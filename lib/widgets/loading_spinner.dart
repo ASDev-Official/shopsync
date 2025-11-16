@@ -4,13 +4,11 @@ import 'package:m3e_collection/m3e_collection.dart';
 class CustomLoadingSpinner extends StatelessWidget {
   final Color? color;
   final double size;
-  final Duration animationDuration;
 
   const CustomLoadingSpinner({
     super.key,
     this.color,
     this.size = 50.0,
-    this.animationDuration = const Duration(milliseconds: 1500),
   });
 
   @override
@@ -18,9 +16,20 @@ class CustomLoadingSpinner extends StatelessWidget {
     return SizedBox(
       width: size,
       height: size,
-      child: CircularProgressIndicatorM3E(
-        trackColor: color ?? Colors.green,
-        activeColor: color ?? Colors.green,
+      child: LoadingIndicatorM3E(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? (color ?? Colors.green[900])
+            : (color ?? Colors.green[400]),
+        polygons: [
+          MaterialShapes.softBurst,
+          MaterialShapes.clover4Leaf,
+          MaterialShapes.arrow,
+          MaterialShapes.verySunny,
+          MaterialShapes.bun,
+          MaterialShapes.clamShell,
+          MaterialShapes.softBoom,
+          MaterialShapes.flower,
+        ],
       ),
     );
   }
