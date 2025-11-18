@@ -2,7 +2,7 @@ name: shopsync
 description: "ShopSync - Share shopping lists with family and friends"
 publish_to: "none"
 
-version: 3.5.2
+version: 3.5.3
 
 environment:
   sdk: ^3.6.0
@@ -42,7 +42,7 @@ dependencies:
   connectivity_plus: ^5.0.2
   home_widget: ^0.6.0
   flutter_expandable_fab: ^2.3.0
-  tflite_flutter: ^0.11.0
+  tflite_flutter: ^0.12.1
   collection: ^1.18.0
 
 dev_dependencies:
