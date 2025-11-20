@@ -238,7 +238,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
       builder: (context) => AlertDialog(
         title: const Text('Delete Category'),
         content: Text(
-          'Are you sure you want to delete "$categoryName"? This will remove the category from all tasks.',
+          'Are you sure you want to delete "$categoryName"? This will remove the category from all items.',
         ),
         actions: [
           TextButton(
