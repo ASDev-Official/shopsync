@@ -260,16 +260,16 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
     );
   }
 
-  void _showSavedTasks() {
+  void _showSavedItems() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SavedTasksScreen(listId: widget.listId),
+        builder: (context) => SavedItemsScreen(listId: widget.listId),
       ),
     );
   }
 
-  Future<void> _clearCompletedTasks() async {
+  Future<void> _clearCompletedItems() async {
     final shouldClear = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
@@ -368,7 +368,7 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
                             icon: Icons.delete_outline,
                             title: 'Clear Completed',
                             subtitle: 'Remove all completed items',
-                            onTap: _clearCompletedTasks,
+                            onTap: _clearCompletedItems,
                           ),
                           if (isOwner)
                             _buildOptionTile(
@@ -420,9 +420,9 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
                           ),
                           _buildOptionTile(
                             icon: Icons.content_copy,
-                            title: 'Saved Tasks',
-                            subtitle: 'Create tasks from saved templates',
-                            onTap: _showSavedTasks,
+                            title: 'Saved Items',
+                            subtitle: 'Create items from saved templates',
+                            onTap: _showSavedItems,
                           ),
                         ],
                       ),
@@ -1354,25 +1354,25 @@ class _SavedLocationsScreenState extends State<SavedLocationsScreen> {
   }
 }
 
-// Saved Tasks Screen
-class SavedTasksScreen extends StatefulWidget {
+// Saved Items Screen
+class SavedItemsScreen extends StatefulWidget {
   final String listId;
 
-  const SavedTasksScreen({super.key, required this.listId});
+  const SavedItemsScreen({super.key, required this.listId});
 
   @override
-  State<SavedTasksScreen> createState() => _SavedTasksScreenState();
+  State<SavedItemsScreen> createState() => _SavedItemsScreenState();
 }
 
-class _SavedTasksScreenState extends State<SavedTasksScreen> {
+class _SavedItemsScreenState extends State<SavedItemsScreen> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
-  Future<void> _addTaskTemplate() async {
+  Future<void> _addItemTemplate() async {
     final result = await Navigator.push<Map<String, dynamic>>(
       context,
       MaterialPageRoute(
-        builder: (context) => CreateTaskTemplateScreen(listId: widget.listId),
+        builder: (context) => CreateItemTemplateScreen(listId: widget.listId),
       ),
     );
 
@@ -1381,7 +1381,7 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
         await _firestore
             .collection('lists')
             .doc(widget.listId)
-            .collection('task_templates')
+            .collection('item_templates')
             .add({
           ...result,
           'createdAt': FieldValue.serverTimestamp(),
@@ -1390,17 +1390,17 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
 
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Task template saved successfully')),
+          const SnackBar(content: Text('Item template saved successfully')),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to save task template')),
+          const SnackBar(content: Text('Failed to save item template')),
         );
       }
     }
   }
 
-  Future<void> _createTaskFromTemplate(Map<String, dynamic> template) async {
+  Future<void> _createItemFromTemplate(Map<String, dynamic> template) async {
     try {
       await _firestore
           .collection('lists')
@@ -1421,11 +1421,11 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
       if (!mounted) return;
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Task created from template')),
+        const SnackBar(content: Text('Item created from template')),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to create task')),
+        const SnackBar(content: Text('Failed to create item')),
       );
     }
   }
@@ -1438,7 +1438,7 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
         title: const Text(
-          'Saved Tasks',
+          'Saved Items',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -1453,7 +1453,7 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.add, color: Colors.white),
-            onPressed: _addTaskTemplate,
+            onPressed: _addItemTemplate,
           ),
         ],
       ),
@@ -1461,7 +1461,7 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
         stream: _firestore
             .collection('lists')
             .doc(widget.listId)
-            .collection('task_templates')
+            .collection('item_templates')
             .orderBy('createdAt', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
@@ -1481,7 +1481,7 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'No saved tasks yet',
+                    'No saved items yet',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey[600],
@@ -1489,7 +1489,7 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Tap the + button to add your first task template',
+                    'Tap the + button to add your first item template',
                     style: TextStyle(
                       color: Colors.grey[500],
                     ),
@@ -1525,7 +1525,7 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
                     ),
                   ),
                   title: Text(
-                    data['name'] ?? 'Unnamed Task',
+                    data['name'] ?? 'Unnamed Item',
                     style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                   subtitle: Column(
@@ -1550,8 +1550,8 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
                           color: Colors.green[800],
                           size: 16,
                         ),
-                        onPressed: () => _createTaskFromTemplate(data),
-                        tooltip: 'Create task from template',
+                        onPressed: () => _createItemFromTemplate(data),
+                        tooltip: 'Create item from template',
                       ),
                       PopupMenuButton<String>(
                         onSelected: (value) async {
@@ -1590,18 +1590,18 @@ class _SavedTasksScreenState extends State<SavedTasksScreen> {
   }
 }
 
-// Create Task Template Screen
-class CreateTaskTemplateScreen extends StatefulWidget {
+// Create Item Template Screen
+class CreateItemTemplateScreen extends StatefulWidget {
   final String listId;
 
-  const CreateTaskTemplateScreen({super.key, required this.listId});
+  const CreateItemTemplateScreen({super.key, required this.listId});
 
   @override
-  State<CreateTaskTemplateScreen> createState() =>
-      _CreateTaskTemplateScreenState();
+  State<CreateItemTemplateScreen> createState() =>
+      _CreateItemTemplateScreenState();
 }
 
-class _CreateTaskTemplateScreenState extends State<CreateTaskTemplateScreen> {
+class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   Map<String, dynamic>? _location;
@@ -1615,7 +1615,7 @@ class _CreateTaskTemplateScreenState extends State<CreateTaskTemplateScreen> {
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
         title: const Text(
-          'Create Task Template',
+          'Create Item Template',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -1632,7 +1632,7 @@ class _CreateTaskTemplateScreenState extends State<CreateTaskTemplateScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Task Name
+            // Item Name
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(

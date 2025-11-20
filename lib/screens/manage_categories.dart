@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '/services/task_categories_service.dart';
+import '/services/item_categories_service.dart';
 import '/widgets/loading_spinner.dart';
 import '/libraries/icons/food_icons_map.dart';
-import '/screens/choose_task_icon.dart';
+import '/screens/choose_item_icon.dart';
 
 class ManageCategoriesScreen extends StatefulWidget {
   final String listId;
@@ -119,7 +119,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                         final result = await Navigator.push<FoodIconMapping>(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ChooseTaskIconScreen(
+                            builder: (context) => ChooseItemIconScreen(
                               selectedIcon: selectedIcon,
                             ),
                           ),
@@ -238,7 +238,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
       builder: (context) => AlertDialog(
         title: const Text('Delete Category'),
         content: Text(
-          'Are you sure you want to delete "$categoryName"? This will remove the category from all tasks.',
+          'Are you sure you want to delete "$categoryName"? This will remove the category from all items.',
         ),
         actions: [
           TextButton(
@@ -348,7 +348,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                     final result = await Navigator.push<FoodIconMapping>(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChooseTaskIconScreen(
+                        builder: (context) => ChooseItemIconScreen(
                           selectedIcon: _selectedIcon,
                         ),
                       ),

@@ -63,8 +63,8 @@ class CategoriesService {
 
   // Delete category
   static Future<void> deleteCategory(String listId, String categoryId) async {
-    // Remove category from tasks that use it
-    final tasksWithCategory = await _firestore
+    // Remove category from items that use it
+    final itemsWithCategory = await _firestore
         .collection('lists')
         .doc(listId)
         .collection('items')
@@ -72,8 +72,8 @@ class CategoriesService {
         .get();
 
     final batch = _firestore.batch();
-    for (final task in tasksWithCategory.docs) {
-      batch.update(task.reference, {'categoryId': FieldValue.delete()});
+    for (final item in itemsWithCategory.docs) {
+      batch.update(item.reference, {'categoryId': FieldValue.delete()});
     }
 
     // Delete the category

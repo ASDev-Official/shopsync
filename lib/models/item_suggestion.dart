@@ -1,5 +1,5 @@
-/// Data model for task suggestions based on user behavior patterns
-class TaskSuggestion {
+/// Data model for item suggestions based on user behavior patterns
+class ItemSuggestion {
   final String name;
   final String? iconIdentifier;
   final Map<String, dynamic>? location;
@@ -11,7 +11,7 @@ class TaskSuggestion {
   final List<int> commonDaysOfWeek; // 1=Monday, 7=Sunday
   final List<int> commonHoursOfDay;
 
-  TaskSuggestion({
+  ItemSuggestion({
     required this.name,
     this.iconIdentifier,
     this.location,
@@ -39,8 +39,8 @@ class TaskSuggestion {
     };
   }
 
-  factory TaskSuggestion.fromJson(Map<String, dynamic> json) {
-    return TaskSuggestion(
+  factory ItemSuggestion.fromJson(Map<String, dynamic> json) {
+    return ItemSuggestion(
       name: json['name'] as String,
       iconIdentifier: json['iconIdentifier'] as String?,
       location: json['location'] as Map<String, dynamic>?,
@@ -54,7 +54,7 @@ class TaskSuggestion {
     );
   }
 
-  TaskSuggestion copyWith({
+  ItemSuggestion copyWith({
     String? name,
     String? iconIdentifier,
     Map<String, dynamic>? location,
@@ -66,7 +66,7 @@ class TaskSuggestion {
     List<int>? commonDaysOfWeek,
     List<int>? commonHoursOfDay,
   }) {
-    return TaskSuggestion(
+    return ItemSuggestion(
       name: name ?? this.name,
       iconIdentifier: iconIdentifier ?? this.iconIdentifier,
       location: location ?? this.location,
@@ -81,8 +81,8 @@ class TaskSuggestion {
   }
 }
 
-/// Represents a single task learning data point
-class TaskLearningData {
+/// Represents a single item learning data point
+class ItemLearningData {
   final String name;
   final String? iconIdentifier;
   final Map<String, dynamic>? location;
@@ -93,7 +93,7 @@ class TaskLearningData {
   final int dayOfWeek; // 1-7
   final int hourOfDay; // 0-23
 
-  TaskLearningData({
+  ItemLearningData({
     required this.name,
     this.iconIdentifier,
     this.location,
@@ -105,13 +105,13 @@ class TaskLearningData {
     required this.hourOfDay,
   });
 
-  factory TaskLearningData.fromFirestore(Map<String, dynamic> data) {
+  factory ItemLearningData.fromFirestore(Map<String, dynamic> data) {
     final addedAt = (data['addedAt'] as dynamic)?.toDate() ?? DateTime.now();
     final completedAt = data['completedAt'] != null
         ? (data['completedAt'] as dynamic).toDate()
         : null;
 
-    return TaskLearningData(
+    return ItemLearningData(
       name: (data['name'] as String? ?? '').toLowerCase().trim(),
       iconIdentifier: data['iconIdentifier'] as String?,
       location: data['location'] as Map<String, dynamic>?,
@@ -138,8 +138,8 @@ class TaskLearningData {
     };
   }
 
-  factory TaskLearningData.fromJson(Map<String, dynamic> json) {
-    return TaskLearningData(
+  factory ItemLearningData.fromJson(Map<String, dynamic> json) {
+    return ItemLearningData(
       name: json['name'] as String,
       iconIdentifier: json['iconIdentifier'] as String?,
       location: json['location'] as Map<String, dynamic>?,
