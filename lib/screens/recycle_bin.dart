@@ -200,13 +200,13 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
     );
   }
 
-  Widget _buildTaskCard(DocumentSnapshot doc, Map<String, dynamic> itemData) {
+  Widget _buildItemCard(DocumentSnapshot doc, Map<String, dynamic> itemData) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final deadline = itemData['deadline'] as Timestamp?;
     final location = itemData['location'] as Map<String, dynamic>?;
     final counter = itemData['counter'] ?? 1;
     final iconIdentifier = itemData['iconIdentifier'] as String?;
-    final taskIcon =
+    final itemIcon =
         iconIdentifier != null ? FoodIconMap.getIcon(iconIdentifier) : null;
     final deletedAt = itemData['deletedAt'] as Timestamp?;
     final deletedByName = itemData['deletedByName'] ?? 'Unknown';
@@ -223,8 +223,8 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
         ),
         child: Row(
           children: [
-            // Task Icon
-            if (taskIcon != null) ...[
+            // Item Icon
+            if (itemIcon != null) ...[
               Container(
                 width: 48,
                 height: 48,
@@ -236,7 +236,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                     width: 1,
                   ),
                 ),
-                child: taskIcon.buildIcon(
+                child: itemIcon.buildIcon(
                   width: 28,
                   height: 28,
                   color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -245,7 +245,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
               const SizedBox(width: 12),
             ],
 
-            // Task content
+            // Item content
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,7 +254,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                     children: [
                       Expanded(
                         child: Text(
-                          itemData['name'] ?? 'Unnamed Task',
+                          itemData['name'] ?? 'Unnamed Item',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -433,7 +433,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                         size: 16,
                         color: Colors.green[600],
                       ),
-                      tooltip: 'Restore task',
+                      tooltip: 'Restore item',
                     ),
                     IconButton(
                       onPressed: () => _deletePermanently(doc.id),
@@ -566,7 +566,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                     opacity: _itemAnimations[doc.id]!,
                     child: SizeTransition(
                       sizeFactor: _itemAnimations[doc.id]!,
-                      child: _buildTaskCard(doc, itemData),
+                      child: _buildItemCard(doc, itemData),
                     ),
                   ),
                 );

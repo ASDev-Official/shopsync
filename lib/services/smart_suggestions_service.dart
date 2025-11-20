@@ -5,14 +5,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import '/models/task_suggestion.dart';
+import '/models/item_suggestion.dart';
 
-/// Service for generating smart task suggestions based on user behavior
+/// Service for generating smart item suggestions based on user behavior
 /// This is an on-device ML system that learns from user patterns
 class SmartSuggestionsService {
   static const String _cacheKey = 'smart_suggestions_cache';
   static const String _lastTrainedKey = 'suggestions_last_trained';
-  static const int _minTasksForSuggestions = 5;
+  static const int _minItemsForSuggestions = 5;
   static const int _maxSuggestions = 10;
   static const double _minConfidenceThreshold = 0.3;
   static const int _daysToAnalyze = 90; // Analyze last 90 days
@@ -20,12 +20,12 @@ class SmartSuggestionsService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  List<TaskSuggestion>? _cachedSuggestions;
+  List<ItemSuggestion>? _cachedSuggestions;
   DateTime? _lastTrainedTime;
   bool _isTraining = false;
 
   /// Get smart suggestions for the current context
-  Future<List<TaskSuggestion>> getSuggestions({
+  Future<List<ItemSuggestion>> getSuggestions({
     String? listId,
     bool forceRefresh = false,
   }) async {
@@ -78,7 +78,7 @@ class SmartSuggestionsService {
     }
   }
 
-  /// Train the model by analyzing user's task history
+  /// Train the model by analyzing user's item history
   Future<void> _trainModel({String? listId}) async {
     if (_isTraining) {
       if (kDebugMode) {
@@ -95,19 +95,19 @@ class SmartSuggestionsService {
         return;
       }
 
-      // Collect learning data from user's tasks (with limit to prevent blocking)
+      // Collect learning data from user's items (with limit to prevent blocking)
       final learningData = await _collectLearningData(user.uid, listId);
 
-      if (learningData.length < _minTasksForSuggestions) {
+      if (learningData.length < _minItemsForSuggestions) {
         if (kDebugMode) {
-          print('Not enough tasks for suggestions: ${learningData.length}');
+          print('Not enough items for suggestions: ${learningData.length}');
         }
         _isTraining = false;
         return;
       }
 
       if (kDebugMode) {
-        print('Training with ${learningData.length} task samples');
+        print('Training with ${learningData.length} item samples');
       }
 
       // Generate suggestions from learning data
@@ -136,18 +136,18 @@ class SmartSuggestionsService {
   }
 
   /// Collect learning data from Firestore
-  Future<List<TaskLearningData>> _collectLearningData(
+  Future<List<ItemLearningData>> _collectLearningData(
     String userId,
     String? listId,
   ) async {
-    final learningData = <TaskLearningData>[];
+    final learningData = <ItemLearningData>[];
     final cutoffDate = DateTime.now().subtract(Duration(days: _daysToAnalyze));
 
     try {
       Query query;
 
       if (listId != null) {
-        // Get tasks from specific list
+        // Get items from specific list
         query = _firestore
             .collection('lists')
             .doc(listId)
@@ -156,14 +156,14 @@ class SmartSuggestionsService {
             .orderBy('addedAt', descending: true)
             .limit(500);
       } else {
-        // Get tasks from all lists the user has access to
+        // Get items from all lists the user has access to
         final listsSnapshot = await _firestore
             .collection('lists')
             .where('members', arrayContains: userId)
             .get();
 
         for (final listDoc in listsSnapshot.docs) {
-          final tasksSnapshot = await _firestore
+          final itemsSnapshot = await _firestore
               .collection('lists')
               .doc(listDoc.id)
               .collection('items')
@@ -172,10 +172,10 @@ class SmartSuggestionsService {
               .limit(200)
               .get();
 
-          for (final taskDoc in tasksSnapshot.docs) {
-            final data = taskDoc.data();
+          for (final itemDoc in itemsSnapshot.docs) {
+            final data = itemDoc.data();
             if (data['name'] != null && (data['name'] as String).isNotEmpty) {
-              learningData.add(TaskLearningData.fromFirestore(data));
+              learningData.add(ItemLearningData.fromFirestore(data));
             }
           }
         }
@@ -186,7 +186,7 @@ class SmartSuggestionsService {
       for (final doc in snapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
         if (data['name'] != null && (data['name'] as String).isNotEmpty) {
-          learningData.add(TaskLearningData.fromFirestore(data));
+          learningData.add(ItemLearningData.fromFirestore(data));
         }
       }
     } catch (e) {
@@ -199,52 +199,52 @@ class SmartSuggestionsService {
   }
 
   /// Generate suggestions from learning data using pattern analysis
-  List<TaskSuggestion> _generateSuggestions(
-    List<TaskLearningData> learningData,
+  List<ItemSuggestion> _generateSuggestions(
+    List<ItemLearningData> learningData,
   ) {
-    final suggestions = <TaskSuggestion>[];
+    final suggestions = <ItemSuggestion>[];
 
-    // Group tasks by normalized name
-    final groupedTasks = groupBy(
+    // Group items by normalized name
+    final groupedItems = groupBy(
       learningData,
-      (TaskLearningData task) => task.name,
+      (ItemLearningData item) => item.name,
     );
 
-    for (final entry in groupedTasks.entries) {
-      final taskName = entry.key;
-      final taskInstances = entry.value;
+    for (final entry in groupedItems.entries) {
+      final itemName = entry.key;
+      final itemInstances = entry.value;
 
       // Skip if not enough instances
-      if (taskInstances.isEmpty) continue;
+      if (itemInstances.isEmpty) continue;
 
       // Calculate frequency
-      final frequency = taskInstances.length;
+      final frequency = itemInstances.length;
 
       // Find most common icon, location, and category
       final mostCommonIcon = _findMostCommon(
-        taskInstances.map((t) => t.iconIdentifier).whereType<String>().toList(),
+        itemInstances.map((t) => t.iconIdentifier).whereType<String>().toList(),
       );
       final mostCommonCategoryId = _findMostCommon(
-        taskInstances.map((t) => t.categoryId).whereType<String>().toList(),
+        itemInstances.map((t) => t.categoryId).whereType<String>().toList(),
       );
       final mostCommonCategoryName = mostCommonCategoryId != null
-          ? taskInstances
+          ? itemInstances
               .firstWhere(
                 (t) => t.categoryId == mostCommonCategoryId,
-                orElse: () => taskInstances.first,
+                orElse: () => itemInstances.first,
               )
               .categoryName
           : null;
 
       // Get the most recent location (locations may vary)
-      final mostRecentLocation = taskInstances
+      final mostRecentLocation = itemInstances
           .where((t) => t.location != null)
           .map((t) => t.location)
           .firstOrNull;
 
       // Analyze temporal patterns
-      final daysOfWeek = taskInstances.map((t) => t.dayOfWeek).toList();
-      final hoursOfDay = taskInstances.map((t) => t.hourOfDay).toList();
+      final daysOfWeek = itemInstances.map((t) => t.dayOfWeek).toList();
+      final hoursOfDay = itemInstances.map((t) => t.hourOfDay).toList();
 
       // Find common days and hours
       final commonDays = _findCommonValues(daysOfWeek);
@@ -253,24 +253,24 @@ class SmartSuggestionsService {
       // Calculate confidence based on multiple factors
       final confidence = _calculateConfidence(
         frequency: frequency,
-        totalTasks: learningData.length,
+        totalItems: learningData.length,
         dayPatternStrength: commonDays.length / 7.0,
         hourPatternStrength: commonHours.length / 24.0,
-        lastUsed: taskInstances.map((t) => t.addedAt).reduce(
+        lastUsed: itemInstances.map((t) => t.addedAt).reduce(
               (a, b) => a.isAfter(b) ? a : b,
             ),
       );
 
       // Only add if confidence meets threshold
       if (confidence >= _minConfidenceThreshold) {
-        suggestions.add(TaskSuggestion(
-          name: taskName,
+        suggestions.add(ItemSuggestion(
+          name: itemName,
           iconIdentifier: mostCommonIcon,
           location: mostRecentLocation,
           categoryId: mostCommonCategoryId,
           categoryName: mostCommonCategoryName,
           confidence: confidence,
-          lastUsed: taskInstances.map((t) => t.addedAt).reduce(
+          lastUsed: itemInstances.map((t) => t.addedAt).reduce(
                 (a, b) => a.isAfter(b) ? a : b,
               ),
           frequency: frequency,
@@ -293,15 +293,15 @@ class SmartSuggestionsService {
   /// Calculate confidence score for a suggestion
   double _calculateConfidence({
     required int frequency,
-    required int totalTasks,
+    required int totalItems,
     required double dayPatternStrength,
     required double hourPatternStrength,
     required DateTime lastUsed,
   }) {
     // Base confidence from frequency
-    double confidence = (frequency / totalTasks).clamp(0.0, 1.0);
+    double confidence = (frequency / totalItems).clamp(0.0, 1.0);
 
-    // Boost for temporal patterns (if task has consistent timing)
+    // Boost for temporal patterns (if item has consistent timing)
     final patternBoost = (dayPatternStrength * 0.3 + hourPatternStrength * 0.2);
     confidence += patternBoost;
 
@@ -346,8 +346,8 @@ class SmartSuggestionsService {
   }
 
   /// Rank suggestions based on current context (time of day, day of week)
-  List<TaskSuggestion> _rankSuggestionsByContext(
-    List<TaskSuggestion> suggestions,
+  List<ItemSuggestion> _rankSuggestionsByContext(
+    List<ItemSuggestion> suggestions,
   ) {
     final now = DateTime.now();
     final currentDay = now.weekday;
@@ -383,7 +383,7 @@ class SmartSuggestionsService {
   }
 
   /// Cache suggestions to shared preferences
-  Future<void> _cacheSuggestions(List<TaskSuggestion> suggestions) async {
+  Future<void> _cacheSuggestions(List<ItemSuggestion> suggestions) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final jsonList = suggestions.map((s) => s.toJson()).toList();
@@ -405,7 +405,7 @@ class SmartSuggestionsService {
         final jsonList = jsonDecode(cachedJson) as List;
         _cachedSuggestions = jsonList
             .map(
-                (json) => TaskSuggestion.fromJson(json as Map<String, dynamic>))
+                (json) => ItemSuggestion.fromJson(json as Map<String, dynamic>))
             .toList();
       }
     } catch (e) {

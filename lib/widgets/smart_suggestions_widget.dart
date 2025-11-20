@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '/models/task_suggestion.dart';
+import '/models/item_suggestion.dart';
 import '/libraries/icons/food_icons_map.dart';
 
-/// Widget that displays smart task suggestions in a horizontal scrollable list
+/// Widget that displays smart item suggestions in a horizontal scrollable list
 class SmartSuggestionsWidget extends StatelessWidget {
-  final List<TaskSuggestion> suggestions;
-  final Function(TaskSuggestion) onSuggestionTapped;
+  final List<ItemSuggestion> suggestions;
+  final Function(ItemSuggestion) onSuggestionTapped;
   final bool isLoading;
 
   const SmartSuggestionsWidget({
@@ -173,7 +173,7 @@ class SmartSuggestionsWidget extends StatelessWidget {
 }
 
 class _SuggestionChip extends StatefulWidget {
-  final TaskSuggestion suggestion;
+  final ItemSuggestion suggestion;
   final VoidCallback onTap;
   final bool isDark;
 
@@ -310,7 +310,7 @@ class _SuggestionChipState extends State<_SuggestionChip>
                                   ),
                           ),
                           const SizedBox(height: 6),
-                          // Task name - capitalized first letter
+                          // Item name - capitalized first letter
                           Flexible(
                             child: Padding(
                               padding:

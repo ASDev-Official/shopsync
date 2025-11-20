@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'task_details.dart';
-import 'create_task.dart';
+import 'item_details.dart';
+import 'create_item.dart';
 import 'list_options.dart';
 import '/widgets/loading_spinner.dart';
 import '/libraries/icons/food_icons_map.dart';
@@ -29,33 +29,33 @@ class _ListViewScreenState extends State<ListViewScreen>
     with TickerProviderStateMixin {
   int _selectedIndex = 0;
   final _firestore = FirebaseFirestore.instance;
-  late AnimationController _tasksAnimationController;
+  late AnimationController _itemsAnimationController;
   late AnimationController _optionsAnimationController;
-  late Animation<double> _tasksBounceAnimation;
-  late Animation<double> _tasksRotateAnimation;
+  late Animation<double> _itemsBounceAnimation;
+  late Animation<double> _itemsRotateAnimation;
   late Animation<double> _optionsSpinAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    // Tasks animation controller for bouncy effect
-    _tasksAnimationController = AnimationController(
+    // Items animation controller for bouncy effect
+    _itemsAnimationController = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    _tasksBounceAnimation = Tween<double>(
+    _itemsBounceAnimation = Tween<double>(
       begin: 1.0,
       end: 1.3,
     ).animate(CurvedAnimation(
-      parent: _tasksAnimationController,
+      parent: _itemsAnimationController,
       curve: Curves.elasticOut,
     ));
-    _tasksRotateAnimation = Tween<double>(
+    _itemsRotateAnimation = Tween<double>(
       begin: 0.0,
       end: 0.1, // Small rotation for playful effect
     ).animate(CurvedAnimation(
-      parent: _tasksAnimationController,
+      parent: _itemsAnimationController,
       curve: Curves.elasticOut,
     ));
 
@@ -75,7 +75,7 @@ class _ListViewScreenState extends State<ListViewScreen>
 
   @override
   void dispose() {
-    _tasksAnimationController.dispose();
+    _itemsAnimationController.dispose();
     _optionsAnimationController.dispose();
     super.dispose();
   }
@@ -90,9 +90,9 @@ class _ListViewScreenState extends State<ListViewScreen>
 
     // Play different animations based on selected tab
     if (index == 0) {
-      // Tasks tab - bouncy animation
-      _tasksAnimationController.forward().then((_) {
-        _tasksAnimationController.reverse();
+      // Items tab - bouncy animation
+      _itemsAnimationController.forward().then((_) {
+        _itemsAnimationController.reverse();
       });
     } else if (index == 1) {
       // Options tab - spin animation
@@ -111,7 +111,7 @@ class _ListViewScreenState extends State<ListViewScreen>
     Widget body = IndexedStack(
       index: _selectedIndex,
       children: [
-        TasksTab(listId: widget.listId, listName: widget.listName),
+        ItemsTab(listId: widget.listId, listName: widget.listName),
         ListOptionsScreen(listId: widget.listId, listName: widget.listName),
       ],
     );
@@ -145,7 +145,7 @@ class _ListViewScreenState extends State<ListViewScreen>
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              CreateTaskScreen(listId: widget.listId),
+                              CreateItemScreen(listId: widget.listId),
                         ),
                       );
                     },
@@ -209,15 +209,15 @@ class _ListViewScreenState extends State<ListViewScreen>
                   destinations: [
                     NavigationRailDestination(
                       icon: AnimatedBuilder(
-                        animation: _tasksAnimationController,
+                        animation: _itemsAnimationController,
                         builder: (context, child) {
                           return Transform.scale(
                             scale: _selectedIndex == 0
-                                ? _tasksBounceAnimation.value
+                                ? _itemsBounceAnimation.value
                                 : 1.0,
                             child: Transform.rotate(
                               angle: _selectedIndex == 0
-                                  ? _tasksRotateAnimation.value * 2 * 3.14159
+                                  ? _itemsRotateAnimation.value * 2 * 3.14159
                                   : 0.0,
                               child: Icon(
                                 Icons.checklist_outlined,
@@ -232,15 +232,15 @@ class _ListViewScreenState extends State<ListViewScreen>
                         },
                       ),
                       selectedIcon: AnimatedBuilder(
-                        animation: _tasksAnimationController,
+                        animation: _itemsAnimationController,
                         builder: (context, child) {
                           return Transform.scale(
                             scale: _selectedIndex == 0
-                                ? _tasksBounceAnimation.value
+                                ? _itemsBounceAnimation.value
                                 : 1.0,
                             child: Transform.rotate(
                               angle: _selectedIndex == 0
-                                  ? _tasksRotateAnimation.value * 2 * 3.14159
+                                  ? _itemsRotateAnimation.value * 2 * 3.14159
                                   : 0.0,
                               child: const Icon(
                                 Icons.checklist,
@@ -251,7 +251,7 @@ class _ListViewScreenState extends State<ListViewScreen>
                         },
                       ),
                       label: Text(
-                        'Tasks',
+                        'Items',
                         style: TextStyle(
                           color: _selectedIndex == 0
                               ? (isDark ? Colors.white : Colors.green[800])
@@ -357,15 +357,15 @@ class _ListViewScreenState extends State<ListViewScreen>
                 destinations: [
                   NavigationDestination(
                     icon: AnimatedBuilder(
-                      animation: _tasksAnimationController,
+                      animation: _itemsAnimationController,
                       builder: (context, child) {
                         return Transform.scale(
                           scale: _selectedIndex == 0
-                              ? _tasksBounceAnimation.value
+                              ? _itemsBounceAnimation.value
                               : 1.0,
                           child: Transform.rotate(
                             angle: _selectedIndex == 0
-                                ? _tasksRotateAnimation.value * 2 * 3.14159
+                                ? _itemsRotateAnimation.value * 2 * 3.14159
                                 : 0.0,
                             child: const Icon(Icons.checklist_outlined),
                           ),
@@ -373,22 +373,22 @@ class _ListViewScreenState extends State<ListViewScreen>
                       },
                     ),
                     selectedIcon: AnimatedBuilder(
-                      animation: _tasksAnimationController,
+                      animation: _itemsAnimationController,
                       builder: (context, child) {
                         return Transform.scale(
                           scale: _selectedIndex == 0
-                              ? _tasksBounceAnimation.value
+                              ? _itemsBounceAnimation.value
                               : 1.0,
                           child: Transform.rotate(
                             angle: _selectedIndex == 0
-                                ? _tasksRotateAnimation.value * 2 * 3.14159
+                                ? _itemsRotateAnimation.value * 2 * 3.14159
                                 : 0.0,
                             child: const Icon(Icons.checklist),
                           ),
                         );
                       },
                     ),
-                    label: 'Tasks',
+                    label: 'Items',
                   ),
                   NavigationDestination(
                     icon: AnimatedBuilder(
@@ -423,21 +423,21 @@ class _ListViewScreenState extends State<ListViewScreen>
   }
 }
 
-class TasksTab extends StatefulWidget {
+class ItemsTab extends StatefulWidget {
   final String listId;
   final String listName;
 
-  const TasksTab({
+  const ItemsTab({
     super.key,
     required this.listId,
     required this.listName,
   });
 
   @override
-  State<TasksTab> createState() => _TasksTabState();
+  State<ItemsTab> createState() => _ItemsTabState();
 }
 
-class _TasksTabState extends State<TasksTab> {
+class _ItemsTabState extends State<ItemsTab> {
   final _firestore = FirebaseFirestore.instance;
 
   // String _standardizePriority(String? priority) {
@@ -498,13 +498,13 @@ class _TasksTabState extends State<TasksTab> {
   //   );
   // }
 
-  Widget _buildStatsCard(QuerySnapshot tasksSnapshot) {
-    final totalTasks = tasksSnapshot.docs.length;
-    final completedTasks = tasksSnapshot.docs.where((doc) {
+  Widget _buildStatsCard(QuerySnapshot itemsSnapshot) {
+    final totalItems = itemsSnapshot.docs.length;
+    final completedItems = itemsSnapshot.docs.where((doc) {
       final data = doc.data() as Map<String, dynamic>;
       return data['completed'] ?? false;
     }).length;
-    final progress = totalTasks > 0 ? completedTasks / totalTasks : 0.0;
+    final progress = totalItems > 0 ? completedItems / totalItems : 0.0;
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -551,7 +551,7 @@ class _TasksTabState extends State<TasksTab> {
                   ),
                 ),
                 Text(
-                  '$completedTasks of $totalTasks tasks completed',
+                  '$completedItems of $totalItems items completed',
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 14,
@@ -577,12 +577,12 @@ class _TasksTabState extends State<TasksTab> {
                 .collection('items')
                 .orderBy('addedAt', descending: true)
                 .snapshots(),
-            builder: (context, tasksSnapshot) {
-              if (tasksSnapshot.connectionState == ConnectionState.waiting) {
+            builder: (context, itemsSnapshot) {
+              if (itemsSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CustomLoadingSpinner());
               }
 
-              if (tasksSnapshot.hasError) {
+              if (itemsSnapshot.hasError) {
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -594,7 +594,7 @@ class _TasksTabState extends State<TasksTab> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'Error loading tasks',
+                        'Error loading items',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.red[700],
@@ -605,7 +605,7 @@ class _TasksTabState extends State<TasksTab> {
                 );
               }
 
-              if (!tasksSnapshot.hasData || tasksSnapshot.data!.docs.isEmpty) {
+              if (!itemsSnapshot.hasData || itemsSnapshot.data!.docs.isEmpty) {
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -617,7 +617,7 @@ class _TasksTabState extends State<TasksTab> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'No tasks yet',
+                        'No items yet',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey[600],
@@ -625,7 +625,7 @@ class _TasksTabState extends State<TasksTab> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Add your first task to get started',
+                        'Add your first item to get started',
                         style: TextStyle(
                           color: Colors.grey[500],
                         ),
@@ -644,47 +644,47 @@ class _TasksTabState extends State<TasksTab> {
                     .orderBy('order', descending: false)
                     .snapshots(),
                 builder: (context, categoriesSnapshot) {
-                  final tasks = tasksSnapshot.data!.docs;
+                  final items = itemsSnapshot.data!.docs;
 
-                  // Group tasks by category and completion status
-                  final Map<String?, List<DocumentSnapshot>> tasksByCategory = {
-                    null: [], // Uncategorized tasks
+                  // Group items by category and completion status
+                  final Map<String?, List<DocumentSnapshot>> itemsByCategory = {
+                    null: [], // Uncategorized items
                   };
 
                   // Initialize categories
                   if (categoriesSnapshot.hasData) {
                     for (var categoryDoc in categoriesSnapshot.data!.docs) {
-                      tasksByCategory[categoryDoc.id] = [];
+                      itemsByCategory[categoryDoc.id] = [];
                     }
                   }
 
-                  // Group tasks
-                  for (var task in tasks) {
-                    final data = task.data() as Map<String, dynamic>;
+                  // Group items
+                  for (var item in items) {
+                    final data = item.data() as Map<String, dynamic>;
                     final categoryId = data['categoryId'] as String?;
-                    if (!tasksByCategory.containsKey(categoryId)) {
-                      tasksByCategory[categoryId] = [];
+                    if (!itemsByCategory.containsKey(categoryId)) {
+                      itemsByCategory[categoryId] = [];
                     }
-                    tasksByCategory[categoryId]!.add(task);
+                    itemsByCategory[categoryId]!.add(item);
                   }
 
-                  // Separate incomplete and completed tasks within each category
+                  // Separate incomplete and completed items within each category
                   final Map<String?, Map<String, List<DocumentSnapshot>>>
-                      groupedTasks = {};
+                      groupedItems = {};
 
-                  tasksByCategory.forEach((categoryId, categoryTasks) {
-                    final incomplete = categoryTasks.where((doc) {
+                  itemsByCategory.forEach((categoryId, categoryItems) {
+                    final incomplete = categoryItems.where((doc) {
                       final data = doc.data() as Map<String, dynamic>;
                       return !(data['completed'] ?? false);
                     }).toList();
 
-                    final completed = categoryTasks.where((doc) {
+                    final completed = categoryItems.where((doc) {
                       final data = doc.data() as Map<String, dynamic>;
                       return data['completed'] ?? false;
                     }).toList();
 
                     if (incomplete.isNotEmpty || completed.isNotEmpty) {
-                      groupedTasks[categoryId] = {
+                      groupedItems[categoryId] = {
                         'incomplete': incomplete,
                         'completed': completed,
                       };
@@ -693,15 +693,15 @@ class _TasksTabState extends State<TasksTab> {
 
                   return ListView(
                     children: [
-                      _buildStatsCard(tasksSnapshot.data!),
+                      _buildStatsCard(itemsSnapshot.data!),
 
                       // Build category sections
-                      ...groupedTasks.entries.map((entry) {
+                      ...groupedItems.entries.map((entry) {
                         final categoryId = entry.key;
-                        final categoryTaskGroups = entry.value;
-                        final incompleteTasks =
-                            categoryTaskGroups['incomplete']!;
-                        final completedTasks = categoryTaskGroups['completed']!;
+                        final categoryItemGroups = entry.value;
+                        final incompleteItems =
+                            categoryItemGroups['incomplete']!;
+                        final completedItems = categoryItemGroups['completed']!;
 
                         // Get category data
                         Map<String, dynamic>? categoryData;
@@ -720,8 +720,8 @@ class _TasksTabState extends State<TasksTab> {
                           key: ValueKey(categoryId ?? 'uncategorized'),
                           categoryId: categoryId,
                           categoryData: categoryData,
-                          incompleteTasks: incompleteTasks,
-                          completedTasks: completedTasks,
+                          incompleteItems: incompleteItems,
+                          completedItems: completedItems,
                           listId: widget.listId,
                         );
                       }),
@@ -743,16 +743,16 @@ class _TasksTabState extends State<TasksTab> {
 class CategorySection extends StatefulWidget {
   final String? categoryId;
   final Map<String, dynamic>? categoryData;
-  final List<DocumentSnapshot> incompleteTasks;
-  final List<DocumentSnapshot> completedTasks;
+  final List<DocumentSnapshot> incompleteItems;
+  final List<DocumentSnapshot> completedItems;
   final String listId;
 
   const CategorySection({
     super.key,
     required this.categoryId,
     required this.categoryData,
-    required this.incompleteTasks,
-    required this.completedTasks,
+    required this.incompleteItems,
+    required this.completedItems,
     required this.listId,
   });
 
@@ -763,13 +763,13 @@ class CategorySection extends StatefulWidget {
 class _CategorySectionState extends State<CategorySection> {
   bool _isExpanded = true; // Default to expanded
 
-  void _toggleTaskCompletion(String taskId, bool currentStatus) async {
+  void _toggleItemCompletion(String itemId, bool currentStatus) async {
     try {
       await FirebaseFirestore.instance
           .collection('lists')
           .doc(widget.listId)
           .collection('items')
-          .doc(taskId)
+          .doc(itemId)
           .update({
         'completed': !currentStatus,
       });
@@ -778,32 +778,32 @@ class _CategorySectionState extends State<CategorySection> {
         e,
         stackTrace: stackTrace,
         hint: Hint.withMap({
-          'message': 'Failed to toggle task completion',
+          'message': 'Failed to toggle item completion',
           'listId': widget.listId,
-          'taskId': taskId,
+          'itemId': itemId,
         }),
       );
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to update task status')),
+        const SnackBar(content: Text('Failed to update item status')),
       );
     }
   }
 
-  void _deleteTask(String taskId) async {
+  void _deleteItem(String itemId) async {
     try {
       final auth = FirebaseAuth.instance;
       final firestore = FirebaseFirestore.instance;
 
-      // Get the task data before deleting
-      final taskDoc = await firestore
+      // Get the item data before deleting
+      final itemDoc = await firestore
           .collection('lists')
           .doc(widget.listId)
           .collection('items')
-          .doc(taskId)
+          .doc(itemId)
           .get();
 
-      if (!taskDoc.exists) return;
+      if (!itemDoc.exists) return;
 
       final batch = firestore.batch();
 
@@ -815,7 +815,7 @@ class _CategorySectionState extends State<CategorySection> {
             .collection('recycled_items')
             .doc(),
         {
-          ...taskDoc.data()!,
+          ...itemDoc.data()!,
           'deletedAt': FieldValue.serverTimestamp(),
           'deletedBy': auth.currentUser!.uid,
           'deletedByName': auth.currentUser!.displayName,
@@ -823,7 +823,7 @@ class _CategorySectionState extends State<CategorySection> {
       );
 
       // Delete from original collection
-      batch.delete(taskDoc.reference);
+      batch.delete(itemDoc.reference);
 
       await batch.commit();
     } catch (e, stackTrace) {
@@ -831,26 +831,26 @@ class _CategorySectionState extends State<CategorySection> {
         e,
         stackTrace: stackTrace,
         hint: Hint.withMap({
-          'message': 'Failed to delete task',
+          'message': 'Failed to delete item',
           'listId': widget.listId,
-          'taskId': taskId,
+          'itemId': itemId,
         }),
       );
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to delete task')),
+        const SnackBar(content: Text('Failed to delete item')),
       );
     }
   }
 
-  Widget _buildTaskCard(DocumentSnapshot doc) {
+  Widget _buildItemCard(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     final isCompleted = data['completed'] ?? false;
     final deadline = data['deadline'] as Timestamp?;
     final location = data['location'] as Map<String, dynamic>?;
     final counter = data['counter'] ?? 1;
     final iconIdentifier = data['iconIdentifier'] as String?;
-    final taskIcon =
+    final itemIcon =
         iconIdentifier != null ? FoodIconMap.getIcon(iconIdentifier) : null;
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -864,9 +864,9 @@ class _CategorySectionState extends State<CategorySection> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => TaskDetailsScreen(
+              builder: (context) => ItemDetailsScreen(
                 listId: widget.listId,
-                taskId: doc.id,
+                itemId: doc.id,
               ),
             ),
           );
@@ -892,7 +892,7 @@ class _CategorySectionState extends State<CategorySection> {
                   return GestureDetector(
                     onTap: isViewerMode
                         ? null
-                        : () => _toggleTaskCompletion(doc.id, isCompleted),
+                        : () => _toggleItemCompletion(doc.id, isCompleted),
                     child: Container(
                       width: 24,
                       height: 24,
@@ -921,8 +921,8 @@ class _CategorySectionState extends State<CategorySection> {
               ),
               const SizedBox(width: 16),
 
-              // Task Icon
-              if (taskIcon != null) ...[
+              // Item Icon
+              if (itemIcon != null) ...[
                 Container(
                   width: 48,
                   height: 48,
@@ -938,7 +938,7 @@ class _CategorySectionState extends State<CategorySection> {
                       width: 1,
                     ),
                   ),
-                  child: taskIcon.buildIcon(
+                  child: itemIcon.buildIcon(
                     width: 28,
                     height: 28,
                     color: isCompleted
@@ -949,7 +949,7 @@ class _CategorySectionState extends State<CategorySection> {
                 const SizedBox(width: 12),
               ],
 
-              // Task content
+              // Item content
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -958,7 +958,7 @@ class _CategorySectionState extends State<CategorySection> {
                       children: [
                         Expanded(
                           child: Text(
-                            data['name'] ?? 'Unnamed Task',
+                            data['name'] ?? 'Unnamed Item',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -1075,13 +1075,13 @@ class _CategorySectionState extends State<CategorySection> {
                     return const SizedBox.shrink();
                   }
                   return IconButton(
-                    onPressed: () => _deleteTask(doc.id),
+                    onPressed: () => _deleteItem(doc.id),
                     icon: Icon(
                       Icons.delete,
                       size: 16,
                       color: Colors.red[400],
                     ),
-                    tooltip: 'Delete task',
+                    tooltip: 'Delete item',
                   );
                 },
               ),
@@ -1100,8 +1100,8 @@ class _CategorySectionState extends State<CategorySection> {
     final categoryIcon =
         iconIdentifier != null ? FoodIconMap.getIcon(iconIdentifier) : null;
 
-    final totalTasks =
-        widget.incompleteTasks.length + widget.completedTasks.length;
+    final totalItems =
+        widget.incompleteItems.length + widget.completedItems.length;
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -1169,7 +1169,7 @@ class _CategorySectionState extends State<CategorySection> {
                           ),
                         ),
                         Text(
-                          '$totalTasks task${totalTasks != 1 ? 's' : ''}',
+                          '$totalItems item${totalItems != 1 ? 's' : ''}',
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[600],
@@ -1202,8 +1202,8 @@ class _CategorySectionState extends State<CategorySection> {
             child: _isExpanded
                 ? Column(
                     children: [
-                      // Incomplete tasks
-                      if (widget.incompleteTasks.isNotEmpty) ...[
+                      // Incomplete items
+                      if (widget.incompleteItems.isNotEmpty) ...[
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 16, right: 16, top: 12, bottom: 8),
@@ -1226,7 +1226,7 @@ class _CategorySectionState extends State<CategorySection> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
-                                  '${widget.incompleteTasks.length}',
+                                  '${widget.incompleteItems.length}',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
@@ -1237,12 +1237,12 @@ class _CategorySectionState extends State<CategorySection> {
                             ],
                           ),
                         ),
-                        ...widget.incompleteTasks
-                            .map((doc) => _buildTaskCard(doc)),
+                        ...widget.incompleteItems
+                            .map((doc) => _buildItemCard(doc)),
                       ],
 
-                      // Completed tasks
-                      if (widget.completedTasks.isNotEmpty) ...[
+                      // Completed items
+                      if (widget.completedItems.isNotEmpty) ...[
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 16, right: 16, top: 12, bottom: 8),
@@ -1265,7 +1265,7 @@ class _CategorySectionState extends State<CategorySection> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
-                                  '${widget.completedTasks.length}',
+                                  '${widget.completedItems.length}',
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
@@ -1276,8 +1276,8 @@ class _CategorySectionState extends State<CategorySection> {
                             ],
                           ),
                         ),
-                        ...widget.completedTasks
-                            .map((doc) => _buildTaskCard(doc)),
+                        ...widget.completedItems
+                            .map((doc) => _buildItemCard(doc)),
                       ],
 
                       const SizedBox(height: 8),
@@ -1291,11 +1291,11 @@ class _CategorySectionState extends State<CategorySection> {
   }
 }
 
-class TasksScreenWithFAB extends StatelessWidget {
+class ItemsScreenWithFAB extends StatelessWidget {
   final String listId;
   final String listName;
 
-  const TasksScreenWithFAB({
+  const ItemsScreenWithFAB({
     super.key,
     required this.listId,
     required this.listName,
@@ -1304,13 +1304,13 @@ class TasksScreenWithFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TasksTab(listId: listId, listName: listName),
+      body: ItemsTab(listId: listId, listName: listName),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CreateTaskScreen(listId: listId),
+              builder: (context) => CreateItemScreen(listId: listId),
             ),
           );
         },

@@ -3,19 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:shopsync/widgets/loading_spinner.dart';
 import '../libraries/icons/food_icons_map.dart';
 
-class ChooseTaskIconScreen extends StatefulWidget {
+class ChooseItemIconScreen extends StatefulWidget {
   final FoodIconMapping? selectedIcon;
 
-  const ChooseTaskIconScreen({
+  const ChooseItemIconScreen({
     super.key,
     this.selectedIcon,
   });
 
   @override
-  State<ChooseTaskIconScreen> createState() => _ChooseTaskIconScreenState();
+  State<ChooseItemIconScreen> createState() => _ChooseItemIconScreenState();
 }
 
-class _ChooseTaskIconScreenState extends State<ChooseTaskIconScreen>
+class _ChooseItemIconScreenState extends State<ChooseItemIconScreen>
     with TickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();

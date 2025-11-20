@@ -5,21 +5,21 @@ import '/widgets/place_selector.dart';
 import '/widgets/category_picker.dart';
 import '/widgets/loading_spinner.dart';
 import '/libraries/icons/food_icons_map.dart';
-import '/screens/choose_task_icon.dart';
+import '/screens/choose_item_icon.dart';
 import '/utils/permissions.dart';
 
-class TaskDetailsScreen extends StatefulWidget {
+class ItemDetailsScreen extends StatefulWidget {
   final String listId;
-  final String taskId;
+  final String itemId;
 
-  const TaskDetailsScreen({
+  const ItemDetailsScreen({
     super.key,
     required this.listId,
-    required this.taskId,
+    required this.itemId,
   });
 
   @override
-  State<TaskDetailsScreen> createState() => _TaskDetailsScreenState();
+  State<ItemDetailsScreen> createState() => _ItemDetailsScreenState();
 }
 
 class DottedLinePainter extends CustomPainter {
@@ -52,7 +52,7 @@ class DottedLinePainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-class _TaskDetailsScreenState extends State<TaskDetailsScreen>
+class _ItemDetailsScreenState extends State<ItemDetailsScreen>
     with SingleTickerProviderStateMixin {
   final _firestore = FirebaseFirestore.instance;
   late TextEditingController _nameController;
@@ -87,12 +87,12 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     super.dispose();
   }
 
-  Future<void> _updateTask(Map<String, dynamic> data) async {
+  Future<void> _updateItem(Map<String, dynamic> data) async {
     await _firestore
         .collection('lists')
         .doc(widget.listId)
         .collection('items')
-        .doc(widget.taskId)
+        .doc(widget.itemId)
         .update(data);
   }
 
@@ -158,7 +158,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
           time.hour,
           time.minute,
         );
-        await _updateTask({'deadline': deadline});
+        await _updateItem({'deadline': deadline});
       }
     }
   }
@@ -171,7 +171,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
         title: const Text(
-          'Task Details',
+          'Item Details',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -189,7 +189,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
             .collection('lists')
             .doc(widget.listId)
             .collection('items')
-            .doc(widget.taskId)
+            .doc(widget.itemId)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -201,14 +201,14 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
             );
           }
 
-          final task = snapshot.data!.data() as Map<String, dynamic>? ?? {};
-          final name = task['name'] ?? 'Untitled Task';
-          final description = task['description'] ?? '';
-          final addedByName = task['addedByName'] ?? 'Unknown';
-          final addedAt = task['addedAt'].toDate();
-          final completed = task['completed'] ?? false;
+          final item = snapshot.data!.data() as Map<String, dynamic>? ?? {};
+          final name = item['name'] ?? 'Untitled Item';
+          final description = item['description'] ?? '';
+          final addedByName = item['addedByName'] ?? 'Unknown';
+          final addedAt = item['addedAt'].toDate();
+          final completed = item['completed'] ?? false;
           _descriptionController.text = description;
-          _selectedDeadline = task['deadline']?.toDate();
+          _selectedDeadline = item['deadline']?.toDate();
           _nameController.text = name;
 
           return SingleChildScrollView(
@@ -233,7 +233,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                                 GestureDetector(
                                   onTap: isViewer
                                       ? null
-                                      : () => _navigateToIconSelector(task),
+                                      : () => _navigateToIconSelector(item),
                                   child: Container(
                                     width: 64,
                                     height: 64,
@@ -246,7 +246,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                                         width: 2,
                                       ),
                                     ),
-                                    child: _buildTaskIcon(task),
+                                    child: _buildItemIcon(item),
                                   ),
                                 ),
                                 if (!isViewer)
@@ -255,7 +255,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                                     right: 2,
                                     child: GestureDetector(
                                       onTap: () =>
-                                          _navigateToIconSelector(task),
+                                          _navigateToIconSelector(item),
                                       child: Container(
                                         width: 20,
                                         height: 20,
@@ -280,7 +280,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                           },
                         ),
                         const SizedBox(width: 16),
-                        // Task name field
+                        // Item name field
                         Expanded(
                           child: FutureBuilder<bool>(
                             future: PermissionsHelper.isViewer(widget.listId),
@@ -306,7 +306,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                                         ? null
                                         : (value) {
                                             if (value.trim().isNotEmpty) {
-                                              _updateTask(
+                                              _updateItem(
                                                   {'name': value.trim()});
                                             }
                                           },
@@ -336,13 +336,13 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                     const SizedBox(height: 24),
                     _buildStatusCard(completed),
                     const SizedBox(height: 16),
-                    _buildCategoryCard(task),
+                    _buildCategoryCard(item),
                     const SizedBox(height: 16),
                     _buildDeadlineCard(),
                     const SizedBox(height: 16),
-                    _buildLocationCard(task),
+                    _buildLocationCard(item),
                     const SizedBox(height: 16),
-                    _buildCounterCard(task),
+                    _buildCounterCard(item),
                     const SizedBox(height: 16),
                     _buildDescriptionCard(),
                     const SizedBox(height: 16),
@@ -399,7 +399,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                 value: completed,
                 onChanged: isViewer
                     ? null
-                    : (value) => _updateTask({'completed': value}),
+                    : (value) => _updateItem({'completed': value}),
                 // ignore: deprecated_member_use
                 activeColor: Colors.white,
                 activeTrackColor: Colors.green[800],
@@ -414,8 +414,8 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     );
   }
 
-  Widget _buildCategoryCard(Map<String, dynamic> task) {
-    final categoryId = task['categoryId'] as String?;
+  Widget _buildCategoryCard(Map<String, dynamic> item) {
+    final categoryId = item['categoryId'] as String?;
 
     return Card(
       elevation: 8,
@@ -455,12 +455,12 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                             selectedCategoryId: categoryId,
                             onCategorySelected: (newCategoryId, categoryName) {
                               if (newCategoryId == null) {
-                                _updateTask({
+                                _updateItem({
                                   'categoryId': FieldValue.delete(),
                                   'categoryName': FieldValue.delete(),
                                 });
                               } else {
-                                _updateTask({
+                                _updateItem({
                                   'categoryId': newCategoryId,
                                   'categoryName': categoryName,
                                 });
@@ -537,8 +537,8 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     );
   }
 
-  Widget _buildTaskIcon(Map<String, dynamic> task) {
-    final iconIdentifier = task['iconIdentifier'] as String?;
+  Widget _buildItemIcon(Map<String, dynamic> item) {
+    final iconIdentifier = item['iconIdentifier'] as String?;
     final selectedIcon =
         iconIdentifier != null ? FoodIconMap.getIcon(iconIdentifier) : null;
 
@@ -557,24 +557,24 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     }
   }
 
-  Future<void> _navigateToIconSelector(Map<String, dynamic> task) async {
-    final iconIdentifier = task['iconIdentifier'] as String?;
+  Future<void> _navigateToIconSelector(Map<String, dynamic> item) async {
+    final iconIdentifier = item['iconIdentifier'] as String?;
     final selectedIcon =
         iconIdentifier != null ? FoodIconMap.getIcon(iconIdentifier) : null;
 
     final result = await Navigator.push<FoodIconMapping>(
       context,
       MaterialPageRoute(
-        builder: (context) => ChooseTaskIconScreen(
+        builder: (context) => ChooseItemIconScreen(
           selectedIcon: selectedIcon,
         ),
       ),
     );
     if (result != null) {
-      await _updateTask({'iconIdentifier': result.identifier});
+      await _updateItem({'iconIdentifier': result.identifier});
     } else if (selectedIcon != null) {
       // User can clear the icon by returning null
-      await _updateTask({'iconIdentifier': FieldValue.delete()});
+      await _updateItem({'iconIdentifier': FieldValue.delete()});
     }
   }
 
@@ -633,7 +633,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                     IconButton(
                       icon: const Icon(Icons.close),
                       onPressed: () =>
-                          _updateTask({'deadline': FieldValue.delete()}),
+                          _updateItem({'deadline': FieldValue.delete()}),
                     ),
                 ],
               ),
@@ -644,7 +644,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     );
   }
 
-  Widget _buildLocationCard(Map<String, dynamic> task) {
+  Widget _buildLocationCard(Map<String, dynamic> item) {
     return Card(
       elevation: 8,
       shadowColor: Colors.black26,
@@ -662,12 +662,12 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                       context: context,
                       isScrollControlled: true,
                       builder: (context) => LocationSelector(
-                        initialLocation: task['location'],
+                        initialLocation: item['location'],
                         onLocationSelected: (location) {
                           if (location.isEmpty) {
-                            _updateTask({'location': FieldValue.delete()});
+                            _updateItem({'location': FieldValue.delete()});
                           } else {
-                            _updateTask({'location': location});
+                            _updateItem({'location': location});
                           }
                         },
                       ),
@@ -703,8 +703,8 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          task['location'] != null
-                              ? '${task['location']['name']}\n${task['location']['address']}'
+                          item['location'] != null
+                              ? '${item['location']['name']}\n${item['location']['address']}'
                               : 'Set location',
                           style: TextStyle(color: Colors.grey[600]),
                         ),
@@ -791,7 +791,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                   ),
                   onChanged: isViewer
                       ? null
-                      : (value) => _updateTask({'description': value}),
+                      : (value) => _updateItem({'description': value}),
                 );
               },
             ),
@@ -892,8 +892,8 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
     );
   }
 
-  Widget _buildCounterCard(Map<String, dynamic> task) {
-    final counter = task['counter'] ?? 1;
+  Widget _buildCounterCard(Map<String, dynamic> item) {
+    final counter = item['counter'] ?? 1;
 
     return Card(
       elevation: 8,
@@ -938,7 +938,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                   children: [
                     IconButton(
                       onPressed: !isViewer && counter > 1
-                          ? () => _updateTask({'counter': counter - 1})
+                          ? () => _updateItem({'counter': counter - 1})
                           : null,
                       icon: Icon(
                         Icons.remove,
@@ -978,7 +978,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen>
                     const SizedBox(width: 20),
                     IconButton(
                       onPressed: !isViewer && counter < 99
-                          ? () => _updateTask({'counter': counter + 1})
+                          ? () => _updateItem({'counter': counter + 1})
                           : null,
                       icon: Icon(
                         Icons.add,

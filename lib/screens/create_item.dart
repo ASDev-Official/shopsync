@@ -8,20 +8,20 @@ import '/widgets/place_selector.dart';
 import '/widgets/category_picker.dart';
 import '/widgets/smart_suggestions_widget.dart';
 import '/libraries/icons/food_icons_map.dart';
-import '/screens/choose_task_icon.dart';
+import '/screens/choose_item_icon.dart';
 import '/services/smart_suggestions_service.dart';
-import '/models/task_suggestion.dart';
+import '/models/item_suggestion.dart';
 
-class CreateTaskScreen extends StatefulWidget {
+class CreateItemScreen extends StatefulWidget {
   final String listId;
 
-  const CreateTaskScreen({super.key, required this.listId});
+  const CreateItemScreen({super.key, required this.listId});
 
   @override
-  State<CreateTaskScreen> createState() => _CreateTaskScreenState();
+  State<CreateItemScreen> createState() => _CreateItemScreenState();
 }
 
-class _CreateTaskScreenState extends State<CreateTaskScreen> {
+class _CreateItemScreenState extends State<CreateItemScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   DateTime? _selectedDeadline;
@@ -35,7 +35,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
 
   // Smart suggestions
   final _suggestionsService = SmartSuggestionsService();
-  List<TaskSuggestion> _suggestions = [];
+  List<ItemSuggestion> _suggestions = [];
   bool _isLoadingSuggestions = false;
 
   @override
@@ -60,7 +60,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           if (kDebugMode) {
             print('Suggestions loading timed out');
           }
-          return <TaskSuggestion>[];
+          return <ItemSuggestion>[];
         },
       );
 
@@ -80,7 +80,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     }
   }
 
-  void _applySuggestion(TaskSuggestion suggestion) {
+  void _applySuggestion(ItemSuggestion suggestion) {
     // Capitalize first letter for display
     final name = suggestion.name.isEmpty
         ? ''
@@ -108,11 +108,11 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     // Note: Visual feedback is now handled by the animation in the suggestion chip
   }
 
-  Future<void> _createTask() async {
+  Future<void> _createItem() async {
     if (_titleController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Please enter a task title'),
+          content: const Text('Please enter an item title'),
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -137,7 +137,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
         );
       }
 
-      final taskData = {
+      final itemData = {
         'name': _titleController.text.trim(),
         'description': _descriptionController.text.trim(),
         'completed': false,
@@ -153,15 +153,15 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
 
       // Add category if selected
       if (_selectedCategoryId != null) {
-        taskData['categoryId'] = _selectedCategoryId;
-        taskData['categoryName'] = _selectedCategoryName;
+        itemData['categoryId'] = _selectedCategoryId;
+        itemData['categoryName'] = _selectedCategoryName;
       }
 
       await FirebaseFirestore.instance
           .collection('lists')
           .doc(widget.listId)
           .collection('items')
-          .add(taskData);
+          .add(itemData);
 
       if (!mounted) return;
       Navigator.pop(context);
@@ -178,7 +178,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
         title: const Text(
-          'Create Task',
+          'Create Item',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -207,9 +207,9 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                 ),
               ),
 
-            // Task Name
+            // Item Name
             _buildCard(
-              title: 'Task Name',
+              title: 'Item Name',
               child: Card(
                 elevation: 8,
                 shadowColor: Colors.black26,
@@ -237,7 +237,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                           ),
                           const SizedBox(width: 16),
                           const Text(
-                            'Task Name',
+                            'Item Name',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -401,7 +401,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     final result = await Navigator.push<FoodIconMapping>(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChooseTaskIconScreen(
+                        builder: (context) => ChooseItemIconScreen(
                           selectedIcon: _selectedIcon,
                         ),
                       ),
@@ -442,7 +442,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                'Task Icon',
+                                'Item Icon',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -828,7 +828,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: ElevatedButton(
-            onPressed: _isLoading ? null : _createTask,
+            onPressed: _isLoading ? null : _createItem,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green[800],
               foregroundColor: Colors.white,
@@ -848,7 +848,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     ),
                   )
                 : const Text(
-                    'Create Task',
+                    'Create Item',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
           ),
