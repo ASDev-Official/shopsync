@@ -11,6 +11,7 @@ import '/libraries/icons/food_icons_map.dart';
 import '/screens/choose_item_icon.dart';
 import '/services/smart_suggestions_service.dart';
 import '/models/item_suggestion.dart';
+import '/utils/food_icon_detector.dart';
 
 class CreateItemScreen extends StatefulWidget {
   final String listId;
@@ -248,6 +249,21 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                       const SizedBox(height: 16),
                       TextField(
                         controller: _titleController,
+                        onChanged: (text) {
+                          // Auto-fill icon based on food item name
+                          if (text.trim().isEmpty) return;
+
+                          final iconIdentifier =
+                              FoodIconDetector.detectFoodIcon(text);
+                          if (iconIdentifier != null) {
+                            final icon = FoodIconMap.getIcon(iconIdentifier);
+                            if (icon != null && mounted) {
+                              setState(() {
+                                _selectedIcon = icon;
+                              });
+                            }
+                          }
+                        },
                         decoration: InputDecoration(
                           hintText: 'Enter task name...',
                           border: OutlineInputBorder(
