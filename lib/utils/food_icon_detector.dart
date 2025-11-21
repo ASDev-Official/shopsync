@@ -28,7 +28,12 @@ class FoodIconDetector {
       }
     }
 
-    // Return the first result as a fallback
-    return results.first.identifier;
+    // Conservative fallback: only return if the first result contains the query
+    if (results.first.displayName.toLowerCase().contains(query)) {
+      return results.first.identifier;
+    }
+
+    // No conservative match found
+    return null;
   }
 }

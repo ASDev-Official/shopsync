@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,6 +34,8 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
   FoodIconMapping? _selectedIcon;
   String? _selectedCategoryId;
   String? _selectedCategoryName;
+  bool _iconManuallySelected = false;
+  Timer? _debounceTimer;
 
   // Smart suggestions
   final _suggestionsService = SmartSuggestionsService();
@@ -43,6 +46,14 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
   void initState() {
     super.initState();
     _loadSuggestions();
+  }
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    _titleController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadSuggestions() async {
@@ -250,19 +261,30 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                       TextField(
                         controller: _titleController,
                         onChanged: (text) {
-                          // Auto-fill icon based on food item name
+                          // Skip auto-fill if user has manually selected an icon
+                          if (_iconManuallySelected) return;
+
+                          // Cancel previous timer
+                          _debounceTimer?.cancel();
+
+                          // Auto-fill icon based on food item name after debounce delay
                           if (text.trim().isEmpty) return;
 
-                          final iconIdentifier =
-                              FoodIconDetector.detectFoodIcon(text);
-                          if (iconIdentifier != null) {
-                            final icon = FoodIconMap.getIcon(iconIdentifier);
-                            if (icon != null && mounted) {
-                              setState(() {
-                                _selectedIcon = icon;
-                              });
+                          _debounceTimer =
+                              Timer(const Duration(milliseconds: 500), () {
+                            if (!mounted || _iconManuallySelected) return;
+
+                            final iconIdentifier =
+                                FoodIconDetector.detectFoodIcon(text);
+                            if (iconIdentifier != null) {
+                              final icon = FoodIconMap.getIcon(iconIdentifier);
+                              if (icon != null && mounted) {
+                                setState(() {
+                                  _selectedIcon = icon;
+                                });
+                              }
                             }
-                          }
+                          });
                         },
                         decoration: InputDecoration(
                           hintText: 'Enter task name...',
@@ -425,6 +447,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                     if (result != null) {
                       setState(() {
                         _selectedIcon = result;
+                        _iconManuallySelected = true;
                       });
                     }
                   },
