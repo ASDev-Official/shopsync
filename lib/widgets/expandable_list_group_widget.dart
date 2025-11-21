@@ -389,7 +389,7 @@ class _ExpandableListGroupWidgetState extends State<ExpandableListGroupWidget>
                 const SizedBox(height: 12),
 
                 // Lists in group
-                StreamBuilder<QuerySnapshot>(
+                StreamBuilder<List<DocumentSnapshot>>(
                   stream: ListGroupsService.getListsInGroup(widget.groupDoc.id),
                   builder: (context, snapshot) {
                     // Prevent rebuilds during navigation
@@ -403,7 +403,7 @@ class _ExpandableListGroupWidgetState extends State<ExpandableListGroupWidget>
                       );
                     }
 
-                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
                       return Container(
                         padding: const EdgeInsets.all(24),
                         child: Column(
@@ -434,7 +434,7 @@ class _ExpandableListGroupWidgetState extends State<ExpandableListGroupWidget>
                       );
                     }
 
-                    final lists = snapshot.data!.docs;
+                    final lists = snapshot.data!;
 
                     return RepaintBoundary(
                       child: Column(
