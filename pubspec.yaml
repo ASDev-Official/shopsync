@@ -32,7 +32,7 @@ dependencies:
   m3e_collection: ^0.3.7
   web: ^1.1.1
   flutter_staggered_animations: ^1.1.1
-  google_sign_in: ^6.3.0
+  google_sign_in: ^7.2.0
   flutter_svg: ^2.1.0
   amplitude_flutter: ^4.0.0
   google_mobile_ads: ^6.0.0
