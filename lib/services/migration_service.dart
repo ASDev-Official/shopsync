@@ -158,7 +158,8 @@ class MigrationService {
       for (int i = 0; i < selectedGroups.length; i++) {
         final group = selectedGroups[i];
 
-        // Create group document
+        // Create group document with listIds only
+        // Don't set groupId on list documents to allow lists to be in multiple groups
         final groupRef = _firestore.collection('list_groups').doc();
         batch.set(groupRef, {
           'name': group.name,
@@ -170,14 +171,6 @@ class MigrationService {
           'isExpanded': true,
           'listIds': group.lists.map((list) => list.id).toList(),
         });
-
-        // Update lists to reference the group
-        for (final list in group.lists) {
-          batch.update(list.reference, {
-            'groupId': groupRef.id,
-            'updatedAt': FieldValue.serverTimestamp(),
-          });
-        }
       }
 
       await batch.commit();

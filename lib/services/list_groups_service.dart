@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -70,31 +71,8 @@ class ListGroupsService {
         return true; // Group doesn't exist, consider it successfully deleted
       }
 
-      final data = groupDoc.data() as Map<String, dynamic>;
-      final listIds = List<String>.from(data['listIds'] ?? []);
-
-      // Use multiple smaller batches to avoid hitting Firestore batch limits
-      // and improve reliability
-      final batchSize = 400; // Firestore limit is 500 operations per batch
-
-      for (int i = 0; i < listIds.length; i += batchSize) {
-        final batch = _firestore.batch();
-        final endIndex =
-            (i + batchSize < listIds.length) ? i + batchSize : listIds.length;
-        final batchListIds = listIds.sublist(i, endIndex);
-
-        // Remove groupId from each list in this batch
-        for (String listId in batchListIds) {
-          batch.update(_firestore.collection('lists').doc(listId), {
-            'groupId': FieldValue.delete(),
-            'updatedAt': FieldValue.serverTimestamp(),
-          });
-        }
-
-        await batch.commit();
-      }
-
-      // Finally, delete the group document
+      // Simply delete the group document
+      // No need to update list documents since groupId field is no longer used
       await _firestore.collection('list_groups').doc(groupId).delete();
 
       return true;
@@ -114,21 +92,13 @@ class ListGroupsService {
   // Add a list to a group
   static Future<bool> addListToGroup(String listId, String groupId) async {
     try {
-      final batch = _firestore.batch();
-
-      // Update the list with groupId
-      batch.update(_firestore.collection('lists').doc(listId), {
-        'groupId': groupId,
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-
-      // Add listId to group's listIds array
-      batch.update(_firestore.collection('list_groups').doc(groupId), {
+      // Only update the group's listIds array
+      // Don't set groupId on the list to allow multiple groups to contain the same list
+      await _firestore.collection('list_groups').doc(groupId).update({
         'listIds': FieldValue.arrayUnion([listId]),
         'updatedAt': FieldValue.serverTimestamp(),
       });
 
-      await batch.commit();
       return true;
     } catch (error, stackTrace) {
       await Sentry.captureException(
@@ -147,21 +117,13 @@ class ListGroupsService {
   // Remove a list from a group
   static Future<bool> removeListFromGroup(String listId, String groupId) async {
     try {
-      final batch = _firestore.batch();
-
-      // Remove groupId from the list
-      batch.update(_firestore.collection('lists').doc(listId), {
-        'groupId': FieldValue.delete(),
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-
-      // Remove listId from group's listIds array
-      batch.update(_firestore.collection('list_groups').doc(groupId), {
+      // Only remove listId from group's listIds array
+      // Don't modify the list document since groupId field is no longer used
+      await _firestore.collection('list_groups').doc(groupId).update({
         'listIds': FieldValue.arrayRemove([listId]),
         'updatedAt': FieldValue.serverTimestamp(),
       });
 
-      await batch.commit();
       return true;
     } catch (error, stackTrace) {
       await Sentry.captureException(
@@ -276,27 +238,23 @@ class ListGroupsService {
         .orderBy('createdAt', descending: true)
         .snapshots()
         .asyncMap((snapshot) async {
-      // Get all existing group IDs
+      // Get all existing groups and their listIds
       final groupsSnapshot = await _firestore
           .collection('list_groups')
           .where('members', arrayContains: user.uid)
           .get();
 
-      final existingGroupIds = groupsSnapshot.docs.map((doc) => doc.id).toSet();
+      // Collect all list IDs that are in any group
+      final groupedListIds = <String>{};
+      for (final groupDoc in groupsSnapshot.docs) {
+        final data = groupDoc.data();
+        final listIds = List<String>.from(data['listIds'] ?? []);
+        groupedListIds.addAll(listIds);
+      }
 
-      // Filter out lists that belong to existing groups
+      // Filter out lists that are in any group
       final ungroupedDocs = snapshot.docs.where((doc) {
-        final data = doc.data();
-        final groupId = data['groupId'];
-
-        // Consider ungrouped if:
-        // 1. groupId is null
-        // 2. groupId doesn't exist as a field
-        // 3. groupId references a group that no longer exists
-        final isUngrouped =
-            groupId == null || !existingGroupIds.contains(groupId);
-
-        return isUngrouped;
+        return !groupedListIds.contains(doc.id);
       }).toList();
 
       return ungroupedDocs;
@@ -304,68 +262,182 @@ class ListGroupsService {
   }
 
   // Get lists in a specific group
-  static Stream<QuerySnapshot> getListsInGroup(String groupId) {
+  static Stream<List<DocumentSnapshot>> getListsInGroup(String groupId) {
     final user = _auth.currentUser;
     if (user == null) {
-      return Stream.empty();
+      return Stream.value([]);
     }
 
-    return _firestore
-        .collection('lists')
-        .where('members', arrayContains: user.uid)
-        .where('groupId', isEqualTo: groupId)
-        .orderBy('createdAt', descending: true)
-        .snapshots();
+    late StreamController<List<DocumentSnapshot>> outerController;
+    StreamSubscription<DocumentSnapshot>? groupSubscription;
+    StreamSubscription<List<DocumentSnapshot?>>? combinedSubscription;
+
+    outerController = StreamController<List<DocumentSnapshot>>(
+      onListen: () {
+        // Subscribe to group document changes
+        groupSubscription = _firestore
+            .collection('list_groups')
+            .doc(groupId)
+            .snapshots()
+            .listen(
+          (groupSnapshot) {
+            // Cancel previous combined subscription on each new group snapshot
+            combinedSubscription?.cancel();
+            combinedSubscription = null;
+
+            if (!groupSnapshot.exists) {
+              outerController.add(<DocumentSnapshot>[]);
+              return;
+            }
+
+            final data = groupSnapshot.data() as Map<String, dynamic>;
+            final listIds = List<String>.from(data['listIds'] ?? []);
+
+            if (listIds.isEmpty) {
+              outerController.add(<DocumentSnapshot>[]);
+              return;
+            }
+
+            // Create a stream for each list document
+            final listStreams = listIds.map((listId) {
+              return _firestore
+                  .collection('lists')
+                  .doc(listId)
+                  .snapshots()
+                  .map((doc) => doc.exists ? doc : null);
+            }).toList();
+
+            // Subscribe to combined list streams
+            combinedSubscription = _combineListStreams(listStreams).listen(
+              (listDocs) {
+                // Filter out null docs and check user membership
+                final validDocs = listDocs
+                    .where((doc) {
+                      if (doc == null || !doc.exists) return false;
+                      final data = doc.data() as Map<String, dynamic>?;
+                      if (data == null) return false;
+                      final members = data['members'] as List<dynamic>?;
+                      return members != null && members.contains(user.uid);
+                    })
+                    .cast<DocumentSnapshot>()
+                    .toList();
+
+                // Sort to match original listIds order
+                validDocs.sort((a, b) {
+                  final indexA = listIds.indexOf(a.id);
+                  final indexB = listIds.indexOf(b.id);
+                  return indexA.compareTo(indexB);
+                });
+
+                outerController.add(validDocs);
+              },
+              onError: (error) {
+                outerController.addError(error);
+              },
+            );
+          },
+          onError: (error) {
+            outerController.addError(error);
+          },
+        );
+      },
+      onCancel: () {
+        combinedSubscription?.cancel();
+        groupSubscription?.cancel();
+      },
+    );
+
+    return outerController.stream;
   }
 
-  // Clean up orphaned lists (lists that reference deleted groups)
+  // Helper method to combine multiple streams into one
+  static Stream<List<DocumentSnapshot?>> _combineListStreams(
+      List<Stream<DocumentSnapshot?>> streams) {
+    if (streams.isEmpty) {
+      return Stream.value([]);
+    }
+
+    final controller = StreamController<List<DocumentSnapshot?>>();
+    final latestValues = List<DocumentSnapshot?>.filled(streams.length, null);
+    final seenInitial = List<bool>.filled(streams.length, false);
+    final subscriptions = <StreamSubscription>[];
+    var receivedCount = 0;
+
+    for (var i = 0; i < streams.length; i++) {
+      final index = i;
+      final subscription = streams[i].listen(
+        (doc) {
+          // Track first emission regardless of null/non-null value
+          if (!seenInitial[index]) {
+            seenInitial[index] = true;
+            receivedCount++;
+          }
+          latestValues[index] = doc;
+
+          // Emit when we have at least one value from each stream
+          if (receivedCount >= streams.length) {
+            controller.add(List.from(latestValues));
+          }
+        },
+        onError: (error) {
+          controller.addError(error);
+        },
+      );
+      subscriptions.add(subscription);
+    }
+
+    controller.onCancel = () {
+      for (var subscription in subscriptions) {
+        subscription.cancel();
+      }
+    };
+
+    return controller.stream;
+  }
+
+  // Clean up orphaned list IDs in groups (list IDs that reference deleted lists)
   static Future<void> cleanupOrphanedLists() async {
     try {
       final user = _auth.currentUser;
       if (user == null) return;
 
-      // Get all user's lists that have a groupId
-      final listsSnapshot = await _firestore
-          .collection('lists')
-          .where('members', arrayContains: user.uid)
-          .where('groupId', isNull: false)
-          .get();
-
-      if (listsSnapshot.docs.isEmpty) return;
-
-      // Get all existing group IDs
+      // Get all user's groups
       final groupsSnapshot = await _firestore
           .collection('list_groups')
           .where('members', arrayContains: user.uid)
           .get();
 
-      final existingGroupIds = groupsSnapshot.docs.map((doc) => doc.id).toSet();
+      // Get all existing list IDs that user has access to
+      final listsSnapshot = await _firestore
+          .collection('lists')
+          .where('members', arrayContains: user.uid)
+          .get();
 
-      // Find lists with orphaned groupIds
-      final orphanedLists = listsSnapshot.docs.where((doc) {
-        final data = doc.data();
-        final groupId = data['groupId'] as String?;
-        return groupId != null && !existingGroupIds.contains(groupId);
-      }).toList();
+      final existingListIds = listsSnapshot.docs.map((doc) => doc.id).toSet();
 
-      if (orphanedLists.isEmpty) return;
+      // For each group, remove list IDs that reference non-existent lists
+      final batch = _firestore.batch();
+      bool needsUpdate = false;
 
-      // Clean up orphaned lists in batches
-      const batchSize = 400;
-      for (int i = 0; i < orphanedLists.length; i += batchSize) {
-        final batch = _firestore.batch();
-        final endIndex = (i + batchSize < orphanedLists.length)
-            ? i + batchSize
-            : orphanedLists.length;
-        final batchLists = orphanedLists.sublist(i, endIndex);
+      for (var groupDoc in groupsSnapshot.docs) {
+        final data = groupDoc.data();
+        final listIds = List<String>.from(data['listIds'] ?? []);
+        final validListIds =
+            listIds.where((id) => existingListIds.contains(id)).toList();
 
-        for (final listDoc in batchLists) {
-          batch.update(_firestore.collection('lists').doc(listDoc.id), {
-            'groupId': FieldValue.delete(),
-            'updatedAt': FieldValue.serverTimestamp(),
-          });
+        if (validListIds.length != listIds.length) {
+          batch.update(
+            _firestore.collection('list_groups').doc(groupDoc.id),
+            {
+              'listIds': validListIds,
+              'updatedAt': FieldValue.serverTimestamp(),
+            },
+          );
+          needsUpdate = true;
         }
+      }
 
+      if (needsUpdate) {
         await batch.commit();
       }
     } catch (error, stackTrace) {
@@ -376,6 +448,139 @@ class ListGroupsService {
           'action': 'cleanup_orphaned_lists',
         }),
       );
+    }
+  }
+
+  // Check if any lists still use the old groupId format
+  static Future<bool> needsGroupIdMigration() async {
+    try {
+      final user = _auth.currentUser;
+      if (user == null) return false;
+
+      // Check if any of the user's lists have a groupId field
+      final listsSnapshot = await _firestore
+          .collection('lists')
+          .where('members', arrayContains: user.uid)
+          .get();
+
+      for (var doc in listsSnapshot.docs) {
+        final data = doc.data();
+        if (data.containsKey('groupId') && data['groupId'] != null) {
+          return true;
+        }
+      }
+
+      return false;
+    } catch (error, stackTrace) {
+      await Sentry.captureException(
+        error,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({
+          'action': 'check_needs_migration',
+        }),
+      );
+      return false;
+    }
+  }
+
+  // Migrate lists from old groupId format to new listIds array format
+  static Future<bool> migrateGroupIdToListIds() async {
+    try {
+      final user = _auth.currentUser;
+      if (user == null) throw Exception('User not authenticated');
+
+      // Get all user's lists that have a groupId
+      final listsSnapshot = await _firestore
+          .collection('lists')
+          .where('members', arrayContains: user.uid)
+          .get();
+
+      // Group lists by their groupId
+      final Map<String, List<String>> groupToLists = {};
+
+      for (var doc in listsSnapshot.docs) {
+        final data = doc.data();
+        final groupId = data['groupId'] as String?;
+
+        if (groupId != null) {
+          if (!groupToLists.containsKey(groupId)) {
+            groupToLists[groupId] = [];
+          }
+          groupToLists[groupId]!.add(doc.id);
+        }
+      }
+
+      if (groupToLists.isEmpty) {
+        return true; // No migration needed
+      }
+
+      // Update each group with its listIds
+      var batch = _firestore.batch();
+      int operationCount = 0;
+
+      for (var entry in groupToLists.entries) {
+        final groupId = entry.key;
+        final listIds = entry.value;
+
+        // Check if group still exists
+        final groupDoc =
+            await _firestore.collection('list_groups').doc(groupId).get();
+
+        if (groupDoc.exists) {
+          batch.update(_firestore.collection('list_groups').doc(groupId), {
+            'listIds': FieldValue.arrayUnion(listIds),
+            'updatedAt': FieldValue.serverTimestamp(),
+          });
+          operationCount++;
+        }
+
+        // Commit in batches of 400 to avoid Firestore limits
+        if (operationCount >= 400) {
+          await batch.commit();
+          batch = _firestore.batch();
+          operationCount = 0;
+        }
+      }
+
+      if (operationCount > 0) {
+        await batch.commit();
+      }
+
+      // Remove groupId field from all lists in batches
+      var batch2 = _firestore.batch();
+      operationCount = 0;
+
+      for (var doc in listsSnapshot.docs) {
+        final data = doc.data();
+        if (data.containsKey('groupId') && data['groupId'] != null) {
+          batch2.update(_firestore.collection('lists').doc(doc.id), {
+            'groupId': FieldValue.delete(),
+            'updatedAt': FieldValue.serverTimestamp(),
+          });
+          operationCount++;
+
+          if (operationCount >= 400) {
+            await batch2.commit();
+            batch2 = _firestore.batch();
+            operationCount = 0;
+          }
+        }
+      }
+
+      if (operationCount > 0) {
+        await batch2.commit();
+      }
+
+      return true;
+    } catch (error, stackTrace) {
+      await Sentry.captureException(
+        error,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({
+          'action': 'migrate_group_id_to_list_ids',
+        }),
+      );
+      return false;
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 import 'package:shopsync/widgets/loading_spinner.dart';
 import '/services/list_groups_service.dart';
@@ -307,17 +308,14 @@ class _ManageListGroupBottomSheetState
             const SizedBox(height: 12),
             ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 200),
-              child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('lists')
-                    .where('groupId', isEqualTo: widget.groupId)
-                    .snapshots(),
+              child: StreamBuilder<List<DocumentSnapshot>>(
+                stream: ListGroupsService.getListsInGroup(widget.groupId),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return const Center(child: CustomLoadingSpinner());
                   }
 
-                  final lists = snapshot.data!.docs;
+                  final lists = snapshot.data!;
                   if (lists.isEmpty) {
                     return Text(
                       'No lists in this group',
@@ -396,70 +394,98 @@ class _ManageListGroupBottomSheetState
           const SizedBox(height: 12),
           ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 200),
-            child: StreamBuilder<List<QueryDocumentSnapshot>>(
-              stream: ListGroupsService.getUngroupedLists(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(child: CustomLoadingSpinner());
-                }
-
-                final lists = snapshot.data!;
-                if (lists.isEmpty) {
+            child: StreamBuilder<List<DocumentSnapshot>>(
+              stream: ListGroupsService.getListsInGroup(widget.groupId),
+              builder: (context, groupSnapshot) {
+                final currentUser = FirebaseAuth.instance.currentUser;
+                if (currentUser == null) {
                   return Text(
-                    'No ungrouped lists available',
+                    'User not authenticated',
                     style: TextStyle(
                       color: isDark ? Colors.grey[400] : Colors.grey[600],
                     ),
                   );
                 }
 
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: lists.length,
-                  itemBuilder: (context, index) {
-                    final list = lists[index];
-                    final data = list.data() as Map<String, dynamic>;
-                    final listName = data['name'] ?? 'Unnamed List';
+                return StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('lists')
+                      .where('members', arrayContains: currentUser.uid)
+                      .orderBy('createdAt', descending: true)
+                      .snapshots(),
+                  builder: (context, allListsSnapshot) {
+                    if (!allListsSnapshot.hasData) {
+                      return const Center(child: CustomLoadingSpinner());
+                    }
 
-                    return Card(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      child: ListTile(
-                        leading: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.blue[100],
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Icon(
-                            Icons.shopping_cart,
-                            color: Colors.blue[700],
-                            size: 16,
-                          ),
+                    // Get IDs of lists already in this group
+                    final listsInGroup = groupSnapshot.data ?? [];
+                    final listIdsInGroup =
+                        listsInGroup.map((doc) => doc.id).toSet();
+
+                    // Filter to show only lists NOT in this group
+                    final availableLists = allListsSnapshot.data!.docs
+                        .where((doc) => !listIdsInGroup.contains(doc.id))
+                        .toList();
+
+                    if (availableLists.isEmpty) {
+                      return Text(
+                        'All your lists are in this group',
+                        style: TextStyle(
+                          color: isDark ? Colors.grey[400] : Colors.grey[600],
                         ),
-                        title: Text(listName),
-                        trailing: IconButton(
-                          icon: const Icon(
-                            Icons.add,
-                            size: 16,
-                            color: Colors.green,
+                      );
+                    }
+
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: availableLists.length,
+                      itemBuilder: (context, index) {
+                        final list = availableLists[index];
+                        final data = list.data() as Map<String, dynamic>;
+                        final listName = data['name'] ?? 'Unnamed List';
+
+                        return Card(
+                          margin: const EdgeInsets.only(bottom: 8),
+                          child: ListTile(
+                            leading: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.blue[100],
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Icon(
+                                Icons.shopping_cart,
+                                color: Colors.blue[700],
+                                size: 16,
+                              ),
+                            ),
+                            title: Text(listName),
+                            trailing: IconButton(
+                              icon: const Icon(
+                                Icons.add,
+                                size: 16,
+                                color: Colors.green,
+                              ),
+                              onPressed: () async {
+                                final success =
+                                    await ListGroupsService.addListToGroup(
+                                  list.id,
+                                  widget.groupId,
+                                );
+                                if (success && mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('$listName added to group'),
+                                      backgroundColor: Colors.green[800],
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
                           ),
-                          onPressed: () async {
-                            final success =
-                                await ListGroupsService.addListToGroup(
-                              list.id,
-                              widget.groupId,
-                            );
-                            if (success && mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('$listName added to group'),
-                                  backgroundColor: Colors.green[800],
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      ),
+                        );
+                      },
                     );
                   },
                 );

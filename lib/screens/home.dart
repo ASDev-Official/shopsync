@@ -11,6 +11,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 
 import '/screens/list_view.dart';
+import '/screens/list_group_migration_screen.dart';
 import '/widgets/loading_spinner.dart';
 import '/widgets/advert.dart';
 import '/widgets/add_list_group_bottom_sheet.dart';
@@ -368,6 +369,7 @@ class _HomeScreenState extends State<HomeScreen>
         .snapshots();
 
     _loadBannerAd();
+    _checkListGroupMigration();
     _checkMigration();
     _cleanupOrphanedLists();
 
@@ -400,6 +402,27 @@ class _HomeScreenState extends State<HomeScreen>
             _showSplashScreen = false;
             _hasShownSplashThisSession = true; // Mark as shown for this session
           });
+        }
+      });
+    }
+  }
+
+  Future<void> _checkListGroupMigration() async {
+    final needsMigration = await ListGroupsService.needsGroupIdMigration();
+    if (needsMigration && mounted) {
+      // Navigate to list group migration screen
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (!mounted) return;
+
+        final result = await Navigator.of(context).push<bool>(
+          MaterialPageRoute(
+            builder: (context) => const ListGroupMigrationScreen(),
+          ),
+        );
+
+        // If migration was successful, clean up orphaned lists
+        if (result == true && mounted) {
+          await _cleanupOrphanedLists();
         }
       });
     }
