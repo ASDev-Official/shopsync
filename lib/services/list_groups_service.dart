@@ -268,58 +268,86 @@ class ListGroupsService {
       return Stream.value([]);
     }
 
-    // Get the group document to retrieve listIds and reactively listen to each list
-    return _firestore
-        .collection('list_groups')
-        .doc(groupId)
-        .snapshots()
-        .asyncExpand((groupSnapshot) async* {
-      if (!groupSnapshot.exists) {
-        yield <DocumentSnapshot>[];
-        return;
-      }
+    late StreamController<List<DocumentSnapshot>> outerController;
+    StreamSubscription<DocumentSnapshot>? groupSubscription;
+    StreamSubscription<List<DocumentSnapshot?>>? combinedSubscription;
 
-      final data = groupSnapshot.data() as Map<String, dynamic>;
-      final listIds = List<String>.from(data['listIds'] ?? []);
-
-      if (listIds.isEmpty) {
-        yield <DocumentSnapshot>[];
-        return;
-      }
-
-      // Create a stream for each list document
-      final listStreams = listIds.map((listId) {
-        return _firestore
-            .collection('lists')
-            .doc(listId)
+    outerController = StreamController<List<DocumentSnapshot>>(
+      onListen: () {
+        // Subscribe to group document changes
+        groupSubscription = _firestore
+            .collection('list_groups')
+            .doc(groupId)
             .snapshots()
-            .map((doc) => doc.exists ? doc : null);
-      }).toList();
+            .listen(
+          (groupSnapshot) {
+            // Cancel previous combined subscription on each new group snapshot
+            combinedSubscription?.cancel();
+            combinedSubscription = null;
 
-      // Combine all list streams into a single stream and yield results
-      await for (final listDocs in _combineListStreams(listStreams)) {
-        // Filter out null docs and check user membership
-        final validDocs = listDocs
-            .where((doc) {
-              if (doc == null || !doc.exists) return false;
-              final data = doc.data() as Map<String, dynamic>?;
-              if (data == null) return false;
-              final members = data['members'] as List<dynamic>?;
-              return members != null && members.contains(user.uid);
-            })
-            .cast<DocumentSnapshot>()
-            .toList();
+            if (!groupSnapshot.exists) {
+              outerController.add(<DocumentSnapshot>[]);
+              return;
+            }
 
-        // Sort to match original listIds order
-        validDocs.sort((a, b) {
-          final indexA = listIds.indexOf(a.id);
-          final indexB = listIds.indexOf(b.id);
-          return indexA.compareTo(indexB);
-        });
+            final data = groupSnapshot.data() as Map<String, dynamic>;
+            final listIds = List<String>.from(data['listIds'] ?? []);
 
-        yield validDocs;
-      }
-    });
+            if (listIds.isEmpty) {
+              outerController.add(<DocumentSnapshot>[]);
+              return;
+            }
+
+            // Create a stream for each list document
+            final listStreams = listIds.map((listId) {
+              return _firestore
+                  .collection('lists')
+                  .doc(listId)
+                  .snapshots()
+                  .map((doc) => doc.exists ? doc : null);
+            }).toList();
+
+            // Subscribe to combined list streams
+            combinedSubscription = _combineListStreams(listStreams).listen(
+              (listDocs) {
+                // Filter out null docs and check user membership
+                final validDocs = listDocs
+                    .where((doc) {
+                      if (doc == null || !doc.exists) return false;
+                      final data = doc.data() as Map<String, dynamic>?;
+                      if (data == null) return false;
+                      final members = data['members'] as List<dynamic>?;
+                      return members != null && members.contains(user.uid);
+                    })
+                    .cast<DocumentSnapshot>()
+                    .toList();
+
+                // Sort to match original listIds order
+                validDocs.sort((a, b) {
+                  final indexA = listIds.indexOf(a.id);
+                  final indexB = listIds.indexOf(b.id);
+                  return indexA.compareTo(indexB);
+                });
+
+                outerController.add(validDocs);
+              },
+              onError: (error) {
+                outerController.addError(error);
+              },
+            );
+          },
+          onError: (error) {
+            outerController.addError(error);
+          },
+        );
+      },
+      onCancel: () {
+        combinedSubscription?.cancel();
+        groupSubscription?.cancel();
+      },
+    );
+
+    return outerController.stream;
   }
 
   // Helper method to combine multiple streams into one
@@ -331,6 +359,7 @@ class ListGroupsService {
 
     final controller = StreamController<List<DocumentSnapshot?>>();
     final latestValues = List<DocumentSnapshot?>.filled(streams.length, null);
+    final seenInitial = List<bool>.filled(streams.length, false);
     final subscriptions = <StreamSubscription>[];
     var receivedCount = 0;
 
@@ -338,7 +367,9 @@ class ListGroupsService {
       final index = i;
       final subscription = streams[i].listen(
         (doc) {
-          if (latestValues[index] == null && doc != null) {
+          // Track first emission regardless of null/non-null value
+          if (!seenInitial[index]) {
+            seenInitial[index] = true;
             receivedCount++;
           }
           latestValues[index] = doc;
