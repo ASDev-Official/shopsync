@@ -15,3 +15,6 @@ changelog:
     - title: 🧰 Maintenance and Bug Fixes
       labels:
         - semver-patch
+    - title: 📦 Dependencies
+      labels:
+        - dependencies
