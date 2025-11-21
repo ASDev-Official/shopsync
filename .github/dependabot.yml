@@ -5,3 +5,9 @@ updates:
     schedule:
       interval: "cron"
       cronjob: "0 9 * * *"
+      timezone: "Asia/Singapore"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps"
+    labels:
+      - "dependencies"
