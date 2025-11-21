@@ -412,6 +412,8 @@ class _HomeScreenState extends State<HomeScreen>
     if (needsMigration && mounted) {
       // Navigate to list group migration screen
       WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (!mounted) return;
+
         final result = await Navigator.of(context).push<bool>(
           MaterialPageRoute(
             builder: (context) => const ListGroupMigrationScreen(),

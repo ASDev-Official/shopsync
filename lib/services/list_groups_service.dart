@@ -372,7 +372,6 @@ class ListGroupsService {
       final listsSnapshot = await _firestore
           .collection('lists')
           .where('members', arrayContains: user.uid)
-          .limit(1)
           .get();
 
       for (var doc in listsSnapshot.docs) {
@@ -427,7 +426,7 @@ class ListGroupsService {
       }
 
       // Update each group with its listIds
-      final batch = _firestore.batch();
+      var batch = _firestore.batch();
       int operationCount = 0;
 
       for (var entry in groupToLists.entries) {
@@ -449,6 +448,7 @@ class ListGroupsService {
         // Commit in batches of 400 to avoid Firestore limits
         if (operationCount >= 400) {
           await batch.commit();
+          batch = _firestore.batch();
           operationCount = 0;
         }
       }
@@ -458,7 +458,7 @@ class ListGroupsService {
       }
 
       // Remove groupId field from all lists in batches
-      final batch2 = _firestore.batch();
+      var batch2 = _firestore.batch();
       operationCount = 0;
 
       for (var doc in listsSnapshot.docs) {
@@ -472,6 +472,7 @@ class ListGroupsService {
 
           if (operationCount >= 400) {
             await batch2.commit();
+            batch2 = _firestore.batch();
             operationCount = 0;
           }
         }
