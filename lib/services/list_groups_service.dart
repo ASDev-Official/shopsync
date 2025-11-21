@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -267,43 +268,100 @@ class ListGroupsService {
       return Stream.value([]);
     }
 
-    // Get the group document to retrieve listIds and combine with lists stream
+    // Get the group document to retrieve listIds and reactively listen to each list
     return _firestore
         .collection('list_groups')
         .doc(groupId)
         .snapshots()
-        .asyncMap((groupSnapshot) async {
+        .asyncExpand((groupSnapshot) async* {
       if (!groupSnapshot.exists) {
-        return <DocumentSnapshot>[];
+        yield <DocumentSnapshot>[];
+        return;
       }
 
       final data = groupSnapshot.data() as Map<String, dynamic>;
       final listIds = List<String>.from(data['listIds'] ?? []);
 
       if (listIds.isEmpty) {
-        return <DocumentSnapshot>[];
+        yield <DocumentSnapshot>[];
+        return;
       }
 
-      // Fetch lists in batches (Firestore whereIn limit is 10)
-      final List<DocumentSnapshot> allDocs = [];
-
-      for (int i = 0; i < listIds.length; i += 10) {
-        final batchIds = listIds.sublist(
-          i,
-          i + 10 < listIds.length ? i + 10 : listIds.length,
-        );
-
-        final batchSnapshot = await _firestore
+      // Create a stream for each list document
+      final listStreams = listIds.map((listId) {
+        return _firestore
             .collection('lists')
-            .where('members', arrayContains: user.uid)
-            .where(FieldPath.documentId, whereIn: batchIds)
-            .get();
+            .doc(listId)
+            .snapshots()
+            .map((doc) => doc.exists ? doc : null);
+      }).toList();
 
-        allDocs.addAll(batchSnapshot.docs);
+      // Combine all list streams into a single stream and yield results
+      await for (final listDocs in _combineListStreams(listStreams)) {
+        // Filter out null docs and check user membership
+        final validDocs = listDocs
+            .where((doc) {
+              if (doc == null || !doc.exists) return false;
+              final data = doc.data() as Map<String, dynamic>?;
+              if (data == null) return false;
+              final members = data['members'] as List<dynamic>?;
+              return members != null && members.contains(user.uid);
+            })
+            .cast<DocumentSnapshot>()
+            .toList();
+
+        // Sort to match original listIds order
+        validDocs.sort((a, b) {
+          final indexA = listIds.indexOf(a.id);
+          final indexB = listIds.indexOf(b.id);
+          return indexA.compareTo(indexB);
+        });
+
+        yield validDocs;
       }
-
-      return allDocs;
     });
+  }
+
+  // Helper method to combine multiple streams into one
+  static Stream<List<DocumentSnapshot?>> _combineListStreams(
+      List<Stream<DocumentSnapshot?>> streams) {
+    if (streams.isEmpty) {
+      return Stream.value([]);
+    }
+
+    final controller = StreamController<List<DocumentSnapshot?>>();
+    final latestValues = List<DocumentSnapshot?>.filled(streams.length, null);
+    final subscriptions = <StreamSubscription>[];
+    var receivedCount = 0;
+
+    for (var i = 0; i < streams.length; i++) {
+      final index = i;
+      final subscription = streams[i].listen(
+        (doc) {
+          if (latestValues[index] == null && doc != null) {
+            receivedCount++;
+          }
+          latestValues[index] = doc;
+
+          // Emit when we have at least one value from each stream
+          if (receivedCount >= streams.length) {
+            controller.add(List.from(latestValues));
+          }
+        },
+        onError: (error) {
+          controller.addError(error);
+        },
+      );
+      subscriptions.add(subscription);
+    }
+
+    controller.onCancel = () {
+      for (var subscription in subscriptions) {
+        subscription.cancel();
+      }
+    };
+
+    return controller.stream;
   }
 
   // Clean up orphaned list IDs in groups (list IDs that reference deleted lists)
