@@ -32,7 +32,8 @@ class ConnectivityService {
 
       // Listen for connectivity changes
       _connectivitySubscription =
-          _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+          _connectivity.onConnectivityChanged.listen(_updateConnectionStatus)
+              as StreamSubscription<ConnectivityResult>?;
 
       _isInitialized = true;
     } catch (e) {
