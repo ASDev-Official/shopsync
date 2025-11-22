@@ -55,9 +55,11 @@ class ExportService {
         final directory = await getTemporaryDirectory();
         final file = File('${directory.path}/$listName.csv');
         await file.writeAsString(csvData);
-        await Share.shareXFiles(
-          [XFile(file.path)],
-          subject: 'Shopping List: $listName',
+        await SharePlus.instance.share(
+          ShareParams(
+            files: [XFile(file.path)],
+            subject: 'Shopping List: $listName',
+          ),
         );
       }
     } catch (e, stackTrace) {
