@@ -34,7 +34,7 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   google_sign_in: ^7.2.0
   flutter_svg: ^2.1.0
-  amplitude_flutter: ^4.0.0
+  amplitude_flutter: ^4.3.9
   google_mobile_ads: ^6.0.0
   flutter_inappwebview: ^6.1.5
   lottie: ^3.3.2
