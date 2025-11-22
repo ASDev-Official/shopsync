@@ -3,10 +3,8 @@ updates:
   - package-ecosystem: "pub"
     directory: "/"
     schedule:
-      interval: "cron"
-      cronjob: "0 9 * * *"
-      timezone: "Asia/Singapore"
-    open-pull-requests-limit: 5
+      interval: "daily"
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "deps"
     labels:
