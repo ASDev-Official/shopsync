@@ -24,7 +24,7 @@ dependencies:
   shared_preferences: ^2.5.3
   provider: ^6.1.5+1
   path_provider: ^2.0.15
-  share_plus: ^7.0.0
+  share_plus: ^12.0.1
   flutter_map: ^6.1.0
   latlong2: ^0.9.0
   geocoding: ^2.2.0
