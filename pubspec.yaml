@@ -38,7 +38,7 @@ dependencies:
   google_mobile_ads: ^6.0.0
   flutter_inappwebview: ^6.1.5
   lottie: ^3.3.2
-  connectivity_plus: ^5.0.2
+  connectivity_plus: ^7.0.0
   home_widget: ^0.6.0
   flutter_expandable_fab: ^2.3.0
   tflite_flutter: ^0.12.1
