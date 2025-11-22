@@ -37,7 +37,7 @@ dependencies:
   amplitude_flutter: ^4.0.0
   google_mobile_ads: ^6.0.0
   flutter_inappwebview: ^6.1.5
-  lottie: ^3.1.2
+  lottie: ^3.3.2
   connectivity_plus: ^5.0.2
   home_widget: ^0.6.0
   flutter_expandable_fab: ^2.3.0
