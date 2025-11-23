@@ -1,11 +1,11 @@
-name: Deploy to Play Store Production
+name: CD-Prod-Play
 
 on:
   workflow_dispatch:
 
 jobs:
-  build-and-upload:
-    name: Build and Upload to Google Play Store Production
+  cd-build-and-upload:
+    name: CD-Build and Upload to Google Play Production
     environment: google-play-deployment
     runs-on: ubuntu-latest
 
