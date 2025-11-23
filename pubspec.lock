@@ -801,10 +801,10 @@ packages:
     dependency: "direct main"
     description:
       name: lucide_icons_flutter
-      sha256: "2cc30b669d2e9329072bdd4e3f50d4a31d4dd6ee9e9748d639dab95cd2edd0ce"
+      sha256: c2b806da2b01fd7df99bd97e9f92ad0b6726f802a97c67812bc50b324a745a7e
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.5"
+    version: "3.1.6"
   m3e_collection:
     dependency: "direct main"
     description:
