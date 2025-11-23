@@ -17,7 +17,7 @@ dependencies:
   firebase_core: ^4.2.1
   firebase_auth: ^6.1.2
   cloud_firestore: ^6.1.0
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
   package_info_plus: ^8.3.0
   in_app_update: ^4.2.5
   intl: 0.20.2
@@ -39,7 +39,7 @@ dependencies:
   flutter_inappwebview: ^6.1.5
   lottie: ^3.3.2
   connectivity_plus: ^7.0.0
-  home_widget: ^0.6.0
+  home_widget: ^0.8.1
   flutter_expandable_fab: ^2.3.0
   tflite_flutter: ^0.12.1
   collection: ^1.18.0
