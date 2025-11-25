@@ -1,0 +1,22 @@
+name: Auto assign issues/pull requests
+
+on:
+  issues:
+        types: [opened, edited, reopened]
+  pull_request:
+        types: [opened, edited, synchronize, reopened]
+
+jobs:
+  auto-assign:
+    name: Auto-assign issues and PRs
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+    - name: 'Auto-assign issue'
+      uses: pozil/auto-assign-issue@v2.2.0
+      with:
+        assignees: 'aadishsamir123'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}

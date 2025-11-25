@@ -1,2 +1,0 @@
-- name: Auto-assign Issue
-  uses: pozil/auto-assign-issue@v2.2.0
