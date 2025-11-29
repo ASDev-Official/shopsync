@@ -5,21 +5,35 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "shopsync",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "shopsync (profile mode)",
+            "name": "ShopSync Phone",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/main.dart",
+            "args": ["--flavor", "phone"]
         },
         {
-            "name": "shopsync (release mode)",
+            "name": "ShopSync Phone (profile)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "program": "lib/main.dart",
+            "flutterMode": "profile",
+            "args": ["--flavor", "phone"]
+        },
+        {
+            "name": "ShopSync Phone (release)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "release",
+            "args": ["--flavor", "phone"]
+        },
+        {
+            "name": "ShopSync WearOS",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/wear/wear_main.dart",
+            "flutterMode": "debug",
+            "args": ["--flavor", "wear"]
         }
     ]
 }

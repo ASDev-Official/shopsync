@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- WearOS flavor: Impeller disabled, use Skia -->
+    <application>
+        <meta-data
+            android:name="io.flutter.embedding.android.EnableImpeller"
+            android:value="false"
+        />
+    </application>
+</manifest>
