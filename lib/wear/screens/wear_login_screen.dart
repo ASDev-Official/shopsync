@@ -129,7 +129,6 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
                         autocorrect: false,
                       ),
                       const SizedBox(height: 16),
-                      const SizedBox(height: 16),
 
                       // Error message
                       if (_errorMessage != null)
