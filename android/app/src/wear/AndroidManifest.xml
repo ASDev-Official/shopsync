@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- WearOS flavor: Impeller disabled, use Skia -->
+    <uses-feature android:name="android.hardware.type.watch" android:required="true" />
     <application>
         <meta-data
             android:name="io.flutter.embedding.android.EnableImpeller"
             android:value="false"
         />
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
     </application>
 </manifest>
