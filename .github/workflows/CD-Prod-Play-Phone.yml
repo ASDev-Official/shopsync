@@ -1,11 +1,11 @@
-name: CD-Prod-Play
+name: CD-Prod-Play-Phone
 
 on:
   workflow_dispatch:
 
 jobs:
   cd-build-and-upload:
-    name: CD-Build and Upload to Google Play Production
+    name: CD-Build and Upload Phone to Google Play Production
     environment: google-play-deployment
     runs-on: ubuntu-latest
 

@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../firebase_options.dart';
-import 'screens/wear_home_screen.dart';
+import 'screens/wear_list_groups_screen.dart';
 import 'screens/wear_login_screen.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -52,6 +52,11 @@ class ShopSyncWearApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.black,
         useMaterial3: true,
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+          },
+        ),
       ),
       home: const WearAuthWrapper(),
     );
@@ -101,7 +106,7 @@ class WearAuthWrapper extends StatelessWidget {
         }
 
         if (snapshot.hasData && snapshot.data != null) {
-          return const WearHomeScreen();
+          return const WearListGroupsScreen();
         }
 
         return const WearLoginScreen();

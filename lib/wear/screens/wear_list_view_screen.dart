@@ -19,6 +19,25 @@ class WearListViewScreen extends StatefulWidget {
 
 class _WearListViewScreenState extends State<WearListViewScreen> {
   final ScrollController _scrollController = ScrollController();
+  Stream<QuerySnapshot>? _itemsStream;
+
+  @override
+  void initState() {
+    super.initState();
+    // Delay stream initialization to prevent any potential issues
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        setState(() {
+          _itemsStream = FirebaseFirestore.instance
+              .collection('lists')
+              .doc(widget.listId)
+              .collection('items')
+              .orderBy('timestamp', descending: false)
+              .snapshots();
+        });
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -34,7 +53,7 @@ class _WearListViewScreenState extends State<WearListViewScreen> {
           .collection('items')
           .doc(itemId)
           .update({
-        'checked': !currentValue,
+        'completed': !currentValue,
         'lastModified': FieldValue.serverTimestamp(),
       });
     } catch (e) {
@@ -58,42 +77,7 @@ class _WearListViewScreenState extends State<WearListViewScreen> {
             return Scaffold(
               backgroundColor:
                   mode == WearMode.active ? Colors.black : Colors.black,
-              body: SafeArea(
-                child: Column(
-                  children: [
-                    // Header
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.arrow_back, size: 20),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                          Expanded(
-                            child: Text(
-                              widget.listName,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: mode == WearMode.active
-                                    ? Colors.white
-                                    : Colors.white70,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Items
-                    Expanded(
-                      child: _buildItemsStream(mode),
-                    ),
-                  ],
-                ),
-              ),
+              body: _buildItemsStream(mode),
             );
           },
         );
@@ -140,19 +124,19 @@ class _WearListViewScreenState extends State<WearListViewScreen> {
         final items = snapshot.data!.docs;
         final uncheckedItems = items.where((item) {
           final data = item.data() as Map<String, dynamic>;
-          return data['checked'] != true;
+          return data['completed'] != true;
         }).toList();
 
         final checkedItems = items.where((item) {
           final data = item.data() as Map<String, dynamic>;
-          return data['checked'] == true;
+          return data['completed'] == true;
         }).toList();
 
         return RotaryScrollbar(
           controller: _scrollController,
           child: ListView(
             controller: _scrollController,
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.only(bottom: 20),
             children: [
               // Unchecked items
               ...uncheckedItems.map((item) => _buildItemCard(item, mode)),
@@ -186,7 +170,7 @@ class _WearListViewScreenState extends State<WearListViewScreen> {
     final data = item.data() as Map<String, dynamic>;
     final itemName = data['name'] ?? 'Unnamed Item';
     final quantity = data['quantity'] ?? 1;
-    final isChecked = data['checked'] == true;
+    final isChecked = data['completed'] == true;
 
     return Card(
       color: mode == WearMode.active
