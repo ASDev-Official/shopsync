@@ -19,7 +19,6 @@ class WearListViewScreen extends StatefulWidget {
 
 class _WearListViewScreenState extends State<WearListViewScreen> {
   final ScrollController _scrollController = ScrollController();
-  Stream<QuerySnapshot>? _itemsStream;
 
   @override
   void initState() {
@@ -27,14 +26,7 @@ class _WearListViewScreenState extends State<WearListViewScreen> {
     // Delay stream initialization to prevent any potential issues
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        setState(() {
-          _itemsStream = FirebaseFirestore.instance
-              .collection('lists')
-              .doc(widget.listId)
-              .collection('items')
-              .orderBy('timestamp', descending: false)
-              .snapshots();
-        });
+        setState(() {});
       }
     });
   }

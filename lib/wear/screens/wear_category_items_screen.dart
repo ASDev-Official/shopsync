@@ -140,8 +140,6 @@ class _WearCategoryItemsScreenState extends State<WearCategoryItemsScreen> {
         final categoryItems = allItems.where((item) {
           final data = item.data() as Map<String, dynamic>;
           final itemCategoryId = data['categoryId'] as String?;
-          final itemName = data['name'] ?? 'unnamed';
-
           return itemCategoryId == widget.categoryId;
         }).toList();
 
