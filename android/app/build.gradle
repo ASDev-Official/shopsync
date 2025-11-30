@@ -51,7 +51,7 @@ android {
             dimension "platform"
             manifestPlaceholders = [:]
             versionNameSuffix "-phone"
-            versionCode = 290240004
+            versionCode = 290240005
         }
         wear {
             manifestPlaceholders = [:]
