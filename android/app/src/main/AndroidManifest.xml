@@ -9,9 +9,6 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true">
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
