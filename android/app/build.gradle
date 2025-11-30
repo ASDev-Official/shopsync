@@ -49,13 +49,15 @@ android {
     productFlavors {
         phone {
             dimension "platform"
+            manifestPlaceholders = [:]
             versionNameSuffix "-phone"
-            versionCode = 290240001
+            versionCode = 290240004
         }
         wear {
+            manifestPlaceholders = [:]
             dimension "platform"
             versionNameSuffix "-wear"
-            versionCode = 290140001
+            versionCode = 290140004
         }
     }
 
