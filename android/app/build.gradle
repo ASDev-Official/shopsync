@@ -50,12 +50,12 @@ android {
         phone {
             dimension "platform"
             versionNameSuffix "-phone"
-            versionCode = 5600
+            versionCode = 2902400
         }
         wear {
             dimension "platform"
             versionNameSuffix "-wear"
-            versionCode = 5601
+            versionCode = 2903400
         }
     }
 
