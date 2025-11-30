@@ -52,30 +52,6 @@ class _WearCategoryItemsScreenState extends State<WearCategoryItemsScreen> {
     super.dispose();
   }
 
-  Future<void> _toggleItemChecked(String itemId, bool currentValue) async {
-    try {
-      await FirebaseFirestore.instance
-          .collection('lists')
-          .doc(widget.listId)
-          .collection('items')
-          .doc(itemId)
-          .update({
-        'completed': !currentValue,
-        'lastModified': FieldValue.serverTimestamp(),
-      });
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error: ${e.toString()}'),
-            backgroundColor: Colors.red,
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return WatchShape(
