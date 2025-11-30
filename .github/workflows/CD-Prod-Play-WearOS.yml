@@ -61,5 +61,5 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: com.aadishsamir.shopsync
           releaseFiles: build/app/outputs/bundle/wearRelease/app-wear-release.aab
-          track: production
+          track: wear:production
 
