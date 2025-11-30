@@ -148,7 +148,7 @@ class _WearListCategoriesScreenState extends State<WearListCategoriesScreen> {
               child: CustomScrollView(
                 controller: _scrollController,
                 slivers: [
-                  // Header
+                  // Header (no back button, padded title)
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.only(
@@ -157,31 +157,20 @@ class _WearListCategoriesScreenState extends State<WearListCategoriesScreen> {
                         top: shape == WearShape.round ? 24.0 : 16.0,
                         bottom: 12.0,
                       ),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () => Navigator.pop(context),
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: const Icon(Icons.arrow_back, size: 18),
-                            ),
+                      child: Center(
+                        child: Text(
+                          widget.listName,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: mode == WearMode.active
+                                ? Colors.white
+                                : Colors.white70,
                           ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              widget.listName,
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: mode == WearMode.active
-                                    ? Colors.white
-                                    : Colors.white70,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ),
@@ -263,53 +252,56 @@ class _WearListCategoriesScreenState extends State<WearListCategoriesScreen> {
               ),
             );
           },
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.category,
-                  size: 18,
-                  color: mode == WearMode.active
-                      ? Colors.orange[300]
-                      : Colors.orange[700],
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        categoryName,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: mode == WearMode.active
-                              ? Colors.white
-                              : Colors.white70,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        '$itemCount ${itemCount == 1 ? 'item' : 'items'}',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: mode == WearMode.active
-                              ? Colors.white54
-                              : Colors.white38,
-                        ),
-                      ),
-                    ],
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.category,
+                    size: 18,
+                    color: mode == WearMode.active
+                        ? Colors.orange[300]
+                        : Colors.orange[700],
                   ),
-                ),
-                Icon(
-                  Icons.chevron_right,
-                  size: 16,
-                  color: Colors.white38,
-                ),
-              ],
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          categoryName,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: mode == WearMode.active
+                                ? Colors.white
+                                : Colors.white70,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '$itemCount ${itemCount == 1 ? 'item' : 'items'}',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: mode == WearMode.active
+                                ? Colors.white54
+                                : Colors.white38,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(
+                    Icons.chevron_right,
+                    size: 16,
+                    color: Colors.white38,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -120,94 +120,78 @@ class _WearItemDetailsScreenState extends State<WearItemDetailsScreen> {
           child: CustomScrollView(
             controller: _scrollController,
             slivers: [
-              // Header with back button
+              // Centered, padded title header
               SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.only(
                     left: shape == WearShape.round ? 32.0 : 16.0,
                     right: shape == WearShape.round ? 32.0 : 16.0,
                     top: shape == WearShape.round ? 24.0 : 16.0,
-                    bottom: 8.0,
+                    bottom: 12.0,
                   ),
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: const Row(
-                        children: [
-                          Icon(Icons.arrow_back, size: 18),
-                          SizedBox(width: 8),
-                          Text(
-                            'Back',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
+                  child: Center(
+                    child: Text(
+                      name,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: mode == WearMode.active
+                            ? Colors.white
+                            : Colors.white70,
+                        decoration: completed
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
               ),
-
-              // Item name and status
+              // Status toggle
               SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: shape == WearShape.round ? 28.0 : 16.0,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: mode == WearMode.active
-                              ? Colors.white
-                              : Colors.white70,
-                          decoration: completed
-                              ? TextDecoration.lineThrough
-                              : TextDecoration.none,
+                  child: ConstrainedBox(
+                    constraints:
+                        const BoxConstraints(minHeight: 48, minWidth: 48),
+                    child: GestureDetector(
+                      onTap: () => _toggleCompleted(completed),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      // Status toggle
-                      GestureDetector(
-                        onTap: () => _toggleCompleted(completed),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: completed
-                                ? Colors.green[800]
-                                : Colors.grey[800],
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                completed
-                                    ? Icons.check_circle
-                                    : Icons.circle_outlined,
-                                size: 16,
+                        decoration: BoxDecoration(
+                          color:
+                              completed ? Colors.green[800] : Colors.grey[800],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              completed
+                                  ? Icons.check_circle
+                                  : Icons.circle_outlined,
+                              size: 16,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              completed ? 'Completed' : 'Not Completed',
+                              style: const TextStyle(
+                                fontSize: 11,
                                 color: Colors.white,
                               ),
-                              const SizedBox(width: 6),
-                              Text(
-                                completed ? 'Completed' : 'Not Completed',
-                                style: const TextStyle(
-                                  fontSize: 11,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),

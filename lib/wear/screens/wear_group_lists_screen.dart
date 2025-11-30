@@ -147,7 +147,7 @@ class _WearGroupListsScreenState extends State<WearGroupListsScreen> {
           child: CustomScrollView(
             controller: _scrollController,
             slivers: [
-              // Header
+              // Centered, padded title header (no back button)
               SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.only(
@@ -156,31 +156,20 @@ class _WearGroupListsScreenState extends State<WearGroupListsScreen> {
                     top: shape == WearShape.round ? 24.0 : 16.0,
                     bottom: 12.0,
                   ),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: const Icon(Icons.arrow_back, size: 18),
-                        ),
+                  child: Center(
+                    child: Text(
+                      widget.groupName,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: mode == WearMode.active
+                            ? Colors.white
+                            : Colors.white70,
                       ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          widget.groupName,
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: mode == WearMode.active
-                                ? Colors.white
-                                : Colors.white70,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),
@@ -195,7 +184,6 @@ class _WearGroupListsScreenState extends State<WearGroupListsScreen> {
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       final listId = listIds[index];
-
                       return FutureBuilder<DocumentSnapshot?>(
                         future: _getListData(listId),
                         builder: (context, listSnapshot) {
@@ -203,20 +191,16 @@ class _WearGroupListsScreenState extends State<WearGroupListsScreen> {
                               listSnapshot.data == null) {
                             return const SizedBox.shrink();
                           }
-
                           final listData = listSnapshot.data!.data()
                               as Map<String, dynamic>?;
                           if (listData == null) {
                             return const SizedBox.shrink();
                           }
-
                           final listName = listData['name'] ?? 'Unnamed List';
-
                           return FutureBuilder<int>(
                             future: _getItemCount(listId),
                             builder: (context, itemSnapshot) {
                               final itemCount = itemSnapshot.data ?? 0;
-
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
                                 child: Card(
@@ -227,70 +211,75 @@ class _WearGroupListsScreenState extends State<WearGroupListsScreen> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              WearListCategoriesScreen(
-                                            listId: listId,
-                                            listName: listName,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.list_alt,
-                                            size: 18,
-                                            color: mode == WearMode.active
-                                                ? Colors.blue[300]
-                                                : Colors.blue[700],
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  listName,
-                                                  style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.bold,
-                                                    color:
-                                                        mode == WearMode.active
-                                                            ? Colors.white
-                                                            : Colors.white70,
-                                                  ),
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                                const SizedBox(height: 4),
-                                                Text(
-                                                  '$itemCount ${itemCount == 1 ? 'item' : 'items'}',
-                                                  style: TextStyle(
-                                                    fontSize: 11,
-                                                    color:
-                                                        mode == WearMode.active
-                                                            ? Colors.white54
-                                                            : Colors.white38,
-                                                  ),
-                                                ),
-                                              ],
+                                  child: ConstrainedBox(
+                                    constraints: const BoxConstraints(
+                                        minHeight: 48, minWidth: 48),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                WearListCategoriesScreen(
+                                              listId: listId,
+                                              listName: listName,
                                             ),
                                           ),
-                                          Icon(
-                                            Icons.chevron_right,
-                                            size: 16,
-                                            color: Colors.white38,
-                                          ),
-                                        ],
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.list_alt,
+                                              size: 18,
+                                              color: mode == WearMode.active
+                                                  ? Colors.blue[300]
+                                                  : Colors.blue[700],
+                                            ),
+                                            const SizedBox(width: 10),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    listName,
+                                                    style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: mode ==
+                                                              WearMode.active
+                                                          ? Colors.white
+                                                          : Colors.white70,
+                                                    ),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  const SizedBox(height: 4),
+                                                  Text(
+                                                    '$itemCount ${itemCount == 1 ? 'item' : 'items'}',
+                                                    style: TextStyle(
+                                                      fontSize: 11,
+                                                      color: mode ==
+                                                              WearMode.active
+                                                          ? Colors.white54
+                                                          : Colors.white38,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Icon(
+                                              Icons.chevron_right,
+                                              size: 16,
+                                              color: Colors.white38,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

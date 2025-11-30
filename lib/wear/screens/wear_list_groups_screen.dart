@@ -126,7 +126,8 @@ class _WearListGroupsScreenState extends State<WearListGroupsScreen> {
                     top: shape == WearShape.round ? 32.0 : 16.0,
                     bottom: 8.0,
                   ),
-                  child: Row(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
@@ -142,45 +143,59 @@ class _WearListGroupsScreenState extends State<WearListGroupsScreen> {
                           size: 20,
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'ShopSync',
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              color: mode == WearMode.active
-                                  ? Colors.white
-                                  : Colors.white70,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
+                      const SizedBox(width: 10),
+                      Text(
+                        'ShopSync',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: mode == WearMode.active
+                              ? Colors.white
+                              : Colors.white70,
+                          letterSpacing: 0.5,
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const WearSettingsScreen(),
-                            ),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Icon(
-                            Icons.settings,
-                            size: 24,
-                            color: mode == WearMode.active
-                                ? Colors.white70
-                                : Colors.white54,
-                          ),
-                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ],
+                  ),
+                ),
+              ),
+              // Settings icon+text button below logo
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: shape == WearShape.round ? 40.0 : 16.0,
+                    right: shape == WearShape.round ? 40.0 : 16.0,
+                    bottom: 12.0,
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[800],
+                        foregroundColor: mode == WearMode.active
+                            ? Colors.white
+                            : Colors.white70,
+                        minimumSize: const Size(48, 48),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 12),
+                      ),
+                      icon: const Icon(Icons.settings, size: 22),
+                      label: const Text('Settings',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500)),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const WearSettingsScreen(),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),

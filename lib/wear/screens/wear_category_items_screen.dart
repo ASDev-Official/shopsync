@@ -178,7 +178,7 @@ class _WearCategoryItemsScreenState extends State<WearCategoryItemsScreen> {
           child: CustomScrollView(
             controller: _scrollController,
             slivers: [
-              // Header
+              // Header (no back button, padded title)
               SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.only(
@@ -187,31 +187,20 @@ class _WearCategoryItemsScreenState extends State<WearCategoryItemsScreen> {
                     top: shape == WearShape.round ? 24.0 : 16.0,
                     bottom: 12.0,
                   ),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: const Icon(Icons.arrow_back, size: 18),
-                        ),
+                  child: Center(
+                    child: Text(
+                      widget.categoryName,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: mode == WearMode.active
+                            ? Colors.white
+                            : Colors.white70,
                       ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          widget.categoryName,
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: mode == WearMode.active
-                                ? Colors.white
-                                : Colors.white70,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),
@@ -301,62 +290,70 @@ class _WearCategoryItemsScreenState extends State<WearCategoryItemsScreen> {
               ),
             );
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () => _toggleItemChecked(item.id, isChecked),
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    child: Icon(
-                      isChecked ? Icons.check_circle : Icons.circle_outlined,
-                      size: 18,
-                      color: isChecked
-                          ? (mode == WearMode.active
-                              ? Colors.green[400]
-                              : Colors.green[700])
-                          : (mode == WearMode.active
-                              ? Colors.white54
-                              : Colors.white38),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 48, minWidth: 48),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Row(
+                children: [
+                  ConstrainedBox(
+                    constraints:
+                        const BoxConstraints(minHeight: 48, minWidth: 48),
+                    child: GestureDetector(
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        child: Icon(
+                          isChecked
+                              ? Icons.check_circle
+                              : Icons.circle_outlined,
+                          size: 24,
+                          color: isChecked
+                              ? (mode == WearMode.active
+                                  ? Colors.green[400]
+                                  : Colors.green[700])
+                              : (mode == WearMode.active
+                                  ? Colors.white54
+                                  : Colors.white38),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        itemName,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: mode == WearMode.active
-                              ? (isChecked ? Colors.white54 : Colors.white)
-                              : Colors.white70,
-                          decoration: isChecked
-                              ? TextDecoration.lineThrough
-                              : TextDecoration.none,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      if (quantity > 1) ...[
-                        const SizedBox(height: 2),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         Text(
-                          'Qty: $quantity',
+                          itemName,
                           style: TextStyle(
-                            fontSize: 10,
+                            fontSize: 12,
                             color: mode == WearMode.active
-                                ? Colors.white38
-                                : Colors.white24,
+                                ? (isChecked ? Colors.white54 : Colors.white)
+                                : Colors.white70,
+                            decoration: isChecked
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
                           ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
+                        if (quantity > 1) ...[
+                          const SizedBox(height: 2),
+                          Text(
+                            'Qty: $quantity',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: mode == WearMode.active
+                                  ? Colors.white38
+                                  : Colors.white24,
+                            ),
+                          ),
+                        ],
                       ],
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

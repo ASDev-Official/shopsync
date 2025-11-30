@@ -42,7 +42,7 @@ class _WearSignOutScreenState extends State<WearSignOutScreen> {
       child: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          // Header with back button
+          // Centered, padded title header (no back button)
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.only(
@@ -51,29 +51,19 @@ class _WearSignOutScreenState extends State<WearSignOutScreen> {
                 top: shape == WearShape.round ? 24.0 : 16.0,
                 bottom: 12.0,
               ),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: const Icon(Icons.arrow_back, size: 18),
-                    ),
+              child: Center(
+                child: Text(
+                  'Sign Out',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color:
+                        mode == WearMode.active ? Colors.white : Colors.white70,
                   ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'Sign Out',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: mode == WearMode.active
-                            ? Colors.white
-                            : Colors.white70,
-                      ),
-                    ),
-                  ),
-                ],
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),
@@ -134,38 +124,42 @@ class _WearSignOutScreenState extends State<WearSignOutScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: InkWell(
-                  onTap: () async {
-                    await FirebaseAuth.instance.signOut();
-                    if (mounted) {
-                      // Pop both this screen and settings screen
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 16.0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.check,
-                          size: 20,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          'Yes, Sign Out',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
+                child: ConstrainedBox(
+                  constraints:
+                      const BoxConstraints(minHeight: 48, minWidth: 48),
+                  child: InkWell(
+                    onTap: () async {
+                      await FirebaseAuth.instance.signOut();
+                      if (mounted) {
+                        // Pop both this screen and settings screen
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 16.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.check,
+                            size: 20,
                             color: Colors.white,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 10),
+                          Text(
+                            'Yes, Sign Out',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -177,7 +171,7 @@ class _WearSignOutScreenState extends State<WearSignOutScreen> {
             padding: EdgeInsets.only(
               left: shape == WearShape.round ? 32.0 : 12.0,
               right: shape == WearShape.round ? 32.0 : 12.0,
-              bottom: 20.0,
+              bottom: 36.0, // Increased bottom padding to prevent clipping
             ),
             sliver: SliverToBoxAdapter(
               child: Card(
@@ -188,35 +182,39 @@ class _WearSignOutScreenState extends State<WearSignOutScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: InkWell(
-                  onTap: () => Navigator.pop(context),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 16.0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.close,
-                          size: 20,
-                          color: mode == WearMode.active
-                              ? Colors.white70
-                              : Colors.white54,
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          'Cancel',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
+                child: ConstrainedBox(
+                  constraints:
+                      const BoxConstraints(minHeight: 48, minWidth: 48),
+                  child: InkWell(
+                    onTap: () => Navigator.pop(context),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 16.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.close,
+                            size: 20,
                             color: mode == WearMode.active
                                 ? Colors.white70
                                 : Colors.white54,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 10),
+                          Text(
+                            'Cancel',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: mode == WearMode.active
+                                  ? Colors.white70
+                                  : Colors.white54,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
