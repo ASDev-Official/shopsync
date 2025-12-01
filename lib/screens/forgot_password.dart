@@ -5,7 +5,9 @@ import '/widgets/loading_spinner.dart';
 import '/utils/sentry_auth_utils.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+  final bool hideSignIn;
+
+  const ForgotPasswordScreen({super.key, this.hideSignIn = false});
 
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
@@ -304,39 +306,41 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               size: ButtonM3ESize.lg,
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Remember your password?',
-                                style: TextStyle(
-                                  color: isDarkMode
-                                      ? Colors.green[100]
-                                          ?.withValues(alpha: 0.9)
-                                      : Colors.green[900]
-                                          ?.withValues(alpha: 0.9),
-                                  fontSize: 15,
-                                ),
-                              ),
-                              ButtonM3E(
-                                onPressed: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, '/login');
-                                },
-                                label: const Text(
-                                  'Sign In',
+                          if (!widget.hideSignIn) ...[
+                            const SizedBox(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Remember your password?',
                                   style: TextStyle(
-                                    fontWeight: FontWeight.bold,
+                                    color: isDarkMode
+                                        ? Colors.green[100]
+                                            ?.withValues(alpha: 0.9)
+                                        : Colors.green[900]
+                                            ?.withValues(alpha: 0.9),
                                     fontSize: 15,
-                                    decoration: TextDecoration.underline,
                                   ),
                                 ),
-                                style: ButtonM3EStyle.text,
-                                size: ButtonM3ESize.sm,
-                              ),
-                            ],
-                          ),
+                                ButtonM3E(
+                                  onPressed: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, '/login');
+                                  },
+                                  label: const Text(
+                                    'Sign In',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                  style: ButtonM3EStyle.text,
+                                  size: ButtonM3ESize.sm,
+                                ),
+                              ],
+                            ),
+                          ],
                         ],
                       ),
                     ),

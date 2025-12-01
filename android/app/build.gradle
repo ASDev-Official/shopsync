@@ -42,7 +42,10 @@ android {
         minSdk = 29
         targetSdk = 35
         versionCode = 56
-        versionName = '4.0.0'
+        versionName = '4.1.0'
+        
+        // Enable Credential Manager for Google Sign-In
+        manifestPlaceholders['credentialManagerEnabled'] = true
     }
 
     flavorDimensions = ["platform"]
@@ -51,13 +54,13 @@ android {
             dimension "platform"
             manifestPlaceholders = [:]
             versionNameSuffix "-phone"
-            versionCode = 290240006
+            versionCode = 290241001
         }
         wear {
             manifestPlaceholders = [:]
             dimension "platform"
             versionNameSuffix "-wear"
-            versionCode = 290140006
+            versionCode = 290141001
         }
     }
 

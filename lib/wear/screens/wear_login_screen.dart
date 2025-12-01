@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
+import 'package:shopsync/services/google_auth.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
+import '../widgets/wear_animated_google_button.dart';
 
 class WearLoginScreen extends StatefulWidget {
   const WearLoginScreen({super.key});
@@ -15,6 +18,7 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
   final _passwordController = TextEditingController();
   final _scrollController = ScrollController();
   bool _isLoading = false;
+  bool _isGoogleLoading = false;
   String? _errorMessage;
   bool _canSignIn = false;
 
@@ -88,6 +92,60 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
       if (mounted) {
         setState(() {
           _isLoading = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    setState(() {
+      _isGoogleLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      final userCredential =
+          await GoogleAuthService.signInWithGoogleCredentialManager();
+
+      if (userCredential == null) {
+        // User canceled
+        setState(() {
+          _isGoogleLoading = false;
+        });
+        return;
+      }
+
+      // Success - auth state will handle navigation
+    } on FirebaseAuthException catch (e, stackTrace) {
+      String message = e.message ?? 'Google Sign-In failed';
+
+      if (e.code == 'account-exists-with-different-credential') {
+        message = 'Account exists with different sign-in method';
+      } else if (e.code == 'network-request-failed') {
+        message = 'Network error. Check your connection';
+      }
+
+      setState(() {
+        _errorMessage = message;
+      });
+
+      await Sentry.captureException(e,
+          stackTrace: stackTrace,
+          hint: Hint.withMap(
+              {'screen': 'WearLoginScreen', 'action': 'google_signin'}));
+    } catch (e, stackTrace) {
+      setState(() {
+        _errorMessage = 'An error occurred. Please try again';
+      });
+
+      await Sentry.captureException(e,
+          stackTrace: stackTrace,
+          hint: Hint.withMap(
+              {'screen': 'WearLoginScreen', 'action': 'google_signin'}));
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isGoogleLoading = false;
         });
       }
     }
@@ -190,44 +248,95 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
                           ),
 
                         // Login button
-                        SizedBox(
-                          width: double.infinity,
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(
-                                minHeight: 48, minWidth: 48),
-                            child: ElevatedButton(
-                              onPressed:
-                                  (_isLoading || !_canSignIn) ? null : _signIn,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: _canSignIn && !_isLoading
-                                    ? Colors.green[700]
-                                    : Colors.grey[700],
-                                foregroundColor: Colors.white,
-                                minimumSize: const Size(48, 48),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24),
+                        Semantics(
+                          button: true,
+                          enabled: !_isLoading && _canSignIn,
+                          label:
+                              _isLoading ? 'Signing in' : 'Sign in with email',
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                  minHeight: 48, minWidth: 48),
+                              child: ElevatedButton(
+                                onPressed: (_isLoading || !_canSignIn)
+                                    ? null
+                                    : _signIn,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _canSignIn && !_isLoading
+                                      ? Colors.green[700]
+                                      : Colors.grey[700],
+                                  foregroundColor: Colors.white,
+                                  minimumSize: const Size(48, 48),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
+                                  textStyle: const TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
-                                textStyle: const TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              child: _isLoading
-                                  ? const SizedBox(
-                                      height: 16,
-                                      width: 16,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                        color: Colors.white,
+                                child: _isLoading
+                                    ? const SizedBox(
+                                        height: 16,
+                                        width: 16,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : const Text(
+                                        'Sign In',
                                       ),
-                                    )
-                                  : const Text(
-                                      'Sign In',
-                                    ),
+                              ),
                             ),
                           ),
+                        ),
+                        const SizedBox(height: 12),
+
+                        // Divider with "or"
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                color: mode == WearMode.active
+                                    ? Colors.white24
+                                    : Colors.white12,
+                                thickness: 1,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                'or',
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  color: mode == WearMode.active
+                                      ? Colors.white54
+                                      : Colors.white38,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                color: mode == WearMode.active
+                                    ? Colors.white24
+                                    : Colors.white12,
+                                thickness: 1,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+
+                        // Google Sign-In button
+                        WearAnimatedGoogleButton(
+                          onPressed: _signInWithGoogle,
+                          isLoading: _isGoogleLoading,
+                          height: 48.0,
                         ),
                         const SizedBox(height: 16),
 

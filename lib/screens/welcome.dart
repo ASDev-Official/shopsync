@@ -1,8 +1,14 @@
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import '/utils/sentry_auth_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:credential_manager/credential_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shopsync/services/connectivity_service.dart';
 import 'package:m3e_collection/m3e_collection.dart';
-// import '/services/google_auth.dart';
+import '/services/google_auth.dart';
+import '/widgets/animated_google_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -16,6 +22,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final packageInfo = await PackageInfo.fromPlatform();
     return 'Version ${packageInfo.version} (${packageInfo.buildNumber})';
   }
+
+  // ignore: unused_field
+  String _errorMessage = '';
+  bool _isGoogleLoading = false;
+  bool _hasTriedCredentialManager = false;
 
   // Widget _getGoogleButtonImage(bool isDarkMode) {
   //   if (Theme.of(context).platform == TargetPlatform.android) {
@@ -36,6 +47,99 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   //     );
   //   }
   // }
+
+  Future<void> _signInWithGoogle() async {
+    setState(() {
+      _isGoogleLoading = true;
+      _errorMessage = '';
+    });
+
+    try {
+      UserCredential? userCredential;
+
+      // On Android, use Credential Manager
+      if (!kIsWeb && Platform.isAndroid) {
+        userCredential =
+            await GoogleAuthService.signInWithGoogleCredentialManager();
+      } else {
+        // On web, use standard Google Sign-In
+        userCredential = await GoogleAuthService.signInWithGoogle();
+      }
+
+      if (userCredential == null) {
+        // User canceled the sign-in
+        setState(() {
+          _isGoogleLoading = false;
+        });
+        return;
+      }
+
+      if (!mounted) return;
+    } on FirebaseAuthException catch (e, stackTrace) {
+      String errorMessage =
+          e.message ?? 'An error occurred with Google Sign-In';
+
+      // Special handling for account-exists-with-different-credential
+      if (e.code == 'account-exists-with-different-credential') {
+        errorMessage =
+            'An account with this email already exists. Please sign in with email/password first, then link your Google account from the Profile screen.';
+      }
+
+      setState(() {
+        _errorMessage = errorMessage;
+      });
+      await SentryUtils.reportError(e, stackTrace);
+    } catch (e, stackTrace) {
+      setState(() {
+        _errorMessage =
+            'An error occurred with Google Sign-In. Please try again.';
+      });
+      await SentryUtils.reportError(e, stackTrace);
+    } finally {
+      setState(() {
+        _isGoogleLoading = false;
+      });
+    }
+  }
+
+  Future<void> _tryCredentialManagerSignIn() async {
+    if (_hasTriedCredentialManager) return;
+
+    setState(() {
+      _hasTriedCredentialManager = true;
+      _isGoogleLoading = true;
+    });
+
+    try {
+      final userCredential =
+          await GoogleAuthService.signInWithGoogleCredentialManager();
+
+      if (userCredential != null) {
+        // Successfully signed in with Credential Manager
+        if (!mounted) return;
+        return;
+      }
+
+      // User canceled or no credentials available - continue to show normal login
+    } catch (e) {
+      // Credential Manager not available or error occurred - continue to show normal login
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isGoogleLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // On Android, try Credential Manager automatically
+    if (!kIsWeb && Platform.isAndroid) {
+      _tryCredentialManagerSignIn();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,6 +250,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
 
                 const Spacer(flex: 2),
+
+                // Continue with Google Button with morphing animation
+                AnimatedGoogleButton(
+                  onPressed: _signInWithGoogle,
+                  isLoading: _isGoogleLoading,
+                  isDarkMode: isDarkMode,
+                ),
+
+                const SizedBox(height: 20),
 
                 // Login Button
                 ButtonM3E(

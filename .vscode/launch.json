@@ -34,6 +34,12 @@
             "program": "lib/wear/wear_main.dart",
             "flutterMode": "debug",
             "args": ["--flavor", "wear"]
-        }
+        },
+        {
+            "name": "ShopSync Web",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+        },
     ]
 }
