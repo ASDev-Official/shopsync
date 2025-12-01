@@ -62,4 +62,3 @@ jobs:
           packageName: com.aadishsamir.shopsync
           releaseFiles: build/app/outputs/bundle/phoneRelease/app-phone-release.aab
           track: production
-          changesNotSentForReview: true

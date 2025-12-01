@@ -62,5 +62,4 @@ jobs:
           packageName: com.aadishsamir.shopsync
           releaseFiles: build/app/outputs/bundle/wearRelease/app-wear-release.aab
           track: wear:production
-          changesNotSentForReview: true
 
