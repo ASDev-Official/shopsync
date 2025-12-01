@@ -484,6 +484,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
+
+                  // Divider with "OR" text
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          color: isDarkMode
+                              ? Colors.green[100]?.withValues(alpha: 0.3)
+                              : Colors.white.withValues(alpha: 0.3),
+                          thickness: 1,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          'OR',
+                          style: TextStyle(
+                            color: isDarkMode
+                                ? Colors.green[100]?.withValues(alpha: 0.7)
+                                : Colors.white.withValues(alpha: 0.7),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: isDarkMode
+                              ? Colors.green[100]?.withValues(alpha: 0.3)
+                              : Colors.white.withValues(alpha: 0.3),
+                          thickness: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

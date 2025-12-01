@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _auth = FirebaseAuth.instance;
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   String _errorMessage = '';
@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
-      await _auth.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );

@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../firebase_options.dart';
 import 'screens/wear_list_groups_screen.dart';
-import 'screens/wear_login_screen.dart';
+import 'screens/wear_welcome_screen.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
@@ -109,7 +109,7 @@ class WearAuthWrapper extends StatelessWidget {
           return const WearListGroupsScreen();
         }
 
-        return const WearLoginScreen();
+        return const WearWelcomeScreen();
       },
     );
   }

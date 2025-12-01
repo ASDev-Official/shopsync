@@ -10,6 +10,7 @@ import 'package:shopsync/services/connectivity_service.dart';
 import '/screens/sign_out.dart';
 import '/widgets/loading_spinner.dart';
 import '/widgets/advert.dart';
+import '/services/google_auth.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -60,7 +61,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   bool _isLoading = false;
   bool _isEditing = false;
+  bool _isLinkingGoogle = false;
   String? _errorMessage;
+  String? _successMessage;
 
   // Ad management
   BannerAd? _bannerAd;
@@ -210,6 +213,138 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         );
       }
+    }
+  }
+
+  Future<void> _linkGoogleAccount() async {
+    setState(() {
+      _isLinkingGoogle = true;
+      _errorMessage = null;
+      _successMessage = null;
+    });
+
+    try {
+      final userCredential = await GoogleAuthService.linkGoogleAccount();
+
+      if (userCredential == null) {
+        // User canceled
+        setState(() {
+          _isLinkingGoogle = false;
+        });
+        return;
+      }
+
+      setState(() {
+        _successMessage =
+            'Google account linked successfully! You can now sign in with Google.';
+      });
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Google account linked successfully!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } on FirebaseAuthException catch (e, stackTrace) {
+      setState(() {
+        _errorMessage =
+            e.message ?? 'An error occurred while linking your Google account.';
+      });
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({'action': 'linking_google_account'}),
+      );
+    } catch (e, stackTrace) {
+      setState(() {
+        _errorMessage = 'An error occurred while linking your Google account.';
+      });
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({'action': 'linking_google_account'}),
+      );
+    } finally {
+      setState(() {
+        _isLinkingGoogle = false;
+      });
+    }
+  }
+
+  Future<void> _unlinkGoogleAccount() async {
+    final shouldUnlink = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Unlink Google Account'),
+            content: const Text(
+              'Are you sure you want to unlink your Google account? '
+              'You will no longer be able to sign in with Google unless you link it again.',
+            ),
+            actions: [
+              ButtonM3E(
+                onPressed: () => Navigator.pop(context, false),
+                label: const Text('Cancel'),
+                style: ButtonM3EStyle.text,
+                size: ButtonM3ESize.md,
+              ),
+              ButtonM3E(
+                onPressed: () => Navigator.pop(context, true),
+                label: const Text('Unlink'),
+                style: ButtonM3EStyle.text,
+                size: ButtonM3ESize.md,
+              ),
+            ],
+          ),
+        ) ??
+        false;
+
+    if (!shouldUnlink) return;
+
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+      _successMessage = null;
+    });
+
+    try {
+      await GoogleAuthService.unlinkGoogleAccount();
+
+      setState(() {
+        _successMessage = 'Google account unlinked successfully.';
+      });
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Google account unlinked successfully'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } on FirebaseAuthException catch (e, stackTrace) {
+      setState(() {
+        _errorMessage = e.message ??
+            'An error occurred while unlinking your Google account.';
+      });
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({'action': 'unlinking_google_account'}),
+      );
+    } catch (e, stackTrace) {
+      setState(() {
+        _errorMessage =
+            'An error occurred while unlinking your Google account.';
+      });
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({'action': 'unlinking_google_account'}),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -545,6 +680,258 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ],
                           ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Success message
+                    if (_successMessage != null)
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 24),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? Colors.green[900]!.withValues(alpha: 0.2)
+                              : Colors.green[50],
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: isDark
+                                ? Colors.green[800]!
+                                : Colors.green[200]!,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.check_circle,
+                                color: isDark
+                                    ? Colors.green[300]
+                                    : Colors.green[700]),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                _successMessage!,
+                                style: TextStyle(
+                                  color: isDark
+                                      ? Colors.green[300]
+                                      : Colors.green[700],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    // Linked Accounts Card
+                    Card(
+                      elevation: isDark ? 0 : 2,
+                      color: isDark ? Colors.grey[850] : Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        side: BorderSide(
+                          color: isDark ? Colors.grey[800]! : Colors.grey[200]!,
+                          width: 1,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Linked Accounts',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    isDark ? Colors.white : Colors.green[800],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'Manage how you sign in to ShopSync',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    isDark ? Colors.white70 : Colors.grey[700],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Email/Password Provider
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              leading: CircleAvatar(
+                                backgroundColor:
+                                    isDark ? Colors.blue[900] : Colors.blue[50],
+                                child: Icon(Icons.email,
+                                    color: isDark
+                                        ? Colors.blue[200]
+                                        : Colors.blue[800]),
+                              ),
+                              title: Text(
+                                'Email & Password',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: isDark ? Colors.white : null,
+                                ),
+                              ),
+                              subtitle: Text(
+                                (FirebaseAuth.instance.currentUser?.providerData
+                                            .any((p) =>
+                                                p.providerId == 'password') ??
+                                        false)
+                                    ? 'Sign in with email and password'
+                                    : 'Not configured',
+                                style: TextStyle(
+                                  color: isDark ? Colors.white60 : null,
+                                ),
+                              ),
+                              trailing: (FirebaseAuth
+                                          .instance.currentUser?.providerData
+                                          .any((p) =>
+                                              p.providerId == 'password') ??
+                                      false)
+                                  ? Icon(
+                                      Icons.check_circle,
+                                      color: Colors.green[600],
+                                    )
+                                  : Icon(
+                                      Icons.cancel,
+                                      color: Colors.grey[400],
+                                    ),
+                            ),
+
+                            // Set Password Button (if email/password not configured)
+                            if (!(FirebaseAuth
+                                    .instance.currentUser?.providerData
+                                    .any((p) => p.providerId == 'password') ??
+                                false))
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12.0),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: ButtonM3E(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, '/forgot-password',
+                                          arguments: true);
+                                    },
+                                    icon: const Icon(Icons.lock_reset),
+                                    label: const Text('Set Password'),
+                                    style: ButtonM3EStyle.outlined,
+                                    size: ButtonM3ESize.md,
+                                  ),
+                                ),
+                              ),
+
+                            const Divider(height: 24),
+
+                            // Google Provider
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              leading: CircleAvatar(
+                                backgroundColor:
+                                    isDark ? Colors.red[900] : Colors.red[50],
+                                child: Image.asset(
+                                  'assets/badges/google/web/png@4x/light/web_light_rd_na@4x.png',
+                                  width: 24,
+                                  height: 24,
+                                ),
+                              ),
+                              title: Text(
+                                'Google',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: isDark ? Colors.white : null,
+                                ),
+                              ),
+                              subtitle: Text(
+                                (FirebaseAuth.instance.currentUser?.providerData
+                                            .any((p) =>
+                                                p.providerId == 'google.com') ??
+                                        false)
+                                    ? 'Sign in with Google account'
+                                    : 'Not linked',
+                                style: TextStyle(
+                                  color: isDark ? Colors.white60 : null,
+                                ),
+                              ),
+                              trailing: (FirebaseAuth
+                                          .instance.currentUser?.providerData
+                                          .any((p) =>
+                                              p.providerId == 'google.com') ??
+                                      false)
+                                  ? Icon(
+                                      Icons.check_circle,
+                                      color: Colors.green[600],
+                                    )
+                                  : Icon(
+                                      Icons.cancel,
+                                      color: Colors.grey[400],
+                                    ),
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Link/Unlink Button
+                            if (FirebaseAuth.instance.currentUser?.providerData
+                                    .any((p) => p.providerId == 'google.com') ??
+                                false)
+                              SizedBox(
+                                width: double.infinity,
+                                child: ButtonM3E(
+                                  onPressed:
+                                      _isLoading ? null : _unlinkGoogleAccount,
+                                  enabled: !_isLoading,
+                                  icon: const Icon(Icons.link_off),
+                                  label: _isLoading
+                                      ? const SizedBox(
+                                          height: 20,
+                                          width: 20,
+                                          child: CustomLoadingSpinner(
+                                            color: Colors.white,
+                                            size: 20.0,
+                                          ),
+                                        )
+                                      : const Text('Unlink Google Account'),
+                                  style: ButtonM3EStyle.outlined,
+                                  size: ButtonM3ESize.md,
+                                ),
+                              )
+                            else
+                              SizedBox(
+                                width: double.infinity,
+                                child: ButtonM3E(
+                                  onPressed: _isLinkingGoogle
+                                      ? null
+                                      : _linkGoogleAccount,
+                                  enabled: !_isLinkingGoogle,
+                                  icon: _isLinkingGoogle
+                                      ? null
+                                      : Image.asset(
+                                          isDark
+                                              ? 'assets/badges/google/web/png@4x/dark/web_dark_rd_na@4x.png'
+                                              : 'assets/badges/google/web/png@4x/light/web_light_rd_na@4x.png',
+                                          height: 20,
+                                          width: 20,
+                                        ),
+                                  label: _isLinkingGoogle
+                                      ? const SizedBox(
+                                          height: 20,
+                                          width: 20,
+                                          child: CustomLoadingSpinner(
+                                            color: Colors.white,
+                                            size: 20.0,
+                                          ),
+                                        )
+                                      : const Text('Link Google Account'),
+                                  style: ButtonM3EStyle.filled,
+                                  size: ButtonM3ESize.md,
+                                ),
+                              ),
+                          ],
                         ),
                       ),
                     ),

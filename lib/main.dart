@@ -12,6 +12,7 @@ import 'screens/login.dart';
 import 'screens/register.dart';
 import 'screens/home.dart';
 import 'screens/profile.dart';
+import 'screens/forgot_password.dart';
 import 'screens/maintenance_screen.dart';
 import 'screens/onboarding.dart';
 import 'screens/settings.dart';
@@ -162,6 +163,12 @@ class ShopSync extends StatelessWidget {
           final listId = settings.arguments as String;
           return MaterialPageRoute(
             builder: (context) => ManageCategoriesScreen(listId: listId),
+          );
+        }
+        if (settings.name == '/forgot-password') {
+          final hideSignIn = settings.arguments as bool? ?? false;
+          return MaterialPageRoute(
+            builder: (context) => ForgotPasswordScreen(hideSignIn: hideSignIn),
           );
         }
         return null;
