@@ -20,6 +20,7 @@ class _AnimatedGoogleButtonState extends State<AnimatedGoogleButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  // ignore: unused_field
   bool _isPressed = false;
 
   @override
