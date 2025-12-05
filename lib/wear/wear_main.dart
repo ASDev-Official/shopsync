@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../firebase_options.dart';
 import 'screens/wear_list_groups_screen.dart';
 import 'screens/wear_welcome_screen.dart';
+import 'screens/wear_maintenance_screen.dart';
+import '../services/maintenance_service.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
@@ -63,8 +65,52 @@ class ShopSyncWearApp extends StatelessWidget {
   }
 }
 
-class WearAuthWrapper extends StatelessWidget {
+class WearAuthWrapper extends StatefulWidget {
   const WearAuthWrapper({super.key});
+
+  @override
+  State<WearAuthWrapper> createState() => _WearAuthWrapperState();
+}
+
+class _WearAuthWrapperState extends State<WearAuthWrapper> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _checkMaintenance();
+    });
+  }
+
+  Future<void> _checkMaintenance() async {
+    final maintenance = await MaintenanceService.checkMaintenance();
+
+    if (maintenance != null && mounted) {
+      if (maintenance['isUnderMaintenance']) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WearMaintenanceScreen(
+              message: maintenance['message'],
+              startTime: maintenance['startTime'],
+              endTime: maintenance['endTime'],
+              isPredictive: false,
+            ),
+          ),
+        );
+      } else if (maintenance['isPredictive']) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => WearMaintenanceScreen(
+            message: maintenance['message'],
+            startTime: maintenance['startTime'],
+            endTime: maintenance['endTime'],
+            isPredictive: true,
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

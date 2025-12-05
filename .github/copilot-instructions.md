@@ -80,7 +80,7 @@ flutter pub get
 
 - **Phone**: CD workflow builds `--flavor phone --target=lib/main.dart` → `app-phone-release.aab`
 - **WearOS**: Separate CD workflow for wear builds
-- Version code format: `29XXNVVVV` where XX=platform (02=phone,01=wear), NNN=semver-written-in-3-digits, VV=version-number-for-a-specific-release
+- Version code format: `XXYYYYYYY` where XX=platform (30=phone,40=wear), YYYYYYY=versionCode.
 - Requires `key.properties` (keystore config) and `sentry.properties` (debug symbols upload)
 
 ## Code Conventions
