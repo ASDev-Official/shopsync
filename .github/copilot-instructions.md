@@ -74,7 +74,7 @@ flutter pub get
 
 - ARB files in `lib/l10n/`, generated via `l10n.yaml` config
 - Run `./extract_strings.sh` to auto-generate `app_en.arb` from code (extracts `Text()`, `title:`, `return` strings)
-- Uses `AppLocalizations.of(context)` for translations
+- Currently translations are not being added inside app. Hardcode strings as normal.
 
 ### Release Process
 
