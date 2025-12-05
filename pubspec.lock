@@ -869,14 +869,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.2"
-  lucide_icons_flutter:
-    dependency: "direct main"
-    description:
-      name: lucide_icons_flutter
-      sha256: c2b806da2b01fd7df99bd97e9f92ad0b6726f802a97c67812bc50b324a745a7e
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.6"
   m3e_collection:
     dependency: "direct main"
     description:

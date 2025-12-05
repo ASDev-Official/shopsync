@@ -41,8 +41,6 @@ android {
         applicationId = "com.aadishsamir.shopsync"
         minSdk = 29
         targetSdk = 35
-        versionCode = 56
-        versionName = '4.1.0'
         
         // Enable Credential Manager for Google Sign-In
         manifestPlaceholders['credentialManagerEnabled'] = true
@@ -51,16 +49,20 @@ android {
     flavorDimensions = ["platform"]
     productFlavors {
         phone {
+            def phoneBaseVersionCode = 300000000
+            def phoneVersionCode = 1
             dimension "platform"
             manifestPlaceholders = [:]
-            versionNameSuffix "-phone"
-            versionCode = 290241001
+            versionName = "4.1.0-phone"
+            versionCode = phoneBaseVersionCode + phoneVersionCode
         }
         wear {
+            def wearBaseVersionCode = 400000000
+            def wearVersionCode = 1
             manifestPlaceholders = [:]
             dimension "platform"
-            versionNameSuffix "-wear"
-            versionCode = 290141001
+            versionName = "1.1.1-wear"
+            versionCode = wearBaseVersionCode + wearVersionCode
         }
     }
 
