@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'wear_sign_out_screen.dart';
 
 class WearSettingsScreen extends StatefulWidget {
@@ -13,6 +14,26 @@ class WearSettingsScreen extends StatefulWidget {
 
 class _WearSettingsScreenState extends State<WearSettingsScreen> {
   final ScrollController _scrollController = ScrollController();
+  String _appVersion = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAppVersion();
+  }
+
+  Future<void> _loadAppVersion() async {
+    try {
+      final packageInfo = await PackageInfo.fromPlatform();
+      setState(() {
+        _appVersion = '${packageInfo.version} (${packageInfo.buildNumber})';
+      });
+    } catch (e) {
+      setState(() {
+        _appVersion = 'Error loading version';
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -66,6 +87,92 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),
+
+          // About App section
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: shape == WearShape.round ? 36.0 : 16.0,
+                right: shape == WearShape.round ? 36.0 : 16.0,
+                bottom: 8.0,
+                top: 16.0,
+              ),
+              child: Text(
+                'About',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color:
+                      mode == WearMode.active ? Colors.white54 : Colors.white38,
+                ),
+              ),
+            ),
+          ),
+
+          // App Version card
+          SliverPadding(
+            padding: EdgeInsets.only(
+              left: shape == WearShape.round ? 32.0 : 12.0,
+              right: shape == WearShape.round ? 32.0 : 12.0,
+              bottom: 16.0,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: Card(
+                color: mode == WearMode.active
+                    ? Colors.grey[900]
+                    : Colors.grey[850],
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                        size: 16,
+                        color: mode == WearMode.active
+                            ? Colors.white54
+                            : Colors.white38,
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'App Version',
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: mode == WearMode.active
+                                    ? Colors.white54
+                                    : Colors.white38,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              _appVersion,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: mode == WearMode.active
+                                    ? Colors.white
+                                    : Colors.white70,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
