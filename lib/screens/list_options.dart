@@ -1833,7 +1833,7 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                           });
                         },
                         decoration: InputDecoration(
-                          hintText: 'Enter task name...',
+                          hintText: 'Enter item name...',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Colors.green[200]!),
