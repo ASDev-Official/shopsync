@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:m3e_collection/m3e_collection.dart';
 import 'item_details.dart';
 import 'create_item.dart';
 import 'list_options.dart';
@@ -116,56 +117,8 @@ class _ListViewScreenState extends State<ListViewScreen>
       ],
     );
 
-    Widget? fab = _selectedIndex == 0
-        ? FutureBuilder<bool>(
-            future: PermissionsHelper.isViewer(widget.listId),
-            builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data == true) {
-                return const SizedBox.shrink();
-              }
-              return Container(
-                width: 64,
-                height: 64,
-                decoration: BoxDecoration(
-                  color: isDark ? Colors.green[700] : Colors.green[600],
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.2),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              CreateItemScreen(listId: widget.listId),
-                        ),
-                      );
-                    },
-                    borderRadius: BorderRadius.circular(20),
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    child: const Center(
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
-          )
-        : null;
+    Widget? fab =
+        _selectedIndex == 0 ? AddItemFabMenu(listId: widget.listId) : null;
 
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
@@ -419,6 +372,130 @@ class _ListViewScreenState extends State<ListViewScreen>
               ),
             ),
       floatingActionButton: fab,
+    );
+  }
+}
+
+class AddItemFabMenu extends StatefulWidget {
+  final String listId;
+
+  const AddItemFabMenu({super.key, required this.listId});
+
+  @override
+  State<AddItemFabMenu> createState() => _AddItemFabMenuState();
+}
+
+class _AddItemFabMenuState extends State<AddItemFabMenu> {
+  final FabMenuController _fabMenuController = FabMenuController();
+
+  void _closeMenu() {
+    if (_fabMenuController.isOpen) {
+      _fabMenuController.toggle();
+    }
+  }
+
+  @override
+  void dispose() {
+    _fabMenuController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return FutureBuilder<bool>(
+      future: PermissionsHelper.isViewer(widget.listId),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data == true) {
+          return const SizedBox.shrink();
+        }
+
+        return FabMenuM3E(
+          controller: _fabMenuController,
+          alignment: Alignment.bottomRight,
+          direction: FabMenuDirection.up,
+          overlay: false,
+          primaryFab: AnimatedBuilder(
+            animation: _fabMenuController,
+            builder: (context, child) {
+              final isOpen = _fabMenuController.isOpen;
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOutCubicEmphasized,
+                width: isOpen ? 56 : 64,
+                height: isOpen ? 56 : 64,
+                decoration: BoxDecoration(
+                  color: isDark ? Colors.green[700] : Colors.green[600],
+                  borderRadius: BorderRadius.circular(isOpen ? 28 : 20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: _fabMenuController.toggle,
+                    borderRadius: BorderRadius.circular(isOpen ? 28 : 20),
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: AnimatedRotation(
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeInOutCubicEmphasized,
+                        turns: isOpen ? 0.125 : 0.0,
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+          items: [
+            FabMenuItem(
+              icon: const Icon(Icons.add_task),
+              label: const Text('Add Item Manually'),
+              onPressed: () {
+                _closeMenu();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateItemScreen(
+                      listId: widget.listId,
+                    ),
+                  ),
+                );
+              },
+            ),
+            FabMenuItem(
+              icon: const Icon(Icons.content_copy),
+              label: const Text('Add From Template'),
+              onPressed: () {
+                _closeMenu();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SavedItemsScreen(
+                      listId: widget.listId,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -1305,18 +1382,7 @@ class ItemsScreenWithFAB extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ItemsTab(listId: listId, listName: listName),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CreateItemScreen(listId: listId),
-            ),
-          );
-        },
-        backgroundColor: Colors.green[800],
-        child: const Icon(Icons.add, color: Colors.white),
-      ),
+      floatingActionButton: AddItemFabMenu(listId: listId),
     );
   }
 }
