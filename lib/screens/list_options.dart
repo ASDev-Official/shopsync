@@ -1305,10 +1305,6 @@ class _SavedLocationsScreenState extends State<SavedLocationsScreen> {
             itemBuilder: (context, index) {
               final doc = snapshot.data!.docs[index];
               final data = doc.data() as Map<String, dynamic>;
-              final iconIdentifier = data['iconIdentifier'] as String?;
-              final foodIcon = iconIdentifier != null
-                  ? FoodIconMap.getIcon(iconIdentifier)
-                  : null;
 
               return Card(
                 elevation: 4,
