@@ -50,10 +50,10 @@ android {
     productFlavors {
         phone {
             def phoneBaseVersionCode = 300000000
-            def phoneVersionCode = 1
+            def phoneVersionCode = 2
             dimension "platform"
             manifestPlaceholders = [:]
-            versionName = "4.1.0-phone"
+            versionName = "4.2.0-phone"
             versionCode = phoneBaseVersionCode + phoneVersionCode
         }
         wear {

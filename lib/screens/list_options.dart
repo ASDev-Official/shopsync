@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,11 +9,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shopsync/services/connectivity_service.dart';
-import '/widgets/place_selector.dart';
-import '/widgets/loading_spinner.dart';
+import '/libraries/icons/food_icons_map.dart';
+import '/models/item_suggestion.dart';
+import '/screens/choose_item_icon.dart';
 import '/services/export_service.dart';
-import '/widgets/advert.dart';
+import '/services/smart_suggestions_service.dart';
+import '/utils/food_icon_detector.dart';
 import '/utils/permissions.dart';
+import '/widgets/advert.dart';
+import '/widgets/category_picker.dart';
+import '/widgets/loading_spinner.dart';
+import '/widgets/place_selector.dart';
+import '/widgets/smart_suggestions_widget.dart';
 import 'recycle_bin.dart';
 
 class ListOptionsScreen extends StatefulWidget {
@@ -1413,7 +1422,10 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
         'addedBy': _auth.currentUser!.uid,
         'addedByName': _auth.currentUser!.displayName,
         'addedAt': FieldValue.serverTimestamp(),
-        // 'priority': template['priority'] ?? 'low',
+        'priority': template['priority'] ?? 'low',
+        'iconIdentifier': template['iconIdentifier'],
+        'categoryId': template['categoryId'],
+        'categoryName': template['categoryName'],
         'location': template['location'],
         'counter': template['counter'] ?? 1,
       });
@@ -1505,6 +1517,10 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
             itemBuilder: (context, index) {
               final doc = snapshot.data!.docs[index];
               final data = doc.data() as Map<String, dynamic>;
+              final iconIdentifier = data['iconIdentifier'] as String?;
+              final foodIcon = iconIdentifier != null
+                  ? FoodIconMap.getIcon(iconIdentifier)
+                  : null;
 
               return Card(
                 elevation: 4,
@@ -1519,10 +1535,16 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
                       color: Colors.blue[100],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      Icons.content_copy,
-                      color: Colors.blue[800],
-                    ),
+                    child: foodIcon != null
+                        ? foodIcon.buildIcon(
+                            width: 24,
+                            height: 24,
+                            color: Colors.blue[800],
+                          )
+                        : Icon(
+                            Icons.content_copy,
+                            color: Colors.blue[800],
+                          ),
                   ),
                   title: Text(
                     data['name'] ?? 'Unnamed Item',
@@ -1534,6 +1556,16 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
                       if (data['description'] != null &&
                           data['description'].isNotEmpty)
                         Text(data['description']),
+                      if (data['categoryName'] != null)
+                        Text(
+                          'Category: ${data['categoryName']}',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                      if (data['counter'] != null)
+                        Text(
+                          'Default count: ${data['counter']}',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
                       if (data['location'] != null)
                         Text(
                           'Location: ${data['location']['name'] ?? 'Unknown'}',
@@ -1604,8 +1636,105 @@ class CreateItemTemplateScreen extends StatefulWidget {
 class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _suggestionsService = SmartSuggestionsService();
+
   Map<String, dynamic>? _location;
   int _counter = 1;
+  String? _selectedCategoryId;
+  String? _selectedCategoryName;
+  FoodIconMapping? _selectedIcon;
+  bool _iconManuallySelected = false;
+  bool _isSaving = false;
+  Timer? _debounceTimer;
+
+  List<ItemSuggestion> _suggestions = [];
+  bool _isLoadingSuggestions = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSuggestions();
+  }
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    _titleController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadSuggestions() async {
+    if (!mounted) return;
+    setState(() => _isLoadingSuggestions = true);
+
+    try {
+      final suggestions = await _suggestionsService
+          .getSuggestions(listId: widget.listId)
+          .timeout(
+            const Duration(seconds: 5),
+            onTimeout: () => <ItemSuggestion>[],
+          );
+
+      if (mounted) {
+        setState(() {
+          _suggestions = suggestions;
+          _isLoadingSuggestions = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() => _isLoadingSuggestions = false);
+      }
+    }
+  }
+
+  void _applySuggestion(ItemSuggestion suggestion) {
+    final name = suggestion.name.isEmpty
+        ? ''
+        : '${suggestion.name[0].toUpperCase()}${suggestion.name.substring(1)}';
+
+    setState(() {
+      _titleController.text = name;
+
+      if (suggestion.iconIdentifier != null) {
+        _selectedIcon = FoodIconMap.getIcon(suggestion.iconIdentifier!);
+      }
+
+      if (suggestion.location != null) {
+        _location = suggestion.location;
+      }
+
+      if (suggestion.categoryId != null) {
+        _selectedCategoryId = suggestion.categoryId;
+        _selectedCategoryName = suggestion.categoryName;
+      }
+    });
+  }
+
+  void _saveTemplate() {
+    if (_titleController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a template name')),
+      );
+      return;
+    }
+
+    setState(() => _isSaving = true);
+
+    Navigator.pop(context, {
+      'name': _titleController.text.trim(),
+      'description': _descriptionController.text.trim(),
+      'location': _location,
+      'counter': _counter,
+      'categoryId': _selectedCategoryId,
+      'categoryName': _selectedCategoryName,
+      'iconIdentifier': _selectedIcon?.identifier,
+      'priority': 'low',
+    });
+
+    // No setState after pop to avoid calling setState on unmounted widget
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1632,83 +1761,97 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Item Name
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextField(
-                  controller: _titleController,
-                  decoration: InputDecoration(
-                    labelText: 'Template Name',
-                    floatingLabelStyle: TextStyle(
-                      color: Colors.green[800],
-                      fontWeight: FontWeight.bold,
-                    ),
-                    hintText: 'Enter template name',
-                    hintStyle: TextStyle(color: Colors.grey[600]),
-                    prefixIcon:
-                        const Icon(Icons.checklist, color: Colors.green),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Colors.green),
-                    ),
-                  ),
+            if (_suggestions.isNotEmpty || _isLoadingSuggestions)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: SmartSuggestionsWidget(
+                  suggestions: _suggestions,
+                  onSuggestionTapped: _applySuggestion,
+                  isLoading: _isLoadingSuggestions,
                 ),
               ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Location
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: InkWell(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    builder: (context) => LocationSelector(
-                      initialLocation: _location,
-                      onLocationSelected: (location) {
-                        setState(() {
-                          _location = location.isNotEmpty ? location : null;
-                        });
-                      },
-                    ),
-                  );
-                },
-                borderRadius: BorderRadius.circular(12),
+            _buildCard(
+              title: 'Item Name',
+              child: Card(
+                elevation: 8,
+                shadowColor: Colors.black26,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
                 child: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.location_on, color: Colors.green),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Location',
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                      Row(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            Text(
-                              _location != null
-                                  ? _location!['name'] ?? 'Unknown location'
-                                  : 'Tap to set location',
-                              style: TextStyle(color: Colors.grey[600]),
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.green[800],
                             ),
-                          ],
+                          ),
+                          const SizedBox(width: 16),
+                          const Text(
+                            'Item Name',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: _titleController,
+                        onChanged: (text) {
+                          if (_iconManuallySelected) return;
+                          _debounceTimer?.cancel();
+
+                          if (text.trim().isEmpty) return;
+
+                          _debounceTimer =
+                              Timer(const Duration(milliseconds: 500), () {
+                            if (!mounted || _iconManuallySelected) return;
+
+                            final iconIdentifier =
+                                FoodIconDetector.detectFoodIcon(text);
+                            if (iconIdentifier != null) {
+                              final icon = FoodIconMap.getIcon(iconIdentifier);
+                              if (icon != null && mounted) {
+                                setState(() {
+                                  _selectedIcon = icon;
+                                });
+                              }
+                            }
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Enter item name...',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Colors.green[200]!),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                BorderSide(color: Colors.green[800]!, width: 2),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Colors.green[200]!),
+                          ),
+                          filled: true,
+                          fillColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[850]
+                                  : Colors.grey[50],
                         ),
                       ),
                     ],
@@ -1716,96 +1859,421 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                 ),
               ),
             ),
+            _buildCard(
+              title: 'Category',
+              child: StreamBuilder<DocumentSnapshot>(
+                stream: _selectedCategoryId != null
+                    ? FirebaseFirestore.instance
+                        .collection('lists')
+                        .doc(widget.listId)
+                        .collection('categories')
+                        .doc(_selectedCategoryId)
+                        .snapshots()
+                    : null,
+                builder: (context, categorySnapshot) {
+                  Map<String, dynamic>? categoryData;
+                  if (categorySnapshot.hasData &&
+                      categorySnapshot.data!.exists) {
+                    categoryData =
+                        categorySnapshot.data!.data() as Map<String, dynamic>;
+                  }
 
-            const SizedBox(height: 16),
+                  return Card(
+                    elevation: 8,
+                    shadowColor: Colors.black26,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    child: InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => CategoryPicker(
+                            listId: widget.listId,
+                            selectedCategoryId: _selectedCategoryId,
+                            onCategorySelected: (categoryId, categoryName) {
+                              setState(() {
+                                _selectedCategoryId = categoryId;
+                                _selectedCategoryName = categoryName;
+                              });
+                            },
+                          ),
+                        );
+                      },
+                      borderRadius: BorderRadius.circular(15),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.green[100],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: categoryData != null
+                                  ? () {
+                                      final iconIdentifier =
+                                          categoryData!['iconIdentifier']
+                                              as String?;
+                                      final categoryIcon = iconIdentifier !=
+                                              null
+                                          ? FoodIconMap.getIcon(iconIdentifier)
+                                          : null;
 
-            // Counter
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.tag, color: Colors.green),
-                        const SizedBox(width: 16),
-                        const Text(
-                          'Default Counter',
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: _counter > 1
-                              ? () => setState(() => _counter--)
-                              : null,
-                          icon: const Icon(Icons.remove),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text(
-                            '$_counter',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green[800],
+                                      return categoryIcon != null
+                                          ? categoryIcon.buildIcon(
+                                              width: 24,
+                                              height: 24,
+                                              color: Colors.green[800],
+                                            )
+                                          : Icon(
+                                              Icons.label,
+                                              color: Colors.green[800],
+                                            );
+                                    }()
+                                  : Icon(
+                                      Icons.label,
+                                      color: Colors.green[800],
+                                    ),
                             ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Category',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    _selectedCategoryName ??
+                                        'Select a category',
+                                    style: TextStyle(color: Colors.grey[600]),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            _buildCard(
+              title: 'Icon',
+              child: Card(
+                elevation: 8,
+                shadowColor: Colors.black26,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: InkWell(
+                  onTap: () async {
+                    final result = await Navigator.push<FoodIconMapping>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChooseItemIconScreen(
+                          selectedIcon: _selectedIcon,
+                        ),
+                      ),
+                    );
+                    if (result != null) {
+                      setState(() {
+                        _selectedIcon = result;
+                        _iconManuallySelected = true;
+                      });
+                    }
+                  },
+                  borderRadius: BorderRadius.circular(15),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 48,
+                          height: 48,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.green[100],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: _selectedIcon != null
+                              ? _selectedIcon!.buildIcon(
+                                  width: 24,
+                                  height: 24,
+                                  color: Colors.green[800],
+                                )
+                              : Icon(
+                                  Icons.category,
+                                  color: Colors.green[800],
+                                ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Item Icon',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                _selectedIcon?.displayName ?? 'Choose an icon',
+                                style: TextStyle(color: Colors.grey[600]),
+                              ),
+                            ],
                           ),
                         ),
-                        IconButton(
-                          onPressed: _counter < 99
-                              ? () => setState(() => _counter++)
-                              : null,
-                          icon: const Icon(Icons.add),
-                        ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
-
-            const SizedBox(height: 16),
-
-            // Description
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+            _buildCard(
+              title: 'Location',
+              child: Card(
+                elevation: 8,
+                shadowColor: Colors.black26,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) => LocationSelector(
+                        initialLocation: _location,
+                        listId: widget.listId,
+                        onLocationSelected: (location) {
+                          if (!mounted) return;
+                          setState(() {
+                            _location = location.isNotEmpty ? location : null;
+                          });
+                        },
+                      ),
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(15),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 48,
+                          height: 48,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Colors.green[100],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child:
+                              Icon(Icons.location_on, color: Colors.green[800]),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Location',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                _location != null
+                                    ? '${_location!['name']}\n${_location!['address']}'
+                                    : 'Set location',
+                                style: TextStyle(color: Colors.grey[600]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextField(
-                  controller: _descriptionController,
-                  maxLines: 3,
-                  decoration: InputDecoration(
-                    labelText: 'Description',
-                    floatingLabelStyle: TextStyle(
-                      color: Colors.green[800],
-                      fontWeight: FontWeight.bold,
-                    ),
-                    hintText: 'Enter template description',
-                    hintStyle: TextStyle(color: Colors.grey[600]),
-                    prefixIcon: const Icon(
-                      Icons.edit_square,
-                      color: Colors.green,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Colors.green[800]!),
-                    ),
+            ),
+            _buildCard(
+              title: 'Counter',
+              child: Card(
+                elevation: 8,
+                shadowColor: Colors.black26,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Icon(Icons.tag, color: Colors.green[800]),
+                          ),
+                          const SizedBox(width: 16),
+                          const Text(
+                            'Counter',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: _counter > 1
+                                ? () => setState(() => _counter--)
+                                : null,
+                            icon: Icon(
+                              Icons.remove,
+                              color: _counter > 1
+                                  ? Colors.green[800]
+                                  : Colors.grey[400],
+                            ),
+                            style: IconButton.styleFrom(
+                              backgroundColor: _counter > 1
+                                  ? Colors.green[100]
+                                  : Colors.grey[200],
+                              shape: const CircleBorder(),
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.grey[850]
+                                  : Colors.grey[50],
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: Colors.green[200]!,
+                              ),
+                            ),
+                            child: Text(
+                              '$_counter',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green[800],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          IconButton(
+                            onPressed: _counter < 99
+                                ? () => setState(() => _counter++)
+                                : null,
+                            icon: Icon(
+                              Icons.add,
+                              color: _counter < 99
+                                  ? Colors.green[800]
+                                  : Colors.grey[400],
+                            ),
+                            style: IconButton.styleFrom(
+                              backgroundColor: _counter < 99
+                                  ? Colors.green[100]
+                                  : Colors.grey[200],
+                              shape: const CircleBorder(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            _buildCard(
+              title: 'Description',
+              child: Card(
+                elevation: 8,
+                shadowColor: Colors.black26,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Icon(Icons.description,
+                                color: Colors.green[800]),
+                          ),
+                          const SizedBox(width: 16),
+                          const Text(
+                            'Description',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: _descriptionController,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          hintText: 'Add description...',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Colors.green[200]!),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                BorderSide(color: Colors.green[800]!, width: 2),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Colors.green[200]!),
+                          ),
+                          filled: true,
+                          fillColor:
+                              isDark ? Colors.grey[850] : Colors.grey[50],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -1817,22 +2285,7 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: ElevatedButton(
-            onPressed: () {
-              if (_titleController.text.trim().isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Please enter a template name')),
-                );
-                return;
-              }
-
-              Navigator.pop(context, {
-                'name': _titleController.text.trim(),
-                'description': _descriptionController.text.trim(),
-                'location': _location,
-                // 'priority': 'low',
-                'counter': _counter,
-              });
-            },
+            onPressed: _isSaving ? null : _saveTemplate,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green[800],
               foregroundColor: Colors.white,
@@ -1841,15 +2294,36 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text(
-              'Save Template',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: _isSaving
+                ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CustomLoadingSpinner(
+                      color: Colors.green,
+                      size: 20.0,
+                    ),
+                  )
+                : const Text(
+                    'Save Template',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildCard({required String title, required Widget child}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          child,
+        ],
       ),
     );
   }
