@@ -18,6 +18,8 @@ _Share shopping lists with family and friends_
 
 [![Crowdin](https://badges.crowdin.net/as-shopsync/localized.svg)](https://crowdin.com/project/as-shopsync)
 
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/ASDev-Official/shopsync?utm_source=oss&utm_medium=github&utm_campaign=ASDev-Official%2Fshopsync&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+
 </div>
 
 ## 📱 Overview
@@ -87,7 +89,6 @@ To make ShopSync available in multiple languages, contribute to our [Crowdin](ht
    ```
 
 3. Configure Firebase
-
    - Create a new Firebase project
    - Make sure to set up Firebase Authentication and Firestore in your Firebase project
    - Add your `google-services.json` to `/android/app/`
