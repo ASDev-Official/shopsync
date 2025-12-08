@@ -59,6 +59,12 @@ void main() async {
 
   unawaited(MobileAds.instance.initialize());
 
+  // Register ShopSync application license
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('LICENSE');
+    yield LicenseEntryWithLineBreaks(['shopsync'], license);
+  });
+
   // Set system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
