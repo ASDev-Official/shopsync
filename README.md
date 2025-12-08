@@ -21,6 +21,8 @@ _Share shopping lists with family and friends_
 
 ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/ASDev-Official/shopsync?utm_source=oss&utm_medium=github&utm_campaign=ASDev-Official%2Fshopsync&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 
+[![Codecov](https://codecov.io/gh/ASDev-Official/shopsync/graph/badge.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
+
 </div>
 
 ## 📱 Overview
@@ -116,5 +118,14 @@ To make ShopSync available in multiple languages, contribute to our [Crowdin](ht
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 for details.
 
+## Code Coverage (Codecov)
+
+[![codecov](https://codecov.io/gh/ASDev-Official/shopsync/graph/badge.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
+
+[![](https://codecov.io/gh/ASDev-Official/shopsync/graphs/sunburst.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
+[![](https://codecov.io/gh/ASDev-Official/shopsync/graphs/tree.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
+[![](https://codecov.io/gh/ASDev-Official/shopsync/graphs/icicle.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
+
+## FOSSA
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync?ref=badge_large)
