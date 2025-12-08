@@ -13,7 +13,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.8
   firebase_core: ^4.2.1
   firebase_auth: ^6.1.2
   cloud_firestore: ^6.1.0
@@ -22,26 +21,18 @@ dependencies:
   in_app_update: ^4.2.5
   intl: 0.20.2
   shared_preferences: ^2.5.3
-  provider: ^6.1.5+1
   path_provider: ^2.0.15
   share_plus: ^12.0.1
-  flutter_map: ^8.2.2
-  latlong2: ^0.9.0
-  geocoding: ^4.0.0
   m3e_collection: ^0.3.7
   web: ^1.1.1
-  flutter_staggered_animations: ^1.1.1
   google_sign_in: ^7.2.0
   credential_manager: ^2.0.0
   flutter_svg: ^2.1.0
-  amplitude_flutter: ^4.3.9
   google_mobile_ads: ^6.0.0
   flutter_inappwebview: ^6.1.5
   lottie: ^3.3.2
   connectivity_plus: ^7.0.0
   home_widget: ^0.8.1
-  flutter_expandable_fab: ^2.3.0
-  tflite_flutter: ^0.12.1
   collection: ^1.18.0
   wear_plus: ^1.2.4
   rotary_scrollbar: ^1.1.0
@@ -57,6 +48,7 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
+    - LICENSE
     - assets/logos/
     - assets/badges/google/android/png@4x/dark/android_dark_rd_ctn@4x.png
     - assets/badges/google/android/png@4x/dark/android_dark_sq_ctn@4x.png

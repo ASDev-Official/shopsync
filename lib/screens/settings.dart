@@ -6,6 +6,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopsync/screens/sign_out.dart';
 import 'package:shopsync/screens/widget_settings.dart';
+import 'package:shopsync/screens/custom_licenses.dart';
 import 'package:shopsync/services/connectivity_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -314,6 +315,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: 'Contribute on Crowdin',
             iconColorOverride: Colors.blue[700],
             onTap: () => _launchUrl(_crowdinUrl),
+          ),
+          buildSettingsTile(
+            icon: Icons.article,
+            title: 'Licenses',
+            subtitle: 'Open source licenses',
+            iconColorOverride: Colors.purple[700],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CustomLicensesPage(
+                    applicationName: 'ShopSync',
+                    applicationVersion: _appVersion,
+                  ),
+                ),
+              );
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
