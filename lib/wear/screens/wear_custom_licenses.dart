@@ -20,16 +20,19 @@ class WearCustomLicensesPage extends StatefulWidget {
 class _WearCustomLicensesPageState extends State<WearCustomLicensesPage> {
   late Future<Map<String, List<_LicenseEntry>>> _licensesFuture;
   final ScrollController _scrollController = ScrollController();
+  final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
     _licensesFuture = _loadLicenses();
+    _searchController.text = _searchQuery;
   }
 
   @override
   void dispose() {
+    _searchController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -283,6 +286,86 @@ class _WearCustomLicensesPageState extends State<WearCustomLicensesPage> {
                   fontWeight: FontWeight.w600,
                   color:
                       mode == WearMode.active ? Colors.white54 : Colors.white38,
+                ),
+              ),
+            ),
+          ),
+
+          // Search input
+          SliverPadding(
+            padding: EdgeInsets.only(
+              left: shape == WearShape.round ? 32.0 : 12.0,
+              right: shape == WearShape.round ? 32.0 : 12.0,
+              bottom: 12.0,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: Card(
+                color: mode == WearMode.active
+                    ? Colors.grey[900]
+                    : Colors.grey[850],
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 6.0,
+                  ),
+                  child: TextField(
+                    controller: _searchController,
+                    onChanged: (value) {
+                      setState(() {
+                        _searchQuery = value.trim();
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Search packages',
+                      hintStyle: TextStyle(
+                        fontSize: 11,
+                        color: mode == WearMode.active
+                            ? Colors.white38
+                            : Colors.white24,
+                      ),
+                      border: InputBorder.none,
+                      isDense: false,
+                      contentPadding:
+                          const EdgeInsets.symmetric(vertical: 10.0),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        size: 16,
+                        color: mode == WearMode.active
+                            ? Colors.white54
+                            : Colors.white38,
+                      ),
+                      suffixIcon: _searchQuery.isNotEmpty
+                          ? IconButton(
+                              icon: Icon(
+                                Icons.clear,
+                                size: 16,
+                                color: mode == WearMode.active
+                                    ? Colors.white54
+                                    : Colors.white38,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _searchQuery = '';
+                                  _searchController.clear();
+                                });
+                              },
+                              splashRadius: 18,
+                            )
+                          : null,
+                    ),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: mode == WearMode.active
+                          ? Colors.white
+                          : Colors.white70,
+                    ),
+                    textAlignVertical: TextAlignVertical.center,
+                    textInputAction: TextInputAction.search,
+                  ),
                 ),
               ),
             ),
