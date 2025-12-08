@@ -22,11 +22,9 @@ class MockUser extends Mock implements User {
 void main() {
   group('ListGroupsService', () {
     late MockFirebaseAuth mockAuth;
-    late MockFirebaseFirestore mockFirestore;
 
     setUp(() {
       mockAuth = MockFirebaseAuth();
-      mockFirestore = MockFirebaseFirestore();
     });
 
     test('createListGroup should return group ID on success', () async {

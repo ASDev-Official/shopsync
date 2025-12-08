@@ -78,12 +78,13 @@ void main() {
     testWidgets('Feedback form displays', (WidgetTester tester) async {
       // Arrange
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Scaffold(
             body: Column(
               children: [
-                TextField(decoration: InputDecoration(hintText: 'Feedback')),
-                ElevatedButton(child: Text('Submit'), onPressed: null),
+                const TextField(
+                    decoration: InputDecoration(hintText: 'Feedback')),
+                ElevatedButton(onPressed: null, child: const Text('Submit')),
               ],
             ),
           ),
@@ -339,20 +340,15 @@ void main() {
 
     testWidgets('Pull to refresh works', (WidgetTester tester) async {
       // Arrange
-      bool refreshTriggered = false;
       await tester.pumpWidget(
-        StatefulBuilder(
-          builder: (context, setState) => MaterialApp(
-            home: Scaffold(
-              body: RefreshIndicator(
-                onRefresh: () async {
-                  refreshTriggered = true;
-                },
-                child: ListView(
-                  children: const [
-                    ListTile(title: Text('Item 1')),
-                  ],
-                ),
+        MaterialApp(
+          home: Scaffold(
+            body: RefreshIndicator(
+              onRefresh: () async {},
+              child: ListView(
+                children: const [
+                  ListTile(title: Text('Item 1')),
+                ],
               ),
             ),
           ),

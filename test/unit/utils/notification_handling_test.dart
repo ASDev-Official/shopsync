@@ -196,13 +196,13 @@ void main() {
       String action = 'opened';
 
       // Act
-      Map<String, String> action_result = {
+      Map<String, String> actionResult = {
         'notification_id': notificationId,
         'action': action,
       };
 
       // Assert
-      expect(action_result['action'], 'opened');
+      expect(actionResult['action'], 'opened');
     });
 
     test('Validate notification format', () {

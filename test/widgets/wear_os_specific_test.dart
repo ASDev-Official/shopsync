@@ -28,7 +28,6 @@ void main() {
 
     testWidgets('Rotary scroll handling works', (WidgetTester tester) async {
       // Arrange
-      int scrollPosition = 0;
       await tester.pumpWidget(
         StatefulBuilder(
           builder: (context, setState) => MaterialApp(
@@ -102,12 +101,11 @@ void main() {
 
     testWidgets('Ambient mode display works', (WidgetTester tester) async {
       // Arrange
-      bool isAmbientMode = false;
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Container(
-              color: isAmbientMode ? Colors.black : Colors.white,
+              color: Colors.white,
               child: const Text('Ambient Mode'),
             ),
           ),

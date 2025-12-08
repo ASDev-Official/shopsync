@@ -119,7 +119,6 @@ void main() {
 
     test('Complete list archiving flow', () async {
       // Arrange: User has completed list
-      String listName = 'Groceries';
       bool isArchived = false;
 
       // Act: User archives list
@@ -189,7 +188,6 @@ void main() {
       // Act: User tries to add item
       // 1. User clicks add item
       // 2. App queues action locally
-      bool actionQueued = true;
       // 3. Device comes online
       isOnline = true;
       // 4. App syncs pending changes
