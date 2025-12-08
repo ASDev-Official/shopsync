@@ -62,7 +62,7 @@ void main() async {
   // Register ShopSync application license
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('LICENSE');
-    yield LicenseEntryWithLineBreaks(['ShopSync'], license);
+    yield LicenseEntryWithLineBreaks(['shopsync'], license);
   });
 
   // Set system UI overlay style

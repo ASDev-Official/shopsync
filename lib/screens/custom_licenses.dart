@@ -165,10 +165,8 @@ class _CustomLicensesPageState extends State<CustomLicensesPage> {
                       )
                     : ListView.builder(
                         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                        itemCount: packageNames.length,
+                        itemCount: packageNames.length + 1,
                         itemBuilder: (context, index) {
-                          final packageName = packageNames[index];
-                          final licenses = licensesMap[packageName] ?? [];
                           if (index == 0) {
                             return Container(
                               margin: const EdgeInsets.only(bottom: 24),
@@ -213,6 +211,9 @@ class _CustomLicensesPageState extends State<CustomLicensesPage> {
                               ),
                             );
                           }
+
+                          final packageName = packageNames[index - 1];
+                          final licenses = licensesMap[packageName] ?? [];
 
                           return PackageTile(
                             packageName: packageName,
