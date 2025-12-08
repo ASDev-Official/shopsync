@@ -606,18 +606,18 @@ class _WearPackageLicensesPageState extends State<WearPackageLicensesPage> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
-                            child: SingleChildScrollView(
-                              child: Text(
-                                license.licenseText,
-                                style: TextStyle(
-                                  fontSize: 9,
-                                  fontFamily: 'monospace',
-                                  color: mode == WearMode.active
-                                      ? Colors.white70
-                                      : Colors.white54,
-                                  height: 1.4,
-                                ),
+                            child: Text(
+                              license.licenseText,
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 9,
+                                fontFamily: 'monospace',
+                                color: mode == WearMode.active
+                                    ? Colors.white70
+                                    : Colors.white54,
+                                height: 1.4,
                               ),
+                              overflow: TextOverflow.visible,
                             ),
                           ),
                         ),
