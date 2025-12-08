@@ -8,6 +8,7 @@ _Share shopping lists with family and friends_
 [![CI](https://github.com/aadishsamir123/asdev-shopsync/actions/workflows/CI.yml/badge.svg)](https://github.com/aadishsamir123/asdev-shopsync/actions/workflows/CI.yml)
 [![CD-Prod-Play-Phone](https://github.com/aadishsamir123/asdev-shopsync/actions/workflows/CD-Prod-Play-Phone.yml/badge.svg)](https://github.com/aadishsamir123/asdev-shopsync/actions/workflows/CD-Prod-Play-Phone.yml)
 [![CD-Prod-Play-WearOS](https://github.com/aadishsamir123/asdev-shopsync/actions/workflows/CD-Prod-Play-WearOS.yml/badge.svg)](https://github.com/aadishsamir123/asdev-shopsync/actions/workflows/CD-Prod-Play-WearOS.yml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync?ref=badge_shield)
 
 [![Flutter Version](https://img.shields.io/badge/Flutter-^3.35.3-blue?logo=flutter)](https://flutter.dev)
 
@@ -114,3 +115,6 @@ To make ShopSync available in multiple languages, contribute to our [Crowdin](ht
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 for details.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync?ref=badge_large)
