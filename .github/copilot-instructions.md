@@ -147,7 +147,203 @@ flutter pub get
 
 ## Testing & Debugging
 
-- No automated tests currently (only manual device testing)
+### Automated Testing Framework
+
+ShopSync has **automated testing with GitHub Actions CI** integrated:
+
+- **Test Types**: Unit tests, Widget tests, Integration tests (framework in place)
+- **Test Framework**: Flutter Test + Mockito
+- **CI/CD**: GitHub Actions runs tests automatically on push and PR
+- **Coverage**: Codecov integration for coverage tracking
+- **Execution**: Parallel test execution enabled (faster CI feedback)
+
+### Running Tests Locally
+
+```bash
+# Run all tests
+flutter test
+
+# Run with coverage report
+flutter test --coverage
+
+# Run specific test file
+flutter test test/unit/models/item_suggestion_test.dart
+
+# Generate coverage summary (after flutter test --coverage)
+lcov --summary coverage/lcov.info
+
+# Use provided helper script
+bash run_tests.sh
+
+# Verify setup
+bash verify_setup.sh
+```
+
+### Test Structure
+
+```
+test/
+├── test_utils.dart                          # Shared test utilities, Firebase mocks
+├── unit/
+│   ├── models/
+│   │   └── item_suggestion_test.dart       # Model serialization/deserialization tests
+│   ├── services/
+│   │   └── services_test.dart              # Service layer tests (expand as needed)
+│   └── utils/                              # Utility function tests
+├── widgets/
+│   ├── basic_widget_test.dart              # Widget rendering & interaction tests
+│   └── screens/                            # Screen-level widget tests
+└── integration/                            # End-to-end flow tests (reserved)
+```
+
+### Writing Unit Tests
+
+When adding new services or models, add tests following this pattern:
+
+```dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:shopsync/services/my_service.dart';
+
+void main() {
+  group('MyService', () {
+    test('performs action correctly', () {
+      // Arrange: Set up test data
+      final service = MyService();
+
+      // Act: Perform the action
+      final result = service.doSomething();
+
+      // Assert: Verify the result
+      expect(result, expectedValue);
+    });
+
+    test('handles error gracefully', () {
+      // Test error handling
+      expect(
+        () => service.failingMethod(),
+        throwsException,
+      );
+    });
+  });
+}
+```
+
+### Writing Widget Tests
+
+Test UI components and interactions:
+
+```dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  group('MyWidget', () {
+    testWidgets('renders correctly', (WidgetTester tester) async {
+      await tester.pumpWidget(const MaterialApp(home: MyWidget()));
+      expect(find.byType(MyWidget), findsOneWidget);
+    });
+
+    testWidgets('handles user interaction', (WidgetTester tester) async {
+      await tester.pumpWidget(const MaterialApp(home: MyWidget()));
+      await tester.tap(find.byType(ElevatedButton));
+      await tester.pumpAndSettle();
+      expect(find.text('Updated'), findsOneWidget);
+    });
+  });
+}
+```
+
+### Test Dependencies
+
+Added to `pubspec.yaml` dev_dependencies:
+
+- `mockito: ^5.4.4` - Mocking framework
+- `fake_cloud_firestore: ^2.5.0` - Firestore mocking
+- `firebase_auth_mocks: ^0.14.0` - Firebase Auth mocking
+- `coverage: ^7.0.0` - Coverage reporting
+
+### GitHub Actions CI
+
+**Workflow**: `.github/workflows/CI.yml`
+
+**Triggers**:
+
+- Push to `main` or `master`
+- Pull request (opened, edited, synchronize)
+
+**Steps**:
+
+1. Checkout code
+2. Setup Flutter 3.35.3 (with caching)
+3. Install dependencies
+4. Run tests with coverage (parallel execution)
+5. Upload coverage to Codecov
+6. Run code analysis
+7. Post results summary
+
+**Branch Protection**: Required status check `Tests & Code Analysis` blocks merge until tests pass.
+
+### Coverage Goals
+
+- **Services Layer**: Target 70%+
+- **Models**: Target 80%+
+- **Utilities**: Target 75%+
+- **Widgets**: Target 60%+ (UI testing is more challenging)
+
+Coverage reports available at Codecov dashboard.
+
+### Testing Best Practices
+
+1. **Test in isolation**: Mock external dependencies (Firebase, networking)
+2. **Use descriptive names**: `test('creates list with correct name', ...)` not `test('works')`
+3. **Follow AAA pattern**: Arrange → Act → Assert
+4. **Keep tests focused**: One behavior per test
+5. **Mock Firebase**: Use `test_utils.dart` helpers for Firebase mocking
+6. **Handle async**: Use `await` and `pumpAndSettle()` for async operations
+7. **Test error cases**: Include tests for error handling and edge cases
+
+### Expanding Test Coverage
+
+Key areas to add tests:
+
+- `ListGroupsService` - group CRUD, reordering, list associations
+- `CategoriesService` - category management per list
+- `SmartSuggestionsService` - ML suggestion logic
+- `GoogleAuthService` - authentication flows
+- `ConnectivityService` - network state handling
+- Screen widgets - home.dart, list_view.dart, create_item.dart
+- Integration tests - full user flows (login → create → collaborate)
+
+### Test Documentation
+
+- **`TESTING.md`**: Complete testing guide with examples
+- **`MANUAL_STEPS.md`**: Manual setup for CI/CD (Codecov, branch protection)
+- **`QUICK_REFERENCE.md`**: Quick reference for manual steps
+- **`IMPLEMENTATION_SUMMARY.md`**: What was implemented and next steps
+
+### Debugging Failed Tests
+
+```bash
+# Verbose output
+flutter test --verbose
+
+# Single test
+flutter test -k "test_name"
+
+# Stop on first failure
+flutter test --fail-fast
+
+# Watch mode (re-run on changes)
+flutter test --watch
+```
+
+If tests pass locally but fail in CI:
+
+1. Check Flutter version matches: `flutter --version` (should be 3.35.3)
+2. Clear cache: `flutter clean && flutter pub get`
+3. Check for timing issues in async tests
+4. Verify test dependencies installed correctly
+
 - Use `kDebugMode` checks for debug prints (see `main.dart` ConnectivityService init)
 - Sentry captures all unhandled errors in production builds
 - Test both flavors separately to catch platform-specific issues
@@ -155,3 +351,32 @@ flutter pub get
 ## AI Agent Guidelines
 
 - **DO NOT create README files**: Never create summary documents, README files, or markdown documentation files after completing tasks unless explicitly requested by the user.
+
+### Testing Responsibilities
+
+When implementing features or fixes:
+
+1. **Write tests alongside code**: Add unit tests for new services, models, and utilities
+2. **Test before merge**: Ensure `flutter test` passes locally
+3. **Follow test patterns**: Use AAA pattern (Arrange → Act → Assert)
+4. **Mock Firebase**: Use `test_utils.dart` for Firebase mocking, don't make real Firestore calls
+5. **Update existing tests**: If modifying existing code, update relevant tests
+6. **Add widget tests**: For new screens/widgets, add corresponding widget tests
+7. **Check coverage**: Run `flutter test --coverage` to verify no major coverage drops
+
+### Test Writing Quick Rules
+
+- Service tests: Mock Firestore, Firebase Auth, external dependencies
+- Widget tests: Test rendering, interactions, state changes
+- Use `expect(condition, matcher)` for assertions
+- Name tests clearly: `test('creates item with correct name and quantity', ...)`
+- One assertion per test when possible
+- Handle async properly: `await`, `pumpAndSettle()`
+
+### When Tests Fail in CI
+
+1. Check locally first: `flutter test`
+2. Look at CI logs in GitHub Actions
+3. Verify Flutter version matches CI (3.35.3)
+4. Check for timing/race conditions in async tests
+5. Ensure mocks are set up correctly in test setup
