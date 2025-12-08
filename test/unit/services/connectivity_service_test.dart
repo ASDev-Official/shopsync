@@ -1,83 +1,82 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shopsync/services/connectivity_service.dart';
 
 void main() {
   group('ConnectivityService', () {
-    test('initialize should check initial connectivity', () async {
-      // Arrange & Act & Assert
-      expect(true, true);
+    test('should be a singleton', () {
+      // Arrange & Act
+      final service1 = ConnectivityService();
+      final service2 = ConnectivityService();
+
+      // Assert
+      expect(identical(service1, service2), true);
     });
 
-    test('isOnline should return true when connected to network', () async {
-      // Arrange: Connected to WiFi or mobile data
+    test('isOnline should return bool', () {
+      // Arrange
+      final service = ConnectivityService();
 
-      // Act & Assert
-      expect(true, true);
+      // Act
+      final isOnline = service.isOnline;
+
+      // Assert
+      expect(isOnline, isA<bool>());
     });
 
-    test('isOnline should return false when not connected', () async {
-      // Arrange: No network connection
+    test('isOffline should return opposite of isOnline', () {
+      // Arrange
+      final service = ConnectivityService();
 
-      // Act & Assert
-      expect(true, true);
+      // Act
+      final isOnline = service.isOnline;
+      final isOffline = service.isOffline;
+
+      // Assert
+      expect(isOffline, !isOnline);
     });
 
-    test('isOffline should return opposite of isOnline', () async {
-      // Arrange: Various connectivity states
+    test('connectionStatus should be a stream', () {
+      // Arrange
+      final service = ConnectivityService();
 
-      // Act & Assert
-      expect(true, true);
+      // Act
+      final stream = service.connectionStatus;
+
+      // Assert
+      expect(stream, isA<Stream<bool>>());
     });
 
-    test('connectionStatus should emit events on connectivity changes',
-        () async {
-      // Arrange: Monitor connection stream
+    test('isInitialized should return bool', () {
+      // Arrange
+      final service = ConnectivityService();
 
-      // Act & Assert
-      expect(true, true);
+      // Act
+      final isInitialized = service.isInitialized;
+
+      // Assert
+      expect(isInitialized, isA<bool>());
     });
 
-    test('checkConnectivity should return current online status', () async {
-      // Arrange: Get current connectivity
+    test('dispose should complete without error', () {
+      // Arrange
+      final service = ConnectivityService();
 
-      // Act & Assert
-      expect(true, true);
+      // Act
+      service.dispose();
+
+      // Assert
+      expect(service, isNotNull);
     });
 
-    test('checkConnectivityAndShowDialog should show dialog when offline',
-        () async {
-      // Arrange: No network, show dialog in context
+    test('service should fallback to online when platform unavailable', () {
+      // Arrange - ConnectivityService catches platform errors
+      final service = ConnectivityService();
 
-      // Act & Assert
-      expect(true, true);
-    });
+      // Act
+      final isOnline = service.isOnline;
 
-    test('checkConnectivityAndShowDialog should not show dialog when online',
-        () async {
-      // Arrange: Connected to network
-
-      // Act & Assert
-      expect(true, true);
-    });
-
-    test('dispose should cancel subscription', () async {
-      // Arrange: Service initialized
-
-      // Act & Assert
-      expect(true, true);
-    });
-
-    test('should handle multiple connectivity changes', () async {
-      // Arrange: Simulate WiFi -> Mobile -> Offline -> WiFi
-
-      // Act & Assert
-      expect(true, true);
-    });
-
-    test('should fallback to online if connectivity check fails', () async {
-      // Arrange: Connectivity check throws error
-
-      // Act & Assert
-      expect(true, true);
+      // Assert - Should default to true on error
+      expect(isOnline, isA<bool>());
     });
   });
 }

@@ -129,8 +129,10 @@ void main() {
         ),
       );
 
+      await tester.pumpAndSettle();
+
       // Act & Assert
-      expect(find.byType(DropdownButton), findsOneWidget);
+      expect(find.byType(DropdownButton<String>), findsOneWidget);
     });
 
     testWidgets('Edit button opens edit dialog', (WidgetTester tester) async {

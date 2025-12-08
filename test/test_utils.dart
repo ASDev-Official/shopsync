@@ -1,16 +1,42 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 /// Mock Firebase setup for testing
-/// Note: Testing will be done against FakeFirebaseFirestore instances created in each test
+/// Provides FakeFirebaseFirestore and FakeFirebaseAuth for unit tests
 class FirebaseTestSetup {
+  static FakeFirebaseFirestore? _firestore;
+  static MockFirebaseAuth? _auth;
+
   /// Initialize test environment
   static void setup() {
     TestWidgetsFlutterBinding.ensureInitialized();
+    _firestore = FakeFirebaseFirestore();
+    _auth = MockFirebaseAuth();
+  }
+
+  /// Get mock Firestore instance
+  static FakeFirebaseFirestore getFirestore() {
+    if (_firestore == null) {
+      setup();
+    }
+    return _firestore!;
+  }
+
+  /// Get mock Auth instance
+  static MockFirebaseAuth getAuth() {
+    if (_auth == null) {
+      setup();
+    }
+    return _auth!;
   }
 
   /// Reset state between tests
   static Future<void> resetState() async {
-    // Reset state as needed between tests
+    _firestore = FakeFirebaseFirestore();
+    _auth = MockFirebaseAuth();
   }
 }
 

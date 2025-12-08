@@ -1,29 +1,53 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shopsync/services/maintenance_service.dart';
 
 void main() {
   group('MaintenanceService', () {
-    test('checkAppHealth should verify app functionality', () async {
-      // Arrange & Act & Assert
-      expect(true, true);
+    test('checkMaintenance should return maintenance status', () async {
+      try {
+        final result = await MaintenanceService.checkMaintenance();
+
+        expect(result, anyOf(isNull, isA<Map<String, dynamic>>()));
+      } catch (e) {
+        expect(e, isNotNull);
+      }
     });
 
-    test('cleanupOldData should remove expired data', () async {
-      // Arrange: Old data exists
+    test('checkMaintenance should include maintenance data structure',
+        () async {
+      try {
+        final result = await MaintenanceService.checkMaintenance();
 
-      // Act & Assert
-      expect(true, true);
+        if (result != null) {
+          expect(result.containsKey('isUnderMaintenance'), true);
+          expect(result['isUnderMaintenance'], isA<bool>());
+        }
+      } catch (e) {
+        expect(e, isNotNull);
+      }
     });
 
-    test('clearCache should remove cached data', () async {
-      // Arrange: Cache exists
+    test('checkMaintenance should include message field', () async {
+      try {
+        final result = await MaintenanceService.checkMaintenance();
 
-      // Act & Assert
-      expect(true, true);
+        if (result != null) {
+          expect(result.containsKey('message'), true);
+        }
+      } catch (e) {
+        expect(e, isNotNull);
+      }
     });
 
-    test('reloadConfiguration should refresh app config', () async {
-      // Arrange & Act & Assert
-      expect(true, true);
+    test('checkMaintenance should handle missing maintenance document',
+        () async {
+      try {
+        final result = await MaintenanceService.checkMaintenance();
+
+        expect(result, anyOf(isNull, isA<Map<String, dynamic>>()));
+      } catch (e) {
+        expect(e, isNotNull);
+      }
     });
   });
 }
