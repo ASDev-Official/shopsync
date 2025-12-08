@@ -4,6 +4,7 @@ import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'wear_sign_out_screen.dart';
+import 'wear_custom_licenses.dart';
 
 class WearSettingsScreen extends StatefulWidget {
   const WearSettingsScreen({super.key});
@@ -296,6 +297,74 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
                   fontWeight: FontWeight.w600,
                   color:
                       mode == WearMode.active ? Colors.white54 : Colors.white38,
+                ),
+              ),
+            ),
+          ),
+
+          // Licenses card
+          SliverPadding(
+            padding: EdgeInsets.only(
+              left: shape == WearShape.round ? 32.0 : 12.0,
+              right: shape == WearShape.round ? 32.0 : 12.0,
+              bottom: 16.0,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: Card(
+                color: mode == WearMode.active
+                    ? Colors.grey[900]
+                    : Colors.grey[850],
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ConstrainedBox(
+                  constraints:
+                      const BoxConstraints(minHeight: 48, minWidth: 48),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WearCustomLicensesPage(
+                            applicationName: 'ShopSync',
+                            applicationVersion: _appVersion,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.article,
+                            size: 18,
+                            color: Colors.blue[400],
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Licenses',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: mode == WearMode.active
+                                    ? Colors.white
+                                    : Colors.white70,
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.chevron_right,
+                            size: 16,
+                            color: mode == WearMode.active
+                                ? Colors.white38
+                                : Colors.white24,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
