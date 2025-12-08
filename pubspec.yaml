@@ -46,7 +46,7 @@ dev_dependencies:
   mockito: ^5.4.4
   fake_cloud_firestore: ^2.5.0
   firebase_auth_mocks: ^0.14.0
-  coverage: ^7.0.0
+  coverage: ^1.15.0
 
 flutter:
   uses-material-design: true
