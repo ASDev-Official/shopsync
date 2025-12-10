@@ -182,8 +182,8 @@ class ListAnalyticsService {
         final data = doc.data();
         final completedAt = (data['completedAt'] as Timestamp?)?.toDate();
         if (completedAt != null &&
-            completedAt.isAfter(dateRange.start) &&
-            completedAt.isBefore(dateRange.end)) {
+            !completedAt.isBefore(dateRange.start) &&
+            !completedAt.isAfter(dateRange.end)) {
           count++;
         }
       }
@@ -324,8 +324,8 @@ class ListAnalyticsService {
           .collection('lists')
           .doc(listId)
           .collection('items')
-          .where('createdAt', isGreaterThanOrEqualTo: dateRange.start)
-          .where('createdAt', isLessThanOrEqualTo: dateRange.end)
+          .where('addedAt', isGreaterThanOrEqualTo: dateRange.start)
+          .where('addedAt', isLessThanOrEqualTo: dateRange.end)
           .get();
 
       final collaboratorMap = <String, (String, int, int)>{};
