@@ -25,6 +25,19 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.35.3"
+          cache: true
+
+      # Step 2.5: Cache Android SDK, NDK, and CMake
+      - name: Cache Android SDK, NDK, and CMake
+        uses: actions/cache@v3
+        with:
+          path: |
+            /home/runner/Android/sdk/ndk/27.0.12077973
+            /home/runner/Android/sdk/platforms/android-31
+            /home/runner/Android/sdk/cmake/3.22.1
+          key: android-tools-${{ runner.os }}-ndk-27-sdk-31-cmake-3.22.1
+          restore-keys: |
+            android-tools-${{ runner.os }}-
 
       # Step 3: Decode Keystore (from GitHub Secret)
       - name: Decode Keystore
