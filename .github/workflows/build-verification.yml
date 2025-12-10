@@ -1,0 +1,255 @@
+name: Build Verification
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '**.dart'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'android/**'
+      - 'ios/**'
+      - 'web/**'
+  pull_request:
+    types: [ opened, edited, synchronize ]
+    paths:
+      - '**.dart'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'android/**'
+      - 'ios/**'
+      - 'web/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-phone:
+    name: Build Phone (Debug)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.3'
+          cache: true
+
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-cache-${{ runner.os }}-
+
+      - name: Cache Android build
+        uses: actions/cache@v4
+        with:
+          path: |
+            android/.gradle
+            android/app/build
+            build/
+            .dart_tool/flutter_build
+          key: android-build-phone-${{ runner.os }}-${{ hashFiles('**/pubspec.lock', '**/build.gradle', '**/gradle.properties') }}
+          restore-keys: |
+            android-build-phone-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Phone APK (Debug)
+        run: flutter build apk --debug --flavor phone --target=lib/main.dart
+
+      - name: Upload Phone APK artifact
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: phone-apk-debug
+          path: build/app/outputs/flutter-apk/app-phone-debug.apk
+          retention-days: 7
+
+      - name: Phone Build Summary
+        if: success()
+        run: |
+          echo "## Phone Build ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Flavor: phone" >> $GITHUB_STEP_SUMMARY
+          echo "- Target: lib/main.dart" >> $GITHUB_STEP_SUMMARY
+          echo "- Build type: Debug APK" >> $GITHUB_STEP_SUMMARY
+
+      - name: Phone Build Failure
+        if: failure()
+        run: |
+          echo "## Phone Build ❌" >> $GITHUB_STEP_SUMMARY
+          echo "Phone APK build failed. Check logs for details." >> $GITHUB_STEP_SUMMARY
+
+  build-wear:
+    name: Build WearOS (Debug)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.3'
+          cache: true
+
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-cache-${{ runner.os }}-
+
+      - name: Cache Android build
+        uses: actions/cache@v4
+        with:
+          path: |
+            android/.gradle
+            android/app/build
+            build/
+            .dart_tool/flutter_build
+          key: android-build-wear-${{ runner.os }}-${{ hashFiles('**/pubspec.lock', '**/build.gradle', '**/gradle.properties') }}
+          restore-keys: |
+            android-build-wear-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build WearOS APK (Debug)
+        run: flutter build apk --debug --flavor wear --target=lib/wear/wear_main.dart
+
+      - name: Upload WearOS APK artifact
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: wear-apk-debug
+          path: build/app/outputs/flutter-apk/app-wear-debug.apk
+          retention-days: 7
+
+      - name: WearOS Build Summary
+        if: success()
+        run: |
+          echo "## WearOS Build ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Flavor: wear" >> $GITHUB_STEP_SUMMARY
+          echo "- Target: lib/wear/wear_main.dart" >> $GITHUB_STEP_SUMMARY
+          echo "- Build type: Debug APK" >> $GITHUB_STEP_SUMMARY
+
+      - name: WearOS Build Failure
+        if: failure()
+        run: |
+          echo "## WearOS Build ❌" >> $GITHUB_STEP_SUMMARY
+          echo "WearOS APK build failed. Check logs for details." >> $GITHUB_STEP_SUMMARY
+
+  build-summary:
+    name: Build Verification Summary
+    runs-on: ubuntu-latest
+    needs: [ build-phone, build-wear ]
+    if: always()
+    steps:
+      - name: Check Build Status
+        run: |
+          echo "## Build Verification Summary" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.build-phone.result }}" == "success" ] && [ "${{ needs.build-wear.result }}" == "success" ]; then
+            echo "✅ All builds successful!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Some builds failed:" >> $GITHUB_STEP_SUMMARY
+            [ "${{ needs.build-phone.result }}" != "success" ] && echo "- Phone build: ❌" >> $GITHUB_STEP_SUMMARY
+            [ "${{ needs.build-wear.result }}" != "success" ] && echo "- WearOS build: ❌" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  build-web:
+    name: Build Web (WASM)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.3'
+          cache: true
+
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-cache-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Web (WASM)
+        run: flutter build web --wasm
+
+      - name: Upload Web build artifact
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: web-build-wasm
+          path: build/web/
+          retention-days: 7
+
+      - name: Web Build Summary
+        if: success()
+        run: |
+          echo "## Web Build ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Platform: web" >> $GITHUB_STEP_SUMMARY
+          echo "- Compiler: WASM" >> $GITHUB_STEP_SUMMARY
+          echo "- Build type: Production" >> $GITHUB_STEP_SUMMARY
+
+      - name: Web Build Failure
+        if: failure()
+        run: |
+          echo "## Web Build ❌" >> $GITHUB_STEP_SUMMARY
+          echo "Web WASM build failed. Check logs for details." >> $GITHUB_STEP_SUMMARY
+
+  build-summary-final:
+    name: Build Verification Summary
+    runs-on: ubuntu-latest
+    needs: [ build-phone, build-wear, build-web ]
+    if: always()
+    steps:
+      - name: Check Build Status
+        run: |
+          echo "## Build Verification Summary" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.build-phone.result }}" == "success" ] && [ "${{ needs.build-wear.result }}" == "success" ] && [ "${{ needs.build-web.result }}" == "success" ]; then
+            echo "✅ All builds successful!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Some builds failed:" >> $GITHUB_STEP_SUMMARY
+            [ "${{ needs.build-phone.result }}" != "success" ] && echo "- Phone build: ❌" >> $GITHUB_STEP_SUMMARY
+            [ "${{ needs.build-wear.result }}" != "success" ] && echo "- WearOS build: ❌" >> $GITHUB_STEP_SUMMARY
+            [ "${{ needs.build-web.result }}" != "success" ] && echo "- Web build: ❌" >> $GITHUB_STEP_SUMMARY
+          fi

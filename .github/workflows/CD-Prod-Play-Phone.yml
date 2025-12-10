@@ -3,6 +3,10 @@ name: CD-Prod-Play-Phone
 on:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   cd-build-and-upload:
     name: CD-Build and Upload Phone to Google Play Production
@@ -11,41 +15,49 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # Step 1: Set up JDK 17
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
-          java-version: "17"
-          distribution: "zulu"
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
 
-      # Step 2: Setup Flutter
-      - name: Setup Flutter
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.35.3"
+          flutter-version: '3.35.3'
           cache: true
 
-      # Step 2.5: Cache Android SDK, NDK, and CMake
-      - name: Cache Android SDK, NDK, and CMake
-        uses: actions/cache@v3
+      - name: Cache Pub packages
+        uses: actions/cache@v4
         with:
           path: |
-            /home/runner/Android/sdk/ndk/27.0.12077973
-            /home/runner/Android/sdk/platforms/android-31
-            /home/runner/Android/sdk/cmake/3.22.1
-          key: android-tools-${{ runner.os }}-ndk-27-sdk-31-cmake-3.22.1
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
-            android-tools-${{ runner.os }}-
+            pub-cache-${{ runner.os }}-
 
-      # Step 3: Decode Keystore (from GitHub Secret)
+      - name: Cache Android build outputs
+        uses: actions/cache@v4
+        with:
+          path: |
+            android/.gradle
+            android/app/build
+            build/
+            .dart_tool/flutter_build
+          key: android-phone-${{ runner.os }}-${{ hashFiles('**/pubspec.lock', '**/build.gradle', '**/gradle.properties') }}
+          restore-keys: |
+            android-phone-${{ runner.os }}-
+
       - name: Decode Keystore
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/release-key.jks
         working-directory: android
 
-      # Step 4: Create key.properties (using GitHub secrets)
       - name: Create key.properties
         run: |
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > key.properties
@@ -54,20 +66,16 @@ jobs:
           echo "storeFile=release-key.jks" >> key.properties
         working-directory: android
 
-      # Step 5: Create sentry.properties (using GitHub secrets)
       - name: Create sentry.properties
         run: |
           echo "${{ secrets.SENTRY_PROPERTIES }}" >> sentry.properties
 
-      # Step 6: Get Flutter dependencies
       - name: Get dependencies
         run: flutter pub get
 
-      # Step 7: Build AAB (Android App Bundle) for release
-      - name: Build AAB
+      - name: Build AAB for Phone
         run: flutter build appbundle --release --flavor phone --target=lib/main.dart
 
-      # Step 8: Upload the generated AAB to Google Play Console
       - name: Upload to Google Play
         uses: r0adkll/upload-google-play@v1
         with:
@@ -75,3 +83,18 @@ jobs:
           packageName: com.aadishsamir.shopsync
           releaseFiles: build/app/outputs/bundle/phoneRelease/app-phone-release.aab
           track: production
+
+      - name: Build Completion Summary
+        if: success()
+        run: |
+          echo "## Phone Release Build" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Phone App Bundle built and uploaded to Google Play (Production)" >> $GITHUB_STEP_SUMMARY
+          echo "- Flavor: phone" >> $GITHUB_STEP_SUMMARY
+          echo "- Target: lib/main.dart" >> $GITHUB_STEP_SUMMARY
+
+      - name: Build Failure Summary
+        if: failure()
+        run: |
+          echo "## Phone Release Build" >> $GITHUB_STEP_SUMMARY
+          echo "❌ Phone build or upload failed" >> $GITHUB_STEP_SUMMARY
+          echo "Check logs above for details" >> $GITHUB_STEP_SUMMARY

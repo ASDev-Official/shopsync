@@ -1,0 +1,73 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '**.dart'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'analysis_options.yaml'
+  pull_request:
+    types: [ opened, edited, synchronize ]
+    paths:
+      - '**.dart'
+      - 'pubspec.yaml'
+      - 'pubspec.lock'
+      - 'analysis_options.yaml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-code:
+    name: Analyze Code Style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.3'
+          cache: true
+
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-cache-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Dart format check
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Dart static analysis
+        run: flutter analyze --no-fatal-infos
+
+      - name: Lint Summary
+        if: success()
+        run: |
+          echo "## Lint & Format ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Code format check: passed" >> $GITHUB_STEP_SUMMARY
+          echo "- Static analysis: passed" >> $GITHUB_STEP_SUMMARY
+
+      - name: Lint Failure
+        if: failure()
+        run: |
+          echo "## Lint & Format ❌" >> $GITHUB_STEP_SUMMARY
+          echo "Code formatting or analysis issues detected" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**To fix format issues locally:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "dart format ." >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

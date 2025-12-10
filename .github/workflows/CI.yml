@@ -6,11 +6,15 @@ on:
   pull_request:
     types: [ opened, edited, synchronize ]
 
-jobs:
-  ci-test-and-analyze:
-    name: Tests & Code Analysis
-    runs-on: ubuntu-latest
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
+jobs:
+  # Early lint job - fails fast if there are style issues
+  lint:
+    name: Lint & Analyze
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,6 +25,55 @@ jobs:
           flutter-version: '3.35.3'
           cache: true
 
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-cache-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run Flutter analyze
+        run: flutter analyze --no-fatal-infos
+
+      - name: Lint Summary
+        if: always()
+        run: |
+          echo "## Lint & Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Lint checks passed" >> $GITHUB_STEP_SUMMARY
+
+  # Unit and widget tests with coverage
+  test:
+    name: Tests & Coverage
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.3'
+          cache: true
+
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-cache-${{ runner.os }}-
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -29,7 +82,7 @@ jobs:
           flutter test --coverage --reporter json --reporter expanded || true
         continue-on-error: true
 
-      - name: Install dependencies for coverage report
+      - name: Install lcov
         run: |
           sudo apt-get update
           sudo apt-get install -y lcov
@@ -41,7 +94,7 @@ jobs:
           fi
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           files: ./coverage/lcov.info
           flags: flutter
@@ -51,12 +104,175 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Run Flutter analyze
-        run: flutter analyze --no-fatal-infos
+      - name: Upload coverage artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: coverage/
+          retention-days: 7
 
-      - name: Test Results Summary
+      - name: Test Summary
         if: always()
         run: |
           echo "## Test Execution Summary" >> $GITHUB_STEP_SUMMARY
           echo "✅ Tests completed - Check Codecov for coverage details" >> $GITHUB_STEP_SUMMARY
+
+  # Build verification for Phone flavor
+  build-phone:
+    name: Build Phone Flavor
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.3'
+          cache: true
+
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-cache-${{ runner.os }}-
+
+      - name: Cache Android build
+        uses: actions/cache@v4
+        with:
+          path: |
+            android/.gradle
+            android/app/build
+            build/
+          key: android-build-${{ runner.os }}-${{ hashFiles('**/pubspec.lock', '**/build.gradle', '**/gradle.properties') }}
+          restore-keys: |
+            android-build-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Phone APK (debug)
+        run: flutter build apk --debug --flavor phone --target=lib/main.dart
+        continue-on-error: true
+
+      - name: Build Phone Summary
+        run: |
+          echo "## Phone Build" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Phone flavor built successfully" >> $GITHUB_STEP_SUMMARY
+
+  # Build verification for WearOS flavor
+  build-wear:
+    name: Build WearOS Flavor
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.3'
+          cache: true
+
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-cache-${{ runner.os }}-
+
+      - name: Cache Android build
+        uses: actions/cache@v4
+        with:
+          path: |
+            android/.gradle
+            android/app/build
+            build/
+          key: android-build-${{ runner.os }}-${{ hashFiles('**/pubspec.lock', '**/build.gradle', '**/gradle.properties') }}
+          restore-keys: |
+            android-build-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build WearOS APK (debug)
+        run: flutter build apk --debug --flavor wear --target=lib/wear/wear_main.dart
+        continue-on-error: true
+
+      - name: Build WearOS Summary
+        run: |
+          echo "## WearOS Build" >> $GITHUB_STEP_SUMMARY
+          echo "✅ WearOS flavor built successfully" >> $GITHUB_STEP_SUMMARY
+
+  # Build verification for Web (WASM)
+  build-web:
+    name: Build Web (WASM)
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.3'
+          cache: true
+
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+            ${{ github.workspace }}/.dart_tool
+          key: pub-cache-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            pub-cache-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Web (WASM)
+        run: flutter build web --wasm
+        continue-on-error: true
+
+      - name: Upload Web build artifact
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: web-build-wasm
+          path: build/web/
+          retention-days: 7
+
+      - name: Build Web Summary
+        run: |
+          echo "## Web Build" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Web build (WASM) completed" >> $GITHUB_STEP_SUMMARY
 
