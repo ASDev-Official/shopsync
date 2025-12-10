@@ -505,7 +505,9 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
                     CircleAvatar(
                       backgroundColor: Colors.green[600],
                       child: Text(
-                        collaborator.userName[0].toUpperCase(),
+                        collaborator.userName.isNotEmpty
+                            ? collaborator.userName[0].toUpperCase()
+                            : '?',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

@@ -133,8 +133,8 @@ class AnalyticsService {
             .collection('lists')
             .doc(listDoc.id)
             .collection('items')
-            .where('createdAt', isGreaterThanOrEqualTo: dateRange.start)
-            .where('createdAt', isLessThanOrEqualTo: dateRange.end)
+            .where('addedAt', isGreaterThanOrEqualTo: dateRange.start)
+            .where('addedAt', isLessThanOrEqualTo: dateRange.end)
             .count()
             .get();
 
@@ -166,14 +166,16 @@ class AnalyticsService {
       int totalCompleted = 0;
 
       // Count completed items in each list
+      // Note: Items don't have completedAt field, so we count all completed items
+      // and filter by addedAt as a proxy (items added in timeframe that are now completed)
       for (final listDoc in listsSnapshot.docs) {
         final itemsSnapshot = await _firestore
             .collection('lists')
             .doc(listDoc.id)
             .collection('items')
-            .where('checked', isEqualTo: true)
-            .where('updatedAt', isGreaterThanOrEqualTo: dateRange.start)
-            .where('updatedAt', isLessThanOrEqualTo: dateRange.end)
+            .where('completed', isEqualTo: true)
+            .where('addedAt', isGreaterThanOrEqualTo: dateRange.start)
+            .where('addedAt', isLessThanOrEqualTo: dateRange.end)
             .count()
             .get();
 
@@ -223,7 +225,7 @@ class AnalyticsService {
 
         int completedCount = 0;
         for (final item in itemsSnapshot.docs) {
-          if (item['checked'] == true) {
+          if (item['completed'] == true) {
             completedCount++;
           }
         }
@@ -265,14 +267,14 @@ class AnalyticsService {
             .collection('lists')
             .doc(listDoc.id)
             .collection('items')
-            .where('createdAt', isGreaterThanOrEqualTo: dateRange.start)
-            .where('createdAt', isLessThanOrEqualTo: dateRange.end)
+            .where('addedAt', isGreaterThanOrEqualTo: dateRange.start)
+            .where('addedAt', isLessThanOrEqualTo: dateRange.end)
             .where('deleted', isNotEqualTo: true)
             .get();
 
         for (final item in itemsSnapshot.docs) {
           final categoryId = item['categoryId'] as String? ?? 'Uncategorized';
-          final isCompleted = item['checked'] == true;
+          final isCompleted = item['completed'] == true;
 
           if (categoryMap.containsKey(categoryId)) {
             final (total, completed) = categoryMap[categoryId]!;
@@ -338,7 +340,7 @@ class AnalyticsService {
 
         int completedCount = 0;
         for (final item in itemsSnapshot.docs) {
-          if (item['checked'] == true) {
+          if (item['completed'] == true) {
             completedCount++;
           }
         }
@@ -457,15 +459,14 @@ class AnalyticsService {
             .collection('lists')
             .doc(listDoc.id)
             .collection('items')
-            .where('createdAt', isGreaterThanOrEqualTo: dateRange.start)
-            .where('createdAt', isLessThanOrEqualTo: dateRange.end)
+            .where('addedAt', isGreaterThanOrEqualTo: dateRange.start)
+            .where('addedAt', isLessThanOrEqualTo: dateRange.end)
             .get();
 
         for (final item in itemsSnapshot.docs) {
-          final createdAt =
-              (item['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now();
-          final dateOnly =
-              DateTime(createdAt.year, createdAt.month, createdAt.day);
+          final addedAt =
+              (item['addedAt'] as Timestamp?)?.toDate() ?? DateTime.now();
+          final dateOnly = DateTime(addedAt.year, addedAt.month, addedAt.day);
 
           dailyItemsMap[dateOnly] = (dailyItemsMap[dateOnly] ?? 0) + 1;
         }

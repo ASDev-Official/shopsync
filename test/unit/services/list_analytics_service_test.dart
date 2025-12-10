@@ -57,7 +57,7 @@ void main() {
       expect(breakdown.categoryName, 'Groceries');
       expect(breakdown.itemCount, 20);
       expect(breakdown.completedCount, 15);
-      expect(breakdown.percentage, 100.0); // itemCount / itemCount * 100
+      expect(breakdown.percentage, 75.0); // 15/20 * 100 = 75.0
     });
 
     test('handles zero items correctly', () {
@@ -77,8 +77,7 @@ void main() {
         completedCount: 5,
       );
 
-      expect(breakdown.percentage,
-          100.0); // Always 100 because itemCount/itemCount
+      expect(breakdown.percentage, 50.0); // 5/10 * 100 = 50.0
     });
   });
 

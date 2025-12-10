@@ -42,7 +42,7 @@ class CategoryBreakdown {
     required this.categoryName,
     required this.itemCount,
     required this.completedCount,
-  }) : percentage = itemCount == 0 ? 0 : (itemCount / itemCount) * 100;
+  }) : percentage = itemCount == 0 ? 0 : (completedCount / itemCount) * 100;
 }
 
 class CollaboratorActivity {
