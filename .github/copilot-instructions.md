@@ -262,26 +262,35 @@ Added to `pubspec.yaml` dev_dependencies:
 - `firebase_auth_mocks: ^0.14.0` - Firebase Auth mocking
 - `coverage: ^7.0.0` - Coverage reporting
 
-### GitHub Actions CI
+### GitHub Actions Workflows (CI/CD & Maintenance)
 
-**Workflow**: `.github/workflows/CI.yml`
+- `.github/workflows/CI.yml` — Full CI matrix.
+  - Triggers: push to `main`/`master`, PR open/edit/sync.
+  - Jobs: `lint` (flutter analyze), `test` (flutter test --coverage → Codecov), `build-phone` (debug APK, flavor phone), `build-wear` (debug APK, flavor wear), `build-web` (flutter build web --wasm). Heavy caching for pub, Flutter, Gradle; artifacts: coverage and web build.
 
-**Triggers**:
+- `.github/workflows/build-verification.yml` — Parallel build-only verification.
+  - Triggers: push/PR affecting Dart, pubspec, android/ ios/ web/.
+  - Jobs: phone debug APK, wear debug APK, web WASM build. Publishes APKs + web build artifacts. Final summary aggregates all three.
 
-- Push to `main` or `master`
-- Pull request (opened, edited, synchronize)
+- `.github/workflows/lint.yml` — Fast lint/format gate.
+  - Triggers: push/PR touching Dart or analysis/pubspect files.
+  - Jobs: dart format check, flutter analyze; uses pub cache; fails fast with summary.
 
-**Steps**:
+- `.github/workflows/CD-Prod-Play-Phone.yml` — Phone release to Play.
+  - Trigger: manual `workflow_dispatch`.
+  - Steps: checkout, Java 17 (cached Gradle), Flutter 3.35.3 (cached), pub cache, Android build cache, decode keystore + key.properties, sentry.properties, `flutter build appbundle --release --flavor phone --target=lib/main.dart`, upload via `r0adkll/upload-google-play` to production.
 
-1. Checkout code
-2. Setup Flutter 3.35.3 (with caching)
-3. Install dependencies
-4. Run tests with coverage (parallel execution)
-5. Upload coverage to Codecov
-6. Run code analysis
-7. Post results summary
+- `.github/workflows/CD-Prod-Play-WearOS.yml` — WearOS release to Play.
+  - Trigger: manual `workflow_dispatch`.
+  - Steps mirror phone CD but `flutter build appbundle --release --flavor wear --target=lib/wear/wear_main.dart`, uploaded to `wear:production` track.
 
-**Branch Protection**: Required status check `Tests & Code Analysis` blocks merge until tests pass.
+- `.github/workflows/auto-assign-issue.yml` — Maintenance.
+  - Trigger: issues opened.
+  - Action: auto-assign configured maintainers.
+
+- `.github/workflows/stale.yml` — Maintenance.
+  - Trigger: scheduled.
+  - Action: marks inactive issues/PRs as stale per config.
 
 ### Coverage Goals
 
