@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shopsync/widgets/loading_spinner.dart';
 
 class LocationSelector extends StatefulWidget {
   final Function(Map<String, dynamic>) onLocationSelected;
@@ -136,7 +137,7 @@ class _LocationSelectorState extends State<LocationSelector>
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CustomLoadingSpinner());
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {

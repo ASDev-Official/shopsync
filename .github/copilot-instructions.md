@@ -95,7 +95,19 @@ flutter pub get
 
 ### Common Patterns
 
-1. **StreamBuilder for Firestore**:
+1. **Loading Indicators**:
+   - **Phone/Web**: Use `CustomLoadingSpinner()` from `/widgets/loading_spinner.dart`
+   - **WearOS**: Use standard `CircularProgressIndicator()`
+
+   ```dart
+   // Phone/Web
+   Center(child: CustomLoadingSpinner())
+
+   // WearOS
+   Center(child: CircularProgressIndicator())
+   ```
+
+2. **StreamBuilder for Firestore**:
 
    ```dart
    StreamBuilder<QuerySnapshot>(
@@ -104,16 +116,16 @@ flutter pub get
    )
    ```
 
-2. **Sentry error tracking** (include context):
+3. **Sentry error tracking** (include context):
 
    ```dart
    await Sentry.captureException(error, stackTrace: stackTrace,
      hint: Hint.withMap({'action': 'create_list', 'list_name': name}));
    ```
 
-3. **Firebase timestamps**: Use `FieldValue.serverTimestamp()` for `createdAt`/`updatedAt`
+4. **Firebase timestamps**: Use `FieldValue.serverTimestamp()` for `createdAt`/`updatedAt`
 
-4. **Animations**: Prefer `SingleTickerProviderStateMixin` + `AnimationController` (see `list_view.dart`)
+5. **Animations**: Prefer `SingleTickerProviderStateMixin` + `AnimationController` (see `list_view.dart`)
 
 ### Authentication
 
@@ -360,6 +372,39 @@ If tests pass locally but fail in CI:
 ## AI Agent Guidelines
 
 - **DO NOT create README files**: Never create summary documents, README files, or markdown documentation files after completing tasks unless explicitly requested by the user.
+
+- **UPDATE COPILOT INSTRUCTIONS**: For any new feature, architectural pattern, or important convention that deserves documentation, add it to this copilot-instructions.md file. Keep instructions clear, concise, and actionable for future AI agents.
+
+### Analytics & Insights Architecture
+
+**Dual-Level Insights System:**
+
+- **User-Level Insights**: Accessible from home drawer, shows aggregate stats across all user's lists
+  - File: `lib/screens/user_insights.dart` (class: `UserInsightsScreen`)
+  - Service: `lib/services/analytics_service.dart` (class: `AnalyticsService`)
+  - Navigation: Home → Drawer → "User Insights"
+
+- **List-Level Insights**: Accessible from individual list navigation, shows per-list statistics
+  - File: `lib/screens/list_insights.dart` (class: `ListInsightsScreen`)
+  - Service: `lib/services/list_analytics_service.dart` (class: `ListAnalyticsService`)
+  - Navigation: List → Insights Tab (between Items and Options tabs)
+  - Tab Order: **Items → Insights → Options**
+
+**Important Field Names for Analytics:**
+
+- Items use `'completed'` field (NOT `'checked'`)
+- Items use `'addedAt'` timestamp (NOT `'createdAt'`)
+- Completed items use `'completedAt'` timestamp (NOT `'updatedAt'`)
+- Items do NOT have a `'deleted'` field - don't filter by it
+- Categories are fetched from `lists/{listId}/categories` subcollection
+- Category names must be resolved from category IDs
+
+**Navigation Tab Order:**
+When creating or modifying list navigation:
+
+- Index 0: Items (bouncy animation)
+- Index 1: Insights (donut spin animation with `Icons.donut_small` → `Icons.donut_large`)
+- Index 2: Options (settings spin animation)
 
 ### Testing Responsibilities
 

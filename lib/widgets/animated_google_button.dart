@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopsync/widgets/loading_spinner.dart';
 
 class AnimatedGoogleButton extends StatefulWidget {
   final VoidCallback? onPressed;
@@ -95,8 +96,7 @@ class _AnimatedGoogleButtonState extends State<AnimatedGoogleButton>
                 child: SizedBox(
                   width: 24,
                   height: 24,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.5,
+                  child: CustomLoadingSpinner(
                     color: widget.isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
