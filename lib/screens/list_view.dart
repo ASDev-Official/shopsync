@@ -8,6 +8,7 @@ import 'package:m3e_collection/m3e_collection.dart';
 import 'item_details.dart';
 import 'create_item.dart';
 import 'list_options.dart';
+import 'list_insights.dart';
 import '/widgets/loading_spinner.dart';
 import '/libraries/icons/food_icons_map.dart';
 import '/utils/permissions.dart';
@@ -32,9 +33,11 @@ class _ListViewScreenState extends State<ListViewScreen>
   final _firestore = FirebaseFirestore.instance;
   late AnimationController _itemsAnimationController;
   late AnimationController _optionsAnimationController;
+  late AnimationController _insightsAnimationController;
   late Animation<double> _itemsBounceAnimation;
   late Animation<double> _itemsRotateAnimation;
   late Animation<double> _optionsSpinAnimation;
+  late Animation<double> _insightsSpinAnimation;
 
   @override
   void initState() {
@@ -72,12 +75,26 @@ class _ListViewScreenState extends State<ListViewScreen>
       parent: _optionsAnimationController,
       curve: Curves.easeInOutBack, // More playful curve with overshoot
     ));
+
+    // Insights animation controller for spin effect
+    _insightsAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+    _insightsSpinAnimation = Tween<double>(
+      begin: 0.0,
+      end: 3.0, // 3 full rotations to end at same orientation
+    ).animate(CurvedAnimation(
+      parent: _insightsAnimationController,
+      curve: Curves.easeInOutBack,
+    ));
   }
 
   @override
   void dispose() {
     _itemsAnimationController.dispose();
     _optionsAnimationController.dispose();
+    _insightsAnimationController.dispose();
     super.dispose();
   }
 
@@ -96,6 +113,11 @@ class _ListViewScreenState extends State<ListViewScreen>
         _itemsAnimationController.reverse();
       });
     } else if (index == 1) {
+      // Insights tab - spin animation
+      _insightsAnimationController.forward().then((_) {
+        _insightsAnimationController.reset();
+      });
+    } else if (index == 2) {
       // Options tab - spin animation
       _optionsAnimationController.forward().then((_) {
         _optionsAnimationController.reset();
@@ -113,6 +135,7 @@ class _ListViewScreenState extends State<ListViewScreen>
       index: _selectedIndex,
       children: [
         ItemsTab(listId: widget.listId, listName: widget.listName),
+        ListInsightsScreen(listId: widget.listId, listName: widget.listName),
         ListOptionsScreen(listId: widget.listId, listName: widget.listName),
       ],
     );
@@ -216,16 +239,49 @@ class _ListViewScreenState extends State<ListViewScreen>
                       ),
                     ),
                     NavigationRailDestination(
+                      icon: Icon(
+                        Icons.donut_small,
+                        color: _selectedIndex == 1
+                            ? Colors.white
+                            : (isDark ? Colors.grey[400] : Colors.green[600]),
+                      ),
+                      selectedIcon: AnimatedBuilder(
+                        animation: _insightsSpinAnimation,
+                        builder: (context, child) {
+                          return Transform.rotate(
+                            angle: _selectedIndex == 1
+                                ? _insightsSpinAnimation.value * 2 * 3.14159
+                                : 0.0,
+                            child: const Icon(
+                              Icons.donut_large,
+                              color: Colors.white,
+                            ),
+                          );
+                        },
+                      ),
+                      label: Text(
+                        'Insights',
+                        style: TextStyle(
+                          color: _selectedIndex == 1
+                              ? (isDark ? Colors.white : Colors.green[800])
+                              : (isDark ? Colors.grey[400] : Colors.green[600]),
+                          fontWeight: _selectedIndex == 1
+                              ? FontWeight.w600
+                              : FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    NavigationRailDestination(
                       icon: AnimatedBuilder(
                         animation: _optionsSpinAnimation,
                         builder: (context, child) {
                           return Transform.rotate(
-                            angle: _selectedIndex == 1
+                            angle: _selectedIndex == 2
                                 ? _optionsSpinAnimation.value * 2 * 3.14159
                                 : 0.0,
                             child: Icon(
                               Icons.settings_outlined,
-                              color: _selectedIndex == 1
+                              color: _selectedIndex == 2
                                   ? Colors.white
                                   : (isDark
                                       ? Colors.grey[400]
@@ -238,7 +294,7 @@ class _ListViewScreenState extends State<ListViewScreen>
                         animation: _optionsSpinAnimation,
                         builder: (context, child) {
                           return Transform.rotate(
-                            angle: _selectedIndex == 1
+                            angle: _selectedIndex == 2
                                 ? _optionsSpinAnimation.value * 2 * 3.14159
                                 : 0.0,
                             child: const Icon(
@@ -251,10 +307,10 @@ class _ListViewScreenState extends State<ListViewScreen>
                       label: Text(
                         'Options',
                         style: TextStyle(
-                          color: _selectedIndex == 1
+                          color: _selectedIndex == 2
                               ? (isDark ? Colors.white : Colors.green[800])
                               : (isDark ? Colors.grey[400] : Colors.green[600]),
-                          fontWeight: _selectedIndex == 1
+                          fontWeight: _selectedIndex == 2
                               ? FontWeight.w600
                               : FontWeight.w500,
                         ),
@@ -344,11 +400,26 @@ class _ListViewScreenState extends State<ListViewScreen>
                     label: 'Items',
                   ),
                   NavigationDestination(
+                    icon: const Icon(Icons.donut_small),
+                    selectedIcon: AnimatedBuilder(
+                      animation: _insightsSpinAnimation,
+                      builder: (context, child) {
+                        return Transform.rotate(
+                          angle: _selectedIndex == 1
+                              ? _insightsSpinAnimation.value * 2 * 3.14159
+                              : 0.0,
+                          child: const Icon(Icons.donut_large),
+                        );
+                      },
+                    ),
+                    label: 'Insights',
+                  ),
+                  NavigationDestination(
                     icon: AnimatedBuilder(
                       animation: _optionsSpinAnimation,
                       builder: (context, child) {
                         return Transform.rotate(
-                          angle: _selectedIndex == 1
+                          angle: _selectedIndex == 2
                               ? _optionsSpinAnimation.value * 2 * 3.14159
                               : 0.0,
                           child: const Icon(Icons.settings_outlined),
@@ -359,7 +430,7 @@ class _ListViewScreenState extends State<ListViewScreen>
                       animation: _optionsSpinAnimation,
                       builder: (context, child) {
                         return Transform.rotate(
-                          angle: _selectedIndex == 1
+                          angle: _selectedIndex == 2
                               ? _optionsSpinAnimation.value * 2 * 3.14159
                               : 0.0,
                           child: const Icon(Icons.settings),
@@ -605,11 +676,10 @@ class _ItemsTabState extends State<ItemsTab> {
           SizedBox(
             width: 60,
             height: 60,
-            child: CircularProgressIndicator(
+            child: CircularProgressIndicatorM3E(
               value: progress,
-              backgroundColor: Colors.grey[300],
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.green[700]!),
-              strokeWidth: 6,
+              trackColor: Colors.green[100],
+              activeColor: Colors.green[700],
             ),
           ),
           const SizedBox(width: 16),

@@ -12,6 +12,7 @@ import 'package:m3e_collection/m3e_collection.dart';
 
 import '/screens/list_view.dart';
 import '/screens/list_group_migration_screen.dart';
+import '/screens/user_insights.dart';
 import '/widgets/loading_spinner.dart';
 import '/widgets/advert.dart';
 import '/widgets/add_list_group_bottom_sheet.dart';
@@ -778,6 +779,21 @@ class _HomeScreenState extends State<HomeScreen>
                                               ? Colors.grey[700]
                                               : Colors.grey[300],
                                           thickness: 2,
+                                        ),
+                                        _buildDrawerItem(
+                                          icon: Icons.analytics,
+                                          title: 'Your Insights',
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const UserInsightsScreen(),
+                                              ),
+                                            );
+                                          },
+                                          color: Colors.green[700],
                                         ),
                                         _buildDrawerItem(
                                           icon: Icons.settings,

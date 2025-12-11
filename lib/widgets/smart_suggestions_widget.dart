@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopsync/widgets/loading_spinner.dart';
 import '/models/item_suggestion.dart';
 import '/libraries/icons/food_icons_map.dart';
 
@@ -57,7 +58,7 @@ class SmartSuggestionsWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Center(
-                child: CircularProgressIndicator(),
+                child: CustomLoadingSpinner(),
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shopsync/widgets/loading_spinner.dart';
 
 class AdvertWidget extends StatefulWidget {
   /// The AdMob advertisement to display
@@ -137,9 +138,7 @@ class _AdvertWidgetState extends State<AdvertWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (widget.showLoadingIndicator) ...[
-            const CircularProgressIndicator(
-              strokeWidth: 2.0,
-            ),
+            const CustomLoadingSpinner(),
             const SizedBox(height: 8.0),
           ],
           Text(

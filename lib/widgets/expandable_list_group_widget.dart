@@ -147,12 +147,7 @@ class _ListItemWidgetState extends State<ListItemWidget> {
                       ? SizedBox(
                           width: 12,
                           height: 12,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              isDark ? Colors.grey[400]! : Colors.grey[600]!,
-                            ),
-                          ),
+                          child: CustomLoadingSpinner(),
                         )
                       : Icon(
                           Icons.arrow_forward,
