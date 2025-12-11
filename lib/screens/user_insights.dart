@@ -393,67 +393,101 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
   }
 
   Widget _buildProductivityCard(bool isDark) {
-    return Container(
-      decoration: BoxDecoration(
-        color: isDark ? Colors.grey[800] : Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark ? Colors.grey[700]! : Colors.grey[200]!,
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
+    return SizedBox(
+      height: 200,
+      child: Container(
+        decoration: BoxDecoration(
+          color: isDark ? Colors.grey[800] : Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isDark ? Colors.grey[700]! : Colors.grey[200]!,
+            width: 1,
           ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Daily Productivity',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: isDark ? Colors.white : Colors.grey[900],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
             ),
-          ),
-          const SizedBox(height: 16),
-          FutureBuilder<double>(
-            future: AnalyticsService.getProductivityTrend(_selectedTimeFrame),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SizedBox(
-                    height: 80, child: Center(child: CustomLoadingSpinner()));
-              }
+          ],
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Daily Productivity',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: isDark ? Colors.white : Colors.grey[900],
+              ),
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: FutureBuilder<double>(
+                future:
+                    AnalyticsService.getProductivityTrend(_selectedTimeFrame),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CustomLoadingSpinner());
+                  }
 
-              final value = snapshot.data ?? 0;
-              return Column(
-                children: [
-                  Text(
-                    value.toStringAsFixed(1),
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue[600],
+                  if (snapshot.hasError) {
+                    debugPrint(
+                        'Error loading productivity trend: ${snapshot.error}');
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Failed to load productivity data',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color:
+                                  isDark ? Colors.grey[400] : Colors.grey[600],
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          TextButton.icon(
+                            onPressed: () => setState(() {}),
+                            icon: const Icon(Icons.refresh, size: 14),
+                            label: const Text('Retry',
+                                style: TextStyle(fontSize: 12)),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  final value = snapshot.data ?? 0;
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          value.toStringAsFixed(1),
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue[600],
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'items added per day',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: isDark ? Colors.grey[400] : Colors.grey[600],
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'items added per day',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isDark ? Colors.grey[400] : Colors.grey[600],
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -494,6 +528,32 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const SizedBox(
                     height: 200, child: Center(child: CustomLoadingSpinner()));
+              }
+
+              if (snapshot.hasError) {
+                debugPrint('Error loading items per day: ${snapshot.error}');
+                return SizedBox(
+                  height: 200,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Failed to load activity data',
+                          style: TextStyle(
+                            color: isDark ? Colors.grey[400] : Colors.grey[600],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        TextButton.icon(
+                          onPressed: () => setState(() {}),
+                          icon: const Icon(Icons.refresh),
+                          label: const Text('Retry'),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               }
 
               final data = snapshot.data ?? [];
@@ -721,6 +781,40 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
           );
         }
 
+        if (snapshot.hasError) {
+          debugPrint('Error loading list completions: ${snapshot.error}');
+          return Container(
+            height: 300,
+            decoration: BoxDecoration(
+              color: isDark ? Colors.grey[800] : Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: isDark ? Colors.grey[700]! : Colors.grey[200]!,
+                width: 1,
+              ),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Failed to load list data',
+                    style: TextStyle(
+                      color: isDark ? Colors.grey[400] : Colors.grey[600],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextButton.icon(
+                    onPressed: () => setState(() {}),
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
         final lists = snapshot.data ?? [];
         if (lists.isEmpty) {
           return _buildEmptyState();
@@ -795,7 +889,9 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
-                            color: Colors.blue[50],
+                            color: isDark
+                                ? Colors.blue[900]!.withValues(alpha: 0.3)
+                                : Colors.blue[50],
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(

@@ -42,12 +42,12 @@ void main() {
     });
 
     test('_getDateRange month returns correct date range', () {
-      final now = DateTime.now();
-      final startOfDay = DateTime(now.year, now.month, now.day);
-      final monthAgo = DateTime(now.year, now.month - 1, now.day);
+      // Use deterministic date to avoid month-boundary issues
+      final testDate = DateTime(2024, 3, 15);
+      final monthAgo = DateTime(2024, 2, 15);
 
-      // Month ago should be before now
-      expect(monthAgo.isBefore(startOfDay), true);
+      // Month ago should be before test date
+      expect(monthAgo.isBefore(testDate), true);
     });
 
     test('_getDateRange year returns correct date range', () {

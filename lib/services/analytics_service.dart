@@ -171,20 +171,21 @@ class AnalyticsService {
       int totalCompleted = 0;
 
       // Count completed items in each list
-      // Note: Items don't have completedAt field, so we count all completed items
-      // and filter by addedAt as a proxy (items added in timeframe that are now completed)
+      // Note: We count items that were added in the timeframe and are now completed
       for (final listDoc in listsSnapshot.docs) {
         final itemsSnapshot = await _firestore
             .collection('lists')
             .doc(listDoc.id)
             .collection('items')
-            .where('completed', isEqualTo: true)
             .where('addedAt', isGreaterThanOrEqualTo: dateRange.start)
             .where('addedAt', isLessThanOrEqualTo: dateRange.end)
-            .count()
             .get();
 
-        totalCompleted += itemsSnapshot.count ?? 0;
+        for (final itemDoc in itemsSnapshot.docs) {
+          if (itemDoc['completed'] == true) {
+            totalCompleted++;
+          }
+        }
       }
 
       return totalCompleted;
@@ -264,6 +265,7 @@ class AnalyticsService {
           .get();
 
       final categoryMap = <String, (int, int)>{};
+      final categoryNameMap = <String, String>{};
 
       // Count items by category
       for (final listDoc in listsSnapshot.docs) {
@@ -274,6 +276,18 @@ class AnalyticsService {
             .where('addedAt', isGreaterThanOrEqualTo: dateRange.start)
             .where('addedAt', isLessThanOrEqualTo: dateRange.end)
             .get();
+
+        // Fetch categories for this list to resolve names
+        final categoriesSnapshot = await _firestore
+            .collection('lists')
+            .doc(listDoc.id)
+            .collection('categories')
+            .get();
+
+        for (final catDoc in categoriesSnapshot.docs) {
+          categoryNameMap[catDoc.id] =
+              catDoc['name'] as String? ?? 'Uncategorized';
+        }
 
         for (final item in itemsSnapshot.docs) {
           final categoryId = item['categoryId'] as String? ?? 'Uncategorized';
@@ -292,7 +306,7 @@ class AnalyticsService {
       // Convert to list and sort by item count
       final insights = categoryMap.entries
           .map((e) => CategoryInsight(
-              categoryName: e.key,
+              categoryName: categoryNameMap[e.key] ?? e.key,
               itemCount: e.value.$1,
               completedCount: e.value.$2))
           .toList()
