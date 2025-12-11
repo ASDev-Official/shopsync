@@ -660,6 +660,40 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
           );
         }
 
+        if (snapshot.hasError) {
+          debugPrint('Error loading top categories: ${snapshot.error}');
+          return Container(
+            height: 200,
+            decoration: BoxDecoration(
+              color: isDark ? Colors.grey[800] : Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: isDark ? Colors.grey[700]! : Colors.grey[200]!,
+                width: 1,
+              ),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Failed to load category data',
+                    style: TextStyle(
+                      color: isDark ? Colors.grey[400] : Colors.grey[600],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextButton.icon(
+                    onPressed: () => setState(() {}),
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
         final categories = snapshot.data ?? [];
         if (categories.isEmpty) {
           return _buildEmptyState();
