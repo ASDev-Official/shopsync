@@ -74,8 +74,13 @@ class AnalyticsService {
         final weekAgo = startOfDay.subtract(const Duration(days: 7));
         return DateRange(weekAgo, now);
       case TimeFrame.month:
-        final monthAgo = DateTime(now.year, now.month - 1, now.day);
-        return DateRange(monthAgo, now);
+        final monthAgo = DateTime(now.year, now.month - 1, 1);
+        final adjustedMonthAgo = DateTime(
+          monthAgo.year,
+          monthAgo.month,
+          now.day.clamp(1, DateTime(monthAgo.year, monthAgo.month + 1, 0).day),
+        );
+        return DateRange(adjustedMonthAgo, now);
       case TimeFrame.quarter:
         final quarterAgo = DateTime(now.year, now.month - 3, now.day);
         return DateRange(quarterAgo, now);
@@ -218,7 +223,6 @@ class AnalyticsService {
             .collection('lists')
             .doc(listDoc.id)
             .collection('items')
-            .where('deleted', isNotEqualTo: true)
             .get();
 
         if (itemsSnapshot.docs.isEmpty) continue;
@@ -269,7 +273,6 @@ class AnalyticsService {
             .collection('items')
             .where('addedAt', isGreaterThanOrEqualTo: dateRange.start)
             .where('addedAt', isLessThanOrEqualTo: dateRange.end)
-            .where('deleted', isNotEqualTo: true)
             .get();
 
         for (final item in itemsSnapshot.docs) {
@@ -333,7 +336,6 @@ class AnalyticsService {
             .collection('lists')
             .doc(listDoc.id)
             .collection('items')
-            .where('deleted', isNotEqualTo: true)
             .get();
 
         if (itemsSnapshot.docs.isEmpty) continue;

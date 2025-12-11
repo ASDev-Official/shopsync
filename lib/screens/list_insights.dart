@@ -45,6 +45,8 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
       final collaborators = await ListAnalyticsService.getCollaboratorActivity(
           widget.listId, _selectedTimeFrame);
 
+      if (!mounted) return;
+
       setState(() {
         _keyInsights = insights;
         _categoryBreakdown = categories;
@@ -53,12 +55,12 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
         _isLoading = false;
       });
     } catch (e) {
+      if (!mounted) return;
+
       setState(() => _isLoading = false);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error loading insights: $e')),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error loading insights: $e')),
+      );
     }
   }
 

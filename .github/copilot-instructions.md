@@ -395,8 +395,8 @@ If tests pass locally but fail in CI:
 - Items use `'completed'` field (NOT `'checked'`)
 - Items use `'addedAt'` timestamp (NOT `'createdAt'`)
 - **Items do NOT have a `'completedAt'` field** - use `'addedAt'` as proxy for time-based queries
-- Items have a `'deleted'` field - filter with `.where('deleted', isNotEqualTo: true)` when needed
-- Lists use `'createdAt'` timestamp (NOT `'addedAt'`)
+- **Items do NOT have a `'deleted'` field** - deleted items are moved to `recycled_items` subcollection, not filtered
+- Lists use `'addedAt'` timestamp (NOT `'createdAt'`)
 - Categories are fetched from `lists/{listId}/categories` subcollection
 - Category names must be resolved from category IDs
 
