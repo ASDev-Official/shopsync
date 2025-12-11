@@ -899,7 +899,8 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
-                              color: Colors.blue[700],
+                              color:
+                                  isDark ? Colors.blue[300] : Colors.blue[700],
                             ),
                           ),
                         ),
