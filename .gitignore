@@ -50,11 +50,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Crowdin related
-.crowdin.yaml
-crowdin.yaml
-.crowdin.yml
-crowdin.yml
-
 # Sentry related
 sentry.properties
