@@ -1,0 +1,172 @@
+{
+  "@@locale": "hu",
+  "returnClearedCountCompletedItems": "Cleared ${count} completed items",
+  "@returnClearedCountCompletedItems": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "returnErrorDeletingListError": "Error deleting list: ${error}",
+  "@returnErrorDeletingListError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "returnErrorFetchingMaintenanceStatusError": "Error fetching maintenance status: ${error}",
+  "@returnErrorFetchingMaintenanceStatusError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "returnErrorSharingListError": "Error sharing list: ${error}",
+  "@returnErrorSharingListError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "returnHigh": "high",
+  "returnLow": "low",
+  "returnMedium": "medium",
+  "returnNameMustBeAtLeast2Characters": "Name must be at least 2 characters",
+  "returnNetworkErrorCheckYourConnectionAndTryAgain": "Network error. Check your connection and try again",
+  "returnNetworkErrorPleaseCheckYourInternetConnectionAndTryAgain": "Network error. Please check your internet connection and try again",
+  "returnNoAccountFoundWithThisEmail": "No account found with this email",
+  "returnNoUserFoundForThatEmailPleaseCheckYourEmailAndTryAgain": "No user found for that email. Please check your email and try again",
+  "returnPasswordMustBeAtLeast6Characters": "Password must be at least 6 characters",
+  "returnPleaseEnterADisplayName": "Please enter a display name",
+  "returnPleaseEnterAPassword": "Please enter a password",
+  "returnPleaseEnterAValidEmailAddress": "Please enter a valid email address",
+  "returnPleaseEnterYourEmail": "Please enter your email",
+  "returnPleaseEnterYourName": "Please enter your name",
+  "returnPleaseEnterYourPassword": "Please enter your password",
+  "returnTheEmailAddressIsAlreadyInUseByAnotherAccount": "The email address is already in use by another account",
+  "returnTheOperationIsNotAllowedPleaseTryAgainLaterIfItDoesn": "The operation is not allowed. Please try again later. If it doesn't",
+  "returnThePasswordIsInvalidOrTheUserDoesNotHaveAPassword": "The password is invalid or the user does not have a password",
+  "returnTheProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword": "The provided credentials are incorrect. Please check your email and password",
+  "returnThisEmailIsAlreadyRegisteredPleaseSignInInstead": "This email is already registered. Please sign in instead",
+  "returnThisPasswordIsTooWeakPleaseChooseAStrongerOne": "This password is too weak. Please choose a stronger one",
+  "returnThisUserHasBeenDisabledPleaseContact": "This user has been disabled. Please contact asdev.feedback@gmail.com",
+  "returnTooManyRequestsPleaseTryAgainLater": "Too many requests. Please try again later",
+  "returnVersionPackageinfoversionPackageinfobuildnumber": "Version ${packageInfoVersion} (${packageInfoBuildNumber})",
+  "@returnVersionPackageinfoversionPackageinfobuildnumber": {
+    "placeholders": {
+      "packageInfoVersion": {
+        "type": "String"
+      },
+      "packageInfoBuildNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "textappLanguage": "App Language",
+  "textareYouSureYouWantToSignOut": "Are you sure you want to sign out?",
+  "textcancel": "Cancel",
+  "textclearCompletedItems": "Clear Completed Items",
+  "textclearCompleted": "Clear Completed",
+  "textclearItems": "Clear Items",
+  "textclearedCompleteditemsdocslengthCompletedItems": "Cleared ${completedItemsLength} completed items",
+  "@textclearedCompleteditemsdocslengthCompletedItems": {
+    "placeholders": {
+      "completedItemsLength": {
+        "type": "int"
+      }
+    }
+  },
+  "textcouldNotOpenPlayStore": "Could not open Play Store",
+  "textcreate": "Create",
+  "textdarkMode": "Dark Mode",
+  "textdeleteList": "Delete List",
+  "textdelete": "Delete",
+  "textenableNotifications": "Enable Notifications",
+  "textenglish": "English",
+  "texterrorFetchingMaintenanceStatusE": "Error fetching maintenance status: ${e}",
+  "@texterrorFetchingMaintenanceStatusE": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "texterrorLoadingListsSnapshoterror": "Error loading lists: ${snapshotError}",
+  "@texterrorLoadingListsSnapshoterror": {
+    "placeholders": {
+      "snapshotError": {
+        "type": "String"
+      }
+    }
+  },
+  "texterrorSharingListEtostring": "Error sharing list: ${eToString}",
+  "@texterrorSharingListEtostring": {
+    "placeholders": {
+      "eToString": {
+        "type": "String"
+      }
+    }
+  },
+  "texterrorSigningOutEtostring": "Error signing out: ${eToString}",
+  "@texterrorSigningOutEtostring": {
+    "placeholders": {
+      "eToString": {
+        "type": "String"
+      }
+    }
+  },
+  "textexportList": "Export List",
+  "textfailedToCreateListPleaseTryAgain": "Failed to create list. Please try again.",
+  "textfailedToDeleteItem": "Failed to delete item",
+  "textfailedToDeleteList": "Failed to delete list",
+  "textfailedToDeleteTask": "Failed to delete task",
+  "textfailedToRestoreItem": "Failed to restore item",
+  "textfailedToSignInWithGoogle": "Failed to sign in with Google",
+  "textfailedToSignOutPleaseTryAgain": "Failed to sign out. Please try again.",
+  "textfailedToUpdateTaskStatus": "Failed to update task status",
+  "textlistDeletedSuccessfully": "List deleted successfully",
+  "textloading": "Loading...",
+  "textowner": "Owner",
+  "textpleaseEnterATaskTitle": "Please enter a task title",
+  "textprivacyPolicy": "Privacy Policy",
+  "textprofileUpdatedSuccessfully": "Profile updated successfully",
+  "textrenameList": "Rename List",
+  "textsaveChanges": "Save Changes",
+  "textsave": "Save",
+  "textselectLanguage": "Select Language",
+  "textsettings": "Settings",
+  "textsignOut": "Sign Out",
+  "texttoggleDarklightTheme": "Toggle dark/light theme",
+  "textuserAddedSuccessfully": "User added successfully",
+  "textuserAlreadyHasAccessToThisList": "User already has access to this list",
+  "textuserRemoved": "User removed",
+  "textversion": "Version",
+  "textviewRecycleBin": "View Recycle Bin",
+  "titleAbout": "About",
+  "titleAccessYourListsAndSettings": "Access your lists and settings",
+  "titleAddItemsToYourList": "Add items to your list",
+  "titleAppInformation": "App Information",
+  "titleAppearance": "Appearance",
+  "titleCreateNewList": "Create New List",
+  "titleCrowdin": "Crowdin",
+  "titleDeadline": "Deadline",
+  "titleDescription": "Description",
+  "titleGithub": "GitHub",
+  "titleLanguage": "Language",
+  "titleLocation": "Location",
+  "titleMyProfile": "My Profile",
+  "titleNotifications": "Notifications",
+  "titleOpenTheDrawerFromTheLeft": "Open the drawer from the left",
+  "titleReleaseNotes": "Release Notes",
+  "titleSelectAShoppingListToView": "Select a shopping list to view",
+  "titleShareCollaborate": "Share & Collaborate",
+  "titleShopsync": "ShopSync",
+  "titleSignOut": "Sign Out",
+  "titleSmartLists": "Smart Lists",
+  "titleTaskName": "Task Name",
+  "titleWelcomeToShopsync": "Welcome to ShopSync"
+}
