@@ -4,22 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:shopsync/services/connectivity_service.dart';
+import 'package:shopsync/services/platform/connectivity_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 
-import '/screens/list_view.dart';
-import '/screens/list_group_migration_screen.dart';
-import '/screens/user_insights.dart';
-import '/widgets/loading_spinner.dart';
-import '/widgets/advert.dart';
-import '/widgets/add_list_group_bottom_sheet.dart';
-import '/widgets/expandable_list_group_widget.dart';
-import '/widgets/splash_screen.dart';
-import '/services/list_groups_service.dart';
-import '/services/migration_service.dart';
+import '/screens/lists/list_view.dart';
+import '/screens/migration/list_group_migration_screen.dart';
+import '/screens/settings/user_insights.dart';
+import '/widgets/ui/loading_spinner.dart';
+import '/widgets/common/advert.dart';
+import '/widgets/lists/add_list_group_bottom_sheet.dart';
+import '/widgets/lists/expandable_list_group_widget.dart';
+import '/widgets/ui/splash_screen.dart';
+import '/services/data/list_groups_service.dart';
+import '/services/migration/migration_service.dart';
 import '/utils/permissions.dart';
 
 class TutorialStep extends StatelessWidget {

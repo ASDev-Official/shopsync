@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
-import 'package:shopsync/services/google_auth.dart';
+import 'package:shopsync/services/auth/google_auth.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'wear_login_screen.dart';
 import '../widgets/wear_animated_google_button.dart';

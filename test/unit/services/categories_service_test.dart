@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shopsync/services/item_categories_service.dart';
+import 'package:shopsync/services/data/item_categories_service.dart';
 
 void main() {
   group('CategoriesService', () {

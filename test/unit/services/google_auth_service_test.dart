@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shopsync/services/google_auth.dart';
+import 'package:shopsync/services/auth/google_auth.dart';
 
 void main() {
   group('GoogleAuthService', () {

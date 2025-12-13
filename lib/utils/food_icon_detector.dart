@@ -1,4 +1,4 @@
-import '/libraries/icons/food_icons_map.dart';
+import '/utils/icons/food_icons_map.dart';
 
 /// Detects food icons from text input
 class FoodIconDetector {

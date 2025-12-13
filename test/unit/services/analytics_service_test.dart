@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shopsync/services/analytics_service.dart';
+import 'package:shopsync/services/analytics/analytics_service.dart';
 
 void main() {
   group('AnalyticsService', () {

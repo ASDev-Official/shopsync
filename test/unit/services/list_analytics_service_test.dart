@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shopsync/services/list_analytics_service.dart';
+import 'package:shopsync/services/analytics/list_analytics_service.dart';
 import 'package:flutter/material.dart';
 
 void main() {

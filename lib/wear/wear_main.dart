@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../firebase_options.dart';
+import '../config/firebase_options.dart';
 import 'screens/wear_list_groups_screen.dart';
 import 'screens/wear_welcome_screen.dart';
 import 'screens/wear_maintenance_screen.dart';
-import '../services/maintenance_service.dart';
+import '../services/platform/maintenance_service.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {

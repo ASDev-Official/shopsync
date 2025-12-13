@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shopsync/services/maintenance_service.dart';
+import 'package:shopsync/services/platform/maintenance_service.dart';
 
 void main() {
   group('MaintenanceService', () {
