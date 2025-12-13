@@ -3,20 +3,17 @@ api_token_env: CROWDIN_PERSONAL_TOKEN
 
 files:
   - source: /lib/l10n/app_en.arb
-    translation: /lib/l10n/app_%locale%.arb
+    translation: /lib/l10n/app_%two_letters_code%.arb
     languages_mapping:
-      locale:
-        af: af
-        ar: ar
-        de: de
-        es: es
-        fr: fr
-        it: it
-        ja: ja
-        ko: ko
-        pt-BR: pt_BR
-        ru: ru
-        zh-CN: zh_CN
-        zh-TW: zh_TW
-
-structure: /lib/l10n/app_%locale%.arb
+      af: af
+      ar: ar
+      de: de
+      es: es
+      fr: fr
+      it: it
+      ja: ja
+      ko: ko
+      pt_BR: pt_BR
+      ru: ru
+      zh_CN: zh_CN
+      zh_TW: zh_TW
