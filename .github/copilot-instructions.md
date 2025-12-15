@@ -141,7 +141,7 @@ flutter pub get
 - **Sentry**: Error tracking with 100% trace/profile sample rate (see `main.dart`)
 - **Google Mobile Ads**: Initialized with `unawaited(MobileAds.instance.initialize())`
 - **TFLite**: Local ML model for smart suggestions (`SmartSuggestionsService`)
-- **Crowdin**: Translation management (not in code, contributor workflow)
+- **Weblate**: Translation management (not in code, contributor workflow)
 
 ### Platform-Specific
 

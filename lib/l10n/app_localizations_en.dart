@@ -288,7 +288,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get titleCreateNewList => 'Create New List';
 
   @override
-  String get titleCrowdin => 'Crowdin';
+  String get titleWeblate => 'Weblate';
 
   @override
   String get titleDeadline => 'Deadline';

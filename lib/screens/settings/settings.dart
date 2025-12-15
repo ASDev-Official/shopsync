@@ -26,9 +26,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _selectedLanguage = 'English';
   final _prefs = SharedPreferences.getInstance();
 
-  // Add GitHub and Crowdin URLs
+  // Add GitHub and Weblate URLs
   final String _githubUrl = 'https://github.com/aadishsamir123/asdev-shopsync';
-  final String _crowdinUrl = 'https://crowdin.com/project/as-shopsync';
+  final String _weblateUrl = 'https://example.com';
 
   // Offline mode
   final connectivityService = ConnectivityService();
@@ -312,9 +312,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           buildSettingsTile(
             icon: Icons.language,
             title: 'Help Translate',
-            subtitle: 'Contribute on Crowdin',
+            subtitle: 'Contribute on Weblate',
             iconColorOverride: Colors.blue[700],
-            onTap: () => _launchUrl(_crowdinUrl),
+            onTap: () => _launchUrl(_weblateUrl),
           ),
           buildSettingsTile(
             icon: Icons.article,

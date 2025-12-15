@@ -571,11 +571,11 @@ abstract class AppLocalizations {
   /// **'Create New List'**
   String get titleCreateNewList;
 
-  /// No description provided for @titleCrowdin.
+  /// No description provided for @titleWeblate.
   ///
   /// In en, this message translates to:
-  /// **'Crowdin'**
-  String get titleCrowdin;
+  /// **'Weblate'**
+  String get titleWeblate;
 
   /// No description provided for @titleDeadline.
   ///
