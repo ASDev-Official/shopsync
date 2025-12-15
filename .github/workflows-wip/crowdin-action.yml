@@ -1,0 +1,48 @@
+name: Crowdin Sync
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'lib/l10n/app_en.arb'
+      - 'crowdin.yml'
+      - '.github/workflows/crowdin-action.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 02:00 UTC
+
+concurrency:
+  group: crowdin-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  synchronize-with-crowdin:
+    name: Synchronize with Crowdin
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync translations
+        uses: crowdin/github-action@v2
+        with:
+          config: crowdin.yml
+          upload_sources: true
+          upload_translations: false
+          download_translations: true
+          localization_branch_name: l10n/crowdin-translations
+          create_pull_request: true
+          pull_request_title: 'chore: sync Crowdin translations'
+          pull_request_body: 'Automated sync via Crowdin GitHub Action.'
+          pull_request_base_branch_name: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
