@@ -85,19 +85,19 @@ class StringExtractor:
         
         # Match ${variable.method()} with arguments - extract base variable
         # Matches: ${variable.method()}, ${variable.method(args)}, ${variable.method().property}
+        # Use base_var as placeholder to match what normalize_string produces: {base_var}
         for match in re.finditer(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)\([^\)]*\)(?:\.[A-Za-z_][A-Za-z0-9_]*)?\}', text):
             base_var = match.group(1).lstrip('_')
-            method_name = match.group(2)
-            # Use method name as the placeholder hint for method calls
-            placeholder_key = f"{base_var}_{method_name}"
-            placeholder_positions.setdefault(placeholder_key, []).append(match.start())
-            placeholders.append(method_name)
+            if base_var:
+                placeholder_positions.setdefault(base_var, []).append(match.start())
+                placeholders.append(base_var)
         
         # Match ${variable()} - immediate function call (no dot notation)
         for match in re.finditer(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\([^\)]*\)\}', text):
             base_var = match.group(1).lstrip('_')
-            placeholder_positions.setdefault(base_var, []).append(match.start())
-            placeholders.append(base_var)
+            if base_var:
+                placeholder_positions.setdefault(base_var, []).append(match.start())
+                placeholders.append(base_var)
         
         # Match ${variable} pattern (simple variable)
         for match in re.finditer(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\}', text):
@@ -209,8 +209,9 @@ class StringExtractor:
         
         # Handle ${variable.method()} or ${variable.method().property} -> {variable}
         normalized = re.sub(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\.[A-Za-z_][A-Za-z0-9_]*\([^\)]*\)(?:\.[A-Za-z_][A-Za-z0-9_]*)?\}', r'{\1}', normalized)
-        
-        # Handle remaining ${variable.xxx} patterns (property access or method calls) -> {variable}
+                # Handle ${variable()} (no dot) -> {variable}
+        normalized = re.sub(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\([^\)]*\)\}', r'{\1}', normalized)
+                # Handle remaining ${variable.xxx} patterns (property access or method calls) -> {variable}
         normalized = re.sub(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\.[^\}]+\}', r'{\1}', normalized)
         
         # Convert simple Dart interpolation to ARB placeholders

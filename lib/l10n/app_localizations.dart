@@ -816,25 +816,25 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Error: {e}'**
-  String errorEtostring(String toString, Object e);
+  String errorEtostring(String e);
 
   /// From: lib/wear/screens/wear_item_details_screen.dart
   ///
   /// In en, this message translates to:
   /// **'Error: {e}'**
-  String errorEtostring1(String toString, Object e);
+  String errorEtostring1(String e);
 
   /// From: lib/wear/screens/wear_item_details_screen.dart
   ///
   /// In en, this message translates to:
   /// **'Error: {e}'**
-  String errorEtostring2(String toString, Object e);
+  String errorEtostring2(String e);
 
   /// From: lib/wear/screens/wear_item_details_screen.dart
   ///
   /// In en, this message translates to:
   /// **'Error: {e}'**
-  String errorEtostring3(String toString, Object e);
+  String errorEtostring3(String e);
 
   /// From: lib/services/platform/maintenance_service.dart
   ///
@@ -900,49 +900,49 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring(String toString, Object e);
+  String errorSigningOutEtostring(String e);
 
   /// From: lib/screens/settings/profile.dart
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring1(String toString, Object e);
+  String errorSigningOutEtostring1(String e);
 
   /// From: lib/screens/settings/profile.dart
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring2(String toString, Object e);
+  String errorSigningOutEtostring2(String e);
 
   /// From: lib/screens/settings/profile.dart
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring3(String toString, Object e);
+  String errorSigningOutEtostring3(String e);
 
   /// From: lib/screens/settings/settings.dart
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring4(String toString, Object e);
+  String errorSigningOutEtostring4(String e);
 
   /// From: lib/screens/settings/settings.dart
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring5(String toString, Object e);
+  String errorSigningOutEtostring5(String e);
 
   /// From: lib/screens/settings/settings.dart
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring6(String toString, Object e);
+  String errorSigningOutEtostring6(String e);
 
   /// From: lib/screens/settings/settings.dart
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring7(String toString, Object e);
+  String errorSigningOutEtostring7(String e);
 
   /// No description provided for @exportBackup.
   ///

@@ -231,7 +231,7 @@
   "errorEtostring": "Error: {e}",
   "@errorEtostring": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -240,7 +240,7 @@
   "errorEtostring1": "Error: {e}",
   "@errorEtostring1": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -249,7 +249,7 @@
   "errorEtostring2": "Error: {e}",
   "@errorEtostring2": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -258,7 +258,7 @@
   "errorEtostring3": "Error: {e}",
   "@errorEtostring3": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -357,7 +357,7 @@
   "errorSigningOutEtostring": "Error signing out: {e}",
   "@errorSigningOutEtostring": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -366,7 +366,7 @@
   "errorSigningOutEtostring1": "Error signing out: {e}",
   "@errorSigningOutEtostring1": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -375,7 +375,7 @@
   "errorSigningOutEtostring2": "Error signing out: {e}",
   "@errorSigningOutEtostring2": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -384,7 +384,7 @@
   "errorSigningOutEtostring3": "Error signing out: {e}",
   "@errorSigningOutEtostring3": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -393,7 +393,7 @@
   "errorSigningOutEtostring4": "Error signing out: {e}",
   "@errorSigningOutEtostring4": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -402,7 +402,7 @@
   "errorSigningOutEtostring5": "Error signing out: {e}",
   "@errorSigningOutEtostring5": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -411,7 +411,7 @@
   "errorSigningOutEtostring6": "Error signing out: {e}",
   "@errorSigningOutEtostring6": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
@@ -420,7 +420,7 @@
   "errorSigningOutEtostring7": "Error signing out: {e}",
   "@errorSigningOutEtostring7": {
     "placeholders": {
-      "toString": {
+      "e": {
         "type": "String"
       }
     },
