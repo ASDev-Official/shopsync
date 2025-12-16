@@ -682,6 +682,69 @@ class AppLocalizationsZh extends AppLocalizations {
       'Google account unlinked successfully';
 
   @override
+  String groupNamecontrollertexttrimCreatedSuccessfully(Object nameController) {
+    return 'Group \"$nameController\" created successfully';
+  }
+
+  @override
+  String groupNamecontrollertexttrimCreatedSuccessfully1(
+      Object nameController) {
+    return 'Group \"$nameController\" created successfully';
+  }
+
+  @override
+  String groupNamecontrollertexttrimCreatedSuccessfully2(
+      Object nameController) {
+    return 'Group \"$nameController\" created successfully';
+  }
+
+  @override
+  String groupNamecontrollertexttrimCreatedSuccessfully3(
+      Object nameController) {
+    return 'Group \"$nameController\" created successfully';
+  }
+
+  @override
+  String groupRenamedToNamecontrollertexttrim(Object nameController) {
+    return 'Group renamed to \"$nameController\"';
+  }
+
+  @override
+  String groupRenamedToNamecontrollertexttrim1(Object nameController) {
+    return 'Group renamed to \"$nameController\"';
+  }
+
+  @override
+  String groupRenamedToNamecontrollertexttrim2(Object nameController) {
+    return 'Group renamed to \"$nameController\"';
+  }
+
+  @override
+  String groupRenamedToNamecontrollertexttrim3(Object nameController) {
+    return 'Group renamed to \"$nameController\"';
+  }
+
+  @override
+  String groupWidgetgroupnameDeleted(String groupName) {
+    return 'Group \"$groupName\" deleted';
+  }
+
+  @override
+  String groupWidgetgroupnameDeleted1(String groupName) {
+    return 'Group \"$groupName\" deleted';
+  }
+
+  @override
+  String groupWidgetgroupnameDeleted2(String groupName) {
+    return 'Group \"$groupName\" deleted';
+  }
+
+  @override
+  String groupWidgetgroupnameDeleted3(String groupName) {
+    return 'Group \"$groupName\" deleted';
+  }
+
+  @override
   String get helpTranslate => 'Help Translate';
 
   @override
@@ -1244,12 +1307,12 @@ class AppLocalizationsZh extends AppLocalizations {
       'The email address is already in use by another account';
 
   @override
-  String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesn =>
-      'The operation is not allowed. Please try again later. If it doesn\\';
+  String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev =>
+      'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
 
   @override
-  String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesn1 =>
-      'The operation is not allowed. Please try again later. If it doesn\\';
+  String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1 =>
+      'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
 
   @override
   String get thePasswordIsInvalidOrTheUserDoesNotHaveAPassword =>
@@ -1268,8 +1331,8 @@ class AppLocalizationsZh extends AppLocalizations {
       'This password is too weak. Please choose a stronger one';
 
   @override
-  String get thisUserHasBeenDisabledPleaseContactAsdevfeedbackgmailcom =>
-      'This user has been disabled. Please contact asdev.feedback@gmail.com';
+  String get thisUserHasBeenDisabledPleaseContactSupportaadishdev =>
+      'This user has been disabled. Please contact support@aadish.dev';
 
   @override
   String get tooManyRequestsPleaseTryAgainLater =>

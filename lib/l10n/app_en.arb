@@ -412,6 +412,50 @@
   "googleAccountLinkedSuccessfully1": "Google account linked successfully!",
   "googleAccountUnlinkedSuccessfully": "Google account unlinked successfully",
   "googleAccountUnlinkedSuccessfully1": "Google account unlinked successfully",
+  "groupNamecontrollertexttrimCreatedSuccessfully": "Group \"{nameController}\" created successfully",
+  "groupNamecontrollertexttrimCreatedSuccessfully1": "Group \"{nameController}\" created successfully",
+  "groupNamecontrollertexttrimCreatedSuccessfully2": "Group \"{nameController}\" created successfully",
+  "groupNamecontrollertexttrimCreatedSuccessfully3": "Group \"{nameController}\" created successfully",
+  "groupRenamedToNamecontrollertexttrim": "Group renamed to \"{nameController}\"",
+  "groupRenamedToNamecontrollertexttrim1": "Group renamed to \"{nameController}\"",
+  "groupRenamedToNamecontrollertexttrim2": "Group renamed to \"{nameController}\"",
+  "groupRenamedToNamecontrollertexttrim3": "Group renamed to \"{nameController}\"",
+  "groupWidgetgroupnameDeleted": "Group \"{groupName}\" deleted",
+  "@groupWidgetgroupnameDeleted": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "groupWidgetgroupnameDeleted1": "Group \"{groupName}\" deleted",
+  "@groupWidgetgroupnameDeleted1": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "groupWidgetgroupnameDeleted2": "Group \"{groupName}\" deleted",
+  "@groupWidgetgroupnameDeleted2": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "groupWidgetgroupnameDeleted3": "Group \"{groupName}\" deleted",
+  "@groupWidgetgroupnameDeleted3": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
   "helpTranslate": "Help Translate",
   "high": "high",
   "icon": "Icon",
@@ -767,13 +811,13 @@
   "templateDeleted1": "Template deleted",
   "templatesShortcuts": "Templates & Shortcuts",
   "theEmailAddressIsAlreadyInUseByAnotherAccount": "The email address is already in use by another account",
-  "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesn": "The operation is not allowed. Please try again later. If it doesn\\",
-  "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesn1": "The operation is not allowed. Please try again later. If it doesn\\",
+  "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev": "The operation is not allowed. Please try again later. If it doesn't work, contact support@aadish.dev",
+  "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1": "The operation is not allowed. Please try again later. If it doesn't work, contact support@aadish.dev",
   "thePasswordIsInvalidOrTheUserDoesNotHaveAPassword": "The password is invalid or the user does not have a password",
   "theProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword": "The provided credentials are incorrect. Please check your email and password",
   "thisEmailIsAlreadyRegisteredPleaseSignInInstead": "This email is already registered. Please sign in instead",
   "thisPasswordIsTooWeakPleaseChooseAStrongerOne": "This password is too weak. Please choose a stronger one",
-  "thisUserHasBeenDisabledPleaseContactAsdevfeedbackgmailcom": "This user has been disabled. Please contact asdev.feedback@gmail.com",
+  "thisUserHasBeenDisabledPleaseContactSupportaadishdev": "This user has been disabled. Please contact support@aadish.dev",
   "tooManyRequestsPleaseTryAgainLater": "Too many requests. Please try again later",
   "tooManyRequestsPleaseTryAgainLater1": "Too many requests. Please try again later",
   "tooManyRequestsPleaseTryAgainLater2": "Too many requests. Please try again later",

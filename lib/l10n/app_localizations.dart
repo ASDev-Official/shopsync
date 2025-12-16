@@ -1244,6 +1244,78 @@ abstract class AppLocalizations {
   /// **'Google account unlinked successfully'**
   String get googleAccountUnlinkedSuccessfully1;
 
+  /// No description provided for @groupNamecontrollertexttrimCreatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Group \"{nameController}\" created successfully'**
+  String groupNamecontrollertexttrimCreatedSuccessfully(Object nameController);
+
+  /// No description provided for @groupNamecontrollertexttrimCreatedSuccessfully1.
+  ///
+  /// In en, this message translates to:
+  /// **'Group \"{nameController}\" created successfully'**
+  String groupNamecontrollertexttrimCreatedSuccessfully1(Object nameController);
+
+  /// No description provided for @groupNamecontrollertexttrimCreatedSuccessfully2.
+  ///
+  /// In en, this message translates to:
+  /// **'Group \"{nameController}\" created successfully'**
+  String groupNamecontrollertexttrimCreatedSuccessfully2(Object nameController);
+
+  /// No description provided for @groupNamecontrollertexttrimCreatedSuccessfully3.
+  ///
+  /// In en, this message translates to:
+  /// **'Group \"{nameController}\" created successfully'**
+  String groupNamecontrollertexttrimCreatedSuccessfully3(Object nameController);
+
+  /// No description provided for @groupRenamedToNamecontrollertexttrim.
+  ///
+  /// In en, this message translates to:
+  /// **'Group renamed to \"{nameController}\"'**
+  String groupRenamedToNamecontrollertexttrim(Object nameController);
+
+  /// No description provided for @groupRenamedToNamecontrollertexttrim1.
+  ///
+  /// In en, this message translates to:
+  /// **'Group renamed to \"{nameController}\"'**
+  String groupRenamedToNamecontrollertexttrim1(Object nameController);
+
+  /// No description provided for @groupRenamedToNamecontrollertexttrim2.
+  ///
+  /// In en, this message translates to:
+  /// **'Group renamed to \"{nameController}\"'**
+  String groupRenamedToNamecontrollertexttrim2(Object nameController);
+
+  /// No description provided for @groupRenamedToNamecontrollertexttrim3.
+  ///
+  /// In en, this message translates to:
+  /// **'Group renamed to \"{nameController}\"'**
+  String groupRenamedToNamecontrollertexttrim3(Object nameController);
+
+  /// From: lib/widgets/lists/manage_list_group_bottom_sheet.dart
+  ///
+  /// In en, this message translates to:
+  /// **'Group \"{groupName}\" deleted'**
+  String groupWidgetgroupnameDeleted(String groupName);
+
+  /// From: lib/widgets/lists/manage_list_group_bottom_sheet.dart
+  ///
+  /// In en, this message translates to:
+  /// **'Group \"{groupName}\" deleted'**
+  String groupWidgetgroupnameDeleted1(String groupName);
+
+  /// From: lib/widgets/lists/manage_list_group_bottom_sheet.dart
+  ///
+  /// In en, this message translates to:
+  /// **'Group \"{groupName}\" deleted'**
+  String groupWidgetgroupnameDeleted2(String groupName);
+
+  /// From: lib/widgets/lists/manage_list_group_bottom_sheet.dart
+  ///
+  /// In en, this message translates to:
+  /// **'Group \"{groupName}\" deleted'**
+  String groupWidgetgroupnameDeleted3(String groupName);
+
   /// No description provided for @helpTranslate.
   ///
   /// In en, this message translates to:
@@ -2246,17 +2318,19 @@ abstract class AppLocalizations {
   /// **'The email address is already in use by another account'**
   String get theEmailAddressIsAlreadyInUseByAnotherAccount;
 
-  /// No description provided for @theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesn.
+  /// No description provided for @theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev.
   ///
   /// In en, this message translates to:
-  /// **'The operation is not allowed. Please try again later. If it doesn\\'**
-  String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesn;
+  /// **'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev'**
+  String
+      get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev;
 
-  /// No description provided for @theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesn1.
+  /// No description provided for @theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1.
   ///
   /// In en, this message translates to:
-  /// **'The operation is not allowed. Please try again later. If it doesn\\'**
-  String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesn1;
+  /// **'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev'**
+  String
+      get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1;
 
   /// No description provided for @thePasswordIsInvalidOrTheUserDoesNotHaveAPassword.
   ///
@@ -2282,11 +2356,11 @@ abstract class AppLocalizations {
   /// **'This password is too weak. Please choose a stronger one'**
   String get thisPasswordIsTooWeakPleaseChooseAStrongerOne;
 
-  /// No description provided for @thisUserHasBeenDisabledPleaseContactAsdevfeedbackgmailcom.
+  /// No description provided for @thisUserHasBeenDisabledPleaseContactSupportaadishdev.
   ///
   /// In en, this message translates to:
-  /// **'This user has been disabled. Please contact asdev.feedback@gmail.com'**
-  String get thisUserHasBeenDisabledPleaseContactAsdevfeedbackgmailcom;
+  /// **'This user has been disabled. Please contact support@aadish.dev'**
+  String get thisUserHasBeenDisabledPleaseContactSupportaadishdev;
 
   /// No description provided for @tooManyRequestsPleaseTryAgainLater.
   ///

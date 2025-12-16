@@ -20,36 +20,53 @@ class StringExtractor:
         self.strings: Dict[str, Dict] = {}
         self.seen_keys: Set[str] = set()
         
-        # Patterns for extracting strings
+        # Patterns for extracting strings with proper escaped character handling
+        # Pattern explanation: (?:[^'\\]|\\.)* matches either non-quote-non-backslash OR backslash-followed-by-anything
+        # This properly handles escaped characters like \' and \"
+        # In raw strings, \\ is ONE backslash, so [^'\\] means "not quote and not backslash"
         self.patterns = [
             # Text widget: Text('string') or Text("string")
-            r'''Text\s*\(\s*['"]([^'"]+)['"]\s*\)''',
+            r"Text\s*\(\s*'((?:[^'\\]|\\.)*)'\s*\)",
+            r'Text\s*\(\s*"((?:[^"\\]|\\.)*)"\s*\)',
             # Text with variables: Text('Hello $name') or Text('Hello ${user.name}')
-            r'''Text\s*\(\s*['"]([^'"]*\$[^'"]+)['"]\s*\)''',
+            r"Text\s*\(\s*'((?:[^'\\]|\\.)*?\$(?:[^'\\]|\\.)*)'\s*\)",
+            r'Text\s*\(\s*"((?:[^"\\]|\\.)*?\$(?:[^"\\]|\\.)*)"\s*\)',
             # title property
-            r'''title\s*:\s*['"]([^'"]+)['"]''',
+            r"title\s*:\s*'((?:[^'\\]|\\.)*)'",
+            r'title\s*:\s*"((?:[^"\\]|\\.)*)"',
             # title with variables
-            r'''title\s*:\s*['"]([^'"]*\$[^'"]+)['"]''',
+            r"title\s*:\s*'((?:[^'\\]|\\.)*?\$(?:[^'\\]|\\.)*)'",
+            r'title\s*:\s*"((?:[^"\\]|\\.)*?\$(?:[^"\\]|\\.)*)"',
             # return statement strings
-            r'''return\s+['"]([^'"]+)['"]''',
+            r"return\s+'((?:[^'\\]|\\.)*)'",
+            r'return\s+"((?:[^"\\]|\\.)*)"',
             # return with variables
-            r'''return\s+['"]([^'"]*\$[^'"]+)['"]''',
+            r"return\s+'((?:[^'\\]|\\.)*?\$(?:[^'\\]|\\.)*)'",
+            r'return\s+"((?:[^"\\]|\\.)*?\$(?:[^"\\]|\\.)*)"',
             # label property
-            r'''label\s*:\s*['"]([^'"]+)['"]''',
+            r"label\s*:\s*'((?:[^'\\]|\\.)*)'",
+            r'label\s*:\s*"((?:[^"\\]|\\.)*)"',
             # label with variables
-            r'''label\s*:\s*['"]([^'"]*\$[^'"]+)['"]''',
+            r"label\s*:\s*'((?:[^'\\]|\\.)*?\$(?:[^'\\]|\\.)*)'",
+            r'label\s*:\s*"((?:[^"\\]|\\.)*?\$(?:[^"\\]|\\.)*)"',
             # SnackBar content
-            r'''content\s*:\s*(?:const\s+)?Text\s*\(\s*['"]([^'"]+)['"]\s*\)''',
+            r"content\s*:\s*(?:const\s+)?Text\s*\(\s*'((?:[^'\\]|\\.)*?)'\s*\)",
+            r'content\s*:\s*(?:const\s+)?Text\s*\(\s*"((?:[^"\\]|\\.)*?)"\s*\)',
             # content with variables
-            r'''content\s*:\s*(?:const\s+)?Text\s*\(\s*['"]([^'"]*\$[^'"]+)['"]\s*\)''',
+            r"content\s*:\s*(?:const\s+)?Text\s*\(\s*'((?:[^'\\]|\\.)*?\$(?:[^'\\]|\\.)*?)'\s*\)",
+            r'content\s*:\s*(?:const\s+)?Text\s*\(\s*"((?:[^"\\]|\\.)*?\$(?:[^"\\]|\\.)*?)"\s*\)',
             # hintText property
-            r'''hintText\s*:\s*['"]([^'"]+)['"]''',
+            r"hintText\s*:\s*'((?:[^'\\]|\\.)*)'",
+            r'hintText\s*:\s*"((?:[^"\\]|\\.)*)"',
             # hintText with variables
-            r'''hintText\s*:\s*['"]([^'"]*\$[^'"]+)['"]''',
+            r"hintText\s*:\s*'((?:[^'\\]|\\.)*?\$(?:[^'\\]|\\.)*)'",
+            r'hintText\s*:\s*"((?:[^"\\]|\\.)*?\$(?:[^"\\]|\\.)*)"',
             # labelText property
-            r'''labelText\s*:\s*['"]([^'"]+)['"]''',
+            r"labelText\s*:\s*'((?:[^'\\]|\\.)*)'",
+            r'labelText\s*:\s*"((?:[^"\\]|\\.)*)"',
             # labelText with variables
-            r'''labelText\s*:\s*['"]([^'"]*\$[^'"]+)['"]''',
+            r"labelText\s*:\s*'((?:[^'\\]|\\.)*?\$(?:[^'\\]|\\.)*)'",
+            r'labelText\s*:\s*"((?:[^"\\]|\\.)*?\$(?:[^"\\]|\\.)*)"',
         ]
 
     def extract_placeholders(self, text: str) -> List[str]:
@@ -163,7 +180,16 @@ class StringExtractor:
         """Normalize string for ARB format with property-based semantic placeholders."""
         normalized = text
         
-        # First, handle ${variable.property} -> {property}
+        # First, unescape Dart escaped characters
+        # \' -> '
+        # \" -> "
+        # \\ -> \
+        # \n, \t, etc. remain as-is (ARB supports them)
+        normalized = normalized.replace("\\'", "'")
+        normalized = normalized.replace('\\"', '"')
+        normalized = normalized.replace('\\\\', '\\')
+        
+        # Then, handle ${variable.property} -> {property}
         # This converts ${packageInfo.version} to {version}
         normalized = re.sub(
             r'\$\{([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)\}',
