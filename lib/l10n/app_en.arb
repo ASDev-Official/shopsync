@@ -1,1 +1,968 @@
-{}
+{
+  "@@locale": "en",
+  "aboutApp": "About App",
+  "accessYourListsAndSettings": "Access your lists and settings",
+  "addCustomGroup": "Add Custom Group",
+  "addDescription": "Add description...",
+  "addDescription1": "Add description...",
+  "addDescription2": "Add description...",
+  "addFromTemplate": "Add From Template",
+  "addGroup": "Add Group",
+  "addItemManually": "Add Item Manually",
+  "addItemsToYourLists": "Add items to your lists",
+  "addNewLocation": "Add new location",
+  "added": "Added",
+  "appLanguage": "App Language",
+  "appVersion": "App Version",
+  "areYouSureYouWantToRemoveAllCompletedItems": "Are you sure you want to remove all completed items?",
+  "areYouSureYouWantToRemoveAllCompletedItems1": "Are you sure you want to remove all completed items?",
+  "areYouSureYouWantToSignOut": "Are you sure you want to sign out?",
+  "areYouSureYouWantToSignOut1": "Are you sure you want to sign out?",
+  "areYouSureYouWantToSignOut2": "Are you sure you want to sign out?",
+  "areYouSureYouWantToSignOut3": "Are you sure you want to sign out?",
+  "avgCompletion": "Avg Completion",
+  "canAddEditAndDeleteItems": "Can add, edit, and delete items",
+  "canOnlyViewItems": "Can only view items",
+  "cancel": "Cancel",
+  "cancel1": "Cancel",
+  "cancel10": "Cancel",
+  "cancel11": "Cancel",
+  "cancel12": "Cancel",
+  "cancel2": "Cancel",
+  "cancel3": "Cancel",
+  "cancel4": "Cancel",
+  "cancel5": "Cancel",
+  "cancel6": "Cancel",
+  "cancel7": "Cancel",
+  "cancel8": "Cancel",
+  "cancel9": "Cancel",
+  "category": "Category",
+  "category1": "Category",
+  "categoryCreatedSuccessfully": "Category created successfully",
+  "categoryCreatedSuccessfully1": "Category created successfully",
+  "categoryDeletedSuccessfully": "Category deleted successfully",
+  "categoryDeletedSuccessfully1": "Category deleted successfully",
+  "categoryName": "Category Name",
+  "categoryName1": "Category Name",
+  "categoryUpdatedSuccessfully": "Category updated successfully",
+  "categoryUpdatedSuccessfully1": "Category updated successfully",
+  "changeTheNameOfThisList": "Change the name of this list",
+  "clearCompleted": "Clear Completed",
+  "clearCompletedItems": "Clear Completed Items",
+  "clearItems": "Clear Items",
+  "clearedCompleteditemsdocslengthCompletedItems": "Cleared {completedItems} completed items",
+  "clearedCompleteditemsdocslengthCompletedItems1": "Cleared {completedItems} completed items",
+  "clearedCompleteditemsdocslengthCompletedItems2": "Cleared {completedItems} completed items",
+  "clearedCompleteditemsdocslengthCompletedItems3": "Cleared {completedItems} completed items",
+  "collaborators": "Collaborators",
+  "completed": "Completed",
+  "completionRate": "completion rate",
+  "completionRate1": "completion rate",
+  "configureHomeScreenWidgetDebugOnly": "Configure home screen widget (Debug Only)",
+  "contributeOnWeblate": "Contribute on Weblate",
+  "couldNotLaunchUrl": "Could not launch {url}",
+  "@couldNotLaunchUrl": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
+  "couldNotLaunchUrl1": "Could not launch {url}",
+  "@couldNotLaunchUrl1": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
+  "couldNotLaunchUrl2": "Could not launch {url}",
+  "@couldNotLaunchUrl2": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
+  "couldNotLaunchUrl3": "Could not launch {url}",
+  "@couldNotLaunchUrl3": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
+  "couldNotOpenPlayStore": "Could not open Play Store",
+  "couldNotOpenPlayStore1": "Could not open Play Store",
+  "couldNotOpenReleaseNotes": "Could not open release notes",
+  "couldNotOpenReleaseNotes1": "Could not open release notes",
+  "counter": "Counter",
+  "counter1": "Counter",
+  "create": "Create",
+  "createCategory": "Create Category",
+  "createItemsFromSavedTemplates": "Create items from saved templates",
+  "createList": "Create List",
+  "createListGroup": "Create List Group",
+  "createListGroups": "Create list groups",
+  "dailyAvg": "Daily Avg",
+  "deadline": "Deadline",
+  "delete": "Delete",
+  "delete1": "Delete",
+  "delete2": "Delete",
+  "delete3": "Delete",
+  "delete4": "Delete",
+  "deleteCategory": "Delete Category",
+  "deleteGroup": "Delete Group",
+  "deleteList": "Delete List",
+  "deleteList1": "Delete List",
+  "description": "Description",
+  "description1": "Description",
+  "editCategory": "Edit Category",
+  "editGroupName": "Edit Group Name",
+  "editListName": "Edit List Name",
+  "editor": "Editor",
+  "egGroceryListsWorkProjects": "e.g., Grocery Lists, Work Projects",
+  "email": "Email",
+  "email1": "Email",
+  "email2": "Email",
+  "email3": "Email",
+  "enterEmailAddress": "Enter email address",
+  "enterGroupName": "Enter group name",
+  "enterGroupName1": "Enter group name",
+  "enterGroupName2": "Enter group name",
+  "enterItemName": "Enter item name...",
+  "enterItemName1": "Enter item name...",
+  "enterListName": "Enter list name",
+  "enterYourName": "Enter your name",
+  "errorCreatingCategoryE": "Error creating category: {e}",
+  "@errorCreatingCategoryE": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/manage_categories.dart"
+  },
+  "errorCreatingCategoryE1": "Error creating category: {e}",
+  "@errorCreatingCategoryE1": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/manage_categories.dart"
+  },
+  "errorCreatingCategoryE2": "Error creating category: {e}",
+  "@errorCreatingCategoryE2": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/manage_categories.dart"
+  },
+  "errorCreatingCategoryE3": "Error creating category: {e}",
+  "@errorCreatingCategoryE3": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/manage_categories.dart"
+  },
+  "errorDeletingCategoryE": "Error deleting category: {e}",
+  "@errorDeletingCategoryE": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/manage_categories.dart"
+  },
+  "errorDeletingCategoryE1": "Error deleting category: {e}",
+  "@errorDeletingCategoryE1": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/manage_categories.dart"
+  },
+  "errorDeletingCategoryE2": "Error deleting category: {e}",
+  "@errorDeletingCategoryE2": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/manage_categories.dart"
+  },
+  "errorDeletingCategoryE3": "Error deleting category: {e}",
+  "@errorDeletingCategoryE3": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/manage_categories.dart"
+  },
+  "errorErrormessage": "Error: {errorMessage}",
+  "@errorErrormessage": {
+    "placeholders": {
+      "errorMessage": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_welcome_screen.dart"
+  },
+  "errorErrormessage1": "Error: {errorMessage}",
+  "@errorErrormessage1": {
+    "placeholders": {
+      "errorMessage": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_welcome_screen.dart"
+  },
+  "errorEtostring": "Error: {e}",
+  "@errorEtostring": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+  },
+  "errorEtostring1": "Error: {e}",
+  "@errorEtostring1": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+  },
+  "errorEtostring2": "Error: {e}",
+  "@errorEtostring2": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+  },
+  "errorEtostring3": "Error: {e}",
+  "@errorEtostring3": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+  },
+  "errorFetchingMaintenanceStatusE": "Error fetching maintenance status: {e}",
+  "@errorFetchingMaintenanceStatusE": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/services/platform/maintenance_service.dart"
+  },
+  "errorFetchingMaintenanceStatusE1": "Error fetching maintenance status: {e}",
+  "@errorFetchingMaintenanceStatusE1": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/services/platform/maintenance_service.dart"
+  },
+  "errorFetchingMaintenanceStatusE2": "Error fetching maintenance status: {e}",
+  "@errorFetchingMaintenanceStatusE2": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/services/platform/maintenance_service.dart"
+  },
+  "errorFetchingMaintenanceStatusE3": "Error fetching maintenance status: {e}",
+  "@errorFetchingMaintenanceStatusE3": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/services/platform/maintenance_service.dart"
+  },
+  "errorLoadingInsightsE": "Error loading insights: {e}",
+  "@errorLoadingInsightsE": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_insights.dart"
+  },
+  "errorLoadingInsightsE1": "Error loading insights: {e}",
+  "@errorLoadingInsightsE1": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_insights.dart"
+  },
+  "errorLoadingInsightsE2": "Error loading insights: {e}",
+  "@errorLoadingInsightsE2": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_insights.dart"
+  },
+  "errorLoadingInsightsE3": "Error loading insights: {e}",
+  "@errorLoadingInsightsE3": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_insights.dart"
+  },
+  "errorLoadingListsSnapshoterror": "Error loading lists: {error}",
+  "@errorLoadingListsSnapshoterror": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/home.dart"
+  },
+  "errorLoadingListsSnapshoterror1": "Error loading lists: {error}",
+  "@errorLoadingListsSnapshoterror1": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/home.dart"
+  },
+  "errorSigningOutEtostring": "Error signing out: {e}",
+  "@errorSigningOutEtostring": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/profile.dart"
+  },
+  "errorSigningOutEtostring1": "Error signing out: {e}",
+  "@errorSigningOutEtostring1": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/profile.dart"
+  },
+  "errorSigningOutEtostring2": "Error signing out: {e}",
+  "@errorSigningOutEtostring2": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/profile.dart"
+  },
+  "errorSigningOutEtostring3": "Error signing out: {e}",
+  "@errorSigningOutEtostring3": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/profile.dart"
+  },
+  "errorSigningOutEtostring4": "Error signing out: {e}",
+  "@errorSigningOutEtostring4": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
+  "errorSigningOutEtostring5": "Error signing out: {e}",
+  "@errorSigningOutEtostring5": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
+  "errorSigningOutEtostring6": "Error signing out: {e}",
+  "@errorSigningOutEtostring6": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
+  "errorSigningOutEtostring7": "Error signing out: {e}",
+  "@errorSigningOutEtostring7": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
+  "exportBackup": "Export & Backup",
+  "exportList": "Export List",
+  "exportListAsACsv": "Export list as a CSV",
+  "failedToChangePermission": "Failed to change permission",
+  "failedToChangePermission1": "Failed to change permission",
+  "failedToCreateGroupPleaseTryAgain": "Failed to create group. Please try again.",
+  "failedToCreateGroupPleaseTryAgain1": "Failed to create group. Please try again.",
+  "failedToCreateItem": "Failed to create item",
+  "failedToCreateItem1": "Failed to create item",
+  "failedToCreateListPleaseTryAgain": "Failed to create list. Please try again.",
+  "failedToCreateListPleaseTryAgain1": "Failed to create list. Please try again.",
+  "failedToDeleteGroupPleaseTryAgain": "Failed to delete group. Please try again.",
+  "failedToDeleteGroupPleaseTryAgain1": "Failed to delete group. Please try again.",
+  "failedToDeleteItem": "Failed to delete item",
+  "failedToDeleteItem1": "Failed to delete item",
+  "failedToDeleteItem2": "Failed to delete item",
+  "failedToDeleteItem3": "Failed to delete item",
+  "failedToDeleteList": "Failed to delete list",
+  "failedToDeleteList1": "Failed to delete list",
+  "failedToMigrateListsPleaseTryAgain": "Failed to migrate lists. Please try again.",
+  "failedToMigrateListsPleaseTryAgain1": "Failed to migrate lists. Please try again.",
+  "failedToRemoveUser": "Failed to remove user",
+  "failedToRemoveUser1": "Failed to remove user",
+  "failedToRestoreItem": "Failed to restore item",
+  "failedToRestoreItem1": "Failed to restore item",
+  "failedToSaveItemTemplate": "Failed to save item template",
+  "failedToSaveItemTemplate1": "Failed to save item template",
+  "failedToSaveLocation": "Failed to save location",
+  "failedToSaveLocation1": "Failed to save location",
+  "failedToShareList": "Failed to share list",
+  "failedToShareList1": "Failed to share list",
+  "failedToSignInWithGoogle": "Failed to sign in with Google",
+  "failedToSignInWithGoogle1": "Failed to sign in with Google",
+  "failedToUpdateGroupNamePleaseTryAgain": "Failed to update group name. Please try again.",
+  "failedToUpdateGroupNamePleaseTryAgain1": "Failed to update group name. Please try again.",
+  "failedToUpdateItemStatus": "Failed to update item status",
+  "failedToUpdateItemStatus1": "Failed to update item status",
+  "failedToUpdateListName": "Failed to update list name",
+  "failedToUpdateListName1": "Failed to update list name",
+  "failedToUpdateWidgetE": "Failed to update widget: {e}",
+  "@failedToUpdateWidgetE": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/widget_settings.dart"
+  },
+  "failedToUpdateWidgetE1": "Failed to update widget: {e}",
+  "@failedToUpdateWidgetE1": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/widget_settings.dart"
+  },
+  "failedToUpdateWidgetE2": "Failed to update widget: {e}",
+  "@failedToUpdateWidgetE2": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/widget_settings.dart"
+  },
+  "failedToUpdateWidgetE3": "Failed to update widget: {e}",
+  "@failedToUpdateWidgetE3": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/widget_settings.dart"
+  },
+  "feedback": "Feedback",
+  "finished": "Finished",
+  "githubRepository": "GitHub Repository",
+  "googleAccountLinkedSuccessfully": "Google account linked successfully!",
+  "googleAccountLinkedSuccessfully1": "Google account linked successfully!",
+  "googleAccountUnlinkedSuccessfully": "Google account unlinked successfully",
+  "googleAccountUnlinkedSuccessfully1": "Google account unlinked successfully",
+  "groupNamecontrollertexttrimCreatedSuccessfully": "Group \"{nameController}\" created successfully",
+  "groupNamecontrollertexttrimCreatedSuccessfully1": "Group \"{nameController}\" created successfully",
+  "groupNamecontrollertexttrimCreatedSuccessfully2": "Group \"{nameController}\" created successfully",
+  "groupNamecontrollertexttrimCreatedSuccessfully3": "Group \"{nameController}\" created successfully",
+  "groupRenamedToNamecontrollertexttrim": "Group renamed to \"{nameController}\"",
+  "groupRenamedToNamecontrollertexttrim1": "Group renamed to \"{nameController}\"",
+  "groupRenamedToNamecontrollertexttrim2": "Group renamed to \"{nameController}\"",
+  "groupRenamedToNamecontrollertexttrim3": "Group renamed to \"{nameController}\"",
+  "groupWidgetgroupnameDeleted": "Group \"{groupName}\" deleted",
+  "@groupWidgetgroupnameDeleted": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "groupWidgetgroupnameDeleted1": "Group \"{groupName}\" deleted",
+  "@groupWidgetgroupnameDeleted1": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "groupWidgetgroupnameDeleted2": "Group \"{groupName}\" deleted",
+  "@groupWidgetgroupnameDeleted2": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "groupWidgetgroupnameDeleted3": "Group \"{groupName}\" deleted",
+  "@groupWidgetgroupnameDeleted3": {
+    "placeholders": {
+      "groupName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "helpTranslate": "Help Translate",
+  "high": "high",
+  "icon": "Icon",
+  "icon1": "Icon",
+  "inTimeframe": "in timeframe",
+  "inTimeframe1": "in timeframe",
+  "insights": "Insights",
+  "itemCreatedFromTemplate": "Item created from template",
+  "itemCreatedFromTemplate1": "Item created from template",
+  "itemName": "Item Name",
+  "itemName1": "Item Name",
+  "itemTemplateSavedSuccessfully": "Item template saved successfully",
+  "itemTemplateSavedSuccessfully1": "Item template saved successfully",
+  "items": "Items",
+  "itemsAdded": "Items Added",
+  "itemsCheckedOff": "items checked off",
+  "itemsCheckedOff1": "items checked off",
+  "itemsCompleted": "Items Completed",
+  "itemsInList": "items in list",
+  "itemsPerDay": "items per day",
+  "itemsPerDay1": "items per day",
+  "keepTrackOfWhatYouNeedToBuy": "Keep track of what you need to buy",
+  "language": "Language",
+  "leaveUngrouped": "Leave Ungrouped",
+  "licenses": "Licenses",
+  "linkGoogleAccount": "Link Google Account",
+  "listDeletedSuccessfully": "List deleted successfully",
+  "listDeletedSuccessfully1": "List deleted successfully",
+  "listManagement": "List Management",
+  "listName": "List name",
+  "listNameUpdated": "List name updated",
+  "listNameUpdated1": "List name updated",
+  "listSharedWithEmailAsSelectedrole": "List shared with {email} as {selectedRole}",
+  "@listSharedWithEmailAsSelectedrole": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      },
+      "selectedRole": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_options.dart"
+  },
+  "listSharedWithEmailAsSelectedrole1": "List shared with {email} as {selectedRole}",
+  "@listSharedWithEmailAsSelectedrole1": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      },
+      "selectedRole": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_options.dart"
+  },
+  "listSharedWithEmailAsSelectedrole2": "List shared with {email} as {selectedRole}",
+  "@listSharedWithEmailAsSelectedrole2": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      },
+      "selectedRole": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_options.dart"
+  },
+  "listSharedWithEmailAsSelectedrole3": "List shared with {email} as {selectedRole}",
+  "@listSharedWithEmailAsSelectedrole3": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      },
+      "selectedRole": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_options.dart"
+  },
+  "listnameAddedToGroup": "{listName} added to group",
+  "@listnameAddedToGroup": {
+    "placeholders": {
+      "listName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "listnameAddedToGroup1": "{listName} added to group",
+  "@listnameAddedToGroup1": {
+    "placeholders": {
+      "listName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "listnameAddedToGroup2": "{listName} added to group",
+  "@listnameAddedToGroup2": {
+    "placeholders": {
+      "listName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "listnameAddedToGroup3": "{listName} added to group",
+  "@listnameAddedToGroup3": {
+    "placeholders": {
+      "listName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "listnameRemovedFromGroup": "{listName} removed from group",
+  "@listnameRemovedFromGroup": {
+    "placeholders": {
+      "listName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "listnameRemovedFromGroup1": "{listName} removed from group",
+  "@listnameRemovedFromGroup1": {
+    "placeholders": {
+      "listName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "listnameRemovedFromGroup2": "{listName} removed from group",
+  "@listnameRemovedFromGroup2": {
+    "placeholders": {
+      "listName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "listnameRemovedFromGroup3": "{listName} removed from group",
+  "@listnameRemovedFromGroup3": {
+    "placeholders": {
+      "listName": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+  },
+  "listsCreated": "Lists Created",
+  "loading": "Loading...",
+  "location": "Location",
+  "location1": "Location",
+  "locationDeleted": "Location deleted",
+  "locationDeleted1": "Location deleted",
+  "locationSavedSuccessfully": "Location saved successfully",
+  "locationSavedSuccessfully1": "Location saved successfully",
+  "low": "low",
+  "low1": "low",
+  "manageCategories": "Manage Categories",
+  "manageYourFrequentlyUsedLocations": "Manage your frequently used locations",
+  "medium": "medium",
+  "moveToGroupname": "Move to {name}",
+  "@moveToGroupname": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/migration/migration_screen.dart"
+  },
+  "moveToGroupname1": "Move to {name}",
+  "@moveToGroupname1": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/migration/migration_screen.dart"
+  },
+  "myProfile": "My Profile",
+  "name": "Name",
+  "nameMustBeAtLeast2Characters": "Name must be at least 2 characters",
+  "networkErrorCheckYourConnectionAndTryAgain": "Network error. Check your connection and try again",
+  "networkErrorPleaseCheckYourInternetConnectionAndTryAgain": "Network error. Please check your internet connection and try again",
+  "networkErrorPleaseCheckYourInternetConnectionAndTryAgain1": "Network error. Please check your internet connection and try again",
+  "noAccountFoundWithThisEmail": "No account found with this email",
+  "noCategoriesAvailable": "No categories available",
+  "noCategory": "No Category",
+  "noUserFoundForThatEmailPleaseCheckYourEmailAndTryAgain": "No user found for that email. Please check your email and try again",
+  "notLoggedIn": "Not logged in",
+  "ok": "OK",
+  "openSourceLicenses": "Open source licenses",
+  "openTheDrawerFromTheLeft": "Open the drawer from the left",
+  "options": "Options",
+  "organizeYourListsWithTheButton": "Organize your lists with the + button",
+  "owner": "owner",
+  "password": "Password",
+  "password1": "Password",
+  "password2": "Password",
+  "passwordMustBeAtLeast6Characters": "Password must be at least 6 characters",
+  "peopleCollaborating": "people collaborating",
+  "permanentlyDeleteThisList": "Permanently delete this list",
+  "permissionChangedToNewrole": "Permission changed to {newRole}",
+  "@permissionChangedToNewrole": {
+    "placeholders": {
+      "newRole": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_options.dart"
+  },
+  "permissionChangedToNewrole1": "Permission changed to {newRole}",
+  "@permissionChangedToNewrole1": {
+    "placeholders": {
+      "newRole": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_options.dart"
+  },
+  "permissionChangedToNewrole2": "Permission changed to {newRole}",
+  "@permissionChangedToNewrole2": {
+    "placeholders": {
+      "newRole": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_options.dart"
+  },
+  "permissionChangedToNewrole3": "Permission changed to {newRole}",
+  "@permissionChangedToNewrole3": {
+    "placeholders": {
+      "newRole": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/lists/list_options.dart"
+  },
+  "pleaseEnterACategoryName": "Please enter a category name",
+  "pleaseEnterACategoryName1": "Please enter a category name",
+  "pleaseEnterACategoryName2": "Please enter a category name",
+  "pleaseEnterACategoryName3": "Please enter a category name",
+  "pleaseEnterADisplayName": "Please enter a display name",
+  "pleaseEnterAGroupName": "Please enter a group name",
+  "pleaseEnterAGroupName1": "Please enter a group name",
+  "pleaseEnterAGroupName2": "Please enter a group name",
+  "pleaseEnterAGroupName3": "Please enter a group name",
+  "pleaseEnterAPassword": "Please enter a password",
+  "pleaseEnterATemplateName": "Please enter a template name",
+  "pleaseEnterATemplateName1": "Please enter a template name",
+  "pleaseEnterAValidEmailAddress": "Please enter a valid email address",
+  "pleaseEnterAValidEmailAddress1": "Please enter a valid email address",
+  "pleaseEnterAValidEmailAddress2": "Please enter a valid email address",
+  "pleaseEnterAValidEmailAddress3": "Please enter a valid email address",
+  "pleaseEnterAValidEmailAddress4": "Please enter a valid email address",
+  "pleaseEnterAnEmailAddress": "Please enter an email address",
+  "pleaseEnterAnEmailAddress1": "Please enter an email address",
+  "pleaseEnterAnItemTitle": "Please enter an item title",
+  "pleaseEnterAnItemTitle1": "Please enter an item title",
+  "pleaseEnterYourEmail": "Please enter your email",
+  "pleaseEnterYourEmail1": "Please enter your email",
+  "pleaseEnterYourEmail2": "Please enter your email",
+  "pleaseEnterYourName": "Please enter your name",
+  "pleaseEnterYourPassword": "Please enter your password",
+  "productivity": "Productivity",
+  "profileUpdatedSuccessfully": "Profile updated successfully",
+  "profileUpdatedSuccessfully1": "Profile updated successfully",
+  "progress": "Progress",
+  "recycleBin": "Recycle Bin",
+  "recycleBin1": "Recycle Bin",
+  "releaseNotes": "Release Notes",
+  "removeAllCompletedItems": "Remove all completed items",
+  "removeMember": "Remove Member",
+  "retry": "Retry",
+  "retry1": "Retry",
+  "retry2": "Retry",
+  "retry3": "Retry",
+  "retry4": "Retry",
+  "save": "Save",
+  "save1": "Save",
+  "save2": "Save",
+  "saveChanges": "Save Changes",
+  "saveChanges1": "Save Changes",
+  "savedItems": "Saved Items",
+  "savedLocations": "Saved Locations",
+  "searchIcons": "Search icons...",
+  "searchPackages": "Search packages",
+  "searchPackages1": "Search packages...",
+  "setPassword": "Set Password",
+  "settings": "Settings",
+  "settings1": "Settings",
+  "shareCollaborate": "Share & Collaborate",
+  "shareList": "Share List",
+  "shareThisListWithOthers": "Share this list with others",
+  "shoppingLists": "shopping lists",
+  "shopsync": "ShopSync",
+  "shopsync1": "ShopSync",
+  "shopsyncForms": "ShopSync Forms",
+  "shopsyncLogo": "ShopSync logo",
+  "signInWithEmail": "Sign in with email",
+  "signOut": "Sign Out",
+  "signOut1": "Sign Out",
+  "signOut2": "Sign Out",
+  "signOut3": "Sign Out",
+  "signOut4": "Sign Out",
+  "signOut5": "Sign Out",
+  "skipForNow": "Skip for Now",
+  "skipOrganization": "Skip Organization",
+  "smartLists": "Smart Lists",
+  "storeAddress": "Store address",
+  "storeName": "Store name",
+  "successfullyOrganizedSelectedgroupslengthGroups": "Successfully organized {length} groups",
+  "@successfullyOrganizedSelectedgroupslengthGroups": {
+    "placeholders": {
+      "length": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/migration/migration_screen.dart"
+  },
+  "successfullyOrganizedSelectedgroupslengthGroups1": "Successfully organized {length} groups",
+  "@successfullyOrganizedSelectedgroupslengthGroups1": {
+    "placeholders": {
+      "length": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/migration/migration_screen.dart"
+  },
+  "successfullyOrganizedSelectedgroupslengthGroups2": "Successfully organized {length} groups",
+  "@successfullyOrganizedSelectedgroupslengthGroups2": {
+    "placeholders": {
+      "length": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/migration/migration_screen.dart"
+  },
+  "successfullyOrganizedSelectedgroupslengthGroups3": "Successfully organized {length} groups",
+  "@successfullyOrganizedSelectedgroupslengthGroups3": {
+    "placeholders": {
+      "length": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/migration/migration_screen.dart"
+  },
+  "templateDeleted": "Template deleted",
+  "templateDeleted1": "Template deleted",
+  "templatesShortcuts": "Templates & Shortcuts",
+  "theEmailAddressIsAlreadyInUseByAnotherAccount": "The email address is already in use by another account",
+  "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev": "The operation is not allowed. Please try again later. If it doesn't work, contact support@aadish.dev",
+  "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1": "The operation is not allowed. Please try again later. If it doesn't work, contact support@aadish.dev",
+  "thePasswordIsInvalidOrTheUserDoesNotHaveAPassword": "The password is invalid or the user does not have a password",
+  "theProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword": "The provided credentials are incorrect. Please check your email and password",
+  "thisEmailIsAlreadyRegisteredPleaseSignInInstead": "This email is already registered. Please sign in instead",
+  "thisPasswordIsTooWeakPleaseChooseAStrongerOne": "This password is too weak. Please choose a stronger one",
+  "thisUserHasBeenDisabledPleaseContactSupportaadishdev": "This user has been disabled. Please contact support@aadish.dev",
+  "tooManyRequestsPleaseTryAgainLater": "Too many requests. Please try again later",
+  "tooManyRequestsPleaseTryAgainLater1": "Too many requests. Please try again later",
+  "tooManyRequestsPleaseTryAgainLater2": "Too many requests. Please try again later",
+  "totalItems": "total items",
+  "totalItems1": "Total Items",
+  "unlink": "Unlink",
+  "unlinkGoogleAccount": "Unlink Google Account",
+  "unlinkGoogleAccount1": "Unlink Google Account",
+  "useYourPhoneToRegisterIfYouDoNotHaveAnAccount": "Use your phone to register if you do not have an account",
+  "userAlreadyHasAccessToThisList": "User already has access to this list",
+  "userAlreadyHasAccessToThisList1": "User already has access to this list",
+  "userNotFoundTheyNeedToSignUpForShopsyncFirst": "User not found. They need to sign up for ShopSync first.",
+  "userNotFoundTheyNeedToSignUpForShopsyncFirst1": "User not found. They need to sign up for ShopSync first.",
+  "userRemoved": "User removed",
+  "userRemoved1": "User removed",
+  "versionPackageinfoversionPackageinfobuildnumber": "Version {version} ({buildNumber})",
+  "@versionPackageinfoversionPackageinfobuildnumber": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "buildNumber": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/auth/welcome.dart"
+  },
+  "versionPackageinfoversionPackageinfobuildnumber1": "Version {version} ({buildNumber})",
+  "@versionPackageinfoversionPackageinfobuildnumber1": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "buildNumber": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/auth/welcome.dart"
+  },
+  "viewDeletedItems": "View deleted items",
+  "viewSourceCode": "View source code",
+  "viewer": "viewer",
+  "viewer1": "viewer",
+  "viewer2": "viewer",
+  "viewer3": "Viewer",
+  "welcomeToShopsync": "Welcome to ShopSync",
+  "widgetSettings": "Widget Settings",
+  "widgetSettings1": "Widget Settings",
+  "widgetUpdatedSuccessfully": "Widget updated successfully!",
+  "widgetUpdatedSuccessfully1": "Widget updated successfully!",
+  "yourInsights": "Your Insights"
+}

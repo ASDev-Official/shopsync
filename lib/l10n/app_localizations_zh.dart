@@ -4,9 +4,9 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for English (`en`).
-class AppLocalizationsEn extends AppLocalizations {
-  AppLocalizationsEn([String locale = 'en']) : super(locale);
+/// The translations for Chinese (`zh`).
+class AppLocalizationsZh extends AppLocalizations {
+  AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
   String get aboutApp => 'About App';
@@ -1434,4 +1434,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yourInsights => 'Your Insights';
+}
+
+/// The translations for Chinese, using the Han script (`zh_Hans`).
+class AppLocalizationsZhHans extends AppLocalizationsZh {
+  AppLocalizationsZhHans() : super('zh_Hans');
+}
+
+/// The translations for Chinese, using the Han script (`zh_Hant`).
+class AppLocalizationsZhHant extends AppLocalizationsZh {
+  AppLocalizationsZhHant() : super('zh_Hant');
 }

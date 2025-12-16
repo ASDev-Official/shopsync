@@ -15,5 +15,5 @@ currently being supported with security updates.
 
 Follow the steps below:
 
-1. Email [asdev.feedback@gmail.com](mailto:asdev.feedback@gmail.com) and start the subject line with **"[SECURITY-ShopSync]".** Ensure to describe the issue in detail.
+1. Email [support@aadish.dev](mailto:support@aadish.dev) and start the subject line with **"[SECURITY-ShopSync]".** Ensure to describe the issue in detail.
 2. Wait for a response. It usually takes between **3-7** working days to receive a response.

@@ -60,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       case 'invalid-email':
         return 'Please enter a valid email address';
       case 'operation-not-allowed':
-        return 'The operation is not allowed. Please try again later. If it doesn\'t work, contact asdev.feecback@gmail.com';
+        return 'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
       case 'weak-password':
         return 'This password is too weak. Please choose a stronger one';
       case 'too-many-requests':

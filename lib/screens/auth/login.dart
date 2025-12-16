@@ -51,9 +51,9 @@ class _LoginScreenState extends State<LoginScreen> {
       case 'invalid-credential':
         return 'The provided credentials are incorrect. Please check your email and password';
       case 'operation-not-allowed':
-        return 'The operation is not allowed. Please try again later. If it doesn\'t work, contact asdev.feecback@gmail.com';
+        return 'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
       case 'user-disabled':
-        return 'This user has been disabled. Please contact asdev.feedback@gmail.com';
+        return 'This user has been disabled. Please contact support@aadish.dev';
       case 'user-not-found':
         return 'No user found for that email. Please check your email and try again';
       case 'wrong-password':
