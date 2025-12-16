@@ -8,7 +8,7 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  sentry_flutter: ^9.8.0
+  sentry_flutter: ^9.9.0
   flutter:
     sdk: flutter
   flutter_localizations:
