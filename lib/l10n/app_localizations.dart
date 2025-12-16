@@ -236,30 +236,6 @@ abstract class AppLocalizations {
   /// **'Are you sure you want to sign out?'**
   String get areYouSureYouWantToSignOut3;
 
-  /// No description provided for @assetsbadgesgoogleandroidpng4xdarkandroiddarkrdctn4xpng.
-  ///
-  /// In en, this message translates to:
-  /// **'assets/badges/google/android/png@4x/dark/android_dark_rd_ctn@4x.png'**
-  String get assetsbadgesgoogleandroidpng4xdarkandroiddarkrdctn4xpng;
-
-  /// No description provided for @assetsbadgesgoogleandroidpng4xdarkandroiddarksqctn4xpng.
-  ///
-  /// In en, this message translates to:
-  /// **'assets/badges/google/android/png@4x/dark/android_dark_sq_ctn@4x.png'**
-  String get assetsbadgesgoogleandroidpng4xdarkandroiddarksqctn4xpng;
-
-  /// No description provided for @assetsbadgesgoogleandroidpng4xlightandroidlightrdctn4xpng.
-  ///
-  /// In en, this message translates to:
-  /// **'assets/badges/google/android/png@4x/light/android_light_rd_ctn@4x.png'**
-  String get assetsbadgesgoogleandroidpng4xlightandroidlightrdctn4xpng;
-
-  /// No description provided for @assetsbadgesgoogleandroidpng4xlightandroidlightsqctn4xpng.
-  ///
-  /// In en, this message translates to:
-  /// **'assets/badges/google/android/png@4x/light/android_light_sq_ctn@4x.png'**
-  String get assetsbadgesgoogleandroidpng4xlightandroidlightsqctn4xpng;
-
   /// No description provided for @avgCompletion.
   ///
   /// In en, this message translates to:
@@ -440,29 +416,29 @@ abstract class AppLocalizations {
   /// **'Clear Items'**
   String get clearItems;
 
-  /// From: lib/screens/lists/list_options.dart
+  /// No description provided for @clearedCompleteditemsdocslengthCompletedItems.
   ///
   /// In en, this message translates to:
   /// **'Cleared {completedItems} completed items'**
-  String clearedCompleteditemsdocslengthCompletedItems(String completedItems);
+  String clearedCompleteditemsdocslengthCompletedItems(Object completedItems);
 
-  /// From: lib/screens/lists/list_options.dart
+  /// No description provided for @clearedCompleteditemsdocslengthCompletedItems1.
   ///
   /// In en, this message translates to:
   /// **'Cleared {completedItems} completed items'**
-  String clearedCompleteditemsdocslengthCompletedItems1(String completedItems);
+  String clearedCompleteditemsdocslengthCompletedItems1(Object completedItems);
 
-  /// From: lib/screens/lists/list_options.dart
+  /// No description provided for @clearedCompleteditemsdocslengthCompletedItems2.
   ///
   /// In en, this message translates to:
   /// **'Cleared {completedItems} completed items'**
-  String clearedCompleteditemsdocslengthCompletedItems2(String completedItems);
+  String clearedCompleteditemsdocslengthCompletedItems2(Object completedItems);
 
-  /// From: lib/screens/lists/list_options.dart
+  /// No description provided for @clearedCompleteditemsdocslengthCompletedItems3.
   ///
   /// In en, this message translates to:
   /// **'Cleared {completedItems} completed items'**
-  String clearedCompleteditemsdocslengthCompletedItems3(String completedItems);
+  String clearedCompleteditemsdocslengthCompletedItems3(Object completedItems);
 
   /// No description provided for @collaborators.
   ///
@@ -836,29 +812,29 @@ abstract class AppLocalizations {
   /// **'Error: {errorMessage}'**
   String errorErrormessage1(String errorMessage);
 
-  /// From: lib/wear/screens/wear_item_details_screen.dart
+  /// No description provided for @errorEtostring.
   ///
   /// In en, this message translates to:
   /// **'Error: {e}'**
-  String errorEtostring(String e);
+  String errorEtostring(Object e);
 
-  /// From: lib/wear/screens/wear_item_details_screen.dart
+  /// No description provided for @errorEtostring1.
   ///
   /// In en, this message translates to:
   /// **'Error: {e}'**
-  String errorEtostring1(String e);
+  String errorEtostring1(Object e);
 
-  /// From: lib/wear/screens/wear_item_details_screen.dart
+  /// No description provided for @errorEtostring2.
   ///
   /// In en, this message translates to:
   /// **'Error: {e}'**
-  String errorEtostring2(String e);
+  String errorEtostring2(Object e);
 
-  /// From: lib/wear/screens/wear_item_details_screen.dart
+  /// No description provided for @errorEtostring3.
   ///
   /// In en, this message translates to:
   /// **'Error: {e}'**
-  String errorEtostring3(String e);
+  String errorEtostring3(Object e);
 
   /// From: lib/services/platform/maintenance_service.dart
   ///
@@ -911,62 +887,62 @@ abstract class AppLocalizations {
   /// From: lib/screens/home.dart
   ///
   /// In en, this message translates to:
-  /// **'Error loading lists: {snapshot}'**
-  String errorLoadingListsSnapshoterror(String snapshot);
+  /// **'Error loading lists: {error}'**
+  String errorLoadingListsSnapshoterror(String error);
 
   /// From: lib/screens/home.dart
   ///
   /// In en, this message translates to:
-  /// **'Error loading lists: {snapshot}'**
-  String errorLoadingListsSnapshoterror1(String snapshot);
+  /// **'Error loading lists: {error}'**
+  String errorLoadingListsSnapshoterror1(String error);
 
-  /// From: lib/screens/settings/profile.dart
+  /// No description provided for @errorSigningOutEtostring.
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring(String e);
+  String errorSigningOutEtostring(Object e);
 
-  /// From: lib/screens/settings/profile.dart
+  /// No description provided for @errorSigningOutEtostring1.
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring1(String e);
+  String errorSigningOutEtostring1(Object e);
 
-  /// From: lib/screens/settings/profile.dart
+  /// No description provided for @errorSigningOutEtostring2.
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring2(String e);
+  String errorSigningOutEtostring2(Object e);
 
-  /// From: lib/screens/settings/profile.dart
+  /// No description provided for @errorSigningOutEtostring3.
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring3(String e);
+  String errorSigningOutEtostring3(Object e);
 
-  /// From: lib/screens/settings/settings.dart
+  /// No description provided for @errorSigningOutEtostring4.
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring4(String e);
+  String errorSigningOutEtostring4(Object e);
 
-  /// From: lib/screens/settings/settings.dart
+  /// No description provided for @errorSigningOutEtostring5.
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring5(String e);
+  String errorSigningOutEtostring5(Object e);
 
-  /// From: lib/screens/settings/settings.dart
+  /// No description provided for @errorSigningOutEtostring6.
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring6(String e);
+  String errorSigningOutEtostring6(Object e);
 
-  /// From: lib/screens/settings/settings.dart
+  /// No description provided for @errorSigningOutEtostring7.
   ///
   /// In en, this message translates to:
   /// **'Error signing out: {e}'**
-  String errorSigningOutEtostring7(String e);
+  String errorSigningOutEtostring7(Object e);
 
   /// No description provided for @exportBackup.
   ///
@@ -1613,14 +1589,14 @@ abstract class AppLocalizations {
   /// From: lib/screens/migration/migration_screen.dart
   ///
   /// In en, this message translates to:
-  /// **'Move to {group}'**
-  String moveToGroupname(String group);
+  /// **'Move to {name}'**
+  String moveToGroupname(String name);
 
   /// From: lib/screens/migration/migration_screen.dart
   ///
   /// In en, this message translates to:
-  /// **'Move to {group}'**
-  String moveToGroupname1(String group);
+  /// **'Move to {name}'**
+  String moveToGroupname1(String name);
 
   /// No description provided for @myProfile.
   ///
@@ -2225,29 +2201,26 @@ abstract class AppLocalizations {
   /// From: lib/screens/migration/migration_screen.dart
   ///
   /// In en, this message translates to:
-  /// **'Successfully organized {selectedGroups} groups'**
-  String successfullyOrganizedSelectedgroupslengthGroups(String selectedGroups);
+  /// **'Successfully organized {length} groups'**
+  String successfullyOrganizedSelectedgroupslengthGroups(String length);
 
   /// From: lib/screens/migration/migration_screen.dart
   ///
   /// In en, this message translates to:
-  /// **'Successfully organized {selectedGroups} groups'**
-  String successfullyOrganizedSelectedgroupslengthGroups1(
-      String selectedGroups);
+  /// **'Successfully organized {length} groups'**
+  String successfullyOrganizedSelectedgroupslengthGroups1(String length);
 
   /// From: lib/screens/migration/migration_screen.dart
   ///
   /// In en, this message translates to:
-  /// **'Successfully organized {selectedGroups} groups'**
-  String successfullyOrganizedSelectedgroupslengthGroups2(
-      String selectedGroups);
+  /// **'Successfully organized {length} groups'**
+  String successfullyOrganizedSelectedgroupslengthGroups2(String length);
 
   /// From: lib/screens/migration/migration_screen.dart
   ///
   /// In en, this message translates to:
-  /// **'Successfully organized {selectedGroups} groups'**
-  String successfullyOrganizedSelectedgroupslengthGroups3(
-      String selectedGroups);
+  /// **'Successfully organized {length} groups'**
+  String successfullyOrganizedSelectedgroupslengthGroups3(String length);
 
   /// No description provided for @templateDeleted.
   ///
@@ -2408,14 +2381,16 @@ abstract class AppLocalizations {
   /// From: lib/screens/auth/welcome.dart
   ///
   /// In en, this message translates to:
-  /// **'Version {packageInfo} ({packageInfo})'**
-  String versionPackageinfoversionPackageinfobuildnumber(String packageInfo);
+  /// **'Version {version} ({buildNumber})'**
+  String versionPackageinfoversionPackageinfobuildnumber(
+      String version, String buildNumber);
 
   /// From: lib/screens/auth/welcome.dart
   ///
   /// In en, this message translates to:
-  /// **'Version {packageInfo} ({packageInfo})'**
-  String versionPackageinfoversionPackageinfobuildnumber1(String packageInfo);
+  /// **'Version {version} ({buildNumber})'**
+  String versionPackageinfoversionPackageinfobuildnumber1(
+      String version, String buildNumber);
 
   /// No description provided for @viewDeletedItems.
   ///

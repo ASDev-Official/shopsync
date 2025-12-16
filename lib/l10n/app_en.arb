@@ -20,10 +20,6 @@
   "areYouSureYouWantToSignOut1": "Are you sure you want to sign out?",
   "areYouSureYouWantToSignOut2": "Are you sure you want to sign out?",
   "areYouSureYouWantToSignOut3": "Are you sure you want to sign out?",
-  "assetsbadgesgoogleandroidpng4xdarkandroiddarkrdctn4xpng": "assets/badges/google/android/png@4x/dark/android_dark_rd_ctn@4x.png",
-  "assetsbadgesgoogleandroidpng4xdarkandroiddarksqctn4xpng": "assets/badges/google/android/png@4x/dark/android_dark_sq_ctn@4x.png",
-  "assetsbadgesgoogleandroidpng4xlightandroidlightrdctn4xpng": "assets/badges/google/android/png@4x/light/android_light_rd_ctn@4x.png",
-  "assetsbadgesgoogleandroidpng4xlightandroidlightsqctn4xpng": "assets/badges/google/android/png@4x/light/android_light_sq_ctn@4x.png",
   "avgCompletion": "Avg Completion",
   "canAddEditAndDeleteItems": "Can add, edit, and delete items",
   "canOnlyViewItems": "Can only view items",
@@ -55,41 +51,9 @@
   "clearCompletedItems": "Clear Completed Items",
   "clearItems": "Clear Items",
   "clearedCompleteditemsdocslengthCompletedItems": "Cleared {completedItems} completed items",
-  "@clearedCompleteditemsdocslengthCompletedItems": {
-    "placeholders": {
-      "completedItems": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/lists/list_options.dart"
-  },
   "clearedCompleteditemsdocslengthCompletedItems1": "Cleared {completedItems} completed items",
-  "@clearedCompleteditemsdocslengthCompletedItems1": {
-    "placeholders": {
-      "completedItems": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/lists/list_options.dart"
-  },
   "clearedCompleteditemsdocslengthCompletedItems2": "Cleared {completedItems} completed items",
-  "@clearedCompleteditemsdocslengthCompletedItems2": {
-    "placeholders": {
-      "completedItems": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/lists/list_options.dart"
-  },
   "clearedCompleteditemsdocslengthCompletedItems3": "Cleared {completedItems} completed items",
-  "@clearedCompleteditemsdocslengthCompletedItems3": {
-    "placeholders": {
-      "completedItems": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/lists/list_options.dart"
-  },
   "collaborators": "Collaborators",
   "completed": "Completed",
   "completionRate": "completion rate",
@@ -265,41 +229,9 @@
     "description": "From: lib/wear/screens/wear_welcome_screen.dart"
   },
   "errorEtostring": "Error: {e}",
-  "@errorEtostring": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
-  },
   "errorEtostring1": "Error: {e}",
-  "@errorEtostring1": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
-  },
   "errorEtostring2": "Error: {e}",
-  "@errorEtostring2": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
-  },
   "errorEtostring3": "Error: {e}",
-  "@errorEtostring3": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
-  },
   "errorFetchingMaintenanceStatusE": "Error fetching maintenance status: {e}",
   "@errorFetchingMaintenanceStatusE": {
     "placeholders": {
@@ -372,96 +304,32 @@
     },
     "description": "From: lib/screens/lists/list_insights.dart"
   },
-  "errorLoadingListsSnapshoterror": "Error loading lists: {snapshot}",
+  "errorLoadingListsSnapshoterror": "Error loading lists: {error}",
   "@errorLoadingListsSnapshoterror": {
     "placeholders": {
-      "snapshot": {
+      "error": {
         "type": "String"
       }
     },
     "description": "From: lib/screens/home.dart"
   },
-  "errorLoadingListsSnapshoterror1": "Error loading lists: {snapshot}",
+  "errorLoadingListsSnapshoterror1": "Error loading lists: {error}",
   "@errorLoadingListsSnapshoterror1": {
     "placeholders": {
-      "snapshot": {
+      "error": {
         "type": "String"
       }
     },
     "description": "From: lib/screens/home.dart"
   },
   "errorSigningOutEtostring": "Error signing out: {e}",
-  "@errorSigningOutEtostring": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/settings/profile.dart"
-  },
   "errorSigningOutEtostring1": "Error signing out: {e}",
-  "@errorSigningOutEtostring1": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/settings/profile.dart"
-  },
   "errorSigningOutEtostring2": "Error signing out: {e}",
-  "@errorSigningOutEtostring2": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/settings/profile.dart"
-  },
   "errorSigningOutEtostring3": "Error signing out: {e}",
-  "@errorSigningOutEtostring3": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/settings/profile.dart"
-  },
   "errorSigningOutEtostring4": "Error signing out: {e}",
-  "@errorSigningOutEtostring4": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/settings/settings.dart"
-  },
   "errorSigningOutEtostring5": "Error signing out: {e}",
-  "@errorSigningOutEtostring5": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/settings/settings.dart"
-  },
   "errorSigningOutEtostring6": "Error signing out: {e}",
-  "@errorSigningOutEtostring6": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/settings/settings.dart"
-  },
   "errorSigningOutEtostring7": "Error signing out: {e}",
-  "@errorSigningOutEtostring7": {
-    "placeholders": {
-      "e": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/settings/settings.dart"
-  },
   "exportBackup": "Export & Backup",
   "exportList": "Export List",
   "exportListAsACsv": "Export list as a CSV",
@@ -709,19 +577,19 @@
   "manageCategories": "Manage Categories",
   "manageYourFrequentlyUsedLocations": "Manage your frequently used locations",
   "medium": "medium",
-  "moveToGroupname": "Move to {group}",
+  "moveToGroupname": "Move to {name}",
   "@moveToGroupname": {
     "placeholders": {
-      "group": {
+      "name": {
         "type": "String"
       }
     },
     "description": "From: lib/screens/migration/migration_screen.dart"
   },
-  "moveToGroupname1": "Move to {group}",
+  "moveToGroupname1": "Move to {name}",
   "@moveToGroupname1": {
     "placeholders": {
-      "group": {
+      "name": {
         "type": "String"
       }
     },
@@ -859,37 +727,37 @@
   "smartLists": "Smart Lists",
   "storeAddress": "Store address",
   "storeName": "Store name",
-  "successfullyOrganizedSelectedgroupslengthGroups": "Successfully organized {selectedGroups} groups",
+  "successfullyOrganizedSelectedgroupslengthGroups": "Successfully organized {length} groups",
   "@successfullyOrganizedSelectedgroupslengthGroups": {
     "placeholders": {
-      "selectedGroups": {
+      "length": {
         "type": "String"
       }
     },
     "description": "From: lib/screens/migration/migration_screen.dart"
   },
-  "successfullyOrganizedSelectedgroupslengthGroups1": "Successfully organized {selectedGroups} groups",
+  "successfullyOrganizedSelectedgroupslengthGroups1": "Successfully organized {length} groups",
   "@successfullyOrganizedSelectedgroupslengthGroups1": {
     "placeholders": {
-      "selectedGroups": {
+      "length": {
         "type": "String"
       }
     },
     "description": "From: lib/screens/migration/migration_screen.dart"
   },
-  "successfullyOrganizedSelectedgroupslengthGroups2": "Successfully organized {selectedGroups} groups",
+  "successfullyOrganizedSelectedgroupslengthGroups2": "Successfully organized {length} groups",
   "@successfullyOrganizedSelectedgroupslengthGroups2": {
     "placeholders": {
-      "selectedGroups": {
+      "length": {
         "type": "String"
       }
     },
     "description": "From: lib/screens/migration/migration_screen.dart"
   },
-  "successfullyOrganizedSelectedgroupslengthGroups3": "Successfully organized {selectedGroups} groups",
+  "successfullyOrganizedSelectedgroupslengthGroups3": "Successfully organized {length} groups",
   "@successfullyOrganizedSelectedgroupslengthGroups3": {
     "placeholders": {
-      "selectedGroups": {
+      "length": {
         "type": "String"
       }
     },
@@ -921,19 +789,25 @@
   "userNotFoundTheyNeedToSignUpForShopsyncFirst1": "User not found. They need to sign up for ShopSync first.",
   "userRemoved": "User removed",
   "userRemoved1": "User removed",
-  "versionPackageinfoversionPackageinfobuildnumber": "Version {packageInfo} ({packageInfo})",
+  "versionPackageinfoversionPackageinfobuildnumber": "Version {version} ({buildNumber})",
   "@versionPackageinfoversionPackageinfobuildnumber": {
     "placeholders": {
-      "packageInfo": {
+      "version": {
+        "type": "String"
+      },
+      "buildNumber": {
         "type": "String"
       }
     },
     "description": "From: lib/screens/auth/welcome.dart"
   },
-  "versionPackageinfoversionPackageinfobuildnumber1": "Version {packageInfo} ({packageInfo})",
+  "versionPackageinfoversionPackageinfobuildnumber1": "Version {version} ({buildNumber})",
   "@versionPackageinfoversionPackageinfobuildnumber1": {
     "placeholders": {
-      "packageInfo": {
+      "version": {
+        "type": "String"
+      },
+      "buildNumber": {
         "type": "String"
       }
     },

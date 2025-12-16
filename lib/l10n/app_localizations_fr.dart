@@ -74,22 +74,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Are you sure you want to sign out?';
 
   @override
-  String get assetsbadgesgoogleandroidpng4xdarkandroiddarkrdctn4xpng =>
-      'assets/badges/google/android/png@4x/dark/android_dark_rd_ctn@4x.png';
-
-  @override
-  String get assetsbadgesgoogleandroidpng4xdarkandroiddarksqctn4xpng =>
-      'assets/badges/google/android/png@4x/dark/android_dark_sq_ctn@4x.png';
-
-  @override
-  String get assetsbadgesgoogleandroidpng4xlightandroidlightrdctn4xpng =>
-      'assets/badges/google/android/png@4x/light/android_light_rd_ctn@4x.png';
-
-  @override
-  String get assetsbadgesgoogleandroidpng4xlightandroidlightsqctn4xpng =>
-      'assets/badges/google/android/png@4x/light/android_light_sq_ctn@4x.png';
-
-  @override
   String get avgCompletion => 'Avg Completion';
 
   @override
@@ -180,22 +164,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get clearItems => 'Clear Items';
 
   @override
-  String clearedCompleteditemsdocslengthCompletedItems(String completedItems) {
+  String clearedCompleteditemsdocslengthCompletedItems(Object completedItems) {
     return 'Cleared $completedItems completed items';
   }
 
   @override
-  String clearedCompleteditemsdocslengthCompletedItems1(String completedItems) {
+  String clearedCompleteditemsdocslengthCompletedItems1(Object completedItems) {
     return 'Cleared $completedItems completed items';
   }
 
   @override
-  String clearedCompleteditemsdocslengthCompletedItems2(String completedItems) {
+  String clearedCompleteditemsdocslengthCompletedItems2(Object completedItems) {
     return 'Cleared $completedItems completed items';
   }
 
   @override
-  String clearedCompleteditemsdocslengthCompletedItems3(String completedItems) {
+  String clearedCompleteditemsdocslengthCompletedItems3(Object completedItems) {
     return 'Cleared $completedItems completed items';
   }
 
@@ -416,22 +400,22 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String errorEtostring(String e) {
+  String errorEtostring(Object e) {
     return 'Error: $e';
   }
 
   @override
-  String errorEtostring1(String e) {
+  String errorEtostring1(Object e) {
     return 'Error: $e';
   }
 
   @override
-  String errorEtostring2(String e) {
+  String errorEtostring2(Object e) {
     return 'Error: $e';
   }
 
   @override
-  String errorEtostring3(String e) {
+  String errorEtostring3(Object e) {
     return 'Error: $e';
   }
 
@@ -476,52 +460,52 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String errorLoadingListsSnapshoterror(String snapshot) {
-    return 'Error loading lists: $snapshot';
+  String errorLoadingListsSnapshoterror(String error) {
+    return 'Error loading lists: $error';
   }
 
   @override
-  String errorLoadingListsSnapshoterror1(String snapshot) {
-    return 'Error loading lists: $snapshot';
+  String errorLoadingListsSnapshoterror1(String error) {
+    return 'Error loading lists: $error';
   }
 
   @override
-  String errorSigningOutEtostring(String e) {
+  String errorSigningOutEtostring(Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring1(String e) {
+  String errorSigningOutEtostring1(Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring2(String e) {
+  String errorSigningOutEtostring2(Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring3(String e) {
+  String errorSigningOutEtostring3(Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring4(String e) {
+  String errorSigningOutEtostring4(Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring5(String e) {
+  String errorSigningOutEtostring5(Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring6(String e) {
+  String errorSigningOutEtostring6(Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring7(String e) {
+  String errorSigningOutEtostring7(Object e) {
     return 'Error signing out: $e';
   }
 
@@ -897,13 +881,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get medium => 'medium';
 
   @override
-  String moveToGroupname(String group) {
-    return 'Move to $group';
+  String moveToGroupname(String name) {
+    return 'Move to $name';
   }
 
   @override
-  String moveToGroupname1(String group) {
-    return 'Move to $group';
+  String moveToGroupname1(String name) {
+    return 'Move to $name';
   }
 
   @override
@@ -1227,27 +1211,23 @@ class AppLocalizationsFr extends AppLocalizations {
   String get storeName => 'Store name';
 
   @override
-  String successfullyOrganizedSelectedgroupslengthGroups(
-      String selectedGroups) {
-    return 'Successfully organized $selectedGroups groups';
+  String successfullyOrganizedSelectedgroupslengthGroups(String length) {
+    return 'Successfully organized $length groups';
   }
 
   @override
-  String successfullyOrganizedSelectedgroupslengthGroups1(
-      String selectedGroups) {
-    return 'Successfully organized $selectedGroups groups';
+  String successfullyOrganizedSelectedgroupslengthGroups1(String length) {
+    return 'Successfully organized $length groups';
   }
 
   @override
-  String successfullyOrganizedSelectedgroupslengthGroups2(
-      String selectedGroups) {
-    return 'Successfully organized $selectedGroups groups';
+  String successfullyOrganizedSelectedgroupslengthGroups2(String length) {
+    return 'Successfully organized $length groups';
   }
 
   @override
-  String successfullyOrganizedSelectedgroupslengthGroups3(
-      String selectedGroups) {
-    return 'Successfully organized $selectedGroups groups';
+  String successfullyOrganizedSelectedgroupslengthGroups3(String length) {
+    return 'Successfully organized $length groups';
   }
 
   @override
@@ -1345,13 +1325,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get userRemoved1 => 'User removed';
 
   @override
-  String versionPackageinfoversionPackageinfobuildnumber(String packageInfo) {
-    return 'Version $packageInfo ($packageInfo)';
+  String versionPackageinfoversionPackageinfobuildnumber(
+      String version, String buildNumber) {
+    return 'Version $version ($buildNumber)';
   }
 
   @override
-  String versionPackageinfoversionPackageinfobuildnumber1(String packageInfo) {
-    return 'Version $packageInfo ($packageInfo)';
+  String versionPackageinfoversionPackageinfobuildnumber1(
+      String version, String buildNumber) {
+    return 'Version $version ($buildNumber)';
   }
 
   @override

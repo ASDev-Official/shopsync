@@ -53,47 +53,136 @@ class StringExtractor:
         ]
 
     def extract_placeholders(self, text: str) -> List[str]:
-        """Extract variable placeholders from a string."""
+        """Extract variable placeholders from a string, handling duplicates with semantic naming."""
         placeholders = []
+        placeholder_positions = {}  # Track position for duplicates
         
-        # Match ${variable.property} or ${variable.method()} - extract base variable only
-        complex_matches = re.findall(r'\$\{([A-Za-z_][A-Za-z0-9_]*)[\.\(][^\}]*\}', text)
-        placeholders.extend(complex_matches)
+        # Match ${variable.property} or ${variable.method()} - extract property as semantic name
+        for match in re.finditer(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)\}', text):
+            base_var = match.group(1).lstrip('_')
+            property_name = match.group(2)
+            # Use property name as the placeholder hint
+            placeholder_key = f"{base_var}_{property_name}"
+            placeholder_positions.setdefault(placeholder_key, []).append(match.start())
+            placeholders.append(property_name)
+        
+        # Match ${variable.method()} - extract just the base variable
+        for match in re.finditer(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\([^\}]*\)', text):
+            base_var = match.group(1).lstrip('_')
+            placeholder_positions.setdefault(base_var, []).append(match.start())
+            placeholders.append(base_var)
         
         # Match ${variable} pattern (simple variable)
-        simple_braces = re.findall(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\}', text)
-        placeholders.extend(simple_braces)
+        for match in re.finditer(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\}', text):
+            base_var = match.group(1).lstrip('_')
+            if base_var:
+                placeholder_positions.setdefault(base_var, []).append(match.start())
+                placeholders.append(base_var)
         
         # Match $variable pattern (not followed by {)
-        simple_dollar = re.findall(r'\$([A-Za-z_][A-Za-z0-9_]*)(?!\{)', text)
-        placeholders.extend(simple_dollar)
+        for match in re.finditer(r'\$([A-Za-z_][A-Za-z0-9_]*)(?!\{)', text):
+            base_var = match.group(1).lstrip('_')
+            if base_var:
+                placeholder_positions.setdefault(base_var, []).append(match.start())
+                placeholders.append(base_var)
         
         # Remove duplicates while preserving order
         seen = set()
         cleaned = []
         for ph in placeholders:
-            # Clean: take only the base variable name before any dot or parenthesis
-            clean_ph = re.split(r'[\.\(]', ph)[0]
-            # Strip leading underscores which are common for private fields
-            clean_ph = clean_ph.lstrip('_')
-            if clean_ph and clean_ph not in seen:
-                seen.add(clean_ph)
-                cleaned.append(clean_ph)
+            if ph and ph not in seen:
+                seen.add(ph)
+                cleaned.append(ph)
         
         return cleaned
+    
+    def _get_placeholder_context_hints(self, text: str, placeholder: str, count: int) -> List[str]:
+        """Generate semantic names for duplicate placeholders based on context."""
+        # Try to extract semantic names from property access patterns in the original text
+        # e.g., ${packageInfo.version} -> "version", ${packageInfo.buildNumber} -> "buildNumber"
+        property_pattern = rf'\$\{{{placeholder}\.([A-Za-z_][A-Za-z0-9_]*)\}}'
+        properties = re.findall(property_pattern, text)
+        
+        if len(properties) >= count:
+            # Convert camelCase to semantic names
+            semantic_names = []
+            for prop in properties[:count]:
+                # Capitalize first letter for ARB placeholder naming
+                semantic_name = prop[0].upper() + prop[1:] if prop else prop
+                semantic_names.append(semantic_name)
+            return semantic_names
+        
+        # Common patterns for duplicate placeholders
+        context_map = {
+            'packageInfo': ['Version', 'Build'],  # "Version 1.0.0 (123)"
+            'count': ['Total', 'Remaining'],
+            'value': ['Before', 'After'],
+            'item': ['Current', 'Total'],
+            'number': ['First', 'Second'],
+            'price': ['Before', 'After'],
+        }
+        
+        # Try to match known patterns
+        for base_name, hints in context_map.items():
+            if base_name in placeholder.lower():
+                return hints[:count] if len(hints) >= count else [str(i + 1) for i in range(count)]
+        
+        # Fallback: use numeric suffixes
+        return [str(i + 1) for i in range(count)]
+
+    def is_translatable(self, text: str) -> bool:
+        """Check if a string should be extracted for translation."""
+        # Skip asset file paths
+        if text.startswith('assets/'):
+            return False
+        
+        # Skip common file extensions (likely asset paths)
+        asset_extensions = ('.png', '.json', '.svg', '.jpg', '.jpeg', '.gif', '.webp', '.xml', '.yaml', '.yml')
+        if any(text.endswith(ext) for ext in asset_extensions):
+            return False
+        
+        # Skip paths with multiple slashes (likely file paths)
+        if text.count('/') > 0 and text.count('/') >= 2:
+            return False
+        
+        # Skip strings that are just variables or code
+        if text.strip().startswith('$') and ' ' not in text:
+            return False
+        
+        # Skip URLs
+        if text.startswith('http://') or text.startswith('https://'):
+            return False
+        
+        # Skip empty strings
+        if not text.strip():
+            return False
+        
+        return True
 
     def normalize_string(self, text: str) -> str:
-        """Normalize string for ARB format."""
-        # First, handle complex expressions with property access/method calls
-        # ${obj.property} or ${obj.method()} -> {obj}
-        normalized = re.sub(r'\$\{([A-Za-z_][A-Za-z0-9_]*)[\.\(][^\}]*\}', r'{\1}', text)
+        """Normalize string for ARB format with property-based semantic placeholders."""
+        normalized = text
+        
+        # First, handle ${variable.property} -> {property}
+        # This converts ${packageInfo.version} to {version}
+        normalized = re.sub(
+            r'\$\{([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)\}',
+            lambda m: f"{{{m.group(2)}}}",
+            normalized
+        )
+        
+        # Handle ${variable.method()} or ${variable.method().property} -> {variable}
+        normalized = re.sub(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\.[A-Za-z_][A-Za-z0-9_]*\([^\)]*\)(?:\.[A-Za-z_][A-Za-z0-9_]*)?\}', r'{\1}', normalized)
+        
+        # Handle remaining ${variable.xxx} patterns (property access or method calls) -> {variable}
+        normalized = re.sub(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\.[^\}]+\}', r'{\1}', normalized)
         
         # Convert simple Dart interpolation to ARB placeholders
         # ${variable} -> {variable}
         normalized = re.sub(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\}', r'{\1}', normalized)
         # $variable -> {variable}
         normalized = re.sub(r'\$([A-Za-z_][A-Za-z0-9_]*)(?!\{)', r'{\1}', normalized)
-
+        
         # Remove leading underscores inside placeholders
         normalized = re.sub(r'\{_([A-Za-z0-9_]+)\}', r'{\1}', normalized)
         
@@ -136,16 +225,8 @@ class StringExtractor:
                 for match in matches:
                     text = match.group(1)
                     
-                    # Skip empty strings
-                    if not text.strip():
-                        continue
-                    
-                    # Skip strings that are just variables or code
-                    if text.strip().startswith('$') and ' ' not in text:
-                        continue
-                    
-                    # Skip URLs
-                    if text.startswith('http://') or text.startswith('https://'):
+                    # Apply translatable filter
+                    if not self.is_translatable(text):
                         continue
                     
                     # Extract placeholders
