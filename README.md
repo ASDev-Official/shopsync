@@ -20,7 +20,7 @@ _Share shopping lists with family and friends_
 
 ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/ASDev-Official/shopsync?utm_source=oss&utm_medium=github&utm_campaign=ASDev-Official%2Fshopsync&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 
-[![Codecov](https://codecov.io/gh/ASDev-Official/shopsync/graph/badge.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
+[![Translation status](https://hosted.weblate.org/widget/asdev-shopsync/svg-badge.svg)](https://hosted.weblate.org/engage/asdev-shopsync/)
 
 </div>
 
@@ -53,9 +53,13 @@ Coming Soon
 [//]: # "  </table>"
 [//]: # "</div>"
 
-## 🌐 Help Localize ShopSync
+## 🌐 Translation
 
-To make ShopSync available in multiple languages, contribute to our Weblate(still getting ready!)
+✨ We use [Weblate](https://weblate.org)!
+
+To make ShopSync available in multiple languages, contribute to our [Weblate](https://hosted.weblate.org/engage/asdev-shopsync/)
+
+[![Translation status](https://hosted.weblate.org/widget/asdev-shopsync/horizontal-auto.svg)](https://hosted.weblate.org/engage/asdev-shopsync/)
 
 ## 🛠️ Tech Stack
 
