@@ -83,8 +83,18 @@ class StringExtractor:
             placeholder_positions.setdefault(placeholder_key, []).append(match.start())
             placeholders.append(property_name)
         
-        # Match ${variable.method()} - extract just the base variable
-        for match in re.finditer(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\([^\}]*\)', text):
+        # Match ${variable.method()} with arguments - extract base variable
+        # Matches: ${variable.method()}, ${variable.method(args)}, ${variable.method().property}
+        for match in re.finditer(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)\([^\)]*\)(?:\.[A-Za-z_][A-Za-z0-9_]*)?\}', text):
+            base_var = match.group(1).lstrip('_')
+            method_name = match.group(2)
+            # Use method name as the placeholder hint for method calls
+            placeholder_key = f"{base_var}_{method_name}"
+            placeholder_positions.setdefault(placeholder_key, []).append(match.start())
+            placeholders.append(method_name)
+        
+        # Match ${variable()} - immediate function call (no dot notation)
+        for match in re.finditer(r'\$\{([A-Za-z_][A-Za-z0-9_]*)\([^\)]*\)\}', text):
             base_var = match.group(1).lstrip('_')
             placeholder_positions.setdefault(base_var, []).append(match.start())
             placeholders.append(base_var)

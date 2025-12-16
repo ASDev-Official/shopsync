@@ -400,22 +400,22 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String errorEtostring(Object e) {
+  String errorEtostring(String toString, Object e) {
     return 'Error: $e';
   }
 
   @override
-  String errorEtostring1(Object e) {
+  String errorEtostring1(String toString, Object e) {
     return 'Error: $e';
   }
 
   @override
-  String errorEtostring2(Object e) {
+  String errorEtostring2(String toString, Object e) {
     return 'Error: $e';
   }
 
   @override
-  String errorEtostring3(Object e) {
+  String errorEtostring3(String toString, Object e) {
     return 'Error: $e';
   }
 
@@ -470,42 +470,42 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String errorSigningOutEtostring(Object e) {
+  String errorSigningOutEtostring(String toString, Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring1(Object e) {
+  String errorSigningOutEtostring1(String toString, Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring2(Object e) {
+  String errorSigningOutEtostring2(String toString, Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring3(Object e) {
+  String errorSigningOutEtostring3(String toString, Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring4(Object e) {
+  String errorSigningOutEtostring4(String toString, Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring5(Object e) {
+  String errorSigningOutEtostring5(String toString, Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring6(Object e) {
+  String errorSigningOutEtostring6(String toString, Object e) {
     return 'Error signing out: $e';
   }
 
   @override
-  String errorSigningOutEtostring7(Object e) {
+  String errorSigningOutEtostring7(String toString, Object e) {
     return 'Error signing out: $e';
   }
 

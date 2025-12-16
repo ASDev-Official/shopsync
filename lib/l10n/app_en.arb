@@ -229,9 +229,41 @@
     "description": "From: lib/wear/screens/wear_welcome_screen.dart"
   },
   "errorEtostring": "Error: {e}",
+  "@errorEtostring": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+  },
   "errorEtostring1": "Error: {e}",
+  "@errorEtostring1": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+  },
   "errorEtostring2": "Error: {e}",
+  "@errorEtostring2": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+  },
   "errorEtostring3": "Error: {e}",
+  "@errorEtostring3": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+  },
   "errorFetchingMaintenanceStatusE": "Error fetching maintenance status: {e}",
   "@errorFetchingMaintenanceStatusE": {
     "placeholders": {
@@ -323,13 +355,77 @@
     "description": "From: lib/screens/home.dart"
   },
   "errorSigningOutEtostring": "Error signing out: {e}",
+  "@errorSigningOutEtostring": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/profile.dart"
+  },
   "errorSigningOutEtostring1": "Error signing out: {e}",
+  "@errorSigningOutEtostring1": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/profile.dart"
+  },
   "errorSigningOutEtostring2": "Error signing out: {e}",
+  "@errorSigningOutEtostring2": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/profile.dart"
+  },
   "errorSigningOutEtostring3": "Error signing out: {e}",
+  "@errorSigningOutEtostring3": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/profile.dart"
+  },
   "errorSigningOutEtostring4": "Error signing out: {e}",
+  "@errorSigningOutEtostring4": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
   "errorSigningOutEtostring5": "Error signing out: {e}",
+  "@errorSigningOutEtostring5": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
   "errorSigningOutEtostring6": "Error signing out: {e}",
+  "@errorSigningOutEtostring6": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
   "errorSigningOutEtostring7": "Error signing out: {e}",
+  "@errorSigningOutEtostring7": {
+    "placeholders": {
+      "toString": {
+        "type": "String"
+      }
+    },
+    "description": "From: lib/screens/settings/settings.dart"
+  },
   "exportBackup": "Export & Backup",
   "exportList": "Export List",
   "exportListAsACsv": "Export list as a CSV",
