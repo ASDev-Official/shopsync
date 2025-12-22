@@ -28,7 +28,7 @@ dependencies:
   google_sign_in: ^7.2.0
   credential_manager: ^2.0.0
   flutter_svg: ^2.1.0
-  google_mobile_ads: ^6.0.0
+  google_mobile_ads: ^7.0.0
   flutter_inappwebview: ^6.1.5
   lottie: ^3.3.2
   connectivity_plus: ^7.0.0
