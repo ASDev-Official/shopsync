@@ -83,6 +83,7 @@ jobs:
           packageName: com.aadishsamir.shopsync
           releaseFiles: build/app/outputs/bundle/phoneRelease/app-phone-release.aab
           track: production
+          whatsNewDirectory: distribution/whatsnew-play
 
       - name: Build Completion Summary
         if: success()
