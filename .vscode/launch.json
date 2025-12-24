@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "ShopSync Phone",
+            "name": "ShopSync Phone (debug)",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
@@ -28,7 +28,7 @@
             "args": ["--flavor", "phone"]
         },
         {
-            "name": "ShopSync WearOS",
+            "name": "ShopSync WearOS (debug)",
             "request": "launch",
             "type": "dart",
             "program": "lib/wear/wear_main.dart",
@@ -36,10 +36,35 @@
             "args": ["--flavor", "wear"]
         },
         {
-            "name": "ShopSync Web",
+            "name": "ShopSync WearOS (profile)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/wear/wear_main.dart",
+            "flutterMode": "profile",
+            "args": ["--flavor", "wear"]
+        },
+        {
+            "name": "ShopSync WearOS (release)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/wear/wear_main.dart",
+            "flutterMode": "release",
+            "args": ["--flavor", "wear"]
+        },
+        {
+            "name": "ShopSync Phone (All Devices) (debug)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "deviceId": "all",
+            "args": ["--flavor", "phone"]
+        },
+        {
+            "name": "ShopSync Chrome",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
+            "deviceId": "chrome"
         },
     ]
 }
