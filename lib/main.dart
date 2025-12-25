@@ -64,7 +64,16 @@ void main() async {
   unawaited(MobileAds.instance.initialize());
 
   // Start Statuspage polling early
-  StatuspageService.startPolling();
+  try {
+    StatuspageService.startPolling();
+  } catch (e, stackTrace) {
+    if (kDebugMode) {
+      print('Statuspage polling initialization error: $e');
+    }
+    await Sentry.captureException(e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({'action': 'statuspage_start_polling'}));
+  }
 
   // Register ShopSync application license
   LicenseRegistry.addLicense(() async* {
