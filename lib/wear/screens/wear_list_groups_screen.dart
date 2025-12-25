@@ -162,7 +162,7 @@ class _WearListGroupsScreenState extends State<WearListGroupsScreen> {
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Icon(
-                                    Icons.check,
+                                    Icons.error,
                                     color: Colors.white,
                                     size: 20,
                                   ),

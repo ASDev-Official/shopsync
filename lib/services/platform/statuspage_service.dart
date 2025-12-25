@@ -58,7 +58,8 @@ class StatuspageService {
     final summaryUrl = Uri.parse('${StatuspageConfig.baseApiUrl}/summary.json');
 
     try {
-      final unresolvedResp = await http.get(unresolvedUrl);
+      final unresolvedResp =
+          await http.get(unresolvedUrl).timeout(const Duration(seconds: 5));
       if (unresolvedResp.statusCode == 200) {
         final data = json.decode(unresolvedResp.body);
         final incidents = (data['incidents'] as List?) ?? [];
@@ -70,6 +71,25 @@ class StatuspageService {
           final impact = inc['impact'] ?? 'minor';
           // Fetch summary to derive affected components list
           final comps = await _fetchAffectedComponents(summaryUrl);
+
+          // Defensive DateTime parsing for incident timestamps
+          final startedAt =
+              DateTime.tryParse(inc['created_at']?.toString() ?? '');
+          final resolvedAt = inc['resolved_at'] != null
+              ? DateTime.tryParse(inc['resolved_at']?.toString() ?? '')
+              : null;
+
+          if (startedAt == null) {
+            await Sentry.captureMessage(
+              'Failed to parse incident created_at',
+              level: SentryLevel.warning,
+              hint: Hint.withMap({
+                'incident_id': inc['id'],
+                'raw_created_at': inc['created_at'],
+              }),
+            );
+          }
+
           return StatusOutage(
             active: true,
             shortStatus: 'outage',
@@ -78,10 +98,8 @@ class StatuspageService {
                 ? 'An outage has been reported.'
                 : (inc['postmortem_body'] ?? inc['shortlink'] ?? ''),
             impact: impact,
-            startedAt: DateTime.parse(inc['created_at']),
-            resolvedAt: inc['resolved_at'] != null
-                ? DateTime.parse(inc['resolved_at'])
-                : null,
+            startedAt: startedAt ?? DateTime.now(),
+            resolvedAt: resolvedAt,
             updates: updates,
             incidentId: inc['id'],
             affectedComponents: comps,
@@ -90,7 +108,8 @@ class StatuspageService {
       }
 
       // If no unresolved incidents, use summary to infer status.
-      final summaryResp = await http.get(summaryUrl);
+      final summaryResp =
+          await http.get(summaryUrl).timeout(const Duration(seconds: 5));
       if (summaryResp.statusCode == 200) {
         final data = json.decode(summaryResp.body) as Map<String, dynamic>;
         final status = (data['status'] as Map<String, dynamic>?);
@@ -128,7 +147,8 @@ class StatuspageService {
 
   static Future<List<String>> _fetchAffectedComponents(Uri summaryUrl) async {
     try {
-      final resp = await http.get(summaryUrl);
+      final resp =
+          await http.get(summaryUrl).timeout(const Duration(seconds: 5));
       if (resp.statusCode == 200) {
         final data = json.decode(resp.body) as Map<String, dynamic>;
         return _extractAffectedComponentsFromSummary(data);

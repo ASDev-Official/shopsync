@@ -11,9 +11,10 @@ class IncidentUpdate {
   });
 
   factory IncidentUpdate.fromJson(Map<String, dynamic> json) {
+    final parsedDate = DateTime.tryParse(json['created_at']?.toString() ?? '');
     return IncidentUpdate(
       body: json['body'] ?? '',
-      createdAt: DateTime.parse(json['created_at']),
+      createdAt: parsedDate ?? DateTime.now(),
       status: json['status'] ?? 'unknown',
     );
   }

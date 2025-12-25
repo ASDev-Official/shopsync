@@ -39,7 +39,14 @@ void main() async {
   }
 
   // Start Statuspage polling on wear as well
-  StatuspageService.startPolling();
+  try {
+    StatuspageService.startPolling();
+  } catch (e, stackTrace) {
+    debugPrint('Statuspage polling initialization error: $e');
+    await Sentry.captureException(e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({'action': 'statuspage_start_polling'}));
+  }
 }
 
 class ShopSyncWearApp extends StatelessWidget {
@@ -119,15 +126,27 @@ class _WearAuthWrapperState extends State<WearAuthWrapper> {
   }
 
   Future<void> _checkOutage() async {
-    final outage = await StatuspageService.fetchCurrentOutage();
-    if (outage.active && mounted) {
-      if (!StatuspageService.dialogDismissedThisSession) {
-        showDialog(
-          context: context,
-          barrierDismissible: true,
-          builder: (context) => WearOutageScreen(outage: outage),
-        );
+    try {
+      final outage = await StatuspageService.fetchCurrentOutage();
+      if (outage.active && mounted) {
+        if (!StatuspageService.dialogDismissedThisSession) {
+          await showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (context) => WearOutageScreen(outage: outage),
+          ).then((_) {
+            // Ensure markDialogDismissed is called when dialog closes
+            StatuspageService.markDialogDismissed();
+          });
+        }
       }
+    } catch (e, stackTrace) {
+      await Sentry.captureException(e,
+          stackTrace: stackTrace,
+          hint: Hint.withMap({
+            'action': 'wear_check_outage',
+            'context': 'showing_outage_dialog'
+          }));
     }
   }
 

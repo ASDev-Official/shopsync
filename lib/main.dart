@@ -281,7 +281,12 @@ class _AuthWrapperState extends State<AuthWrapper> {
           );
         }
       }
-    } catch (_) {}
+    } catch (e, stackTrace) {
+      await Sentry.captureException(e,
+          stackTrace: stackTrace,
+          hint: Hint.withMap(
+              {'action': 'check_outage', 'context': 'showing_outage_dialog'}));
+    }
   }
 
   @override
