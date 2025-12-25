@@ -32,11 +32,13 @@ android {
     }
 
     signingConfigs {
-        register("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = keystoreProperties["storeFile"]?.let { file(it.toString()) }
-            storePassword = keystoreProperties["storePassword"] as String
+        if (keystorePropertiesFile.exists()) {
+            register("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = keystoreProperties["storeFile"]?.let { file(it.toString()) }
+                storePassword = keystoreProperties["storePassword"] as String
+            }
         }
     }
 
@@ -71,7 +73,9 @@ android {
 
     buildTypes {
         named("release") {
-            signingConfig = signingConfigs.getByName("release")
+            if (keystorePropertiesFile.exists()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 }
