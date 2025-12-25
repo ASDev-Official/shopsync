@@ -142,6 +142,22 @@ flutter pub get
 - **Google Mobile Ads**: Initialized with `unawaited(MobileAds.instance.initialize())`
 - **TFLite**: Local ML model for smart suggestions (`SmartSuggestionsService`)
 - **Weblate**: Translation management (not in code, contributor workflow)
+- **Atlassian Statuspage**: Outage status via public API (`StatuspageService`)
+
+### Statuspage Outage Integration
+
+- Service: `lib/services/platform/statuspage_service.dart` (static API, Sentry-wrapped)
+- Config: `lib/config/statuspage_config.dart` → set `baseApiUrl` to your Statuspage domain (e.g., `https://yourpage.statuspage.io/api/v2`)
+- Model: `lib/models/status_outage.dart`
+- UI (Phone/Web):
+  - Fullscreen closable dialog: `lib/screens/status/outage_dialog.dart` (shown once per app run when outage is active)
+  - Global top banner: `lib/widgets/status/outage_banner.dart` rendered across all screens via `MaterialApp.builder` overlay; polls every 1 minute
+- UI (WearOS):
+  - Fullscreen closable dialog: `lib/wear/screens/wear_outage_screen.dart`
+  - Header replacement: In `lib/wear/screens/wear_list_groups_screen.dart` the ShopSync logo is replaced with a red exclamation indicator + short status after the dialog is dismissed. Tapping it reopens the fullscreen dialog.
+- Polling: `StatuspageService.startPolling()` is called on app startup (phone and wear). Poll interval is 1 minute to avoid rate limits.
+- Short statuses: `'outage'`, `'fixed'`, `'none'` mapped from unresolved incidents and summary indicator.
+- Error handling: All fetch errors captured via `Sentry.captureException()` with contextual hints.
 
 ### Platform-Specific
 
@@ -417,7 +433,8 @@ When implementing features or fixes:
 4. **Mock Firebase**: Use `test_utils.dart` for Firebase mocking, don't make real Firestore calls
 5. **Update existing tests**: If modifying existing code, update relevant tests
 6. **Add widget tests**: For new screens/widgets, add corresponding widget tests
-7. **Check coverage**: Run `flutter test --coverage` to verify no major coverage drops
+7. **Statuspage tests**: Unit tests for `StatusOutage` model live in `test/unit/services/statuspage_service_test.dart`
+8. **Check coverage**: Run `flutter test --coverage` to verify no major coverage drops
 
 ### Test Writing Quick Rules
 

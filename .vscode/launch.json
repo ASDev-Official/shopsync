@@ -52,14 +52,6 @@
             "args": ["--flavor", "wear"]
         },
         {
-            "name": "ShopSync Phone (All Devices) (debug)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "deviceId": "all",
-            "args": ["--flavor", "phone"]
-        },
-        {
             "name": "ShopSync Chrome",
             "request": "launch",
             "type": "dart",

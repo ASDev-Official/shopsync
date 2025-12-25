@@ -6,7 +6,9 @@ import '../config/firebase_options.dart';
 import 'screens/wear_list_groups_screen.dart';
 import 'screens/wear_welcome_screen.dart';
 import 'screens/wear_maintenance_screen.dart';
+import 'screens/wear_outage_screen.dart';
 import '../services/platform/maintenance_service.dart';
+import '../services/platform/statuspage_service.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
@@ -34,6 +36,16 @@ void main() async {
     debugPrint('Sentry initialization error: $e');
     // If Sentry fails, still run the app
     runApp(const ShopSyncWearApp());
+  }
+
+  // Start Statuspage polling on wear as well
+  try {
+    StatuspageService.startPolling();
+  } catch (e, stackTrace) {
+    debugPrint('Statuspage polling initialization error: $e');
+    await Sentry.captureException(e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({'action': 'statuspage_start_polling'}));
   }
 }
 
@@ -78,6 +90,7 @@ class _WearAuthWrapperState extends State<WearAuthWrapper> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _checkMaintenance();
+      await _checkOutage();
     });
   }
 
@@ -109,6 +122,31 @@ class _WearAuthWrapperState extends State<WearAuthWrapper> {
           ),
         );
       }
+    }
+  }
+
+  Future<void> _checkOutage() async {
+    try {
+      final outage = await StatuspageService.fetchCurrentOutage();
+      if (outage.active && mounted) {
+        if (!StatuspageService.dialogDismissedThisSession) {
+          await showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (context) => WearOutageScreen(outage: outage),
+          ).then((_) {
+            // Ensure markDialogDismissed is called when dialog closes
+            StatuspageService.markDialogDismissed();
+          });
+        }
+      }
+    } catch (e, stackTrace) {
+      await Sentry.captureException(e,
+          stackTrace: stackTrace,
+          hint: Hint.withMap({
+            'action': 'wear_check_outage',
+            'context': 'showing_outage_dialog'
+          }));
     }
   }
 

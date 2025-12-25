@@ -5,6 +5,9 @@ import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
 import 'wear_group_lists_screen.dart';
 import 'wear_settings_screen.dart';
+import '../../services/platform/statuspage_service.dart';
+import '../../models/status_outage.dart';
+import 'wear_outage_screen.dart';
 
 class WearListGroupsScreen extends StatefulWidget {
   const WearListGroupsScreen({super.key});
@@ -117,7 +120,7 @@ class _WearListGroupsScreenState extends State<WearListGroupsScreen> {
           child: CustomScrollView(
             controller: _scrollController,
             slivers: [
-              // ShopSync Branding
+              // Header: ShopSync branding or outage indicator (if dialog dismissed)
               SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.only(
@@ -126,37 +129,126 @@ class _WearListGroupsScreenState extends State<WearListGroupsScreen> {
                     top: shape == WearShape.round ? 32.0 : 16.0,
                     bottom: 8.0,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: Colors.green[800],
-                          shape: BoxShape.circle,
+                  child: ValueListenableBuilder<StatusOutage?>(
+                    valueListenable: StatuspageService.currentOutage,
+                    builder: (context, outage, _) {
+                      final showOutageIndicator = outage?.active == true &&
+                          StatuspageService.dialogDismissedThisSession;
+                      if (showOutageIndicator) {
+                        return InkWell(
+                          onTap: () {
+                            if (outage != null) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => WearOutageScreen(
+                                    outage: outage,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 32,
+                                  height: 32,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.error,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        outage?.shortStatus == 'outage'
+                                            ? 'Outage'
+                                            : (outage?.shortStatus == 'fixed'
+                                                ? 'Fixed'
+                                                : 'Status'),
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: mode == WearMode.active
+                                              ? Colors.white
+                                              : Colors.white70,
+                                        ),
+                                      ),
+                                      if ((outage?.affectedComponents ??
+                                              const [])
+                                          .isNotEmpty) ...[
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          _formatFirstComponent(
+                                              outage!.affectedComponents),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: mode == WearMode.active
+                                                ? Colors.white70
+                                                : Colors.white60,
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 32,
+                              height: 32,
+                              decoration: BoxDecoration(
+                                color: Colors.green[800],
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'ShopSync',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: mode == WearMode.active
+                                    ? Colors.white
+                                    : Colors.white70,
+                                letterSpacing: 0.5,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                        child: Icon(
-                          Icons.check,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        'ShopSync',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: mode == WearMode.active
-                              ? Colors.white
-                              : Colors.white70,
-                          letterSpacing: 0.5,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
               ),
@@ -331,5 +423,13 @@ class _WearListGroupsScreenState extends State<WearListGroupsScreen> {
         );
       },
     );
+  }
+}
+
+extension _WearOutageText on _WearListGroupsScreenState {
+  String _formatFirstComponent(List<String> comps) {
+    if (comps.isEmpty) return '';
+    if (comps.length == 1) return 'Affected: ${comps.first}';
+    return 'Affected: ${comps.first} +${comps.length - 1} more';
   }
 }

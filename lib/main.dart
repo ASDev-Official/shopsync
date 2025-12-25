@@ -15,16 +15,20 @@ import 'screens/settings/profile.dart';
 import 'screens/auth/forgot_password.dart';
 import 'screens/maintenance/maintenance_screen.dart';
 import 'screens/onboarding/onboarding.dart';
+import 'screens/status/outage_dialog.dart';
 import 'screens/settings/settings.dart';
 import 'screens/migration/migration_screen.dart';
 import 'screens/settings/feedback.dart';
 import 'screens/lists/manage_categories.dart';
 import 'services/platform/update_service.dart';
 import 'services/platform/maintenance_service.dart';
+import 'services/platform/statuspage_service.dart';
 import 'services/storage/shared_prefs.dart';
 import 'services/platform/home_widget_service.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'widgets/ui/splash_screen.dart';
+import 'widgets/status/outage_banner.dart';
+import 'core/navigation_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,6 +62,18 @@ void main() async {
   }
 
   unawaited(MobileAds.instance.initialize());
+
+  // Start Statuspage polling early
+  try {
+    StatuspageService.startPolling();
+  } catch (e, stackTrace) {
+    if (kDebugMode) {
+      print('Statuspage polling initialization error: $e');
+    }
+    await Sentry.captureException(e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({'action': 'statuspage_start_polling'}));
+  }
 
   // Register ShopSync application license
   LicenseRegistry.addLicense(() async* {
@@ -113,6 +129,7 @@ class ShopSync extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ShopSync',
+      navigatorKey: AppNavigation.navigatorKey,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.green,
@@ -152,6 +169,19 @@ class ShopSync extends StatelessWidget {
         ),
       ),
       // themeMode: themeNotifier.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      builder: (context, child) {
+        return Stack(
+          children: [
+            if (child != null) child,
+            const Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: OutageBanner(),
+            ),
+          ],
+        );
+      },
       home: const AuthWrapper(),
       routes: {
         '/welcome': (context) => WelcomeScreen(),
@@ -205,6 +235,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
       }
       UpdateService.checkForUpdate(context);
       await _checkMaintenance();
+      await _checkOutage();
     });
   }
 
@@ -243,6 +274,30 @@ class _AuthWrapperState extends State<AuthWrapper> {
           ),
         );
       }
+    }
+  }
+
+  Future<void> _checkOutage() async {
+    try {
+      final outage = await StatuspageService.fetchCurrentOutage();
+      // Show fullscreen closable dialog once per app run when outage is active
+      if (outage.active && mounted) {
+        if (!StatuspageService.dialogDismissedThisSession) {
+          await showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (context) => OutageDialog(outage: outage),
+          ).then((_) {
+            // Track dismissal regardless of how dialog was closed (button or barrier tap)
+            StatuspageService.markDialogDismissed();
+          });
+        }
+      }
+    } catch (e, stackTrace) {
+      await Sentry.captureException(e,
+          stackTrace: stackTrace,
+          hint: Hint.withMap(
+              {'action': 'check_outage', 'context': 'showing_outage_dialog'}));
     }
   }
 
