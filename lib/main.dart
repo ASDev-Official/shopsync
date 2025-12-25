@@ -283,11 +283,14 @@ class _AuthWrapperState extends State<AuthWrapper> {
       // Show fullscreen closable dialog once per app run when outage is active
       if (outage.active && mounted) {
         if (!StatuspageService.dialogDismissedThisSession) {
-          showDialog(
+          await showDialog(
             context: context,
             barrierDismissible: true,
             builder: (context) => OutageDialog(outage: outage),
-          );
+          ).then((_) {
+            // Track dismissal regardless of how dialog was closed (button or barrier tap)
+            StatuspageService.markDialogDismissed();
+          });
         }
       }
     } catch (e, stackTrace) {

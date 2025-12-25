@@ -232,7 +232,7 @@ class _WearListGroupsScreenState extends State<WearListGroupsScreen> {
                                 size: 20,
                               ),
                             ),
-                            const SizedBox(width: 10),
+                            const SizedBox(height: 10),
                             Text(
                               'ShopSync',
                               style: TextStyle(
