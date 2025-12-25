@@ -3422,7 +3422,6 @@ vector_graphics_codec
 vector_graphics_compiler
 webview_flutter
 webview_flutter_platform_interface
-webview_flutter_wkwebview
 xdg_directories
 
 Copyright 2013 The Flutter Authors. All rights reserved.
@@ -11697,6 +11696,7 @@ IN THE MATERIALS.
 google_sign_in_android
 google_sign_in_ios
 shared_preferences
+webview_flutter_wkwebview
 
 Copyright 2013 The Flutter Authors
 
@@ -36494,7 +36494,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --------------------------------------------------------------------------------
 webview_flutter_android
 
-Copyright 2013 The Flutter Authors. All rights reserved.
+Copyright 2013 The Flutter Authors
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
