@@ -36,6 +36,7 @@ dependencies:
   collection: ^1.18.0
   wear_plus: ^1.2.4
   rotary_scrollbar: ^1.1.0
+  http: ^1.2.0
 
 dev_dependencies:
   sentry_dart_plugin: ^3.2.0

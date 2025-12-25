@@ -6,7 +6,9 @@ import '../config/firebase_options.dart';
 import 'screens/wear_list_groups_screen.dart';
 import 'screens/wear_welcome_screen.dart';
 import 'screens/wear_maintenance_screen.dart';
+import 'screens/wear_outage_screen.dart';
 import '../services/platform/maintenance_service.dart';
+import '../services/platform/statuspage_service.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
@@ -35,6 +37,9 @@ void main() async {
     // If Sentry fails, still run the app
     runApp(const ShopSyncWearApp());
   }
+
+  // Start Statuspage polling on wear as well
+  StatuspageService.startPolling();
 }
 
 class ShopSyncWearApp extends StatelessWidget {
@@ -78,6 +83,7 @@ class _WearAuthWrapperState extends State<WearAuthWrapper> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _checkMaintenance();
+      await _checkOutage();
     });
   }
 
@@ -107,6 +113,19 @@ class _WearAuthWrapperState extends State<WearAuthWrapper> {
             endTime: maintenance['endTime'],
             isPredictive: true,
           ),
+        );
+      }
+    }
+  }
+
+  Future<void> _checkOutage() async {
+    final outage = await StatuspageService.fetchCurrentOutage();
+    if (outage.active && mounted) {
+      if (!StatuspageService.dialogDismissedThisSession) {
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (context) => WearOutageScreen(outage: outage),
         );
       }
     }
