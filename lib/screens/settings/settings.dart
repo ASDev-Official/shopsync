@@ -401,12 +401,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
           // Advertisement at the bottom
           const SizedBox(height: 16),
           if (_isBannerAdLoaded && _bannerAd != null)
-            Center(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: BannerAdvertWidget(
-                  bannerAd: _bannerAd,
-                  backgroundColor: isDark ? Colors.grey[800]! : Colors.white,
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).padding.bottom,
+              ),
+              child: Center(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 18.0),
+                  child: BannerAdvertWidget(
+                    bannerAd: _bannerAd,
+                    backgroundColor: isDark ? Colors.grey[800]! : Colors.white,
+                  ),
                 ),
               ),
             ),

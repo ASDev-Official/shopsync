@@ -88,10 +88,9 @@ class _AdvertWidgetState extends State<AdvertWidget> {
           width: widget.width ?? _getAdWidth(),
           decoration: BoxDecoration(
             color: widget.backgroundColor,
-            borderRadius: BorderRadius.circular(8.0),
             border: Border.all(
               color: Colors.grey.shade300,
-              width: 1.0,
+              width: 3.0,
             ),
           ),
           child: _buildAdContent(),

@@ -462,13 +462,18 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
 
                     // Advertisement at the bottom
                     if (_isBannerAdLoaded && _bannerAd != null)
-                      Center(
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 8.0),
-                          child: BannerAdvertWidget(
-                            bannerAd: _bannerAd,
-                            backgroundColor:
-                                isDark ? Colors.grey[800]! : Colors.white,
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).padding.bottom,
+                        ),
+                        child: Center(
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 8.0),
+                            child: BannerAdvertWidget(
+                              bannerAd: _bannerAd,
+                              backgroundColor:
+                                  isDark ? Colors.grey[800]! : Colors.white,
+                            ),
                           ),
                         ),
                       ),

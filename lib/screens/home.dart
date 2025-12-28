@@ -1477,14 +1477,17 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   // Advertisement at the bottom
                   if (_isBannerAdLoaded && _bannerAd != null)
-                    Container(
-                      margin: const EdgeInsets.all(8.0),
-                      child: BannerAdvertWidget(
-                        bannerAd: _bannerAd,
-                        backgroundColor:
-                            Theme.of(context).brightness == Brightness.dark
-                                ? Colors.grey[800]!
-                                : Colors.white,
+                    SafeArea(
+                      top: false,
+                      child: Container(
+                        margin: const EdgeInsets.all(8.0),
+                        child: BannerAdvertWidget(
+                          bannerAd: _bannerAd,
+                          backgroundColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[800]!
+                                  : Colors.white,
+                        ),
                       ),
                     ),
                 ],

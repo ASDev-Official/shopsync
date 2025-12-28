@@ -45,7 +45,7 @@ android {
     defaultConfig {
         applicationId = "com.aadishsamir.shopsync"
         minSdk = 29
-        targetSdk = 35
+        targetSdk = 36
         
         // Enable Credential Manager for Google Sign-In
         manifestPlaceholders["credentialManagerEnabled"] = true
