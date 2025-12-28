@@ -1057,11 +1057,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     // Advertisement at the bottom
                     if (_isBannerAdLoaded && _bannerAd != null)
-                      Center(
-                        child: BannerAdvertWidget(
-                          bannerAd: _bannerAd,
-                          backgroundColor:
-                              isDark ? Colors.grey[800]! : Colors.white,
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).padding.bottom,
+                        ),
+                        child: Center(
+                          child: BannerAdvertWidget(
+                            bannerAd: _bannerAd,
+                            backgroundColor:
+                                isDark ? Colors.grey[800]! : Colors.white,
+                          ),
                         ),
                       ),
                     const SizedBox(height: 16),
