@@ -105,6 +105,8 @@ jobs:
     needs: cd-build-and-upload
     if: success()
     environment: google-play-deployment
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
@@ -183,7 +185,7 @@ jobs:
       - name: Upload APK as Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ShopSync-Phone-APK
+          name: ShopSync_Android_v${{ steps.extract_version.outputs.version_name }}_release
           path: build/app/outputs/flutter-apk/ShopSync_Android_v${{ steps.extract_version.outputs.version_name }}_release.apk
           retention-days: 7
 
