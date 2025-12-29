@@ -3,6 +3,9 @@ name: CD-Prod-Play-Phone
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
