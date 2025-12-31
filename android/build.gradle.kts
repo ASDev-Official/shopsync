@@ -11,12 +11,12 @@ subprojects {
     project.layout.buildDirectory.set(file("${rootProject.layout.buildDirectory.get()}/${project.name}"))
     
     afterEvaluate { project ->
-        if (project.hasProperty('android')) {
+        if (project.hasProperty("android")) {
             project.android {
-                if (project.android.hasProperty('compileSdkVersion')) {
-                    compileSdkVersion 34
+                if (project.android.hasProperty("compileSdkVersion")) {
+                    compileSdkVersion =  34
                 } else {
-                    compileSdk 34
+                    compileSdk =  34
                 }
             }
         }
