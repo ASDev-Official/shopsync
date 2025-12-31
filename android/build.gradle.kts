@@ -6,21 +6,11 @@ allprojects {
 }
 
 rootProject.layout.buildDirectory.set(file("../build"))
-
 subprojects {
     project.layout.buildDirectory.set(file("${rootProject.layout.buildDirectory.get()}/${project.name}"))
-    
-    afterEvaluate { project ->
-        if (project.hasProperty("android")) {
-            project.android {
-                if (project.android.hasProperty("compileSdkVersion")) {
-                    compileSdkVersion =  34
-                } else {
-                    compileSdk =  34
-                }
-            }
-        }
-    }
+}
+subprojects {
+    project.evaluationDependsOn(":app")
 }
 
 tasks.register<Delete>("clean") {
