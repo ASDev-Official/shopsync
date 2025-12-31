@@ -2,19 +2,19 @@ name: Lint
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
     paths:
-      - '**.dart'
-      - 'pubspec.yaml'
-      - 'pubspec.lock'
-      - 'analysis_options.yaml'
+      - "**.dart"
+      - "pubspec.yaml"
+      - "pubspec.lock"
+      - "analysis_options.yaml"
   pull_request:
-    types: [ opened, edited, synchronize ]
+    types: [opened, edited, synchronize]
     paths:
-      - '**.dart'
-      - 'pubspec.yaml'
-      - 'pubspec.lock'
-      - 'analysis_options.yaml'
+      - "**.dart"
+      - "pubspec.yaml"
+      - "pubspec.lock"
+      - "analysis_options.yaml"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -31,7 +31,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3'
+          flutter-version: "3.38.5"
           cache: true
 
       - name: Cache Pub packages

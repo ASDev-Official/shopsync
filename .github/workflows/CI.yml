@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    types: [ opened, edited, synchronize ]
+    types: [opened, edited, synchronize]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -22,7 +22,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3'
+          flutter-version: "3.38.5"
           cache: true
 
       - name: Cache Pub packages
@@ -60,7 +60,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3'
+          flutter-version: "3.38.5"
           cache: true
 
       - name: Cache Pub packages
@@ -130,13 +130,13 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3'
+          flutter-version: "3.38.5"
           cache: true
 
       - name: Cache Pub packages
@@ -185,13 +185,13 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3'
+          flutter-version: "3.38.5"
           cache: true
 
       - name: Cache Pub packages
@@ -240,7 +240,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3'
+          flutter-version: "3.38.5"
           cache: true
 
       - name: Cache Pub packages
@@ -273,4 +273,3 @@ jobs:
         run: |
           echo "## Web Build" >> $GITHUB_STEP_SUMMARY
           echo "✅ Web build (WASM) completed" >> $GITHUB_STEP_SUMMARY
-
