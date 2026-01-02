@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 class LocationSelector extends StatefulWidget {
   final Function(Map<String, dynamic>) onLocationSelected;
@@ -162,7 +163,7 @@ class _LocationSelectorState extends State<LocationSelector>
                         _showSavedLocations = false;
                       });
                     },
-                    child: const Text('Add new location'),
+                    child: Text(AppLocalizations.of(context)!.addNewLocation),
                   ),
                 ],
               ),
@@ -299,10 +300,10 @@ class _LocationSelectorState extends State<LocationSelector>
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Icon(Icons.save, size: 18),
-          SizedBox(width: 8),
-          Text('Save Changes'),
+        children: [
+          const Icon(Icons.save, size: 18),
+          const SizedBox(width: 8),
+          Text(AppLocalizations.of(context)!.saveChanges),
         ],
       ),
     );

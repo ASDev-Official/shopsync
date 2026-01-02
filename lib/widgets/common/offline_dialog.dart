@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:m3e_collection/m3e_collection.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 class OfflineDialog extends StatefulWidget {
   final String featureName;
@@ -99,7 +100,7 @@ class _OfflineDialogState extends State<OfflineDialog>
       actions: [
         ButtonM3E(
           onPressed: () => Navigator.of(context).pop(),
-          label: const Text('OK'),
+          label: Text(AppLocalizations.of(context)!.ok),
           style: ButtonM3EStyle.text,
           size: ButtonM3ESize.md,
         ),

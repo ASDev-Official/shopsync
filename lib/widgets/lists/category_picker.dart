@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '/services/data/item_categories_service.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/utils/icons/food_icons_map.dart';
@@ -78,7 +79,7 @@ class _CategoryPickerState extends State<CategoryPicker> {
                 size: 20,
               ),
             ),
-            title: const Text('No Category'),
+            title: Text(AppLocalizations.of(context)!.noCategory),
             trailing: _selectedCategoryId == null
                 ? Icon(
                     Icons.check,
@@ -110,10 +111,11 @@ class _CategoryPickerState extends State<CategoryPicker> {
               }
 
               if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                return const Padding(
-                  padding: EdgeInsets.all(32.0),
+                return Padding(
+                  padding: const EdgeInsets.all(32.0),
                   child: Center(
-                    child: Text('No categories available'),
+                    child: Text(
+                        AppLocalizations.of(context)!.noCategoriesAvailable),
                   ),
                 );
               }
@@ -183,7 +185,7 @@ class _CategoryPickerState extends State<CategoryPicker> {
                 );
               },
               icon: const Icon(Icons.settings),
-              label: const Text('Manage Categories'),
+              label: Text(AppLocalizations.of(context)!.manageCategories),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[800],
                 foregroundColor: Colors.white,

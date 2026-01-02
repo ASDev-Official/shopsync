@@ -5,6 +5,7 @@ import '/utils/sentry_auth_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:credential_manager/credential_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 import '/services/auth/google_auth.dart';
@@ -18,9 +19,9 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  Future<String> _getVersionInfo() async {
+  Future<String> _getVersionInfo(AppLocalizations l10n) async {
     final packageInfo = await PackageInfo.fromPlatform();
-    return 'Version ${packageInfo.version} (${packageInfo.buildNumber})';
+    return l10n.versionInfo(packageInfo.version, packageInfo.buildNumber);
   }
 
   // ignore: unused_field
@@ -54,6 +55,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       _errorMessage = '';
     });
 
+    final l10n = AppLocalizations.of(context)!;
+
     try {
       UserCredential? userCredential;
 
@@ -76,13 +79,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
       if (!mounted) return;
     } on FirebaseAuthException catch (e, stackTrace) {
-      String errorMessage =
-          e.message ?? 'An error occurred with Google Sign-In';
+      String errorMessage = e.message ?? l10n.googleSignInError;
 
       // Special handling for account-exists-with-different-credential
       if (e.code == 'account-exists-with-different-credential') {
-        errorMessage =
-            'An account with this email already exists. Please sign in with email/password first, then link your Google account from the Profile screen.';
+        errorMessage = l10n.googleSignInAccountExists;
       }
 
       setState(() {
@@ -91,8 +92,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       await SentryUtils.reportError(e, stackTrace);
     } catch (e, stackTrace) {
       setState(() {
-        _errorMessage =
-            'An error occurred with Google Sign-In. Please try again.';
+        _errorMessage = l10n.googleSignInGeneric;
       });
       await SentryUtils.reportError(e, stackTrace);
     } finally {
@@ -143,6 +143,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     final connectivityService = ConnectivityService();
@@ -238,7 +239,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   child: Align(
                     child: Text(
-                      'Share shopping lists with family and friends.',
+                      l10n.welcomeTagline,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16,
@@ -265,18 +266,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   onPressed: () async {
                     if (await connectivityService
                         .checkConnectivityAndShowDialog(context,
-                            feature: 'ShopSync Authentication')) {
+                            feature: l10n.shopSyncAuthentication)) {
                       Navigator.pushNamed(context, '/login');
                     }
                   },
-                  label: const Row(
+                  label: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.login, size: 24),
-                      SizedBox(width: 12),
+                      const Icon(Icons.login, size: 24),
+                      const SizedBox(width: 12),
                       Text(
-                        'Sign In',
-                        style: TextStyle(
+                        l10n.signIn,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -294,19 +295,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   onPressed: () async {
                     if (await connectivityService
                         .checkConnectivityAndShowDialog(context,
-                            feature: 'ShopSync Authentication')) {
+                            feature: l10n.shopSyncAuthentication)) {
                       // Navigate to registration screen
                       Navigator.pushNamed(context, '/register');
                     }
                   },
-                  label: const Row(
+                  label: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.person_add, size: 24),
-                      SizedBox(width: 12),
+                      const Icon(Icons.person_add, size: 24),
+                      const SizedBox(width: 12),
                       Text(
-                        'Sign Up',
-                        style: TextStyle(
+                        l10n.signUp,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -349,10 +350,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                 // Version info
                 FutureBuilder<String>(
-                  future: _getVersionInfo(),
+                  future: _getVersionInfo(l10n),
                   builder: (context, snapshot) {
                     return Text(
-                      snapshot.data ?? 'Loading version information...',
+                      snapshot.data ?? l10n.loadingVersionInfo,
                       style: TextStyle(
                         fontSize: 12,
                         color: isDarkMode

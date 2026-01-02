@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '/services/data/item_categories_service.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/utils/icons/food_icons_map.dart';
@@ -25,10 +26,11 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
   }
 
   Future<void> _createCategory() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_nameController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Please enter a category name'),
+          content: Text(l10n.pleaseEnterACategoryName),
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -51,9 +53,10 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
       });
 
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Category created successfully'),
+          content: Text(l10n.categoryCreatedSuccessfully),
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -62,9 +65,10 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
       );
     } catch (e) {
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error creating category: $e'),
+          content: Text(l10n.errorCreatingCategoryE(e.toString())),
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -87,13 +91,14 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
         return StatefulBuilder(
           builder: (context, setDialogState) {
             final isDark = Theme.of(context).brightness == Brightness.dark;
+            final l10n = AppLocalizations.of(context)!;
 
             return AlertDialog(
               backgroundColor: isDark ? Colors.grey[900] : Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              title: const Text('Edit Category'),
+              title: Text(l10n.editCategory),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -184,14 +189,14 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancel'),
+                  child: Text(l10n.cancel),
                 ),
                 ElevatedButton(
                   onPressed: () async {
                     if (nameController.text.trim().isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: const Text('Please enter a category name'),
+                          content: Text(l10n.pleaseEnterACategoryName),
                           behavior: SnackBarBehavior.floating,
                           backgroundColor: Colors.red[800],
                         ),
@@ -212,7 +217,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: const Text('Category updated successfully'),
+                        content: Text(l10n.categoryUpdatedSuccessfully),
                         behavior: SnackBarBehavior.floating,
                         backgroundColor: Colors.green[800],
                       ),
@@ -222,7 +227,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                     backgroundColor: Colors.green[800],
                     foregroundColor: Colors.white,
                   ),
-                  child: const Text('Save'),
+                  child: Text(l10n.save),
                 ),
               ],
             );
@@ -233,17 +238,18 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
   }
 
   Future<void> _deleteCategory(String categoryId, String categoryName) async {
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Category'),
+        title: Text(l10n.deleteCategory),
         content: Text(
           'Are you sure you want to delete "$categoryName"? This will remove the category from all items.',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -251,7 +257,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
               backgroundColor: Colors.red[800],
               foregroundColor: Colors.white,
             ),
-            child: const Text('Delete'),
+            child: Text(l10n.delete),
           ),
         ],
       ),
@@ -261,18 +267,20 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
       try {
         await CategoriesService.deleteCategory(widget.listId, categoryId);
         if (!mounted) return;
+        final l10n = AppLocalizations.of(context)!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Category deleted successfully'),
+            content: Text(l10n.categoryDeletedSuccessfully),
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.green[800],
           ),
         );
       } catch (e) {
         if (!mounted) return;
+        final l10n = AppLocalizations.of(context)!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error deleting category: $e'),
+            content: Text(l10n.errorDeletingCategoryE(e.toString())),
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.red[800],
           ),
@@ -426,7 +434,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                   child: ElevatedButton.icon(
                     onPressed: _createCategory,
                     icon: const Icon(Icons.add),
-                    label: const Text('Create Category'),
+                    label: Text(AppLocalizations.of(context)!.createCategory),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green[800],
                       foregroundColor: Colors.white,

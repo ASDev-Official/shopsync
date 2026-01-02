@@ -3,8 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import '../../services/locale_service.dart';
+import '../../wear/wear_main.dart';
 import 'wear_sign_out_screen.dart';
 import 'wear_custom_licenses.dart';
+import 'wear_language_selector_screen.dart';
 
 class WearSettingsScreen extends StatefulWidget {
   const WearSettingsScreen({super.key});
@@ -16,11 +19,13 @@ class WearSettingsScreen extends StatefulWidget {
 class _WearSettingsScreenState extends State<WearSettingsScreen> {
   final ScrollController _scrollController = ScrollController();
   String _appVersion = '';
+  Locale? _currentLocale;
 
   @override
   void initState() {
     super.initState();
     _loadAppVersion();
+    _loadLocale();
   }
 
   Future<void> _loadAppVersion() async {
@@ -34,6 +39,20 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
         _appVersion = 'Error loading version';
       });
     }
+  }
+
+  Future<void> _loadLocale() async {
+    final savedLocale = await LocaleService.getSavedLocale();
+    setState(() {
+      _currentLocale = savedLocale;
+    });
+  }
+
+  String _getCurrentLanguageName() {
+    if (_currentLocale == null) {
+      return 'System';
+    }
+    return LocaleService.getLocaleName(_currentLocale!);
   }
 
   @override
@@ -302,6 +321,78 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
             ),
           ),
 
+          // Language card
+          SliverPadding(
+            padding: EdgeInsets.only(
+              left: shape == WearShape.round ? 32.0 : 12.0,
+              right: shape == WearShape.round ? 32.0 : 12.0,
+              bottom: 16.0,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: Card(
+                color: mode == WearMode.active
+                    ? Colors.grey[900]
+                    : Colors.grey[850],
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ConstrainedBox(
+                  constraints:
+                      const BoxConstraints(minHeight: 48, minWidth: 48),
+                  child: InkWell(
+                    onTap: () => _showLanguageSelector(mode),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.language,
+                            size: 18,
+                            color: Colors.green[400],
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Language',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: mode == WearMode.active
+                                        ? Colors.white
+                                        : Colors.white70,
+                                  ),
+                                ),
+                                Text(
+                                  _getCurrentLanguageName(),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: mode == WearMode.active
+                                        ? Colors.white54
+                                        : Colors.white38,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.chevron_right,
+                            size: 16,
+                            color: mode == WearMode.active
+                                ? Colors.white38
+                                : Colors.white24,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
           // Licenses card
           SliverPadding(
             padding: EdgeInsets.only(
@@ -437,5 +528,32 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
         ],
       ),
     );
+  }
+
+  void _showLanguageSelector(WearMode mode) async {
+    final result = await Navigator.push<Locale?>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => WearLanguageSelectorScreen(
+          currentLocale: _currentLocale,
+        ),
+      ),
+    );
+
+    // Update state if language was changed
+    if (result != null || (result == null && _currentLocale != null)) {
+      setState(() {
+        _currentLocale = result;
+      });
+      // Apply locale change to the app
+      if (mounted) {
+        if (result == null) {
+          // System locale - use device default
+          ShopSyncWearApp.setLocale(context, const Locale('en'));
+        } else {
+          ShopSyncWearApp.setLocale(context, result);
+        }
+      }
+    }
   }
 }

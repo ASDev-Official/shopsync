@@ -487,6 +487,612 @@ abstract class AppLocalizations {
   /// **'Could not launch {url}'**
   String couldNotLaunchUrl1(String url);
 
+  /// No description provided for @itemDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Item Details'**
+  String get itemDetailsTitle;
+
+  /// No description provided for @untitledItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled Item'**
+  String get untitledItem;
+
+  /// No description provided for @unknownUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknownUser;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @setDeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Set deadline'**
+  String get setDeadline;
+
+  /// No description provided for @setLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Set location'**
+  String get setLocation;
+
+  /// No description provided for @addedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Added by'**
+  String get addedBy;
+
+  /// No description provided for @addedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Added at'**
+  String get addedAt;
+
+  /// No description provided for @unnamedCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Unnamed Category'**
+  String get unnamedCategory;
+
+  /// No description provided for @onboardingWelcomeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Share shopping lists with family and friends'**
+  String get onboardingWelcomeDescription;
+
+  /// No description provided for @onboardingSmartListsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Create and manage your shopping lists effortlessly'**
+  String get onboardingSmartListsDescription;
+
+  /// No description provided for @onboardingShareDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Share lists with family and friends'**
+  String get onboardingShareDescription;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboardingSkip;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get onboardingDone;
+
+  /// No description provided for @upcomingMaintenance.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming Maintenance'**
+  String get upcomingMaintenance;
+
+  /// No description provided for @underMaintenance.
+  ///
+  /// In en, this message translates to:
+  /// **'Under Maintenance'**
+  String get underMaintenance;
+
+  /// No description provided for @understood.
+  ///
+  /// In en, this message translates to:
+  /// **'Understood'**
+  String get understood;
+
+  /// No description provided for @scheduledPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled Period'**
+  String get scheduledPeriod;
+
+  /// No description provided for @expectedDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected Duration'**
+  String get expectedDuration;
+
+  /// No description provided for @utcTimeZone.
+  ///
+  /// In en, this message translates to:
+  /// **'UTC Time Zone'**
+  String get utcTimeZone;
+
+  /// No description provided for @createItemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Item'**
+  String get createItemTitle;
+
+  /// No description provided for @itemNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Item Name'**
+  String get itemNameLabel;
+
+  /// No description provided for @enterItemName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter item name...'**
+  String get enterItemName;
+
+  /// No description provided for @categoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get categoryLabel;
+
+  /// No description provided for @selectCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a category'**
+  String get selectCategory;
+
+  /// No description provided for @itemIconLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Item Icon'**
+  String get itemIconLabel;
+
+  /// No description provided for @chooseIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an icon'**
+  String get chooseIcon;
+
+  /// No description provided for @deadlineLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Deadline'**
+  String get deadlineLabel;
+
+  /// No description provided for @setDeadlineText.
+  ///
+  /// In en, this message translates to:
+  /// **'Set deadline'**
+  String get setDeadlineText;
+
+  /// No description provided for @locationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get locationLabel;
+
+  /// No description provided for @setLocationText.
+  ///
+  /// In en, this message translates to:
+  /// **'Set location'**
+  String get setLocationText;
+
+  /// No description provided for @counterLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Counter'**
+  String get counterLabel;
+
+  /// No description provided for @descriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get descriptionLabel;
+
+  /// No description provided for @createItemButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Item'**
+  String get createItemButton;
+
+  /// No description provided for @createItemTemplate.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Item Template'**
+  String get createItemTemplate;
+
+  /// No description provided for @welcomeTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Share shopping lists with family and friends.'**
+  String get welcomeTagline;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signIn;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUp;
+
+  /// From: lib/screens/auth/welcome.dart
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version} ({buildNumber})'**
+  String versionInfo(String version, String buildNumber);
+
+  /// No description provided for @loadingVersionInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading version information...'**
+  String get loadingVersionInfo;
+
+  /// No description provided for @googleSignInError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred with Google Sign-In'**
+  String get googleSignInError;
+
+  /// No description provided for @googleSignInAccountExists.
+  ///
+  /// In en, this message translates to:
+  /// **'An account with this email already exists. Please sign in with email/password first, then link your Google account from the Profile screen.'**
+  String get googleSignInAccountExists;
+
+  /// No description provided for @googleSignInGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred with Google Sign-In. Please try again.'**
+  String get googleSignInGeneric;
+
+  /// No description provided for @shopSyncAuthentication.
+  ///
+  /// In en, this message translates to:
+  /// **'ShopSync Authentication'**
+  String get shopSyncAuthentication;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome\nBack!'**
+  String get welcomeBack;
+
+  /// No description provided for @signInContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to continue with ShopSync'**
+  String get signInContinue;
+
+  /// No description provided for @loginEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get loginEmail;
+
+  /// No description provided for @loginPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get loginPassword;
+
+  /// No description provided for @loginInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get loginInvalidEmail;
+
+  /// No description provided for @loginPasswordEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Password cannot be empty'**
+  String get loginPasswordEmpty;
+
+  /// No description provided for @loginSignInButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get loginSignInButton;
+
+  /// No description provided for @loginForgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
+  String get loginForgotPassword;
+
+  /// No description provided for @loginNoAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get loginNoAccount;
+
+  /// No description provided for @loginSignUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get loginSignUp;
+
+  /// No description provided for @loginAccountExists.
+  ///
+  /// In en, this message translates to:
+  /// **'The email address is already in use by another account'**
+  String get loginAccountExists;
+
+  /// No description provided for @loginInvalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'The provided credentials are incorrect. Please check your email and password'**
+  String get loginInvalidCredentials;
+
+  /// No description provided for @loginOperationNotAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev'**
+  String get loginOperationNotAllowed;
+
+  /// No description provided for @loginUserDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'This user has been disabled. Please contact support@aadish.dev'**
+  String get loginUserDisabled;
+
+  /// No description provided for @loginUserNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No user found for that email. Please check your email and try again'**
+  String get loginUserNotFound;
+
+  /// No description provided for @loginWrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'The password is invalid or the user does not have a password'**
+  String get loginWrongPassword;
+
+  /// No description provided for @loginTooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests. Please try again later'**
+  String get loginTooManyRequests;
+
+  /// No description provided for @loginNetworkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Please check your internet connection and try again'**
+  String get loginNetworkError;
+
+  /// No description provided for @loginGenericError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred during login'**
+  String get loginGenericError;
+
+  /// No description provided for @registerCreateAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create\nAccount'**
+  String get registerCreateAccount;
+
+  /// No description provided for @registerSignUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up to start sharing grocery lists'**
+  String get registerSignUp;
+
+  /// No description provided for @registerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get registerName;
+
+  /// No description provided for @registerNameError.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at least 2 characters'**
+  String get registerNameError;
+
+  /// No description provided for @registerEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get registerEmail;
+
+  /// No description provided for @registerPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get registerPassword;
+
+  /// No description provided for @registerEmailExists.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already registered. Please sign in instead'**
+  String get registerEmailExists;
+
+  /// No description provided for @registerInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address'**
+  String get registerInvalidEmail;
+
+  /// No description provided for @registerWeakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'This password is too weak. Please choose a stronger one'**
+  String get registerWeakPassword;
+
+  /// No description provided for @registerTooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests. Please try again later'**
+  String get registerTooManyRequests;
+
+  /// No description provided for @registerNetworkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Please check your internet connection and try again'**
+  String get registerNetworkError;
+
+  /// No description provided for @registerGenericError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred during registration'**
+  String get registerGenericError;
+
+  /// No description provided for @registerButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get registerButton;
+
+  /// No description provided for @registerEnterName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your name'**
+  String get registerEnterName;
+
+  /// No description provided for @registerNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at least 2 characters'**
+  String get registerNameTooShort;
+
+  /// No description provided for @registerEnterPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get registerEnterPassword;
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset\nPassword'**
+  String get resetPasswordTitle;
+
+  /// No description provided for @resetPasswordSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email to receive a password reset link'**
+  String get resetPasswordSubtitle;
+
+  /// No description provided for @resetPasswordEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get resetPasswordEmail;
+
+  /// No description provided for @resetPasswordButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPasswordButton;
+
+  /// No description provided for @resetPasswordInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address'**
+  String get resetPasswordInvalidEmail;
+
+  /// No description provided for @resetPasswordUserNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No account found with this email'**
+  String get resetPasswordUserNotFound;
+
+  /// No description provided for @resetPasswordTooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests. Please try again later'**
+  String get resetPasswordTooManyRequests;
+
+  /// No description provided for @resetPasswordNetworkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Check your connection and try again'**
+  String get resetPasswordNetworkError;
+
+  /// No description provided for @resetPasswordGenericError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred'**
+  String get resetPasswordGenericError;
+
+  /// No description provided for @resetPasswordSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset link sent to your email'**
+  String get resetPasswordSuccess;
+
+  /// No description provided for @resetPasswordError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred. Please try again later'**
+  String get resetPasswordError;
+
+  /// No description provided for @resetPasswordBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Sign In'**
+  String get resetPasswordBack;
+
+  /// No description provided for @signingOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing Out...'**
+  String get signingOut;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// No description provided for @outageServiceOutage.
+  ///
+  /// In en, this message translates to:
+  /// **'Service Outage'**
+  String get outageServiceOutage;
+
+  /// No description provided for @outageDefaultDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'An outage has been reported. Our team is investigating.'**
+  String get outageDefaultDescription;
+
+  /// From: lib/screens/status/outage_dialog.dart
+  ///
+  /// In en, this message translates to:
+  /// **'Affected: {components}'**
+  String outageAffected(String components);
+
+  /// No description provided for @outageStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Started'**
+  String get outageStarted;
+
+  /// No description provided for @outageResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get outageResolved;
+
+  /// No description provided for @outageLatestUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest Updates'**
+  String get outageLatestUpdates;
+
+  /// No description provided for @outageClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get outageClose;
+
   /// From: lib/screens/settings/settings.dart
   ///
   /// In en, this message translates to:
@@ -726,12 +1332,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter group name'**
   String get enterGroupName2;
-
-  /// No description provided for @enterItemName.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter item name...'**
-  String get enterItemName;
 
   /// No description provided for @enterItemName1.
   ///

@@ -2,7 +2,7 @@ name: shopsync
 description: "ShopSync - Share shopping lists with family and friends"
 publish_to: "none"
 
-version: 5.0.4-other
+version: 5.1.0-other
 
 environment:
   sdk: ^3.6.0
@@ -58,6 +58,7 @@ flutter:
     - assets/badges/google/android/png@4x/dark/android_dark_rd_ctn@4x.png
     - assets/badges/google/android/png@4x/dark/android_dark_sq_ctn@4x.png
     - assets/badges/google/android/png@4x/light/android_light_rd_ctn@4x.png
+    - assets/badges/google/android/png@4x/light/android_light_rd_na@4x.png
     - assets/badges/google/android/png@4x/light/android_light_sq_ctn@4x.png
     - assets/badges/google/android/png@4x/dark/android_dark_rd_na@4x.png
     - assets/badges/google/android/png@4x/dark/android_dark_sq_na@4x.png

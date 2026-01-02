@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:m3e_collection/m3e_collection.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'item_details.dart';
 import 'create_item.dart';
 import 'list_options.dart';
@@ -536,7 +537,7 @@ class _AddItemFabMenuState extends State<AddItemFabMenu> {
           items: [
             FabMenuItem(
               icon: const Icon(Icons.add_task),
-              label: const Text('Add Item Manually'),
+              label: Text(AppLocalizations.of(context)!.addItemManually),
               onPressed: () {
                 _closeMenu();
                 Navigator.push(
@@ -551,7 +552,7 @@ class _AddItemFabMenuState extends State<AddItemFabMenu> {
             ),
             FabMenuItem(
               icon: const Icon(Icons.content_copy),
-              label: const Text('Add From Template'),
+              label: Text(AppLocalizations.of(context)!.addFromTemplate),
               onPressed: () {
                 _closeMenu();
                 Navigator.push(
@@ -931,8 +932,9 @@ class _CategorySectionState extends State<CategorySection> {
         }),
       );
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to update item status')),
+        SnackBar(content: Text(l10n.failedToUpdateItemStatus)),
       );
     }
   }
@@ -984,8 +986,9 @@ class _CategorySectionState extends State<CategorySection> {
         }),
       );
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to delete item')),
+        SnackBar(content: Text(l10n.failedToDeleteItem)),
       );
     }
   }

@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
+import 'package:shopsync/services/locale_service.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'config/firebase_options.dart';
 import 'screens/auth/welcome.dart';
 import 'screens/auth/login.dart';
@@ -118,18 +120,57 @@ void main() async {
       // Setting to 1.0 will profile 100% of sampled transactions:
       options.profilesSampleRate = 1.0;
     },
-    appRunner: () => runApp(SentryWidget(child: ShopSync())),
+    appRunner: () => runApp(SentryWidget(child: ShopSyncApp())),
   );
 }
 
-class ShopSync extends StatelessWidget {
-  const ShopSync({super.key});
+class ShopSyncApp extends StatefulWidget {
+  const ShopSyncApp({super.key});
+
+  @override
+  State<ShopSyncApp> createState() => _ShopSyncAppState();
+
+  /// Static method to change locale from anywhere in the app
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _ShopSyncAppState? state =
+        context.findAncestorStateOfType<_ShopSyncAppState>();
+    state?.setLocale(newLocale);
+  }
+}
+
+class _ShopSyncAppState extends State<ShopSyncApp> {
+  Locale? _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLocale();
+  }
+
+  Future<void> _loadLocale() async {
+    final savedLocale = await LocaleService.getSavedLocale();
+    if (savedLocale != null && mounted) {
+      setState(() {
+        _locale = savedLocale;
+      });
+    }
+  }
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+    LocaleService.saveLocale(locale);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ShopSync',
       navigatorKey: AppNavigation.navigatorKey,
+      locale: _locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.green,

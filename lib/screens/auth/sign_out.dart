@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '/widgets/ui/loading_spinner.dart';
 
 class SignOutScreen extends StatefulWidget {
@@ -46,6 +47,7 @@ class _SignOutScreenState extends State<SignOutScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -66,8 +68,8 @@ class _SignOutScreenState extends State<SignOutScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Signing Out...',
+            Text(
+              l10n.signingOut,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),

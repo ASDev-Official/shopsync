@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:m3e_collection/m3e_collection.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'forgot_password.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/utils/sentry_auth_utils.dart';
@@ -44,26 +45,26 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  String? _getErrorMessage(FirebaseAuthException e) {
+  String? _getErrorMessage(FirebaseAuthException e, AppLocalizations l10n) {
     switch (e.code) {
       case 'account-exists-with-different-credential':
-        return 'The email address is already in use by another account';
+        return l10n.loginAccountExists;
       case 'invalid-credential':
-        return 'The provided credentials are incorrect. Please check your email and password';
+        return l10n.loginInvalidCredentials;
       case 'operation-not-allowed':
-        return 'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
+        return l10n.loginOperationNotAllowed;
       case 'user-disabled':
-        return 'This user has been disabled. Please contact support@aadish.dev';
+        return l10n.loginUserDisabled;
       case 'user-not-found':
-        return 'No user found for that email. Please check your email and try again';
+        return l10n.loginUserNotFound;
       case 'wrong-password':
-        return 'The password is invalid or the user does not have a password';
+        return l10n.loginWrongPassword;
       case 'too-many-requests':
-        return 'Too many requests. Please try again later';
+        return l10n.loginTooManyRequests;
       case 'network-request-failed':
-        return 'Network error. Please check your internet connection and try again';
+        return l10n.loginNetworkError;
       default:
-        return e.message ?? 'An error occurred during login';
+        return e.message ?? l10n.loginGenericError;
     }
   }
 
@@ -83,13 +84,15 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (e, stackTrace) {
+      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _errorMessage = _getErrorMessage(e) ?? 'An error occurred during login';
+        _errorMessage = _getErrorMessage(e, l10n) ?? l10n.loginGenericError;
       });
       await SentryUtils.reportError(e, stackTrace);
     } catch (e, stackTrace) {
+      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _errorMessage = 'An error occurred. Please try again later';
+        _errorMessage = l10n.loginGenericError;
       });
       await SentryUtils.reportError(e, stackTrace);
     } finally {
@@ -101,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -142,8 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ? [Colors.green[300]!, Colors.green[400]!]
                           : [Colors.white, Colors.white.withValues(alpha: 0.9)],
                     ).createShader(bounds),
-                    child: const Text(
-                      'Welcome\nBack!',
+                    child: Text(
+                      l10n.welcomeBack,
                       style: TextStyle(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
@@ -155,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Sign in to continue with ShopSync',
+                    l10n.signInContinue,
                     style: TextStyle(
                       fontSize: 16,
                       color: isDarkMode
@@ -192,10 +196,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
-                              labelText: 'Email',
+                              labelText: l10n.loginEmail,
                               errorText: _emailController.text.isNotEmpty &&
                                       !_isEmailValid
-                                  ? 'Please enter a valid email'
+                                  ? l10n.loginInvalidEmail
                                   : null,
                               labelStyle: TextStyle(
                                 color: isDarkMode
@@ -257,10 +261,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
-                              labelText: 'Password',
+                              labelText: l10n.loginPassword,
                               errorText: _passwordController.text.isNotEmpty &&
                                       !_isPasswordValid
-                                  ? 'Password cannot be empty'
+                                  ? l10n.loginPasswordEmpty
                                   : null,
                               labelStyle: TextStyle(
                                 color: isDarkMode
@@ -372,8 +376,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.white,
                                       size: 24.0,
                                     )
-                                  : const Text(
-                                      'Sign In',
+                                  : Text(
+                                      l10n.loginSignInButton,
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
@@ -395,8 +399,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               );
                             },
-                            label: const Text(
-                              'Forgot Password?',
+                            label: Text(
+                              l10n.loginForgotPassword,
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
@@ -415,7 +419,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't have an account?",
+                        l10n.loginNoAccount,
                         style: TextStyle(
                           color: isDarkMode
                               ? Colors.green[100]?.withValues(alpha: 0.9)
@@ -427,8 +431,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, '/register');
                         },
-                        label: const Text(
-                          'Sign Up',
+                        label: Text(
+                          l10n.loginSignUp,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,

@@ -1,5 +1,6 @@
 // lib/screens/onboarding.dart
 import 'package:flutter/material.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '../../services/storage/shared_prefs.dart';
 
 class AnimatedShoppingCartPainter extends CustomPainter {
@@ -229,44 +230,47 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   late final Animation<double> _pageAnimation;
   int _currentPage = 0;
 
-  final List<OnboardingPage> _pages = [
-    OnboardingPage(
-      title: 'Welcome to ShopSync',
-      description: 'Share shopping lists with family and friends',
-      painter: (primary, secondary, animation) => AnimatedShoppingCartPainter(
-        primaryColor: primary,
-        secondaryColor: secondary,
-        animation: animation,
-      ),
-    ),
-    OnboardingPage(
-      title: 'Smart Lists',
-      description: 'Create and manage your shopping lists effortlessly',
-      painter: (primary, secondary, animation) => AnimatedListPainter(
-        primaryColor: primary,
-        secondaryColor: secondary,
-        animation: animation,
-      ),
-    ),
-    OnboardingPage(
-      title: 'Share & Collaborate',
-      description: 'Share lists with family and friends',
-      painter: (primary, secondary, animation) => AnimatedSharePainter(
-        primaryColor: primary,
-        secondaryColor: secondary,
-        animation: animation,
-      ),
-    ),
-  ];
+  List<OnboardingPage> _buildPages(AppLocalizations l10n) => [
+        OnboardingPage(
+          title: l10n.welcomeToShopsync,
+          description: l10n.onboardingWelcomeDescription,
+          painter: (primary, secondary, animation) =>
+              AnimatedShoppingCartPainter(
+            primaryColor: primary,
+            secondaryColor: secondary,
+            animation: animation,
+          ),
+        ),
+        OnboardingPage(
+          title: l10n.smartLists,
+          description: l10n.onboardingSmartListsDescription,
+          painter: (primary, secondary, animation) => AnimatedListPainter(
+            primaryColor: primary,
+            secondaryColor: secondary,
+            animation: animation,
+          ),
+        ),
+        OnboardingPage(
+          title: l10n.shareCollaborate,
+          description: l10n.onboardingShareDescription,
+          painter: (primary, secondary, animation) => AnimatedSharePainter(
+            primaryColor: primary,
+            secondaryColor: secondary,
+            animation: animation,
+          ),
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final primaryColor = Colors.green;
     final secondaryColor = Colors.green[700]!;
     final backgroundColor = isDark ? Colors.grey[900] : Colors.white;
     final textColor = isDark ? Colors.white : Colors.black87;
+    final pages = _buildPages(l10n);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -275,7 +279,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           children: [
             PageView.builder(
               controller: _pageController,
-              itemCount: _pages.length,
+              itemCount: pages.length,
               onPageChanged: _onPageChanged,
               itemBuilder: (context, index) {
                 return AnimatedBuilder(
@@ -288,7 +292,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           height: 300,
                           width: 300,
                           child: CustomPaint(
-                            painter: _pages[index].painter(
+                            painter: pages[index].painter(
                               primaryColor,
                               secondaryColor,
                               _pageAnimation.value,
@@ -305,7 +309,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                               end: Offset.zero,
                             ).animate(_pageAnimation),
                             child: Text(
-                              _pages[index].title,
+                              pages[index].title,
                               style: theme.textTheme.headlineMedium?.copyWith(
                                 color: primaryColor,
                                 fontWeight: FontWeight.bold,
@@ -326,7 +330,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 32),
                               child: Text(
-                                _pages[index].description,
+                                pages[index].description,
                                 textAlign: TextAlign.center,
                                 style: theme.textTheme.bodyLarge?.copyWith(
                                   color: textColor,
@@ -349,11 +353,11 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
-                    onPressed: _currentPage == _pages.length - 1
+                    onPressed: _currentPage == pages.length - 1
                         ? null
                         : _finishOnboarding,
                     child: Text(
-                      'Skip',
+                      l10n.onboardingSkip,
                       style: TextStyle(
                         color: textColor.withValues(alpha: 0.7),
                       ),
@@ -361,7 +365,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   ),
                   Row(
                     children: List.generate(
-                      _pages.length,
+                      pages.length,
                       (index) => AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
                         margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -377,14 +381,16 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     ),
                   ),
                   TextButton(
-                    onPressed: () => _currentPage < _pages.length - 1
+                    onPressed: () => _currentPage < pages.length - 1
                         ? _pageController.nextPage(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut,
                           )
                         : _finishOnboarding(),
                     child: Text(
-                      _currentPage == _pages.length - 1 ? 'Done' : 'Next',
+                      _currentPage == pages.length - 1
+                          ? l10n.onboardingDone
+                          : l10n.onboardingNext,
                       style: TextStyle(color: primaryColor),
                     ),
                   ),

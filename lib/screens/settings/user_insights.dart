@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shopsync/services/analytics/analytics_service.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 import '../../widgets/ui/loading_spinner.dart';
 
@@ -343,7 +344,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                         TextButton.icon(
                           onPressed: () => setState(() {}),
                           icon: const Icon(Icons.refresh, size: 16),
-                          label: const Text('Retry'),
+                          label: Text(AppLocalizations.of(context)!.retry),
                         ),
                       ],
                     ),
@@ -548,7 +549,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                         TextButton.icon(
                           onPressed: () => setState(() {}),
                           icon: const Icon(Icons.refresh),
-                          label: const Text('Retry'),
+                          label: Text(AppLocalizations.of(context)!.retry),
                         ),
                       ],
                     ),
@@ -686,7 +687,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                   TextButton.icon(
                     onPressed: () => setState(() {}),
                     icon: const Icon(Icons.refresh),
-                    label: const Text('Retry'),
+                    label: Text(AppLocalizations.of(context)!.retry),
                   ),
                 ],
               ),
@@ -841,7 +842,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                   TextButton.icon(
                     onPressed: () => setState(() {}),
                     icon: const Icon(Icons.refresh),
-                    label: const Text('Retry'),
+                    label: Text(AppLocalizations.of(context)!.retry),
                   ),
                 ],
               ),

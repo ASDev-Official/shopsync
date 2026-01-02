@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
 import '/services/migration/migration_service.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 class MigrationScreen extends StatefulWidget {
   const MigrationScreen({super.key});
@@ -82,7 +83,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Edit Group Name'),
+        title: Text(AppLocalizations.of(context)!.editGroupName),
         content: TextField(
           controller: controller,
           autofocus: true,
@@ -94,7 +95,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -107,7 +108,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
               }
               Navigator.pop(context);
             },
-            child: const Text('Save'),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -153,8 +154,9 @@ class _MigrationScreenState extends State<MigrationScreen> {
       Navigator.of(context).pushReplacementNamed('/home');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content:
-              Text('Successfully organized ${selectedGroups.length} groups'),
+          content: Text(AppLocalizations.of(context)!
+              .successfullyOrganizedSelectedgroupslengthGroups(
+                  selectedGroups.length.toString())),
           backgroundColor: Colors.green[800],
         ),
       );
@@ -163,8 +165,9 @@ class _MigrationScreenState extends State<MigrationScreen> {
         _isMigrating = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to migrate lists. Please try again.'),
+        SnackBar(
+          content: Text(
+              AppLocalizations.of(context)!.failedToMigrateListsPleaseTryAgain),
           backgroundColor: Colors.red,
         ),
       );
@@ -175,19 +178,19 @@ class _MigrationScreenState extends State<MigrationScreen> {
     final shouldSkip = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Skip Organization'),
+        title: Text(AppLocalizations.of(context)!.skipOrganization),
         content: const Text(
           'You can organize your lists into groups later from the home screen. Continue without organizing?',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.orange),
-            child: const Text('Skip for Now'),
+            child: Text(AppLocalizations.of(context)!.skipForNow),
           ),
         ],
       ),
@@ -270,9 +273,9 @@ class _MigrationScreenState extends State<MigrationScreen> {
             }
           },
           itemBuilder: (context) => [
-            const PopupMenuItem(
+            PopupMenuItem(
               value: -1,
-              child: Text('Leave Ungrouped'),
+              child: Text(AppLocalizations.of(context)!.leaveUngrouped),
             ),
             ..._suggestedGroups
                 .asMap()
@@ -619,12 +622,14 @@ class _MigrationScreenState extends State<MigrationScreen> {
                                         _customGroupController.clear();
                                       });
                                     },
-                                    child: const Text('Cancel'),
+                                    child: Text(
+                                        AppLocalizations.of(context)!.cancel),
                                   ),
                                   const SizedBox(width: 8),
                                   ElevatedButton(
                                     onPressed: _addCustomGroup,
-                                    child: const Text('Add Group'),
+                                    child: Text(
+                                        AppLocalizations.of(context)!.addGroup),
                                   ),
                                 ],
                               ),
@@ -641,7 +646,8 @@ class _MigrationScreenState extends State<MigrationScreen> {
                               });
                             },
                             icon: const Icon(Icons.add, size: 16),
-                            label: const Text('Add Custom Group'),
+                            label: Text(
+                                AppLocalizations.of(context)!.addCustomGroup),
                             style: OutlinedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 24,
