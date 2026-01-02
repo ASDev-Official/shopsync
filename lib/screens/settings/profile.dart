@@ -11,6 +11,7 @@ import '/screens/auth/sign_out.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/widgets/common/advert.dart';
 import '/services/auth/google_auth.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -146,8 +147,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Profile updated successfully'),
+        SnackBar(
+          content:
+              Text(AppLocalizations.of(context)!.profileUpdatedSuccessfully),
           backgroundColor: Colors.green,
         ),
       );
@@ -168,18 +170,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final shouldSignOut = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Sign Out'),
-            content: const Text('Are you sure you want to sign out?'),
+            title: Text(AppLocalizations.of(context)!.signOut),
+            content:
+                Text(AppLocalizations.of(context)!.areYouSureYouWantToSignOut),
             actions: [
               ButtonM3E(
                 onPressed: () => Navigator.pop(context, false),
-                label: const Text('Cancel'),
+                label: Text(AppLocalizations.of(context)!.cancel),
                 style: ButtonM3EStyle.text,
                 size: ButtonM3ESize.md,
               ),
               ButtonM3E(
                 onPressed: () => Navigator.pop(context, true),
-                label: const Text('Sign Out'),
+                label: Text(AppLocalizations.of(context)!.signOut),
                 style: ButtonM3EStyle.text,
                 size: ButtonM3ESize.md,
               ),
@@ -241,8 +244,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Google account linked successfully!'),
+        SnackBar(
+          content: Text(
+              AppLocalizations.of(context)!.googleAccountLinkedSuccessfully),
           backgroundColor: Colors.green,
         ),
       );
@@ -276,7 +280,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final shouldUnlink = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Unlink Google Account'),
+            title: Text(AppLocalizations.of(context)!.unlinkGoogleAccount),
             content: const Text(
               'Are you sure you want to unlink your Google account? '
               'You will no longer be able to sign in with Google unless you link it again.',
@@ -284,13 +288,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             actions: [
               ButtonM3E(
                 onPressed: () => Navigator.pop(context, false),
-                label: const Text('Cancel'),
+                label: Text(AppLocalizations.of(context)!.cancel),
                 style: ButtonM3EStyle.text,
                 size: ButtonM3ESize.md,
               ),
               ButtonM3E(
                 onPressed: () => Navigator.pop(context, true),
-                label: const Text('Unlink'),
+                label: Text(AppLocalizations.of(context)!.unlink),
                 style: ButtonM3EStyle.text,
                 size: ButtonM3ESize.md,
               ),
@@ -819,7 +823,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           arguments: true);
                                     },
                                     icon: const Icon(Icons.lock_reset),
-                                    label: const Text('Set Password'),
+                                    label: Text(AppLocalizations.of(context)!
+                                        .setPassword),
                                     style: ButtonM3EStyle.outlined,
                                     size: ButtonM3ESize.md,
                                   ),
@@ -832,12 +837,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ListTile(
                               contentPadding: EdgeInsets.zero,
                               leading: CircleAvatar(
-                                backgroundColor:
-                                    isDark ? Colors.red[900] : Colors.red[50],
+                                backgroundColor: Colors.white,
                                 child: Image.asset(
-                                  'assets/badges/google/web/png@4x/light/web_light_rd_na@4x.png',
-                                  width: 24,
-                                  height: 24,
+                                  'assets/badges/google/android/png@4x/light/android_light_rd_na@4x.png',
+                                  width: 50,
+                                  height: 50,
                                 ),
                               ),
                               title: Text(
@@ -895,7 +899,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             size: 20.0,
                                           ),
                                         )
-                                      : const Text('Unlink Google Account'),
+                                      : Text(AppLocalizations.of(context)!
+                                          .unlinkGoogleAccount),
                                   style: ButtonM3EStyle.outlined,
                                   size: ButtonM3ESize.md,
                                 ),
@@ -926,7 +931,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             size: 20.0,
                                           ),
                                         )
-                                      : const Text('Link Google Account'),
+                                      : Text(AppLocalizations.of(context)!
+                                          .linkGoogleAccount),
                                   style: ButtonM3EStyle.filled,
                                   size: ButtonM3ESize.md,
                                 ),
@@ -1013,7 +1019,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: ButtonM3E(
                               onPressed: () =>
                                   setState(() => _isEditing = false),
-                              label: const Text('Cancel'),
+                              label: Text(AppLocalizations.of(context)!.cancel),
                               style: ButtonM3EStyle.outlined,
                               size: ButtonM3ESize.lg,
                             ),
@@ -1032,7 +1038,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         size: 24.0,
                                       ),
                                     )
-                                  : const Text('Save Changes'),
+                                  : Text(AppLocalizations.of(context)!
+                                      .saveChanges),
                               style: ButtonM3EStyle.filled,
                               size: ButtonM3ESize.lg,
                             ),
@@ -1048,7 +1055,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: ButtonM3E(
                         onPressed: () => {_signOut()},
                         icon: const Icon(Icons.logout),
-                        label: const Text('Sign Out'),
+                        label: Text(AppLocalizations.of(context)!.signOut),
                         style: ButtonM3EStyle.outlined,
                         size: ButtonM3ESize.lg,
                       ),

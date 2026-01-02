@@ -57,4 +57,75 @@ class SharedPrefs {
       );
     }
   }
+
+  /// Get a string value from SharedPreferences
+  static Future<String?> getString(String key) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.getString(key);
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        print('Error getting string from SharedPreferences: $e');
+      }
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        withScope: (scope) {
+          scope.setContexts('preferences', {
+            'operation': 'getString',
+            'key': key,
+          });
+          scope.setTag('error_type', 'shared_prefs_error');
+        },
+      );
+      return null;
+    }
+  }
+
+  /// Set a string value in SharedPreferences
+  static Future<void> setString(String key, String value) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(key, value);
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        print('Error setting string in SharedPreferences: $e');
+      }
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        withScope: (scope) {
+          scope.setContexts('preferences', {
+            'operation': 'setString',
+            'key': key,
+            'value': value,
+          });
+          scope.setTag('error_type', 'shared_prefs_error');
+        },
+      );
+    }
+  }
+
+  /// Remove a value from SharedPreferences
+  static Future<void> remove(String key) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(key);
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        print('Error removing value from SharedPreferences: $e');
+      }
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        withScope: (scope) {
+          scope.setContexts('preferences', {
+            'operation': 'remove',
+            'key': key,
+          });
+          scope.setTag('error_type', 'shared_prefs_error');
+        },
+      );
+    }
+  }
 }

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopsync/screens/auth/sign_out.dart';
-import 'package:shopsync/screens/settings/widget_settings.dart';
 import 'package:shopsync/screens/settings/custom_licenses.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
+import 'package:shopsync/services/locale_service.dart';
+import 'package:shopsync/main.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '/widgets/common/advert.dart';
@@ -21,14 +22,12 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   String _appVersion = '';
-  // bool _isDarkMode = false;
-  // bool _notificationsEnabled = false;
-  String _selectedLanguage = 'English';
-  final _prefs = SharedPreferences.getInstance();
+  Locale? _currentLocale;
 
   // Add GitHub and Weblate URLs
   final String _githubUrl = 'https://github.com/aadishsamir123/asdev-shopsync';
-  final String _weblateUrl = 'https://example.com';
+  final String _weblateUrl =
+      'https://hosted.weblate.org/engage/asdev-shopsync/';
 
   // Offline mode
   final connectivityService = ConnectivityService();
@@ -74,11 +73,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _loadSettings() async {
-    final prefs = await _prefs;
+    final savedLocale = await LocaleService.getSavedLocale();
     setState(() {
-      // _isDarkMode = prefs.getBool('darkMode') ?? false;
-      // _notificationsEnabled = prefs.getBool('notificationsEnabled') ?? true;
-      _selectedLanguage = prefs.getString('language') ?? 'English';
+      _currentLocale = savedLocale;
     });
   }
 
@@ -118,39 +115,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
   //   });
   // }
 
-  Future<void> _changeLanguage(String language) async {
-    final prefs = await _prefs;
-    await prefs.setString('language', language);
+  Future<void> _changeLanguage(Locale locale) async {
     setState(() {
-      _selectedLanguage = language;
+      _currentLocale = locale;
     });
+    await LocaleService.saveLocale(locale);
+    if (mounted) {
+      ShopSyncApp.setLocale(context, locale);
+    }
+  }
+
+  String _getCurrentLanguageName() {
+    if (_currentLocale == null) {
+      return 'System Default';
+    }
+    return LocaleService.getLocaleName(_currentLocale!);
   }
 
   Future<void> _launchUrl(String url) async {
+    final l10n = AppLocalizations.of(context)!;
     final Uri uri = Uri.parse(url);
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not launch $url')),
+        SnackBar(content: Text(l10n.couldNotLaunchUrl(url))),
       );
     }
   }
 
   Future<void> _signOut() async {
+    final l10n = AppLocalizations.of(context)!;
     final shouldSignOut = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Sign Out'),
-            content: const Text('Are you sure you want to sign out?'),
+            title: Text(l10n.signOut),
+            content: Text(l10n.areYouSureYouWantToSignOut),
             actions: [
               ButtonM3E(
                 onPressed: () => Navigator.pop(context, false),
-                label: const Text('Cancel'),
+                label: Text(l10n.cancel),
                 style: ButtonM3EStyle.text,
                 size: ButtonM3ESize.md,
               ),
               ButtonM3E(
                 onPressed: () => Navigator.pop(context, true),
-                label: const Text('Sign Out'),
+                label: Text(l10n.signOut),
                 style: ButtonM3EStyle.text,
                 size: ButtonM3ESize.md,
               ),
@@ -177,9 +185,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         );
 
         if (!mounted) return;
+        final l10n = AppLocalizations.of(context)!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error signing out: ${e.toString()}'),
+            content: Text(l10n.errorSigningOutEtostring(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -197,6 +206,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final cardColor = isDark ? const Color(0xFF23262B) : Colors.white;
     final iconColor = isDark ? Colors.green[200]! : Colors.green[700]!;
@@ -278,9 +288,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         backgroundColor: isDark ? Colors.grey[800] : Colors.green[800],
         elevation: 0,
-        title: const Text(
-          'Settings',
-          style: TextStyle(
+        title: Text(
+          l10n.settings,
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 22,
@@ -295,31 +305,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.all(18),
         children: [
           // About App Section
-          SectionHeader(title: 'About App', color: iconColor),
+          SectionHeader(title: l10n.aboutApp, color: iconColor),
           buildSettingsTile(
             icon: Icons.info,
-            title: 'App Version',
+            title: l10n.appVersion,
             subtitle: _appVersion,
             iconColorOverride: iconColor,
           ),
           buildSettingsTile(
             icon: Icons.code,
-            title: 'GitHub Repository',
-            subtitle: 'View source code',
+            title: l10n.githubRepository,
+            subtitle: l10n.viewSourceCode,
             // iconColorOverride: Colors.black,
             onTap: () => _launchUrl(_githubUrl),
           ),
           buildSettingsTile(
             icon: Icons.language,
-            title: 'Help Translate',
-            subtitle: 'Contribute on Weblate',
+            title: l10n.helpTranslate,
+            subtitle: l10n.contributeOnWeblate,
             iconColorOverride: Colors.blue[700],
             onTap: () => _launchUrl(_weblateUrl),
           ),
           buildSettingsTile(
             icon: Icons.article,
-            title: 'Licenses',
-            subtitle: 'Open source licenses',
+            title: l10n.licenses,
+            subtitle: l10n.openSourceLicenses,
             iconColorOverride: Colors.purple[700],
             onTap: () {
               Navigator.push(
@@ -338,25 +348,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Divider(color: dividerColor, thickness: 1.2),
           ),
           // Settings Section
-          SectionHeader(title: 'Settings', color: iconColor),
-          // Only show Widget Settings in debug mode
-          if (kDebugMode)
-            buildSettingsTile(
-              icon: Icons.smartphone,
-              title: 'Widget Settings',
-              subtitle: 'Configure home screen widget (Debug Only)',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const WidgetSettingsScreen(),
-                  ),
-                );
-              },
-            ),
+          SectionHeader(title: l10n.settings, color: iconColor),
           buildSettingsTile(
             icon: Icons.logout,
-            title: 'Sign Out',
+            title: l10n.signOut,
             iconColorOverride: Colors.red,
             textColorOverride: Colors.red,
             isDestructive: true,
@@ -366,34 +361,195 @@ class _SettingsScreenState extends State<SettingsScreen> {
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: Divider(color: dividerColor, thickness: 1.2),
           ),
-          SectionHeader(title: 'Language', color: iconColor),
+          SectionHeader(title: l10n.language, color: iconColor),
           buildSettingsTile(
             icon: Icons.language,
-            title: 'App Language',
-            subtitle: _selectedLanguage,
+            title: l10n.appLanguage,
+            subtitle: _getCurrentLanguageName(),
             onTap: () async {
-              final selectedLanguage = await showDialog<String>(
+              final selectedLocale = await showDialog<Locale?>(
                 context: context,
-                builder: (BuildContext context) {
+                builder: (BuildContext dialogContext) {
                   return SimpleDialog(
                     backgroundColor: cardColor,
-                    title: Text('Select Language',
-                        style: TextStyle(color: textColor)),
+                    title: const Text('Select Language'),
                     children: <Widget>[
                       SimpleDialogOption(
                         onPressed: () {
-                          Navigator.pop(context, 'English');
+                          Navigator.pop(dialogContext, null);
                         },
-                        child:
-                            Text('English', style: TextStyle(color: textColor)),
+                        child: Text('System Default',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale == null
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
                       ),
-                      // Add more languages here
+                      const Divider(),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('en'));
+                        },
+                        child: Text('English',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'en'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('de'));
+                        },
+                        child: Text('Deutsch',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'de'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('es'));
+                        },
+                        child: Text('Español',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'es'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('fr'));
+                        },
+                        child: Text('Français',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'fr'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('hi'));
+                        },
+                        child: Text('हिन्दी',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'hi'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('it'));
+                        },
+                        child: Text('Italiano',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'it'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('ja'));
+                        },
+                        child: Text('日本語',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'ja'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('ko'));
+                        },
+                        child: Text('한국어',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'ko'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('ru'));
+                        },
+                        child: Text('Русский',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'ru'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('zh'));
+                        },
+                        child: Text('简体中文',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight:
+                                    _currentLocale?.languageCode == 'zh' &&
+                                            _currentLocale?.scriptCode == null
+                                        ? FontWeight.bold
+                                        : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(
+                              dialogContext,
+                              const Locale.fromSubtags(
+                                  languageCode: 'zh', scriptCode: 'Hant'));
+                        },
+                        child: Text('繁體中文',
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.scriptCode == 'Hant'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
                     ],
                   );
                 },
               );
-              if (selectedLanguage != null) {
-                _changeLanguage(selectedLanguage);
+              if (selectedLocale != null) {
+                await _changeLanguage(selectedLocale);
+              } else if (selectedLocale == null &&
+                  await showDialog<bool>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Use System Default'),
+                          content: const Text(
+                              'Do you want to use your device\'s language setting?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, false),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, true),
+                              child: const Text('Confirm'),
+                            ),
+                          ],
+                        ),
+                      ) ==
+                      true) {
+                await LocaleService.clearLocale();
+                setState(() {
+                  _currentLocale = null;
+                });
+                if (mounted) {
+                  // Reload the app to apply system default
+                  ShopSyncApp.setLocale(
+                      context,
+                      View.of(context)
+                          .platformDispatcher
+                          .locale); // Use device locale
+                }
               }
             },
           ),

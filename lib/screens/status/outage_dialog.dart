@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '../../models/status_outage.dart';
 import '../../services/platform/statuspage_service.dart';
 
@@ -10,6 +11,7 @@ class OutageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final backgroundColor = isDark ? Colors.grey[900] : Colors.grey[50];
     final cardColor = isDark
@@ -85,7 +87,9 @@ class OutageDialog extends StatelessWidget {
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        outage.name.isNotEmpty ? outage.name : 'Service Outage',
+                        outage.name.isNotEmpty
+                            ? outage.name
+                            : l10n.outageServiceOutage,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 24,
@@ -97,7 +101,7 @@ class OutageDialog extends StatelessWidget {
                       Text(
                         outage.description.isNotEmpty
                             ? outage.description
-                            : 'An outage has been reported. Our team is investigating.',
+                            : l10n.outageDefaultDescription,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
@@ -108,7 +112,8 @@ class OutageDialog extends StatelessWidget {
                       if (outage.affectedComponents.isNotEmpty) ...[
                         const SizedBox(height: 12),
                         Text(
-                          'Affected: ${_formatComponents(outage.affectedComponents)}',
+                          l10n.outageAffected(
+                              _formatComponents(outage.affectedComponents)),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 13,
@@ -117,10 +122,10 @@ class OutageDialog extends StatelessWidget {
                         ),
                       ],
                       const SizedBox(height: 20),
-                      _buildTimes(isDark),
+                      _buildTimes(isDark, l10n),
                       if (outage.updates.isNotEmpty) ...[
                         const SizedBox(height: 20),
-                        _buildUpdates(isDark),
+                        _buildUpdates(isDark, l10n),
                       ],
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
@@ -139,9 +144,9 @@ class OutageDialog extends StatelessWidget {
                         ),
                         icon: const Icon(Icons.check_circle,
                             size: 18, color: Colors.white),
-                        label: const Text('Close',
-                            style:
-                                TextStyle(fontSize: 16, color: Colors.white)),
+                        label: Text(l10n.outageClose,
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white)),
                       ),
                     ],
                   ),
@@ -154,7 +159,7 @@ class OutageDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildTimes(bool isDark) {
+  Widget _buildTimes(bool isDark, AppLocalizations l10n) {
     final started =
         DateFormat('MMM d, yyyy • HH:mm').format(outage.startedAt.toUtc());
     final resolved = outage.resolvedAt != null
@@ -176,7 +181,7 @@ class OutageDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Started',
+            l10n.outageStarted,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -194,7 +199,7 @@ class OutageDialog extends StatelessWidget {
           if (resolved != null) ...[
             const SizedBox(height: 12),
             Text(
-              'Resolved',
+              l10n.outageResolved,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
@@ -215,7 +220,7 @@ class OutageDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildUpdates(bool isDark) {
+  Widget _buildUpdates(bool isDark, AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -228,8 +233,8 @@ class OutageDialog extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Latest Updates',
+          Text(
+            l10n.outageLatestUpdates,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 8),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:m3e_collection/m3e_collection.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
 import '/utils/sentry_auth_utils.dart';
 
@@ -53,22 +54,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
   }
 
-  String? _getErrorMessage(FirebaseAuthException e) {
+  String? _getErrorMessage(FirebaseAuthException e, AppLocalizations l10n) {
     switch (e.code) {
       case 'email-already-in-use':
-        return 'This email is already registered. Please sign in instead';
+        return l10n.registerEmailExists;
       case 'invalid-email':
-        return 'Please enter a valid email address';
+        return l10n.registerInvalidEmail;
       case 'operation-not-allowed':
-        return 'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
+        return l10n.loginOperationNotAllowed;
       case 'weak-password':
-        return 'This password is too weak. Please choose a stronger one';
+        return l10n.registerWeakPassword;
       case 'too-many-requests':
-        return 'Too many requests. Please try again later';
+        return l10n.registerTooManyRequests;
       case 'network-request-failed':
-        return 'Network error. Please check your internet connection and try again';
+        return l10n.registerNetworkError;
       default:
-        return e.message ?? 'An error occurred during registration';
+        return e.message ?? l10n.registerGenericError;
     }
   }
 
@@ -100,14 +101,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (!mounted) return;
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (e, stackTrace) {
+      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _errorMessage =
-            _getErrorMessage(e) ?? 'An error occurred during registration';
+        _errorMessage = _getErrorMessage(e, l10n) ?? l10n.registerGenericError;
       });
       await SentryUtils.reportError(e, stackTrace);
     } catch (e, stackTrace) {
+      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _errorMessage = 'An error occurred. Please try again later';
+        _errorMessage = l10n.registerGenericError;
       });
       await SentryUtils.reportError(e, stackTrace);
     } finally {
@@ -119,6 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -160,8 +163,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ? [Colors.green[300]!, Colors.green[400]!]
                           : [Colors.white, Colors.white.withValues(alpha: 0.9)],
                     ).createShader(bounds),
-                    child: const Text(
-                      'Create\nAccount',
+                    child: Text(
+                      l10n.registerCreateAccount,
                       style: TextStyle(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
@@ -173,7 +176,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Sign up to start sharing grocery lists',
+                    l10n.registerSignUp,
                     style: TextStyle(
                       fontSize: 16,
                       color: isDarkMode
@@ -210,10 +213,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
-                              labelText: 'Name',
+                              labelText: l10n.registerName,
                               errorText: _nameController.text.isNotEmpty &&
                                       !_isNameValid
-                                  ? 'Name must be at least 2 characters'
+                                  ? l10n.registerNameError
                                   : null,
                               labelStyle: TextStyle(
                                 color: isDarkMode
@@ -253,10 +256,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             textInputAction: TextInputAction.next,
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
-                                return 'Please enter your name';
+                                return l10n.registerEnterName;
                               }
                               if (value.trim().length < 2) {
-                                return 'Name must be at least 2 characters';
+                                return l10n.registerNameTooShort;
                               }
                               return null;
                             },
@@ -272,10 +275,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
-                              labelText: 'Email',
+                              labelText: l10n.registerEmail,
                               errorText: _emailController.text.isNotEmpty &&
                                       !_isEmailValid
-                                  ? 'Please enter a valid email'
+                                  ? l10n.loginInvalidEmail
                                   : null,
                               labelStyle: TextStyle(
                                 color: isDarkMode
@@ -337,7 +340,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
-                              labelText: 'Password',
+                              labelText: l10n.registerPassword,
                               errorText: _passwordController.text.isNotEmpty &&
                                       !_isPasswordValid
                                   ? 'Password must be at least 6 characters'
@@ -405,7 +408,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             textInputAction: TextInputAction.done,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter a password';
+                                return l10n.registerEnterPassword;
                               }
                               if (value.length < 6) {
                                 return 'Password must be at least 6 characters';
@@ -467,8 +470,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       color: Colors.white,
                                       size: 24.0,
                                     )
-                                  : const Text(
-                                      'Sign Up',
+                                  : Text(
+                                      l10n.registerButton,
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
@@ -537,9 +540,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, '/login');
                         },
-                        label: const Text(
-                          'Sign In',
-                          style: TextStyle(
+                        label: Text(
+                          l10n.signIn,
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             decoration: TextDecoration.underline,

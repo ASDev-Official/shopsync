@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 import '/widgets/ui/loading_spinner.dart';
 import '/utils/permissions.dart';
@@ -102,8 +103,9 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
         }),
       );
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to restore item')),
+        SnackBar(content: Text(l10n.failedToRestoreItem)),
       );
     }
   }
@@ -128,8 +130,9 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
         }),
       );
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to delete item')),
+        SnackBar(content: Text(l10n.failedToDeleteItem)),
       );
     }
   }

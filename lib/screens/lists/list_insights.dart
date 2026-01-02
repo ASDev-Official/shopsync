@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopsync/services/analytics/list_analytics_service.dart';
 import 'package:intl/intl.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 class ListInsightsScreen extends StatefulWidget {
   final String listId;
@@ -57,9 +58,10 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
     } catch (e) {
       if (!mounted) return;
 
+      final l10n = AppLocalizations.of(context)!;
       setState(() => _isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error loading insights: $e')),
+        SnackBar(content: Text(l10n.errorLoadingInsightsE(e.toString()))),
       );
     }
   }

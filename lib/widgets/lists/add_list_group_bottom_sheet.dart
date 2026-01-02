@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '/services/data/list_groups_service.dart';
 
 class AddListGroupBottomSheet extends StatefulWidget {
@@ -22,10 +23,11 @@ class _AddListGroupBottomSheetState extends State<AddListGroupBottomSheet> {
   }
 
   Future<void> _createGroup() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_nameController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please enter a group name'),
+        SnackBar(
+          content: Text(l10n.pleaseEnterAGroupName),
           backgroundColor: Colors.orange,
         ),
       );
@@ -54,9 +56,10 @@ class _AddListGroupBottomSheetState extends State<AddListGroupBottomSheet> {
       setState(() {
         _isCreating = false;
       });
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to create group. Please try again.'),
+        SnackBar(
+          content: Text(l10n.failedToCreateGroupPleaseTryAgain),
           backgroundColor: Colors.red,
         ),
       );

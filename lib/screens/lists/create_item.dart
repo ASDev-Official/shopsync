@@ -13,6 +13,7 @@ import '/screens/lists/choose_item_icon.dart';
 import '/services/data/smart_suggestions_service.dart';
 import '/models/item_suggestion.dart';
 import '/utils/food_icon_detector.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 class CreateItemScreen extends StatefulWidget {
   final String listId;
@@ -124,7 +125,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
     if (_titleController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Please enter an item title'),
+          content: Text(AppLocalizations.of(context)!.pleaseEnterAnItemTitle),
           behavior: SnackBarBehavior.floating,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -184,14 +185,15 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Create Item',
-          style: TextStyle(
+        title: Text(
+          l10n.createItemTitle,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -248,9 +250,9 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                             ),
                           ),
                           const SizedBox(width: 16),
-                          const Text(
-                            'Item Name',
-                            style: TextStyle(
+                          Text(
+                            l10n.itemNameLabel,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -287,7 +289,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                           });
                         },
                         decoration: InputDecoration(
-                          hintText: 'Enter item name...',
+                          hintText: l10n.enterItemName,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Colors.green[200]!),
@@ -401,9 +403,9 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'Category',
-                                    style: TextStyle(
+                                  Text(
+                                    l10n.categoryLabel,
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
@@ -411,7 +413,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                                   const SizedBox(height: 4),
                                   Text(
                                     _selectedCategoryName ??
-                                        'Select a category',
+                                        l10n.selectCategory,
                                     style: TextStyle(color: Colors.grey[600]),
                                   ),
                                 ],
@@ -480,16 +482,16 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Item Icon',
-                                style: TextStyle(
+                              Text(
+                                l10n.itemIconLabel,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                _selectedIcon?.displayName ?? 'Choose an icon',
+                                _selectedIcon?.displayName ?? l10n.chooseIcon,
                                 style: TextStyle(color: Colors.grey[600]),
                               ),
                             ],
@@ -587,9 +589,9 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Deadline',
-                                style: TextStyle(
+                              Text(
+                                l10n.deadlineLabel,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
@@ -598,7 +600,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                               Text(
                                 _selectedDeadline != null
                                     ? '${DateFormat('MMM dd, yyyy').format(_selectedDeadline!)} ${_selectedTime?.format(context) ?? ''}'
-                                    : 'Set deadline',
+                                    : l10n.setDeadlineText,
                                 style: TextStyle(color: Colors.grey[600]),
                               ),
                             ],
@@ -666,9 +668,9 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Location',
-                                style: TextStyle(
+                              Text(
+                                l10n.locationLabel,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
@@ -677,7 +679,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                               Text(
                                 _location != null
                                     ? '${_location!['name']}\n${_location!['address']}'
-                                    : 'Set location',
+                                    : l10n.setLocationText,
                                 style: TextStyle(color: Colors.grey[600]),
                               ),
                             ],
@@ -716,9 +718,9 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                             child: Icon(Icons.tag, color: Colors.green[800]),
                           ),
                           const SizedBox(width: 16),
-                          const Text(
-                            'Counter',
-                            style: TextStyle(
+                          Text(
+                            l10n.counterLabel,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -822,9 +824,9 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                                 color: Colors.green[800]),
                           ),
                           const SizedBox(width: 16),
-                          const Text(
-                            'Description',
-                            style: TextStyle(
+                          Text(
+                            l10n.descriptionLabel,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -836,7 +838,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                         controller: _descriptionController,
                         maxLines: 5,
                         decoration: InputDecoration(
-                          hintText: 'Add description...',
+                          hintText: l10n.addDescription,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Colors.green[200]!),
@@ -886,9 +888,10 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                       size: 20.0,
                     ),
                   )
-                : const Text(
-                    'Create Item',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                : Text(
+                    l10n.createItemButton,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
           ),
         ),

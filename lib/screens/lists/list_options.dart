@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '/utils/icons/food_icons_map.dart';
 import '/models/item_suggestion.dart';
 import '/screens/lists/choose_item_icon.dart';
@@ -98,9 +99,9 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
 
         return AlertDialog(
           backgroundColor: isDark ? Colors.grey[900] : Colors.white,
-          title: const Text(
-            'Edit List Name',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Text(
+            AppLocalizations.of(context)!.editListName,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           content: TextField(
             controller: nameController,
@@ -109,7 +110,7 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
               color: isDark ? Colors.white : Colors.black,
             ),
             decoration: InputDecoration(
-              hintText: 'Enter list name',
+              hintText: AppLocalizations.of(context)!.enterListName,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -122,7 +123,7 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -135,12 +136,15 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
                     if (!mounted) return;
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('List name updated')),
+                      SnackBar(
+                          content: Text(
+                              AppLocalizations.of(context)!.listNameUpdated)),
                     );
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Failed to update list name')),
+                      SnackBar(
+                          content: Text(AppLocalizations.of(context)!
+                              .failedToUpdateListName)),
                     );
                   }
                 }
@@ -149,7 +153,7 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
                 backgroundColor: Colors.green[800],
                 foregroundColor: Colors.white,
               ),
-              child: const Text('Save'),
+              child: Text(AppLocalizations.of(context)!.save),
             ),
           ],
         );
@@ -158,18 +162,19 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
   }
 
   Future<void> _deleteList() async {
+    final l10n = AppLocalizations.of(context)!;
     final shouldDelete = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Delete List'),
-            content: const Text(
-              'Are you sure you want to delete this list? This action cannot be undone.',
+            title: Text(l10n.deleteList),
+            content: Text(
+              l10n.permanentlyDeleteThisList,
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
                 child: Text(
-                  'Cancel',
+                  l10n.cancel,
                   style: TextStyle(color: Colors.grey[700]),
                 ),
               ),
@@ -178,7 +183,7 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.red[700],
                 ),
-                child: const Text('Delete'),
+                child: Text(l10n.delete),
               ),
             ],
           ),
@@ -223,8 +228,9 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
         if (!mounted) return;
         Navigator.pop(context); // Return to home screen
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('List deleted successfully'),
+          SnackBar(
+            content:
+                Text(AppLocalizations.of(context)!.listDeletedSuccessfully),
             backgroundColor: Colors.green,
           ),
         );
@@ -239,7 +245,8 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
         );
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to delete list')),
+          SnackBar(
+              content: Text(AppLocalizations.of(context)!.failedToDeleteList)),
         );
       }
     }
@@ -279,22 +286,22 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
   }
 
   Future<void> _clearCompletedItems() async {
+    final l10n = AppLocalizations.of(context)!;
     final shouldClear = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Clear Completed Items'),
-            content: const Text(
-                'Are you sure you want to remove all completed items?'),
+            title: Text(l10n.clearCompletedItems),
+            content: Text(l10n.areYouSureYouWantToRemoveAllCompletedItems),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child:
-                    Text('Cancel', style: TextStyle(color: Colors.grey[700])),
+                child: Text(l10n.cancel,
+                    style: TextStyle(color: Colors.grey[700])),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
                 style: TextButton.styleFrom(foregroundColor: Colors.red[700]),
-                child: const Text('Clear Items'),
+                child: Text(l10n.clearItems),
               ),
             ],
           ),
@@ -320,7 +327,8 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Cleared ${completedItems.docs.length} completed items'),
+        content: Text(l10n.clearedCompleteditemsdocslengthCompletedItems(
+            completedItems.docs.length)),
         backgroundColor: Colors.green[800],
         behavior: SnackBarBehavior.floating,
       ),
@@ -595,7 +603,9 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
     final email = _emailController.text.trim();
     if (email.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter an email address')),
+        SnackBar(
+            content:
+                Text(AppLocalizations.of(context)!.pleaseEnterAnEmailAddress)),
       );
       return;
     }
@@ -633,8 +643,9 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
       if (currentMembers.contains(userId)) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('User already has access to this list'),
+          SnackBar(
+            content: Text(
+                AppLocalizations.of(context)!.userAlreadyHasAccessToThisList),
             backgroundColor: Colors.orange,
           ),
         );
@@ -652,14 +663,18 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
       setState(() => _selectedRole = 'editor'); // Reset to default
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('List shared with $email as $_selectedRole'),
+          content: Text(
+            AppLocalizations.of(context)!
+                .listSharedWithEmailAsSelectedrole(email, _selectedRole),
+          ),
           backgroundColor: Colors.green[800],
         ),
       );
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to share list')),
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!.failedToShareList)),
       );
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -676,19 +691,21 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('User removed'),
+          content: Text(AppLocalizations.of(context)!.userRemoved),
           backgroundColor: Colors.green[800],
         ),
       );
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to remove user')),
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!.failedToRemoveUser)),
       );
     }
   }
 
   Future<void> _changeMemberRole(String userId, String currentRole) async {
+    final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final newRole = await showDialog<String>(
@@ -696,7 +713,7 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: isDark ? Colors.grey[900] : Colors.white,
         title: Text(
-          'Change Permission Level',
+          l10n.collaborators,
           style: TextStyle(
             color: isDark ? Colors.white : Colors.black,
           ),
@@ -714,7 +731,7 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Editor',
+                    l10n.editor,
                     style: TextStyle(
                       color: isDark ? Colors.white : Colors.black,
                     ),
@@ -722,7 +739,7 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                 ],
               ),
               subtitle: Text(
-                'Can add, edit, and delete items',
+                l10n.canAddEditAndDeleteItems,
                 style: TextStyle(
                   color: isDark ? Colors.grey[400] : Colors.grey[600],
                 ),
@@ -742,7 +759,7 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Viewer',
+                    l10n.viewer3,
                     style: TextStyle(
                       color: isDark ? Colors.white : Colors.black,
                     ),
@@ -750,7 +767,7 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                 ],
               ),
               subtitle: Text(
-                'Can only view items',
+                l10n.canOnlyViewItems,
                 style: TextStyle(
                   color: isDark ? Colors.grey[400] : Colors.grey[600],
                 ),
@@ -766,7 +783,7 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'Cancel',
+              l10n.cancel,
               style: TextStyle(
                 color: isDark ? Colors.grey[400] : Colors.grey[600],
               ),
@@ -785,14 +802,14 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Permission changed to $newRole'),
+            content: Text(l10n.permissionChangedToNewrole(newRole)),
             backgroundColor: Colors.green[800],
           ),
         );
       } catch (e) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to change permission')),
+          SnackBar(content: Text(l10n.failedToChangePermission)),
         );
       }
     }
@@ -805,9 +822,9 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Share List',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.shareList,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -848,9 +865,9 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                           ),
                         ),
                         const SizedBox(width: 12),
-                        const Text(
-                          'Add Collaborator',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.collaborators,
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -894,9 +911,9 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                             ),
                           ),
                           RadioListTile<String>(
-                            title: const Text('Editor'),
-                            subtitle:
-                                const Text('Can add, edit, and delete items'),
+                            title: Text(AppLocalizations.of(context)!.editor),
+                            subtitle: Text(AppLocalizations.of(context)!
+                                .canAddEditAndDeleteItems),
                             value: 'editor',
                             groupValue: _selectedRole,
                             activeColor: Colors.green[800],
@@ -905,8 +922,9 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                             },
                           ),
                           RadioListTile<String>(
-                            title: const Text('Viewer'),
-                            subtitle: const Text('Can only view items'),
+                            title: Text(AppLocalizations.of(context)!.viewer),
+                            subtitle: Text(
+                                AppLocalizations.of(context)!.canOnlyViewItems),
                             value: 'viewer',
                             groupValue: _selectedRole,
                             activeColor: Colors.green[800],
@@ -991,9 +1009,9 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                               ),
                             ),
                             const SizedBox(width: 12),
-                            const Text(
-                              'Current Members',
-                              style: TextStyle(
+                            Text(
+                              AppLocalizations.of(context)!.collaborators,
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -1009,11 +1027,12 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                                   .get(),
                               builder: (context, userSnapshot) {
                                 if (!userSnapshot.hasData) {
-                                  return const ListTile(
-                                    leading: CircleAvatar(
+                                  return ListTile(
+                                    leading: const CircleAvatar(
                                       child: CustomLoadingSpinner(size: 16),
                                     ),
-                                    title: Text('Loading...'),
+                                    title: Text(
+                                        AppLocalizations.of(context)!.loading),
                                   );
                                 }
 
@@ -1117,8 +1136,10 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                                                       context: context,
                                                       builder: (context) =>
                                                           AlertDialog(
-                                                        title: const Text(
-                                                            'Remove Member'),
+                                                        title: Text(
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .removeMember),
                                                         content: Text(
                                                           currentUserId ==
                                                                   userId
@@ -1131,8 +1152,10 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                                                                 Navigator.pop(
                                                                     context,
                                                                     false),
-                                                            child: const Text(
-                                                                'Cancel'),
+                                                            child: Text(
+                                                                AppLocalizations.of(
+                                                                        context)!
+                                                                    .cancel),
                                                           ),
                                                           TextButton(
                                                             onPressed: () =>
@@ -1225,11 +1248,15 @@ class _SavedLocationsScreenState extends State<SavedLocationsScreen> {
 
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Location saved successfully')),
+          SnackBar(
+              content: Text(
+                  AppLocalizations.of(context)!.locationSavedSuccessfully)),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to save location')),
+          SnackBar(
+              content:
+                  Text(AppLocalizations.of(context)!.failedToSaveLocation)),
         );
       }
     }
@@ -1242,9 +1269,9 @@ class _SavedLocationsScreenState extends State<SavedLocationsScreen> {
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Saved Locations',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.savedLocations,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -1341,18 +1368,20 @@ class _SavedLocationsScreenState extends State<SavedLocationsScreen> {
                         await doc.reference.delete();
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Location deleted')),
+                          SnackBar(
+                              content: Text(AppLocalizations.of(context)!
+                                  .locationDeleted)),
                         );
                       }
                     },
                     itemBuilder: (context) => [
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'delete',
                         child: Row(
                           children: [
-                            Icon(Icons.delete, size: 16),
-                            SizedBox(width: 8),
-                            Text('Delete'),
+                            const Icon(Icons.delete, size: 16),
+                            const SizedBox(width: 8),
+                            Text(AppLocalizations.of(context)!.delete),
                           ],
                         ),
                       ),
@@ -1381,6 +1410,7 @@ class SavedItemsScreen extends StatefulWidget {
 class _SavedItemsScreenState extends State<SavedItemsScreen> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
+  AppLocalizations get l10n => AppLocalizations.of(context)!;
 
   Future<void> _addItemTemplate() async {
     final result = await Navigator.push<Map<String, dynamic>>(
@@ -1404,11 +1434,15 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
 
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Item template saved successfully')),
+          SnackBar(
+              content: Text(
+                  AppLocalizations.of(context)!.itemTemplateSavedSuccessfully)),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to save item template')),
+          SnackBar(
+              content:
+                  Text(AppLocalizations.of(context)!.failedToSaveItemTemplate)),
         );
       }
     }
@@ -1438,11 +1472,14 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
       if (!mounted) return;
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Item created from template')),
+        SnackBar(
+            content:
+                Text(AppLocalizations.of(context)!.itemCreatedFromTemplate)),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to create item')),
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!.failedToCreateItem)),
       );
     }
   }
@@ -1454,9 +1491,9 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Saved Items',
-          style: TextStyle(
+        title: Text(
+          l10n.savedItems,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -1563,17 +1600,17 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
                         Text(data['description']),
                       if (data['categoryName'] != null)
                         Text(
-                          'Category: ${data['categoryName']}',
+                          '${l10n.category}: ${data['categoryName']}',
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                       if (data['counter'] != null)
                         Text(
-                          'Default count: ${data['counter']}',
+                          '${l10n.counter}: ${data['counter']}',
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                       if (data['location'] != null)
                         Text(
-                          'Location: ${data['location']['name'] ?? 'Unknown'}',
+                          '${l10n.location}: ${data['location']['name'] ?? 'Unknown'}',
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                     ],
@@ -1588,7 +1625,7 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
                           size: 16,
                         ),
                         onPressed: () => _createItemFromTemplate(data),
-                        tooltip: 'Create item from template',
+                        tooltip: l10n.createItemsFromSavedTemplates,
                       ),
                       PopupMenuButton<String>(
                         onSelected: (value) async {
@@ -1596,18 +1633,18 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
                             await doc.reference.delete();
                             if (!mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Template deleted')),
+                              SnackBar(content: Text(l10n.templateDeleted)),
                             );
                           }
                         },
                         itemBuilder: (context) => [
-                          const PopupMenuItem(
+                          PopupMenuItem(
                             value: 'delete',
                             child: Row(
                               children: [
                                 Icon(Icons.delete, size: 16),
                                 SizedBox(width: 8),
-                                Text('Delete'),
+                                Text(l10n.delete),
                               ],
                             ),
                           ),
@@ -1720,7 +1757,9 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
   void _saveTemplate() {
     if (_titleController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a template name')),
+        SnackBar(
+            content:
+                Text(AppLocalizations.of(context)!.pleaseEnterATemplateName)),
       );
       return;
     }
@@ -1748,9 +1787,9 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Create Item Template',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.savedItems,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -1803,9 +1842,9 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                             ),
                           ),
                           const SizedBox(width: 16),
-                          const Text(
-                            'Item Name',
-                            style: TextStyle(
+                          Text(
+                            AppLocalizations.of(context)!.itemName,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -1950,9 +1989,9 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'Category',
-                                    style: TextStyle(
+                                  Text(
+                                    AppLocalizations.of(context)!.category,
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
@@ -2027,9 +2066,9 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Item Icon',
-                                style: TextStyle(
+                              Text(
+                                AppLocalizations.of(context)!.category,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
@@ -2093,9 +2132,9 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Location',
-                                style: TextStyle(
+                              Text(
+                                AppLocalizations.of(context)!.location,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
@@ -2141,9 +2180,9 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                             child: Icon(Icons.tag, color: Colors.green[800]),
                           ),
                           const SizedBox(width: 16),
-                          const Text(
-                            'Counter',
-                            style: TextStyle(
+                          Text(
+                            AppLocalizations.of(context)!.counter,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -2245,9 +2284,9 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                                 color: Colors.green[800]),
                           ),
                           const SizedBox(width: 16),
-                          const Text(
-                            'Description',
-                            style: TextStyle(
+                          Text(
+                            AppLocalizations.of(context)!.description,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -2259,7 +2298,8 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                         controller: _descriptionController,
                         maxLines: 5,
                         decoration: InputDecoration(
-                          hintText: 'Add description...',
+                          hintText:
+                              AppLocalizations.of(context)!.addDescription,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Colors.green[200]!),
@@ -2308,9 +2348,9 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                       size: 20.0,
                     ),
                   )
-                : const Text(
-                    'Save Template',
-                    style: TextStyle(
+                : Text(
+                    AppLocalizations.of(context)!.save,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),

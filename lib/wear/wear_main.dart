@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../config/firebase_options.dart';
+import '../services/locale_service.dart';
+import '../l10n/app_localizations.dart';
 import 'screens/wear_list_groups_screen.dart';
 import 'screens/wear_welcome_screen.dart';
 import 'screens/wear_maintenance_screen.dart';
@@ -49,13 +51,52 @@ void main() async {
   }
 }
 
-class ShopSyncWearApp extends StatelessWidget {
+class ShopSyncWearApp extends StatefulWidget {
   const ShopSyncWearApp({super.key});
+
+  @override
+  State<ShopSyncWearApp> createState() => _ShopSyncWearAppState();
+
+  /// Static method to change locale from anywhere in the app
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _ShopSyncWearAppState? state =
+        context.findAncestorStateOfType<_ShopSyncWearAppState>();
+    state?.setLocale(newLocale);
+  }
+}
+
+class _ShopSyncWearAppState extends State<ShopSyncWearApp> {
+  Locale? _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLocale();
+  }
+
+  Future<void> _loadLocale() async {
+    final savedLocale = await LocaleService.getSavedLocale();
+    if (savedLocale != null && mounted) {
+      setState(() {
+        _locale = savedLocale;
+      });
+    }
+  }
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+    LocaleService.saveLocale(locale);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ShopSync',
+      locale: _locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.green,

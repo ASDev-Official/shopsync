@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 class FeedbackScreen extends StatefulWidget {
   const FeedbackScreen({super.key});
@@ -212,7 +213,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     appBar: AppBar(
                       elevation: 0,
                       automaticallyImplyLeading: false,
-                      title: const Text('ShopSync Forms'),
+                      title: Text(AppLocalizations.of(context)!.shopsyncForms),
                       titleTextStyle: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,

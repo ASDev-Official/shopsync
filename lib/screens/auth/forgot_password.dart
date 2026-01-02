@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:m3e_collection/m3e_collection.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/utils/sentry_auth_utils.dart';
 
@@ -36,18 +37,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     });
   }
 
-  String? _getErrorMessage(FirebaseAuthException e) {
+  String? _getErrorMessage(FirebaseAuthException e, AppLocalizations l10n) {
     switch (e.code) {
       case 'invalid-email':
-        return 'Please enter a valid email address';
+        return l10n.resetPasswordInvalidEmail;
       case 'user-not-found':
-        return 'No account found with this email';
+        return l10n.resetPasswordUserNotFound;
       case 'too-many-requests':
-        return 'Too many requests. Please try again later';
+        return l10n.resetPasswordTooManyRequests;
       case 'network-request-failed':
-        return 'Network error. Check your connection and try again';
+        return l10n.resetPasswordNetworkError;
       default:
-        return e.message ?? 'An error occurred';
+        return e.message ?? l10n.resetPasswordGenericError;
     }
   }
 
@@ -64,19 +65,22 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       await _auth.sendPasswordResetEmail(
         email: _emailController.text.trim(),
       );
+      final l10n = AppLocalizations.of(context)!;
       setState(() {
         _isSuccess = true;
-        _message = 'Password reset link sent to your email';
+        _message = l10n.resetPasswordSuccess;
       });
     } on FirebaseAuthException catch (e, stackTrace) {
+      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _message = _getErrorMessage(e) ?? 'An error occurred';
+        _message = _getErrorMessage(e, l10n) ?? l10n.resetPasswordGenericError;
         _isSuccess = false;
       });
       await SentryUtils.reportError(e, stackTrace);
     } catch (e, stackTrace) {
+      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _message = 'An error occurred. Please try again later';
+        _message = l10n.resetPasswordError;
         _isSuccess = false;
       });
       await SentryUtils.reportError(e, stackTrace);
@@ -89,6 +93,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -130,8 +135,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           ? [Colors.green[300]!, Colors.green[400]!]
                           : [Colors.white, Colors.white.withValues(alpha: 0.9)],
                     ).createShader(bounds),
-                    child: const Text(
-                      'Reset\nPassword',
+                    child: Text(
+                      l10n.resetPasswordTitle,
                       style: TextStyle(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
@@ -143,7 +148,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Enter your email to receive a password reset link',
+                    l10n.resetPasswordSubtitle,
                     style: TextStyle(
                       fontSize: 16,
                       color: isDarkMode
@@ -180,10 +185,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
-                              labelText: 'Email',
+                              labelText: l10n.resetPasswordEmail,
                               errorText: _emailController.text.isNotEmpty &&
                                       !_isEmailValid
-                                  ? 'Please enter a valid email'
+                                  ? l10n.resetPasswordInvalidEmail
                                   : null,
                               labelStyle: TextStyle(
                                 color: isDarkMode
@@ -294,8 +299,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       color: Colors.white,
                                       size: 24.0,
                                     )
-                                  : const Text(
-                                      'Send Reset Link',
+                                  : Text(
+                                      l10n.resetPasswordButton,
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,

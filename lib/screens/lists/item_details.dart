@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '/widgets/lists/place_selector.dart';
 import '/widgets/lists/category_picker.dart';
 import '/widgets/ui/loading_spinner.dart';
@@ -60,6 +61,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   DateTime? _selectedDeadline;
+
+  AppLocalizations get l10n => AppLocalizations.of(context)!;
 
   // String? _priority;
 
@@ -170,9 +173,9 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Item Details',
-          style: TextStyle(
+        title: Text(
+          l10n.itemDetailsTitle,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -202,9 +205,9 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
           }
 
           final item = snapshot.data!.data() as Map<String, dynamic>? ?? {};
-          final name = item['name'] ?? 'Untitled Item';
+          final name = item['name'] ?? l10n.untitledItem;
           final description = item['description'] ?? '';
-          final addedByName = item['addedByName'] ?? 'Unknown';
+          final addedByName = item['addedByName'] ?? l10n.unknownUser;
           final addedAt = item['addedAt'].toDate();
           final completed = item['completed'] ?? false;
           _descriptionController.text = description;
@@ -380,7 +383,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
         ),
         child: ListTile(
           title: Text(
-            'Status',
+            l10n.status,
             style: TextStyle(
               color: completed
                   ? Colors.white
@@ -509,8 +512,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Category',
+                            Text(
+                              l10n.category,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
@@ -519,8 +522,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                             const SizedBox(height: 4),
                             Text(
                               categoryData != null
-                                  ? categoryData['name'] ?? 'Unnamed Category'
-                                  : 'No category',
+                                  ? categoryData['name'] ?? l10n.unnamedCategory
+                                  : l10n.noCategory,
                               style: TextStyle(color: Colors.grey[600]),
                             ),
                           ],
@@ -611,8 +614,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Deadline',
+                        Text(
+                          l10n.deadline,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -623,7 +626,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                           _selectedDeadline != null
                               ? DateFormat('MMM dd, yyyy - hh:mm a')
                                   .format(_selectedDeadline!)
-                              : 'Set deadline',
+                              : l10n.setDeadline,
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                       ],
@@ -694,8 +697,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Location',
+                        Text(
+                          l10n.location,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -705,7 +708,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                         Text(
                           item['location'] != null
                               ? '${item['location']['name']}\n${item['location']['address']}'
-                              : 'Set location',
+                              : l10n.setLocation,
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                       ],
@@ -744,8 +747,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                   child: Icon(Icons.description, color: Colors.green[800]),
                 ),
                 const SizedBox(width: 16),
-                const Text(
-                  'Description',
+                Text(
+                  l10n.description,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -764,7 +767,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                   maxLines: 5,
                   enabled: !isViewer,
                   decoration: InputDecoration(
-                    hintText: 'Add description...',
+                    hintText: l10n.addDescription,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: Colors.green[200]!),
@@ -825,8 +828,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Added by',
+                Text(
+                  l10n.addedBy,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -872,8 +875,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Added at',
+                Text(
+                  l10n.addedAt,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -918,8 +921,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                   child: Icon(Icons.tag, color: Colors.green[800]),
                 ),
                 const SizedBox(width: 16),
-                const Text(
-                  'Counter',
+                Text(
+                  l10n.counter,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,

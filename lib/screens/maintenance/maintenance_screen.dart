@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 class MaintenanceScreen extends StatelessWidget {
   final String message;
@@ -17,6 +18,7 @@ class MaintenanceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final backgroundColor = isDark ? Colors.grey[900] : Colors.grey[50];
     final cardColor = isDark
@@ -92,8 +94,8 @@ class MaintenanceScreen extends StatelessWidget {
                       children: [
                         Text(
                           isPredictive
-                              ? 'Upcoming Maintenance'
-                              : 'Under Maintenance',
+                              ? l10n.upcomingMaintenance
+                              : l10n.underMaintenance,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 28,
@@ -115,7 +117,7 @@ class MaintenanceScreen extends StatelessWidget {
                     ),
                     if (startTime != null && endTime != null) ...[
                       const SizedBox(height: 32),
-                      _buildTimeDisplay(isDark),
+                      _buildTimeDisplay(isDark, l10n),
                     ],
                     if (isPredictive) ...[
                       const SizedBox(height: 32),
@@ -135,9 +137,12 @@ class MaintenanceScreen extends StatelessWidget {
                           size: 18,
                           color: Colors.black,
                         ),
-                        label: const Text(
-                          'Understood',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        label: Text(
+                          l10n.understood,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ],
@@ -151,7 +156,7 @@ class MaintenanceScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTimeDisplay(bool isDark) {
+  Widget _buildTimeDisplay(bool isDark, AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -166,7 +171,7 @@ class MaintenanceScreen extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            isPredictive ? 'Scheduled Period' : 'Expected Duration',
+            isPredictive ? l10n.scheduledPeriod : l10n.expectedDuration,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -199,7 +204,7 @@ class MaintenanceScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'UTC Time Zone',
+            l10n.utcTimeZone,
             style: TextStyle(
               fontSize: 13,
               color: isDark ? Colors.white70 : Colors.black54,

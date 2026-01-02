@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopsync/services/data/list_groups_service.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 
 class ListGroupMigrationScreen extends StatefulWidget {
   const ListGroupMigrationScreen({super.key});
@@ -149,7 +150,7 @@ class _ListGroupMigrationScreenState extends State<ListGroupMigrationScreen> {
                         ElevatedButton.icon(
                           onPressed: _retry,
                           icon: const Icon(Icons.refresh),
-                          label: const Text('Retry'),
+                          label: Text(AppLocalizations.of(context)!.retry),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green[600],
                             foregroundColor: Colors.white,

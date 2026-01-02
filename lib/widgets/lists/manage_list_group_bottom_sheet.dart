@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '/services/data/list_groups_service.dart';
 
 class ManageListGroupBottomSheet extends StatefulWidget {
@@ -42,10 +43,11 @@ class _ManageListGroupBottomSheetState
   }
 
   Future<void> _updateGroupName() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_nameController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please enter a group name'),
+        SnackBar(
+          content: Text(l10n.pleaseEnterAGroupName),
           backgroundColor: Colors.orange,
         ),
       );
@@ -76,9 +78,10 @@ class _ManageListGroupBottomSheetState
         ),
       );
     } else {
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to update group name. Please try again.'),
+        SnackBar(
+          content: Text(l10n.failedToUpdateGroupNamePleaseTryAgain),
           backgroundColor: Colors.red,
         ),
       );
@@ -86,23 +89,24 @@ class _ManageListGroupBottomSheetState
   }
 
   Future<void> _deleteGroup() async {
+    final l10n = AppLocalizations.of(context)!;
     final shouldDelete = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Group'),
+        title: Text(l10n.deleteGroup),
         content: Text(
           'Are you sure you want to delete "${widget.groupName}"? The lists will not be deleted, just ungrouped.',
         ),
         actions: [
           ButtonM3E(
             onPressed: () => Navigator.pop(context, false),
-            label: const Text('Cancel'),
+            label: Text(l10n.cancel),
             style: ButtonM3EStyle.text,
             size: ButtonM3ESize.md,
           ),
           ButtonM3E(
             onPressed: () => Navigator.pop(context, true),
-            label: const Text('Delete'),
+            label: Text(l10n.delete),
             style: ButtonM3EStyle.text,
             size: ButtonM3ESize.md,
           ),
@@ -132,9 +136,10 @@ class _ManageListGroupBottomSheetState
       setState(() {
         _isDeleting = false;
       });
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to delete group. Please try again.'),
+        SnackBar(
+          content: Text(l10n.failedToDeleteGroupPleaseTryAgain),
           backgroundColor: Colors.red,
         ),
       );

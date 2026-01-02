@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'wear_group_lists_screen.dart';
 import 'wear_settings_screen.dart';
 import '../../services/platform/statuspage_service.dart';
@@ -70,7 +71,7 @@ class _WearListGroupsScreenState extends State<WearListGroupsScreen> {
 
   Widget _buildGroupsStream(User? user, WearMode mode, WearShape shape) {
     if (user == null) {
-      return const Center(child: Text('Not logged in'));
+      return Center(child: Text(AppLocalizations.of(context)!.notLoggedIn));
     }
 
     if (_groupsStream == null) {
@@ -276,8 +277,8 @@ class _WearListGroupsScreenState extends State<WearListGroupsScreen> {
                             vertical: 8, horizontal: 12),
                       ),
                       icon: const Icon(Icons.settings, size: 22),
-                      label: const Text('Settings',
-                          style: TextStyle(
+                      label: Text(AppLocalizations.of(context)!.settings,
+                          style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w500)),
                       onPressed: () {
                         Navigator.push(

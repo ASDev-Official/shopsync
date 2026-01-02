@@ -9,50 +9,51 @@ class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
   @override
-  String get aboutApp => 'About App';
+  String get aboutApp => 'Über diese App';
 
   @override
-  String get accessYourListsAndSettings => 'Access your lists and settings';
+  String get accessYourListsAndSettings =>
+      'Auf Ihre Listen und Einstellungen zugreifen';
 
   @override
-  String get addCustomGroup => 'Add Custom Group';
+  String get addCustomGroup => 'Eine benutzerdefinierte Gruppe hinzufügen';
 
   @override
-  String get addDescription => 'Add description...';
+  String get addDescription => 'Eine Beschreibung hinzufügen...';
 
   @override
-  String get addDescription1 => 'Add description...';
+  String get addDescription1 => 'Eine Beschreibung hinzufügen ...';
 
   @override
-  String get addDescription2 => 'Add description...';
+  String get addDescription2 => 'Eine Beschreibung hinzufügen ...';
 
   @override
-  String get addFromTemplate => 'Add From Template';
+  String get addFromTemplate => 'Aus Vorlage hinzufügen';
 
   @override
-  String get addGroup => 'Add Group';
+  String get addGroup => 'Eine Gruppe hinzufügen';
 
   @override
-  String get addItemManually => 'Add Item Manually';
+  String get addItemManually => 'Gegenstände manuell hinzufügen';
 
   @override
-  String get addItemsToYourLists => 'Add items to your lists';
+  String get addItemsToYourLists => 'Gegenstände zu Ihreren Listen hinzufügen';
 
   @override
-  String get addNewLocation => 'Add new location';
+  String get addNewLocation => 'Einen neuen Standort hinzufügen';
 
   @override
-  String get added => 'Added';
+  String get added => 'Hinzugefügt';
 
   @override
-  String get appLanguage => 'App Language';
+  String get appLanguage => 'App-Sprache';
 
   @override
   String get appVersion => 'App Version';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems =>
-      'Are you sure you want to remove all completed items?';
+      'Möchten Sie wirklich alle Ihre abgeschlossenen Gegenstände entfernen?';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems1 =>
@@ -213,6 +214,331 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get itemDetailsTitle => 'Item Details';
+
+  @override
+  String get untitledItem => 'Untitled Item';
+
+  @override
+  String get unknownUser => 'Unknown';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get setDeadline => 'Set deadline';
+
+  @override
+  String get setLocation => 'Set location';
+
+  @override
+  String get addedBy => 'Added by';
+
+  @override
+  String get addedAt => 'Added at';
+
+  @override
+  String get unnamedCategory => 'Unnamed Category';
+
+  @override
+  String get onboardingWelcomeDescription =>
+      'Share shopping lists with family and friends';
+
+  @override
+  String get onboardingSmartListsDescription =>
+      'Create and manage your shopping lists effortlessly';
+
+  @override
+  String get onboardingShareDescription =>
+      'Share lists with family and friends';
+
+  @override
+  String get onboardingSkip => 'Skip';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingDone => 'Done';
+
+  @override
+  String get upcomingMaintenance => 'Upcoming Maintenance';
+
+  @override
+  String get underMaintenance => 'Under Maintenance';
+
+  @override
+  String get understood => 'Understood';
+
+  @override
+  String get scheduledPeriod => 'Scheduled Period';
+
+  @override
+  String get expectedDuration => 'Expected Duration';
+
+  @override
+  String get utcTimeZone => 'UTC Time Zone';
+
+  @override
+  String get createItemTitle => 'Create Item';
+
+  @override
+  String get itemNameLabel => 'Item Name';
+
+  @override
+  String get enterItemName => 'Enter item name...';
+
+  @override
+  String get categoryLabel => 'Category';
+
+  @override
+  String get selectCategory => 'Select a category';
+
+  @override
+  String get itemIconLabel => 'Item Icon';
+
+  @override
+  String get chooseIcon => 'Choose an icon';
+
+  @override
+  String get deadlineLabel => 'Deadline';
+
+  @override
+  String get setDeadlineText => 'Set deadline';
+
+  @override
+  String get locationLabel => 'Location';
+
+  @override
+  String get setLocationText => 'Set location';
+
+  @override
+  String get counterLabel => 'Counter';
+
+  @override
+  String get descriptionLabel => 'Description';
+
+  @override
+  String get createItemButton => 'Create Item';
+
+  @override
+  String get welcomeTagline => 'Share shopping lists with family and friends.';
+
+  @override
+  String get signIn => 'Sign In';
+
+  @override
+  String get signUp => 'Sign Up';
+
+  @override
+  String versionInfo(String version, String buildNumber) {
+    return 'Version $version ($buildNumber)';
+  }
+
+  @override
+  String get loadingVersionInfo => 'Loading version information...';
+
+  @override
+  String get googleSignInError => 'An error occurred with Google Sign-In';
+
+  @override
+  String get googleSignInAccountExists =>
+      'An account with this email already exists. Please sign in with email/password first, then link your Google account from the Profile screen.';
+
+  @override
+  String get googleSignInGeneric =>
+      'An error occurred with Google Sign-In. Please try again.';
+
+  @override
+  String get shopSyncAuthentication => 'ShopSync Authentication';
+
+  @override
+  String get welcomeBack => 'Welcome\nBack!';
+
+  @override
+  String get signInContinue => 'Sign in to continue with ShopSync';
+
+  @override
+  String get loginEmail => 'Email';
+
+  @override
+  String get loginPassword => 'Password';
+
+  @override
+  String get loginInvalidEmail => 'Please enter a valid email';
+
+  @override
+  String get loginPasswordEmpty => 'Password cannot be empty';
+
+  @override
+  String get loginSignInButton => 'Sign In';
+
+  @override
+  String get loginForgotPassword => 'Forgot Password?';
+
+  @override
+  String get loginNoAccount => 'Don\'t have an account?';
+
+  @override
+  String get loginSignUp => 'Sign Up';
+
+  @override
+  String get loginAccountExists =>
+      'The email address is already in use by another account';
+
+  @override
+  String get loginInvalidCredentials =>
+      'The provided credentials are incorrect. Please check your email and password';
+
+  @override
+  String get loginOperationNotAllowed =>
+      'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
+
+  @override
+  String get loginUserDisabled =>
+      'This user has been disabled. Please contact support@aadish.dev';
+
+  @override
+  String get loginUserNotFound =>
+      'No user found for that email. Please check your email and try again';
+
+  @override
+  String get loginWrongPassword =>
+      'The password is invalid or the user does not have a password';
+
+  @override
+  String get loginTooManyRequests =>
+      'Too many requests. Please try again later';
+
+  @override
+  String get loginNetworkError =>
+      'Network error. Please check your internet connection and try again';
+
+  @override
+  String get loginGenericError => 'An error occurred during login';
+
+  @override
+  String get registerCreateAccount => 'Create\nAccount';
+
+  @override
+  String get registerSignUp => 'Sign up to start sharing grocery lists';
+
+  @override
+  String get registerName => 'Name';
+
+  @override
+  String get registerNameError => 'Name must be at least 2 characters';
+
+  @override
+  String get registerEmail => 'Email';
+
+  @override
+  String get registerPassword => 'Password';
+
+  @override
+  String get registerEmailExists =>
+      'This email is already registered. Please sign in instead';
+
+  @override
+  String get registerInvalidEmail => 'Please enter a valid email address';
+
+  @override
+  String get registerWeakPassword =>
+      'This password is too weak. Please choose a stronger one';
+
+  @override
+  String get registerTooManyRequests =>
+      'Too many requests. Please try again later';
+
+  @override
+  String get registerNetworkError =>
+      'Network error. Please check your internet connection and try again';
+
+  @override
+  String get registerGenericError => 'An error occurred during registration';
+
+  @override
+  String get registerButton => 'Register';
+
+  @override
+  String get registerEnterName => 'Please enter your name';
+
+  @override
+  String get registerNameTooShort => 'Name must be at least 2 characters';
+
+  @override
+  String get registerEnterPassword => 'Please enter your password';
+
+  @override
+  String get resetPasswordTitle => 'Reset\nPassword';
+
+  @override
+  String get resetPasswordSubtitle =>
+      'Enter your email to receive a password reset link';
+
+  @override
+  String get resetPasswordEmail => 'Email';
+
+  @override
+  String get resetPasswordButton => 'Reset Password';
+
+  @override
+  String get resetPasswordInvalidEmail => 'Please enter a valid email address';
+
+  @override
+  String get resetPasswordUserNotFound => 'No account found with this email';
+
+  @override
+  String get resetPasswordTooManyRequests =>
+      'Too many requests. Please try again later';
+
+  @override
+  String get resetPasswordNetworkError =>
+      'Network error. Check your connection and try again';
+
+  @override
+  String get resetPasswordGenericError => 'An error occurred';
+
+  @override
+  String get resetPasswordSuccess => 'Password reset link sent to your email';
+
+  @override
+  String get resetPasswordError => 'An error occurred. Please try again later';
+
+  @override
+  String get resetPasswordBack => 'Back to Sign In';
+
+  @override
+  String get signingOut => 'Signing Out...';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get outageServiceOutage => 'Service Outage';
+
+  @override
+  String get outageDefaultDescription =>
+      'An outage has been reported. Our team is investigating.';
+
+  @override
+  String outageAffected(String components) {
+    return 'Affected: $components';
+  }
+
+  @override
+  String get outageStarted => 'Started';
+
+  @override
+  String get outageResolved => 'Resolved';
+
+  @override
+  String get outageLatestUpdates => 'Latest Updates';
+
+  @override
+  String get outageClose => 'Close';
+
+  @override
   String couldNotLaunchUrl2(String url) {
     return 'Could not launch $url';
   }
@@ -336,9 +662,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get enterGroupName2 => 'Enter group name';
-
-  @override
-  String get enterItemName => 'Enter item name...';
 
   @override
   String get enterItemName1 => 'Enter item name...';

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -194,9 +195,9 @@ class _HomeScreenState extends State<HomeScreen>
         }),
       );
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Failed to create list. Please try again.')),
+        SnackBar(content: Text(l10n.failedToCreateListPleaseTryAgain)),
       );
     }
   }
@@ -1553,7 +1554,8 @@ class _HomeScreenState extends State<HomeScreen>
                   items: [
                     FabMenuItem(
                       icon: const Icon(Icons.layers),
-                      label: const Text('Create List Group'),
+                      label:
+                          Text(AppLocalizations.of(context)!.createListGroup),
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
@@ -1569,7 +1571,7 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                     FabMenuItem(
                       icon: const Icon(Icons.shopping_cart),
-                      label: const Text('Create List'),
+                      label: Text(AppLocalizations.of(context)!.createList),
                       onPressed: () {
                         showDialog(
                           context: context,
@@ -1620,13 +1622,15 @@ class _HomeScreenState extends State<HomeScreen>
                             actions: [
                               ButtonM3E(
                                 onPressed: () => Navigator.pop(context),
-                                label: const Text('Cancel'),
+                                label:
+                                    Text(AppLocalizations.of(context)!.cancel),
                                 style: ButtonM3EStyle.text,
                                 size: ButtonM3ESize.md,
                               ),
                               ButtonM3E(
                                 onPressed: _createList,
-                                label: const Text('Create'),
+                                label:
+                                    Text(AppLocalizations.of(context)!.create),
                                 style: ButtonM3EStyle.filled,
                                 size: ButtonM3ESize.md,
                               ),
