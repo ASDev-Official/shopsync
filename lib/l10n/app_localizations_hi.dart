@@ -321,6 +321,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get createItemButton => 'Create Item';
 
   @override
+  String get createItemTemplate => 'Create Item Template';
+
+  @override
   String get welcomeTagline => 'Share shopping lists with family and friends.';
 
   @override

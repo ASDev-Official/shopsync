@@ -697,6 +697,12 @@ abstract class AppLocalizations {
   /// **'Create Item'**
   String get createItemButton;
 
+  /// No description provided for @createItemTemplate.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Item Template'**
+  String get createItemTemplate;
+
   /// No description provided for @welcomeTagline.
   ///
   /// In en, this message translates to:

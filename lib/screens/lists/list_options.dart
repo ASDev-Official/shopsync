@@ -1788,7 +1788,7 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context)!.savedItems,
+          AppLocalizations.of(context)!.createItemTemplate,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -2067,7 +2067,7 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                AppLocalizations.of(context)!.category,
+                                AppLocalizations.of(context)!.itemIconLabel,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
