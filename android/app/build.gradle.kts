@@ -58,7 +58,7 @@ android {
             val phoneVersionCode = 10
             dimension = "platform"
             manifestPlaceholders.clear()
-            versionName = "5.1.0-phone"
+            versionName = "5.1.1-phone"
             versionCode = phoneBaseVersionCode + phoneVersionCode
         }
         create("wear") {
@@ -66,7 +66,7 @@ android {
             val wearVersionCode = 7
             manifestPlaceholders.clear()
             dimension = "platform"
-            versionName = "1.3.0-wear"
+            versionName = "1.3.1-wear"
             versionCode = wearBaseVersionCode + wearVersionCode
         }
     }
