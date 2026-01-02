@@ -9,123 +9,120 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
-  String get aboutApp => 'About App';
+  String get aboutApp => 'ऐप के बारे में';
 
   @override
-  String get accessYourListsAndSettings => 'Access your lists and settings';
+  String get accessYourListsAndSettings => 'अपनी लिस्ट और सेटिंग्स एक्सेस करें';
 
   @override
-  String get addCustomGroup => 'Add Custom Group';
+  String get addCustomGroup => 'कस्टम समूह जोड़ें';
 
   @override
-  String get addDescription => 'Add description...';
+  String get addDescription => 'विवरण जोड़ें..।';
 
   @override
-  String get addDescription1 => 'Add description...';
+  String get addDescription1 => 'विवरण जोड़ें..।';
 
   @override
-  String get addDescription2 => 'Add description...';
+  String get addDescription2 => 'विवरण जोड़ें..।';
 
   @override
-  String get addFromTemplate => 'Add From Template';
+  String get addFromTemplate => 'टेम्पलेट से जोड़ें';
 
   @override
-  String get addGroup => 'Add Group';
+  String get addGroup => 'समूह जोड़ें';
 
   @override
-  String get addItemManually => 'Add Item Manually';
+  String get addItemManually => 'आइटम मैन्युअल रूप से जोड़ें';
 
   @override
-  String get addItemsToYourLists => 'Add items to your lists';
+  String get addItemsToYourLists => 'अपनी सूचियों में आइटम जोड़ें';
 
   @override
-  String get addNewLocation => 'Add new location';
+  String get addNewLocation => 'नया स्थान जोड़ें';
 
   @override
-  String get added => 'Added';
+  String get added => 'जोड़ा';
 
   @override
-  String get appLanguage => 'App Language';
+  String get appLanguage => 'ऐप की भाषा';
 
   @override
-  String get appVersion => 'App Version';
+  String get appVersion => 'ऐप का वर्ज़न';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems =>
-      'Are you sure you want to remove all completed items?';
+      'क्या आप पक्का सभी पूरे किए गए आइटम हटाना चाहते हैं?';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems1 =>
-      'Are you sure you want to remove all completed items?';
+      'क्या आप पक्का सभी पूरे किए गए आइटम हटाना चाहते हैं?';
 
   @override
-  String get areYouSureYouWantToSignOut => 'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut => 'क्या आप लॉग आउट करना चाहते हैं?';
 
   @override
-  String get areYouSureYouWantToSignOut1 =>
-      'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut1 => 'क्या आप लॉग आउट करना चाहते हैं?';
 
   @override
-  String get areYouSureYouWantToSignOut2 =>
-      'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut2 => 'क्या आप लॉग आउट करना चाहते हैं?';
 
   @override
-  String get areYouSureYouWantToSignOut3 =>
-      'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut3 => 'क्या आप लॉग आउट करना चाहते हैं?';
 
   @override
-  String get avgCompletion => 'Avg Completion';
+  String get avgCompletion => 'औसत पूर्णता';
 
   @override
-  String get canAddEditAndDeleteItems => 'Can add, edit, and delete items';
+  String get canAddEditAndDeleteItems => 'आइटम जोड़, एडिट और डिलीट कर सकते हैं';
 
   @override
-  String get canOnlyViewItems => 'Can only view items';
+  String get canOnlyViewItems => 'केवल आइटम देख सकते हैं';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'रुक';
 
   @override
-  String get cancel1 => 'Cancel';
+  String get cancel1 => 'रुक';
 
   @override
-  String get cancel10 => 'Cancel';
+  String get cancel10 => 'रुक';
 
   @override
-  String get cancel11 => 'Cancel';
+  String get cancel11 => 'रुक';
 
   @override
-  String get cancel12 => 'Cancel';
+  String get cancel12 => 'रुक';
 
   @override
-  String get cancel2 => 'Cancel';
+  String get cancel2 => 'रुक';
 
   @override
-  String get cancel3 => 'Cancel';
+  String get cancel3 => 'रुक';
 
   @override
-  String get cancel4 => 'Cancel';
+  String get cancel4 => 'रुक';
 
   @override
-  String get cancel5 => 'Cancel';
+  String get cancel5 => 'रुक';
 
   @override
-  String get cancel6 => 'Cancel';
+  String get cancel6 => 'रुक';
 
   @override
-  String get cancel7 => 'Cancel';
+  String get cancel7 => 'रुक';
 
   @override
-  String get cancel8 => 'Cancel';
+  String get cancel8 => 'रुक';
 
   @override
-  String get cancel9 => 'Cancel';
+  String get cancel9 => 'रुक';
 
   @override
-  String get category => 'Category';
+  String get category => 'वर्ग';
 
   @override
-  String get category1 => 'Category';
+  String get category1 => 'वर्ग';
 
   @override
   String get categoryCreatedSuccessfully => 'Category created successfully';
