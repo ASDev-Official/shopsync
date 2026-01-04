@@ -45,7 +45,7 @@ class DefaultFirebaseOptions {
     appId: '1:160863676221:web:435324d9788cca2b688754',
     messagingSenderId: '160863676221',
     projectId: 'as-shopsync',
-    authDomain: 'as-shopsync.firebaseapp.com',
+    authDomain: 'shopsync-auth.aadish.dev',
     storageBucket: 'as-shopsync.firebasestorage.app',
     measurementId: 'G-99BL9Z5BF2',
   );
@@ -87,7 +87,7 @@ class DefaultFirebaseOptions {
     appId: '1:160863676221:web:7001eaf6e9a008fa688754',
     messagingSenderId: '160863676221',
     projectId: 'as-shopsync',
-    authDomain: 'as-shopsync.firebaseapp.com',
+    authDomain: 'shopsync-auth.aadish.dev',
     storageBucket: 'as-shopsync.firebasestorage.app',
   );
 }
