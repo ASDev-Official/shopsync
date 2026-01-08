@@ -32,7 +32,7 @@ dependencies:
   flutter_inappwebview: ^6.1.5
   lottie: ^3.3.2
   connectivity_plus: ^7.0.0
-  home_widget: ^0.8.1
+  home_widget: ^0.9.0
   collection: ^1.18.0
   wear_plus: ^1.2.4
   rotary_scrollbar: ^1.1.0
