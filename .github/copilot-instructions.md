@@ -165,6 +165,15 @@ flutter pub get
 - **WearOS**: Rotary scroll support via `rotary_scrollbar` package, ambient mode via `wear_plus`
 - **In-app updates**: `UpdateService.checkForUpdate()` triggers Android Play update flow
 
+#### WearOS Language Selection Flow
+
+- The language selector screen lists options and, on tap, navigates to a separate confirmation screen.
+- The confirmation screen is minimal and scrollable with extra bottom space; it displays:
+  - Title: "Confirm Language"
+  - Selected language name (lowercase)
+  - "OK" and "Cancel" buttons only.
+- The selector no longer shows a bottom "OK" button; confirmation happens on the next screen to avoid UI clipping issues on round displays.
+
 ## Critical Gotchas
 
 - **Don't use Provider**: Theme state management code is commented out; rebuild MaterialApp manually
