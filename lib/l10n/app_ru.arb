@@ -1,1 +1,1519 @@
-{}
+{
+    "aboutApp": "О приложении",
+    "@aboutApp": {},
+    "accessYourListsAndSettings": "Получите доступ к спискам и настройкам",
+    "@accessYourListsAndSettings": {},
+    "addCustomGroup": "Добавить свою группу",
+    "@addCustomGroup": {},
+    "addDescription": "Добавить описание...",
+    "@addDescription": {},
+    "addDescription1": "Добавить описание...",
+    "@addDescription1": {},
+    "addDescription2": "Добавить описание...",
+    "@addDescription2": {},
+    "addFromTemplate": "Добавить из шаблона",
+    "@addFromTemplate": {},
+    "addGroup": "Добавить группу",
+    "@addGroup": {},
+    "addItemManually": "Добавить товар вручную",
+    "@addItemManually": {},
+    "addItemsToYourLists": "Добавляйте товары в ваши списки",
+    "@addItemsToYourLists": {},
+    "addNewLocation": "Добавить новое место",
+    "@addNewLocation": {},
+    "added": "Добавлено",
+    "@added": {},
+    "appLanguage": "Язык приложения",
+    "@appLanguage": {},
+    "appVersion": "Версия приложения",
+    "@appVersion": {},
+    "areYouSureYouWantToRemoveAllCompletedItems": "Вы уверены, что хотите удалить все купленные товары?",
+    "@areYouSureYouWantToRemoveAllCompletedItems": {},
+    "areYouSureYouWantToRemoveAllCompletedItems1": "Вы уверены, что хотите удалить все купленные товары?",
+    "@areYouSureYouWantToRemoveAllCompletedItems1": {},
+    "areYouSureYouWantToSignOut": "Вы уверены, что хотите выйти из аккаунта?",
+    "@areYouSureYouWantToSignOut": {},
+    "areYouSureYouWantToSignOut1": "Вы уверены, что хотите выйти из аккаунта?",
+    "@areYouSureYouWantToSignOut1": {},
+    "areYouSureYouWantToSignOut2": "Вы уверены, что хотите выйти из аккаунта?",
+    "@areYouSureYouWantToSignOut2": {},
+    "areYouSureYouWantToSignOut3": "Вы уверены, что хотите выйти из аккаунта?",
+    "@areYouSureYouWantToSignOut3": {},
+    "avgCompletion": "Среднее выполнение",
+    "@avgCompletion": {},
+    "canAddEditAndDeleteItems": "Может добавлять, менять и удалять товары",
+    "@canAddEditAndDeleteItems": {},
+    "canOnlyViewItems": "Может только просматривать товары",
+    "@canOnlyViewItems": {},
+    "cancel": "Отмена",
+    "@cancel": {},
+    "cancel1": "Отмена",
+    "@cancel1": {},
+    "cancel10": "Отмена",
+    "@cancel10": {},
+    "cancel11": "Отмена",
+    "@cancel11": {},
+    "cancel12": "Отмена",
+    "@cancel12": {},
+    "cancel2": "Отмена",
+    "@cancel2": {},
+    "cancel3": "Отмена",
+    "@cancel3": {},
+    "cancel4": "Отмена",
+    "@cancel4": {},
+    "cancel5": "Отмена",
+    "@cancel5": {},
+    "cancel6": "Отмена",
+    "@cancel6": {},
+    "cancel7": "Отмена",
+    "@cancel7": {},
+    "cancel8": "Отмена",
+    "@cancel8": {},
+    "cancel9": "Отмена",
+    "@cancel9": {},
+    "category": "Категория",
+    "@category": {},
+    "category1": "Категория",
+    "@category1": {},
+    "categoryCreatedSuccessfully": "Категория успешно создана",
+    "@categoryCreatedSuccessfully": {},
+    "categoryCreatedSuccessfully1": "Категория успешно создана",
+    "@categoryCreatedSuccessfully1": {},
+    "categoryDeletedSuccessfully": "Категория успешно удалена",
+    "@categoryDeletedSuccessfully": {},
+    "categoryDeletedSuccessfully1": "Категория успешно удалена",
+    "@categoryDeletedSuccessfully1": {},
+    "categoryName": "Название категории",
+    "@categoryName": {},
+    "categoryName1": "Название категории",
+    "@categoryName1": {},
+    "categoryUpdatedSuccessfully": "Категория успешно обновлена",
+    "@categoryUpdatedSuccessfully": {},
+    "categoryUpdatedSuccessfully1": "Категория успешно обновлена",
+    "@categoryUpdatedSuccessfully1": {},
+    "changeTheNameOfThisList": "Изменить название этого списка",
+    "@changeTheNameOfThisList": {},
+    "clearCompleted": "Удалить купленные",
+    "@clearCompleted": {},
+    "clearCompletedItems": "Удалить купленные товары",
+    "@clearCompletedItems": {},
+    "clearItems": "Очистить список",
+    "@clearItems": {},
+    "clearedCompleteditemsdocslengthCompletedItems": "Удалено купленных товаров: {completedItems}",
+    "@clearedCompleteditemsdocslengthCompletedItems": {},
+    "clearedCompleteditemsdocslengthCompletedItems1": "Удалено купленных товаров: {completedItems}",
+    "@clearedCompleteditemsdocslengthCompletedItems1": {},
+    "clearedCompleteditemsdocslengthCompletedItems2": "Удалено купленных товаров: {completedItems}",
+    "@clearedCompleteditemsdocslengthCompletedItems2": {},
+    "clearedCompleteditemsdocslengthCompletedItems3": "Удалено купленных товаров: {completedItems}",
+    "@clearedCompleteditemsdocslengthCompletedItems3": {},
+    "collaborators": "Участники",
+    "@collaborators": {},
+    "completed": "Куплено",
+    "@completed": {},
+    "completionRate": "Процент выполнения",
+    "@completionRate": {},
+    "completionRate1": "Процент выполнения",
+    "@completionRate1": {},
+    "configureHomeScreenWidgetDebugOnly": "Настроить виджет (Только отладка)",
+    "@configureHomeScreenWidgetDebugOnly": {},
+    "contributeOnWeblate": "Помочь с переводом на Weblate",
+    "@contributeOnWeblate": {},
+    "couldNotLaunchUrl": "Не удалось открыть {url}",
+    "@couldNotLaunchUrl": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "couldNotLaunchUrl1": "Не удалось открыть {url}",
+    "@couldNotLaunchUrl1": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "itemDetailsTitle": "Детали товара",
+    "@itemDetailsTitle": {},
+    "untitledItem": "Товар без названия",
+    "@untitledItem": {},
+    "unknownUser": "Неизвестно",
+    "@unknownUser": {},
+    "status": "Статус",
+    "@status": {},
+    "setDeadline": "Установить срок",
+    "@setDeadline": {},
+    "setLocation": "Указать место",
+    "@setLocation": {},
+    "addedBy": "Добавил(а)",
+    "@addedBy": {},
+    "addedAt": "Дата добавления",
+    "@addedAt": {},
+    "unnamedCategory": "Категория без названия",
+    "@unnamedCategory": {},
+    "onboardingWelcomeDescription": "Делитесь списками покупок с семьей и друзьями",
+    "@onboardingWelcomeDescription": {},
+    "onboardingSmartListsDescription": "Легко создавайте списки покупок и управляйте ими",
+    "@onboardingSmartListsDescription": {},
+    "onboardingShareDescription": "Делитесь списками с семьей и друзьями",
+    "@onboardingShareDescription": {},
+    "onboardingSkip": "Пропустить",
+    "@onboardingSkip": {},
+    "onboardingNext": "Далее",
+    "@onboardingNext": {},
+    "onboardingDone": "Готово",
+    "@onboardingDone": {},
+    "upcomingMaintenance": "Планируется тех. обслуживание",
+    "@upcomingMaintenance": {},
+    "underMaintenance": "Техническое обслуживание",
+    "@underMaintenance": {},
+    "understood": "Понятно",
+    "@understood": {},
+    "scheduledPeriod": "Запланированный период",
+    "@scheduledPeriod": {},
+    "expectedDuration": "Ожидаемая длительность",
+    "@expectedDuration": {},
+    "utcTimeZone": "Часовой пояс UTC",
+    "@utcTimeZone": {},
+    "createItemTitle": "Создание товара",
+    "@createItemTitle": {},
+    "itemNameLabel": "Название товара",
+    "@itemNameLabel": {},
+    "enterItemName": "Введите название товара...",
+    "@enterItemName": {},
+    "categoryLabel": "Категория",
+    "@categoryLabel": {},
+    "selectCategory": "Выберите категорию",
+    "@selectCategory": {},
+    "itemIconLabel": "Иконка товара",
+    "@itemIconLabel": {},
+    "chooseIcon": "Выберите иконку",
+    "@chooseIcon": {},
+    "deadlineLabel": "Срок",
+    "@deadlineLabel": {},
+    "setDeadlineText": "Установить срок",
+    "@setDeadlineText": {},
+    "locationLabel": "Место",
+    "@locationLabel": {},
+    "setLocationText": "Указать место",
+    "@setLocationText": {},
+    "counterLabel": "Количество",
+    "@counterLabel": {},
+    "descriptionLabel": "Описание",
+    "@descriptionLabel": {},
+    "createItemButton": "Создать товар",
+    "@createItemButton": {},
+    "createItemTemplate": "Создать шаблон товара",
+    "@createItemTemplate": {},
+    "welcomeTagline": "Делитесь списками покупок с семьей и друзьями.",
+    "@welcomeTagline": {},
+    "signIn": "Войти",
+    "@signIn": {},
+    "signUp": "Регистрация",
+    "@signUp": {},
+    "versionInfo": "Версия {version} ({buildNumber})",
+    "@versionInfo": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/auth/welcome.dart"
+    },
+    "loadingVersionInfo": "Загрузка информации о версии...",
+    "@loadingVersionInfo": {},
+    "googleSignInError": "Ошибка при входе через Google",
+    "@googleSignInError": {},
+    "googleSignInAccountExists": "Аккаунт с этой почтой уже существует. Войдите с паролем, а затем привяжите Google в профиле.",
+    "@googleSignInAccountExists": {},
+    "googleSignInGeneric": "Ошибка входа через Google. Попробуйте еще раз.",
+    "@googleSignInGeneric": {},
+    "shopSyncAuthentication": "Вход в ShopSync",
+    "@shopSyncAuthentication": {},
+    "welcomeBack": "С\nвозвращением!",
+    "@welcomeBack": {},
+    "signInContinue": "Войдите, чтобы продолжить в ShopSync",
+    "@signInContinue": {},
+    "loginEmail": "Email",
+    "@loginEmail": {},
+    "loginPassword": "Пароль",
+    "@loginPassword": {},
+    "loginInvalidEmail": "Введите корректный email",
+    "@loginInvalidEmail": {},
+    "loginPasswordEmpty": "Пароль не может быть пустым",
+    "@loginPasswordEmpty": {},
+    "loginSignInButton": "Войти",
+    "@loginSignInButton": {},
+    "loginForgotPassword": "Забыли пароль?",
+    "@loginForgotPassword": {},
+    "loginNoAccount": "Нет аккаунта?",
+    "@loginNoAccount": {},
+    "loginSignUp": "Регистрация",
+    "@loginSignUp": {},
+    "loginAccountExists": "Этот email уже используется другим аккаунтом",
+    "@loginAccountExists": {},
+    "loginInvalidCredentials": "Неверные данные. Проверьте email и пароль",
+    "@loginInvalidCredentials": {},
+    "loginOperationNotAllowed": "Операция запрещена. Повторите позже или напишите на support@aadish.dev",
+    "@loginOperationNotAllowed": {},
+    "loginUserDisabled": "Пользователь заблокирован. Напишите на support@aadish.dev",
+    "@loginUserDisabled": {},
+    "loginUserNotFound": "Пользователь с таким email не найден. Проверьте адрес и попробуйте снова",
+    "@loginUserNotFound": {},
+    "loginWrongPassword": "Неверный пароль или у пользователя нет пароля",
+    "@loginWrongPassword": {},
+    "loginTooManyRequests": "Слишком много запросов. Попробуйте позже",
+    "@loginTooManyRequests": {},
+    "loginNetworkError": "Ошибка сети. Проверьте интернет и попробуйте снова",
+    "@loginNetworkError": {},
+    "loginGenericError": "Произошла ошибка при входе",
+    "@loginGenericError": {},
+    "registerCreateAccount": "Создать\nаккаунт",
+    "@registerCreateAccount": {},
+    "registerSignUp": "Зарегистрируйтесь для совместных покупок",
+    "@registerSignUp": {},
+    "registerName": "Имя",
+    "@registerName": {},
+    "registerNameError": "Имя должно быть не короче 2 символов",
+    "@registerNameError": {},
+    "registerEmail": "Email",
+    "@registerEmail": {},
+    "registerPassword": "Пароль",
+    "@registerPassword": {},
+    "registerEmailExists": "Этот email уже зарегистрирован. Пожалуйста, войдите",
+    "@registerEmailExists": {},
+    "registerInvalidEmail": "Введите корректный адрес email",
+    "@registerInvalidEmail": {},
+    "registerWeakPassword": "Пароль слишком простой. Придумайте посложнее",
+    "@registerWeakPassword": {},
+    "registerTooManyRequests": "Слишком много запросов. Попробуйте позже",
+    "@registerTooManyRequests": {},
+    "registerNetworkError": "Ошибка сети. Проверьте интернет и попробуйте снова",
+    "@registerNetworkError": {},
+    "registerGenericError": "Произошла ошибка при регистрации",
+    "@registerGenericError": {},
+    "registerButton": "Зарегистрироваться",
+    "@registerButton": {},
+    "registerEnterName": "Пожалуйста, введите ваше имя",
+    "@registerEnterName": {},
+    "registerNameTooShort": "Имя должно быть не короче 2 символов",
+    "@registerNameTooShort": {},
+    "registerEnterPassword": "Пожалуйста, введите пароль",
+    "@registerEnterPassword": {},
+    "resetPasswordTitle": "Сбросить\nпароль",
+    "@resetPasswordTitle": {},
+    "resetPasswordSubtitle": "Введите email для получения ссылки на сброс пароля",
+    "@resetPasswordSubtitle": {},
+    "resetPasswordEmail": "Email",
+    "@resetPasswordEmail": {},
+    "resetPasswordButton": "Сбросить пароль",
+    "@resetPasswordButton": {},
+    "resetPasswordInvalidEmail": "Введите корректный адрес email",
+    "@resetPasswordInvalidEmail": {},
+    "resetPasswordUserNotFound": "Аккаунт с таким email не найден",
+    "@resetPasswordUserNotFound": {},
+    "resetPasswordTooManyRequests": "Слишком много запросов. Попробуйте позже",
+    "@resetPasswordTooManyRequests": {},
+    "resetPasswordNetworkError": "Ошибка сети. Проверьте подключение и повторите",
+    "@resetPasswordNetworkError": {},
+    "resetPasswordGenericError": "Произошла ошибка",
+    "@resetPasswordGenericError": {},
+    "resetPasswordSuccess": "Ссылка для сброса пароля отправлена на ваш email",
+    "@resetPasswordSuccess": {},
+    "resetPasswordError": "Произошла ошибка. Пожалуйста, попробуйте позже",
+    "@resetPasswordError": {},
+    "resetPasswordBack": "Вернуться ко входу",
+    "@resetPasswordBack": {},
+    "signingOut": "Выход из системы..",
+    "@signingOut": {},
+    "error": "Ошибка",
+    "@error": {},
+    "outageServiceOutage": "Сбой в работе сервиса",
+    "@outageServiceOutage": {},
+    "outageDefaultDescription": "Зафиксирован сбой. Наша команда уже разбирается.",
+    "@outageDefaultDescription": {},
+    "outageAffected": "Затронуто: {components}",
+    "@outageAffected": {
+        "placeholders": {
+            "components": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/status/outage_dialog.dart"
+    },
+    "outageStarted": "Начало",
+    "@outageStarted": {},
+    "outageResolved": "Исправлено",
+    "@outageResolved": {},
+    "outageLatestUpdates": "Последние обновления",
+    "@outageLatestUpdates": {},
+    "outageClose": "Закрыть",
+    "@outageClose": {},
+    "couldNotLaunchUrl2": "Не удалось открыть {url}",
+    "@couldNotLaunchUrl2": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "couldNotLaunchUrl3": "Не удалось открыть {url}",
+    "@couldNotLaunchUrl3": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "couldNotOpenPlayStore": "Не удалось открыть Play Store",
+    "@couldNotOpenPlayStore": {},
+    "couldNotOpenPlayStore1": "Не удалось открыть Play Store",
+    "@couldNotOpenPlayStore1": {},
+    "couldNotOpenReleaseNotes": "Не удалось открыть список изменений",
+    "@couldNotOpenReleaseNotes": {},
+    "couldNotOpenReleaseNotes1": "Не удалось открыть список изменений",
+    "@couldNotOpenReleaseNotes1": {},
+    "counter": "Количество",
+    "@counter": {},
+    "counter1": "Количество",
+    "@counter1": {},
+    "create": "Создать",
+    "@create": {},
+    "createCategory": "Создать категорию",
+    "@createCategory": {},
+    "createItemsFromSavedTemplates": "Создавайте товары из шаблонов",
+    "@createItemsFromSavedTemplates": {},
+    "createList": "Создать список",
+    "@createList": {},
+    "createListGroup": "Создать группу списков",
+    "@createListGroup": {},
+    "createListGroups": "Создавайте группы списков",
+    "@createListGroups": {},
+    "dailyAvg": "Среднее в день",
+    "@dailyAvg": {},
+    "deadline": "Срок",
+    "@deadline": {},
+    "delete": "Удалить",
+    "@delete": {},
+    "delete1": "Удалить",
+    "@delete1": {},
+    "delete2": "Удалить",
+    "@delete2": {},
+    "delete3": "Удалить",
+    "@delete3": {},
+    "delete4": "Удалить",
+    "@delete4": {},
+    "deleteCategory": "Удалить категорию",
+    "@deleteCategory": {},
+    "deleteGroup": "Удалить группу",
+    "@deleteGroup": {},
+    "deleteList": "Удалить список",
+    "@deleteList": {},
+    "deleteList1": "Удалить список",
+    "@deleteList1": {},
+    "description": "Описание",
+    "@description": {},
+    "description1": "Описание",
+    "@description1": {},
+    "editCategory": "Изменить категорию",
+    "@editCategory": {},
+    "editGroupName": "Изменить название группы",
+    "@editGroupName": {},
+    "editListName": "Редактировать название списка",
+    "@editListName": {},
+    "editor": "Редактор",
+    "@editor": {},
+    "egGroceryListsWorkProjects": "Например: Продукты, Работа",
+    "@egGroceryListsWorkProjects": {},
+    "email": "Email",
+    "@email": {},
+    "email1": "Email",
+    "@email1": {},
+    "email2": "Email",
+    "@email2": {},
+    "email3": "Email",
+    "@email3": {},
+    "enterEmailAddress": "Введите email",
+    "@enterEmailAddress": {},
+    "enterGroupName": "Введите название группы",
+    "@enterGroupName": {},
+    "enterGroupName1": "Введите название группы",
+    "@enterGroupName1": {},
+    "enterGroupName2": "Введите название группы",
+    "@enterGroupName2": {},
+    "enterItemName1": "Введите название товара...",
+    "@enterItemName1": {},
+    "enterListName": "Введите название списка",
+    "@enterListName": {},
+    "enterYourName": "Введите ваше имя",
+    "@enterYourName": {},
+    "errorCreatingCategoryE": "Ошибка создания категории: {e}",
+    "@errorCreatingCategoryE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorCreatingCategoryE1": "Ошибка создания категории: {e}",
+    "@errorCreatingCategoryE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorCreatingCategoryE2": "Ошибка создания категории: {e}",
+    "@errorCreatingCategoryE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorCreatingCategoryE3": "Ошибка создания категории: {e}",
+    "@errorCreatingCategoryE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorDeletingCategoryE": "Ошибка удаления категории: {e}",
+    "@errorDeletingCategoryE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorDeletingCategoryE1": "Ошибка удаления категории: {e}",
+    "@errorDeletingCategoryE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorDeletingCategoryE2": "Ошибка удаления категории: {e}",
+    "@errorDeletingCategoryE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorDeletingCategoryE3": "Ошибка удаления категории: {e}",
+    "@errorDeletingCategoryE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorErrormessage": "Ошибка: {errorMessage}",
+    "@errorErrormessage": {
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_welcome_screen.dart"
+    },
+    "errorErrormessage1": "Ошибка: {errorMessage}",
+    "@errorErrormessage1": {
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_welcome_screen.dart"
+    },
+    "errorEtostring": "Ошибка: {e}",
+    "@errorEtostring": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "errorEtostring1": "Ошибка: {e}",
+    "@errorEtostring1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "errorEtostring2": "Ошибка: {e}",
+    "@errorEtostring2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "errorEtostring3": "Ошибка: {e}",
+    "@errorEtostring3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "errorFetchingMaintenanceStatusE": "Ошибка получения статуса обслуживания: {e}",
+    "@errorFetchingMaintenanceStatusE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "errorFetchingMaintenanceStatusE1": "Ошибка получения статуса обслуживания: {e}",
+    "@errorFetchingMaintenanceStatusE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "errorFetchingMaintenanceStatusE2": "Ошибка получения статуса обслуживания: {e}",
+    "@errorFetchingMaintenanceStatusE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "errorFetchingMaintenanceStatusE3": "Ошибка получения статуса обслуживания: {e}",
+    "@errorFetchingMaintenanceStatusE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "errorLoadingInsightsE": "Ошибка загрузки статистики: {e}",
+    "@errorLoadingInsightsE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "errorLoadingInsightsE1": "Ошибка загрузки статистики: {e}",
+    "@errorLoadingInsightsE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "errorLoadingInsightsE2": "Ошибка загрузки статистики: {e}",
+    "@errorLoadingInsightsE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "errorLoadingInsightsE3": "Ошибка загрузки статистики: {e}",
+    "@errorLoadingInsightsE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "errorLoadingListsSnapshoterror": "Ошибка загрузки списков: {error}",
+    "@errorLoadingListsSnapshoterror": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/home.dart"
+    },
+    "errorLoadingListsSnapshoterror1": "Ошибка загрузки списков: {error}",
+    "@errorLoadingListsSnapshoterror1": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/home.dart"
+    },
+    "errorSigningOutEtostring": "Ошибка при выходе: {e}",
+    "@errorSigningOutEtostring": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "errorSigningOutEtostring1": "Ошибка при выходе: {e}",
+    "@errorSigningOutEtostring1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "errorSigningOutEtostring2": "Ошибка при выходе: {e}",
+    "@errorSigningOutEtostring2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "errorSigningOutEtostring3": "Ошибка при выходе: {e}",
+    "@errorSigningOutEtostring3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "errorSigningOutEtostring4": "Ошибка при выходе: {e}",
+    "@errorSigningOutEtostring4": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "errorSigningOutEtostring5": "Ошибка при выходе: {e}",
+    "@errorSigningOutEtostring5": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "errorSigningOutEtostring6": "Ошибка при выходе: {e}",
+    "@errorSigningOutEtostring6": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "errorSigningOutEtostring7": "Ошибка при выходе: {e}",
+    "@errorSigningOutEtostring7": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "exportBackup": "Экспорт и резервные копии",
+    "@exportBackup": {},
+    "exportList": "Экспорт списка",
+    "@exportList": {},
+    "exportListAsACsv": "Экспортировать список в CSV",
+    "@exportListAsACsv": {},
+    "failedToChangePermission": "Не удалось изменить права",
+    "@failedToChangePermission": {},
+    "failedToChangePermission1": "Не удалось изменить права",
+    "@failedToChangePermission1": {},
+    "failedToCreateGroupPleaseTryAgain": "Не удалось создать группу. Попробуйте снова.",
+    "@failedToCreateGroupPleaseTryAgain": {},
+    "failedToCreateGroupPleaseTryAgain1": "Не удалось создать группу. Попробуйте снова.",
+    "@failedToCreateGroupPleaseTryAgain1": {},
+    "failedToCreateItem": "Не удалось создать товар",
+    "@failedToCreateItem": {},
+    "failedToCreateItem1": "Не удалось создать товар",
+    "@failedToCreateItem1": {},
+    "failedToCreateListPleaseTryAgain": "Не удалось создать список. Попробуйте снова.",
+    "@failedToCreateListPleaseTryAgain": {},
+    "failedToCreateListPleaseTryAgain1": "Не удалось создать список. Попробуйте снова.",
+    "@failedToCreateListPleaseTryAgain1": {},
+    "failedToDeleteGroupPleaseTryAgain": "Не удалось удалить группу. Попробуйте снова.",
+    "@failedToDeleteGroupPleaseTryAgain": {},
+    "failedToDeleteGroupPleaseTryAgain1": "Не удалось удалить группу. Попробуйте снова.",
+    "@failedToDeleteGroupPleaseTryAgain1": {},
+    "failedToDeleteItem": "Не удалось удалить товар",
+    "@failedToDeleteItem": {},
+    "failedToDeleteItem1": "Не удалось удалить товар",
+    "@failedToDeleteItem1": {},
+    "failedToDeleteItem2": "Не удалось удалить товар",
+    "@failedToDeleteItem2": {},
+    "failedToDeleteItem3": "Не удалось удалить товар",
+    "@failedToDeleteItem3": {},
+    "failedToDeleteList": "Не удалось удалить список",
+    "@failedToDeleteList": {},
+    "failedToDeleteList1": "Не удалось удалить список",
+    "@failedToDeleteList1": {},
+    "failedToMigrateListsPleaseTryAgain": "Не удалось перенести списки. Попробуйте снова.",
+    "@failedToMigrateListsPleaseTryAgain": {},
+    "failedToMigrateListsPleaseTryAgain1": "Не удалось перенести списки. Попробуйте снова.",
+    "@failedToMigrateListsPleaseTryAgain1": {},
+    "failedToRemoveUser": "Не удалось удалить пользователя",
+    "@failedToRemoveUser": {},
+    "failedToRemoveUser1": "Не удалось удалить пользователя",
+    "@failedToRemoveUser1": {},
+    "failedToRestoreItem": "Не удалось восстановить товар",
+    "@failedToRestoreItem": {},
+    "failedToRestoreItem1": "Не удалось восстановить товар",
+    "@failedToRestoreItem1": {},
+    "failedToSaveItemTemplate": "Не удалось сохранить шаблон товара",
+    "@failedToSaveItemTemplate": {},
+    "failedToSaveItemTemplate1": "Не удалось сохранить шаблон товара",
+    "@failedToSaveItemTemplate1": {},
+    "failedToSaveLocation": "Не удалось сохранить место",
+    "@failedToSaveLocation": {},
+    "failedToSaveLocation1": "Не удалось сохранить место",
+    "@failedToSaveLocation1": {},
+    "failedToShareList": "Не удалось поделиться списком",
+    "@failedToShareList": {},
+    "failedToShareList1": "Не удалось поделиться списком",
+    "@failedToShareList1": {},
+    "failedToSignInWithGoogle": "Не удалось войти через Google",
+    "@failedToSignInWithGoogle": {},
+    "failedToSignInWithGoogle1": "Не удалось войти через Google",
+    "@failedToSignInWithGoogle1": {},
+    "failedToUpdateGroupNamePleaseTryAgain": "Не удалось обновить название группы. Попробуйте снова.",
+    "@failedToUpdateGroupNamePleaseTryAgain": {},
+    "failedToUpdateGroupNamePleaseTryAgain1": "Не удалось обновить название группы. Попробуйте снова.",
+    "@failedToUpdateGroupNamePleaseTryAgain1": {},
+    "failedToUpdateItemStatus": "Не удалось обновить статус товара",
+    "@failedToUpdateItemStatus": {},
+    "failedToUpdateItemStatus1": "Не удалось обновить статус товара",
+    "@failedToUpdateItemStatus1": {},
+    "failedToUpdateListName": "Не удалось обновить название списка",
+    "@failedToUpdateListName": {},
+    "failedToUpdateListName1": "Не удалось обновить название списка",
+    "@failedToUpdateListName1": {},
+    "failedToUpdateWidgetE": "Не удалось обновить виджет: {e}",
+    "@failedToUpdateWidgetE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "failedToUpdateWidgetE1": "Не удалось обновить виджет: {e}",
+    "@failedToUpdateWidgetE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "failedToUpdateWidgetE2": "Не удалось обновить виджет: {e}",
+    "@failedToUpdateWidgetE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "failedToUpdateWidgetE3": "Не удалось обновить виджет: {e}",
+    "@failedToUpdateWidgetE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "feedback": "Обратная связь",
+    "@feedback": {},
+    "finished": "Завершено",
+    "@finished": {},
+    "githubRepository": "Репозиторий GitHub",
+    "@githubRepository": {},
+    "googleAccountLinkedSuccessfully": "Аккаунт Google успешно привязан!",
+    "@googleAccountLinkedSuccessfully": {},
+    "googleAccountLinkedSuccessfully1": "Аккаунт Google успешно привязан!",
+    "@googleAccountLinkedSuccessfully1": {},
+    "googleAccountUnlinkedSuccessfully": "Аккаунт Google успешно отвязан",
+    "@googleAccountUnlinkedSuccessfully": {},
+    "googleAccountUnlinkedSuccessfully1": "Аккаунт Google успешно отвязан",
+    "@googleAccountUnlinkedSuccessfully1": {},
+    "groupNamecontrollertexttrimCreatedSuccessfully": "Группа \"{nameController}\" успешно создана",
+    "@groupNamecontrollertexttrimCreatedSuccessfully": {},
+    "groupNamecontrollertexttrimCreatedSuccessfully1": "Группа \"{nameController}\" успешно создана",
+    "@groupNamecontrollertexttrimCreatedSuccessfully1": {},
+    "groupNamecontrollertexttrimCreatedSuccessfully2": "Группа \"{nameController}\" успешно создана",
+    "@groupNamecontrollertexttrimCreatedSuccessfully2": {},
+    "groupNamecontrollertexttrimCreatedSuccessfully3": "Группа \"{nameController}\" успешно создана",
+    "@groupNamecontrollertexttrimCreatedSuccessfully3": {},
+    "groupRenamedToNamecontrollertexttrim": "Группа переименована в \"{nameController}\"",
+    "@groupRenamedToNamecontrollertexttrim": {},
+    "groupRenamedToNamecontrollertexttrim1": "Группа переименована в \"{nameController}\"",
+    "@groupRenamedToNamecontrollertexttrim1": {},
+    "groupRenamedToNamecontrollertexttrim2": "Группа переименована в \"{nameController}\"",
+    "@groupRenamedToNamecontrollertexttrim2": {},
+    "groupRenamedToNamecontrollertexttrim3": "Группа переименована в \"{nameController}\"",
+    "@groupRenamedToNamecontrollertexttrim3": {},
+    "groupWidgetgroupnameDeleted": "Группа \"{groupName}\" удалена",
+    "@groupWidgetgroupnameDeleted": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "groupWidgetgroupnameDeleted1": "Группа \"{groupName}\" удалена",
+    "@groupWidgetgroupnameDeleted1": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "groupWidgetgroupnameDeleted2": "Группа \"{groupName}\" удалена",
+    "@groupWidgetgroupnameDeleted2": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "groupWidgetgroupnameDeleted3": "Группа \"{groupName}\" удалена",
+    "@groupWidgetgroupnameDeleted3": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "helpTranslate": "Помочь с переводом",
+    "@helpTranslate": {},
+    "high": "Высокий",
+    "@high": {},
+    "icon": "Иконка",
+    "@icon": {},
+    "icon1": "Иконка",
+    "@icon1": {},
+    "inTimeframe": "за период",
+    "@inTimeframe": {},
+    "inTimeframe1": "за период",
+    "@inTimeframe1": {},
+    "insights": "Статистика",
+    "@insights": {},
+    "itemCreatedFromTemplate": "Товар создан из шаблона",
+    "@itemCreatedFromTemplate": {},
+    "itemCreatedFromTemplate1": "Товар создан из шаблона",
+    "@itemCreatedFromTemplate1": {},
+    "itemName": "Название товара",
+    "@itemName": {},
+    "itemName1": "Название товара",
+    "@itemName1": {},
+    "itemTemplateSavedSuccessfully": "Шаблон товара успешно сохранен",
+    "@itemTemplateSavedSuccessfully": {},
+    "itemTemplateSavedSuccessfully1": "Шаблон товара успешно сохранен",
+    "@itemTemplateSavedSuccessfully1": {},
+    "items": "Товары",
+    "@items": {},
+    "itemsAdded": "Добавлено товаров",
+    "@itemsAdded": {},
+    "itemsCheckedOff": "отмечено товаров",
+    "@itemsCheckedOff": {},
+    "itemsCheckedOff1": "отмечено товаров",
+    "@itemsCheckedOff1": {},
+    "itemsCompleted": "Купленные товары",
+    "@itemsCompleted": {},
+    "itemsInList": "товаров в списке",
+    "@itemsInList": {},
+    "itemsPerDay": "товаров в день",
+    "@itemsPerDay": {},
+    "itemsPerDay1": "товаров в день",
+    "@itemsPerDay1": {},
+    "keepTrackOfWhatYouNeedToBuy": "Следите за тем, что нужно купить",
+    "@keepTrackOfWhatYouNeedToBuy": {},
+    "language": "Язык",
+    "@language": {},
+    "leaveUngrouped": "Оставить без группы",
+    "@leaveUngrouped": {},
+    "licenses": "Лицензии",
+    "@licenses": {},
+    "linkGoogleAccount": "Привязать аккаунт Google",
+    "@linkGoogleAccount": {},
+    "listDeletedSuccessfully": "Список успешно удален",
+    "@listDeletedSuccessfully": {},
+    "listDeletedSuccessfully1": "Список успешно удален",
+    "@listDeletedSuccessfully1": {},
+    "listManagement": "Управление списками",
+    "@listManagement": {},
+    "listName": "Название списка",
+    "@listName": {},
+    "listNameUpdated": "Название списка обновлено",
+    "@listNameUpdated": {},
+    "listNameUpdated1": "Название списка обновлено",
+    "@listNameUpdated1": {},
+    "listSharedWithEmailAsSelectedrole": "Список открыт для {email} с ролью {selectedRole}",
+    "@listSharedWithEmailAsSelectedrole": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "listSharedWithEmailAsSelectedrole1": "Список открыт для {email} с ролью {selectedRole}",
+    "@listSharedWithEmailAsSelectedrole1": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "listSharedWithEmailAsSelectedrole2": "Список открыт для {email} с ролью {selectedRole}",
+    "@listSharedWithEmailAsSelectedrole2": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "listSharedWithEmailAsSelectedrole3": "Список открыт для {email} с ролью {selectedRole}",
+    "@listSharedWithEmailAsSelectedrole3": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "listnameAddedToGroup": "{listName} добавлен в группу",
+    "@listnameAddedToGroup": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameAddedToGroup1": "{listName} добавлен в группу",
+    "@listnameAddedToGroup1": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameAddedToGroup2": "{listName} добавлен в группу",
+    "@listnameAddedToGroup2": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameAddedToGroup3": "{listName} добавлен в группу",
+    "@listnameAddedToGroup3": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameRemovedFromGroup": "{listName} удален из группы",
+    "@listnameRemovedFromGroup": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameRemovedFromGroup1": "{listName} удален из группы",
+    "@listnameRemovedFromGroup1": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameRemovedFromGroup2": "{listName} удален из группы",
+    "@listnameRemovedFromGroup2": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameRemovedFromGroup3": "{listName} удален из группы",
+    "@listnameRemovedFromGroup3": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listsCreated": "Создано списков",
+    "@listsCreated": {},
+    "loading": "Загрузка...",
+    "@loading": {},
+    "location": "Место",
+    "@location": {},
+    "location1": "Место",
+    "@location1": {},
+    "locationDeleted": "Место удалено",
+    "@locationDeleted": {},
+    "locationDeleted1": "Место удалено",
+    "@locationDeleted1": {},
+    "locationSavedSuccessfully": "Место успешно сохранено",
+    "@locationSavedSuccessfully": {},
+    "locationSavedSuccessfully1": "Место успешно сохранено",
+    "@locationSavedSuccessfully1": {},
+    "low": "Низкий",
+    "@low": {},
+    "low1": "Низкий",
+    "@low1": {},
+    "manageCategories": "Управление категориями",
+    "@manageCategories": {},
+    "manageYourFrequentlyUsedLocations": "Управляйте часто используемыми местами",
+    "@manageYourFrequentlyUsedLocations": {},
+    "medium": "Средний",
+    "@medium": {},
+    "moveToGroupname": "Переместить в {name}",
+    "@moveToGroupname": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "moveToGroupname1": "Переместить в {name}",
+    "@moveToGroupname1": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "myProfile": "Мой профиль",
+    "@myProfile": {},
+    "name": "Имя",
+    "@name": {},
+    "nameMustBeAtLeast2Characters": "Имя должно быть не короче 2 символов",
+    "@nameMustBeAtLeast2Characters": {},
+    "networkErrorCheckYourConnectionAndTryAgain": "Ошибка сети. Проверьте подключение и повторите",
+    "@networkErrorCheckYourConnectionAndTryAgain": {},
+    "networkErrorPleaseCheckYourInternetConnectionAndTryAgain": "Ошибка сети. Проверьте интернет и попробуйте снова",
+    "@networkErrorPleaseCheckYourInternetConnectionAndTryAgain": {},
+    "networkErrorPleaseCheckYourInternetConnectionAndTryAgain1": "Ошибка сети. Проверьте интернет и попробуйте снова",
+    "@networkErrorPleaseCheckYourInternetConnectionAndTryAgain1": {},
+    "noAccountFoundWithThisEmail": "Аккаунт с таким email не найден",
+    "@noAccountFoundWithThisEmail": {},
+    "noCategoriesAvailable": "Нет доступных категорий",
+    "@noCategoriesAvailable": {},
+    "noCategory": "Без категории",
+    "@noCategory": {},
+    "noUserFoundForThatEmailPleaseCheckYourEmailAndTryAgain": "Пользователь с таким email не найден. Проверьте адрес и попробуйте снова",
+    "@noUserFoundForThatEmailPleaseCheckYourEmailAndTryAgain": {},
+    "notLoggedIn": "Вход не выполнен",
+    "@notLoggedIn": {},
+    "ok": "ОК",
+    "@ok": {},
+    "openSourceLicenses": "Лицензии открытого ПО",
+    "@openSourceLicenses": {},
+    "openTheDrawerFromTheLeft": "Откройте меню слева",
+    "@openTheDrawerFromTheLeft": {},
+    "options": "Опции",
+    "@options": {},
+    "organizeYourListsWithTheButton": "Организуйте списки кнопкой +",
+    "@organizeYourListsWithTheButton": {},
+    "owner": "владелец",
+    "@owner": {},
+    "password": "Пароль",
+    "@password": {},
+    "password1": "Пароль",
+    "@password1": {},
+    "password2": "Пароль",
+    "@password2": {},
+    "passwordMustBeAtLeast6Characters": "Пароль должен быть не короче 6 символов",
+    "@passwordMustBeAtLeast6Characters": {},
+    "peopleCollaborating": "участников",
+    "@peopleCollaborating": {},
+    "permanentlyDeleteThisList": "Удалить этот список навсегда",
+    "@permanentlyDeleteThisList": {},
+    "permissionChangedToNewrole": "Права изменены на {newRole}",
+    "@permissionChangedToNewrole": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "permissionChangedToNewrole1": "Права изменены на {newRole}",
+    "@permissionChangedToNewrole1": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "permissionChangedToNewrole2": "Права изменены на {newRole}",
+    "@permissionChangedToNewrole2": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "permissionChangedToNewrole3": "Права изменены на {newRole}",
+    "@permissionChangedToNewrole3": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "pleaseEnterACategoryName": "Пожалуйста, введите название категории",
+    "@pleaseEnterACategoryName": {},
+    "pleaseEnterACategoryName1": "Пожалуйста, введите название категории",
+    "@pleaseEnterACategoryName1": {},
+    "pleaseEnterACategoryName2": "Пожалуйста, введите название категории",
+    "@pleaseEnterACategoryName2": {},
+    "pleaseEnterACategoryName3": "Пожалуйста, введите название категории",
+    "@pleaseEnterACategoryName3": {},
+    "pleaseEnterADisplayName": "Пожалуйста, введите отображаемое имя",
+    "@pleaseEnterADisplayName": {},
+    "pleaseEnterAGroupName": "Пожалуйста, введите название группы",
+    "@pleaseEnterAGroupName": {},
+    "pleaseEnterAGroupName1": "Пожалуйста, введите название группы",
+    "@pleaseEnterAGroupName1": {},
+    "pleaseEnterAGroupName2": "Пожалуйста, введите название группы",
+    "@pleaseEnterAGroupName2": {},
+    "pleaseEnterAGroupName3": "Пожалуйста, введите название группы",
+    "@pleaseEnterAGroupName3": {},
+    "pleaseEnterAPassword": "Пожалуйста, введите пароль",
+    "@pleaseEnterAPassword": {},
+    "pleaseEnterATemplateName": "Пожалуйста, введите название шаблона",
+    "@pleaseEnterATemplateName": {},
+    "pleaseEnterATemplateName1": "Пожалуйста, введите название шаблона",
+    "@pleaseEnterATemplateName1": {},
+    "pleaseEnterAValidEmailAddress": "Пожалуйста, введите корректный адрес email",
+    "@pleaseEnterAValidEmailAddress": {},
+    "pleaseEnterAValidEmailAddress1": "Пожалуйста, введите корректный адрес email",
+    "@pleaseEnterAValidEmailAddress1": {},
+    "pleaseEnterAValidEmailAddress2": "Пожалуйста, введите корректный адрес email",
+    "@pleaseEnterAValidEmailAddress2": {},
+    "pleaseEnterAValidEmailAddress3": "Пожалуйста, введите корректный адрес email",
+    "@pleaseEnterAValidEmailAddress3": {},
+    "pleaseEnterAValidEmailAddress4": "Пожалуйста, введите корректный адрес email",
+    "@pleaseEnterAValidEmailAddress4": {},
+    "pleaseEnterAnEmailAddress": "Пожалуйста, введите адрес email",
+    "@pleaseEnterAnEmailAddress": {},
+    "pleaseEnterAnEmailAddress1": "Пожалуйста, введите адрес email",
+    "@pleaseEnterAnEmailAddress1": {},
+    "pleaseEnterAnItemTitle": "Пожалуйста, введите название товара",
+    "@pleaseEnterAnItemTitle": {},
+    "pleaseEnterAnItemTitle1": "Пожалуйста, введите название товара",
+    "@pleaseEnterAnItemTitle1": {},
+    "pleaseEnterYourEmail": "Пожалуйста, введите ваш email",
+    "@pleaseEnterYourEmail": {},
+    "pleaseEnterYourEmail1": "Пожалуйста, введите ваш email",
+    "@pleaseEnterYourEmail1": {},
+    "pleaseEnterYourEmail2": "Пожалуйста, введите ваш email",
+    "@pleaseEnterYourEmail2": {},
+    "pleaseEnterYourName": "Пожалуйста, введите ваше имя",
+    "@pleaseEnterYourName": {},
+    "pleaseEnterYourPassword": "Пожалуйста, введите ваш пароль",
+    "@pleaseEnterYourPassword": {},
+    "productivity": "Продуктивность",
+    "@productivity": {},
+    "profileUpdatedSuccessfully": "Профиль успешно обновлен",
+    "@profileUpdatedSuccessfully": {},
+    "profileUpdatedSuccessfully1": "Профиль успешно обновлен",
+    "@profileUpdatedSuccessfully1": {},
+    "progress": "Прогресс",
+    "@progress": {},
+    "recycleBin": "Корзина",
+    "@recycleBin": {},
+    "recycleBin1": "Корзина",
+    "@recycleBin1": {},
+    "releaseNotes": "Список изменений",
+    "@releaseNotes": {},
+    "removeAllCompletedItems": "Удалить все купленные товары",
+    "@removeAllCompletedItems": {},
+    "removeMember": "Удалить участника",
+    "@removeMember": {},
+    "retry": "Повторить",
+    "@retry": {},
+    "retry1": "Повторить",
+    "@retry1": {},
+    "retry2": "Повторить",
+    "@retry2": {},
+    "retry3": "Повторить",
+    "@retry3": {},
+    "retry4": "Повторить",
+    "@retry4": {},
+    "save": "Сохранить",
+    "@save": {},
+    "save1": "Сохранить",
+    "@save1": {},
+    "save2": "Сохранить",
+    "@save2": {},
+    "saveChanges": "Сохранить изменения",
+    "@saveChanges": {},
+    "saveChanges1": "Сохранить изменения",
+    "@saveChanges1": {},
+    "savedItems": "Сохраненные товары",
+    "@savedItems": {},
+    "savedLocations": "Сохраненные места",
+    "@savedLocations": {},
+    "searchIcons": "Поиск иконок...",
+    "@searchIcons": {},
+    "searchPackages": "Поиск пакетов",
+    "@searchPackages": {},
+    "searchPackages1": "Поиск пакетов...",
+    "@searchPackages1": {},
+    "setPassword": "Установить пароль",
+    "@setPassword": {},
+    "settings": "Настройки",
+    "@settings": {},
+    "settings1": "Настройки",
+    "@settings1": {},
+    "shareCollaborate": "Поделиться и Совместный доступ",
+    "@shareCollaborate": {},
+    "shareList": "Поделиться списком",
+    "@shareList": {},
+    "shareThisListWithOthers": "Поделиться этим списком с другими",
+    "@shareThisListWithOthers": {},
+    "shoppingLists": "списки покупок",
+    "@shoppingLists": {},
+    "shopsync": "ShopSync",
+    "@shopsync": {},
+    "shopsync1": "ShopSync",
+    "@shopsync1": {},
+    "shopsyncForms": "Формы ShopSync",
+    "@shopsyncForms": {},
+    "shopsyncLogo": "Логотип ShopSync",
+    "@shopsyncLogo": {},
+    "signInWithEmail": "Войти по email",
+    "@signInWithEmail": {},
+    "signOut": "Выйти",
+    "@signOut": {},
+    "signOut1": "Выйти",
+    "@signOut1": {},
+    "signOut2": "Выйти",
+    "@signOut2": {},
+    "signOut3": "Выйти",
+    "@signOut3": {},
+    "signOut4": "Выйти",
+    "@signOut4": {},
+    "signOut5": "Выйти",
+    "@signOut5": {},
+    "skipForNow": "Пропустить",
+    "@skipForNow": {},
+    "skipOrganization": "Пропустить организацию",
+    "@skipOrganization": {},
+    "smartLists": "Умные списки",
+    "@smartLists": {},
+    "storeAddress": "Адрес магазина",
+    "@storeAddress": {},
+    "storeName": "Название магазина",
+    "@storeName": {},
+    "successfullyOrganizedSelectedgroupslengthGroups": "Успешно организовано групп: {length}",
+    "@successfullyOrganizedSelectedgroupslengthGroups": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "successfullyOrganizedSelectedgroupslengthGroups1": "Успешно организовано групп: {length}",
+    "@successfullyOrganizedSelectedgroupslengthGroups1": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "successfullyOrganizedSelectedgroupslengthGroups2": "Успешно организовано групп: {length}",
+    "@successfullyOrganizedSelectedgroupslengthGroups2": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "successfullyOrganizedSelectedgroupslengthGroups3": "Успешно организовано групп: {length}",
+    "@successfullyOrganizedSelectedgroupslengthGroups3": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "templateDeleted": "Шаблон удален",
+    "@templateDeleted": {},
+    "templateDeleted1": "Шаблон удален",
+    "@templateDeleted1": {},
+    "templatesShortcuts": "Шаблоны и ярлыки",
+    "@templatesShortcuts": {},
+    "theEmailAddressIsAlreadyInUseByAnotherAccount": "Этот email уже используется другим аккаунтом",
+    "@theEmailAddressIsAlreadyInUseByAnotherAccount": {},
+    "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev": "Операция запрещена. Повторите позже или напишите на support@aadish.dev",
+    "@theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev": {},
+    "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1": "Операция запрещена. Повторите позже или напишите на support@aadish.dev",
+    "@theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1": {},
+    "thePasswordIsInvalidOrTheUserDoesNotHaveAPassword": "Неверный пароль или у пользователя нет пароля",
+    "@thePasswordIsInvalidOrTheUserDoesNotHaveAPassword": {},
+    "theProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword": "Неверные данные. Проверьте email и пароль",
+    "@theProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword": {},
+    "thisEmailIsAlreadyRegisteredPleaseSignInInstead": "Этот email уже зарегистрирован. Пожалуйста, войдите",
+    "@thisEmailIsAlreadyRegisteredPleaseSignInInstead": {},
+    "thisPasswordIsTooWeakPleaseChooseAStrongerOne": "Пароль слишком простой. Придумайте посложнее",
+    "@thisPasswordIsTooWeakPleaseChooseAStrongerOne": {},
+    "thisUserHasBeenDisabledPleaseContactSupportaadishdev": "Пользователь заблокирован. Напишите на support@aadish.dev",
+    "@thisUserHasBeenDisabledPleaseContactSupportaadishdev": {},
+    "tooManyRequestsPleaseTryAgainLater": "Слишком много запросов. Попробуйте позже",
+    "@tooManyRequestsPleaseTryAgainLater": {},
+    "tooManyRequestsPleaseTryAgainLater1": "Слишком много запросов. Попробуйте позже",
+    "@tooManyRequestsPleaseTryAgainLater1": {},
+    "tooManyRequestsPleaseTryAgainLater2": "Слишком много запросов. Попробуйте позже",
+    "@tooManyRequestsPleaseTryAgainLater2": {},
+    "totalItems": "всего товаров",
+    "@totalItems": {},
+    "totalItems1": "Всего товаров",
+    "@totalItems1": {},
+    "unlink": "Отвязать",
+    "@unlink": {},
+    "unlinkGoogleAccount": "Отвязать аккаунт Google",
+    "@unlinkGoogleAccount": {},
+    "unlinkGoogleAccount1": "Отвязать аккаунт Google",
+    "@unlinkGoogleAccount1": {},
+    "useYourPhoneToRegisterIfYouDoNotHaveAnAccount": "Используйте телефон для регистрации, если нет аккаунта",
+    "@useYourPhoneToRegisterIfYouDoNotHaveAnAccount": {},
+    "userAlreadyHasAccessToThisList": "Пользователь уже имеет доступ к этому списку",
+    "@userAlreadyHasAccessToThisList": {},
+    "userAlreadyHasAccessToThisList1": "Пользователь уже имеет доступ к этому списку",
+    "@userAlreadyHasAccessToThisList1": {},
+    "userNotFoundTheyNeedToSignUpForShopsyncFirst": "Пользователь не найден. Ему нужно сначала зарегистрироваться в ShopSync.",
+    "@userNotFoundTheyNeedToSignUpForShopsyncFirst": {},
+    "userNotFoundTheyNeedToSignUpForShopsyncFirst1": "Пользователь не найден. Ему нужно сначала зарегистрироваться в ShopSync.",
+    "@userNotFoundTheyNeedToSignUpForShopsyncFirst1": {},
+    "userRemoved": "Пользователь удален",
+    "@userRemoved": {},
+    "userRemoved1": "Пользователь удален",
+    "@userRemoved1": {},
+    "versionPackageinfoversionPackageinfobuildnumber": "Версия {version} ({buildNumber})",
+    "@versionPackageinfoversionPackageinfobuildnumber": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/auth/welcome.dart"
+    },
+    "versionPackageinfoversionPackageinfobuildnumber1": "Версия {version} ({buildNumber})",
+    "@versionPackageinfoversionPackageinfobuildnumber1": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/auth/welcome.dart"
+    },
+    "viewDeletedItems": "Показать удаленные товары",
+    "@viewDeletedItems": {},
+    "viewSourceCode": "Посмотреть исходный код",
+    "@viewSourceCode": {},
+    "viewer": "Читатель",
+    "@viewer": {},
+    "viewer1": "Читатель",
+    "@viewer1": {},
+    "viewer2": "Читатель",
+    "@viewer2": {},
+    "viewer3": "Читатель",
+    "@viewer3": {},
+    "welcomeToShopsync": "Добро пожаловать в ShopSync",
+    "@welcomeToShopsync": {},
+    "widgetSettings": "Настройки виджета",
+    "@widgetSettings": {},
+    "widgetSettings1": "Настройки виджета",
+    "@widgetSettings1": {},
+    "widgetUpdatedSuccessfully": "Виджет успешно обновлен!",
+    "@widgetUpdatedSuccessfully": {},
+    "widgetUpdatedSuccessfully1": "Виджет успешно обновлен!",
+    "@widgetUpdatedSuccessfully1": {},
+    "yourInsights": "Ваша статистика",
+    "@yourInsights": {}
+}
