@@ -39,7 +39,7 @@ dependencies:
   http: ^1.6.0
 
 dev_dependencies:
-  sentry_dart_plugin: ^3.2.0
+  sentry_dart_plugin: ^3.2.1
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
