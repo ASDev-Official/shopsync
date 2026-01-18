@@ -154,19 +154,18 @@ class _AIPreferenceSetupScreenState extends State<AIPreferenceSetupScreen>
 
                     // Enable AI Card
                     _PreferenceCard(
-                      title: 'Enable AI Features',
-                      description:
-                          'Get personalized item suggestions based on your shopping history and patterns',
+                      title: l10n.enableAiFeatures,
+                      description: l10n.enableAiDescription,
                       icon: Icons.psychology,
                       iconColor: Colors.green,
                       isSelected: _selectedPreference == true,
                       onTap: () => setState(() => _selectedPreference = true),
                       isDark: isDark,
-                      features: const [
-                        'Smart item suggestions',
-                        'Pattern recognition',
-                        'Time-based recommendations',
-                        'Personalized experience',
+                      features: [
+                        l10n.smartItemSuggestions,
+                        l10n.patternRecognition,
+                        l10n.timeBasedRecommendations,
+                        l10n.personalizedExperience,
                       ],
                     ),
 

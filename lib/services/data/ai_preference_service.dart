@@ -62,10 +62,10 @@ class AIPreferenceService {
         throw Exception('User not authenticated');
       }
 
-      await _firestore.collection('users').doc(user.uid).update({
+      await _firestore.collection('users').doc(user.uid).set({
         'aiEnabled': enabled,
         'aiPreferenceUpdatedAt': FieldValue.serverTimestamp(),
-      });
+      }, SetOptions(merge: true));
 
       if (kDebugMode) {
         print('AI preference set to: $enabled for user ${user.uid}');

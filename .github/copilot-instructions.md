@@ -435,10 +435,6 @@ If tests pass locally but fail in CI:
 
 - **UPDATE COPILOT INSTRUCTIONS**: For any new feature, architectural pattern, or important convention that deserves documentation, add it to this copilot-instructions.md file. Keep instructions clear, concise, and actionable for future AI agents.
 
-### Analytics & Insights Architecture
-
-**Dual-Level Insights System:**
-
 ### AI Features & User Preferences
 
 **AI Preference System:**

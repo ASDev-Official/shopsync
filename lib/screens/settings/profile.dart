@@ -982,7 +982,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             FutureBuilder<bool?>(
                               future: AIPreferenceService.getAIPreference(),
                               builder: (context, snapshot) {
-                                if (!snapshot.hasData) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
                                   return const Center(
                                       child: CustomLoadingSpinner());
                                 }
