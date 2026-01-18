@@ -39,10 +39,14 @@ class _ListViewScreenState extends State<ListViewScreen>
   late Animation<double> _itemsRotateAnimation;
   late Animation<double> _optionsSpinAnimation;
   late Animation<double> _insightsSpinAnimation;
+  late Future<bool> _isViewerFuture;
 
   @override
   void initState() {
     super.initState();
+
+    // Cache permission check to avoid repeated Firestore queries
+    _isViewerFuture = PermissionsHelper.isViewer(widget.listId);
 
     // Items animation controller for bouncy effect
     _itemsAnimationController = AnimationController(
@@ -89,6 +93,15 @@ class _ListViewScreenState extends State<ListViewScreen>
       parent: _insightsAnimationController,
       curve: Curves.easeInOutBack,
     ));
+  }
+
+  @override
+  void didUpdateWidget(ListViewScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Refresh permission check if listId changes
+    if (oldWidget.listId != widget.listId) {
+      _isViewerFuture = PermissionsHelper.isViewer(widget.listId);
+    }
   }
 
   @override
@@ -144,7 +157,7 @@ class _ListViewScreenState extends State<ListViewScreen>
 
     Widget? fab = _selectedIndex == 0
         ? FutureBuilder<bool>(
-            future: PermissionsHelper.isViewer(widget.listId),
+            future: _isViewerFuture,
             builder: (context, snapshot) {
               // Hide FAB until permission check completes
               if (snapshot.connectionState != ConnectionState.done ||
