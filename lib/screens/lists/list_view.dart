@@ -1356,7 +1356,7 @@ class _CategorySectionState extends State<CategorySection> {
   }
 }
 
-class ItemsScreenWithFAB extends StatelessWidget {
+class ItemsScreenWithFAB extends StatefulWidget {
   final String listId;
   final String listName;
 
@@ -1367,12 +1367,35 @@ class ItemsScreenWithFAB extends StatelessWidget {
   });
 
   @override
+  State<ItemsScreenWithFAB> createState() => _ItemsScreenWithFABState();
+}
+
+class _ItemsScreenWithFABState extends State<ItemsScreenWithFAB> {
+  late Future<bool> _isViewerFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    // Cache permission check to avoid repeated Firestore queries
+    _isViewerFuture = PermissionsHelper.isViewer(widget.listId);
+  }
+
+  @override
+  void didUpdateWidget(ItemsScreenWithFAB oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Refresh permission check if listId changes
+    if (oldWidget.listId != widget.listId) {
+      _isViewerFuture = PermissionsHelper.isViewer(widget.listId);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      body: ItemsTab(listId: listId, listName: listName),
+      body: ItemsTab(listId: widget.listId, listName: widget.listName),
       floatingActionButton: FutureBuilder<bool>(
-        future: PermissionsHelper.isViewer(listId),
+        future: _isViewerFuture,
         builder: (context, snapshot) {
           // Hide FAB until permission check completes
           if (snapshot.connectionState != ConnectionState.done ||
@@ -1386,7 +1409,7 @@ class ItemsScreenWithFAB extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CreateItemScreen(listId: listId),
+                  builder: (context) => CreateItemScreen(listId: widget.listId),
                 ),
               );
             },
