@@ -162,6 +162,13 @@ Text(AppLocalizations.of(context)!.aiFeatures)
 
 5. **Animations**: Prefer `SingleTickerProviderStateMixin` + `AnimationController` (see `list_view.dart`)
 
+6. **Item Templates Access**:
+
+- "Add From Template" is launched from the Create Item screen.
+- A localized entry appears directly below the Smart Suggestions card.
+- The FAB no longer includes a direct template action.
+- Navigation uses `SavedItemsScreen(listId)` from `lib/screens/lists/list_options.dart`.
+
 ### Authentication
 
 - Google Sign-In uses **Credential Manager** on Android (v2.0.0 API) for passkey support

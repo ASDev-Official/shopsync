@@ -10,6 +10,7 @@ import '/widgets/lists/category_picker.dart';
 import '/widgets/lists/smart_suggestions_widget.dart';
 import '/utils/icons/food_icons_map.dart';
 import '/screens/lists/choose_item_icon.dart';
+import '/screens/lists/list_options.dart';
 import '/services/data/smart_suggestions_service.dart';
 import '/services/data/ai_preference_service.dart';
 import '/models/item_suggestion.dart';
@@ -233,6 +234,54 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                   isLoading: _isLoadingSuggestions,
                 ),
               ),
+
+            // Add from Template entry
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Card(
+                elevation: 8,
+                shadowColor: Colors.black26,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(15),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SavedItemsScreen(
+                          listId: widget.listId,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: ListTile(
+                      leading: Container(
+                        width: 48,
+                        height: 48,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.green[100],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child:
+                            const Icon(Icons.content_copy, color: Colors.green),
+                      ),
+                      title: Text(
+                        l10n.addFromTemplate,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle: Text(l10n.createItemsFromSavedTemplates),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                ),
+              ),
+            ),
 
             // Item Name
             _buildCard(
