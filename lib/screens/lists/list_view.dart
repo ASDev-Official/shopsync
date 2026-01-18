@@ -146,7 +146,10 @@ class _ListViewScreenState extends State<ListViewScreen>
         ? FutureBuilder<bool>(
             future: PermissionsHelper.isViewer(widget.listId),
             builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data == true) {
+              // Hide FAB until permission check completes
+              if (snapshot.connectionState != ConnectionState.done ||
+                  !snapshot.hasData ||
+                  snapshot.data == true) {
                 return const SizedBox.shrink();
               }
               return FloatingActionButton(
@@ -1358,7 +1361,10 @@ class ItemsScreenWithFAB extends StatelessWidget {
       floatingActionButton: FutureBuilder<bool>(
         future: PermissionsHelper.isViewer(listId),
         builder: (context, snapshot) {
-          if (snapshot.hasData && snapshot.data == true) {
+          // Hide FAB until permission check completes
+          if (snapshot.connectionState != ConnectionState.done ||
+              !snapshot.hasData ||
+              snapshot.data == true) {
             return const SizedBox.shrink();
           }
           return FloatingActionButton(
