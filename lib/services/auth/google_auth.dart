@@ -484,6 +484,7 @@ class GoogleAuthService {
           'photoURL': user.photoURL,
           'createdAt': FieldValue.serverTimestamp(),
           'signInMethod': 'google',
+          // Note: aiEnabled field is NOT set here - user must choose via AI preference setup screen
         });
 
         if (kDebugMode) {

@@ -13,6 +13,8 @@ import 'screens/auth/welcome.dart';
 import 'screens/auth/login.dart';
 import 'screens/auth/register.dart';
 import 'screens/home.dart';
+import 'screens/settings/ai_preference_setup.dart';
+import 'services/data/ai_preference_service.dart';
 import 'screens/settings/profile.dart';
 import 'screens/auth/forgot_password.dart';
 import 'screens/maintenance/maintenance_screen.dart';
@@ -358,8 +360,27 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
         // Check if user is logged in
         if (snapshot.hasData && snapshot.data != null) {
-          // User is signed in, direct to home screen
-          return const HomeScreen();
+          // User is signed in, check if AI preference is set
+          return FutureBuilder<bool>(
+            future: AIPreferenceService.hasAIPreference(),
+            builder: (context, aiSnapshot) {
+              if (aiSnapshot.connectionState == ConnectionState.waiting) {
+                return const Scaffold(
+                  body: Center(
+                    child: SplashScreen(),
+                  ),
+                );
+              }
+
+              // If AI preference not set, show mandatory setup screen
+              if (!aiSnapshot.hasData || !aiSnapshot.data!) {
+                return const AIPreferenceSetupScreen();
+              }
+
+              // AI preference is set, direct to home screen
+              return const HomeScreen();
+            },
+          );
         }
 
         // User is not signed in, direct to welcome screen

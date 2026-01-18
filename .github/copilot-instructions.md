@@ -85,6 +85,41 @@ flutter pub get
 
 ## Code Conventions
 
+### Localization
+
+**CRITICAL**: All user-facing strings in UI elements MUST be localized.
+
+- **Never** use hardcoded strings in UI components (Text, labels, titles, messages, etc.)
+- **Always** use `AppLocalizations.of(context)!` to access localized strings
+- **Always** add new strings to `lib/l10n/app_en.arb` when creating UI elements
+- String keys should be camelCase and descriptive (e.g., `aiFeatures`, `enableSmartSuggestions`)
+- Include context in key names when needed (e.g., `aiFeaturesEnabled` vs `aiFeaturesDisabledMessage`)
+
+**Example**:
+
+```dart
+// ❌ WRONG - Hardcoded string
+Text('AI Features')
+
+// ✅ CORRECT - Localized string
+Text(AppLocalizations.of(context)!.aiFeatures)
+```
+
+**Adding new strings**:
+
+1. Add the string to `lib/l10n/app_en.arb`:
+   ```json
+   "aiFeatures": "AI Features",
+   "enableSmartSuggestions": "Enable Smart Suggestions"
+   ```
+2. Use it in code:
+   ```dart
+   final l10n = AppLocalizations.of(context)!;
+   Text(l10n.aiFeatures)
+   ```
+
+**Note**: Currently, translations are not being added to other locale files. Only `app_en.arb` needs to be updated with English strings.
+
 ### File Organization
 
 - `lib/screens/` - full-page UI (e.g., `home.dart`, `list_view.dart`)
@@ -399,6 +434,62 @@ If tests pass locally but fail in CI:
 - **DO NOT create README files**: Never create summary documents, README files, or markdown documentation files after completing tasks unless explicitly requested by the user.
 
 - **UPDATE COPILOT INSTRUCTIONS**: For any new feature, architectural pattern, or important convention that deserves documentation, add it to this copilot-instructions.md file. Keep instructions clear, concise, and actionable for future AI agents.
+
+### AI Features & User Preferences
+
+**AI Preference System:**
+
+ShopSync includes on-device AI features (primarily Smart Suggestions) that some users may prefer to disable. The AI preference is stored in Firestore and controlled via:
+
+- **Service**: `lib/services/data/ai_preference_service.dart` (class: `AIPreferenceService`)
+- **Setup Screen**: `lib/screens/settings/ai_preference_setup.dart` (class: `AIPreferenceSetupScreen`)
+  - Mandatory screen shown to new users or existing users without preference set
+  - User must choose to enable or disable AI features (cannot skip)
+  - Navigation: Shown automatically in AuthWrapper if preference not set
+- **Profile Settings**: Users can change preference later in `lib/screens/settings/profile.dart`
+  - Toggle switch in "AI Features" card
+  - Changes take effect immediately
+
+**Firestore Field:**
+
+- Collection: `users/{userId}`
+- Field: `aiEnabled` (boolean) - indicates if user has enabled AI features
+- Field: `aiPreferenceUpdatedAt` (timestamp) - last time preference was changed
+
+**Implementation Flow:**
+
+1. New user signs up → `aiEnabled` field NOT set in user document
+2. User logs in → `AuthWrapper` checks `AIPreferenceService.hasAIPreference()`
+3. If preference not set → Show `AIPreferenceSetupScreen` (mandatory, cannot skip)
+4. User chooses enable/disable → Preference saved to Firestore
+5. User navigates to home screen
+6. Existing users can toggle preference in Profile settings
+
+**AI Features Affected:**
+
+- Smart Suggestions in create item screen (`lib/screens/lists/create_item.dart`)
+- Smart Suggestions in item templates (`lib/screens/lists/list_options.dart`)
+- Both screens check `AIPreferenceService.isAIEnabled()` before loading suggestions
+- If AI disabled, suggestions array is empty and widget not shown
+
+**Important Notes:**
+
+- **Phone/Web Only**: AI preference feature is NOT implemented for WearOS
+- **On-Device ML**: Smart suggestions use `SmartSuggestionsService` with local TFLite model
+- **Privacy-Focused**: When disabled, no shopping pattern analysis occurs
+- **Service Methods**:
+  - `hasAIPreference()` - Check if user has set preference
+  - `getAIPreference()` - Get current preference (null if not set)
+  - `setAIPreference(bool)` - Update preference
+  - `isAIEnabled()` - Quick check, returns false if not set
+
+**Testing Responsibilities:**
+When modifying AI features:
+
+- Ensure AI preference check is respected
+- Test with AI enabled and disabled states
+- Add unit tests for `AIPreferenceService`
+- Verify setup screen cannot be skipped
 
 ### Analytics & Insights Architecture
 

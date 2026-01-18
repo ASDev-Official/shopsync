@@ -15,6 +15,7 @@ import '/models/item_suggestion.dart';
 import '/screens/lists/choose_item_icon.dart';
 import '/services/storage/export_service.dart';
 import '/services/data/smart_suggestions_service.dart';
+import '/services/data/ai_preference_service.dart';
 import '/utils/food_icon_detector.dart';
 import '/utils/permissions.dart';
 import '/widgets/common/advert.dart';
@@ -1708,6 +1709,18 @@ class _CreateItemTemplateScreenState extends State<CreateItemTemplateScreen> {
 
   Future<void> _loadSuggestions() async {
     if (!mounted) return;
+
+    // Check if AI features are enabled
+    final aiEnabled = await AIPreferenceService.isAIEnabled();
+    if (!aiEnabled) {
+      // AI disabled, skip loading suggestions
+      setState(() {
+        _suggestions = [];
+        _isLoadingSuggestions = false;
+      });
+      return;
+    }
+
     setState(() => _isLoadingSuggestions = true);
 
     try {

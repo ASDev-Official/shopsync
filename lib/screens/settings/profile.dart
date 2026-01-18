@@ -11,6 +11,7 @@ import '/screens/auth/sign_out.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/widgets/common/advert.dart';
 import '/services/auth/google_auth.dart';
+import '/services/data/ai_preference_service.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -937,6 +938,139 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   size: ButtonM3ESize.md,
                                 ),
                               ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // AI Preferences Card
+                    Card(
+                      elevation: isDark ? 0 : 2,
+                      color: isDark ? Colors.grey[850] : Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        side: BorderSide(
+                          color: isDark ? Colors.grey[800]! : Colors.grey[200]!,
+                          width: 1,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.aiFeatures,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    isDark ? Colors.white : Colors.green[800],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              AppLocalizations.of(context)!.controlAiFeatures,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    isDark ? Colors.white70 : Colors.grey[700],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            FutureBuilder<bool?>(
+                              future: AIPreferenceService.getAIPreference(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CustomLoadingSpinner());
+                                }
+
+                                final aiEnabled = snapshot.data ?? false;
+
+                                return SwitchListTile(
+                                  contentPadding: EdgeInsets.zero,
+                                  value: aiEnabled,
+                                  onChanged: (value) async {
+                                    try {
+                                      await AIPreferenceService.setAIPreference(
+                                          value);
+                                      if (mounted) {
+                                        final l10n =
+                                            AppLocalizations.of(context)!;
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              value
+                                                  ? l10n.aiFeaturesEnabled
+                                                  : l10n
+                                                      .aiFeaturesDisabledMessage,
+                                            ),
+                                            backgroundColor: Colors.green,
+                                          ),
+                                        );
+                                        setState(
+                                            () {}); // Refresh to show new value
+                                      }
+                                    } catch (e) {
+                                      if (mounted) {
+                                        final l10n =
+                                            AppLocalizations.of(context)!;
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(l10n
+                                                .failedToUpdateAiPreference),
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  },
+                                  title: Text(
+                                    AppLocalizations.of(context)!
+                                        .enableSmartSuggestions,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: isDark ? Colors.white : null,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    aiEnabled
+                                        ? AppLocalizations.of(context)!
+                                            .aiAnalyzesPatterns
+                                        : AppLocalizations.of(context)!
+                                            .aiFeaturesDisabled,
+                                    style: TextStyle(
+                                      color: isDark ? Colors.white60 : null,
+                                    ),
+                                  ),
+                                  secondary: CircleAvatar(
+                                    backgroundColor: aiEnabled
+                                        ? (isDark
+                                            ? Colors.purple[900]
+                                            : Colors.purple[50])
+                                        : (isDark
+                                            ? Colors.grey[800]
+                                            : Colors.grey[200]),
+                                    child: Icon(
+                                      Icons.auto_awesome,
+                                      color: aiEnabled
+                                          ? (isDark
+                                              ? Colors.purple[200]
+                                              : Colors.purple[800])
+                                          : (isDark
+                                              ? Colors.grey[500]
+                                              : Colors.grey[600]),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),
