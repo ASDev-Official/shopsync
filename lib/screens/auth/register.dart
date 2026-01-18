@@ -94,6 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'displayName': _nameController.text.trim(),
         'email': _emailController.text.trim(),
         'createdAt': FieldValue.serverTimestamp(),
+        // Note: aiEnabled field is NOT set here - user must choose via AI preference setup screen
       });
 
       await userCredential.user?.updateDisplayName(_nameController.text.trim());

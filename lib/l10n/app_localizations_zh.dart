@@ -1759,6 +1759,84 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get yourInsights => 'Your Insights';
+
+  @override
+  String get aiFeatures => 'AI Features';
+
+  @override
+  String get aiSetupDescription =>
+      'ShopSync uses on-device AI to provide smart suggestions based on your shopping patterns. Choose whether you\'d like to enable these features.';
+
+  @override
+  String get enableAiFeatures => 'Enable AI Features';
+
+  @override
+  String get enableAiDescription =>
+      'Get personalized item suggestions based on your shopping history and patterns';
+
+  @override
+  String get disableAiFeatures => 'Disable AI Features';
+
+  @override
+  String get disableAiDescription =>
+      'Use ShopSync without AI-powered suggestions';
+
+  @override
+  String get smartItemSuggestions => 'Smart item suggestions';
+
+  @override
+  String get patternRecognition => 'Pattern recognition';
+
+  @override
+  String get timeBasedRecommendations => 'Time-based recommendations';
+
+  @override
+  String get personalizedExperience => 'Personalized experience';
+
+  @override
+  String get noDataAnalysis => 'No data analysis';
+
+  @override
+  String get noAiSuggestions => 'No AI suggestions';
+
+  @override
+  String get basicListManagement => 'Basic list management';
+
+  @override
+  String get privacyFocused => 'Privacy-focused';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get aiPreferenceChangeNote =>
+      'You can change this setting later in your profile.';
+
+  @override
+  String get controlAiFeatures =>
+      'Control on-device AI features like smart suggestions';
+
+  @override
+  String get enableSmartSuggestions => 'Enable Smart Suggestions';
+
+  @override
+  String get aiAnalyzesPatterns => 'AI analyzes your shopping patterns';
+
+  @override
+  String get aiFeaturesDisabled => 'AI features are disabled';
+
+  @override
+  String get aiFeaturesEnabled => 'AI features enabled';
+
+  @override
+  String get aiFeaturesDisabledMessage => 'AI features disabled';
+
+  @override
+  String get failedToUpdateAiPreference => 'Failed to update AI preference';
+
+  @override
+  String get errorSavingPreference =>
+      'Error saving preference. Please try again.';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).

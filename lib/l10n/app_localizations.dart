@@ -3136,6 +3136,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Insights'**
   String get yourInsights;
+
+  /// No description provided for @aiFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Features'**
+  String get aiFeatures;
+
+  /// No description provided for @aiSetupDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'ShopSync uses on-device AI to provide smart suggestions based on your shopping patterns. Choose whether you\'d like to enable these features.'**
+  String get aiSetupDescription;
+
+  /// No description provided for @enableAiFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable AI Features'**
+  String get enableAiFeatures;
+
+  /// No description provided for @enableAiDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Get personalized item suggestions based on your shopping history and patterns'**
+  String get enableAiDescription;
+
+  /// No description provided for @disableAiFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable AI Features'**
+  String get disableAiFeatures;
+
+  /// No description provided for @disableAiDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Use ShopSync without AI-powered suggestions'**
+  String get disableAiDescription;
+
+  /// No description provided for @smartItemSuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart item suggestions'**
+  String get smartItemSuggestions;
+
+  /// No description provided for @patternRecognition.
+  ///
+  /// In en, this message translates to:
+  /// **'Pattern recognition'**
+  String get patternRecognition;
+
+  /// No description provided for @timeBasedRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Time-based recommendations'**
+  String get timeBasedRecommendations;
+
+  /// No description provided for @personalizedExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalized experience'**
+  String get personalizedExperience;
+
+  /// No description provided for @noDataAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'No data analysis'**
+  String get noDataAnalysis;
+
+  /// No description provided for @noAiSuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'No AI suggestions'**
+  String get noAiSuggestions;
+
+  /// No description provided for @basicListManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic list management'**
+  String get basicListManagement;
+
+  /// No description provided for @privacyFocused.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy-focused'**
+  String get privacyFocused;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// No description provided for @aiPreferenceChangeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'You can change this setting later in your profile.'**
+  String get aiPreferenceChangeNote;
+
+  /// No description provided for @controlAiFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Control on-device AI features like smart suggestions'**
+  String get controlAiFeatures;
+
+  /// No description provided for @enableSmartSuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Smart Suggestions'**
+  String get enableSmartSuggestions;
+
+  /// No description provided for @aiAnalyzesPatterns.
+  ///
+  /// In en, this message translates to:
+  /// **'AI analyzes your shopping patterns'**
+  String get aiAnalyzesPatterns;
+
+  /// No description provided for @aiFeaturesDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'AI features are disabled'**
+  String get aiFeaturesDisabled;
+
+  /// No description provided for @aiFeaturesEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'AI features enabled'**
+  String get aiFeaturesEnabled;
+
+  /// No description provided for @aiFeaturesDisabledMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'AI features disabled'**
+  String get aiFeaturesDisabledMessage;
+
+  /// No description provided for @failedToUpdateAiPreference.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update AI preference'**
+  String get failedToUpdateAiPreference;
+
+  /// No description provided for @errorSavingPreference.
+  ///
+  /// In en, this message translates to:
+  /// **'Error saving preference. Please try again.'**
+  String get errorSavingPreference;
 }
 
 class _AppLocalizationsDelegate
