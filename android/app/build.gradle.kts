@@ -63,10 +63,10 @@ android {
         }
         create("wear") {
             val wearBaseVersionCode = 400000000
-            val wearVersionCode = 13
+            val wearVersionCode = 12
             manifestPlaceholders.clear()
             dimension = "platform"
-            versionName = "1.4.0-wear"
+            versionName = "1.3.3-wear"
             versionCode = wearBaseVersionCode + wearVersionCode
         }
     }
