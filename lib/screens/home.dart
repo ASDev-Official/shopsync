@@ -698,7 +698,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             ),
                                             const SizedBox(height: 16),
                                             Text(
-                                              'Swipe down to view options',
+                                              'Swipe up to view options',
                                               style: TextStyle(
                                                 color: Colors.grey[600],
                                               ),
