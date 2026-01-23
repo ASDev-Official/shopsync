@@ -692,13 +692,13 @@ class _HomeScreenState extends State<HomeScreen>
                                             ),
                                             Spacer(flex: 1),
                                             Icon(
-                                              Icons.arrow_downward,
+                                              Icons.arrow_upward_rounded,
                                               size: 48,
                                               color: Colors.grey[400],
                                             ),
                                             const SizedBox(height: 16),
                                             Text(
-                                              'Swipe down to view options',
+                                              'Swipe up to view options',
                                               style: TextStyle(
                                                 color: Colors.grey[600],
                                               ),
