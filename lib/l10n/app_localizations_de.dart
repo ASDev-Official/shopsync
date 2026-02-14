@@ -57,61 +57,63 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems1 =>
-      'Are you sure you want to remove all completed items?';
+      'Sind Sie sicher, dass Sie ihre abgeschlossenen Elemente löschen wollen?';
 
   @override
-  String get areYouSureYouWantToSignOut => 'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut =>
+      'Sind Sie sicher, dass Sie sich abmelden wollen?';
 
   @override
   String get areYouSureYouWantToSignOut1 =>
-      'Are you sure you want to sign out?';
+      'Sind Sie sicher, dass Sie sich abmelden wollen?';
 
   @override
   String get areYouSureYouWantToSignOut2 =>
-      'Are you sure you want to sign out?';
+      'Sind Sie sicher, dass Sie sich abmelden wollen?';
 
   @override
   String get areYouSureYouWantToSignOut3 =>
-      'Are you sure you want to sign out?';
+      'Sind Sie sicher, dass Sie sich abmelden wollen?';
 
   @override
-  String get avgCompletion => 'Avg Completion';
+  String get avgCompletion => 'Durchschnittliche Fertigstellung';
 
   @override
-  String get canAddEditAndDeleteItems => 'Can add, edit, and delete items';
+  String get canAddEditAndDeleteItems =>
+      'Kann Elemente hinzufügen, editieren und löschen';
 
   @override
-  String get canOnlyViewItems => 'Can only view items';
+  String get canOnlyViewItems => 'Kann ausschließlich Elemente ansehen';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Abbrechen';
 
   @override
-  String get cancel1 => 'Cancel';
+  String get cancel1 => 'Abbrechen';
 
   @override
-  String get cancel10 => 'Cancel';
+  String get cancel10 => 'Abbrechen';
 
   @override
-  String get cancel11 => 'Cancel';
+  String get cancel11 => 'Abbrechen';
 
   @override
-  String get cancel12 => 'Cancel';
+  String get cancel12 => 'Abbrechen';
 
   @override
-  String get cancel2 => 'Cancel';
+  String get cancel2 => 'Abbrechen';
 
   @override
-  String get cancel3 => 'Cancel';
+  String get cancel3 => 'Abbrechen';
 
   @override
-  String get cancel4 => 'Cancel';
+  String get cancel4 => 'Abbrechen';
 
   @override
-  String get cancel5 => 'Cancel';
+  String get cancel5 => 'Abbrechen';
 
   @override
-  String get cancel6 => 'Cancel';
+  String get cancel6 => 'Abbrechen';
 
   @override
   String get cancel7 => 'Cancel';
