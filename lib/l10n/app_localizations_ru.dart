@@ -1766,80 +1766,80 @@ class AppLocalizationsRu extends AppLocalizations {
   String get yourInsights => 'Ваша статистика';
 
   @override
-  String get aiFeatures => 'AI Features';
+  String get aiFeatures => 'Функции ИИ';
 
   @override
   String get aiSetupDescription =>
-      'ShopSync uses on-device AI to provide smart suggestions based on your shopping patterns. Choose whether you\'d like to enable these features.';
+      'ShopSync использует ИИ на устройстве для умных подсказок на основе ваших привычек. Выберите, хотите ли вы включить эти функции.';
 
   @override
-  String get enableAiFeatures => 'Enable AI Features';
+  String get enableAiFeatures => 'Включить функции ИИ';
 
   @override
   String get enableAiDescription =>
-      'Get personalized item suggestions based on your shopping history and patterns';
+      'Получайте персональные подсказки на основе истории покупок и привычек';
 
   @override
-  String get disableAiFeatures => 'Disable AI Features';
+  String get disableAiFeatures => 'Отключить функции ИИ';
 
   @override
   String get disableAiDescription =>
-      'Use ShopSync without AI-powered suggestions';
+      'Использовать ShopSync без умных подсказок ИИ';
 
   @override
-  String get smartItemSuggestions => 'Smart item suggestions';
+  String get smartItemSuggestions => 'Умные подсказки товаров';
 
   @override
-  String get patternRecognition => 'Pattern recognition';
+  String get patternRecognition => 'Распознавание привычек';
 
   @override
-  String get timeBasedRecommendations => 'Time-based recommendations';
+  String get timeBasedRecommendations => 'Рекомендации с учётом времени';
 
   @override
-  String get personalizedExperience => 'Personalized experience';
+  String get personalizedExperience => 'Персональный опыт';
 
   @override
-  String get noDataAnalysis => 'No data analysis';
+  String get noDataAnalysis => 'Без анализа данных';
 
   @override
-  String get noAiSuggestions => 'No AI suggestions';
+  String get noAiSuggestions => 'Без подсказок ИИ';
 
   @override
-  String get basicListManagement => 'Basic list management';
+  String get basicListManagement => 'Базовое управление списками';
 
   @override
-  String get privacyFocused => 'Privacy-focused';
+  String get privacyFocused => 'Акцент на конфиденциальность';
 
   @override
-  String get continueButton => 'Continue';
+  String get continueButton => 'Продолжить';
 
   @override
   String get aiPreferenceChangeNote =>
-      'You can change this setting later in your profile.';
+      'Вы сможете изменить эту настройку позже в профиле.';
 
   @override
   String get controlAiFeatures =>
-      'Control on-device AI features like smart suggestions';
+      'Управление функциями ИИ (например, умными подсказками)';
 
   @override
-  String get enableSmartSuggestions => 'Enable Smart Suggestions';
+  String get enableSmartSuggestions => 'Включить умные подсказки';
 
   @override
-  String get aiAnalyzesPatterns => 'AI analyzes your shopping patterns';
+  String get aiAnalyzesPatterns => 'ИИ анализирует ваши привычки покупок';
 
   @override
-  String get aiFeaturesDisabled => 'AI features are disabled';
+  String get aiFeaturesDisabled => 'Функции ИИ теперь отключены';
 
   @override
-  String get aiFeaturesEnabled => 'AI features enabled';
+  String get aiFeaturesEnabled => 'Функции ИИ включены';
 
   @override
-  String get aiFeaturesDisabledMessage => 'AI features disabled';
+  String get aiFeaturesDisabledMessage => 'Функции ИИ отключены';
 
   @override
-  String get failedToUpdateAiPreference => 'Failed to update AI preference';
+  String get failedToUpdateAiPreference => 'Не удалось обновить настройки ИИ';
 
   @override
   String get errorSavingPreference =>
-      'Error saving preference. Please try again.';
+      'Ошибка сохранения настройки. Попробуйте снова.';
 }
