@@ -1,1 +1,9 @@
-{}
+{
+    "aboutApp": "关于本软件",
+    "accessYourListsAndSettings": "访问您的列表和设置",
+    "appLanguage": "应用程序语言",
+    "appVersion": "应用程序版本",
+    "addItemManually": "手动添加项目",
+    "cancel": "取消",
+    "areYouSureYouWantToSignOut": "你确定想要退出登录吗？"
+}
