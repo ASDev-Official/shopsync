@@ -238,26 +238,38 @@ class ListGroupsService {
         .orderBy('createdAt', descending: true)
         .snapshots()
         .asyncMap((snapshot) async {
-      // Get all existing groups and their listIds
-      final groupsSnapshot = await _firestore
-          .collection('list_groups')
-          .where('members', arrayContains: user.uid)
-          .get();
+      try {
+        // Get all existing groups and their listIds
+        final groupsSnapshot = await _firestore
+            .collection('list_groups')
+            .where('members', arrayContains: user.uid)
+            .get();
 
-      // Collect all list IDs that are in any group
-      final groupedListIds = <String>{};
-      for (final groupDoc in groupsSnapshot.docs) {
-        final data = groupDoc.data();
-        final listIds = List<String>.from(data['listIds'] ?? []);
-        groupedListIds.addAll(listIds);
+        // Collect all list IDs that are in any group
+        final groupedListIds = <String>{};
+        for (final groupDoc in groupsSnapshot.docs) {
+          final data = groupDoc.data();
+          final listIds = List<String>.from(data['listIds'] ?? []);
+          groupedListIds.addAll(listIds);
+        }
+
+        // Filter out lists that are in any group
+        final ungroupedDocs = snapshot.docs.where((doc) {
+          return !groupedListIds.contains(doc.id);
+        }).toList();
+
+        return ungroupedDocs;
+      } catch (error, stackTrace) {
+        await Sentry.captureException(
+          error,
+          stackTrace: stackTrace,
+          hint: Hint.withMap({
+            'action': 'get_ungrouped_lists_groups_query',
+          }),
+        );
+        // If we can't fetch groups (e.g. permission denied), treat all lists as ungrouped
+        return snapshot.docs;
       }
-
-      // Filter out lists that are in any group
-      final ungroupedDocs = snapshot.docs.where((doc) {
-        return !groupedListIds.contains(doc.id);
-      }).toList();
-
-      return ungroupedDocs;
     });
   }
 
