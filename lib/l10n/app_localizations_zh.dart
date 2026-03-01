@@ -9,10 +9,10 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get aboutApp => 'About App';
+  String get aboutApp => '关于本软件';
 
   @override
-  String get accessYourListsAndSettings => 'Access your lists and settings';
+  String get accessYourListsAndSettings => '访问您的列表和设置';
 
   @override
   String get addCustomGroup => 'Add Custom Group';
@@ -33,7 +33,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get addGroup => 'Add Group';
 
   @override
-  String get addItemManually => 'Add Item Manually';
+  String get addItemManually => '手动添加项目';
 
   @override
   String get addItemsToYourLists => 'Add items to your lists';
@@ -45,10 +45,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get added => 'Added';
 
   @override
-  String get appLanguage => 'App Language';
+  String get appLanguage => '应用程序语言';
 
   @override
-  String get appVersion => 'App Version';
+  String get appVersion => '应用程序版本';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems =>
@@ -59,7 +59,7 @@ class AppLocalizationsZh extends AppLocalizations {
       'Are you sure you want to remove all completed items?';
 
   @override
-  String get areYouSureYouWantToSignOut => 'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut => '你确定想要退出登录吗？';
 
   @override
   String get areYouSureYouWantToSignOut1 =>
@@ -83,7 +83,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get canOnlyViewItems => 'Can only view items';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => '取消';
 
   @override
   String get cancel1 => 'Cancel';

@@ -142,6 +142,7 @@ class _HomeScreenState extends State<HomeScreen>
   late final Stream<QuerySnapshot> _listGroupsStream;
   late final Stream<List<QueryDocumentSnapshot>> _ungroupedListsStream;
   late final Stream<QuerySnapshot> _drawerListsStream;
+  late final Stream<QuerySnapshot> _allListsCheckStream;
 
   @override
   bool get wantKeepAlive => true;
@@ -368,6 +369,11 @@ class _HomeScreenState extends State<HomeScreen>
         .collection('lists')
         .where('members', arrayContains: _auth.currentUser?.uid)
         .orderBy('createdAt', descending: true)
+        .snapshots();
+    _allListsCheckStream = _firestore
+        .collection('lists')
+        .where('members', arrayContains: _auth.currentUser?.uid)
+        .limit(1)
         .snapshots();
 
     _loadBannerAd();
@@ -1208,12 +1214,7 @@ class _HomeScreenState extends State<HomeScreen>
 
                               // Check if we have any lists at all (for welcome screen)
                               return StreamBuilder<QuerySnapshot>(
-                                stream: _firestore
-                                    .collection('lists')
-                                    .where('members',
-                                        arrayContains: _auth.currentUser?.uid)
-                                    .limit(1)
-                                    .snapshots(),
+                                stream: _allListsCheckStream,
                                 builder: (context, allListsSnapshot) {
                                   final hasAnyLists = allListsSnapshot
                                           .hasData &&
