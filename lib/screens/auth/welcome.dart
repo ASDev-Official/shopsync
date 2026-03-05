@@ -84,6 +84,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       // Special handling for account-exists-with-different-credential
       if (e.code == 'account-exists-with-different-credential') {
         errorMessage = l10n.googleSignInAccountExists;
+      } else if (e.code == 'user-disabled') {
+        // The user's Firebase account has been disabled by an administrator.
+        // Show a specific, actionable message and do not report to Sentry
+        // since this is a legitimate account status, not an app bug.
+        errorMessage = l10n.loginUserDisabled;
+        setState(() {
+          _errorMessage = errorMessage;
+        });
+        return;
       }
 
       setState(() {
