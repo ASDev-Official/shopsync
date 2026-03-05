@@ -55,8 +55,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       _errorMessage = '';
     });
 
-    final l10n = AppLocalizations.of(context)!;
-
     try {
       UserCredential? userCredential;
 
@@ -71,34 +69,44 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
       if (userCredential == null) {
         // User canceled the sign-in
-        setState(() {
-          _isGoogleLoading = false;
-        });
+        if (mounted) {
+          setState(() {
+            _isGoogleLoading = false;
+          });
+        }
         return;
       }
 
       if (!mounted) return;
     } on FirebaseAuthException catch (e, stackTrace) {
-      String errorMessage = e.message ?? l10n.googleSignInError;
+      if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
+        String errorMessage = e.message ?? l10n.googleSignInError;
 
-      // Special handling for account-exists-with-different-credential
-      if (e.code == 'account-exists-with-different-credential') {
-        errorMessage = l10n.googleSignInAccountExists;
+        // Special handling for account-exists-with-different-credential
+        if (e.code == 'account-exists-with-different-credential') {
+          errorMessage = l10n.googleSignInAccountExists;
+        }
+
+        setState(() {
+          _errorMessage = errorMessage;
+        });
       }
-
-      setState(() {
-        _errorMessage = errorMessage;
-      });
       await SentryUtils.reportError(e, stackTrace);
     } catch (e, stackTrace) {
-      setState(() {
-        _errorMessage = l10n.googleSignInGeneric;
-      });
+      if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
+        setState(() {
+          _errorMessage = l10n.googleSignInGeneric;
+        });
+      }
       await SentryUtils.reportError(e, stackTrace);
     } finally {
-      setState(() {
-        _isGoogleLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isGoogleLoading = false;
+        });
+      }
     }
   }
 
