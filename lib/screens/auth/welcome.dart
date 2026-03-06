@@ -24,7 +24,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return l10n.versionInfo(packageInfo.version, packageInfo.buildNumber);
   }
 
-  // ignore: unused_field
   String _errorMessage = '';
   bool _isGoogleLoading = false;
   bool _hasTriedCredentialManager = false;
@@ -267,6 +266,34 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   isLoading: _isGoogleLoading,
                   isDarkMode: isDarkMode,
                 ),
+
+                // Error Message Display
+                if (_errorMessage.isNotEmpty)
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    margin: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.red.shade50,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.red.shade200),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.error, color: Colors.red.shade400, size: 20),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            _errorMessage,
+                            style: TextStyle(
+                              color: Colors.red.shade700,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
                 const SizedBox(height: 20),
 
