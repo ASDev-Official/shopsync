@@ -140,7 +140,13 @@ class GoogleAuthService {
       if (kDebugMode) {
         print('Firebase Auth Error: ${e.code} - ${e.message}');
       }
-      await _logError(e, stackTrace, 'signInWithGoogleCredentialManager');
+      // Do not report to Sentry when an account is disabled — this is a
+      // legitimate Firebase account status set by an administrator, not a
+      // bug in the app. The UI layer is responsible for showing the user
+      // an appropriate message.
+      if (e.code != 'user-disabled') {
+        await _logError(e, stackTrace, 'signInWithGoogleCredentialManager');
+      }
       rethrow;
     } catch (e, stackTrace) {
       if (kDebugMode) {
@@ -215,7 +221,13 @@ class GoogleAuthService {
       if (kDebugMode) {
         print('Firebase Auth Error: ${e.code} - ${e.message}');
       }
-      await _logError(e, stackTrace, 'signInWithGoogle');
+      // Do not report to Sentry when an account is disabled — this is a
+      // legitimate Firebase account status set by an administrator, not a
+      // bug in the app. The UI layer is responsible for showing the user
+      // an appropriate message.
+      if (e.code != 'user-disabled') {
+        await _logError(e, stackTrace, 'signInWithGoogle');
+      }
       rethrow;
     } catch (e, stackTrace) {
       if (kDebugMode) {
