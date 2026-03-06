@@ -6,12 +6,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
 import '/screens/auth/sign_out.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/widgets/common/advert.dart';
+import '/widgets/user/user_avatar.dart';
 import '/services/auth/google_auth.dart';
 import '/services/data/ai_preference_service.dart';
+import '/services/data/gravatar_service.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -455,23 +458,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             child: Hero(
                               tag: 'profile-avatar',
-                              child: CircleAvatar(
-                                radius: 50,
-                                backgroundColor:
-                                    isDark ? Colors.grey[800] : Colors.white,
-                                child: Text(
-                                  displayName.isNotEmpty
-                                      ? displayName[0].toUpperCase()
-                                      : 'U',
-                                  style: TextStyle(
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    color: isDark
-                                        ? Colors.white
-                                        : Colors.green[800],
-                                  ),
-                                ),
-                              ),
+                              child: user != null
+                                  ? UserAvatar.fromUserId(
+                                      userId: user.uid,
+                                      radius: 50,
+                                    )
+                                  : CircleAvatar(
+                                      radius: 50,
+                                      backgroundColor: isDark
+                                          ? Colors.grey[800]
+                                          : Colors.white,
+                                      child: Text(
+                                        displayName.isNotEmpty
+                                            ? displayName[0].toUpperCase()
+                                            : 'U',
+                                        style: TextStyle(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.bold,
+                                          color: isDark
+                                              ? Colors.white
+                                              : Colors.green[800],
+                                        ),
+                                      ),
+                                    ),
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -993,6 +1002,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 return SwitchListTile(
                                   contentPadding: EdgeInsets.zero,
                                   value: aiEnabled,
+                                  activeColor: isDark
+                                      ? Colors.purple[400]
+                                      : Colors.purple[700],
+                                  activeTrackColor: isDark
+                                      ? Colors.purple[700]
+                                      : Colors.purple[200],
+                                  inactiveThumbColor: isDark
+                                      ? Colors.grey[700]
+                                      : Colors.grey[400],
+                                  inactiveTrackColor: isDark
+                                      ? Colors.grey[800]
+                                      : Colors.grey[300],
                                   onChanged: (value) async {
                                     try {
                                       await AIPreferenceService.setAIPreference(
@@ -1068,6 +1089,359 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               : Colors.grey[600]),
                                     ),
                                   ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Gravatar Settings Card
+                    Card(
+                      elevation: isDark ? 0 : 2,
+                      color: isDark ? Colors.grey[850] : Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        side: BorderSide(
+                          color: isDark ? Colors.grey[800]! : Colors.grey[200]!,
+                          width: 1,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    AppLocalizations.of(context)!
+                                        .gravatarSettings,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: isDark
+                                          ? Colors.white
+                                          : Colors.green[800],
+                                    ),
+                                  ),
+                                ),
+                                TextButton.icon(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text(
+                                            AppLocalizations.of(context)!
+                                                .whatIsGravatar),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(AppLocalizations.of(context)!
+                                                .gravatarExplanation),
+                                            const SizedBox(height: 16),
+                                            Text(
+                                              AppLocalizations.of(context)!
+                                                  .privacyControl,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Text(AppLocalizations.of(context)!
+                                                .gravatarPrivacyDescription),
+                                          ],
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () async {
+                                              final url = Uri.parse(
+                                                  'https://gravatar.com');
+                                              if (await canLaunchUrl(url)) {
+                                                await launchUrl(url,
+                                                    mode: LaunchMode
+                                                        .externalApplication);
+                                              }
+                                              if (context.mounted) {
+                                                Navigator.of(context).pop();
+                                              }
+                                            },
+                                            child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .visitGravatar),
+                                          ),
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.of(context).pop(),
+                                            child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .close),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  icon:
+                                      const Icon(Icons.info_outline, size: 18),
+                                  label: Text(
+                                      AppLocalizations.of(context)!.learnMore),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              AppLocalizations.of(context)!.gravatarDescription,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color:
+                                    isDark ? Colors.white70 : Colors.grey[700],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            FutureBuilder<DocumentSnapshot>(
+                              future: _firestore
+                                  .collection('users')
+                                  .doc(user?.uid)
+                                  .get(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CustomLoadingSpinner());
+                                }
+
+                                if (!snapshot.hasData) {
+                                  return const SizedBox.shrink();
+                                }
+
+                                final userData = snapshot.data!.data()
+                                    as Map<String, dynamic>?;
+                                final gravatarEnabled =
+                                    userData?['gravatarEnabled'] ?? false;
+                                final gravatarUrl =
+                                    userData?['gravatarUrl'] as String?;
+                                final hasGravatar = gravatarUrl != null &&
+                                    gravatarUrl.isNotEmpty;
+
+                                return Column(
+                                  children: [
+                                    // Avatar Preview
+                                    Row(
+                                      children: [
+                                        UserAvatar.fromUserData(
+                                          displayName: displayName,
+                                          gravatarUrl: gravatarUrl,
+                                          gravatarEnabled: gravatarEnabled,
+                                          radius: 32,
+                                        ),
+                                        const SizedBox(width: 16),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                hasGravatar
+                                                    ? (gravatarEnabled
+                                                        ? AppLocalizations.of(
+                                                                context)!
+                                                            .gravatarEnabled
+                                                        : AppLocalizations.of(
+                                                                context)!
+                                                            .gravatarDisabled)
+                                                    : AppLocalizations.of(
+                                                            context)!
+                                                        .gravatarNotFound,
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: isDark
+                                                      ? Colors.white
+                                                      : null,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 4),
+                                              Text(
+                                                email,
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: isDark
+                                                      ? Colors.white60
+                                                      : Colors.grey[600],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 20),
+                                    // Enable/Disable Toggle (only if Gravatar exists)
+                                    if (hasGravatar)
+                                      SwitchListTile(
+                                        contentPadding: EdgeInsets.zero,
+                                        value: gravatarEnabled,
+                                        activeColor: isDark
+                                            ? Colors.green[400]
+                                            : Colors.green[700],
+                                        activeTrackColor: isDark
+                                            ? Colors.green[700]
+                                            : Colors.green[200],
+                                        inactiveThumbColor: isDark
+                                            ? Colors.grey[700]
+                                            : Colors.grey[400],
+                                        inactiveTrackColor: isDark
+                                            ? Colors.grey[800]
+                                            : Colors.grey[300],
+                                        onChanged: (value) async {
+                                          try {
+                                            if (value) {
+                                              await GravatarService
+                                                  .enableGravatar();
+                                            } else {
+                                              await GravatarService
+                                                  .disableGravatar();
+                                            }
+                                            if (mounted) {
+                                              final l10n =
+                                                  AppLocalizations.of(context)!;
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    value
+                                                        ? l10n
+                                                            .gravatarEnabledMessage
+                                                        : l10n
+                                                            .gravatarDisabledMessage,
+                                                  ),
+                                                  backgroundColor: Colors.green,
+                                                ),
+                                              );
+                                              setState(() {});
+                                            }
+                                          } catch (e) {
+                                            if (mounted) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .anErrorOccurred),
+                                                  backgroundColor: Colors.red,
+                                                ),
+                                              );
+                                            }
+                                          }
+                                        },
+                                        title: Text(
+                                          'Show Gravatar',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            color: isDark ? Colors.white : null,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          'Display profile picture to other users',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            color: isDark
+                                                ? Colors.white60
+                                                : Colors.grey[600],
+                                          ),
+                                        ),
+                                        secondary: CircleAvatar(
+                                          backgroundColor: gravatarEnabled
+                                              ? (isDark
+                                                  ? Colors.green[900]
+                                                  : Colors.green[100])
+                                              : (isDark
+                                                  ? Colors.grey[800]
+                                                  : Colors.grey[200]),
+                                          child: Icon(
+                                            gravatarEnabled
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                            color: gravatarEnabled
+                                                ? (isDark
+                                                    ? Colors.green[300]
+                                                    : Colors.green[700])
+                                                : (isDark
+                                                    ? Colors.grey[500]
+                                                    : Colors.grey[600]),
+                                          ),
+                                        ),
+                                      ),
+                                    // Refresh Button
+                                    const SizedBox(height: 12),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: ButtonM3E(
+                                        onPressed: () async {
+                                          setState(() => _isLoading = true);
+                                          try {
+                                            final found = await GravatarService
+                                                .refreshGravatar();
+                                            if (mounted) {
+                                              final l10n =
+                                                  AppLocalizations.of(context)!;
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    found
+                                                        ? l10n.gravatarFound
+                                                        : l10n.gravatarNotFound,
+                                                  ),
+                                                  backgroundColor: found
+                                                      ? Colors.green
+                                                      : Colors.orange,
+                                                ),
+                                              );
+                                              setState(() {});
+                                            }
+                                          } catch (e) {
+                                            if (mounted) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .anErrorOccurred),
+                                                  backgroundColor: Colors.red,
+                                                ),
+                                              );
+                                            }
+                                          } finally {
+                                            if (mounted) {
+                                              setState(
+                                                  () => _isLoading = false);
+                                            }
+                                          }
+                                        },
+                                        label: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            const Icon(Icons.refresh, size: 20),
+                                            const SizedBox(width: 8),
+                                            Text(AppLocalizations.of(context)!
+                                                .refreshGravatar),
+                                          ],
+                                        ),
+                                        style: ButtonM3EStyle.outlined,
+                                        size: ButtonM3ESize.md,
+                                      ),
+                                    ),
+                                  ],
                                 );
                               },
                             ),

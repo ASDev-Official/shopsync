@@ -5,6 +5,7 @@ import 'package:shopsync/l10n/app_localizations.dart';
 import '/widgets/lists/place_selector.dart';
 import '/widgets/lists/category_picker.dart';
 import '/widgets/ui/loading_spinner.dart';
+import '/widgets/user/user_avatar.dart';
 import '/utils/icons/food_icons_map.dart';
 import '/screens/lists/choose_item_icon.dart';
 import '/utils/permissions.dart';
@@ -207,6 +208,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
           final item = snapshot.data!.data() as Map<String, dynamic>? ?? {};
           final name = item['name'] ?? l10n.untitledItem;
           final description = item['description'] ?? '';
+          final addedBy = item['addedBy'] as String?;
           final addedByName = item['addedByName'] ?? l10n.unknownUser;
           final addedAt = item['addedAt'].toDate();
           final completed = item['completed'] ?? false;
@@ -349,7 +351,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                     const SizedBox(height: 16),
                     _buildDescriptionCard(),
                     const SizedBox(height: 16),
-                    _buildAddedByCard(addedByName),
+                    _buildAddedByCard(addedBy, addedByName),
                     const SizedBox(height: 16),
                     _buildAddedAtCard(addedAt),
                   ],
@@ -804,7 +806,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
     );
   }
 
-  Widget _buildAddedByCard(String addedByName) {
+  Widget _buildAddedByCard(String? addedBy, String addedByName) {
     return Card(
       elevation: 8,
       shadowColor: Colors.black26,
@@ -813,17 +815,25 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            Container(
-              width: 48,
-              height: 48,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.green[100],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(Icons.person, color: Colors.green[800]),
-            ),
+            addedBy != null
+                ? UserAvatar.fromUserId(
+                    userId: addedBy,
+                    radius: 24,
+                  )
+                : CircleAvatar(
+                    radius: 24,
+                    backgroundColor: Colors.green[100],
+                    child: Text(
+                      addedByName.isNotEmpty
+                          ? addedByName[0].toUpperCase()
+                          : '?',
+                      style: TextStyle(
+                        color: Colors.green[800],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
             const SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

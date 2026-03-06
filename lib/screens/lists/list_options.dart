@@ -23,6 +23,7 @@ import '/widgets/lists/category_picker.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/widgets/lists/place_selector.dart';
 import '/widgets/lists/smart_suggestions_widget.dart';
+import '/widgets/user/user_avatar.dart';
 import 'recycle_bin.dart';
 
 class ListOptionsScreen extends StatefulWidget {
@@ -1029,8 +1030,9 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                               builder: (context, userSnapshot) {
                                 if (!userSnapshot.hasData) {
                                   return ListTile(
-                                    leading: const CircleAvatar(
-                                      child: CustomLoadingSpinner(size: 16),
+                                    leading: CircleAvatar(
+                                      child:
+                                          const CustomLoadingSpinner(size: 16),
                                     ),
                                     title: Text(
                                         AppLocalizations.of(context)!.loading),
@@ -1043,23 +1045,22 @@ class _ShareMenuScreenState extends State<ShareMenuScreen> {
                                     userData?['email'] ?? 'Unknown user';
                                 final displayName =
                                     userData?['displayName'] ?? 'User';
+                                final gravatarUrl =
+                                    userData?['gravatarUrl'] as String?;
+                                final gravatarEnabled =
+                                    userData?['gravatarEnabled'] ?? false;
                                 final isOwner = userId == ownerId;
                                 final currentUserId = _auth.currentUser?.uid;
                                 final userRole =
                                     memberRoles[userId] ?? 'editor';
 
                                 return ListTile(
-                                  leading: CircleAvatar(
-                                    backgroundColor: isOwner
-                                        ? Colors.amber[100]
-                                        : Colors.green[100],
-                                    child: Icon(
-                                      isOwner ? Icons.star : Icons.person,
-                                      color: isOwner
-                                          ? Colors.amber[800]
-                                          : Colors.green[800],
-                                      size: 16,
-                                    ),
+                                  leading: UserAvatar.fromUserData(
+                                    displayName: displayName,
+                                    gravatarUrl: gravatarUrl,
+                                    gravatarEnabled: gravatarEnabled,
+                                    radius: 20,
+                                    isOwner: isOwner,
                                   ),
                                   title: Text(
                                     displayName,

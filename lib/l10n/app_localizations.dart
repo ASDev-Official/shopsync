@@ -3211,6 +3211,210 @@ abstract class AppLocalizations {
   /// **'No AI suggestions'**
   String get noAiSuggestions;
 
+  /// No description provided for @gravatarSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile Picture'**
+  String get gravatarSettings;
+
+  /// No description provided for @gravatarDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Gravatar is a globally recognized avatar service. If you have a Gravatar associated with your email, enable it to show your profile picture throughout ShopSync.'**
+  String get gravatarDescription;
+
+  /// No description provided for @enableGravatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Show My Gravatar'**
+  String get enableGravatar;
+
+  /// No description provided for @disableGravatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide My Gravatar'**
+  String get disableGravatar;
+
+  /// No description provided for @gravatarEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Gravatar Enabled'**
+  String get gravatarEnabled;
+
+  /// No description provided for @gravatarDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Gravatar Disabled'**
+  String get gravatarDisabled;
+
+  /// No description provided for @gravatarEnabledMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Gravatar profile picture is now visible to other users'**
+  String get gravatarEnabledMessage;
+
+  /// No description provided for @gravatarDisabledMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Gravatar profile picture is now hidden from other users'**
+  String get gravatarDisabledMessage;
+
+  /// No description provided for @refreshGravatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh Gravatar'**
+  String get refreshGravatar;
+
+  /// No description provided for @gravatarRefreshed.
+  ///
+  /// In en, this message translates to:
+  /// **'Gravatar refreshed successfully'**
+  String get gravatarRefreshed;
+
+  /// No description provided for @gravatarNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Gravatar found for your email'**
+  String get gravatarNotFound;
+
+  /// No description provided for @gravatarFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Gravatar found and updated'**
+  String get gravatarFound;
+
+  /// No description provided for @whatIsGravatar.
+  ///
+  /// In en, this message translates to:
+  /// **'What is Gravatar?'**
+  String get whatIsGravatar;
+
+  /// No description provided for @gravatarExplanation.
+  ///
+  /// In en, this message translates to:
+  /// **'Gravatar (Globally Recognized Avatar) is a service that provides a profile picture across different websites and apps using your email address. Visit gravatar.com to create or update your Gravatar.'**
+  String get gravatarExplanation;
+
+  /// No description provided for @visitGravatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Visit Gravatar.com'**
+  String get visitGravatar;
+
+  /// No description provided for @privacyControl.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Control'**
+  String get privacyControl;
+
+  /// No description provided for @gravatarPrivacyDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You can enable or disable your Gravatar at any time. When disabled, only your initials will be shown to other users.'**
+  String get gravatarPrivacyDescription;
+
+  /// No description provided for @learnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn More'**
+  String get learnMore;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @anErrorOccurred.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred'**
+  String get anErrorOccurred;
+
+  /// No description provided for @gravatarProfilePictures.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile Pictures'**
+  String get gravatarProfilePictures;
+
+  /// No description provided for @gravatarSetupDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'ShopSync can display your Gravatar profile picture throughout the app. Would you like to enable this feature?'**
+  String get gravatarSetupDescription;
+
+  /// No description provided for @enableGravatarSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Gravatar'**
+  String get enableGravatarSetup;
+
+  /// No description provided for @enableGravatarSetupDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Show my profile picture to other users'**
+  String get enableGravatarSetupDescription;
+
+  /// No description provided for @disableGravatarSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable Gravatar'**
+  String get disableGravatarSetup;
+
+  /// No description provided for @disableGravatarSetupDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep my profile picture private'**
+  String get disableGravatarSetupDescription;
+
+  /// No description provided for @gravatarFeature1.
+  ///
+  /// In en, this message translates to:
+  /// **'Display your profile picture from Gravatar'**
+  String get gravatarFeature1;
+
+  /// No description provided for @gravatarFeature2.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically synced with your email'**
+  String get gravatarFeature2;
+
+  /// No description provided for @gravatarFeature3.
+  ///
+  /// In en, this message translates to:
+  /// **'Visible in shared lists and collaborations'**
+  String get gravatarFeature3;
+
+  /// No description provided for @gravatarFeature4.
+  ///
+  /// In en, this message translates to:
+  /// **'Can be changed anytime in settings'**
+  String get gravatarFeature4;
+
+  /// No description provided for @gravatarDisabledFeature1.
+  ///
+  /// In en, this message translates to:
+  /// **'Only initials shown to other users'**
+  String get gravatarDisabledFeature1;
+
+  /// No description provided for @gravatarDisabledFeature2.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum privacy protection'**
+  String get gravatarDisabledFeature2;
+
+  /// No description provided for @gravatarDisabledFeature3.
+  ///
+  /// In en, this message translates to:
+  /// **'Can be enabled later in settings'**
+  String get gravatarDisabledFeature3;
+
+  /// No description provided for @gravatarPreferenceChangeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'You can change this setting later in your profile settings.'**
+  String get gravatarPreferenceChangeNote;
+
   /// No description provided for @basicListManagement.
   ///
   /// In en, this message translates to:

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,9 @@ import '/widgets/common/advert.dart';
 import '/widgets/lists/add_list_group_bottom_sheet.dart';
 import '/widgets/lists/expandable_list_group_widget.dart';
 import '/widgets/ui/splash_screen.dart';
+import '/widgets/user/user_avatar.dart';
 import '/services/data/list_groups_service.dart';
+import '/services/data/gravatar_service.dart';
 import '/services/migration/migration_service.dart';
 import '/utils/permissions.dart';
 
@@ -381,6 +385,9 @@ class _HomeScreenState extends State<HomeScreen>
     _checkMigration();
     _cleanupOrphanedLists();
 
+    // Refresh Gravatar on app open (non-blocking)
+    unawaited(GravatarService.refreshGravatarOnAppOpen());
+
     // Only show splash screen on first visit in this session
     if (_hasShownSplashThisSession) {
       _showSplashScreen = false;
@@ -581,25 +588,9 @@ class _HomeScreenState extends State<HomeScreen>
                                   ],
                                 ),
                               ),
-                              child: CircleAvatar(
+                              child: UserAvatar.fromUserId(
+                                userId: _auth.currentUser!.uid,
                                 radius: 40,
-                                backgroundColor: isDark
-                                    ? Colors.grey[800]
-                                    : Colors.green[100],
-                                child: Text(
-                                  (_auth.currentUser?.displayName?.isNotEmpty ==
-                                          true)
-                                      ? _auth.currentUser!.displayName![0]
-                                          .toUpperCase()
-                                      : 'U',
-                                  style: TextStyle(
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold,
-                                    color: isDark
-                                        ? Colors.white
-                                        : Colors.green[800],
-                                  ),
-                                ),
                               ),
                             ),
                             const SizedBox(height: 16),
