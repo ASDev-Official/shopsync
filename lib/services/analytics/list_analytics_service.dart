@@ -223,7 +223,7 @@ class ListAnalyticsService {
       final categoryMap = <String, (int, int)>{};
 
       for (final item in itemsSnapshot.docs) {
-        final categoryId = item['categoryId'] as String? ?? 'Uncategorized';
+        final categoryId = item.data()['categoryId'] as String? ?? 'Uncategorized';
         final isCompleted = item['completed'] == true;
 
         if (categoryMap.containsKey(categoryId)) {
@@ -331,8 +331,8 @@ class ListAnalyticsService {
       final collaboratorMap = <String, (String, int, int)>{};
 
       for (final item in itemsSnapshot.docs) {
-        final createdBy = item['createdBy'] as String? ?? 'Unknown';
-        final createdByName = item['createdByName'] as String? ?? 'Unknown';
+        final createdBy = item['addedBy'] as String? ?? 'Unknown';
+        final createdByName = item['addedByName'] as String? ?? 'Unknown';
         final isCompleted = item['completed'] == true;
 
         if (collaboratorMap.containsKey(createdBy)) {
