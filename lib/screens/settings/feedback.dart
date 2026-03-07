@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
@@ -16,8 +17,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   bool isLoading = true;
 
   Future<bool> _onWillPop() async {
-    if (webViewController != null) {
-      // Check if webview can go back
+    if (!kIsWeb && webViewController != null) {
+      // Check if webview can go back (not supported on web platform)
       if (await webViewController!.canGoBack()) {
         // Go back in webview
         await webViewController!.goBack();
@@ -61,16 +62,18 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 onWebViewCreated: (controller) {
                   webViewController = controller;
 
-                  // Add handler for close button
-                  controller.addJavaScriptHandler(
-                    handlerName: 'closeShopSync',
-                    callback: (args) async {
-                      final shouldPop = await _onWillPop();
-                      if (shouldPop && context.mounted) {
-                        Navigator.of(context).pop();
-                      }
-                    },
-                  );
+                  // Add handler for close button (not supported on web platform)
+                  if (!kIsWeb) {
+                    controller.addJavaScriptHandler(
+                      handlerName: 'closeShopSync',
+                      callback: (args) async {
+                        final shouldPop = await _onWillPop();
+                        if (shouldPop && context.mounted) {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    );
+                  }
                 },
                 shouldOverrideUrlLoading: (controller, navigationAction) async {
                   final uri = navigationAction.request.url;
