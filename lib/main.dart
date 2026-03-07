@@ -266,6 +266,18 @@ class AuthWrapper extends StatefulWidget {
 }
 
 class _AuthWrapperState extends State<AuthWrapper> {
+  String? _cachedUserId;
+  Future<bool>? _aiPreferenceFuture;
+  Future<bool?>? _gravatarPreferenceFuture;
+
+  void _updateUserFutures(String uid) {
+    if (_cachedUserId != uid) {
+      _cachedUserId = uid;
+      _aiPreferenceFuture = AIPreferenceService.hasAIPreference();
+      _gravatarPreferenceFuture = GravatarService.hasGravatarPreference();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -362,9 +374,12 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
         // Check if user is logged in
         if (snapshot.hasData && snapshot.data != null) {
+          // Cache futures keyed to the current user to prevent re-creation on rebuild
+          _updateUserFutures(snapshot.data!.uid);
+
           // User is signed in, check if AI preference is set
           return FutureBuilder<bool>(
-            future: AIPreferenceService.hasAIPreference(),
+            future: _aiPreferenceFuture,
             builder: (context, aiSnapshot) {
               if (aiSnapshot.connectionState == ConnectionState.waiting) {
                 return const Scaffold(
@@ -381,7 +396,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
               // AI preference is set, now check Gravatar preference
               return FutureBuilder<bool?>(
-                future: GravatarService.hasGravatarPreference(),
+                future: _gravatarPreferenceFuture,
                 builder: (context, gravatarSnapshot) {
                   if (gravatarSnapshot.connectionState ==
                       ConnectionState.waiting) {
