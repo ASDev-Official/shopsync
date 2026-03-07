@@ -96,7 +96,18 @@ class SmartSuggestionsService {
       }
 
       // Collect learning data from user's items (with limit to prevent blocking)
-      final learningData = await _collectLearningData(user.uid, listId);
+      // Use a timeout to ensure the background training never hangs indefinitely,
+      // especially on the web platform where Firestore queries can be slow.
+      final learningData = await _collectLearningData(user.uid, listId)
+          .timeout(
+        const Duration(seconds: 20),
+        onTimeout: () {
+          if (kDebugMode) {
+            print('Learning data collection timed out after 20 seconds');
+          }
+          return <ItemLearningData>[];
+        },
+      );
 
       if (learningData.length < _minItemsForSuggestions) {
         if (kDebugMode) {
@@ -160,7 +171,16 @@ class SmartSuggestionsService {
         final listsSnapshot = await _firestore
             .collection('lists')
             .where('members', arrayContains: userId)
-            .get();
+            .get()
+            .timeout(
+          const Duration(seconds: 10),
+          onTimeout: () {
+            if (kDebugMode) {
+              print('Lists query timed out after 10 seconds');
+            }
+            throw TimeoutException('Lists query timed out', const Duration(seconds: 10));
+          },
+        );
 
         for (final listDoc in listsSnapshot.docs) {
           final itemsSnapshot = await _firestore
@@ -170,7 +190,16 @@ class SmartSuggestionsService {
               .where('addedAt', isGreaterThan: cutoffDate)
               .orderBy('addedAt', descending: true)
               .limit(200)
-              .get();
+              .get()
+              .timeout(
+            const Duration(seconds: 10),
+            onTimeout: () {
+              if (kDebugMode) {
+                print('Items query for list ${listDoc.id} timed out after 10 seconds');
+              }
+              throw TimeoutException('Items query timed out', const Duration(seconds: 10));
+            },
+          );
 
           for (final itemDoc in itemsSnapshot.docs) {
             final data = itemDoc.data();
@@ -182,7 +211,15 @@ class SmartSuggestionsService {
         return learningData;
       }
 
-      final snapshot = await query.get();
+      final snapshot = await query.get().timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          if (kDebugMode) {
+            print('Items query for specific list timed out after 10 seconds');
+          }
+          throw TimeoutException('Items query timed out', const Duration(seconds: 10));
+        },
+      );
       for (final doc in snapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
         if (data['name'] != null && (data['name'] as String).isNotEmpty) {
