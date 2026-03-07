@@ -3,6 +3,8 @@ import 'package:shopsync/services/analytics/list_analytics_service.dart';
 import 'package:intl/intl.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
+import 'package:shopsync/widgets/user/user_avatar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ListInsightsScreen extends StatefulWidget {
   final String listId;
@@ -506,17 +508,41 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
                 final collaborator = _collaboratorActivity[index];
                 return Row(
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.green[600],
-                      child: Text(
-                        collaborator.userName.isNotEmpty
-                            ? collaborator.userName[0].toUpperCase()
-                            : '?',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    FutureBuilder<DocumentSnapshot>(
+                      future: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(collaborator.userId)
+                          .get(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return CircleAvatar(
+                            radius: 20,
+                            backgroundColor: Colors.green[600],
+                            child: Text(
+                              collaborator.userName.isNotEmpty
+                                  ? collaborator.userName[0].toUpperCase()
+                                  : '?',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        }
+
+                        final userData =
+                            snapshot.data!.data() as Map<String, dynamic>?;
+                        final gravatarUrl = userData?['gravatarUrl'] as String?;
+                        final gravatarEnabled =
+                            userData?['gravatarEnabled'] ?? false;
+
+                        return UserAvatar.fromUserData(
+                          displayName: collaborator.userName,
+                          gravatarUrl: gravatarUrl,
+                          gravatarEnabled: gravatarEnabled,
+                          radius: 20,
+                        );
+                      },
                     ),
                     const SizedBox(width: 12),
                     Expanded(

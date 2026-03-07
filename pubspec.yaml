@@ -27,7 +27,7 @@ dependencies:
   web: ^1.1.1
   google_sign_in: ^7.2.0
   credential_manager: ^2.0.0
-  flutter_svg: ^2.1.0
+  flutter_svg: ^2.2.4
   google_mobile_ads: ^7.0.0
   flutter_inappwebview: ^6.1.5
   lottie: ^3.3.2
@@ -37,6 +37,7 @@ dependencies:
   wear_plus: ^1.2.4
   rotary_scrollbar: ^1.1.0
   http: ^1.6.0
+  crypto: ^3.0.6
 
 dev_dependencies:
   sentry_dart_plugin: ^3.2.1

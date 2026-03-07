@@ -5,6 +5,7 @@ import 'package:m3e_collection/m3e_collection.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
 import '/utils/sentry_auth_utils.dart';
+import '/services/data/gravatar_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -98,6 +99,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
 
       await userCredential.user?.updateDisplayName(_nameController.text.trim());
+
+      // Initialize Gravatar (async, non-blocking)
+      GravatarService.initializeGravatar(
+        userCredential.user!.uid,
+        _emailController.text.trim(),
+      );
 
       if (!mounted) return;
       Navigator.of(context).pop();

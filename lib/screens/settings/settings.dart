@@ -25,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Locale? _currentLocale;
 
   // Add GitHub and Weblate URLs
-  final String _githubUrl = 'https://github.com/aadishsamir123/asdev-shopsync';
+  final String _githubUrl = 'https://github.com/ASDev-Official/ShopSync';
   final String _weblateUrl =
       'https://hosted.weblate.org/engage/asdev-shopsync/';
 

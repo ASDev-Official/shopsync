@@ -1800,6 +1800,118 @@ class AppLocalizationsVi extends AppLocalizations {
   String get noAiSuggestions => 'No AI suggestions';
 
   @override
+  String get gravatarSettings => 'Profile Picture';
+
+  @override
+  String get gravatarDescription =>
+      'Gravatar is a globally recognized avatar service. If you have a Gravatar associated with your email, enable it to show your profile picture throughout ShopSync.';
+
+  @override
+  String get enableGravatar => 'Show My Gravatar';
+
+  @override
+  String get disableGravatar => 'Hide My Gravatar';
+
+  @override
+  String get gravatarEnabled => 'Gravatar Enabled';
+
+  @override
+  String get gravatarDisabled => 'Gravatar Disabled';
+
+  @override
+  String get gravatarEnabledMessage =>
+      'Your Gravatar profile picture is now visible to other users';
+
+  @override
+  String get gravatarDisabledMessage =>
+      'Your Gravatar profile picture is now hidden from other users';
+
+  @override
+  String get refreshGravatar => 'Refresh Gravatar';
+
+  @override
+  String get gravatarRefreshed => 'Gravatar refreshed successfully';
+
+  @override
+  String get gravatarNotFound => 'No Gravatar found for your email';
+
+  @override
+  String get gravatarFound => 'Gravatar found and updated';
+
+  @override
+  String get whatIsGravatar => 'What is Gravatar?';
+
+  @override
+  String get gravatarExplanation =>
+      'Gravatar (Globally Recognized Avatar) is a service that provides a profile picture across different websites and apps using your email address. Visit gravatar.com to create or update your Gravatar.';
+
+  @override
+  String get visitGravatar => 'Visit Gravatar.com';
+
+  @override
+  String get privacyControl => 'Privacy Control';
+
+  @override
+  String get gravatarPrivacyDescription =>
+      'You can enable or disable your Gravatar at any time. When disabled, only your initials will be shown to other users.';
+
+  @override
+  String get learnMore => 'Learn More';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get anErrorOccurred => 'An error occurred';
+
+  @override
+  String get gravatarProfilePictures => 'Profile Pictures';
+
+  @override
+  String get gravatarSetupDescription =>
+      'ShopSync can display your Gravatar profile picture throughout the app. Would you like to enable this feature?';
+
+  @override
+  String get enableGravatarSetup => 'Enable Gravatar';
+
+  @override
+  String get enableGravatarSetupDescription =>
+      'Show my profile picture to other users';
+
+  @override
+  String get disableGravatarSetup => 'Disable Gravatar';
+
+  @override
+  String get disableGravatarSetupDescription =>
+      'Keep my profile picture private';
+
+  @override
+  String get gravatarFeature1 => 'Display your profile picture from Gravatar';
+
+  @override
+  String get gravatarFeature2 => 'Automatically synced with your email';
+
+  @override
+  String get gravatarFeature3 => 'Visible in shared lists and collaborations';
+
+  @override
+  String get gravatarFeature4 => 'Can be changed anytime in settings';
+
+  @override
+  String get gravatarDisabledFeature1 => 'Only initials shown to other users';
+
+  @override
+  String get gravatarDisabledFeature2 =>
+      'Keeps your Gravatar hidden from other users';
+
+  @override
+  String get gravatarDisabledFeature3 => 'Can be enabled later in settings';
+
+  @override
+  String get gravatarPreferenceChangeNote =>
+      'You can change this setting later in your profile settings.';
+
+  @override
   String get basicListManagement => 'Basic list management';
 
   @override
