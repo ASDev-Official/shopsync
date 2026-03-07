@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '/l10n/app_localizations.dart';
 import '/widgets/ui/loading_spinner.dart';
 
 /// A reusable widget for displaying user avatars with Gravatar support
@@ -253,7 +254,8 @@ class UserAvatar extends StatelessWidget {
           }
 
           final userData = snapshot.data!.data() as Map<String, dynamic>?;
-          final name = userData?['displayName'] as String? ?? 'User';
+          final name = userData?['displayName'] as String? ??
+              AppLocalizations.of(context)!.unknownUser;
           final gravatar = userData?['gravatarUrl'] as String?;
           final enabled = userData?['gravatarEnabled'] as bool? ?? false;
 
