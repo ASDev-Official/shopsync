@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:credential_manager/credential_manager.dart';
+import '/services/data/gravatar_service.dart';
 
 /// Service for handling Google Sign-In with Firebase Authentication
 /// Supports web, Android (phone and WearOS) platforms
@@ -498,6 +499,11 @@ class GoogleAuthService {
           'signInMethod': 'google',
           // Note: aiEnabled field is NOT set here - user must choose via AI preference setup screen
         });
+
+        // Initialize Gravatar (async, non-blocking)
+        if (user.email != null) {
+          GravatarService.initializeGravatar(user.uid, user.email!);
+        }
 
         if (kDebugMode) {
           print('Created user profile for ${user.uid}');

@@ -498,6 +498,167 @@ When modifying AI features:
 - Add unit tests for `AIPreferenceService`
 - Verify setup screen cannot be skipped
 
+### Gravatar Profile Pictures
+
+**Overview:**
+
+ShopSync integrates Gravatar for user profile pictures. Gravatar (Globally Recognized Avatar) is a public service that associates avatars with email addresses. Users can enable Gravatar to display their profile picture throughout the app.
+
+**Service:**
+
+- File: `lib/services/data/gravatar_service.dart` (class: `GravatarService`)
+- All static methods (no instances)
+- Key Methods:
+  - `generateGravatarUrl(email)` - Creates Gravatar URL from MD5-hashed email
+  - `gravatarExists(email)` - HTTP HEAD check if Gravatar exists for email
+  - `initializeGravatar(userId, email)` - Auto-detect and store on registration/sign-in (non-blocking)
+  - `refreshGravatar(userId, email)` - Manual re-check for Gravatar existence
+  - `refreshGravatarOnAppOpen()` - Silent auto-refresh when user opens app (non-blocking)
+  - `enableGravatar(userId, email)` - Enable Gravatar display for user
+  - `disableGravatar(userId)` - Disable Gravatar display (privacy control)
+  - `getGravatarUrl(userId)` - Retrieve stored Gravatar URL
+  - `isGravatarEnabled(userId)` - Check if user has enabled Gravatar
+  - `hasGravatarUrl(userId)` - Check if Gravatar URL exists in Firestore
+  - `hasGravatarPreference()` - Check if user has completed initial Gravatar setup
+  - `setGravatarPreference(bool)` - Set user's initial Gravatar preference
+
+**Firestore Schema:**
+
+- Collection: `users/{userId}`
+- Fields:
+  - `gravatarUrl` (string, nullable) - Full Gravatar URL with email hash
+  - `gravatarEnabled` (boolean) - User's privacy preference
+  - `gravatarLastChecked` (timestamp) - Last existence check timestamp
+
+**Widget:**
+
+- File: `lib/widgets/user/user_avatar.dart` (class: `UserAvatar`)
+- Factory Constructors:
+  - `UserAvatar.fromUserId(userId, name, size)` - StreamBuilder mode, real-time Firestore updates
+  - `UserAvatar.fromUserData(name, gravatarUrl, gravatarEnabled, size)` - Static mode from existing data
+  - `UserAvatar(name, size)` - Placeholder mode with initials only
+- Displays Gravatar if enabled, falls back to colored circle with initials and icon overlay
+- Consistent color generation per user name (hash-based)
+- Loading/error states handled gracefully
+
+**UI Integration:**
+
+- **Initial Setup**: `lib/screens/settings/gravatar_preference_setup.dart`
+  - Mandatory screen shown to new users or existing users without Gravatar preference
+  - User must choose to enable or disable Gravatar (cannot skip)
+  - Similar flow to AI preference setup
+  - Navigation: Shown automatically after AI preference setup if not set
+- **Profile Settings**: `lib/screens/settings/profile.dart`
+  - Gravatar settings card with preview, enable/disable toggle, refresh button
+  - Info dialog explaining Gravatar concept with link to gravatar.com
+  - Privacy-focused messaging
+- **Registration**: `lib/screens/auth/register.dart`
+  - Automatic Gravatar initialization after user creation (non-blocking)
+- **Google Sign-In**: `lib/services/auth/google_auth.dart`
+  - Automatic Gravatar initialization for new Google users
+- **App Launch**: `lib/screens/home.dart`
+  - Gravatar auto-refreshes every time user opens the app (non-blocking)
+  - Called in initState: `unawaited(GravatarService.refreshGravatarOnAppOpen())`
+- **Collaborators List**: `lib/screens/lists/list_options.dart`
+  - UserAvatar.fromUserData displays collaborator avatars
+- **Home Drawer**: `lib/screens/home.dart`
+  - UserAvatar.fromUserId displays current user's avatar
+
+**Usage Patterns:**
+
+```dart
+// Real-time streaming from Firestore
+UserAvatar.fromUserId(
+  userId: user.uid,
+  name: user.displayName ?? 'User',
+  size: 40,
+)
+
+// Static from existing data
+UserAvatar.fromUserData(
+  name: collaborator['name'],
+  gravatarUrl: collaborator['gravatarUrl'],
+  gravatarEnabled: collaborator['gravatarEnabled'],
+  size: 40,
+)
+
+// Initialize on registration/sign-in (non-blocking)
+unawaited(GravatarService.initializeGravatar(uid, email));
+
+// Auto-refresh on app open (called in home.dart initState)
+unawaited(GravatarService.refreshGravatarOnAppOpen());
+
+// Manual refresh in settings
+await GravatarService.refreshGravatar(uid, email);
+
+// Set initial preference during setup
+await GravatarService.setGravatarPreference(true); // or false
+
+// Toggle privacy preference
+await GravatarService.enableGravatar(uid, email);
+await GravatarService.disableGravatar(uid);
+```
+
+**Implementation Flow:**
+
+1. New user signs up or signs in with Google
+2. `initializeGravatar()` called automatically (non-blocking)
+3. User completes AI preference setup → redirected to Gravatar preference setup
+4. User chooses enable/disable → `setGravatarPreference(bool)` called
+5. Preference stored in Firestore (`gravatarEnabled` field set)
+6. User navigates to home screen
+7. Every time user opens app → `refreshGravatarOnAppOpen()` updates Gravatar URL
+8. Existing users can toggle preference in Profile settings
+
+**Privacy Design:**
+
+- **Opt-in approach**: Gravatar detection is automatic but user must enable display
+- **User control**: Enable/disable toggle in profile settings
+- **Transparency**: Info dialog explains what Gravatar is and how it works
+- **Non-blocking**: Gravatar checks never block registration or sign-in flows
+- **Graceful fallback**: Always shows initials if Gravatar disabled or unavailable
+
+**Dependencies:**
+
+- `crypto ^3.0.6` - MD5 hashing of email addresses (Gravatar API requirement)
+- `http` package - Existence checks via HTTP HEAD requests
+- Firestore - Storage of URLs and user preferences
+- Sentry - Error logging for all Gravatar operations
+
+**Error Handling:**
+
+- All service methods wrapped in try-catch with Sentry logging
+- HTTP errors (404, network issues) handled gracefully
+- Failed initialization doesn't prevent user registration/sign-in
+- Widget displays fallback initials on any error
+
+**Localization:**
+
+32 strings in `lib/l10n/app_en.arb`:
+- Setup screen: `gravatarProfilePictures`, `gravatarSetupDescription`, `enableGravatarSetup`, `enableGravatarSetupDescription`, `disableGravatarSetup`, `disableGravatarSetupDescription`, `gravatarFeature1-4`, `gravatarDisabledFeature1-3`, `gravatarPreferenceChangeNote`
+- Settings: `gravatarSettings`, `gravatarDescription`, `enableGravatar`, `disableGravatar`, `gravatarEnabled`, `gravatarDisabled`, `gravatarEnabledMessage`, `gravatarDisabledMessage`
+- Actions: `refreshGravatar`, `gravatarRefreshed`, `gravatarNotFound`, `gravatarFound`
+- Info: `whatIsGravatar`, `gravatarExplanation`, `visitGravatar`, `privacyControl`, `gravatarPrivacyDescription`, `learnMore`
+
+**Important Notes:**
+
+- **Phone/Web Only**: Gravatar integration is currently implemented for phone and web platforms
+- **WearOS**: Not yet implemented for WearOS screens
+- **Public Service**: Gravatar doesn't require API keys - uses public API with email hashes
+- **Consistency**: UserAvatar widget ensures uniform appearance across all screens
+- **Future Locations**: Consider adding UserAvatar to any screen displaying user names
+
+**Testing Responsibilities:**
+
+When modifying Gravatar features:
+- Test with Gravatar enabled and disabled states
+- Test with users who have Gravatar vs. those who don't
+- Verify non-blocking initialization doesn't delay sign-up/sign-in
+- Test fallback behavior when network unavailable
+- Add unit tests for `GravatarService` methods
+- Add widget tests for `UserAvatar` loading/error states
+- Verify privacy controls work correctly
+
 ### Analytics & Insights Architecture
 
 **Dual-Level Insights System:**

@@ -15,6 +15,8 @@ import 'screens/auth/register.dart';
 import 'screens/home.dart';
 import 'screens/settings/ai_preference_setup.dart';
 import 'services/data/ai_preference_service.dart';
+import 'screens/settings/gravatar_preference_setup.dart';
+import 'services/data/gravatar_service.dart';
 import 'screens/settings/profile.dart';
 import 'screens/auth/forgot_password.dart';
 import 'screens/maintenance/maintenance_screen.dart';
@@ -377,8 +379,35 @@ class _AuthWrapperState extends State<AuthWrapper> {
                 return const AIPreferenceSetupScreen();
               }
 
-              // AI preference is set, direct to home screen
-              return const HomeScreen();
+              // AI preference is set, now check Gravatar preference
+              return FutureBuilder<bool?>(
+                future: GravatarService.hasGravatarPreference(),
+                builder: (context, gravatarSnapshot) {
+                  if (gravatarSnapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const Scaffold(
+                      body: Center(
+                        child: SplashScreen(),
+                      ),
+                    );
+                  }
+
+                  // Handle Firestore errors - allow normal startup instead of forcing setup
+                  if (gravatarSnapshot.hasError ||
+                      gravatarSnapshot.data == null) {
+                    // Log error but proceed to home screen to avoid blocking user
+                    return const HomeScreen();
+                  }
+
+                  // If Gravatar preference not set (false), show mandatory setup screen
+                  if (gravatarSnapshot.data == false) {
+                    return const GravatarPreferenceSetupScreen();
+                  }
+
+                  // Both preferences are set, direct to home screen
+                  return const HomeScreen();
+                },
+              );
             },
           );
         }
