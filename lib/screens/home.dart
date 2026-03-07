@@ -842,7 +842,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                     context,
                                                     feature: 'release notes')) {
                                               final Uri url = Uri.parse(
-                                                  'https://github.com/aadishsamir123/asdev-shopsync/releases');
+                                                  'https://rn.shopsync.aadish.dev');
                                               if (!await launchUrl(url)) {
                                                 if (!mounted) return;
                                                 ScaffoldMessenger.of(context)
