@@ -380,7 +380,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
               }
 
               // AI preference is set, now check Gravatar preference
-              return FutureBuilder<bool>(
+              return FutureBuilder<bool?>(
                 future: GravatarService.hasGravatarPreference(),
                 builder: (context, gravatarSnapshot) {
                   if (gravatarSnapshot.connectionState ==
@@ -392,8 +392,15 @@ class _AuthWrapperState extends State<AuthWrapper> {
                     );
                   }
 
-                  // If Gravatar preference not set, show mandatory setup screen
-                  if (!gravatarSnapshot.hasData || !gravatarSnapshot.data!) {
+                  // Handle Firestore errors - allow normal startup instead of forcing setup
+                  if (gravatarSnapshot.hasError ||
+                      gravatarSnapshot.data == null) {
+                    // Log error but proceed to home screen to avoid blocking user
+                    return const HomeScreen();
+                  }
+
+                  // If Gravatar preference not set (false), show mandatory setup screen
+                  if (gravatarSnapshot.data == false) {
                     return const GravatarPreferenceSetupScreen();
                   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '/widgets/ui/loading_spinner.dart';
 
 /// A reusable widget for displaying user avatars with Gravatar support
 ///
@@ -167,17 +168,9 @@ class UserAvatar extends StatelessWidget {
               return CircleAvatar(
                 radius: radius,
                 backgroundColor: effectiveBgColor,
-                child: SizedBox(
-                  width: radius,
-                  height: radius,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(effectiveFgColor),
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
-                  ),
+                child: CustomLoadingSpinner(
+                  size: radius * 1.2,
+                  color: effectiveFgColor,
                 ),
               );
             },

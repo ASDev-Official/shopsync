@@ -222,7 +222,11 @@ class GravatarService {
   }
 
   /// Check if user has set their Gravatar preference (initial setup complete)
-  static Future<bool> hasGravatarPreference() async {
+  /// Returns:
+  ///   - true: preference is set (gravatarEnabled field exists)
+  ///   - false: preference is not set (user needs to complete setup)
+  ///   - null: error occurred during Firestore lookup
+  static Future<bool?> hasGravatarPreference() async {
     try {
       final user = _auth.currentUser;
       if (user == null) return false;
@@ -239,7 +243,7 @@ class GravatarService {
       if (kDebugMode) {
         print('Error checking Gravatar preference: $e');
       }
-      return false;
+      return null; // Return null on error to distinguish from "not set"
     }
   }
 
@@ -284,7 +288,8 @@ class GravatarService {
 
       // Check if user has set Gravatar preference
       final hasPreference = await hasGravatarPreference();
-      if (!hasPreference) return; // Skip if user hasn't completed setup
+      if (hasPreference != true)
+        return; // Skip if user hasn't completed setup or error occurred
 
       // Check if Gravatar exists
       final exists = await gravatarExists(user.email!);
