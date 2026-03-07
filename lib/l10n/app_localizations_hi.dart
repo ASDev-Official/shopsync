@@ -1898,7 +1898,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get gravatarDisabledFeature1 => 'Only initials shown to other users';
 
   @override
-  String get gravatarDisabledFeature2 => 'Maximum privacy protection';
+  String get gravatarDisabledFeature2 =>
+      'Keeps your Gravatar hidden from other users';
 
   @override
   String get gravatarDisabledFeature3 => 'Can be enabled later in settings';

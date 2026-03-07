@@ -3400,7 +3400,7 @@ abstract class AppLocalizations {
   /// No description provided for @gravatarDisabledFeature2.
   ///
   /// In en, this message translates to:
-  /// **'Maximum privacy protection'**
+  /// **'Keeps your Gravatar hidden from other users'**
   String get gravatarDisabledFeature2;
 
   /// No description provided for @gravatarDisabledFeature3.
