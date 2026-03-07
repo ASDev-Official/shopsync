@@ -1127,7 +1127,7 @@
   "gravatarFeature3": "Visible in shared lists and collaborations",
   "gravatarFeature4": "Can be changed anytime in settings",
   "gravatarDisabledFeature1": "Only initials shown to other users",
-  "gravatarDisabledFeature2": "Maximum privacy protection",
+  "gravatarDisabledFeature2": "Keeps your Gravatar hidden from other users",
   "gravatarDisabledFeature3": "Can be enabled later in settings",
   "gravatarPreferenceChangeNote": "You can change this setting later in your profile settings.",
   "basicListManagement": "Basic list management",
