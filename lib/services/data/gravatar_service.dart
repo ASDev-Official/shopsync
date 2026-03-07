@@ -255,8 +255,7 @@ class GravatarService {
       final gravatarUrl = exists ? generateGravatarUrl(user.email!) : null;
 
       await _firestore.collection('users').doc(user.uid).update({
-        'gravatarEnabled':
-            enabled && exists, // Only enable if user wants it AND it exists
+        'gravatarEnabled': enabled,
         'gravatarUrl': gravatarUrl,
         'gravatarLastChecked': FieldValue.serverTimestamp(),
       });
