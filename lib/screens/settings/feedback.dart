@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
@@ -61,16 +62,18 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 onWebViewCreated: (controller) {
                   webViewController = controller;
 
-                  // Add handler for close button
-                  controller.addJavaScriptHandler(
-                    handlerName: 'closeShopSync',
-                    callback: (args) async {
-                      final shouldPop = await _onWillPop();
-                      if (shouldPop && context.mounted) {
-                        Navigator.of(context).pop();
-                      }
-                    },
-                  );
+                  // Add handler for close button (not supported on web platform)
+                  if (!kIsWeb) {
+                    controller.addJavaScriptHandler(
+                      handlerName: 'closeShopSync',
+                      callback: (args) async {
+                        final shouldPop = await _onWillPop();
+                        if (shouldPop && context.mounted) {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    );
+                  }
                 },
                 shouldOverrideUrlLoading: (controller, navigationAction) async {
                   final uri = navigationAction.request.url;
