@@ -36,7 +36,7 @@
     "category1": "Categoría",
     "categoryCreatedSuccessfully": "Categoría creada correctamente",
     "categoryCreatedSuccessfully1": "Categoría creada correctamente",
-    "categoryDeletedSuccessfully": "Categoría creada correctamente",
+    "categoryDeletedSuccessfully": "Categoría eliminada correctamente",
     "categoryDeletedSuccessfully1": "Categoría eliminada correctamente",
     "categoryName": "Nombre de Categoría",
     "categoryName1": "Nombre de Categoría",
@@ -147,5 +147,69 @@
     "loginUserNotFound": "No encontrado usuario para ese correo-e. Compruebe su correo-e e intente de nuevo",
     "loginWrongPassword": "La contraseña no es válida o el usuario no tiene una contraseña",
     "loginTooManyRequests": "Demasiadas peticiones. Inténtelo más tarde",
-    "loginNetworkError": "Error de red, Compruebe su conexión de Internet e inténtelo de nuevo"
+    "loginNetworkError": "Error de red, Compruebe su conexión de Internet e inténtelo de nuevo",
+    "canAddEditAndDeleteItems": "Puede añadir, editar y borrar elementos",
+    "canOnlyViewItems": "Solo puede ver elementos",
+    "registerCreateAccount": "Crear\nCuenta",
+    "error": "Error",
+    "delete": "Borrar",
+    "delete1": "Borrar",
+    "delete2": "Borrar",
+    "delete3": "Borrar",
+    "delete4": "Borrar",
+    "deleteCategory": "Borrar Categoría",
+    "deleteGroup": "Borrar Grupo",
+    "deleteList": "Borrar Listado",
+    "email": "Correo-e",
+    "email1": "Correo-e",
+    "email2": "Correo-e",
+    "email3": "Correo-e",
+    "errorEtostring": "Error: {e}",
+    "@errorEtostring": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "errorEtostring1": "Error: {e}",
+    "@errorEtostring1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "errorEtostring2": "Error: {e}",
+    "@errorEtostring2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "errorEtostring3": "Error: {e}",
+    "@errorEtostring3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "icon": "Icono",
+    "icon1": "Icono",
+    "ok": "Aceptar",
+    "options": "Opciones",
+    "save2": "Guardar",
+    "save1": "Guardar",
+    "save": "Guardar",
+    "retry4": "Reintentar",
+    "retry": "Reintentar",
+    "retry1": "Reintentar",
+    "retry2": "Reintentar",
+    "retry3": "Reintentar"
 }
