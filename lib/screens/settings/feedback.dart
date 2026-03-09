@@ -17,8 +17,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   bool isLoading = true;
 
   Future<bool> _onWillPop() async {
-    if (webViewController != null) {
-      // Check if webview can go back
+    if (!kIsWeb && webViewController != null) {
+      // Check if webview can go back (not supported on web platform)
       if (await webViewController!.canGoBack()) {
         // Go back in webview
         await webViewController!.goBack();
