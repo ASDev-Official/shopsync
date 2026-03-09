@@ -223,7 +223,8 @@ class ListAnalyticsService {
       final categoryMap = <String, (int, int)>{};
 
       for (final item in itemsSnapshot.docs) {
-        final categoryId = item.data()['categoryId'] as String? ?? 'Uncategorized';
+        final categoryId =
+            item.data()['categoryId'] as String? ?? 'Uncategorized';
         final isCompleted = item['completed'] == true;
 
         if (categoryMap.containsKey(categoryId)) {
