@@ -59,8 +59,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
   final _firestore = FirebaseFirestore.instance;
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
-  late AnimationController _animationController;
-  late Animation<double> _fadeAnimation;
+  AnimationController? _animationController;
+  Animation<double>? _fadeAnimation;
   DateTime? _selectedDeadline;
 
   AppLocalizations get l10n => AppLocalizations.of(context)!;
@@ -85,7 +85,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController?.dispose();
     _nameController.dispose();
     _descriptionController.dispose();
     super.dispose();
@@ -218,7 +218,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
 
           return SingleChildScrollView(
             child: FadeTransition(
-              opacity: _fadeAnimation,
+              opacity: _fadeAnimation ?? const AlwaysStoppedAnimation(1.0),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
