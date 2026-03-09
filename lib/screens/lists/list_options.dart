@@ -1222,6 +1222,7 @@ class SavedLocationsScreen extends StatefulWidget {
 class _SavedLocationsScreenState extends State<SavedLocationsScreen> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
+  QuerySnapshot? _lastSavedLocationsSnapshot;
 
   Future<void> _addLocation() async {
     Map<String, dynamic>? location;
@@ -1299,11 +1300,31 @@ class _SavedLocationsScreenState extends State<SavedLocationsScreen> {
             .orderBy('createdAt', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.hasData) {
+            _lastSavedLocationsSnapshot = snapshot.data;
+          }
+
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  '${AppLocalizations.of(context)!.error}: ${snapshot.error}',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          }
+
+          final effectiveSnapshot =
+              snapshot.data ?? _lastSavedLocationsSnapshot;
+
+          if (snapshot.connectionState == ConnectionState.waiting &&
+              effectiveSnapshot == null) {
             return const Center(child: CustomLoadingSpinner());
           }
 
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          if (effectiveSnapshot == null || effectiveSnapshot.docs.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1335,9 +1356,9 @@ class _SavedLocationsScreenState extends State<SavedLocationsScreen> {
 
           return ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: snapshot.data!.docs.length,
+            itemCount: effectiveSnapshot.docs.length,
             itemBuilder: (context, index) {
-              final doc = snapshot.data!.docs[index];
+              final doc = effectiveSnapshot.docs[index];
               final data = doc.data() as Map<String, dynamic>;
 
               return Card(
@@ -1413,6 +1434,7 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   AppLocalizations get l10n => AppLocalizations.of(context)!;
+  QuerySnapshot? _lastSavedItemsSnapshot;
 
   Future<void> _addItemTemplate() async {
     final result = await Navigator.push<Map<String, dynamic>>(
@@ -1521,11 +1543,30 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
             .orderBy('createdAt', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.hasData) {
+            _lastSavedItemsSnapshot = snapshot.data;
+          }
+
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  '${l10n.error}: ${snapshot.error}',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          }
+
+          final effectiveSnapshot = snapshot.data ?? _lastSavedItemsSnapshot;
+
+          if (snapshot.connectionState == ConnectionState.waiting &&
+              effectiveSnapshot == null) {
             return const Center(child: CustomLoadingSpinner());
           }
 
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          if (effectiveSnapshot == null || effectiveSnapshot.docs.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1557,9 +1598,9 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
 
           return ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: snapshot.data!.docs.length,
+            itemCount: effectiveSnapshot.docs.length,
             itemBuilder: (context, index) {
-              final doc = snapshot.data!.docs[index];
+              final doc = effectiveSnapshot.docs[index];
               final data = doc.data() as Map<String, dynamic>;
               final iconIdentifier = data['iconIdentifier'] as String?;
               final foodIcon = iconIdentifier != null

@@ -18,6 +18,7 @@ class ManageCategoriesScreen extends StatefulWidget {
 class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
   final _nameController = TextEditingController();
   FoodIconMapping? _selectedIcon;
+  QuerySnapshot? _lastCategoriesSnapshot;
 
   @override
   void dispose() {
@@ -454,7 +455,15 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
             child: StreamBuilder<QuerySnapshot>(
               stream: CategoriesService.getListCategories(widget.listId),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
+                if (snapshot.hasData) {
+                  _lastCategoriesSnapshot = snapshot.data;
+                }
+
+                final effectiveSnapshot =
+                    snapshot.data ?? _lastCategoriesSnapshot;
+
+                if (snapshot.connectionState == ConnectionState.waiting &&
+                    effectiveSnapshot == null) {
                   return const Center(
                     child: CustomLoadingSpinner(
                       color: Colors.green,
@@ -463,7 +472,8 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                   );
                 }
 
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                if (effectiveSnapshot == null ||
+                    effectiveSnapshot.docs.isEmpty) {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -495,9 +505,9 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
 
                 return ListView.builder(
                   padding: const EdgeInsets.all(16),
-                  itemCount: snapshot.data!.docs.length,
+                  itemCount: effectiveSnapshot.docs.length,
                   itemBuilder: (context, index) {
-                    final doc = snapshot.data!.docs[index];
+                    final doc = effectiveSnapshot.docs[index];
                     final category = doc.data() as Map<String, dynamic>;
                     final categoryName = category['name'] ?? 'Unnamed';
                     final iconIdentifier =

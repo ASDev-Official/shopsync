@@ -51,6 +51,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
   late AnimationController _controller;
   final Map<String, AnimationController> _itemControllers = {};
   final Map<String, Animation<double>> _itemAnimations = {};
+  QuerySnapshot? _lastRecycleBinSnapshot;
 
   @override
   void initState() {
@@ -495,13 +496,20 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
             .orderBy('deletedAt', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.hasData) {
+            _lastRecycleBinSnapshot = snapshot.data;
+          }
+
+          final effectiveSnapshot = snapshot.data ?? _lastRecycleBinSnapshot;
+
+          if (snapshot.connectionState == ConnectionState.waiting &&
+              effectiveSnapshot == null) {
             return const Center(
               child: CustomLoadingSpinner(color: Colors.green, size: 60.0),
             );
           }
 
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          if (effectiveSnapshot == null || effectiveSnapshot.docs.isEmpty) {
             return Center(
               child: Container(
                 padding: const EdgeInsets.all(24),
@@ -546,10 +554,10 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
           return ListView(
             children: [
               // Statistics Card
-              _buildStatsCard(snapshot.data!),
+              _buildStatsCard(effectiveSnapshot),
 
               // Recycled Items List
-              ...snapshot.data!.docs.map((doc) {
+              ...effectiveSnapshot.docs.map((doc) {
                 final itemData = doc.data() as Map<String, dynamic>;
 
                 if (!_itemControllers.containsKey(doc.id)) {

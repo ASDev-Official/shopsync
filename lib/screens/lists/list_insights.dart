@@ -23,6 +23,7 @@ class ListInsightsScreen extends StatefulWidget {
 class _ListInsightsScreenState extends State<ListInsightsScreen> {
   ListTimeFrame _selectedTimeFrame = ListTimeFrame.week;
   bool _isLoading = true;
+  bool _hasLoadedOnce = false;
 
   List<ListInsightData> _keyInsights = [];
   List<CategoryBreakdown> _categoryBreakdown = [];
@@ -36,7 +37,9 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
   }
 
   Future<void> _loadData() async {
-    setState(() => _isLoading = true);
+    if (!_hasLoadedOnce) {
+      setState(() => _isLoading = true);
+    }
 
     try {
       final insights = await ListAnalyticsService.generateListInsights(
@@ -56,6 +59,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
         _activityTimeline = activity;
         _collaboratorActivity = collaborators;
         _isLoading = false;
+        _hasLoadedOnce = true;
       });
     } catch (e) {
       if (!mounted) return;
@@ -76,7 +80,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
       backgroundColor: Theme.of(context).brightness == Brightness.dark
           ? Colors.grey[900]
           : Colors.grey[50],
-      body: _isLoading
+      body: (_isLoading && !_hasLoadedOnce)
           ? const Center(child: CustomLoadingSpinner())
           : RefreshIndicator(
               onRefresh: _loadData,
