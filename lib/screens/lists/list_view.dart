@@ -503,6 +503,8 @@ class ItemsTab extends StatefulWidget {
 
 class _ItemsTabState extends State<ItemsTab> {
   final _firestore = FirebaseFirestore.instance;
+  QuerySnapshot? _lastItemsSnapshot;
+  QuerySnapshot? _lastCategoriesSnapshot;
 
   // String _standardizePriority(String? priority) {
   //   switch (priority?.toLowerCase()) {
@@ -641,11 +643,19 @@ class _ItemsTabState extends State<ItemsTab> {
                 .orderBy('addedAt', descending: true)
                 .snapshots(),
             builder: (context, itemsSnapshot) {
-              if (itemsSnapshot.connectionState == ConnectionState.waiting) {
+              if (itemsSnapshot.hasData) {
+                _lastItemsSnapshot = itemsSnapshot.data;
+              }
+
+              final effectiveItemsSnapshot =
+                  itemsSnapshot.data ?? _lastItemsSnapshot;
+
+              if (itemsSnapshot.connectionState == ConnectionState.waiting &&
+                  effectiveItemsSnapshot == null) {
                 return const Center(child: CustomLoadingSpinner());
               }
 
-              if (itemsSnapshot.hasError) {
+              if (itemsSnapshot.hasError && effectiveItemsSnapshot == null) {
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -668,7 +678,8 @@ class _ItemsTabState extends State<ItemsTab> {
                 );
               }
 
-              if (!itemsSnapshot.hasData || itemsSnapshot.data!.docs.isEmpty) {
+              if (effectiveItemsSnapshot == null ||
+                  effectiveItemsSnapshot.docs.isEmpty) {
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -707,7 +718,13 @@ class _ItemsTabState extends State<ItemsTab> {
                     .orderBy('order', descending: false)
                     .snapshots(),
                 builder: (context, categoriesSnapshot) {
-                  final items = itemsSnapshot.data!.docs;
+                  if (categoriesSnapshot.hasData) {
+                    _lastCategoriesSnapshot = categoriesSnapshot.data;
+                  }
+
+                  final effectiveCategoriesSnapshot =
+                      categoriesSnapshot.data ?? _lastCategoriesSnapshot;
+                  final items = effectiveItemsSnapshot.docs;
 
                   // Group items by category and completion status
                   final Map<String?, List<DocumentSnapshot>> itemsByCategory = {
@@ -715,8 +732,8 @@ class _ItemsTabState extends State<ItemsTab> {
                   };
 
                   // Initialize categories
-                  if (categoriesSnapshot.hasData) {
-                    for (var categoryDoc in categoriesSnapshot.data!.docs) {
+                  if (effectiveCategoriesSnapshot != null) {
+                    for (var categoryDoc in effectiveCategoriesSnapshot.docs) {
                       itemsByCategory[categoryDoc.id] = [];
                     }
                   }
@@ -756,7 +773,7 @@ class _ItemsTabState extends State<ItemsTab> {
 
                   return ListView(
                     children: [
-                      _buildStatsCard(itemsSnapshot.data!),
+                      _buildStatsCard(effectiveItemsSnapshot),
 
                       // Build category sections
                       ...groupedItems.entries.map((entry) {

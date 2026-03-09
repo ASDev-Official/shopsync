@@ -55,10 +55,10 @@ android {
     productFlavors {
         create("phone") {
             val phoneBaseVersionCode = 300000000
-            val phoneVersionCode = 20
+            val phoneVersionCode = 21
             dimension = "platform"
             manifestPlaceholders.clear()
-            versionName = "5.4.0-phone"
+            versionName = "5.5.0-phone"
             versionCode = phoneBaseVersionCode + phoneVersionCode
         }
         create("wear") {

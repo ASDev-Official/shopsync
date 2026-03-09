@@ -8,6 +8,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
 import 'package:shopsync/services/locale_service.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
+import 'package:shopsync/widgets/ui/loading_spinner.dart';
 import 'config/firebase_options.dart';
 import 'screens/auth/welcome.dart';
 import 'screens/auth/login.dart';
@@ -32,7 +33,6 @@ import 'services/platform/statuspage_service.dart';
 import 'services/storage/shared_prefs.dart';
 import 'services/platform/home_widget_service.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'widgets/ui/splash_screen.dart';
 import 'widgets/status/outage_banner.dart';
 import 'core/navigation_service.dart';
 
@@ -270,11 +270,17 @@ class _AuthWrapperState extends State<AuthWrapper> {
   Future<bool>? _aiPreferenceFuture;
   Future<bool?>? _gravatarPreferenceFuture;
 
+  // Track if we've already determined the authenticated route
+  Widget? _authenticatedWidget;
+  bool _isInitialLoad = true;
+
   void _updateUserFutures(String uid) {
     if (_cachedUserId != uid) {
       _cachedUserId = uid;
       _aiPreferenceFuture = AIPreferenceService.hasAIPreference();
       _gravatarPreferenceFuture = GravatarService.hasGravatarPreference();
+      _authenticatedWidget = null; // Reset cached widget on user change
+      _isInitialLoad = true;
     }
   }
 
@@ -363,13 +369,27 @@ class _AuthWrapperState extends State<AuthWrapper> {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        // If Firebase is still initializing, show loading
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
+        // Only show loading on initial connection, not on active/done states
+        if (snapshot.connectionState == ConnectionState.waiting &&
+            _isInitialLoad) {
+          return Scaffold(
+            backgroundColor: Theme.of(context).brightness == Brightness.dark
+                ? const Color(0xFF212121)
+                : Colors.white,
             body: Center(
-              child: SplashScreen(),
+              child: Image.asset(
+                'assets/logos/shopsync.png',
+                fit: BoxFit.cover,
+              ),
             ),
           );
+        }
+
+        // If we have a cached authenticated widget and user hasn't changed, return it immediately
+        if (_authenticatedWidget != null &&
+            snapshot.hasData &&
+            snapshot.data != null) {
+          return _authenticatedWidget!;
         }
 
         // Check if user is logged in
@@ -381,17 +401,25 @@ class _AuthWrapperState extends State<AuthWrapper> {
           return FutureBuilder<bool>(
             future: _aiPreferenceFuture,
             builder: (context, aiSnapshot) {
-              if (aiSnapshot.connectionState == ConnectionState.waiting) {
-                return const Scaffold(
+              if (aiSnapshot.connectionState == ConnectionState.waiting &&
+                  _isInitialLoad) {
+                return Scaffold(
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.dark
+                          ? const Color(0xFF212121)
+                          : Colors.white,
                   body: Center(
-                    child: SplashScreen(),
+                    child: CustomLoadingSpinner(),
                   ),
                 );
               }
 
               // If AI preference not set, show mandatory setup screen
               if (!aiSnapshot.hasData || !aiSnapshot.data!) {
-                return const AIPreferenceSetupScreen();
+                final widget = const AIPreferenceSetupScreen();
+                _authenticatedWidget = widget;
+                _isInitialLoad = false;
+                return widget;
               }
 
               // AI preference is set, now check Gravatar preference
@@ -399,10 +427,15 @@ class _AuthWrapperState extends State<AuthWrapper> {
                 future: _gravatarPreferenceFuture,
                 builder: (context, gravatarSnapshot) {
                   if (gravatarSnapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return const Scaffold(
+                          ConnectionState.waiting &&
+                      _isInitialLoad) {
+                    return Scaffold(
+                      backgroundColor:
+                          Theme.of(context).brightness == Brightness.dark
+                              ? const Color(0xFF212121)
+                              : Colors.white,
                       body: Center(
-                        child: SplashScreen(),
+                        child: CustomLoadingSpinner(),
                       ),
                     );
                   }
@@ -410,22 +443,34 @@ class _AuthWrapperState extends State<AuthWrapper> {
                   // Handle Firestore errors - allow normal startup instead of forcing setup
                   if (gravatarSnapshot.hasError ||
                       gravatarSnapshot.data == null) {
-                    // Log error but proceed to home screen to avoid blocking user
-                    return const HomeScreen();
+                    final widget = const HomeScreen();
+                    _authenticatedWidget = widget;
+                    _isInitialLoad = false;
+                    return widget;
                   }
 
                   // If Gravatar preference not set (false), show mandatory setup screen
                   if (gravatarSnapshot.data == false) {
-                    return const GravatarPreferenceSetupScreen();
+                    final widget = const GravatarPreferenceSetupScreen();
+                    _authenticatedWidget = widget;
+                    _isInitialLoad = false;
+                    return widget;
                   }
 
                   // Both preferences are set, direct to home screen
-                  return const HomeScreen();
+                  final widget = const HomeScreen();
+                  _authenticatedWidget = widget;
+                  _isInitialLoad = false;
+                  return widget;
                 },
               );
             },
           );
         }
+
+        // User is not signed in - reset cached widget
+        _authenticatedWidget = null;
+        _isInitialLoad = true;
 
         // User is not signed in, direct to welcome screen
         return WelcomeScreen();

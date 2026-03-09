@@ -151,18 +151,25 @@ Text(AppLocalizations.of(context)!.aiFeatures)
    )
    ```
 
-3. **Sentry error tracking** (include context):
+3. **No-Flash Stream Loading**:
+
+- For list/item/recycle/category screens, cache the last successful `StreamBuilder` snapshot in state.
+- During transient `ConnectionState.waiting` reconnects, render cached data instead of replacing content with a loading spinner.
+- Only show full-screen loading if there is no cached snapshot yet (first load).
+- For non-stream analytics refreshes (`list_insights.dart`), show full-screen spinner only on first load; keep previous content visible during subsequent refreshes.
+
+4. **Sentry error tracking** (include context):
 
    ```dart
    await Sentry.captureException(error, stackTrace: stackTrace,
      hint: Hint.withMap({'action': 'create_list', 'list_name': name}));
    ```
 
-4. **Firebase timestamps**: Use `FieldValue.serverTimestamp()` for `createdAt`/`updatedAt`
+5. **Firebase timestamps**: Use `FieldValue.serverTimestamp()` for `createdAt`/`updatedAt`
 
-5. **Animations**: Prefer `SingleTickerProviderStateMixin` + `AnimationController` (see `list_view.dart`)
+6. **Animations**: Prefer `SingleTickerProviderStateMixin` + `AnimationController` (see `list_view.dart`)
 
-6. **Item Templates Access**:
+7. **Item Templates Access**:
 
 - "Add From Template" is launched from the Create Item screen.
 - A localized entry appears directly below the Smart Suggestions card.

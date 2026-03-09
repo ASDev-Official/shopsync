@@ -59,9 +59,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
   final _firestore = FirebaseFirestore.instance;
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
-  late AnimationController _animationController;
-  late Animation<double> _fadeAnimation;
   DateTime? _selectedDeadline;
+  DocumentSnapshot? _lastItemSnapshot;
 
   AppLocalizations get l10n => AppLocalizations.of(context)!;
 
@@ -72,20 +71,10 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
     super.initState();
     _nameController = TextEditingController();
     _descriptionController = TextEditingController();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 800),
-      vsync: this,
-    );
-    _fadeAnimation = CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    );
-    _animationController.forward();
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
     _nameController.dispose();
     _descriptionController.dispose();
     super.dispose();
@@ -196,7 +185,13 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
             .doc(widget.itemId)
             .snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (snapshot.hasData) {
+            _lastItemSnapshot = snapshot.data;
+          }
+
+          final effectiveSnapshot = snapshot.data ?? _lastItemSnapshot;
+
+          if (effectiveSnapshot == null) {
             return const Center(
               child: CustomLoadingSpinner(
                 color: Colors.green,
@@ -205,7 +200,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
             );
           }
 
-          final item = snapshot.data!.data() as Map<String, dynamic>? ?? {};
+          final item = effectiveSnapshot.data() as Map<String, dynamic>? ?? {};
           final name = item['name'] ?? l10n.untitledItem;
           final description = item['description'] ?? '';
           final addedBy = item['addedBy'] as String?;
@@ -217,17 +212,74 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
           _nameController.text = name;
 
           return SingleChildScrollView(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        // Large icon display
-                        FutureBuilder<bool>(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      // Large icon display
+                      FutureBuilder<bool>(
+                        future: PermissionsHelper.isViewer(widget.listId),
+                        builder: (context, snapshot) {
+                          final isViewer =
+                              snapshot.hasData && snapshot.data == true;
+
+                          return Stack(
+                            children: [
+                              GestureDetector(
+                                onTap: isViewer
+                                    ? null
+                                    : () => _navigateToIconSelector(item),
+                                child: Container(
+                                  width: 64,
+                                  height: 64,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: Colors.green[100],
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: Colors.green[200]!,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  child: _buildItemIcon(item),
+                                ),
+                              ),
+                              if (!isViewer)
+                                Positioned(
+                                  top: 2,
+                                  right: 2,
+                                  child: GestureDetector(
+                                    onTap: () => _navigateToIconSelector(item),
+                                    child: Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        color: Colors.green[800],
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Colors.white,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: const Icon(
+                                        Icons.edit,
+                                        size: 11,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 16),
+                      // Item name field
+                      Expanded(
+                        child: FutureBuilder<bool>(
                           future: PermissionsHelper.isViewer(widget.listId),
                           builder: (context, snapshot) {
                             final isViewer =
@@ -235,127 +287,64 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
 
                             return Stack(
                               children: [
-                                GestureDetector(
-                                  onTap: isViewer
+                                TextField(
+                                  controller: _nameController,
+                                  enabled: !isViewer,
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.only(bottom: 8),
+                                  ),
+                                  onSubmitted: isViewer
                                       ? null
-                                      : () => _navigateToIconSelector(item),
-                                  child: Container(
-                                    width: 64,
-                                    height: 64,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: Colors.green[100],
-                                      borderRadius: BorderRadius.circular(16),
-                                      border: Border.all(
-                                        color: Colors.green[200]!,
-                                        width: 2,
-                                      ),
+                                      : (value) {
+                                          if (value.trim().isNotEmpty) {
+                                            _updateItem({'name': value.trim()});
+                                          }
+                                        },
+                                ),
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  child: CustomPaint(
+                                    painter: DottedLinePainter(
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Colors.grey[600]!
+                                          : Colors.grey[300]!,
                                     ),
-                                    child: _buildItemIcon(item),
+                                    size: Size(
+                                        MediaQuery.of(context).size.width, 1),
                                   ),
                                 ),
-                                if (!isViewer)
-                                  Positioned(
-                                    top: 2,
-                                    right: 2,
-                                    child: GestureDetector(
-                                      onTap: () =>
-                                          _navigateToIconSelector(item),
-                                      child: Container(
-                                        width: 20,
-                                        height: 20,
-                                        decoration: BoxDecoration(
-                                          color: Colors.green[800],
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: Colors.white,
-                                            width: 1,
-                                          ),
-                                        ),
-                                        child: const Icon(
-                                          Icons.edit,
-                                          size: 11,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                               ],
                             );
                           },
                         ),
-                        const SizedBox(width: 16),
-                        // Item name field
-                        Expanded(
-                          child: FutureBuilder<bool>(
-                            future: PermissionsHelper.isViewer(widget.listId),
-                            builder: (context, snapshot) {
-                              final isViewer =
-                                  snapshot.hasData && snapshot.data == true;
-
-                              return Stack(
-                                children: [
-                                  TextField(
-                                    controller: _nameController,
-                                    enabled: !isViewer,
-                                    style: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      contentPadding:
-                                          EdgeInsets.only(bottom: 8),
-                                    ),
-                                    onSubmitted: isViewer
-                                        ? null
-                                        : (value) {
-                                            if (value.trim().isNotEmpty) {
-                                              _updateItem(
-                                                  {'name': value.trim()});
-                                            }
-                                          },
-                                  ),
-                                  Positioned(
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    child: CustomPaint(
-                                      painter: DottedLinePainter(
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? Colors.grey[600]!
-                                            : Colors.grey[300]!,
-                                      ),
-                                      size: Size(
-                                          MediaQuery.of(context).size.width, 1),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 24),
-                    _buildStatusCard(completed),
-                    const SizedBox(height: 16),
-                    _buildCategoryCard(item),
-                    const SizedBox(height: 16),
-                    _buildDeadlineCard(),
-                    const SizedBox(height: 16),
-                    _buildLocationCard(item),
-                    const SizedBox(height: 16),
-                    _buildCounterCard(item),
-                    const SizedBox(height: 16),
-                    _buildDescriptionCard(),
-                    const SizedBox(height: 16),
-                    _buildAddedByCard(addedBy, addedByName),
-                    const SizedBox(height: 16),
-                    _buildAddedAtCard(addedAt),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  _buildStatusCard(completed),
+                  const SizedBox(height: 16),
+                  _buildCategoryCard(item),
+                  const SizedBox(height: 16),
+                  _buildDeadlineCard(),
+                  const SizedBox(height: 16),
+                  _buildLocationCard(item),
+                  const SizedBox(height: 16),
+                  _buildCounterCard(item),
+                  const SizedBox(height: 16),
+                  _buildDescriptionCard(),
+                  const SizedBox(height: 16),
+                  _buildAddedByCard(addedBy, addedByName),
+                  const SizedBox(height: 16),
+                  _buildAddedAtCard(addedAt),
+                ],
               ),
             ),
           );
