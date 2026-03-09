@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen>
 
       _newListController.clear();
       if (!mounted) return;
-      Navigator.pop(context);
+      if (Navigator.canPop(context)) Navigator.pop(context);
     } catch (error, stackTrace) {
       await Sentry.captureException(
         error,
