@@ -74,10 +74,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get avgCompletion => 'Avg Completion';
 
   @override
-  String get canAddEditAndDeleteItems => 'Can add, edit, and delete items';
+  String get canAddEditAndDeleteItems =>
+      'Puede añadir, editar y borrar elementos';
 
   @override
-  String get canOnlyViewItems => 'Can only view items';
+  String get canOnlyViewItems => 'Solo puede ver elementos';
 
   @override
   String get cancel => 'Cancelar';
@@ -131,7 +132,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get categoryCreatedSuccessfully1 => 'Categoría creada correctamente';
 
   @override
-  String get categoryDeletedSuccessfully => 'Categoría creada correctamente';
+  String get categoryDeletedSuccessfully => 'Categoría eliminada correctamente';
 
   @override
   String get categoryDeletedSuccessfully1 =>
@@ -419,95 +420,103 @@ class AppLocalizationsEs extends AppLocalizations {
       'Error de red, Compruebe su conexión de Internet e inténtelo de nuevo';
 
   @override
-  String get loginGenericError => 'An error occurred during login';
+  String get loginGenericError =>
+      'Ocurrió un error durante el acceso al sistema';
 
   @override
-  String get registerCreateAccount => 'Create\nAccount';
+  String get registerCreateAccount => 'Crear\nCuenta';
 
   @override
   String get registerSignUp => 'Sign up to start sharing grocery lists';
 
   @override
-  String get registerName => 'Name';
+  String get registerName => 'Nombre';
 
   @override
-  String get registerNameError => 'Name must be at least 2 characters';
+  String get registerNameError =>
+      'El nombre debe tener al menos dos caracteres';
 
   @override
-  String get registerEmail => 'Email';
+  String get registerEmail => 'Correo-e';
 
   @override
-  String get registerPassword => 'Password';
+  String get registerPassword => 'Contraseña';
 
   @override
   String get registerEmailExists =>
-      'This email is already registered. Please sign in instead';
+      'Este correo-e ya está registrado. Acceda en su lugar';
 
   @override
-  String get registerInvalidEmail => 'Please enter a valid email address';
+  String get registerInvalidEmail =>
+      'Introduzca una dirección de correo-e válida';
 
   @override
   String get registerWeakPassword =>
-      'This password is too weak. Please choose a stronger one';
+      'Esta contraseña es muy débil. Elija uno más fuerte';
 
   @override
   String get registerTooManyRequests =>
-      'Too many requests. Please try again later';
+      'Demasiadas solicitudes. Inténtelo más tarde';
 
   @override
   String get registerNetworkError =>
-      'Network error. Please check your internet connection and try again';
+      'Error de red. Compruebe su conexión a Internet e inténtelo de nuevo';
 
   @override
-  String get registerGenericError => 'An error occurred during registration';
+  String get registerGenericError => 'Ha ocurrido un error durante el registro';
 
   @override
-  String get registerButton => 'Register';
+  String get registerButton => 'Registro';
 
   @override
-  String get registerEnterName => 'Please enter your name';
+  String get registerEnterName => 'Introduzca su nombre';
 
   @override
-  String get registerNameTooShort => 'Name must be at least 2 characters';
+  String get registerNameTooShort =>
+      'El nombre debe al menos tener 2 caracteres';
 
   @override
-  String get registerEnterPassword => 'Please enter your password';
+  String get registerEnterPassword => 'Introduzca su contraseña';
 
   @override
-  String get resetPasswordTitle => 'Reset\nPassword';
+  String get resetPasswordTitle => 'Restablecer\nContraseña';
 
   @override
   String get resetPasswordSubtitle =>
-      'Enter your email to receive a password reset link';
+      'Introduzca su correo-e para recibir un enlace de restablecimiento de contraseña';
 
   @override
-  String get resetPasswordEmail => 'Email';
+  String get resetPasswordEmail => 'Correo-e';
 
   @override
-  String get resetPasswordButton => 'Reset Password';
+  String get resetPasswordButton => 'Restablecer Contraseña';
 
   @override
-  String get resetPasswordInvalidEmail => 'Please enter a valid email address';
+  String get resetPasswordInvalidEmail =>
+      'Introduzca una dirección de correo-e válida';
 
   @override
-  String get resetPasswordUserNotFound => 'No account found with this email';
+  String get resetPasswordUserNotFound =>
+      'No se encontró ninguna cuenta con este correo-e';
 
   @override
   String get resetPasswordTooManyRequests =>
-      'Too many requests. Please try again later';
+      'Demasiadas solicitudes. Inténtelo de nuevo más tarde';
 
   @override
   String get resetPasswordNetworkError =>
-      'Network error. Check your connection and try again';
+      'Error de red. Compruebe su conexión e inténtelo de nuevo';
 
   @override
-  String get resetPasswordGenericError => 'An error occurred';
+  String get resetPasswordGenericError => 'Ha sucedido un error';
 
   @override
-  String get resetPasswordSuccess => 'Password reset link sent to your email';
+  String get resetPasswordSuccess =>
+      'Enlace de restablecimiento de contraseña enviado a su correo-e';
 
   @override
-  String get resetPasswordError => 'An error occurred. Please try again later';
+  String get resetPasswordError =>
+      'Ha ocurrido un error. Inténtelo de nuevo más tarde';
 
   @override
   String get resetPasswordBack => 'Back to Sign In';
@@ -565,77 +574,77 @@ class AppLocalizationsEs extends AppLocalizations {
   String get couldNotOpenReleaseNotes1 => 'Could not open release notes';
 
   @override
-  String get counter => 'Counter';
+  String get counter => 'Contador';
 
   @override
-  String get counter1 => 'Counter';
+  String get counter1 => 'Contador';
 
   @override
-  String get create => 'Create';
+  String get create => 'Crear';
 
   @override
-  String get createCategory => 'Create Category';
+  String get createCategory => 'Crear Categoría';
 
   @override
   String get createItemsFromSavedTemplates =>
-      'Create items from saved templates';
+      'Crea elementos desde plantillas guardadas';
 
   @override
-  String get createList => 'Create List';
+  String get createList => 'Crear Enlace';
 
   @override
-  String get createListGroup => 'Create List Group';
+  String get createListGroup => 'Crear Grupo de Listado';
 
   @override
-  String get createListGroups => 'Create list groups';
+  String get createListGroups => 'Crear grupos de listado';
 
   @override
-  String get dailyAvg => 'Daily Avg';
+  String get dailyAvg => 'Med. Diaria';
 
   @override
-  String get deadline => 'Deadline';
+  String get deadline => 'Fecha límite';
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Borrar';
 
   @override
-  String get delete1 => 'Delete';
+  String get delete1 => 'Borrar';
 
   @override
-  String get delete2 => 'Delete';
+  String get delete2 => 'Borrar';
 
   @override
-  String get delete3 => 'Delete';
+  String get delete3 => 'Borrar';
 
   @override
-  String get delete4 => 'Delete';
+  String get delete4 => 'Borrar';
 
   @override
-  String get deleteCategory => 'Delete Category';
+  String get deleteCategory => 'Borrar Categoría';
 
   @override
-  String get deleteGroup => 'Delete Group';
+  String get deleteGroup => 'Borrar Grupo';
 
   @override
-  String get deleteList => 'Delete List';
+  String get deleteList => 'Borrar Listado';
 
   @override
   String get deleteList1 => 'Delete List';
 
   @override
-  String get description => 'Description';
+  String get description => 'Descripción';
 
   @override
-  String get description1 => 'Description';
+  String get description1 => 'Descripción';
 
   @override
-  String get editCategory => 'Edit Category';
+  String get editCategory => 'Editar Categoría';
 
   @override
-  String get editGroupName => 'Edit Group Name';
+  String get editGroupName => 'Editar Nombre del Grupo';
 
   @override
-  String get editListName => 'Edit List Name';
+  String get editListName => 'Editar Nombre del Listado';
 
   @override
   String get editor => 'Editor';
@@ -644,16 +653,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get egGroceryListsWorkProjects => 'e.g., Grocery Lists, Work Projects';
 
   @override
-  String get email => 'Email';
+  String get email => 'Correo-e';
 
   @override
-  String get email1 => 'Email';
+  String get email1 => 'Correo-e';
 
   @override
-  String get email2 => 'Email';
+  String get email2 => 'Correo-e';
 
   @override
-  String get email3 => 'Email';
+  String get email3 => 'Correo-e';
 
   @override
   String get enterEmailAddress => 'Enter email address';
@@ -987,26 +996,26 @@ class AppLocalizationsEs extends AppLocalizations {
   String get feedback => 'Feedback';
 
   @override
-  String get finished => 'Finished';
+  String get finished => 'Finalizado';
 
   @override
-  String get githubRepository => 'GitHub Repository';
+  String get githubRepository => 'Repositorio GitHub';
 
   @override
   String get googleAccountLinkedSuccessfully =>
-      'Google account linked successfully!';
+      'Cuenta Google correctamente enlazada.';
 
   @override
   String get googleAccountLinkedSuccessfully1 =>
-      'Google account linked successfully!';
+      'Cuenta Google correctamente enlazada.';
 
   @override
   String get googleAccountUnlinkedSuccessfully =>
-      'Google account unlinked successfully';
+      'Cuenta Google correctamente enlazada.';
 
   @override
   String get googleAccountUnlinkedSuccessfully1 =>
-      'Google account unlinked successfully';
+      'Cuenta Google correctamente desenlazada.';
 
   @override
   String groupNamecontrollertexttrimCreatedSuccessfully(Object nameController) {
@@ -1078,10 +1087,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get high => 'high';
 
   @override
-  String get icon => 'Icon';
+  String get icon => 'Icono';
 
   @override
-  String get icon1 => 'Icon';
+  String get icon1 => 'Icono';
 
   @override
   String get inTimeframe => 'in timeframe';
@@ -1319,7 +1328,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get notLoggedIn => 'Not logged in';
 
   @override
-  String get ok => 'OK';
+  String get ok => 'Aceptar';
 
   @override
   String get openSourceLicenses => 'Open source licenses';
@@ -1328,7 +1337,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get openTheDrawerFromTheLeft => 'Open the drawer from the left';
 
   @override
-  String get options => 'Options';
+  String get options => 'Opciones';
 
   @override
   String get organizeYourListsWithTheButton =>
@@ -1487,28 +1496,28 @@ class AppLocalizationsEs extends AppLocalizations {
   String get removeMember => 'Remove Member';
 
   @override
-  String get retry => 'Retry';
+  String get retry => 'Reintentar';
 
   @override
-  String get retry1 => 'Retry';
+  String get retry1 => 'Reintentar';
 
   @override
-  String get retry2 => 'Retry';
+  String get retry2 => 'Reintentar';
 
   @override
-  String get retry3 => 'Retry';
+  String get retry3 => 'Reintentar';
 
   @override
-  String get retry4 => 'Retry';
+  String get retry4 => 'Reintentar';
 
   @override
-  String get save => 'Save';
+  String get save => 'Guardar';
 
   @override
-  String get save1 => 'Save';
+  String get save1 => 'Guardar';
 
   @override
-  String get save2 => 'Save';
+  String get save2 => 'Guardar';
 
   @override
   String get saveChanges => 'Save Changes';
