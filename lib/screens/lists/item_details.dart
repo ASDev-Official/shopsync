@@ -200,12 +200,22 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
             );
           }
 
+          if (!effectiveSnapshot.exists) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted && Navigator.canPop(context)) {
+                Navigator.pop(context);
+              }
+            });
+            return const SizedBox.shrink();
+          }
+
           final item = effectiveSnapshot.data() as Map<String, dynamic>? ?? {};
           final name = item['name'] ?? l10n.untitledItem;
           final description = item['description'] ?? '';
           final addedBy = item['addedBy'] as String?;
           final addedByName = item['addedByName'] ?? l10n.unknownUser;
-          final addedAt = item['addedAt'].toDate();
+          final addedAtTimestamp = item['addedAt'] as Timestamp?;
+          final addedAt = addedAtTimestamp?.toDate() ?? DateTime.now();
           final completed = item['completed'] ?? false;
           _descriptionController.text = description;
           _selectedDeadline = item['deadline']?.toDate();
