@@ -506,6 +506,15 @@ class _ItemsTabState extends State<ItemsTab> {
   QuerySnapshot? _lastItemsSnapshot;
   QuerySnapshot? _lastCategoriesSnapshot;
 
+  @override
+  void didUpdateWidget(covariant ItemsTab oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.listId != widget.listId) {
+      _lastItemsSnapshot = null;
+      _lastCategoriesSnapshot = null;
+    }
+  }
+
   // String _standardizePriority(String? priority) {
   //   switch (priority?.toLowerCase()) {
   //     case 'high':
@@ -785,9 +794,10 @@ class _ItemsTabState extends State<ItemsTab> {
 
                         // Get category data
                         Map<String, dynamic>? categoryData;
-                        if (categoryId != null && categoriesSnapshot.hasData) {
+                        if (categoryId != null &&
+                            effectiveCategoriesSnapshot != null) {
                           try {
-                            final categoryDoc = categoriesSnapshot.data!.docs
+                            final categoryDoc = effectiveCategoriesSnapshot.docs
                                 .firstWhere((doc) => doc.id == categoryId);
                             categoryData =
                                 categoryDoc.data() as Map<String, dynamic>;

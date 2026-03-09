@@ -1304,6 +1304,18 @@ class _SavedLocationsScreenState extends State<SavedLocationsScreen> {
             _lastSavedLocationsSnapshot = snapshot.data;
           }
 
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  '${AppLocalizations.of(context)!.error}: ${snapshot.error}',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          }
+
           final effectiveSnapshot =
               snapshot.data ?? _lastSavedLocationsSnapshot;
 
@@ -1533,6 +1545,18 @@ class _SavedItemsScreenState extends State<SavedItemsScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             _lastSavedItemsSnapshot = snapshot.data;
+          }
+
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  '${l10n.error}: ${snapshot.error}',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
           }
 
           final effectiveSnapshot = snapshot.data ?? _lastSavedItemsSnapshot;

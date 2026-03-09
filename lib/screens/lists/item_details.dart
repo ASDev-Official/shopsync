@@ -233,15 +233,15 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                       FutureBuilder<bool>(
                         future: PermissionsHelper.isViewer(widget.listId),
                         builder: (context, snapshot) {
-                          final isViewer =
-                              snapshot.hasData && snapshot.data == true;
+                          final canEdit =
+                              snapshot.hasData && snapshot.data == false;
 
                           return Stack(
                             children: [
                               GestureDetector(
-                                onTap: isViewer
-                                    ? null
-                                    : () => _navigateToIconSelector(item),
+                                onTap: canEdit
+                                    ? () => _navigateToIconSelector(item)
+                                    : null,
                                 child: Container(
                                   width: 64,
                                   height: 64,
@@ -257,7 +257,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                                   child: _buildItemIcon(item),
                                 ),
                               ),
-                              if (!isViewer)
+                              if (canEdit)
                                 Positioned(
                                   top: 2,
                                   right: 2,
@@ -292,14 +292,14 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                         child: FutureBuilder<bool>(
                           future: PermissionsHelper.isViewer(widget.listId),
                           builder: (context, snapshot) {
-                            final isViewer =
-                                snapshot.hasData && snapshot.data == true;
+                            final canEdit =
+                                snapshot.hasData && snapshot.data == false;
 
                             return Stack(
                               children: [
                                 TextField(
                                   controller: _nameController,
-                                  enabled: !isViewer,
+                                  enabled: canEdit,
                                   style: const TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
@@ -308,13 +308,13 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
                                     border: InputBorder.none,
                                     contentPadding: EdgeInsets.only(bottom: 8),
                                   ),
-                                  onSubmitted: isViewer
-                                      ? null
-                                      : (value) {
+                                  onSubmitted: canEdit
+                                      ? (value) {
                                           if (value.trim().isNotEmpty) {
                                             _updateItem({'name': value.trim()});
                                           }
-                                        },
+                                        }
+                                      : null,
                                 ),
                                 Positioned(
                                   left: 0,

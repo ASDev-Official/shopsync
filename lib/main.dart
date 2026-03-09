@@ -270,8 +270,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
   Future<bool>? _aiPreferenceFuture;
   Future<bool?>? _gravatarPreferenceFuture;
 
-  // Track if we've already determined the authenticated route
-  Widget? _authenticatedWidget;
   bool _isInitialLoad = true;
 
   void _updateUserFutures(String uid) {
@@ -279,7 +277,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
       _cachedUserId = uid;
       _aiPreferenceFuture = AIPreferenceService.hasAIPreference();
       _gravatarPreferenceFuture = GravatarService.hasGravatarPreference();
-      _authenticatedWidget = null; // Reset cached widget on user change
       _isInitialLoad = true;
     }
   }
@@ -385,13 +382,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
           );
         }
 
-        // If we have a cached authenticated widget and user hasn't changed, return it immediately
-        if (_authenticatedWidget != null &&
-            snapshot.hasData &&
-            snapshot.data != null) {
-          return _authenticatedWidget!;
-        }
-
         // Check if user is logged in
         if (snapshot.hasData && snapshot.data != null) {
           // Cache futures keyed to the current user to prevent re-creation on rebuild
@@ -416,10 +406,8 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
               // If AI preference not set, show mandatory setup screen
               if (!aiSnapshot.hasData || !aiSnapshot.data!) {
-                final widget = const AIPreferenceSetupScreen();
-                _authenticatedWidget = widget;
                 _isInitialLoad = false;
-                return widget;
+                return const AIPreferenceSetupScreen();
               }
 
               // AI preference is set, now check Gravatar preference
@@ -443,33 +431,29 @@ class _AuthWrapperState extends State<AuthWrapper> {
                   // Handle Firestore errors - allow normal startup instead of forcing setup
                   if (gravatarSnapshot.hasError ||
                       gravatarSnapshot.data == null) {
-                    final widget = const HomeScreen();
-                    _authenticatedWidget = widget;
                     _isInitialLoad = false;
-                    return widget;
+                    return const HomeScreen();
                   }
 
                   // If Gravatar preference not set (false), show mandatory setup screen
                   if (gravatarSnapshot.data == false) {
-                    final widget = const GravatarPreferenceSetupScreen();
-                    _authenticatedWidget = widget;
                     _isInitialLoad = false;
-                    return widget;
+                    return const GravatarPreferenceSetupScreen();
                   }
 
                   // Both preferences are set, direct to home screen
-                  final widget = const HomeScreen();
-                  _authenticatedWidget = widget;
                   _isInitialLoad = false;
-                  return widget;
+                  return const HomeScreen();
                 },
               );
             },
           );
         }
 
-        // User is not signed in - reset cached widget
-        _authenticatedWidget = null;
+        // User is not signed in - reset state
+        _cachedUserId = null;
+        _aiPreferenceFuture = null;
+        _gravatarPreferenceFuture = null;
         _isInitialLoad = true;
 
         // User is not signed in, direct to welcome screen
