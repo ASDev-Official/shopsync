@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
 import '../../models/status_outage.dart';
-import '../../services/platform/statuspage_service.dart';
 
 class WearOutageScreen extends StatefulWidget {
   final StatusOutage outage;
@@ -134,7 +133,6 @@ class _WearOutageScreenState extends State<WearOutageScreen> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                StatuspageService.markDialogDismissed();
                                 Navigator.of(context).pop();
                               },
                               child: Padding(

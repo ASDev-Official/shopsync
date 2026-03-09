@@ -12,6 +12,11 @@ import '/models/item_suggestion.dart';
 class SmartSuggestionsService {
   static const String _cacheKey = 'smart_suggestions_cache';
   static const String _lastTrainedKey = 'suggestions_last_trained';
+  static const String _cacheVersionKey = 'smart_suggestions_cache_version';
+
+  /// Increment this version whenever the structure of ItemSuggestion changes
+  /// (e.g. new required fields added) to automatically invalidate stale caches.
+  static const int _currentCacheVersion = 2;
   static const int _minItemsForSuggestions = 5;
   static const int _maxSuggestions = 10;
   static const double _minConfidenceThreshold = 0.3;
@@ -388,6 +393,8 @@ class SmartSuggestionsService {
       final prefs = await SharedPreferences.getInstance();
       final jsonList = suggestions.map((s) => s.toJson()).toList();
       await prefs.setString(_cacheKey, jsonEncode(jsonList));
+      // Always stamp the current schema version so stale caches can be detected.
+      await prefs.setInt(_cacheVersionKey, _currentCacheVersion);
     } catch (e) {
       if (kDebugMode) {
         print('Error caching suggestions: $e');
@@ -399,14 +406,42 @@ class SmartSuggestionsService {
   Future<void> _loadCachedSuggestions() async {
     try {
       final prefs = await SharedPreferences.getInstance();
+
+      // Invalidate the cache if it was written by an older version of the app
+      // that may have stored suggestions without fields added in later versions
+      // (e.g. `categoryId`).
+      final cachedVersion = prefs.getInt(_cacheVersionKey) ?? 0;
+      if (cachedVersion < _currentCacheVersion) {
+        await prefs.remove(_cacheKey);
+        await prefs.remove(_lastTrainedKey);
+        await prefs.setInt(_cacheVersionKey, _currentCacheVersion);
+        if (kDebugMode) {
+          print(
+              'Cleared stale suggestions cache (version $cachedVersion < $_currentCacheVersion)');
+        }
+        return;
+      }
+
       final cachedJson = prefs.getString(_cacheKey);
 
       if (cachedJson != null) {
-        final jsonList = jsonDecode(cachedJson) as List;
-        _cachedSuggestions = jsonList
-            .map(
-                (json) => ItemSuggestion.fromJson(json as Map<String, dynamic>))
-            .toList();
+        try {
+          final jsonList = jsonDecode(cachedJson) as List;
+          _cachedSuggestions = jsonList
+              .map((json) =>
+                  ItemSuggestion.fromJson(json as Map<String, dynamic>))
+              .toList();
+        } catch (e) {
+          // The cached data is corrupted or in an incompatible format.
+          // Remove it so the next launch starts fresh instead of crashing again.
+          await prefs.remove(_cacheKey);
+          await prefs.remove(_lastTrainedKey);
+          await prefs.setInt(_cacheVersionKey, _currentCacheVersion);
+          _cachedSuggestions = null;
+          if (kDebugMode) {
+            print('Cleared corrupted suggestions cache: $e');
+          }
+        }
       }
     } catch (e) {
       if (kDebugMode) {
@@ -421,6 +456,7 @@ class SmartSuggestionsService {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove(_cacheKey);
       await prefs.remove(_lastTrainedKey);
+      await prefs.remove(_cacheVersionKey);
       _cachedSuggestions = null;
       _lastTrainedTime = null;
     } catch (e) {

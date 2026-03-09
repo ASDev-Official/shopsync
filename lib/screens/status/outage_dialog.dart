@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import '../../models/status_outage.dart';
-import '../../services/platform/statuspage_service.dart';
 
 class OutageDialog extends StatelessWidget {
   final StatusOutage outage;
@@ -33,7 +32,6 @@ class OutageDialog extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.close, color: Colors.white),
               onPressed: () {
-                StatuspageService.markDialogDismissed();
                 Navigator.of(context).pop();
               },
             ),
@@ -130,7 +128,6 @@ class OutageDialog extends StatelessWidget {
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
                         onPressed: () {
-                          StatuspageService.markDialogDismissed();
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
