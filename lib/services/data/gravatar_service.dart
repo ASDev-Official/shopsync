@@ -305,6 +305,17 @@ class GravatarService {
             'Auto-refreshed Gravatar on app open: ${exists ? "found" : "not found"}');
       }
     } catch (e, stackTrace) {
+      // Silently ignore permission-denied errors — the user document may be in
+      // an incomplete state (e.g. missing the gravatarEnabled field) which can
+      // cause Firestore security rules to reject the write. This is a
+      // non-critical background refresh and should never surface to the user or
+      // pollute Sentry with noise.
+      if (e is FirebaseException && e.code == 'permission-denied') {
+        if (kDebugMode) {
+          print('Gravatar auto-refresh skipped: permission denied');
+        }
+        return;
+      }
       await Sentry.captureException(e,
           stackTrace: stackTrace,
           hint: Hint.withMap({'action': 'refresh_gravatar_on_app_open'}));
