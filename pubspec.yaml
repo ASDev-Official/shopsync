@@ -36,6 +36,7 @@ dependencies:
   collection: ^1.18.0
   wear_plus: ^1.2.4
   rotary_scrollbar: ^1.1.0
+  restart_app: ^1.7.3
   http: ^1.6.0
   crypto: ^3.0.6
 

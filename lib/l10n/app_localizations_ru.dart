@@ -2256,10 +2256,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get langEnglish => 'English';
 
   @override
-  String get langArabic => 'Arabic';
+  String get langArabic => 'العربية';
 
   @override
-  String get langBengali => 'Bengali';
+  String get langBengali => 'বাংলা';
 
   @override
   String get langDeutsch => 'Deutsch';
@@ -2277,7 +2277,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get langHindi => 'हिन्दी';
 
   @override
-  String get langIndonesian => 'Indonesian';
+  String get langIndonesian => 'Bahasa Indonesia';
 
   @override
   String get langItaliano => 'Italiano';
@@ -2286,16 +2286,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get langJapanese => '日本語';
 
   @override
-  String get langKannada => 'Kannada';
+  String get langKannada => 'ಕನ್ನಡ';
 
   @override
   String get langKorean => '한국어';
 
   @override
-  String get langMarathi => 'Marathi';
+  String get langMarathi => 'मराठी';
 
   @override
-  String get langPortuguese => 'Portuguese';
+  String get langPortuguese => 'Português';
 
   @override
   String get langRussian => 'Русский';
@@ -2304,16 +2304,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get langSimplifiedChinese => '简体中文';
 
   @override
-  String get langTamil => 'Tamil';
+  String get langTamil => 'தமிழ்';
 
   @override
-  String get langTelugu => 'Telugu';
+  String get langTelugu => 'తెలుగు';
 
   @override
   String get langTraditionalChinese => '繁體中文';
 
   @override
-  String get langTurkish => 'Turkish';
+  String get langTurkish => 'Türkçe';
 
   @override
   String get useSystemDefaultTitle => 'Use System Default';
@@ -2424,7 +2424,17 @@ class AppLocalizationsRu extends AppLocalizations {
       'Please update the app to continue using the latest features and improvements.';
 
   @override
+  String get restartingShopSync => 'Restarting ShopSync';
+
+  @override
   String get downloadingUpdateLabel => 'Downloading update...';
+
+  @override
+  String get restartRequiredTitle => 'Restart Required';
+
+  @override
+  String get restartRequiredBody =>
+      'Automatic restart failed. Please force close ShopSync and open it again to apply your language change.';
 
   @override
   String get install => 'Install';

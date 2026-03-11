@@ -5,6 +5,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shopsync/screens/auth/sign_out.dart';
 import 'package:shopsync/screens/settings/custom_licenses.dart';
+import 'package:shopsync/screens/settings/restarting_screen.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
 import 'package:shopsync/services/locale_service.dart';
 import 'package:shopsync/main.dart';
@@ -119,10 +120,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _currentLocale = locale;
     });
-    await LocaleService.saveLocale(locale);
-    if (mounted) {
-      ShopSyncApp.setLocale(context, locale);
-    }
+    if (!mounted) return;
+
+    ShopSyncApp.setLocale(context, locale);
+
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const RestartingScreen(),
+      ),
+    );
+  }
+
+  Future<void> _useSystemDefaultLanguage() async {
+    setState(() {
+      _currentLocale = null;
+    });
+    if (!mounted) return;
+
+    ShopSyncApp.setLocale(context, null);
+
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const RestartingScreen(),
+      ),
+    );
   }
 
   String _getCurrentLanguageName(AppLocalizations l10n) {
@@ -647,18 +668,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ) ==
                       true) {
-                await LocaleService.clearLocale();
-                setState(() {
-                  _currentLocale = null;
-                });
-                if (mounted) {
-                  // Reload the app to apply system default
-                  ShopSyncApp.setLocale(
-                      context,
-                      View.of(context)
-                          .platformDispatcher
-                          .locale); // Use device locale
-                }
+                await _useSystemDefaultLanguage();
               }
             },
           ),

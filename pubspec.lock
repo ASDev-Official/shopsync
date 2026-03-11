@@ -1157,6 +1157,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+  restart_app:
+    dependency: "direct main"
+    description:
+      name: restart_app
+      sha256: "5bbeb34f7af32d1b87fbb8bc56a6501ca779596cfbb84af6ba4e3ebf57af4a23"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.7.3"
   rotary_scrollbar:
     dependency: "direct main"
     description:

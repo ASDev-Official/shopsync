@@ -3978,13 +3978,13 @@ abstract class AppLocalizations {
   /// No description provided for @langArabic.
   ///
   /// In en, this message translates to:
-  /// **'Arabic'**
+  /// **'العربية'**
   String get langArabic;
 
   /// No description provided for @langBengali.
   ///
   /// In en, this message translates to:
-  /// **'Bengali'**
+  /// **'বাংলা'**
   String get langBengali;
 
   /// No description provided for @langDeutsch.
@@ -4020,7 +4020,7 @@ abstract class AppLocalizations {
   /// No description provided for @langIndonesian.
   ///
   /// In en, this message translates to:
-  /// **'Indonesian'**
+  /// **'Bahasa Indonesia'**
   String get langIndonesian;
 
   /// No description provided for @langItaliano.
@@ -4038,7 +4038,7 @@ abstract class AppLocalizations {
   /// No description provided for @langKannada.
   ///
   /// In en, this message translates to:
-  /// **'Kannada'**
+  /// **'ಕನ್ನಡ'**
   String get langKannada;
 
   /// No description provided for @langKorean.
@@ -4050,13 +4050,13 @@ abstract class AppLocalizations {
   /// No description provided for @langMarathi.
   ///
   /// In en, this message translates to:
-  /// **'Marathi'**
+  /// **'मराठी'**
   String get langMarathi;
 
   /// No description provided for @langPortuguese.
   ///
   /// In en, this message translates to:
-  /// **'Portuguese'**
+  /// **'Português'**
   String get langPortuguese;
 
   /// No description provided for @langRussian.
@@ -4074,13 +4074,13 @@ abstract class AppLocalizations {
   /// No description provided for @langTamil.
   ///
   /// In en, this message translates to:
-  /// **'Tamil'**
+  /// **'தமிழ்'**
   String get langTamil;
 
   /// No description provided for @langTelugu.
   ///
   /// In en, this message translates to:
-  /// **'Telugu'**
+  /// **'తెలుగు'**
   String get langTelugu;
 
   /// No description provided for @langTraditionalChinese.
@@ -4092,7 +4092,7 @@ abstract class AppLocalizations {
   /// No description provided for @langTurkish.
   ///
   /// In en, this message translates to:
-  /// **'Turkish'**
+  /// **'Türkçe'**
   String get langTurkish;
 
   /// No description provided for @useSystemDefaultTitle.
@@ -4275,11 +4275,29 @@ abstract class AppLocalizations {
   /// **'Please update the app to continue using the latest features and improvements.'**
   String get pleaseUpdateAppBody;
 
+  /// No description provided for @restartingShopSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Restarting ShopSync'**
+  String get restartingShopSync;
+
   /// No description provided for @downloadingUpdateLabel.
   ///
   /// In en, this message translates to:
   /// **'Downloading update...'**
   String get downloadingUpdateLabel;
+
+  /// No description provided for @restartRequiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart Required'**
+  String get restartRequiredTitle;
+
+  /// No description provided for @restartRequiredBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic restart failed. Please force close ShopSync and open it again to apply your language change.'**
+  String get restartRequiredBody;
 
   /// No description provided for @install.
   ///
