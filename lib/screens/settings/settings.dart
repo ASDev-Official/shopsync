@@ -5,6 +5,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shopsync/screens/auth/sign_out.dart';
 import 'package:shopsync/screens/settings/custom_licenses.dart';
+import 'package:shopsync/screens/settings/restarting_screen.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
 import 'package:shopsync/services/locale_service.dart';
 import 'package:shopsync/main.dart';
@@ -119,15 +120,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _currentLocale = locale;
     });
-    await LocaleService.saveLocale(locale);
-    if (mounted) {
-      ShopSyncApp.setLocale(context, locale);
-    }
+    if (!mounted) return;
+
+    ShopSyncApp.setLocale(context, locale);
+
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const RestartingScreen(),
+      ),
+    );
   }
 
-  String _getCurrentLanguageName() {
+  Future<void> _useSystemDefaultLanguage() async {
+    setState(() {
+      _currentLocale = null;
+    });
+    if (!mounted) return;
+
+    ShopSyncApp.setLocale(context, null);
+
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const RestartingScreen(),
+      ),
+    );
+  }
+
+  String _getCurrentLanguageName(AppLocalizations l10n) {
     if (_currentLocale == null) {
-      return 'System Default';
+      return l10n.systemDefault;
     }
     return LocaleService.getLocaleName(_currentLocale!);
   }
@@ -365,20 +386,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
           buildSettingsTile(
             icon: Icons.language,
             title: l10n.appLanguage,
-            subtitle: _getCurrentLanguageName(),
+            subtitle: _getCurrentLanguageName(l10n),
             onTap: () async {
               final selectedLocale = await showDialog<Locale?>(
                 context: context,
                 builder: (BuildContext dialogContext) {
                   return SimpleDialog(
                     backgroundColor: cardColor,
-                    title: const Text('Select Language'),
+                    title: Text(l10n.selectLanguage),
                     children: <Widget>[
                       SimpleDialogOption(
                         onPressed: () {
                           Navigator.pop(dialogContext, null);
                         },
-                        child: Text('System Default',
+                        child: Text(l10n.systemDefault,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale == null
@@ -390,7 +411,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('en'));
                         },
-                        child: Text('English',
+                        child: Text(l10n.langEnglish,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'en'
@@ -399,9 +420,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SimpleDialogOption(
                         onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('ar'));
+                        },
+                        child: Text(l10n.langArabic,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'ar'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('bn'));
+                        },
+                        child: Text(l10n.langBengali,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'bn'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
                           Navigator.pop(dialogContext, const Locale('de'));
                         },
-                        child: Text('Deutsch',
+                        child: Text(l10n.langDeutsch,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'de'
@@ -412,7 +455,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('es'));
                         },
-                        child: Text('Español',
+                        child: Text(l10n.langEspanol,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'es'
@@ -423,7 +466,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('fr'));
                         },
-                        child: Text('Français',
+                        child: Text(l10n.langFrancais,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'fr'
@@ -434,7 +477,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('hi'));
                         },
-                        child: Text('हिन्दी',
+                        child: Text(l10n.langHindi,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'hi'
@@ -443,9 +486,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SimpleDialogOption(
                         onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('id'));
+                        },
+                        child: Text(l10n.langIndonesian,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'id'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
                           Navigator.pop(dialogContext, const Locale('it'));
                         },
-                        child: Text('Italiano',
+                        child: Text(l10n.langItaliano,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'it'
@@ -456,7 +510,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('ja'));
                         },
-                        child: Text('日本語',
+                        child: Text(l10n.langJapanese,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'ja'
@@ -465,9 +519,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SimpleDialogOption(
                         onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('kn'));
+                        },
+                        child: Text(l10n.langKannada,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'kn'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
                           Navigator.pop(dialogContext, const Locale('ko'));
                         },
-                        child: Text('한국어',
+                        child: Text(l10n.langKorean,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'ko'
@@ -476,9 +541,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SimpleDialogOption(
                         onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('mr'));
+                        },
+                        child: Text(l10n.langMarathi,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'mr'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('nl'));
+                        },
+                        child: Text(l10n.langDutch,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'nl'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('pt'));
+                        },
+                        child: Text(l10n.langPortuguese,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'pt'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
                           Navigator.pop(dialogContext, const Locale('ru'));
                         },
-                        child: Text('Русский',
+                        child: Text(l10n.langRussian,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'ru'
@@ -487,9 +585,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SimpleDialogOption(
                         onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('ta'));
+                        },
+                        child: Text(l10n.langTamil,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'ta'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('te'));
+                        },
+                        child: Text(l10n.langTelugu,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'te'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('tr'));
+                        },
+                        child: Text(l10n.langTurkish,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'tr'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
                           Navigator.pop(dialogContext, const Locale('zh'));
                         },
-                        child: Text('简体中文',
+                        child: Text(l10n.langSimplifiedChinese,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight:
@@ -505,7 +636,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               const Locale.fromSubtags(
                                   languageCode: 'zh', scriptCode: 'Hant'));
                         },
-                        child: Text('繁體中文',
+                        child: Text(l10n.langTraditionalChinese,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.scriptCode == 'Hant'
@@ -522,34 +653,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   await showDialog<bool>(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: const Text('Use System Default'),
-                          content: const Text(
-                              'Do you want to use your device\'s language setting?'),
+                          title: Text(l10n.useSystemDefaultTitle),
+                          content: Text(l10n.useSystemDefaultBody),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(context, false),
-                              child: const Text('Cancel'),
+                              child: Text(l10n.cancel),
                             ),
                             TextButton(
                               onPressed: () => Navigator.pop(context, true),
-                              child: const Text('Confirm'),
+                              child: Text(l10n.confirm),
                             ),
                           ],
                         ),
                       ) ==
                       true) {
-                await LocaleService.clearLocale();
-                setState(() {
-                  _currentLocale = null;
-                });
-                if (mounted) {
-                  // Reload the app to apply system default
-                  ShopSyncApp.setLocale(
-                      context,
-                      View.of(context)
-                          .platformDispatcher
-                          .locale); // Use device locale
-                }
+                await _useSystemDefaultLanguage();
               }
             },
           ),

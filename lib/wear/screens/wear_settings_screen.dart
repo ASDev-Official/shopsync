@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -48,9 +49,9 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
     });
   }
 
-  String _getCurrentLanguageName() {
+  String _getCurrentLanguageName(AppLocalizations l10n) {
     if (_currentLocale == null) {
-      return 'System';
+      return l10n.systemDefault;
     }
     return LocaleService.getLocaleName(_currentLocale!);
   }
@@ -79,6 +80,7 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
   }
 
   Widget _buildSettings(WearMode mode, WearShape shape) {
+    final l10n = AppLocalizations.of(context)!;
     final user = FirebaseAuth.instance.currentUser;
 
     return RotaryScrollbar(
@@ -357,7 +359,7 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Language',
+                                  l10n.language,
                                   style: TextStyle(
                                     fontSize: 12,
                                     color: mode == WearMode.active
@@ -366,7 +368,7 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
                                   ),
                                 ),
                                 Text(
-                                  _getCurrentLanguageName(),
+                                  _getCurrentLanguageName(l10n),
                                   style: TextStyle(
                                     fontSize: 10,
                                     color: mode == WearMode.active
@@ -548,8 +550,7 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
       // Apply locale change to the app
       if (mounted) {
         if (result == null) {
-          // System locale - use device default
-          ShopSyncWearApp.setLocale(context, const Locale('en'));
+          ShopSyncWearApp.setLocale(context, null);
         } else {
           ShopSyncWearApp.setLocale(context, result);
         }

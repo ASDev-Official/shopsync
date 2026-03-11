@@ -217,11 +217,18 @@ Text(AppLocalizations.of(context)!.aiFeatures)
 #### WearOS Language Selection Flow
 
 - The language selector screen lists options and, on tap, navigates to a separate confirmation screen.
+- WearOS language options should stay in sync with the phone app locale list and use localized self-names from `AppLocalizations` rather than hardcoded English labels.
 - The confirmation screen is minimal and scrollable with extra bottom space; it displays:
   - Title: "Confirm Language"
   - Selected language name (lowercase)
   - "OK" and "Cancel" buttons only.
 - The selector no longer shows a bottom "OK" button; confirmation happens on the next screen to avoid UI clipping issues on round displays.
+
+#### Phone/Web Language Change Flow
+
+- In the main app, changing the language from Settings should navigate to a dedicated restart screen showing "Restarting ShopSync" and then trigger an app restart after a short delay using the `restart_app` package.
+- Selecting "System Default" should clear the saved locale and follow the same restart flow.
+- The current-language subtitle should use autonyms from `LocaleService.getLocaleName()` so users see language names in their own script.
 
 ## Critical Gotchas
 

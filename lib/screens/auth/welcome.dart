@@ -26,7 +26,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   String _errorMessage = '';
   bool _isGoogleLoading = false;
-  bool _hasTriedCredentialManager = false;
+  bool _hasTriedCredentialManager = true;
 
   // Widget _getGoogleButtonImage(bool isDarkMode) {
   //   if (Theme.of(context).platform == TargetPlatform.android) {
@@ -219,7 +219,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         : [Colors.white, Colors.white70],
                   ).createShader(bounds),
                   child: Text(
-                    'ShopSync',
+                    l10n.shopsync,
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,

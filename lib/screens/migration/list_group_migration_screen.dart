@@ -38,7 +38,7 @@ class _ListGroupMigrationScreenState extends State<ListGroupMigrationScreen> {
         setState(() {
           _isUpgrading = false;
           _hasError = true;
-          _errorMessage = 'Failed to upgrade lists. Please try again.';
+          _errorMessage = AppLocalizations.of(context)!.failedToUpgradeLists;
         });
       }
     } catch (e) {
@@ -46,7 +46,8 @@ class _ListGroupMigrationScreenState extends State<ListGroupMigrationScreen> {
       setState(() {
         _isUpgrading = false;
         _hasError = true;
-        _errorMessage = 'An error occurred: ${e.toString()}';
+        _errorMessage =
+            AppLocalizations.of(context)!.anErrorOccurredError(e.toString());
       });
     }
   }
@@ -107,7 +108,9 @@ class _ListGroupMigrationScreenState extends State<ListGroupMigrationScreen> {
 
                   // Title
                   Text(
-                    _hasError ? 'Upgrade Failed' : 'Upgrading your lists',
+                    _hasError
+                        ? AppLocalizations.of(context)!.upgradeFailed
+                        : AppLocalizations.of(context)!.upgradingYourLists,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -121,7 +124,8 @@ class _ListGroupMigrationScreenState extends State<ListGroupMigrationScreen> {
                   // Description
                   if (!_hasError)
                     Text(
-                      'Please wait while we update your list groups to the new format...',
+                      AppLocalizations.of(context)!
+                          .pleaseWaitUpdatingListGroups,
                       style: TextStyle(
                         fontSize: 16,
                         color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -167,7 +171,7 @@ class _ListGroupMigrationScreenState extends State<ListGroupMigrationScreen> {
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(false),
                           child: Text(
-                            'Skip for now',
+                            AppLocalizations.of(context)!.skipForNow,
                             style: TextStyle(
                               color:
                                   isDark ? Colors.grey[400] : Colors.grey[600],

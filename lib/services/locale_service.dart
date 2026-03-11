@@ -38,17 +38,28 @@ class LocaleService {
   /// Get display name for a locale
   static String getLocaleName(Locale locale) {
     final Map<String, String> localeNames = {
+      'ar': 'العربية',
+      'bn': 'বাংলা',
       'en': 'English',
       'de': 'Deutsch',
       'es': 'Español',
       'fr': 'Français',
-      'hi': 'हिंदी',
+      'hi': 'हिन्दी',
+      'id': 'Bahasa Indonesia',
       'it': 'Italiano',
       'ja': '日本語',
+      'kn': 'ಕನ್ನಡ',
       'ko': '한국어',
+      'mr': 'मराठी',
+      'nl': 'Nederlands',
+      'pt': 'Português',
       'ru': 'Русский',
+      'ta': 'தமிழ்',
+      'te': 'తెలుగు',
+      'tr': 'Türkçe',
       'zh': '简体中文',
       'zh_Hant': '繁體中文',
+      'vi': 'Tiếng Việt',
     };
 
     String key = locale.languageCode;

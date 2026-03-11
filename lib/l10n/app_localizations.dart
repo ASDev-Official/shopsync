@@ -5,15 +5,25 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_ar.dart';
+import 'app_localizations_bn.dart';
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
 import 'app_localizations_hi.dart';
+import 'app_localizations_id.dart';
 import 'app_localizations_it.dart';
 import 'app_localizations_ja.dart';
+import 'app_localizations_kn.dart';
 import 'app_localizations_ko.dart';
+import 'app_localizations_mr.dart';
+import 'app_localizations_nl.dart';
+import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
+import 'app_localizations_ta.dart';
+import 'app_localizations_te.dart';
+import 'app_localizations_tr.dart';
 import 'app_localizations_vi.dart';
 import 'app_localizations_zh.dart';
 
@@ -103,15 +113,25 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('de'),
     Locale('en'),
+    Locale('ar'),
+    Locale('bn'),
+    Locale('de'),
     Locale('es'),
     Locale('fr'),
     Locale('hi'),
+    Locale('id'),
     Locale('it'),
     Locale('ja'),
+    Locale('kn'),
     Locale('ko'),
+    Locale('mr'),
+    Locale('nl'),
+    Locale('pt'),
     Locale('ru'),
+    Locale('ta'),
+    Locale('te'),
+    Locale('tr'),
     Locale('vi'),
     Locale('zh'),
     Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant')
@@ -3486,6 +3506,822 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error saving preference. Please try again.'**
   String get errorSavingPreference;
+
+  /// No description provided for @chooseIconTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Icon'**
+  String get chooseIconTitle;
+
+  /// No description provided for @doneButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get doneButton;
+
+  /// No description provided for @selectedIconLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected Icon'**
+  String get selectedIconLabel;
+
+  /// No description provided for @loadingIcons.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading icons...'**
+  String get loadingIcons;
+
+  /// No description provided for @noIconsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No icons found'**
+  String get noIconsFound;
+
+  /// No description provided for @noIconsFoundHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Try adjusting your search or category filter'**
+  String get noIconsFoundHint;
+
+  /// No description provided for @allCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allCategory;
+
+  /// No description provided for @itemInRecycleBin.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No items in recycle bin} =1{{count} item in recycle bin} other{{count} items in recycle bin}}'**
+  String itemInRecycleBin(int count);
+
+  /// No description provided for @restoreItemTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore item'**
+  String get restoreItemTooltip;
+
+  /// No description provided for @deletePermanentlyTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete permanently'**
+  String get deletePermanentlyTooltip;
+
+  /// No description provided for @deletedOnDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted {date}'**
+  String deletedOnDate(String date);
+
+  /// No description provided for @noDeletedItems.
+  ///
+  /// In en, this message translates to:
+  /// **'No Deleted Items'**
+  String get noDeletedItems;
+
+  /// No description provided for @noDeletedItemsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Items you delete will appear here for 30 days'**
+  String get noDeletedItemsSubtitle;
+
+  /// No description provided for @areYouSureDeleteCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete \"{categoryName}\"? This will remove the category from all items.'**
+  String areYouSureDeleteCategory(String categoryName);
+
+  /// No description provided for @noCategoriesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories yet'**
+  String get noCategoriesYet;
+
+  /// No description provided for @createYourFirstCategoryAbove.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your first category above'**
+  String get createYourFirstCategoryAbove;
+
+  /// No description provided for @editTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get editTooltip;
+
+  /// No description provided for @deleteTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteTooltip;
+
+  /// No description provided for @createNewCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Create New Category'**
+  String get createNewCategory;
+
+  /// No description provided for @timeframeDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get timeframeDay;
+
+  /// No description provided for @timeframeWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get timeframeWeek;
+
+  /// No description provided for @timeframeMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get timeframeMonth;
+
+  /// No description provided for @timeframeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get timeframeAll;
+
+  /// No description provided for @noInsightsAvailableYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No insights available yet'**
+  String get noInsightsAvailableYet;
+
+  /// No description provided for @noActivityDataForTimeframe.
+  ///
+  /// In en, this message translates to:
+  /// **'No activity data for this timeframe'**
+  String get noActivityDataForTimeframe;
+
+  /// No description provided for @activityTimeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Timeline'**
+  String get activityTimeline;
+
+  /// No description provided for @addedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Added'**
+  String get addedLabel;
+
+  /// No description provided for @completedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completedLabel;
+
+  /// No description provided for @categoryBreakdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Category Breakdown'**
+  String get categoryBreakdown;
+
+  /// No description provided for @noCollaboratorActivityInTimeframe.
+  ///
+  /// In en, this message translates to:
+  /// **'No collaborator activity in this timeframe'**
+  String get noCollaboratorActivityInTimeframe;
+
+  /// No description provided for @collaboratorActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Collaborator Activity'**
+  String get collaboratorActivity;
+
+  /// No description provided for @addedCompletedSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{added} added • {completed} completed'**
+  String addedCompletedSummary(String added, String completed);
+
+  /// No description provided for @continueWithoutOrganizing.
+  ///
+  /// In en, this message translates to:
+  /// **'You can organize your lists into groups later from the home screen. Continue without organizing?'**
+  String get continueWithoutOrganizing;
+
+  /// No description provided for @createdAtDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Created {date}'**
+  String createdAtDate(String date);
+
+  /// No description provided for @suggestedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggested'**
+  String get suggestedBadge;
+
+  /// No description provided for @ungroupedListsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Ungrouped Lists'**
+  String get ungroupedListsSection;
+
+  /// No description provided for @ungroupedListsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No lists assigned to any group} =1{{count} list not assigned to any group} other{{count} lists not assigned to any group}}'**
+  String ungroupedListsCount(int count);
+
+  /// No description provided for @dragListsToGroupOrCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag these lists to a group above or create a new group for them:'**
+  String get dragListsToGroupOrCreate;
+
+  /// No description provided for @shopSyncMigration.
+  ///
+  /// In en, this message translates to:
+  /// **'ShopSync Migration'**
+  String get shopSyncMigration;
+
+  /// No description provided for @organizeWithListGroups.
+  ///
+  /// In en, this message translates to:
+  /// **'Organize with List Groups'**
+  String get organizeWithListGroups;
+
+  /// No description provided for @organizeListsBodyCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{We\'ve suggested some groups for your lists. You can edit, remove, or add new groups.} =1{We\'ve suggested some groups for your {count} list. You can edit, remove, or add new groups.} other{We\'ve suggested some groups for your {count} lists. You can edit, remove, or add new groups.}}'**
+  String organizeListsBodyCount(int count);
+
+  /// No description provided for @organizeLists.
+  ///
+  /// In en, this message translates to:
+  /// **'Organize Lists'**
+  String get organizeLists;
+
+  /// No description provided for @listsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No lists} =1{{count} list} other{{count} lists}}'**
+  String listsCount(int count);
+
+  /// No description provided for @failedToUpgradeLists.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to upgrade lists. Please try again.'**
+  String get failedToUpgradeLists;
+
+  /// No description provided for @anErrorOccurredError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred: {error}'**
+  String anErrorOccurredError(String error);
+
+  /// No description provided for @upgradeFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade Failed'**
+  String get upgradeFailed;
+
+  /// No description provided for @upgradingYourLists.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrading your lists'**
+  String get upgradingYourLists;
+
+  /// No description provided for @pleaseWaitUpdatingListGroups.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait while we update your list groups to the new format...'**
+  String get pleaseWaitUpdatingListGroups;
+
+  /// No description provided for @licensesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Licenses'**
+  String get licensesTitle;
+
+  /// No description provided for @noPackagesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No packages found'**
+  String get noPackagesFound;
+
+  /// No description provided for @noPackagesMatchSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'No packages match your search'**
+  String get noPackagesMatchSearch;
+
+  /// No description provided for @versionDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String versionDisplay(String version);
+
+  /// No description provided for @trendsAndPerformance.
+  ///
+  /// In en, this message translates to:
+  /// **'Trends & Performance'**
+  String get trendsAndPerformance;
+
+  /// No description provided for @topCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Categories'**
+  String get topCategories;
+
+  /// No description provided for @topCompletedLists.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Completed Lists'**
+  String get topCompletedLists;
+
+  /// No description provided for @timeframeQuarter.
+  ///
+  /// In en, this message translates to:
+  /// **'Quarter'**
+  String get timeframeQuarter;
+
+  /// No description provided for @timeframeYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get timeframeYear;
+
+  /// No description provided for @timeframeAllTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All Time'**
+  String get timeframeAllTime;
+
+  /// No description provided for @completionRateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Completion Rate'**
+  String get completionRateTitle;
+
+  /// No description provided for @failedToLoadCompletionRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load completion rate'**
+  String get failedToLoadCompletionRate;
+
+  /// No description provided for @ofItemsCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'of items completed'**
+  String get ofItemsCompleted;
+
+  /// No description provided for @dailyProductivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Productivity'**
+  String get dailyProductivity;
+
+  /// No description provided for @failedToLoadProductivityData.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load productivity data'**
+  String get failedToLoadProductivityData;
+
+  /// No description provided for @itemsAddedPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'items added per day'**
+  String get itemsAddedPerDay;
+
+  /// No description provided for @activityOverTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Over Time'**
+  String get activityOverTime;
+
+  /// No description provided for @failedToLoadActivityData.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load activity data'**
+  String get failedToLoadActivityData;
+
+  /// No description provided for @noDataAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No data available'**
+  String get noDataAvailable;
+
+  /// No description provided for @noData.
+  ///
+  /// In en, this message translates to:
+  /// **'No data'**
+  String get noData;
+
+  /// No description provided for @itemsCountTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No items} =1{{count} item} other{{count} items}}'**
+  String itemsCountTooltip(int count);
+
+  /// No description provided for @itemsAddedEachDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Items added each day'**
+  String get itemsAddedEachDay;
+
+  /// No description provided for @failedToLoadCategoryData.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load category data'**
+  String get failedToLoadCategoryData;
+
+  /// No description provided for @itemCountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No items} =1{{count} item} other{{count} items}}'**
+  String itemCountLabel(int count);
+
+  /// No description provided for @failedToLoadListData.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load list data'**
+  String get failedToLoadListData;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get selectLanguage;
+
+  /// No description provided for @systemDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'System Default'**
+  String get systemDefault;
+
+  /// No description provided for @langEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get langEnglish;
+
+  /// No description provided for @langArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'العربية'**
+  String get langArabic;
+
+  /// No description provided for @langBengali.
+  ///
+  /// In en, this message translates to:
+  /// **'বাংলা'**
+  String get langBengali;
+
+  /// No description provided for @langDeutsch.
+  ///
+  /// In en, this message translates to:
+  /// **'Deutsch'**
+  String get langDeutsch;
+
+  /// No description provided for @langDutch.
+  ///
+  /// In en, this message translates to:
+  /// **'Dutch'**
+  String get langDutch;
+
+  /// No description provided for @langEspanol.
+  ///
+  /// In en, this message translates to:
+  /// **'Español'**
+  String get langEspanol;
+
+  /// No description provided for @langFrancais.
+  ///
+  /// In en, this message translates to:
+  /// **'Français'**
+  String get langFrancais;
+
+  /// No description provided for @langHindi.
+  ///
+  /// In en, this message translates to:
+  /// **'हिन्दी'**
+  String get langHindi;
+
+  /// No description provided for @langIndonesian.
+  ///
+  /// In en, this message translates to:
+  /// **'Bahasa Indonesia'**
+  String get langIndonesian;
+
+  /// No description provided for @langItaliano.
+  ///
+  /// In en, this message translates to:
+  /// **'Italiano'**
+  String get langItaliano;
+
+  /// No description provided for @langJapanese.
+  ///
+  /// In en, this message translates to:
+  /// **'日本語'**
+  String get langJapanese;
+
+  /// No description provided for @langKannada.
+  ///
+  /// In en, this message translates to:
+  /// **'ಕನ್ನಡ'**
+  String get langKannada;
+
+  /// No description provided for @langKorean.
+  ///
+  /// In en, this message translates to:
+  /// **'한국어'**
+  String get langKorean;
+
+  /// No description provided for @langMarathi.
+  ///
+  /// In en, this message translates to:
+  /// **'मराठी'**
+  String get langMarathi;
+
+  /// No description provided for @langPortuguese.
+  ///
+  /// In en, this message translates to:
+  /// **'Português'**
+  String get langPortuguese;
+
+  /// No description provided for @langRussian.
+  ///
+  /// In en, this message translates to:
+  /// **'Русский'**
+  String get langRussian;
+
+  /// No description provided for @langSimplifiedChinese.
+  ///
+  /// In en, this message translates to:
+  /// **'简体中文'**
+  String get langSimplifiedChinese;
+
+  /// No description provided for @langTamil.
+  ///
+  /// In en, this message translates to:
+  /// **'தமிழ்'**
+  String get langTamil;
+
+  /// No description provided for @langTelugu.
+  ///
+  /// In en, this message translates to:
+  /// **'తెలుగు'**
+  String get langTelugu;
+
+  /// No description provided for @langTraditionalChinese.
+  ///
+  /// In en, this message translates to:
+  /// **'繁體中文'**
+  String get langTraditionalChinese;
+
+  /// No description provided for @langTurkish.
+  ///
+  /// In en, this message translates to:
+  /// **'Türkçe'**
+  String get langTurkish;
+
+  /// No description provided for @useSystemDefaultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use System Default'**
+  String get useSystemDefaultTitle;
+
+  /// No description provided for @useSystemDefaultBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to use your device\'s language setting?'**
+  String get useSystemDefaultBody;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @errorUpdatingProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Error updating profile: {error}'**
+  String errorUpdatingProfile(String error);
+
+  /// No description provided for @googleAccountLinkedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Google account linked successfully! You can now sign in with Google.'**
+  String get googleAccountLinkedMessage;
+
+  /// No description provided for @areYouSureUnlinkGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to unlink your Google account? You will no longer be able to sign in with Google unless you link it again.'**
+  String get areYouSureUnlinkGoogle;
+
+  /// No description provided for @anErrorOccurredLinkingGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while linking your Google account.'**
+  String get anErrorOccurredLinkingGoogle;
+
+  /// No description provided for @anErrorOccurredUnlinkingGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while unlinking your Google account.'**
+  String get anErrorOccurredUnlinkingGoogle;
+
+  /// No description provided for @goBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Back'**
+  String get goBack;
+
+  /// No description provided for @editProfileTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfileTooltip;
+
+  /// No description provided for @accountInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Information'**
+  String get accountInformation;
+
+  /// No description provided for @displayName.
+  ///
+  /// In en, this message translates to:
+  /// **'Display Name'**
+  String get displayName;
+
+  /// No description provided for @emailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Address'**
+  String get emailAddress;
+
+  /// No description provided for @emailCannotBeChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Email (cannot be changed)'**
+  String get emailCannotBeChanged;
+
+  /// No description provided for @linkedAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked Accounts'**
+  String get linkedAccounts;
+
+  /// No description provided for @manageHowYouSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage how you sign in to ShopSync'**
+  String get manageHowYouSignIn;
+
+  /// No description provided for @emailAndPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Email & Password'**
+  String get emailAndPassword;
+
+  /// No description provided for @signInWithEmailAndPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with email and password'**
+  String get signInWithEmailAndPassword;
+
+  /// No description provided for @notConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Not configured'**
+  String get notConfigured;
+
+  /// No description provided for @signInWithGoogleAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Google account'**
+  String get signInWithGoogleAccount;
+
+  /// No description provided for @notLinked.
+  ///
+  /// In en, this message translates to:
+  /// **'Not linked'**
+  String get notLinked;
+
+  /// No description provided for @showGravatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Gravatar'**
+  String get showGravatar;
+
+  /// No description provided for @displayProfilePictureToOtherUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Display profile picture to other users'**
+  String get displayProfilePictureToOtherUsers;
+
+  /// No description provided for @accountActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Activity'**
+  String get accountActivity;
+
+  /// No description provided for @shoppingListsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No shopping lists} =1{{count} shopping list} other{{count} shopping lists}}'**
+  String shoppingListsCount(int count);
+
+  /// No description provided for @listsYouHaveAccessTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Lists you have access to'**
+  String get listsYouHaveAccessTo;
+
+  /// No description provided for @rememberYourPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember your password?'**
+  String get rememberYourPassword;
+
+  /// No description provided for @shopSyncUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'ShopSync Update'**
+  String get shopSyncUpdate;
+
+  /// No description provided for @shopSyncHasAnUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'ShopSync has an update'**
+  String get shopSyncHasAnUpdate;
+
+  /// No description provided for @pleaseUpdateAppBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Please update the app to continue using the latest features and improvements.'**
+  String get pleaseUpdateAppBody;
+
+  /// No description provided for @restartingShopSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Restarting ShopSync'**
+  String get restartingShopSync;
+
+  /// No description provided for @downloadingUpdateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading update...'**
+  String get downloadingUpdateLabel;
+
+  /// No description provided for @restartRequiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart Required'**
+  String get restartRequiredTitle;
+
+  /// No description provided for @restartRequiredBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic restart failed. Please force close ShopSync and open it again to apply your language change.'**
+  String get restartRequiredBody;
+
+  /// No description provided for @install.
+  ///
+  /// In en, this message translates to:
+  /// **'Install'**
+  String get install;
+
+  /// No description provided for @downloading.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading...'**
+  String get downloading;
+
+  /// No description provided for @updateButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get updateButton;
+
+  /// No description provided for @google.
+  ///
+  /// In en, this message translates to:
+  /// **'Google'**
+  String get google;
+
+  /// No description provided for @startAddingItemsToSeeInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Start adding items to see insights'**
+  String get startAddingItemsToSeeInsights;
+
+  /// No description provided for @pleaseTryAgainLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again later'**
+  String get pleaseTryAgainLater;
 }
 
 class _AppLocalizationsDelegate
@@ -3499,15 +4335,25 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) => <String>[
+        'ar',
+        'bn',
         'de',
         'en',
         'es',
         'fr',
         'hi',
+        'id',
         'it',
         'ja',
+        'kn',
         'ko',
+        'mr',
+        'nl',
+        'pt',
         'ru',
+        'ta',
+        'te',
+        'tr',
         'vi',
         'zh'
       ].contains(locale.languageCode);
@@ -3531,6 +4377,10 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'bn':
+      return AppLocalizationsBn();
     case 'de':
       return AppLocalizationsDe();
     case 'en':
@@ -3541,14 +4391,30 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsFr();
     case 'hi':
       return AppLocalizationsHi();
+    case 'id':
+      return AppLocalizationsId();
     case 'it':
       return AppLocalizationsIt();
     case 'ja':
       return AppLocalizationsJa();
+    case 'kn':
+      return AppLocalizationsKn();
     case 'ko':
       return AppLocalizationsKo();
+    case 'mr':
+      return AppLocalizationsMr();
+    case 'nl':
+      return AppLocalizationsNl();
+    case 'pt':
+      return AppLocalizationsPt();
     case 'ru':
       return AppLocalizationsRu();
+    case 'ta':
+      return AppLocalizationsTa();
+    case 'te':
+      return AppLocalizationsTe();
+    case 'tr':
+      return AppLocalizationsTr();
     case 'vi':
       return AppLocalizationsVi();
     case 'zh':

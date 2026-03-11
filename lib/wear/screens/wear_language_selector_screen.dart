@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import '../../services/locale_service.dart';
 
 class WearLanguageSelectorScreen extends StatefulWidget {
@@ -20,24 +21,6 @@ class _WearLanguageSelectorScreenState
     extends State<WearLanguageSelectorScreen> {
   late Locale? _selectedLocale;
   final ScrollController _scrollController = ScrollController();
-
-  final List<Map<String, dynamic>> _languages = [
-    {'name': 'System', 'locale': null},
-    {'name': 'English', 'locale': const Locale('en')},
-    {'name': 'Deutsch', 'locale': const Locale('de')},
-    {'name': 'Español', 'locale': const Locale('es')},
-    {'name': 'Français', 'locale': const Locale('fr')},
-    {'name': 'हिन्दी', 'locale': const Locale('hi')},
-    {'name': 'Italiano', 'locale': const Locale('it')},
-    {'name': '日本語', 'locale': const Locale('ja')},
-    {'name': '한국어', 'locale': const Locale('ko')},
-    {'name': 'Русский', 'locale': const Locale('ru')},
-    {'name': '简体中文', 'locale': const Locale('zh')},
-    {
-      'name': '繁體中文',
-      'locale': const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant')
-    },
-  ];
 
   @override
   void initState() {
@@ -62,6 +45,39 @@ class _WearLanguageSelectorScreenState
     }
   }
 
+  List<Map<String, dynamic>> _buildLanguages(AppLocalizations l10n) {
+    return [
+      {'name': l10n.systemDefault, 'locale': null},
+      {'name': l10n.langEnglish, 'locale': const Locale('en')},
+      {'name': l10n.langArabic, 'locale': const Locale('ar')},
+      {'name': l10n.langBengali, 'locale': const Locale('bn')},
+      {'name': l10n.langDeutsch, 'locale': const Locale('de')},
+      {'name': l10n.langEspanol, 'locale': const Locale('es')},
+      {'name': l10n.langFrancais, 'locale': const Locale('fr')},
+      {'name': l10n.langHindi, 'locale': const Locale('hi')},
+      {'name': l10n.langIndonesian, 'locale': const Locale('id')},
+      {'name': l10n.langItaliano, 'locale': const Locale('it')},
+      {'name': l10n.langJapanese, 'locale': const Locale('ja')},
+      {'name': l10n.langKannada, 'locale': const Locale('kn')},
+      {'name': l10n.langKorean, 'locale': const Locale('ko')},
+      {'name': l10n.langMarathi, 'locale': const Locale('mr')},
+      {'name': l10n.langDutch, 'locale': const Locale('nl')},
+      {'name': l10n.langPortuguese, 'locale': const Locale('pt')},
+      {'name': l10n.langRussian, 'locale': const Locale('ru')},
+      {'name': l10n.langTamil, 'locale': const Locale('ta')},
+      {'name': l10n.langTelugu, 'locale': const Locale('te')},
+      {'name': l10n.langTurkish, 'locale': const Locale('tr')},
+      {'name': l10n.langSimplifiedChinese, 'locale': const Locale('zh')},
+      {
+        'name': l10n.langTraditionalChinese,
+        'locale': const Locale.fromSubtags(
+          languageCode: 'zh',
+          scriptCode: 'Hant',
+        ),
+      },
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return WatchShape(
@@ -80,118 +96,119 @@ class _WearLanguageSelectorScreenState
   }
 
   Widget _buildLanguageSelector(WearMode mode, WearShape shape) {
-    return Expanded(
-      child: RotaryScrollbar(
+    final l10n = AppLocalizations.of(context)!;
+    final languages = _buildLanguages(l10n);
+
+    return RotaryScrollbar(
+      controller: _scrollController,
+      child: ListView(
         controller: _scrollController,
-        child: ListView(
-          controller: _scrollController,
-          padding: EdgeInsets.only(
-            left: shape == WearShape.round ? 32.0 : 12.0,
-            right: shape == WearShape.round ? 32.0 : 12.0,
-            top: shape == WearShape.round ? 24.0 : 16.0,
-            bottom: shape == WearShape.round ? 80.0 : 60.0,
-          ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                bottom: 12.0,
-              ),
-              child: Center(
-                child: Text(
-                  'Select Language',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color:
-                        mode == WearMode.active ? Colors.white : Colors.white70,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
+        padding: EdgeInsets.only(
+          left: shape == WearShape.round ? 32.0 : 12.0,
+          right: shape == WearShape.round ? 32.0 : 12.0,
+          top: shape == WearShape.round ? 24.0 : 16.0,
+          bottom: shape == WearShape.round ? 80.0 : 60.0,
+        ),
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 12.0,
+            ),
+            child: Center(
+              child: Text(
+                l10n.selectLanguage,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color:
+                      mode == WearMode.active ? Colors.white : Colors.white70,
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
             ),
-            ..._languages.map((lang) {
-              final isSelected = lang['locale'] == _selectedLocale ||
-                  (lang['locale'] == null && _selectedLocale == null);
+          ),
+          ...languages.map((lang) {
+            final isSelected = lang['locale'] == _selectedLocale ||
+                (lang['locale'] == null && _selectedLocale == null);
 
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Card(
-                  color: mode == WearMode.active
-                      ? Colors.grey[900]
-                      : Colors.grey[850],
-                  margin: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: ConstrainedBox(
-                    constraints:
-                        const BoxConstraints(minHeight: 48, minWidth: 48),
-                    child: InkWell(
-                      onTap: () async {
-                        setState(() {
-                          _selectedLocale = lang['locale'] as Locale?;
-                        });
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Card(
+                color: mode == WearMode.active
+                    ? Colors.grey[900]
+                    : Colors.grey[850],
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ConstrainedBox(
+                  constraints:
+                      const BoxConstraints(minHeight: 48, minWidth: 48),
+                  child: InkWell(
+                    onTap: () async {
+                      setState(() {
+                        _selectedLocale = lang['locale'] as Locale?;
+                      });
 
-                        final confirmed = await Navigator.push<bool>(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WearLanguageConfirmScreen(
-                              languageName: lang['name'] as String,
-                              isSystemLanguage: lang['locale'] == null,
+                      final confirmed = await Navigator.push<bool>(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WearLanguageConfirmScreen(
+                            languageName: lang['name'] as String,
+                            isSystemLanguage: lang['locale'] == null,
+                          ),
+                        ),
+                      );
+
+                      if (!mounted || confirmed != true) return;
+                      await _applyLanguage();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        children: [
+                          if (isSelected)
+                            Icon(
+                              Icons.check_circle,
+                              size: 18,
+                              color: Colors.green[400],
+                            )
+                          else
+                            Icon(
+                              Icons.radio_button_unchecked,
+                              size: 18,
+                              color: mode == WearMode.active
+                                  ? Colors.white38
+                                  : Colors.white24,
+                            ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              lang['name'] as String,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: isSelected
+                                    ? Colors.green[400]
+                                    : (mode == WearMode.active
+                                        ? Colors.white
+                                        : Colors.white70),
+                                fontWeight: isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                              ),
                             ),
                           ),
-                        );
-
-                        if (!mounted || confirmed != true) return;
-                        await _applyLanguage();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          children: [
-                            if (isSelected)
-                              Icon(
-                                Icons.check_circle,
-                                size: 18,
-                                color: Colors.green[400],
-                              )
-                            else
-                              Icon(
-                                Icons.radio_button_unchecked,
-                                size: 18,
-                                color: mode == WearMode.active
-                                    ? Colors.white38
-                                    : Colors.white24,
-                              ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                lang['name'] as String,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: isSelected
-                                      ? Colors.green[400]
-                                      : (mode == WearMode.active
-                                          ? Colors.white
-                                          : Colors.white70),
-                                  fontWeight: isSelected
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              );
-            }),
-          ],
-        ),
+              ),
+            );
+          }),
+        ],
       ),
     );
   }
@@ -223,6 +240,8 @@ class _WearLanguageConfirmScreenState extends State<WearLanguageConfirmScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return WatchShape(
       builder: (context, shape, child) {
         return AmbientMode(
@@ -247,7 +266,7 @@ class _WearLanguageConfirmScreenState extends State<WearLanguageConfirmScreen> {
                       children: [
                         Center(
                           child: Text(
-                            'Confirm Language',
+                            l10n.selectLanguage,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -262,7 +281,7 @@ class _WearLanguageConfirmScreenState extends State<WearLanguageConfirmScreen> {
                         Center(
                           child: Text(
                             widget.isSystemLanguage
-                                ? 'System'
+                                ? l10n.systemDefault
                                 : widget.languageName,
                             style: TextStyle(
                               fontSize: 14,
@@ -283,11 +302,11 @@ class _WearLanguageConfirmScreenState extends State<WearLanguageConfirmScreen> {
                                 minHeight: 46, minWidth: 46),
                             child: InkWell(
                               onTap: () => Navigator.pop(context, true),
-                              child: const Padding(
+                              child: Padding(
                                 padding: EdgeInsets.all(12.0),
                                 child: Center(
                                   child: Text(
-                                    'OK',
+                                    l10n.confirm,
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
@@ -315,7 +334,7 @@ class _WearLanguageConfirmScreenState extends State<WearLanguageConfirmScreen> {
                                 padding: const EdgeInsets.all(12.0),
                                 child: Center(
                                   child: Text(
-                                    'Cancel',
+                                    l10n.cancel,
                                     style: TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w600,

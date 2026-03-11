@@ -141,6 +141,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
   Widget _buildStatsCard(QuerySnapshot recycleBinSnapshot) {
     final totalItems = recycleBinSnapshot.docs.length;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       margin: const EdgeInsets.all(16),
@@ -182,7 +183,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Recycle Bin',
+                  l10n.recycleBin,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -190,7 +191,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                   ),
                 ),
                 Text(
-                  '$totalItems ${totalItems == 1 ? 'item' : 'items'} in recycle bin',
+                  l10n.itemInRecycleBin(totalItems),
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 14,
@@ -206,6 +207,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
 
   Widget _buildItemCard(DocumentSnapshot doc, Map<String, dynamic> itemData) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
     final deadline = itemData['deadline'] as Timestamp?;
     final location = itemData['location'] as Map<String, dynamic>?;
     final counter = itemData['counter'] ?? 1;
@@ -213,7 +215,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
     final itemIcon =
         iconIdentifier != null ? FoodIconMap.getIcon(iconIdentifier) : null;
     final deletedAt = itemData['deletedAt'] as Timestamp?;
-    final deletedByName = itemData['deletedByName'] ?? 'Unknown';
+    final deletedByName = itemData['deletedByName'] ?? l10n.unknownUser;
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -352,7 +354,8 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                                   size: 10, color: Colors.red[800]),
                               const SizedBox(width: 4),
                               Text(
-                                'Deleted ${DateFormat('MMM dd, yyyy').format(deletedAt.toDate())}',
+                                l10n.deletedOnDate(DateFormat('MMM dd, yyyy')
+                                    .format(deletedAt.toDate())),
                                 style: TextStyle(
                                   color: Colors.red[800],
                                   fontSize: 10,
@@ -437,7 +440,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                         size: 16,
                         color: Colors.green[600],
                       ),
-                      tooltip: 'Restore item',
+                      tooltip: l10n.restoreItemTooltip,
                     ),
                     IconButton(
                       onPressed: () => _deletePermanently(doc.id),
@@ -446,7 +449,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                         size: 16,
                         color: Colors.red[400],
                       ),
-                      tooltip: 'Delete permanently',
+                      tooltip: l10n.deletePermanentlyTooltip,
                     ),
                   ],
                 );
@@ -461,6 +464,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     PreferredSize buildCustomAppBar(BuildContext context) {
       final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -473,9 +477,9 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.pop(context),
           ),
-          title: const Text(
-            "Recycle Bin",
-            style: TextStyle(
+          title: Text(
+            l10n.recycleBin,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -530,7 +534,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'No Deleted Items',
+                      l10n.noDeletedItems,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -539,7 +543,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Items you delete will appear here for 30 days',
+                      l10n.noDeletedItemsSubtitle,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: isDark ? Colors.grey[400] : Colors.grey[600],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
+import 'package:shopsync/screens/settings/restarting_screen.dart';
 import '/widgets/ui/loading_spinner.dart';
 
 class SignOutScreen extends StatefulWidget {
@@ -36,7 +37,11 @@ class _SignOutScreenState extends State<SignOutScreen>
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
     if (!mounted) return;
-    Navigator.pushReplacementNamed(context, '/onboarding');
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const RestartingScreen(),
+      ),
+    );
   }
 
   @override
@@ -55,8 +60,8 @@ class _SignOutScreenState extends State<SignOutScreen>
       appBar: AppBar(
         backgroundColor: isDark ? Colors.grey[800] : Colors.green[800],
         elevation: 0,
-        title: const Text(
-          'ShopSync',
+        title: Text(
+          l10n.shopsync,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

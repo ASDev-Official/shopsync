@@ -135,7 +135,7 @@ class ShopSyncApp extends StatefulWidget {
   State<ShopSyncApp> createState() => _ShopSyncAppState();
 
   /// Static method to change locale from anywhere in the app
-  static void setLocale(BuildContext context, Locale newLocale) {
+  static void setLocale(BuildContext context, Locale? newLocale) {
     _ShopSyncAppState? state =
         context.findAncestorStateOfType<_ShopSyncAppState>();
     state?.setLocale(newLocale);
@@ -160,11 +160,15 @@ class _ShopSyncAppState extends State<ShopSyncApp> {
     }
   }
 
-  void setLocale(Locale locale) {
+  void setLocale(Locale? locale) {
     setState(() {
       _locale = locale;
     });
-    LocaleService.saveLocale(locale);
+    if (locale == null) {
+      LocaleService.clearLocale();
+    } else {
+      LocaleService.saveLocale(locale);
+    }
   }
 
   @override

@@ -288,8 +288,9 @@ class GravatarService {
 
       // Check if user has set Gravatar preference
       final hasPreference = await hasGravatarPreference();
-      if (hasPreference != true)
+      if (hasPreference != true) {
         return; // Skip if user hasn't completed setup or error occurred
+      }
 
       // Check if Gravatar exists
       final exists = await gravatarExists(user.email!);

@@ -4,116 +4,113 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for German (`de`).
-class AppLocalizationsDe extends AppLocalizations {
-  AppLocalizationsDe([String locale = 'de']) : super(locale);
+/// The translations for Marathi (`mr`).
+class AppLocalizationsMr extends AppLocalizations {
+  AppLocalizationsMr([String locale = 'mr']) : super(locale);
 
   @override
-  String get aboutApp => 'Über diese App';
+  String get aboutApp => 'About App';
 
   @override
-  String get accessYourListsAndSettings =>
-      'Auf Ihre Listen und Einstellungen zugreifen';
+  String get accessYourListsAndSettings => 'Access your lists and settings';
 
   @override
-  String get addCustomGroup => 'Eine benutzerdefinierte Gruppe hinzufügen';
+  String get addCustomGroup => 'Add Custom Group';
 
   @override
-  String get addDescription => 'Eine Beschreibung hinzufügen...';
+  String get addDescription => 'Add description...';
 
   @override
-  String get addDescription1 => 'Eine Beschreibung hinzufügen ...';
+  String get addDescription1 => 'Add description...';
 
   @override
-  String get addDescription2 => 'Eine Beschreibung hinzufügen ...';
+  String get addDescription2 => 'Add description...';
 
   @override
-  String get addFromTemplate => 'Aus Vorlage hinzufügen';
+  String get addFromTemplate => 'Add From Template';
 
   @override
-  String get addGroup => 'Eine Gruppe hinzufügen';
+  String get addGroup => 'Add Group';
 
   @override
-  String get addItemManually => 'Gegenstände manuell hinzufügen';
+  String get addItemManually => 'Add Item Manually';
 
   @override
-  String get addItemsToYourLists => 'Gegenstände zu Ihreren Listen hinzufügen';
+  String get addItemsToYourLists => 'Add items to your lists';
 
   @override
-  String get addNewLocation => 'Einen neuen Standort hinzufügen';
+  String get addNewLocation => 'Add new location';
 
   @override
-  String get added => 'Hinzugefügt';
+  String get added => 'Added';
 
   @override
-  String get appLanguage => 'App-Sprache';
+  String get appLanguage => 'App Language';
 
   @override
   String get appVersion => 'App Version';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems =>
-      'Möchten Sie wirklich alle Ihre abgeschlossenen Gegenstände entfernen?';
+      'Are you sure you want to remove all completed items?';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems1 =>
-      'Sind Sie sicher, dass Sie ihre abgeschlossenen Elemente löschen wollen?';
+      'Are you sure you want to remove all completed items?';
 
   @override
-  String get areYouSureYouWantToSignOut =>
-      'Sind Sie sicher, dass Sie sich abmelden wollen?';
+  String get areYouSureYouWantToSignOut => 'Are you sure you want to sign out?';
 
   @override
   String get areYouSureYouWantToSignOut1 =>
-      'Sind Sie sicher, dass Sie sich abmelden wollen?';
+      'Are you sure you want to sign out?';
 
   @override
   String get areYouSureYouWantToSignOut2 =>
-      'Sind Sie sicher, dass Sie sich abmelden wollen?';
+      'Are you sure you want to sign out?';
 
   @override
   String get areYouSureYouWantToSignOut3 =>
-      'Sind Sie sicher, dass Sie sich abmelden wollen?';
+      'Are you sure you want to sign out?';
 
   @override
-  String get avgCompletion => 'Durchschnittliche Fertigstellung';
+  String get avgCompletion => 'Avg Completion';
 
   @override
-  String get canAddEditAndDeleteItems =>
-      'Kann Elemente hinzufügen, editieren und löschen';
+  String get canAddEditAndDeleteItems => 'Can add, edit, and delete items';
 
   @override
-  String get canOnlyViewItems => 'Kann ausschließlich Elemente ansehen';
+  String get canOnlyViewItems => 'Can only view items';
 
   @override
-  String get cancel => 'Abbrechen';
+  String get cancel => 'Cancel';
 
   @override
-  String get cancel1 => 'Abbrechen';
+  String get cancel1 => 'Cancel';
 
   @override
-  String get cancel10 => 'Abbrechen';
+  String get cancel10 => 'Cancel';
 
   @override
-  String get cancel11 => 'Abbrechen';
+  String get cancel11 => 'Cancel';
 
   @override
-  String get cancel12 => 'Abbrechen';
+  String get cancel12 => 'Cancel';
 
   @override
-  String get cancel2 => 'Abbrechen';
+  String get cancel2 => 'Cancel';
 
   @override
-  String get cancel3 => 'Abbrechen';
+  String get cancel3 => 'Cancel';
 
   @override
-  String get cancel4 => 'Abbrechen';
+  String get cancel4 => 'Cancel';
 
   @override
-  String get cancel5 => 'Abbrechen';
+  String get cancel5 => 'Cancel';
 
   @override
-  String get cancel6 => 'Abbrechen';
+  String get cancel6 => 'Cancel';
 
   @override
   String get cancel7 => 'Cancel';

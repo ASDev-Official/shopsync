@@ -1141,5 +1141,243 @@
   "aiFeaturesEnabled": "AI features enabled",
   "aiFeaturesDisabledMessage": "AI features disabled",
   "failedToUpdateAiPreference": "Failed to update AI preference",
-  "errorSavingPreference": "Error saving preference. Please try again."
+  "errorSavingPreference": "Error saving preference. Please try again.",
+  "chooseIconTitle": "Choose Icon",
+  "doneButton": "Done",
+  "selectedIconLabel": "Selected Icon",
+  "loadingIcons": "Loading icons...",
+  "noIconsFound": "No icons found",
+  "noIconsFoundHint": "Try adjusting your search or category filter",
+  "allCategory": "All",
+  "itemInRecycleBin": "{count, plural, =0{No items in recycle bin} =1{{count} item in recycle bin} other{{count} items in recycle bin}}",
+  "@itemInRecycleBin": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "restoreItemTooltip": "Restore item",
+  "deletePermanentlyTooltip": "Delete permanently",
+  "deletedOnDate": "Deleted {date}",
+  "@deletedOnDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "noDeletedItems": "No Deleted Items",
+  "noDeletedItemsSubtitle": "Items you delete will appear here for 30 days",
+  "areYouSureDeleteCategory": "Are you sure you want to delete \"{categoryName}\"? This will remove the category from all items.",
+  "@areYouSureDeleteCategory": {
+    "placeholders": {
+      "categoryName": {
+        "type": "String"
+      }
+    }
+  },
+  "noCategoriesYet": "No categories yet",
+  "createYourFirstCategoryAbove": "Create your first category above",
+  "editTooltip": "Edit",
+  "deleteTooltip": "Delete",
+  "createNewCategory": "Create New Category",
+  "timeframeDay": "Day",
+  "timeframeWeek": "Week",
+  "timeframeMonth": "Month",
+  "timeframeAll": "All",
+  "noInsightsAvailableYet": "No insights available yet",
+  "noActivityDataForTimeframe": "No activity data for this timeframe",
+  "activityTimeline": "Activity Timeline",
+  "addedLabel": "Added",
+  "completedLabel": "Completed",
+  "categoryBreakdown": "Category Breakdown",
+  "noCollaboratorActivityInTimeframe": "No collaborator activity in this timeframe",
+  "collaboratorActivity": "Collaborator Activity",
+  "addedCompletedSummary": "{added} added • {completed} completed",
+  "@addedCompletedSummary": {
+    "placeholders": {
+      "added": {
+        "type": "String"
+      },
+      "completed": {
+        "type": "String"
+      }
+    }
+  },
+  "continueWithoutOrganizing": "You can organize your lists into groups later from the home screen. Continue without organizing?",
+  "createdAtDate": "Created {date}",
+  "@createdAtDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "suggestedBadge": "Suggested",
+  "ungroupedListsSection": "Ungrouped Lists",
+  "ungroupedListsCount": "{count, plural, =0{No lists assigned to any group} =1{{count} list not assigned to any group} other{{count} lists not assigned to any group}}",
+  "@ungroupedListsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dragListsToGroupOrCreate": "Drag these lists to a group above or create a new group for them:",
+  "shopSyncMigration": "ShopSync Migration",
+  "organizeWithListGroups": "Organize with List Groups",
+  "organizeListsBodyCount": "{count, plural, =0{We've suggested some groups for your lists. You can edit, remove, or add new groups.} =1{We've suggested some groups for your {count} list. You can edit, remove, or add new groups.} other{We've suggested some groups for your {count} lists. You can edit, remove, or add new groups.}}",
+  "@organizeListsBodyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "organizeLists": "Organize Lists",
+  "listsCount": "{count, plural, =0{No lists} =1{{count} list} other{{count} lists}}",
+  "@listsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "failedToUpgradeLists": "Failed to upgrade lists. Please try again.",
+  "anErrorOccurredError": "An error occurred: {error}",
+  "@anErrorOccurredError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "upgradeFailed": "Upgrade Failed",
+  "upgradingYourLists": "Upgrading your lists",
+  "pleaseWaitUpdatingListGroups": "Please wait while we update your list groups to the new format...",
+  "licensesTitle": "Licenses",
+  "noPackagesFound": "No packages found",
+  "noPackagesMatchSearch": "No packages match your search",
+  "versionDisplay": "Version {version}",
+  "@versionDisplay": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "trendsAndPerformance": "Trends & Performance",
+  "topCategories": "Top Categories",
+  "topCompletedLists": "Top Completed Lists",
+  "timeframeQuarter": "Quarter",
+  "timeframeYear": "Year",
+  "timeframeAllTime": "All Time",
+  "completionRateTitle": "Completion Rate",
+  "failedToLoadCompletionRate": "Failed to load completion rate",
+  "ofItemsCompleted": "of items completed",
+  "dailyProductivity": "Daily Productivity",
+  "failedToLoadProductivityData": "Failed to load productivity data",
+  "itemsAddedPerDay": "items added per day",
+  "activityOverTime": "Activity Over Time",
+  "failedToLoadActivityData": "Failed to load activity data",
+  "noDataAvailable": "No data available",
+  "noData": "No data",
+  "itemsCountTooltip": "{count, plural, =0{No items} =1{{count} item} other{{count} items}}",
+  "@itemsCountTooltip": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "itemsAddedEachDay": "Items added each day",
+  "failedToLoadCategoryData": "Failed to load category data",
+  "itemCountLabel": "{count, plural, =0{No items} =1{{count} item} other{{count} items}}",
+  "@itemCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "failedToLoadListData": "Failed to load list data",
+  "selectLanguage": "Select Language",
+  "systemDefault": "System Default",
+  "langEnglish": "English",
+  "langArabic": "العربية",
+  "langBengali": "বাংলা",
+  "langDeutsch": "Deutsch",
+  "langDutch": "Dutch",
+  "langEspanol": "Español",
+  "langFrancais": "Français",
+  "langHindi": "हिन्दी",
+  "langIndonesian": "Bahasa Indonesia",
+  "langItaliano": "Italiano",
+  "langJapanese": "日本語",
+  "langKannada": "ಕನ್ನಡ",
+  "langKorean": "한국어",
+  "langMarathi": "मराठी",
+  "langPortuguese": "Português",
+  "langRussian": "Русский",
+  "langSimplifiedChinese": "简体中文",
+  "langTamil": "தமிழ்",
+  "langTelugu": "తెలుగు",
+  "langTraditionalChinese": "繁體中文",
+  "langTurkish": "Türkçe",
+  "langVietnamese": "Tiếng Việt",
+  "useSystemDefaultTitle": "Use System Default",
+  "useSystemDefaultBody": "Do you want to use your device's language setting?",
+  "confirm": "Confirm",
+  "errorUpdatingProfile": "Error updating profile: {error}",
+  "@errorUpdatingProfile": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "googleAccountLinkedMessage": "Google account linked successfully! You can now sign in with Google.",
+  "areYouSureUnlinkGoogle": "Are you sure you want to unlink your Google account? You will no longer be able to sign in with Google unless you link it again.",
+  "anErrorOccurredLinkingGoogle": "An error occurred while linking your Google account.",
+  "anErrorOccurredUnlinkingGoogle": "An error occurred while unlinking your Google account.",
+  "goBack": "Go Back",
+  "editProfileTooltip": "Edit Profile",
+  "accountInformation": "Account Information",
+  "displayName": "Display Name",
+  "emailAddress": "Email Address",
+  "emailCannotBeChanged": "Email (cannot be changed)",
+  "linkedAccounts": "Linked Accounts",
+  "manageHowYouSignIn": "Manage how you sign in to ShopSync",
+  "emailAndPassword": "Email & Password",
+  "signInWithEmailAndPassword": "Sign in with email and password",
+  "notConfigured": "Not configured",
+  "signInWithGoogleAccount": "Sign in with Google account",
+  "notLinked": "Not linked",
+  "showGravatar": "Show Gravatar",
+  "displayProfilePictureToOtherUsers": "Display profile picture to other users",
+  "accountActivity": "Account Activity",
+  "shoppingListsCount": "{count, plural, =0{No shopping lists} =1{{count} shopping list} other{{count} shopping lists}}",
+  "@shoppingListsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "listsYouHaveAccessTo": "Lists you have access to",
+  "rememberYourPassword": "Remember your password?",
+  "shopSyncUpdate": "ShopSync Update",
+  "shopSyncHasAnUpdate": "ShopSync has an update",
+  "pleaseUpdateAppBody": "Please update the app to continue using the latest features and improvements.",
+  "restartingShopSync": "Restarting ShopSync",
+  "downloadingUpdateLabel": "Downloading update...",
+  "restartRequiredTitle": "Restart Required",
+  "restartRequiredBody": "Automatic restart failed. Please force close ShopSync and open it again to apply your language change.",
+  "install": "Install",
+  "downloading": "Downloading...",
+  "updateButton": "Update",
+  "google": "Google",
+  "startAddingItemsToSeeInsights": "Start adding items to see insights",
+  "pleaseTryAgainLater": "Please try again later"
 }

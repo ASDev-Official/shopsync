@@ -87,8 +87,8 @@ class _MigrationScreenState extends State<MigrationScreen> {
         content: TextField(
           controller: controller,
           autofocus: true,
-          decoration: const InputDecoration(
-            hintText: 'Enter group name',
+          decoration: InputDecoration(
+            hintText: AppLocalizations.of(context)!.enterGroupName,
             border: OutlineInputBorder(),
           ),
         ),
@@ -179,8 +179,8 @@ class _MigrationScreenState extends State<MigrationScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.skipOrganization),
-        content: const Text(
-          'You can organize your lists into groups later from the home screen. Continue without organizing?',
+        content: Text(
+          AppLocalizations.of(context)!.continueWithoutOrganizing,
         ),
         actions: [
           TextButton(
@@ -224,6 +224,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
 
   Widget _buildListItem(QueryDocumentSnapshot listDoc, int groupIndex) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
     final data = listDoc.data() as Map<String, dynamic>;
     final listName = data['name'] ?? 'Unnamed List';
     final timestamp = data['createdAt'] as Timestamp?;
@@ -259,7 +260,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
         subtitle: Text(
-          'Created $createdAt',
+          l10n.createdAtDate(createdAt),
           style: TextStyle(fontSize: 12, color: Colors.grey[600]),
         ),
         trailing: PopupMenuButton<int>(
@@ -287,7 +288,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
 
                   return PopupMenuItem(
                     value: index,
-                    child: Text('Move to ${group.name}'),
+                    child: Text(l10n.moveToGroupname(group.name)),
                   );
                 })
                 .where((item) => item != null)
@@ -300,6 +301,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
 
   Widget _buildGroupCard(MigrationGroup group, int index) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -352,7 +354,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
                         ),
                       ),
                       Text(
-                        '${group.lists.length} list${group.lists.length != 1 ? 's' : ''}',
+                        l10n.listsCount(group.lists.length),
                         style: TextStyle(
                           color: isDark ? Colors.grey[400] : Colors.grey[600],
                         ),
@@ -369,7 +371,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      'Suggested',
+                      l10n.suggestedBadge,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.blue[800],
@@ -405,6 +407,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
   Widget _buildUngroupedListsSection() {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final ungroupedLists = _ungroupedLists;
+    final l10n = AppLocalizations.of(context)!;
 
     if (ungroupedLists.isEmpty) return const SizedBox.shrink();
 
@@ -460,7 +463,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Ungrouped Lists',
+                        l10n.ungroupedListsSection,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -469,7 +472,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
                         ),
                       ),
                       Text(
-                        '${ungroupedLists.length} list${ungroupedLists.length != 1 ? 's' : ''} not assigned to any group',
+                        l10n.ungroupedListsCount(ungroupedLists.length),
                         style: TextStyle(
                           color:
                               isDark ? Colors.orange[300] : Colors.orange[700],
@@ -489,7 +492,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Drag these lists to a group above or create a new group for them:',
+                  l10n.dragListsToGroupOrCreate,
                   style: TextStyle(
                     fontSize: 14,
                     color: isDark ? Colors.orange[300] : Colors.orange[700],
@@ -512,12 +515,13 @@ class _MigrationScreenState extends State<MigrationScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'ShopSync Migration',
+        title: Text(
+          l10n.shopSyncMigration,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -550,7 +554,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'Organize with List Groups',
+                        l10n.organizeWithListGroups,
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -559,7 +563,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'We\'ve suggested some groups for your ${_userLists.length} lists. You can edit, remove, or add new groups.',
+                        l10n.organizeListsBodyCount(_userLists.length),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
@@ -606,8 +610,8 @@ class _MigrationScreenState extends State<MigrationScreen> {
                               TextField(
                                 controller: _customGroupController,
                                 autofocus: true,
-                                decoration: const InputDecoration(
-                                  hintText: 'Enter group name',
+                                decoration: InputDecoration(
+                                  hintText: l10n.enterGroupName,
                                   border: OutlineInputBorder(),
                                 ),
                                 onSubmitted: (_) => _addCustomGroup(),
@@ -690,8 +694,8 @@ class _MigrationScreenState extends State<MigrationScreen> {
                   foregroundColor: Colors.grey[600],
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                child: const Text(
-                  'Skip for Now',
+                child: Text(
+                  l10n.skipForNow,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                   ),
@@ -715,8 +719,8 @@ class _MigrationScreenState extends State<MigrationScreen> {
                         width: 20,
                         child: CustomLoadingSpinner(),
                       )
-                    : const Text(
-                        'Organize Lists',
+                    : Text(
+                        l10n.organizeLists,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
