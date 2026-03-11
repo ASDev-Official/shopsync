@@ -3723,17 +3723,11 @@ abstract class AppLocalizations {
   /// **'Ungrouped Lists'**
   String get ungroupedListsSection;
 
-  /// No description provided for @ungroupedListsCountOne.
+  /// No description provided for @ungroupedListsCount.
   ///
   /// In en, this message translates to:
-  /// **'{count} list not assigned to any group'**
-  String ungroupedListsCountOne(int count);
-
-  /// No description provided for @ungroupedListsCountOther.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} lists not assigned to any group'**
-  String ungroupedListsCountOther(int count);
+  /// **'{count, plural, =0{No lists assigned to any group} =1{{count} list not assigned to any group} other{{count} lists not assigned to any group}}'**
+  String ungroupedListsCount(int count);
 
   /// No description provided for @dragListsToGroupOrCreate.
   ///
@@ -3765,17 +3759,11 @@ abstract class AppLocalizations {
   /// **'Organize Lists'**
   String get organizeLists;
 
-  /// No description provided for @listsCountOne.
+  /// No description provided for @listsCount.
   ///
   /// In en, this message translates to:
-  /// **'{count} list'**
-  String listsCountOne(int count);
-
-  /// No description provided for @listsCountOther.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} lists'**
-  String listsCountOther(int count);
+  /// **'{count, plural, =0{No lists} =1{{count} list} other{{count} lists}}'**
+  String listsCount(int count);
 
   /// No description provided for @failedToUpgradeLists.
   ///

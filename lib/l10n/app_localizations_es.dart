@@ -2091,13 +2091,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ungroupedListsSection => 'Ungrouped Lists';
 
   @override
-  String ungroupedListsCountOne(int count) {
-    return '$count list not assigned to any group';
-  }
-
-  @override
-  String ungroupedListsCountOther(int count) {
-    return '$count lists not assigned to any group';
+  String ungroupedListsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count lists not assigned to any group',
+      one: '$count list not assigned to any group',
+      zero: 'No lists assigned to any group',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -2129,13 +2131,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get organizeLists => 'Organize Lists';
 
   @override
-  String listsCountOne(int count) {
-    return '$count list';
-  }
-
-  @override
-  String listsCountOther(int count) {
-    return '$count lists';
+  String listsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count lists',
+      one: '$count list',
+      zero: 'No lists',
+    );
+    return '$_temp0';
   }
 
   @override

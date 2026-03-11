@@ -354,9 +354,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
                         ),
                       ),
                       Text(
-                        group.lists.length == 1
-                            ? l10n.listsCountOne(group.lists.length)
-                            : l10n.listsCountOther(group.lists.length),
+                        l10n.listsCount(group.lists.length),
                         style: TextStyle(
                           color: isDark ? Colors.grey[400] : Colors.grey[600],
                         ),
@@ -474,11 +472,7 @@ class _MigrationScreenState extends State<MigrationScreen> {
                         ),
                       ),
                       Text(
-                        ungroupedLists.length == 1
-                            ? l10n.ungroupedListsCountOne(ungroupedLists.length)
-                            : l10n.ungroupedListsCountOther(
-                                ungroupedLists.length,
-                              ),
+                        l10n.ungroupedListsCount(ungroupedLists.length),
                         style: TextStyle(
                           color:
                               isDark ? Colors.orange[300] : Colors.orange[700],

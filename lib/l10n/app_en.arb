@@ -1216,16 +1216,8 @@
   },
   "suggestedBadge": "Suggested",
   "ungroupedListsSection": "Ungrouped Lists",
-  "ungroupedListsCountOne": "{count} list not assigned to any group",
-  "@ungroupedListsCountOne": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "ungroupedListsCountOther": "{count} lists not assigned to any group",
-  "@ungroupedListsCountOther": {
+  "ungroupedListsCount": "{count, plural, =0{No lists assigned to any group} =1{{count} list not assigned to any group} other{{count} lists not assigned to any group}}",
+  "@ungroupedListsCount": {
     "placeholders": {
       "count": {
         "type": "int"
@@ -1244,16 +1236,8 @@
     }
   },
   "organizeLists": "Organize Lists",
-  "listsCountOne": "{count} list",
-  "@listsCountOne": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "listsCountOther": "{count} lists",
-  "@listsCountOther": {
+  "listsCount": "{count, plural, =0{No lists} =1{{count} list} other{{count} lists}}",
+  "@listsCount": {
     "placeholders": {
       "count": {
         "type": "int"
