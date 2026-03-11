@@ -113,10 +113,10 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
     Locale('ar'),
     Locale('bn'),
     Locale('de'),
-    Locale('en'),
     Locale('es'),
     Locale('fr'),
     Locale('hi'),
@@ -3552,7 +3552,7 @@ abstract class AppLocalizations {
   /// No description provided for @itemInRecycleBin.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =0{No items in recycle bin} =1{# item in recycle bin} other{# items in recycle bin}}'**
+  /// **'{count, plural, =0{No items in recycle bin} =1{{count} item in recycle bin} other{{count} items in recycle bin}}'**
   String itemInRecycleBin(int count);
 
   /// No description provided for @restoreItemTooltip.
@@ -3756,7 +3756,7 @@ abstract class AppLocalizations {
   /// No description provided for @organizeListsBodyCount.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =0{We\'ve suggested some groups for your lists. You can edit, remove, or add new groups.} =1{We\'ve suggested some groups for your # list. You can edit, remove, or add new groups.} other{We\'ve suggested some groups for your # lists. You can edit, remove, or add new groups.}}'**
+  /// **'{count, plural, =0{We\'ve suggested some groups for your lists. You can edit, remove, or add new groups.} =1{We\'ve suggested some groups for your {count} list. You can edit, remove, or add new groups.} other{We\'ve suggested some groups for your {count} lists. You can edit, remove, or add new groups.}}'**
   String organizeListsBodyCount(int count);
 
   /// No description provided for @organizeLists.
@@ -3930,7 +3930,7 @@ abstract class AppLocalizations {
   /// No description provided for @itemsCountTooltip.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =0{No items} =1{# item} other{# items}}'**
+  /// **'{count, plural, =0{No items} =1{{count} item} other{{count} items}}'**
   String itemsCountTooltip(int count);
 
   /// No description provided for @itemsAddedEachDay.
@@ -3948,7 +3948,7 @@ abstract class AppLocalizations {
   /// No description provided for @itemCountLabel.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =0{No items} =1{# item} other{# items}}'**
+  /// **'{count, plural, =0{No items} =1{{count} item} other{{count} items}}'**
   String itemCountLabel(int count);
 
   /// No description provided for @failedToLoadListData.
@@ -4242,7 +4242,7 @@ abstract class AppLocalizations {
   /// No description provided for @shoppingListsCount.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =0{No shopping lists} =1{# shopping list} other{# shopping lists}}'**
+  /// **'{count, plural, =0{No shopping lists} =1{{count} shopping list} other{{count} shopping lists}}'**
   String shoppingListsCount(int count);
 
   /// No description provided for @listsYouHaveAccessTo.

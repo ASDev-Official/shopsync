@@ -1149,7 +1149,7 @@
   "noIconsFound": "No icons found",
   "noIconsFoundHint": "Try adjusting your search or category filter",
   "allCategory": "All",
-  "itemInRecycleBin": "{count, plural, =0{No items in recycle bin} =1{# item in recycle bin} other{# items in recycle bin}}",
+  "itemInRecycleBin": "{count, plural, =0{No items in recycle bin} =1{{count} item in recycle bin} other{{count} items in recycle bin}}",
   "@itemInRecycleBin": {
     "placeholders": {
       "count": {
@@ -1235,7 +1235,7 @@
   "dragListsToGroupOrCreate": "Drag these lists to a group above or create a new group for them:",
   "shopSyncMigration": "ShopSync Migration",
   "organizeWithListGroups": "Organize with List Groups",
-  "organizeListsBodyCount": "{count, plural, =0{We've suggested some groups for your lists. You can edit, remove, or add new groups.} =1{We've suggested some groups for your # list. You can edit, remove, or add new groups.} other{We've suggested some groups for your # lists. You can edit, remove, or add new groups.}}",
+  "organizeListsBodyCount": "{count, plural, =0{We've suggested some groups for your lists. You can edit, remove, or add new groups.} =1{We've suggested some groups for your {count} list. You can edit, remove, or add new groups.} other{We've suggested some groups for your {count} lists. You can edit, remove, or add new groups.}}",
   "@organizeListsBodyCount": {
     "placeholders": {
       "count": {
@@ -1299,7 +1299,7 @@
   "failedToLoadActivityData": "Failed to load activity data",
   "noDataAvailable": "No data available",
   "noData": "No data",
-  "itemsCountTooltip": "{count, plural, =0{No items} =1{# item} other{# items}}",
+  "itemsCountTooltip": "{count, plural, =0{No items} =1{{count} item} other{{count} items}}",
   "@itemsCountTooltip": {
     "placeholders": {
       "count": {
@@ -1309,7 +1309,7 @@
   },
   "itemsAddedEachDay": "Items added each day",
   "failedToLoadCategoryData": "Failed to load category data",
-  "itemCountLabel": "{count, plural, =0{No items} =1{# item} other{# items}}",
+  "itemCountLabel": "{count, plural, =0{No items} =1{{count} item} other{{count} items}}",
   "@itemCountLabel": {
     "placeholders": {
       "count": {
@@ -1372,7 +1372,7 @@
   "showGravatar": "Show Gravatar",
   "displayProfilePictureToOtherUsers": "Display profile picture to other users",
   "accountActivity": "Account Activity",
-  "shoppingListsCount": "{count, plural, =0{No shopping lists} =1{# shopping list} other{# shopping lists}}",
+  "shoppingListsCount": "{count, plural, =0{No shopping lists} =1{{count} shopping list} other{{count} shopping lists}}",
   "@shoppingListsCount": {
     "placeholders": {
       "count": {

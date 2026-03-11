@@ -1987,8 +1987,8 @@ class AppLocalizationsEs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '# items in recycle bin',
-      one: '# item in recycle bin',
+      other: '$count items in recycle bin',
+      one: '$count item in recycle bin',
       zero: 'No items in recycle bin',
     );
     return '$_temp0';
@@ -2116,9 +2116,9 @@ class AppLocalizationsEs extends AppLocalizations {
       count,
       locale: localeName,
       other:
-          'We\'ve suggested some groups for your # lists. You can edit, remove, or add new groups.',
+          'We\'ve suggested some groups for your $count lists. You can edit, remove, or add new groups.',
       one:
-          'We\'ve suggested some groups for your # list. You can edit, remove, or add new groups.',
+          'We\'ve suggested some groups for your $count list. You can edit, remove, or add new groups.',
       zero:
           'We\'ve suggested some groups for your lists. You can edit, remove, or add new groups.',
     );
@@ -2224,8 +2224,8 @@ class AppLocalizationsEs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '# items',
-      one: '# item',
+      other: '$count items',
+      one: '$count item',
       zero: 'No items',
     );
     return '$_temp0';
@@ -2242,8 +2242,8 @@ class AppLocalizationsEs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '# items',
-      one: '# item',
+      other: '$count items',
+      one: '$count item',
       zero: 'No items',
     );
     return '$_temp0';
@@ -2406,8 +2406,8 @@ class AppLocalizationsEs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '# shopping lists',
-      one: '# shopping list',
+      other: '$count shopping lists',
+      one: '$count shopping list',
       zero: 'No shopping lists',
     );
     return '$_temp0';
