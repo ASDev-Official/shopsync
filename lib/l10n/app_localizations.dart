@@ -4083,6 +4083,12 @@ abstract class AppLocalizations {
   /// **'Türkçe'**
   String get langTurkish;
 
+  /// No description provided for @langVietnamese.
+  ///
+  /// In en, this message translates to:
+  /// **'Tiếng Việt'**
+  String get langVietnamese;
+
   /// No description provided for @useSystemDefaultTitle.
   ///
   /// In en, this message translates to:

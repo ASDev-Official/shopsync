@@ -2315,6 +2315,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get langTurkish => 'Türkçe';
 
   @override
+  String get langVietnamese => 'Tiếng Việt';
+
+  @override
   String get useSystemDefaultTitle => 'Use System Default';
 
   @override
