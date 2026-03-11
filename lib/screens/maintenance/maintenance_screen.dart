@@ -30,8 +30,8 @@ class MaintenanceScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: isDark ? Colors.grey[800] : Colors.green[800],
         elevation: 0,
-        title: const Text(
-          'ShopSync',
+        title: Text(
+          l10n.shopsync,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

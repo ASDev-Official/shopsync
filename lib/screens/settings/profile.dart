@@ -164,7 +164,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         stackTrace: StackTrace.current,
         hint: Hint.withMap({'action': 'updating_profile'}),
       );
-      setState(() => _errorMessage = 'Error updating profile: ${e.toString()}');
+      setState(() {
+        _errorMessage =
+            AppLocalizations.of(context)!.errorUpdatingProfile(e.toString());
+      });
     } finally {
       setState(() => _isLoading = false);
     }
@@ -215,7 +218,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error signing out: ${e.toString()}'),
+            content: Text(
+              AppLocalizations.of(context)!.errorSigningOutEtostring(
+                e.toString(),
+              ),
+            ),
             backgroundColor: Colors.red,
           ),
         );
@@ -243,7 +250,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       setState(() {
         _successMessage =
-            'Google account linked successfully! You can now sign in with Google.';
+            AppLocalizations.of(context)!.googleAccountLinkedMessage;
       });
 
       if (!mounted) return;
@@ -256,8 +263,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
     } on FirebaseAuthException catch (e, stackTrace) {
       setState(() {
-        _errorMessage =
-            e.message ?? 'An error occurred while linking your Google account.';
+        _errorMessage = e.message ??
+            AppLocalizations.of(context)!.anErrorOccurredLinkingGoogle;
       });
       await Sentry.captureException(
         e,
@@ -266,7 +273,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
     } catch (e, stackTrace) {
       setState(() {
-        _errorMessage = 'An error occurred while linking your Google account.';
+        _errorMessage =
+            AppLocalizations.of(context)!.anErrorOccurredLinkingGoogle;
       });
       await Sentry.captureException(
         e,
@@ -285,9 +293,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           context: context,
           builder: (context) => AlertDialog(
             title: Text(AppLocalizations.of(context)!.unlinkGoogleAccount),
-            content: const Text(
-              'Are you sure you want to unlink your Google account? '
-              'You will no longer be able to sign in with Google unless you link it again.',
+            content: Text(
+              AppLocalizations.of(context)!.areYouSureUnlinkGoogle,
             ),
             actions: [
               ButtonM3E(
@@ -319,20 +326,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await GoogleAuthService.unlinkGoogleAccount();
 
       setState(() {
-        _successMessage = 'Google account unlinked successfully.';
+        _successMessage =
+            AppLocalizations.of(context)!.googleAccountUnlinkedSuccessfully;
       });
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Google account unlinked successfully'),
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.googleAccountUnlinkedSuccessfully,
+          ),
           backgroundColor: Colors.green,
         ),
       );
     } on FirebaseAuthException catch (e, stackTrace) {
       setState(() {
         _errorMessage = e.message ??
-            'An error occurred while unlinking your Google account.';
+            AppLocalizations.of(context)!.anErrorOccurredUnlinkingGoogle;
       });
       await Sentry.captureException(
         e,
@@ -342,7 +352,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     } catch (e, stackTrace) {
       setState(() {
         _errorMessage =
-            'An error occurred while unlinking your Google account.';
+            AppLocalizations.of(context)!.anErrorOccurredUnlinkingGoogle;
       });
       await Sentry.captureException(
         e,
@@ -362,6 +372,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final email = user?.email ?? 'No email';
     final displayName = user?.displayName ?? 'User';
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Theme(
       data: Theme.of(context).copyWith(
@@ -396,7 +407,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ? IconButton(
                       icon: const Icon(Icons.arrow_back, color: Colors.white),
                       onPressed: () => Navigator.pop(context),
-                      tooltip: 'Go Back',
+                      tooltip: l10n.goBack,
                     )
                   : null,
               flexibleSpace: FlexibleSpaceBar(
@@ -526,7 +537,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: IconButton(
                         icon: const Icon(Icons.edit, color: Colors.white),
                         onPressed: () => setState(() => _isEditing = true),
-                        tooltip: 'Edit Profile',
+                        tooltip: l10n.editProfileTooltip,
                       ),
                     ),
                   ),
@@ -590,7 +601,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Account Information',
+                                l10n.accountInformation,
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -600,7 +611,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               const SizedBox(height: 24),
                               Text(
-                                'Display Name',
+                                l10n.displayName,
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: isDark
@@ -614,7 +625,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ? TextFormField(
                                       controller: _nameController,
                                       decoration: InputDecoration(
-                                        hintText: 'Enter your name',
+                                        hintText: l10n.enterYourName,
                                         suffixIcon: Icon(Icons.person,
                                             color: isDark
                                                 ? Colors.white70
@@ -623,7 +634,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       validator: (value) {
                                         if (value == null ||
                                             value.trim().isEmpty) {
-                                          return 'Please enter a display name';
+                                          return l10n.pleaseEnterADisplayName;
                                         }
                                         return null;
                                       },
@@ -648,7 +659,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                       ),
                                       subtitle: Text(
-                                        'Display Name',
+                                        l10n.displayName,
                                         style: TextStyle(
                                           color: isDark ? Colors.white60 : null,
                                         ),
@@ -656,7 +667,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                               const Divider(height: 32),
                               Text(
-                                'Email Address',
+                                l10n.emailAddress,
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: isDark
@@ -686,7 +697,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  'Email (cannot be changed)',
+                                  l10n.emailCannotBeChanged,
                                   style: TextStyle(
                                     color: isDark ? Colors.white60 : null,
                                   ),
@@ -753,7 +764,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Linked Accounts',
+                              l10n.linkedAccounts,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -763,7 +774,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'Manage how you sign in to ShopSync',
+                              l10n.manageHowYouSignIn,
                               style: TextStyle(
                                 fontSize: 14,
                                 color:
@@ -784,7 +795,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         : Colors.blue[800]),
                               ),
                               title: Text(
-                                'Email & Password',
+                                l10n.emailAndPassword,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -796,8 +807,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             .any((p) =>
                                                 p.providerId == 'password') ??
                                         false)
-                                    ? 'Sign in with email and password'
-                                    : 'Not configured',
+                                    ? l10n.signInWithEmailAndPassword
+                                    : l10n.notConfigured,
                                 style: TextStyle(
                                   color: isDark ? Colors.white60 : null,
                                 ),
@@ -855,7 +866,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               title: Text(
-                                'Google',
+                                l10n.google,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -867,8 +878,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             .any((p) =>
                                                 p.providerId == 'google.com') ??
                                         false)
-                                    ? 'Sign in with Google account'
-                                    : 'Not linked',
+                                    ? l10n.signInWithGoogleAccount
+                                    : l10n.notLinked,
                                 style: TextStyle(
                                   color: isDark ? Colors.white60 : null,
                                 ),
@@ -1002,7 +1013,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 return SwitchListTile(
                                   contentPadding: EdgeInsets.zero,
                                   value: aiEnabled,
-                                  activeColor: isDark
+                                  activeThumbColor: isDark
                                       ? Colors.purple[400]
                                       : Colors.purple[700],
                                   activeTrackColor: isDark
@@ -1285,7 +1296,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       SwitchListTile(
                                         contentPadding: EdgeInsets.zero,
                                         value: gravatarEnabled,
-                                        activeColor: isDark
+                                        activeThumbColor: isDark
                                             ? Colors.green[400]
                                             : Colors.green[700],
                                         activeTrackColor: isDark
@@ -1340,7 +1351,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           }
                                         },
                                         title: Text(
-                                          'Show Gravatar',
+                                          l10n.showGravatar,
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
@@ -1348,7 +1359,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           ),
                                         ),
                                         subtitle: Text(
-                                          'Display profile picture to other users',
+                                          l10n.displayProfilePictureToOtherUsers,
                                           style: TextStyle(
                                             fontSize: 13,
                                             color: isDark
@@ -1468,7 +1479,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Account Activity',
+                              l10n.accountActivity,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -1498,7 +1509,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             : Colors.amber[800]),
                                   ),
                                   title: Text(
-                                    '$listCount shopping lists',
+                                    l10n.shoppingListsCount(listCount),
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
@@ -1506,7 +1517,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   subtitle: Text(
-                                    'Lists you have access to',
+                                    l10n.listsYouHaveAccessTo,
                                     style: TextStyle(
                                       color: isDark ? Colors.white60 : null,
                                     ),

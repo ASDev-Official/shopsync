@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
 import '/utils/icons/food_icons_map.dart';
@@ -195,13 +196,14 @@ class _ChooseItemIconScreenState extends State<ChooseItemIconScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Choose Icon',
-          style: TextStyle(
+        title: Text(
+          l10n.chooseIconTitle,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -242,9 +244,9 @@ class _ChooseItemIconScreenState extends State<ChooseItemIconScreen>
                         color: Colors.white,
                         size: 16,
                       ),
-                      label: const Text(
-                        'Done',
-                        style: TextStyle(
+                      label: Text(
+                        l10n.doneButton,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -290,7 +292,7 @@ class _ChooseItemIconScreenState extends State<ChooseItemIconScreen>
                         color: isDark ? Colors.white : Colors.black87,
                       ),
                       decoration: InputDecoration(
-                        hintText: 'Search icons...',
+                        hintText: l10n.searchIcons,
                         hintStyle: TextStyle(
                           color: isDark ? Colors.grey[400] : Colors.grey[600],
                         ),
@@ -409,7 +411,7 @@ class _ChooseItemIconScreenState extends State<ChooseItemIconScreen>
                               child: FilterChip(
                                 label: Text(
                                   category == 'all'
-                                      ? 'All'
+                                      ? l10n.allCategory
                                       : category.substring(0, 1).toUpperCase() +
                                           category.substring(1),
                                   style: TextStyle(
@@ -559,7 +561,7 @@ class _ChooseItemIconScreenState extends State<ChooseItemIconScreen>
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Selected Icon',
+                                                l10n.selectedIconLabel,
                                                 style: TextStyle(
                                                   color: isDark
                                                       ? Colors.white.withValues(
@@ -633,7 +635,7 @@ class _ChooseItemIconScreenState extends State<ChooseItemIconScreen>
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'Loading icons...',
+                          l10n.loadingIcons,
                           style: TextStyle(
                             fontSize: 16,
                             color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -675,7 +677,7 @@ class _ChooseItemIconScreenState extends State<ChooseItemIconScreen>
                                     ),
                                     const SizedBox(height: 16),
                                     Text(
-                                      'No icons found',
+                                      l10n.noIconsFound,
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -686,7 +688,7 @@ class _ChooseItemIconScreenState extends State<ChooseItemIconScreen>
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      'Try adjusting your search or category filter',
+                                      l10n.noIconsFoundHint,
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: isDark

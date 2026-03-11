@@ -1949,4 +1949,431 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get errorSavingPreference =>
       'Error saving preference. Please try again.';
+
+  @override
+  String get chooseIconTitle => 'Choose Icon';
+
+  @override
+  String get doneButton => 'Done';
+
+  @override
+  String get selectedIconLabel => 'Selected Icon';
+
+  @override
+  String get loadingIcons => 'Loading icons...';
+
+  @override
+  String get noIconsFound => 'No icons found';
+
+  @override
+  String get noIconsFoundHint => 'Try adjusting your search or category filter';
+
+  @override
+  String get allCategory => 'All';
+
+  @override
+  String itemInRecycleBin(int count) {
+    return '$count item in recycle bin';
+  }
+
+  @override
+  String itemsInRecycleBin(int count) {
+    return '$count items in recycle bin';
+  }
+
+  @override
+  String get restoreItemTooltip => 'Restore item';
+
+  @override
+  String get deletePermanentlyTooltip => 'Delete permanently';
+
+  @override
+  String deletedOnDate(String date) {
+    return 'Deleted $date';
+  }
+
+  @override
+  String get noDeletedItems => 'No Deleted Items';
+
+  @override
+  String get noDeletedItemsSubtitle =>
+      'Items you delete will appear here for 30 days';
+
+  @override
+  String areYouSureDeleteCategory(String categoryName) {
+    return 'Are you sure you want to delete \"$categoryName\"? This will remove the category from all items.';
+  }
+
+  @override
+  String get noCategoriesYet => 'No categories yet';
+
+  @override
+  String get createYourFirstCategoryAbove => 'Create your first category above';
+
+  @override
+  String get editTooltip => 'Edit';
+
+  @override
+  String get deleteTooltip => 'Delete';
+
+  @override
+  String get createNewCategory => 'Create New Category';
+
+  @override
+  String get timeframeDay => 'Day';
+
+  @override
+  String get timeframeWeek => 'Week';
+
+  @override
+  String get timeframeMonth => 'Month';
+
+  @override
+  String get timeframeAll => 'All';
+
+  @override
+  String get noInsightsAvailableYet => 'No insights available yet';
+
+  @override
+  String get noActivityDataForTimeframe =>
+      'No activity data for this timeframe';
+
+  @override
+  String get activityTimeline => 'Activity Timeline';
+
+  @override
+  String get addedLabel => 'Added';
+
+  @override
+  String get completedLabel => 'Completed';
+
+  @override
+  String get categoryBreakdown => 'Category Breakdown';
+
+  @override
+  String get noCollaboratorActivityInTimeframe =>
+      'No collaborator activity in this timeframe';
+
+  @override
+  String get collaboratorActivity => 'Collaborator Activity';
+
+  @override
+  String addedCompletedSummary(String added, String completed) {
+    return '$added added • $completed completed';
+  }
+
+  @override
+  String get continueWithoutOrganizing =>
+      'You can organize your lists into groups later from the home screen. Continue without organizing?';
+
+  @override
+  String createdAtDate(String date) {
+    return 'Created $date';
+  }
+
+  @override
+  String get suggestedBadge => 'Suggested';
+
+  @override
+  String get ungroupedListsSection => 'Ungrouped Lists';
+
+  @override
+  String ungroupedListsCountOne(int count) {
+    return '$count list not assigned to any group';
+  }
+
+  @override
+  String ungroupedListsCountOther(int count) {
+    return '$count lists not assigned to any group';
+  }
+
+  @override
+  String get dragListsToGroupOrCreate =>
+      'Drag these lists to a group above or create a new group for them:';
+
+  @override
+  String get shopSyncMigration => 'ShopSync Migration';
+
+  @override
+  String get organizeWithListGroups => 'Organize with List Groups';
+
+  @override
+  String organizeListsBodyCount(int count) {
+    return 'We’ve suggested some groups for your $count lists. You can edit, remove, or add new groups.';
+  }
+
+  @override
+  String get organizeLists => 'Organize Lists';
+
+  @override
+  String listsCountOne(int count) {
+    return '$count list';
+  }
+
+  @override
+  String listsCountOther(int count) {
+    return '$count lists';
+  }
+
+  @override
+  String get failedToUpgradeLists =>
+      'Failed to upgrade lists. Please try again.';
+
+  @override
+  String anErrorOccurredError(String error) {
+    return 'An error occurred: $error';
+  }
+
+  @override
+  String get upgradeFailed => 'Upgrade Failed';
+
+  @override
+  String get upgradingYourLists => 'Upgrading your lists';
+
+  @override
+  String get pleaseWaitUpdatingListGroups =>
+      'Please wait while we update your list groups to the new format...';
+
+  @override
+  String get licensesTitle => 'Licenses';
+
+  @override
+  String get noPackagesFound => 'No packages found';
+
+  @override
+  String get noPackagesMatchSearch => 'No packages match your search';
+
+  @override
+  String versionDisplay(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get trendsAndPerformance => 'Trends & Performance';
+
+  @override
+  String get topCategories => 'Top Categories';
+
+  @override
+  String get topCompletedLists => 'Top Completed Lists';
+
+  @override
+  String get timeframeQuarter => 'Quarter';
+
+  @override
+  String get timeframeYear => 'Year';
+
+  @override
+  String get timeframeAllTime => 'All Time';
+
+  @override
+  String get completionRateTitle => 'Completion Rate';
+
+  @override
+  String get failedToLoadCompletionRate => 'Failed to load completion rate';
+
+  @override
+  String get ofItemsCompleted => 'of items completed';
+
+  @override
+  String get dailyProductivity => 'Daily Productivity';
+
+  @override
+  String get failedToLoadProductivityData => 'Failed to load productivity data';
+
+  @override
+  String get itemsAddedPerDay => 'items added per day';
+
+  @override
+  String get activityOverTime => 'Activity Over Time';
+
+  @override
+  String get failedToLoadActivityData => 'Failed to load activity data';
+
+  @override
+  String get noDataAvailable => 'No data available';
+
+  @override
+  String get noData => 'No data';
+
+  @override
+  String itemsCountTooltip(String count) {
+    return '$count items';
+  }
+
+  @override
+  String get itemsAddedEachDay => 'Items added each day';
+
+  @override
+  String get failedToLoadCategoryData => 'Failed to load category data';
+
+  @override
+  String itemCountLabel(int count) {
+    return '$count items';
+  }
+
+  @override
+  String get failedToLoadListData => 'Failed to load list data';
+
+  @override
+  String get selectLanguage => 'Select Language';
+
+  @override
+  String get systemDefault => 'System Default';
+
+  @override
+  String get langEnglish => 'English';
+
+  @override
+  String get langDeutsch => 'Deutsch';
+
+  @override
+  String get langEspanol => 'Español';
+
+  @override
+  String get langFrancais => 'Français';
+
+  @override
+  String get langHindi => 'हिन्दी';
+
+  @override
+  String get langItaliano => 'Italiano';
+
+  @override
+  String get langJapanese => '日本語';
+
+  @override
+  String get langKorean => '한국어';
+
+  @override
+  String get langRussian => 'Русский';
+
+  @override
+  String get langSimplifiedChinese => '简体中文';
+
+  @override
+  String get langTraditionalChinese => '繁體中文';
+
+  @override
+  String get useSystemDefaultTitle => 'Use System Default';
+
+  @override
+  String get useSystemDefaultBody =>
+      'Do you want to use your device\'s language setting?';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String errorUpdatingProfile(String error) {
+    return 'Error updating profile: $error';
+  }
+
+  @override
+  String get googleAccountLinkedMessage =>
+      'Google account linked successfully! You can now sign in with Google.';
+
+  @override
+  String get areYouSureUnlinkGoogle =>
+      'Are you sure you want to unlink your Google account? You will no longer be able to sign in with Google unless you link it again.';
+
+  @override
+  String get anErrorOccurredLinkingGoogle =>
+      'An error occurred while linking your Google account.';
+
+  @override
+  String get anErrorOccurredUnlinkingGoogle =>
+      'An error occurred while unlinking your Google account.';
+
+  @override
+  String get goBack => 'Go Back';
+
+  @override
+  String get editProfileTooltip => 'Edit Profile';
+
+  @override
+  String get accountInformation => 'Account Information';
+
+  @override
+  String get displayName => 'Display Name';
+
+  @override
+  String get emailAddress => 'Email Address';
+
+  @override
+  String get emailCannotBeChanged => 'Email (cannot be changed)';
+
+  @override
+  String get linkedAccounts => 'Linked Accounts';
+
+  @override
+  String get manageHowYouSignIn => 'Manage how you sign in to ShopSync';
+
+  @override
+  String get emailAndPassword => 'Email & Password';
+
+  @override
+  String get signInWithEmailAndPassword => 'Sign in with email and password';
+
+  @override
+  String get notConfigured => 'Not configured';
+
+  @override
+  String get signInWithGoogleAccount => 'Sign in with Google account';
+
+  @override
+  String get notLinked => 'Not linked';
+
+  @override
+  String get showGravatar => 'Show Gravatar';
+
+  @override
+  String get displayProfilePictureToOtherUsers =>
+      'Display profile picture to other users';
+
+  @override
+  String get accountActivity => 'Account Activity';
+
+  @override
+  String shoppingListsCount(int count) {
+    return '$count shopping lists';
+  }
+
+  @override
+  String get listsYouHaveAccessTo => 'Lists you have access to';
+
+  @override
+  String get rememberYourPassword => 'Remember your password?';
+
+  @override
+  String get shopSyncUpdate => 'ShopSync Update';
+
+  @override
+  String get shopSyncHasAnUpdate => 'ShopSync has an update';
+
+  @override
+  String get pleaseUpdateAppBody =>
+      'Please update the app to continue using the latest features and improvements.';
+
+  @override
+  String get downloadingUpdateLabel => 'Downloading update...';
+
+  @override
+  String get install => 'Install';
+
+  @override
+  String get downloading => 'Downloading...';
+
+  @override
+  String get updateButton => 'Update';
+
+  @override
+  String get google => 'Google';
+
+  @override
+  String get startAddingItemsToSeeInsights =>
+      'Start adding items to see insights';
+
+  @override
+  String get pleaseTryAgainLater => 'Please try again later';
 }

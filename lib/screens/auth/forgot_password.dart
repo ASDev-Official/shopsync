@@ -317,7 +317,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Remember your password?',
+                                  AppLocalizations.of(context)!
+                                      .rememberYourPassword,
                                   style: TextStyle(
                                     color: isDarkMode
                                         ? Colors.green[100]
@@ -332,8 +333,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     Navigator.pushReplacementNamed(
                                         context, '/login');
                                   },
-                                  label: const Text(
-                                    'Sign In',
+                                  label: Text(
+                                    AppLocalizations.of(context)!.signIn,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 15,

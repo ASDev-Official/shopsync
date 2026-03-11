@@ -108,16 +108,16 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                     TextField(
                       controller: nameController,
                       decoration: InputDecoration(
-                        labelText: 'Category Name',
+                        labelText: l10n.categoryName,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Icon',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      l10n.icon,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     InkWell(
@@ -168,7 +168,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                             const SizedBox(width: 16),
                             Expanded(
                               child: Text(
-                                selectedIcon?.displayName ?? 'Choose an icon',
+                                selectedIcon?.displayName ?? l10n.chooseIcon,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: isDark ? Colors.white : Colors.black,
@@ -245,7 +245,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
       builder: (context) => AlertDialog(
         title: Text(l10n.deleteCategory),
         content: Text(
-          'Are you sure you want to delete "$categoryName"? This will remove the category from all items.',
+          l10n.areYouSureDeleteCategory(categoryName),
         ),
         actions: [
           TextButton(
@@ -293,13 +293,14 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Manage Categories',
-          style: TextStyle(
+        title: Text(
+          l10n.manageCategories,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -329,9 +330,9 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Create New Category',
-                  style: TextStyle(
+                Text(
+                  l10n.createNewCategory,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -402,16 +403,16 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Icon',
-                                style: TextStyle(
+                              Text(
+                                l10n.icon,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12,
                                 ),
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                _selectedIcon?.displayName ?? 'Choose an icon',
+                                _selectedIcon?.displayName ?? l10n.chooseIcon,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: isDark ? Colors.white : Colors.black87,
@@ -485,7 +486,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'No categories yet',
+                          l10n.noCategoriesYet,
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.grey[600],
@@ -493,7 +494,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Create your first category above',
+                          l10n.createYourFirstCategoryAbove,
                           style: TextStyle(
                             color: Colors.grey[500],
                           ),
@@ -557,7 +558,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                                 size: 16,
                               ),
                               onPressed: () => _editCategory(doc.id, category),
-                              tooltip: 'Edit',
+                              tooltip: l10n.editTooltip,
                             ),
                             IconButton(
                               icon: Icon(
@@ -567,7 +568,7 @@ class _ManageCategoriesScreenState extends State<ManageCategoriesScreen> {
                               ),
                               onPressed: () =>
                                   _deleteCategory(doc.id, categoryName),
-                              tooltip: 'Delete',
+                              tooltip: l10n.deleteTooltip,
                             ),
                           ],
                         ),

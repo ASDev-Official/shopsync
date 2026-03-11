@@ -125,9 +125,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  String _getCurrentLanguageName() {
+  String _getCurrentLanguageName(AppLocalizations l10n) {
     if (_currentLocale == null) {
-      return 'System Default';
+      return l10n.systemDefault;
     }
     return LocaleService.getLocaleName(_currentLocale!);
   }
@@ -365,20 +365,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
           buildSettingsTile(
             icon: Icons.language,
             title: l10n.appLanguage,
-            subtitle: _getCurrentLanguageName(),
+            subtitle: _getCurrentLanguageName(l10n),
             onTap: () async {
               final selectedLocale = await showDialog<Locale?>(
                 context: context,
                 builder: (BuildContext dialogContext) {
                   return SimpleDialog(
                     backgroundColor: cardColor,
-                    title: const Text('Select Language'),
+                    title: Text(l10n.selectLanguage),
                     children: <Widget>[
                       SimpleDialogOption(
                         onPressed: () {
                           Navigator.pop(dialogContext, null);
                         },
-                        child: Text('System Default',
+                        child: Text(l10n.systemDefault,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale == null
@@ -390,7 +390,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('en'));
                         },
-                        child: Text('English',
+                        child: Text(l10n.langEnglish,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'en'
@@ -401,7 +401,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('de'));
                         },
-                        child: Text('Deutsch',
+                        child: Text(l10n.langDeutsch,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'de'
@@ -412,7 +412,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('es'));
                         },
-                        child: Text('Español',
+                        child: Text(l10n.langEspanol,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'es'
@@ -423,7 +423,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('fr'));
                         },
-                        child: Text('Français',
+                        child: Text(l10n.langFrancais,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'fr'
@@ -434,7 +434,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('hi'));
                         },
-                        child: Text('हिन्दी',
+                        child: Text(l10n.langHindi,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'hi'
@@ -445,7 +445,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('it'));
                         },
-                        child: Text('Italiano',
+                        child: Text(l10n.langItaliano,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'it'
@@ -456,7 +456,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('ja'));
                         },
-                        child: Text('日本語',
+                        child: Text(l10n.langJapanese,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'ja'
@@ -467,7 +467,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('ko'));
                         },
-                        child: Text('한국어',
+                        child: Text(l10n.langKorean,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'ko'
@@ -478,7 +478,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('ru'));
                         },
-                        child: Text('Русский',
+                        child: Text(l10n.langRussian,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'ru'
@@ -489,7 +489,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onPressed: () {
                           Navigator.pop(dialogContext, const Locale('zh'));
                         },
-                        child: Text('简体中文',
+                        child: Text(l10n.langSimplifiedChinese,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight:
@@ -505,7 +505,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               const Locale.fromSubtags(
                                   languageCode: 'zh', scriptCode: 'Hant'));
                         },
-                        child: Text('繁體中文',
+                        child: Text(l10n.langTraditionalChinese,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.scriptCode == 'Hant'
@@ -522,17 +522,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   await showDialog<bool>(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: const Text('Use System Default'),
-                          content: const Text(
-                              'Do you want to use your device\'s language setting?'),
+                          title: Text(l10n.useSystemDefaultTitle),
+                          content: Text(l10n.useSystemDefaultBody),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(context, false),
-                              child: const Text('Cancel'),
+                              child: Text(l10n.cancel),
                             ),
                             TextButton(
                               onPressed: () => Navigator.pop(context, true),
-                              child: const Text('Confirm'),
+                              child: Text(l10n.confirm),
                             ),
                           ],
                         ),

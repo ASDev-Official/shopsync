@@ -108,6 +108,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
   }
 
   Widget _buildTimeFrameSelector(ColorScheme colorScheme) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       color: colorScheme.surfaceContainer,
       child: Padding(
@@ -115,10 +116,14 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildTimeFrameButton('Day', ListTimeFrame.day, colorScheme),
-            _buildTimeFrameButton('Week', ListTimeFrame.week, colorScheme),
-            _buildTimeFrameButton('Month', ListTimeFrame.month, colorScheme),
-            _buildTimeFrameButton('All', ListTimeFrame.allTime, colorScheme),
+            _buildTimeFrameButton(
+                l10n.timeframeDay, ListTimeFrame.day, colorScheme),
+            _buildTimeFrameButton(
+                l10n.timeframeWeek, ListTimeFrame.week, colorScheme),
+            _buildTimeFrameButton(
+                l10n.timeframeMonth, ListTimeFrame.month, colorScheme),
+            _buildTimeFrameButton(
+                l10n.timeframeAll, ListTimeFrame.allTime, colorScheme),
           ],
         ),
       ),
@@ -158,7 +163,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
           padding: const EdgeInsets.all(24),
           child: Center(
             child: Text(
-              'No insights available yet',
+              AppLocalizations.of(context)!.noInsightsAvailableYet,
               style: TextStyle(
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
                 fontSize: 16,
@@ -227,7 +232,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
           padding: const EdgeInsets.all(24),
           child: Center(
             child: Text(
-              'No activity data for this timeframe',
+              AppLocalizations.of(context)!.noActivityDataForTimeframe,
               style: TextStyle(
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
               ),
@@ -259,7 +264,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
                 Icon(Icons.timeline, color: Colors.green[600], size: 24),
                 const SizedBox(width: 8),
                 Text(
-                  'Activity Timeline',
+                  AppLocalizations.of(context)!.activityTimeline,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -271,9 +276,11 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
             const SizedBox(height: 16),
             Row(
               children: [
-                _buildLegendItem(Colors.cyan[600]!, 'Added', colorScheme),
+                _buildLegendItem(Colors.cyan[600]!,
+                    AppLocalizations.of(context)!.addedLabel, colorScheme),
                 const SizedBox(width: 16),
-                _buildLegendItem(Colors.teal[600]!, 'Completed', colorScheme),
+                _buildLegendItem(Colors.teal[600]!,
+                    AppLocalizations.of(context)!.completedLabel, colorScheme),
               ],
             ),
             const SizedBox(height: 16),
@@ -371,7 +378,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
           padding: const EdgeInsets.all(24),
           child: Center(
             child: Text(
-              'No categories yet',
+              AppLocalizations.of(context)!.noCategoriesYet,
               style: TextStyle(
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
               ),
@@ -394,7 +401,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
                     color: Colors.green[600], size: 24),
                 const SizedBox(width: 8),
                 Text(
-                  'Category Breakdown',
+                  AppLocalizations.of(context)!.categoryBreakdown,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -471,7 +478,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
           padding: const EdgeInsets.all(24),
           child: Center(
             child: Text(
-              'No collaborator activity in this timeframe',
+              AppLocalizations.of(context)!.noCollaboratorActivityInTimeframe,
               style: TextStyle(
                 color: colorScheme.onSurface.withValues(alpha: 0.6),
               ),
@@ -493,7 +500,7 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
                 Icon(Icons.people_outline, color: Colors.green[600], size: 24),
                 const SizedBox(width: 8),
                 Text(
-                  'Collaborator Activity',
+                  AppLocalizations.of(context)!.collaboratorActivity,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -564,7 +571,10 @@ class _ListInsightsScreenState extends State<ListInsightsScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            '${collaborator.itemsAdded} added • ${collaborator.itemsCompleted} completed',
+                            AppLocalizations.of(context)!.addedCompletedSummary(
+                              collaborator.itemsAdded.toString(),
+                              collaborator.itemsCompleted.toString(),
+                            ),
                             style: TextStyle(
                               fontSize: 12,
                               color:

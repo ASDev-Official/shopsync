@@ -4,9 +4,9 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for Vietnamese (`vi`).
-class AppLocalizationsVi extends AppLocalizations {
-  AppLocalizationsVi([String locale = 'vi']) : super(locale);
+/// The translations for Kannada (`kn`).
+class AppLocalizationsKn extends AppLocalizations {
+  AppLocalizationsKn([String locale = 'kn']) : super(locale);
 
   @override
   String get aboutApp => 'About App';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:in_app_update/in_app_update.dart';
 import '../../services/platform/update_service.dart';
 
@@ -55,6 +56,7 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return PopScope(
       canPop: false,
@@ -63,9 +65,9 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
         appBar: AppBar(
           backgroundColor: isDark ? Colors.grey[800] : Colors.green[800],
           elevation: 0,
-          title: const Text(
-            'ShopSync Update',
-            style: TextStyle(
+          title: Text(
+            l10n.shopSyncUpdate,
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
@@ -84,18 +86,18 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
                   color: Colors.green,
                 ),
                 const SizedBox(height: 32),
-                const Text(
-                  'ShopSync has an update',
-                  style: TextStyle(
+                Text(
+                  l10n.shopSyncHasAnUpdate,
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Please update the app to continue using the latest features and improvements.',
+                Text(
+                  l10n.pleaseUpdateAppBody,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 32),
                 if (_isDownloading && !_isDownloaded) ...[
@@ -111,9 +113,9 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
                                 AlwaysStoppedAnimation<Color>(Colors.green),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Downloading update...',
-                            style: TextStyle(fontSize: 14),
+                          Text(
+                            l10n.downloadingUpdateLabel,
+                            style: const TextStyle(fontSize: 14),
                           ),
                         ],
                       );
@@ -134,8 +136,10 @@ class _UpdateAppScreenState extends State<UpdateAppScreen> {
                         : () => _handleUpdateButtonPress(),
                     child: Text(
                       _isDownloaded
-                          ? 'Install'
-                          : (_isDownloading ? 'Downloading...' : 'Update'),
+                          ? l10n.install
+                          : (_isDownloading
+                              ? l10n.downloading
+                              : l10n.updateButton),
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),

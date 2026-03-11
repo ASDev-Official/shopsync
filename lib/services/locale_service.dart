@@ -49,6 +49,7 @@ class LocaleService {
       'ru': 'Русский',
       'zh': '简体中文',
       'zh_Hant': '繁體中文',
+      'vi': 'Tiếng Việt',
     };
 
     String key = locale.languageCode;

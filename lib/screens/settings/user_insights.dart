@@ -18,12 +18,13 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: isDark ? Colors.grey[900] : Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Your Insights',
+        title: Text(
+          l10n.yourInsights,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -81,7 +82,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Trends & Performance',
+                    l10n.trendsAndPerformance,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -106,7 +107,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Top Categories',
+                    l10n.topCategories,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -127,7 +128,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Top Completed Lists',
+                    l10n.topCompletedLists,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -147,19 +148,22 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
   }
 
   Widget _buildTimeFrameSelector(bool isDark) {
+    final l10n = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          _buildTimeFrameButton(TimeFrame.week, 'Week', isDark),
+          _buildTimeFrameButton(TimeFrame.week, l10n.timeframeWeek, isDark),
           const SizedBox(width: 8),
-          _buildTimeFrameButton(TimeFrame.month, 'Month', isDark),
+          _buildTimeFrameButton(TimeFrame.month, l10n.timeframeMonth, isDark),
           const SizedBox(width: 8),
-          _buildTimeFrameButton(TimeFrame.quarter, 'Quarter', isDark),
+          _buildTimeFrameButton(
+              TimeFrame.quarter, l10n.timeframeQuarter, isDark),
           const SizedBox(width: 8),
-          _buildTimeFrameButton(TimeFrame.year, 'Year', isDark),
+          _buildTimeFrameButton(TimeFrame.year, l10n.timeframeYear, isDark),
           const SizedBox(width: 8),
-          _buildTimeFrameButton(TimeFrame.allTime, 'All Time', isDark),
+          _buildTimeFrameButton(
+              TimeFrame.allTime, l10n.timeframeAllTime, isDark),
         ],
       ),
     );
@@ -309,7 +313,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Completion Rate',
+            AppLocalizations.of(context)!.completionRateTitle,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -334,7 +338,8 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Failed to load completion rate',
+                          AppLocalizations.of(context)!
+                              .failedToLoadCompletionRate,
                           style: TextStyle(
                             fontSize: 14,
                             color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -378,7 +383,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'of items completed',
+                    AppLocalizations.of(context)!.ofItemsCompleted,
                     style: TextStyle(
                       fontSize: 12,
                       color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -417,7 +422,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Daily Productivity',
+              AppLocalizations.of(context)!.dailyProductivity,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -442,7 +447,8 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Failed to load productivity data',
+                            AppLocalizations.of(context)!
+                                .failedToLoadProductivityData,
                             style: TextStyle(
                               fontSize: 12,
                               color:
@@ -453,8 +459,10 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                           TextButton.icon(
                             onPressed: () => setState(() {}),
                             icon: const Icon(Icons.refresh, size: 14),
-                            label: const Text('Retry',
-                                style: TextStyle(fontSize: 12)),
+                            label: Text(
+                              AppLocalizations.of(context)!.retry,
+                              style: const TextStyle(fontSize: 12),
+                            ),
                           ),
                         ],
                       ),
@@ -475,7 +483,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'items added per day',
+                          AppLocalizations.of(context)!.itemsAddedPerDay,
                           style: TextStyle(
                             fontSize: 12,
                             color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -515,7 +523,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Activity Over Time',
+            AppLocalizations.of(context)!.activityOverTime,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -540,7 +548,8 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Failed to load activity data',
+                          AppLocalizations.of(context)!
+                              .failedToLoadActivityData,
                           style: TextStyle(
                             color: isDark ? Colors.grey[400] : Colors.grey[600],
                           ),
@@ -561,7 +570,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
               if (data.isEmpty) {
                 return Center(
                   child: Text(
-                    'No data available',
+                    AppLocalizations.of(context)!.noDataAvailable,
                     style: TextStyle(
                       color: isDark ? Colors.grey[400] : Colors.grey[600],
                     ),
@@ -581,7 +590,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
     if (data.isEmpty) {
       return Center(
         child: Text(
-          'No data',
+          AppLocalizations.of(context)!.noData,
           style: TextStyle(
             color: isDark ? Colors.grey[400] : Colors.grey[600],
           ),
@@ -607,7 +616,8 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Tooltip(
-                    message: '${item.value.toStringAsFixed(0)} items',
+                    message: AppLocalizations.of(context)!
+                        .itemsCountTooltip(item.value.toStringAsFixed(0)),
                     child: Container(
                       width: 20,
                       height: height,
@@ -632,7 +642,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Items added each day',
+          AppLocalizations.of(context)!.itemsAddedEachDay,
           style: TextStyle(
             fontSize: 12,
             color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -678,7 +688,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Failed to load category data',
+                    AppLocalizations.of(context)!.failedToLoadCategoryData,
                     style: TextStyle(
                       color: isDark ? Colors.grey[400] : Colors.grey[600],
                     ),
@@ -754,7 +764,8 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              '${category.itemCount} items',
+                              AppLocalizations.of(context)!
+                                  .itemCountLabel(category.itemCount),
                               style: TextStyle(
                                 fontSize: 12,
                                 color: isDark
@@ -833,7 +844,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Failed to load list data',
+                    AppLocalizations.of(context)!.failedToLoadListData,
                     style: TextStyle(
                       color: isDark ? Colors.grey[400] : Colors.grey[600],
                     ),
@@ -987,7 +998,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'No data available',
+              AppLocalizations.of(context)!.noDataAvailable,
               style: TextStyle(
                 fontSize: 16,
                 color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -995,7 +1006,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Start adding items to see insights',
+              AppLocalizations.of(context)!.startAddingItemsToSeeInsights,
               style: TextStyle(
                 fontSize: 12,
                 color: isDark ? Colors.grey[500] : Colors.grey[500],
@@ -1030,7 +1041,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'An error occurred',
+              AppLocalizations.of(context)!.anErrorOccurred,
               style: TextStyle(
                 fontSize: 16,
                 color: isDark ? Colors.grey[400] : Colors.grey[600],
@@ -1038,7 +1049,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Please try again later',
+              AppLocalizations.of(context)!.pleaseTryAgainLater,
               style: TextStyle(
                 fontSize: 12,
                 color: isDark ? Colors.grey[500] : Colors.grey[500],

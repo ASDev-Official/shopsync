@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
 
@@ -53,6 +54,7 @@ class _CustomLicensesPageState extends State<CustomLicensesPage> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
     final backgroundColor = isDark ? Colors.grey[900] : Colors.grey[50];
     final cardColor = isDark ? const Color(0xFF23262B) : Colors.white;
     final textColor = isDark ? Colors.white : Colors.grey[900]!;
@@ -64,8 +66,8 @@ class _CustomLicensesPageState extends State<CustomLicensesPage> {
         backgroundColor: isDark ? Colors.grey[800] : Colors.green[800],
         elevation: 0,
         title: Text(
-          'Licenses',
-          style: TextStyle(
+          l10n.licensesTitle,
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 22,
@@ -117,7 +119,7 @@ class _CustomLicensesPageState extends State<CustomLicensesPage> {
                     });
                   },
                   decoration: InputDecoration(
-                    hintText: 'Search packages...',
+                    hintText: l10n.searchPackages,
                     hintStyle: TextStyle(color: subtitleColor),
                     prefixIcon: Icon(Icons.search, color: subtitleColor),
                     suffixIcon: _searchQuery.isNotEmpty
@@ -158,8 +160,8 @@ class _CustomLicensesPageState extends State<CustomLicensesPage> {
                     ? Center(
                         child: Text(
                           _searchQuery.isEmpty
-                              ? 'No packages found'
-                              : 'No packages match your search',
+                              ? l10n.noPackagesFound
+                              : l10n.noPackagesMatchSearch,
                           style: TextStyle(color: subtitleColor),
                         ),
                       )
@@ -193,7 +195,8 @@ class _CustomLicensesPageState extends State<CustomLicensesPage> {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    'Version ${widget.applicationVersion}',
+                                    l10n.versionDisplay(
+                                        widget.applicationVersion),
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: subtitleColor,
