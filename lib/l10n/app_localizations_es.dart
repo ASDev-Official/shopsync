@@ -1984,12 +1984,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String itemInRecycleBin(int count) {
-    return '$count item in recycle bin';
-  }
-
-  @override
-  String itemsInRecycleBin(int count) {
-    return '$count items in recycle bin';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '# items in recycle bin',
+      one: '# item in recycle bin',
+      zero: 'No items in recycle bin',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -2110,7 +2112,17 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String organizeListsBodyCount(int count) {
-    return 'We’ve suggested some groups for your $count lists. You can edit, remove, or add new groups.';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'We\'ve suggested some groups for your # lists. You can edit, remove, or add new groups.',
+      one:
+          'We\'ve suggested some groups for your # list. You can edit, remove, or add new groups.',
+      zero:
+          'We\'ve suggested some groups for your lists. You can edit, remove, or add new groups.',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -2208,8 +2220,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get noData => 'No data';
 
   @override
-  String itemsCountTooltip(String count) {
-    return '$count items';
+  String itemsCountTooltip(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '# items',
+      one: '# item',
+      zero: 'No items',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -2220,7 +2239,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String itemCountLabel(int count) {
-    return '$count items';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '# items',
+      one: '# item',
+      zero: 'No items',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -2236,7 +2262,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get langEnglish => 'English';
 
   @override
+  String get langArabic => 'Arabic';
+
+  @override
+  String get langBengali => 'Bengali';
+
+  @override
   String get langDeutsch => 'Deutsch';
+
+  @override
+  String get langDutch => 'Dutch';
 
   @override
   String get langEspanol => 'Español';
@@ -2248,13 +2283,25 @@ class AppLocalizationsEs extends AppLocalizations {
   String get langHindi => 'हिन्दी';
 
   @override
+  String get langIndonesian => 'Indonesian';
+
+  @override
   String get langItaliano => 'Italiano';
 
   @override
   String get langJapanese => '日本語';
 
   @override
+  String get langKannada => 'Kannada';
+
+  @override
   String get langKorean => '한국어';
+
+  @override
+  String get langMarathi => 'Marathi';
+
+  @override
+  String get langPortuguese => 'Portuguese';
 
   @override
   String get langRussian => 'Русский';
@@ -2263,7 +2310,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get langSimplifiedChinese => '简体中文';
 
   @override
+  String get langTamil => 'Tamil';
+
+  @override
+  String get langTelugu => 'Telugu';
+
+  @override
   String get langTraditionalChinese => '繁體中文';
+
+  @override
+  String get langTurkish => 'Turkish';
 
   @override
   String get useSystemDefaultTitle => 'Use System Default';

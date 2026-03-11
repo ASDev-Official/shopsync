@@ -191,9 +191,7 @@ class _RecycleBinScreenState extends State<RecycleBinScreen>
                   ),
                 ),
                 Text(
-                  totalItems == 1
-                      ? l10n.itemInRecycleBin(totalItems)
-                      : l10n.itemsInRecycleBin(totalItems),
+                  l10n.itemInRecycleBin(totalItems),
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 14,

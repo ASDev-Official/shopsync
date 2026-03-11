@@ -1149,16 +1149,8 @@
   "noIconsFound": "No icons found",
   "noIconsFoundHint": "Try adjusting your search or category filter",
   "allCategory": "All",
-  "itemInRecycleBin": "{count} item in recycle bin",
+  "itemInRecycleBin": "{count, plural, =0{No items in recycle bin} =1{# item in recycle bin} other{# items in recycle bin}}",
   "@itemInRecycleBin": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "itemsInRecycleBin": "{count} items in recycle bin",
-  "@itemsInRecycleBin": {
     "placeholders": {
       "count": {
         "type": "int"
@@ -1243,7 +1235,7 @@
   "dragListsToGroupOrCreate": "Drag these lists to a group above or create a new group for them:",
   "shopSyncMigration": "ShopSync Migration",
   "organizeWithListGroups": "Organize with List Groups",
-  "organizeListsBodyCount": "We’ve suggested some groups for your {count} lists. You can edit, remove, or add new groups.",
+  "organizeListsBodyCount": "{count, plural, =0{We've suggested some groups for your lists. You can edit, remove, or add new groups.} =1{We've suggested some groups for your # list. You can edit, remove, or add new groups.} other{We've suggested some groups for your # lists. You can edit, remove, or add new groups.}}",
   "@organizeListsBodyCount": {
     "placeholders": {
       "count": {
@@ -1307,17 +1299,17 @@
   "failedToLoadActivityData": "Failed to load activity data",
   "noDataAvailable": "No data available",
   "noData": "No data",
-  "itemsCountTooltip": "{count} items",
+  "itemsCountTooltip": "{count, plural, =0{No items} =1{# item} other{# items}}",
   "@itemsCountTooltip": {
     "placeholders": {
       "count": {
-        "type": "String"
+        "type": "int"
       }
     }
   },
   "itemsAddedEachDay": "Items added each day",
   "failedToLoadCategoryData": "Failed to load category data",
-  "itemCountLabel": "{count} items",
+  "itemCountLabel": "{count, plural, =0{No items} =1{# item} other{# items}}",
   "@itemCountLabel": {
     "placeholders": {
       "count": {
@@ -1329,16 +1321,26 @@
   "selectLanguage": "Select Language",
   "systemDefault": "System Default",
   "langEnglish": "English",
+  "langArabic": "Arabic",
+  "langBengali": "Bengali",
   "langDeutsch": "Deutsch",
+  "langDutch": "Dutch",
   "langEspanol": "Español",
   "langFrancais": "Français",
   "langHindi": "हिन्दी",
+  "langIndonesian": "Indonesian",
   "langItaliano": "Italiano",
   "langJapanese": "日本語",
+  "langKannada": "Kannada",
   "langKorean": "한국어",
+  "langMarathi": "Marathi",
+  "langPortuguese": "Portuguese",
   "langRussian": "Русский",
   "langSimplifiedChinese": "简体中文",
+  "langTamil": "Tamil",
+  "langTelugu": "Telugu",
   "langTraditionalChinese": "繁體中文",
+  "langTurkish": "Turkish",
   "useSystemDefaultTitle": "Use System Default",
   "useSystemDefaultBody": "Do you want to use your device's language setting?",
   "confirm": "Confirm",

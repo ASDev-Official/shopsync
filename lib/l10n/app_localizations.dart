@@ -3552,14 +3552,8 @@ abstract class AppLocalizations {
   /// No description provided for @itemInRecycleBin.
   ///
   /// In en, this message translates to:
-  /// **'{count} item in recycle bin'**
+  /// **'{count, plural, =0{No items in recycle bin} =1{# item in recycle bin} other{# items in recycle bin}}'**
   String itemInRecycleBin(int count);
-
-  /// No description provided for @itemsInRecycleBin.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} items in recycle bin'**
-  String itemsInRecycleBin(int count);
 
   /// No description provided for @restoreItemTooltip.
   ///
@@ -3762,7 +3756,7 @@ abstract class AppLocalizations {
   /// No description provided for @organizeListsBodyCount.
   ///
   /// In en, this message translates to:
-  /// **'We’ve suggested some groups for your {count} lists. You can edit, remove, or add new groups.'**
+  /// **'{count, plural, =0{We\'ve suggested some groups for your lists. You can edit, remove, or add new groups.} =1{We\'ve suggested some groups for your # list. You can edit, remove, or add new groups.} other{We\'ve suggested some groups for your # lists. You can edit, remove, or add new groups.}}'**
   String organizeListsBodyCount(int count);
 
   /// No description provided for @organizeLists.
@@ -3936,8 +3930,8 @@ abstract class AppLocalizations {
   /// No description provided for @itemsCountTooltip.
   ///
   /// In en, this message translates to:
-  /// **'{count} items'**
-  String itemsCountTooltip(String count);
+  /// **'{count, plural, =0{No items} =1{# item} other{# items}}'**
+  String itemsCountTooltip(int count);
 
   /// No description provided for @itemsAddedEachDay.
   ///
@@ -3954,7 +3948,7 @@ abstract class AppLocalizations {
   /// No description provided for @itemCountLabel.
   ///
   /// In en, this message translates to:
-  /// **'{count} items'**
+  /// **'{count, plural, =0{No items} =1{# item} other{# items}}'**
   String itemCountLabel(int count);
 
   /// No description provided for @failedToLoadListData.
@@ -3981,11 +3975,29 @@ abstract class AppLocalizations {
   /// **'English'**
   String get langEnglish;
 
+  /// No description provided for @langArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get langArabic;
+
+  /// No description provided for @langBengali.
+  ///
+  /// In en, this message translates to:
+  /// **'Bengali'**
+  String get langBengali;
+
   /// No description provided for @langDeutsch.
   ///
   /// In en, this message translates to:
   /// **'Deutsch'**
   String get langDeutsch;
+
+  /// No description provided for @langDutch.
+  ///
+  /// In en, this message translates to:
+  /// **'Dutch'**
+  String get langDutch;
 
   /// No description provided for @langEspanol.
   ///
@@ -4005,6 +4017,12 @@ abstract class AppLocalizations {
   /// **'हिन्दी'**
   String get langHindi;
 
+  /// No description provided for @langIndonesian.
+  ///
+  /// In en, this message translates to:
+  /// **'Indonesian'**
+  String get langIndonesian;
+
   /// No description provided for @langItaliano.
   ///
   /// In en, this message translates to:
@@ -4017,11 +4035,29 @@ abstract class AppLocalizations {
   /// **'日本語'**
   String get langJapanese;
 
+  /// No description provided for @langKannada.
+  ///
+  /// In en, this message translates to:
+  /// **'Kannada'**
+  String get langKannada;
+
   /// No description provided for @langKorean.
   ///
   /// In en, this message translates to:
   /// **'한국어'**
   String get langKorean;
+
+  /// No description provided for @langMarathi.
+  ///
+  /// In en, this message translates to:
+  /// **'Marathi'**
+  String get langMarathi;
+
+  /// No description provided for @langPortuguese.
+  ///
+  /// In en, this message translates to:
+  /// **'Portuguese'**
+  String get langPortuguese;
 
   /// No description provided for @langRussian.
   ///
@@ -4035,11 +4071,29 @@ abstract class AppLocalizations {
   /// **'简体中文'**
   String get langSimplifiedChinese;
 
+  /// No description provided for @langTamil.
+  ///
+  /// In en, this message translates to:
+  /// **'Tamil'**
+  String get langTamil;
+
+  /// No description provided for @langTelugu.
+  ///
+  /// In en, this message translates to:
+  /// **'Telugu'**
+  String get langTelugu;
+
   /// No description provided for @langTraditionalChinese.
   ///
   /// In en, this message translates to:
   /// **'繁體中文'**
   String get langTraditionalChinese;
+
+  /// No description provided for @langTurkish.
+  ///
+  /// In en, this message translates to:
+  /// **'Turkish'**
+  String get langTurkish;
 
   /// No description provided for @useSystemDefaultTitle.
   ///

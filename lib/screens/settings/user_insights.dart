@@ -617,7 +617,7 @@ class _UserInsightsScreenState extends State<UserInsightsScreen> {
                 children: [
                   Tooltip(
                     message: AppLocalizations.of(context)!
-                        .itemsCountTooltip(item.value.toStringAsFixed(0)),
+                        .itemsCountTooltip(item.value.round()),
                     child: Container(
                       width: 20,
                       height: height,

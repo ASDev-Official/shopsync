@@ -399,6 +399,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SimpleDialogOption(
                         onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('ar'));
+                        },
+                        child: Text(l10n.langArabic,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'ar'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('bn'));
+                        },
+                        child: Text(l10n.langBengali,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'bn'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
                           Navigator.pop(dialogContext, const Locale('de'));
                         },
                         child: Text(l10n.langDeutsch,
@@ -443,6 +465,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SimpleDialogOption(
                         onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('id'));
+                        },
+                        child: Text(l10n.langIndonesian,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'id'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
                           Navigator.pop(dialogContext, const Locale('it'));
                         },
                         child: Text(l10n.langItaliano,
@@ -465,6 +498,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SimpleDialogOption(
                         onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('kn'));
+                        },
+                        child: Text(l10n.langKannada,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'kn'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
                           Navigator.pop(dialogContext, const Locale('ko'));
                         },
                         child: Text(l10n.langKorean,
@@ -476,12 +520,78 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SimpleDialogOption(
                         onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('mr'));
+                        },
+                        child: Text(l10n.langMarathi,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'mr'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('nl'));
+                        },
+                        child: Text(l10n.langDutch,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'nl'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('pt'));
+                        },
+                        child: Text(l10n.langPortuguese,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'pt'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
                           Navigator.pop(dialogContext, const Locale('ru'));
                         },
                         child: Text(l10n.langRussian,
                             style: TextStyle(
                                 color: textColor,
                                 fontWeight: _currentLocale?.languageCode == 'ru'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('ta'));
+                        },
+                        child: Text(l10n.langTamil,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'ta'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('te'));
+                        },
+                        child: Text(l10n.langTelugu,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'te'
+                                    ? FontWeight.bold
+                                    : FontWeight.normal)),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          Navigator.pop(dialogContext, const Locale('tr'));
+                        },
+                        child: Text(l10n.langTurkish,
+                            style: TextStyle(
+                                color: textColor,
+                                fontWeight: _currentLocale?.languageCode == 'tr'
                                     ? FontWeight.bold
                                     : FontWeight.normal)),
                       ),
