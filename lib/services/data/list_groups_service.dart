@@ -484,6 +484,11 @@ class ListGroupsService {
 
       return false;
     } catch (error, stackTrace) {
+      // Permission-denied is expected for viewer-only users who cannot query
+      // the entire lists collection — no migration needed in this case.
+      if (error is FirebaseException && error.code == 'permission-denied') {
+        return false;
+      }
       await Sentry.captureException(
         error,
         stackTrace: stackTrace,
