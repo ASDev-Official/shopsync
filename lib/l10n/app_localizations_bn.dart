@@ -2392,7 +2392,14 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String shoppingListsCount(int count) {
-    return '$count shopping lists';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '# shopping lists',
+      one: '# shopping list',
+      zero: 'No shopping lists',
+    );
+    return '$_temp0';
   }
 
   @override

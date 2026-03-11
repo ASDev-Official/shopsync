@@ -1372,7 +1372,7 @@
   "showGravatar": "Show Gravatar",
   "displayProfilePictureToOtherUsers": "Display profile picture to other users",
   "accountActivity": "Account Activity",
-  "shoppingListsCount": "{count} shopping lists",
+  "shoppingListsCount": "{count, plural, =0{No shopping lists} =1{# shopping list} other{# shopping lists}}",
   "@shoppingListsCount": {
     "placeholders": {
       "count": {

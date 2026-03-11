@@ -4242,7 +4242,7 @@ abstract class AppLocalizations {
   /// No description provided for @shoppingListsCount.
   ///
   /// In en, this message translates to:
-  /// **'{count} shopping lists'**
+  /// **'{count, plural, =0{No shopping lists} =1{# shopping list} other{# shopping lists}}'**
   String shoppingListsCount(int count);
 
   /// No description provided for @listsYouHaveAccessTo.
