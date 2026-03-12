@@ -224,7 +224,7 @@
     "registerNetworkError": "Error de red. Compruebe su conexión a Internet e inténtelo de nuevo",
     "registerGenericError": "Ha ocurrido un error durante el registro",
     "registerButton": "Registro",
-    "registerEnterName": "Introduzca su nombre",
+    "registerEnterName": "Introduzca su nombre, por favor",
     "registerNameTooShort": "El nombre debe al menos tener 2 caracteres",
     "registerEnterPassword": "Introduzca su contraseña",
     "resetPasswordTitle": "Restablecer\nContraseña",
@@ -485,5 +485,652 @@
             }
         },
         "description": "From: lib/screens/lists/list_insights.dart"
-    }
+    },
+    "errorLoadingInsightsE1": "Error al cargar información: {e}",
+    "@errorLoadingInsightsE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "errorLoadingInsightsE2": "Error al cargar información: {e}",
+    "@errorLoadingInsightsE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "errorLoadingInsightsE3": "Error al cargar información: {e}",
+    "@errorLoadingInsightsE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "errorLoadingListsSnapshoterror": "Error al cargar listados: {error}",
+    "@errorLoadingListsSnapshoterror": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/home.dart"
+    },
+    "errorLoadingListsSnapshoterror1": "Error al cargar listados: {error}",
+    "@errorLoadingListsSnapshoterror1": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/home.dart"
+    },
+    "errorSigningOutEtostring": "Error al salir: {e}",
+    "@errorSigningOutEtostring": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "errorSigningOutEtostring1": "Error al salir: {e}",
+    "@errorSigningOutEtostring1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "errorSigningOutEtostring2": "Error al salir: {e}",
+    "@errorSigningOutEtostring2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "errorSigningOutEtostring3": "Error al salir: {e}",
+    "@errorSigningOutEtostring3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "errorSigningOutEtostring4": "Error al salir: {e}",
+    "@errorSigningOutEtostring4": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "errorSigningOutEtostring5": "Error al salir: {e}",
+    "@errorSigningOutEtostring5": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "errorSigningOutEtostring6": "Error al salir: {e}",
+    "@errorSigningOutEtostring6": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "errorSigningOutEtostring7": "Error al salir: {e}",
+    "@errorSigningOutEtostring7": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "failedToChangePermission": "Ha fallado al cambiar permiso",
+    "failedToChangePermission1": "Ha fallado al cambiar permiso",
+    "failedToCreateGroupPleaseTryAgain": "Ha fallado al crear grupo. Inténtelo de nuevo.",
+    "failedToCreateGroupPleaseTryAgain1": "Ha fallado al crear grupo. Inténtelo de nuevo.",
+    "failedToCreateItem": "Ha fallado al crear elemento",
+    "failedToCreateItem1": "Ha fallado al crear elemento",
+    "failedToCreateListPleaseTryAgain": "Ha fallado al crear listado. Inténtelo de nuevo.",
+    "failedToCreateListPleaseTryAgain1": "Ha fallado al crear listado. Inténtelo de nuevo.",
+    "failedToDeleteGroupPleaseTryAgain": "Ha fallado al eliminar grupo. Inténtelo de nuevo.",
+    "failedToDeleteGroupPleaseTryAgain1": "Ha fallado al eliminar grupo. Inténtelo de nuevo.",
+    "failedToDeleteItem": "Ha fallado al eliminar elemento",
+    "failedToDeleteItem1": "Ha fallado al eliminar elemento",
+    "failedToDeleteItem2": "Ha fallado al eliminar elemento",
+    "failedToDeleteItem3": "Ha fallado al eliminar elemento",
+    "failedToDeleteList": "Ha fallado al eliminar listado",
+    "failedToDeleteList1": "Ha fallado al eliminar listado",
+    "failedToMigrateListsPleaseTryAgain": "Ha fallado al migrar listados. Inténtelo de nuevo.",
+    "failedToMigrateListsPleaseTryAgain1": "Ha fallado al migrar listados. Inténtelo de nuevo.",
+    "failedToRemoveUser": "Ha fallado al quitar usuario",
+    "failedToRemoveUser1": "Ha fallado al quitar usuario",
+    "failedToRestoreItem": "Ha fallado al restaurar elemento",
+    "failedToRestoreItem1": "Ha fallado al restaurar elemento",
+    "failedToSaveItemTemplate": "Ha fallado al guardar plantilla de elemento",
+    "failedToSaveItemTemplate1": "Ha fallado al guardar plantilla de elemento",
+    "failedToSaveLocation": "Ha fallado al guardar lugar",
+    "failedToSaveLocation1": "Ha fallado al guardar lugar",
+    "failedToShareList": "Ha fallado al compartir listado",
+    "failedToShareList1": "Ha fallado al compartir listado",
+    "failedToSignInWithGoogle": "Ha fallado al acceder con Google",
+    "failedToSignInWithGoogle1": "Ha fallado al acceder con Google",
+    "failedToUpdateGroupNamePleaseTryAgain": "Ha fallado al actualizar el nombre del grupo. Inténtelo de nuevo.",
+    "failedToUpdateGroupNamePleaseTryAgain1": "Ha fallado al actualizar el nombre del grupo. Inténtelo de nuevo.",
+    "failedToUpdateItemStatus": "Ha fallado al actualizar el estado del elemento",
+    "failedToUpdateItemStatus1": "Ha fallado al actualizar el estado del elemento",
+    "failedToUpdateListName": "Ha fallado al actualizar el nombre del listado",
+    "failedToUpdateListName1": "Ha fallado al actualizar el nombre del listado",
+    "failedToUpdateWidgetE": "Ha fallado al actualizar el widget: {e}",
+    "@failedToUpdateWidgetE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "failedToUpdateWidgetE1": "Ha fallado al actualizar el widget: {e}",
+    "@failedToUpdateWidgetE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "failedToUpdateWidgetE2": "Ha fallado al actualizar el widget: {e}",
+    "@failedToUpdateWidgetE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "failedToUpdateWidgetE3": "Ha fallado al actualizar el widget: {e}",
+    "@failedToUpdateWidgetE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "feedback": "Retroalimentación",
+    "groupNamecontrollertexttrimCreatedSuccessfully": "Grupo «{nameController}» creado correctamente",
+    "groupNamecontrollertexttrimCreatedSuccessfully1": "Grupo «{nameController}» creado correctamente",
+    "groupNamecontrollertexttrimCreatedSuccessfully2": "Grupo «{nameController}» creado correctamente",
+    "groupNamecontrollertexttrimCreatedSuccessfully3": "Grupo «{nameController}» creado correctamente",
+    "groupRenamedToNamecontrollertexttrim": "Grupo renombrado a «{nameController}»",
+    "groupRenamedToNamecontrollertexttrim1": "Grupo renombrado a «{nameController}»",
+    "groupRenamedToNamecontrollertexttrim2": "Grupo renombrado a «{nameController}»",
+    "groupRenamedToNamecontrollertexttrim3": "Grupo renombrado a «{nameController}»",
+    "groupWidgetgroupnameDeleted": "Grupo «{groupName}» eliminado",
+    "@groupWidgetgroupnameDeleted": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "groupWidgetgroupnameDeleted1": "Grupo «{groupName}» eliminado",
+    "@groupWidgetgroupnameDeleted1": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "groupWidgetgroupnameDeleted2": "Grupo «{groupName}» eliminado",
+    "@groupWidgetgroupnameDeleted2": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "groupWidgetgroupnameDeleted3": "Grupo «{groupName}» eliminado",
+    "@groupWidgetgroupnameDeleted3": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "helpTranslate": "Ayuda a Traducción",
+    "inTimeframe": "en fotograma",
+    "inTimeframe1": "en fotograma",
+    "insights": "Insignias",
+    "itemCreatedFromTemplate": "Ítem creado desde plantilla",
+    "itemCreatedFromTemplate1": "Ítem creado desde plantilla",
+    "itemName": "Nombre de Ítem",
+    "itemName1": "Nombre de Ítem",
+    "itemTemplateSavedSuccessfully": "Plantilla de ítem guardada correctamente",
+    "itemTemplateSavedSuccessfully1": "Plantilla de ítem guardada correctamente",
+    "items": "Ítemes",
+    "itemsAdded": "Ítemes Añadidos",
+    "itemsCheckedOff": "elementos marcados",
+    "itemsCheckedOff1": "elementos marcados",
+    "itemsCompleted": "Elementos Completados",
+    "itemsInList": "elementos dentro del listado",
+    "itemsPerDay": "elementos por día",
+    "itemsPerDay1": "elementos por día",
+    "keepTrackOfWhatYouNeedToBuy": "Conservar seguimiento de qué necesita comprar",
+    "language": "Idioma",
+    "leaveUngrouped": "Dejar Desagrupado",
+    "licenses": "Licencias",
+    "listSharedWithEmailAsSelectedrole": "Listado compartido con {email} como {selectedRole}",
+    "@listSharedWithEmailAsSelectedrole": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "listSharedWithEmailAsSelectedrole1": "Listado compartido con {email} como {selectedRole}",
+    "@listSharedWithEmailAsSelectedrole1": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "listSharedWithEmailAsSelectedrole2": "Listado compartido con {email} como {selectedRole}",
+    "@listSharedWithEmailAsSelectedrole2": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "listSharedWithEmailAsSelectedrole3": "Listado compartido con {email} como {selectedRole}",
+    "@listSharedWithEmailAsSelectedrole3": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "listnameAddedToGroup": "{listName} añadido al grupo",
+    "@listnameAddedToGroup": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameAddedToGroup1": "{listName} añadido al grupo",
+    "@listnameAddedToGroup1": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameAddedToGroup2": "{listName} añadido al grupo",
+    "@listnameAddedToGroup2": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameAddedToGroup3": "{listName} añadido al grupo",
+    "@listnameAddedToGroup3": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameRemovedFromGroup": "{listName} retirado del grupo",
+    "@listnameRemovedFromGroup": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameRemovedFromGroup1": "{listName} retirado del grupo",
+    "@listnameRemovedFromGroup1": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameRemovedFromGroup2": "{listName} retirado del grupo",
+    "@listnameRemovedFromGroup2": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listnameRemovedFromGroup3": "{listName} retirado del grupo",
+    "@listnameRemovedFromGroup3": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "listsCreated": "Listados Creados",
+    "loading": "Cargando…",
+    "location": "Lugar",
+    "location1": "Lugar",
+    "locationDeleted": "Lugar eliminado",
+    "locationDeleted1": "Lugar eliminado",
+    "locationSavedSuccessfully": "Lugar guardado correctamente",
+    "locationSavedSuccessfully1": "Lugar guardado correctamente",
+    "networkErrorPleaseCheckYourInternetConnectionAndTryAgain": "Error de red. Compruebe su conexión de internet e intente de nuevo",
+    "networkErrorPleaseCheckYourInternetConnectionAndTryAgain1": "Error de red. Compruebe su conexión de internet e intente de nuevo",
+    "noAccountFoundWithThisEmail": "Ninguna cuenta encontrada con este correo-e",
+    "noCategoriesAvailable": "Ninguna categoría disponible",
+    "noCategory": "Ninguna Categoría",
+    "noUserFoundForThatEmailPleaseCheckYourEmailAndTryAgain": "Ningún usuario encontrado para ese correo-e. Compruebe su correo-e e intente de nuevo",
+    "notLoggedIn": "No accedido",
+    "openSourceLicenses": "Licencias de fuente abierta",
+    "openTheDrawerFromTheLeft": "Abre el cajón desde el izquierdo",
+    "organizeYourListsWithTheButton": "Organice sus listados con el botón +",
+    "owner": "propietario",
+    "password": "Contraseña",
+    "password1": "Contraseña",
+    "password2": "Contraseña",
+    "passwordMustBeAtLeast6Characters": "La contraseña debe ser de al menos 6 caracteres",
+    "peopleCollaborating": "gente colaborando",
+    "permanentlyDeleteThisList": "Elimina permanentemente este listado",
+    "permissionChangedToNewrole": "Permiso cambiado a {newRole}",
+    "@permissionChangedToNewrole": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "permissionChangedToNewrole1": "Permiso cambiado a {newRole}",
+    "@permissionChangedToNewrole1": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "permissionChangedToNewrole2": "Permiso cambiado a {newRole}",
+    "@permissionChangedToNewrole2": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "permissionChangedToNewrole3": "Permiso cambiado a {newRole}",
+    "@permissionChangedToNewrole3": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "pleaseEnterACategoryName": "Introduzca un nombre de categoría",
+    "pleaseEnterACategoryName1": "Introduzca un nombre de categoría",
+    "pleaseEnterACategoryName2": "Introduzca un nombre de categoría",
+    "pleaseEnterACategoryName3": "Introduzca un nombre de categoría",
+    "pleaseEnterADisplayName": "Introduzca un nombre de pantalla",
+    "pleaseEnterAGroupName": "Introduzca un nombre de grupo",
+    "pleaseEnterAGroupName1": "Introduzca un nombre de grupo",
+    "pleaseEnterAGroupName2": "Introduzca un nombre de grupo",
+    "pleaseEnterAGroupName3": "Introduzca un nombre de grupo",
+    "pleaseEnterAPassword": "Introduzca una contraseña",
+    "pleaseEnterATemplateName": "Introduzca un nombre de plantilla",
+    "pleaseEnterATemplateName1": "Introduzca un nombre de plantilla",
+    "pleaseEnterAValidEmailAddress": "Introduzca una dirección de correo-e válida",
+    "pleaseEnterAValidEmailAddress1": "Introduzca una dirección de correo-e válida",
+    "pleaseEnterAValidEmailAddress2": "Introduzca una dirección de correo-e válida",
+    "pleaseEnterAValidEmailAddress3": "Introduzca una dirección de correo-e válida",
+    "pleaseEnterAValidEmailAddress4": "Introduzca una dirección de correo-e válida",
+    "pleaseEnterAnEmailAddress": "Introduzca una dirección de correo-e",
+    "pleaseEnterAnEmailAddress1": "Introduzca una dirección de correo-e",
+    "pleaseEnterAnItemTitle": "Introduzca un elemento de título",
+    "pleaseEnterAnItemTitle1": "Introduzca un elemento de título",
+    "pleaseEnterYourEmail": "Introduzca su correo-e",
+    "pleaseEnterYourEmail1": "Introduzca su correo-e",
+    "pleaseEnterYourEmail2": "Introduzca su correo-e",
+    "pleaseEnterYourName": "Introduzca su nombre",
+    "pleaseEnterYourPassword": "Introduzca su contraseña",
+    "productivity": "Productividad",
+    "profileUpdatedSuccessfully": "Perfil actualizado correctamente",
+    "profileUpdatedSuccessfully1": "Perfil actualizado correctamente",
+    "progress": "Progreso",
+    "recycleBin": "Papelera",
+    "recycleBin1": "Papelera",
+    "releaseNotes": "Notas de Versión",
+    "removeAllCompletedItems": "Quita todos los elementos completados",
+    "removeMember": "Retirar Miembro",
+    "saveChanges": "Guardar Cambios",
+    "saveChanges1": "Guardar Cambios",
+    "savedItems": "Guardar Elementos",
+    "savedLocations": "Lugar Guardado",
+    "searchIcons": "Buscar iconos…",
+    "searchPackages": "Buscar paquetes",
+    "searchPackages1": "Buscar paquetes…",
+    "setPassword": "Establecer Contraseña",
+    "settings": "Ajustes",
+    "settings1": "Ajustes",
+    "shareCollaborate": "Compartir y Colaborar",
+    "shareList": "Listado Compartido",
+    "shareThisListWithOthers": "Comparte este listado con otros",
+    "shoppingLists": "listado de compras",
+    "shopsync": "ShopSync",
+    "shopsync1": "ShopSync",
+    "shopsyncForms": "Formularios ShopSync",
+    "shopsyncLogo": "Logotipo ShopSync",
+    "signInWithEmail": "Acceder con correo-e",
+    "signOut": "Salir",
+    "signOut1": "Salir",
+    "signOut2": "Salir",
+    "signOut3": "Salir",
+    "signOut4": "Salir",
+    "signOut5": "Salir",
+    "skipForNow": "Omitir por Ahora",
+    "skipOrganization": "Omitir Organización",
+    "smartLists": "Listados Inteligentes",
+    "storeAddress": "Dirección de tienda",
+    "storeName": "Nombre de tienda",
+    "successfullyOrganizedSelectedgroupslengthGroups": "Se organizaron {length} grupos correctamente",
+    "@successfullyOrganizedSelectedgroupslengthGroups": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "successfullyOrganizedSelectedgroupslengthGroups1": "Se organizaron {length} grupos correctamente",
+    "@successfullyOrganizedSelectedgroupslengthGroups1": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "successfullyOrganizedSelectedgroupslengthGroups2": "Se organizaron {length} grupos correctamente",
+    "@successfullyOrganizedSelectedgroupslengthGroups2": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "successfullyOrganizedSelectedgroupslengthGroups3": "Se organizaron {length} grupos correctamente",
+    "@successfullyOrganizedSelectedgroupslengthGroups3": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "templateDeleted": "Plantilla eliminada",
+    "templateDeleted1": "Plantilla eliminada",
+    "templatesShortcuts": "Plantilla y Accesos directos",
+    "theEmailAddressIsAlreadyInUseByAnotherAccount": "La dirección del correo-e ya está en uso por otra cuenta",
+    "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev": "La operación no está concedida. Intente de nuevo más tarde. Si no funciona, contacte con support@aadish.dev",
+    "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1": "La operación no está concedida. Intente de nuevo más tarde. Si no funciona, contacte con support@aadish.dev",
+    "thePasswordIsInvalidOrTheUserDoesNotHaveAPassword": "La contraseña es inválida o el usuario no tiene una contraseña",
+    "theProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword": "Las credenciales proporcionadas son incorrectas. Verifique su correo-e y contraseña",
+    "thisEmailIsAlreadyRegisteredPleaseSignInInstead": "Este correo-e ya está registrado. Acceda en su lugar",
+    "thisPasswordIsTooWeakPleaseChooseAStrongerOne": "Esta contraseña es muy débil. Elija una más fuerte",
+    "thisUserHasBeenDisabledPleaseContactSupportaadishdev": "Este usuario ha sido inhabilitado. Contacte con support@aadish.dev",
+    "tooManyRequestsPleaseTryAgainLater": "Demasiadas peticiones. Inténtelo más tarde",
+    "tooManyRequestsPleaseTryAgainLater1": "Demasiadas peticiones. Inténtelo más tarde",
+    "tooManyRequestsPleaseTryAgainLater2": "Demasiadas peticiones. Inténtelo más tarde",
+    "totalItems": "elementos totales",
+    "totalItems1": "Elementos Totales",
+    "unlink": "Desenlazar",
+    "unlinkGoogleAccount": "Desenlazar Cuenta de Google",
+    "unlinkGoogleAccount1": "Desenlazar Cuenta de Google",
+    "useYourPhoneToRegisterIfYouDoNotHaveAnAccount": "Utilice su teléfono para registrar si no tiene una cuenta",
+    "userAlreadyHasAccessToThisList": "Usuario ya tiene acceso a este listado",
+    "userAlreadyHasAccessToThisList1": "Usuario ya tiene acceso a este listado",
+    "userNotFoundTheyNeedToSignUpForShopsyncFirst": "Usuario no encontrado. Necesitan acceder para el primer ShopSync.",
+    "userNotFoundTheyNeedToSignUpForShopsyncFirst1": "Usuario no encontrado. Necesitan acceder para el primer ShopSync.",
+    "userRemoved": "Usuario retirado",
+    "userRemoved1": "Usuario retirado",
+    "versionPackageinfoversionPackageinfobuildnumber": "Versión {version} ({buildNumber})",
+    "@versionPackageinfoversionPackageinfobuildnumber": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/auth/welcome.dart"
+    },
+    "versionPackageinfoversionPackageinfobuildnumber1": "Versión {version} ({buildNumber})",
+    "@versionPackageinfoversionPackageinfobuildnumber1": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/auth/welcome.dart"
+    },
+    "viewDeletedItems": "Vista de elementos borrados",
+    "viewSourceCode": "Vista de código fuente",
+    "viewer": "visor",
+    "viewer1": "visor",
+    "viewer2": "visor",
+    "viewer3": "Visor",
+    "welcomeToShopsync": "Bienvenido a ShopSync",
+    "widgetSettings": "Ajustes de Widget",
+    "widgetSettings1": "Ajustes de Widget",
+    "widgetUpdatedSuccessfully": "Widget actualizado correctamente.",
+    "widgetUpdatedSuccessfully1": "Widget actualizado correctamente.",
+    "yourInsights": "Sus Insignias",
+    "aiFeatures": "Características de IA",
+    "aiSetupDescription": "ShopSync utiliza IA en dispositivo para proporcionar sugerencias breves basadas en sus patrones de compras. Elija si lo gustaría habilitar estas características.",
+    "enableAiFeatures": "Habilitar Características de IA",
+    "enableAiDescription": "Reciba sugerencias personalizadas de artículos basadas en su historial y patrones de compra",
+    "disableAiFeatures": "Inhabilitar Características de IA",
+    "disableAiDescription": "Utiliza ShopSync sin sugerencias basadas en IA",
+    "smartItemSuggestions": "Sugerencias inteligentes de artículos",
+    "patternRecognition": "Reconocimiento de patrones",
+    "timeBasedRecommendations": "Recomendaciones basadas en el tiempo",
+    "personalizedExperience": "Experiencia personalizada",
+    "noDataAnalysis": "Sin análisis de datos",
+    "noAiSuggestions": "Sin sugerencias de IA",
+    "gravatarSettings": "Imagen de Perfil",
+    "gravatarDescription": "Gravatar es un servicio de avatares reconocido a nivel mundial. Si tienes un Gravatar asociado a tu correo electrónico, actívalo para que tu foto de perfil aparezca en todo ShopSync.",
+    "enableGravatar": "Mostrar My Gravatar",
+    "disableGravatar": "Ocultar My Gravatar",
+    "gravatarEnabled": "Gravatar habilitado",
+    "gravatarDisabled": "Gravatar inhabilitado",
+    "gravatarEnabledMessage": "Tu foto de perfil de Gravatar ahora es visible para otros usuarios",
+    "gravatarDisabledMessage": "Tu foto de perfil de Gravatar ahora está oculta para otros usuarios",
+    "refreshGravatar": "Recargar Gravatar",
+    "gravatarRefreshed": "Gravatar recargado correctamente",
+    "gravatarNotFound": "No se ha encontrado ningún Gravatar para tu correo-e",
+    "gravatarFound": "Gravatar encontrado y actualizado",
+    "whatIsGravatar": "¿Qué es Gravatar?",
+    "gravatarExplanation": "Gravatar (Globally Recognized Avatar) es un servicio que proporciona una imagen de perfil en diferentes sitios web y aplicaciones utilizando tu dirección de correo electrónico. Visita gravatar.com para crear o actualizar tu Gravatar.",
+    "visitGravatar": "Visitar Gravatar.com",
+    "privacyControl": "Control de Privacidad",
+    "gravatarPrivacyDescription": "Puedes activar o desactivar tu Gravatar en cualquier momento. Cuando esté desactivado, solo se mostrarán tus iniciales a los demás usuarios.",
+    "learnMore": "Aprender Más",
+    "close": "Cerrar",
+    "anErrorOccurred": "Ha ocurrido un error",
+    "gravatarProfilePictures": "Fotos de perfil",
+    "gravatarSetupDescription": "ShopSync puede exhibir tu foto de perfil de Gravatar en toda la aplicación. ¿Deseas habilitar esta función?",
+    "enableGravatarSetup": "Habilitar Gravatar",
+    "enableGravatarSetupDescription": "Mostrar mi foto de perfil a otros usuarios",
+    "disableGravatarSetup": "Inhabilitar Gravatar",
+    "disableGravatarSetupDescription": "Mantener mi foto de perfil privada",
+    "gravatarFeature1": "Exhibe tu foto de perfil de Gravatar",
+    "gravatarFeature2": "Sincronización automática con tu correo-e",
+    "gravatarFeature3": "Visible en listas compartidas y colaboraciones",
+    "gravatarFeature4": "Se puede cambiar en cualquier momento en los ajustes",
+    "gravatarDisabledFeature1": "Solo se muestran las iniciales a otros usuarios",
+    "gravatarDisabledFeature2": "Mantiene tu Gravatar oculto para otros usuarios",
+    "gravatarDisabledFeature3": "Se puede habilitar más adelante en los ajustes",
+    "gravatarPreferenceChangeNote": "Puedes cambiar este ajuste más adelante en los ajustes de tu perfil.",
+    "basicListManagement": "Gestión básica de listados"
 }
