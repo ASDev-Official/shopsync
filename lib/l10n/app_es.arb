@@ -258,6 +258,232 @@
     "githubRepository": "Repositorio GitHub",
     "googleAccountLinkedSuccessfully": "Cuenta Google correctamente enlazada.",
     "googleAccountLinkedSuccessfully1": "Cuenta Google correctamente enlazada.",
-    "googleAccountUnlinkedSuccessfully": "Cuenta Google correctamente enlazada.",
-    "googleAccountUnlinkedSuccessfully1": "Cuenta Google correctamente desenlazada."
+    "googleAccountUnlinkedSuccessfully": "Cuenta Google correctamente desenlazada",
+    "googleAccountUnlinkedSuccessfully1": "Cuenta Google correctamente desenlazada",
+    "avgCompletion": "Promedio de finalización",
+    "registerSignUp": "Regístrate para comenzar a compartir listas de compras",
+    "resetPasswordBack": "Volver a Iniciar sesión",
+    "signingOut": "Cerrar sesión…",
+    "outageServiceOutage": "Interrupción del Servicio",
+    "outageDefaultDescription": "Se ha informado de una interrupción del servicio. Nuestro equipo está investigando.",
+    "outageAffected": "Afectados: {components}",
+    "@outageAffected": {
+        "placeholders": {
+            "components": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/status/outage_dialog.dart"
+    },
+    "outageStarted": "Comenzado",
+    "outageResolved": "Resuelto",
+    "outageLatestUpdates": "Últimas actualizaciones",
+    "outageClose": "Cerrar",
+    "couldNotLaunchUrl2": "No pudo lanzar {url}",
+    "@couldNotLaunchUrl2": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "couldNotLaunchUrl3": "No pudo lanzar {url}",
+    "@couldNotLaunchUrl3": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "couldNotOpenPlayStore": "No pudo abrir Play Store",
+    "couldNotOpenPlayStore1": "No pudo abrir Play Store",
+    "couldNotOpenReleaseNotes": "No se pudieron abrir las notas de la versión",
+    "couldNotOpenReleaseNotes1": "No se pudieron abrir las notas de la versión",
+    "deleteList1": "Eliminar lista",
+    "egGroceryListsWorkProjects": "p.ej., listas de compras, proyectos de trabajo",
+    "enterEmailAddress": "Introduzca su dirección de correo-e",
+    "enterGroupName": "Introduzca el nombre del grupo",
+    "enterGroupName1": "Introduzca el nombre del grupo",
+    "enterGroupName2": "Introduzca el nombre del grupo",
+    "enterItemName1": "Introduzca el nombre del artículo…",
+    "enterListName": "Introduzca el nombre de la lista",
+    "enterYourName": "Introduzca su nombre",
+    "errorCreatingCategoryE": "Error al crear categoría: {e}",
+    "@errorCreatingCategoryE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorCreatingCategoryE1": "Error al crear categoría: {e}",
+    "@errorCreatingCategoryE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorCreatingCategoryE2": "Error al crear categoría: {e}",
+    "@errorCreatingCategoryE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorCreatingCategoryE3": "Error al crear categoría: {e}",
+    "@errorCreatingCategoryE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorDeletingCategoryE": "Error al eliminar categoría: {e}",
+    "@errorDeletingCategoryE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorDeletingCategoryE1": "Error al eliminar categoría: {e}",
+    "@errorDeletingCategoryE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorDeletingCategoryE2": "Error al eliminar categoría: {e}",
+    "@errorDeletingCategoryE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorDeletingCategoryE3": "Error al eliminar categoría: {e}",
+    "@errorDeletingCategoryE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "errorErrormessage": "Error: {errorMessage}",
+    "@errorErrormessage": {
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_welcome_screen.dart"
+    },
+    "errorErrormessage1": "Error: {errorMessage}",
+    "@errorErrormessage1": {
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_welcome_screen.dart"
+    },
+    "google": "Google",
+    "showGravatar": "Mostrar Gravatar",
+    "goBack": "Atrás",
+    "exportBackup": "Exportar y Respaldar",
+    "exportList": "Exportar Listado",
+    "exportListAsACsv": "Exportar listado como un CSV",
+    "high": "alta",
+    "linkGoogleAccount": "Enlace de Cuenta Google",
+    "listDeletedSuccessfully": "Listado eliminado correctamente",
+    "listDeletedSuccessfully1": "Listado eliminado correctamente",
+    "listManagement": "Gestor de Listado",
+    "listName": "Nombre de listado",
+    "listNameUpdated": "Nombre de listado actualizado",
+    "listNameUpdated1": "Nombre de listado actualizado",
+    "low": "bajo",
+    "low1": "bajo",
+    "manageCategories": "Categorías de Gestión",
+    "manageYourFrequentlyUsedLocations": "Gestiona su lugar frecuentemente utilizado",
+    "medium": "medio",
+    "moveToGroupname": "Mover a {name}",
+    "@moveToGroupname": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "moveToGroupname1": "Mover a {name}",
+    "@moveToGroupname1": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "myProfile": "Mi Perfil",
+    "name": "Nombre",
+    "nameMustBeAtLeast2Characters": "El nombre debe ser de al menos 2 caracteres",
+    "networkErrorCheckYourConnectionAndTryAgain": "Error de red. Compruebe su conexión e inténtelo de nuevo",
+    "errorFetchingMaintenanceStatusE": "Error al obtener estado de mantenimiento: {e}",
+    "@errorFetchingMaintenanceStatusE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "errorFetchingMaintenanceStatusE1": "Error al obtener estado de mantenimiento: {e}",
+    "@errorFetchingMaintenanceStatusE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "errorFetchingMaintenanceStatusE2": "Error al obtener estado de mantenimiento: {e}",
+    "@errorFetchingMaintenanceStatusE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "errorFetchingMaintenanceStatusE3": "Error al obtener estado de mantenimiento: {e}",
+    "@errorFetchingMaintenanceStatusE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "errorLoadingInsightsE": "Error al cargar perspectivas: {e}",
+    "@errorLoadingInsightsE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    }
 }
