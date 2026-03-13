@@ -71,7 +71,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get areYouSureYouWantToSignOut3 => '¿Seguro que desea salir?';
 
   @override
-  String get avgCompletion => 'Avg Completion';
+  String get avgCompletion => 'Promedio de finalización';
 
   @override
   String get canAddEditAndDeleteItems =>
@@ -427,7 +427,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get registerCreateAccount => 'Crear\nCuenta';
 
   @override
-  String get registerSignUp => 'Sign up to start sharing grocery lists';
+  String get registerSignUp =>
+      'Regístrate para comenzar a compartir listas de compras';
 
   @override
   String get registerName => 'Nombre';
@@ -469,7 +470,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get registerButton => 'Registro';
 
   @override
-  String get registerEnterName => 'Introduzca su nombre';
+  String get registerEnterName => 'Introduzca su nombre, por favor';
 
   @override
   String get registerNameTooShort =>
@@ -519,59 +520,61 @@ class AppLocalizationsEs extends AppLocalizations {
       'Ha ocurrido un error. Inténtelo de nuevo más tarde';
 
   @override
-  String get resetPasswordBack => 'Back to Sign In';
+  String get resetPasswordBack => 'Volver a Iniciar sesión';
 
   @override
-  String get signingOut => 'Signing Out...';
+  String get signingOut => 'Cerrar sesión…';
 
   @override
   String get error => 'Error';
 
   @override
-  String get outageServiceOutage => 'Service Outage';
+  String get outageServiceOutage => 'Interrupción del Servicio';
 
   @override
   String get outageDefaultDescription =>
-      'An outage has been reported. Our team is investigating.';
+      'Se ha informado de una interrupción del servicio. Nuestro equipo está investigando.';
 
   @override
   String outageAffected(String components) {
-    return 'Affected: $components';
+    return 'Afectados: $components';
   }
 
   @override
-  String get outageStarted => 'Started';
+  String get outageStarted => 'Comenzado';
 
   @override
-  String get outageResolved => 'Resolved';
+  String get outageResolved => 'Resuelto';
 
   @override
-  String get outageLatestUpdates => 'Latest Updates';
+  String get outageLatestUpdates => 'Últimas actualizaciones';
 
   @override
-  String get outageClose => 'Close';
+  String get outageClose => 'Cerrar';
 
   @override
   String couldNotLaunchUrl2(String url) {
-    return 'Could not launch $url';
+    return 'No pudo lanzar $url';
   }
 
   @override
   String couldNotLaunchUrl3(String url) {
-    return 'Could not launch $url';
+    return 'No pudo lanzar $url';
   }
 
   @override
-  String get couldNotOpenPlayStore => 'Could not open Play Store';
+  String get couldNotOpenPlayStore => 'No pudo abrir Play Store';
 
   @override
-  String get couldNotOpenPlayStore1 => 'Could not open Play Store';
+  String get couldNotOpenPlayStore1 => 'No pudo abrir Play Store';
 
   @override
-  String get couldNotOpenReleaseNotes => 'Could not open release notes';
+  String get couldNotOpenReleaseNotes =>
+      'No se pudieron abrir las notas de la versión';
 
   @override
-  String get couldNotOpenReleaseNotes1 => 'Could not open release notes';
+  String get couldNotOpenReleaseNotes1 =>
+      'No se pudieron abrir las notas de la versión';
 
   @override
   String get counter => 'Contador';
@@ -629,7 +632,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get deleteList => 'Borrar Listado';
 
   @override
-  String get deleteList1 => 'Delete List';
+  String get deleteList1 => 'Eliminar lista';
 
   @override
   String get description => 'Descripción';
@@ -650,7 +653,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get editor => 'Editor';
 
   @override
-  String get egGroceryListsWorkProjects => 'e.g., Grocery Lists, Work Projects';
+  String get egGroceryListsWorkProjects =>
+      'p.ej., listas de compras, proyectos de trabajo';
 
   @override
   String get email => 'Correo-e';
@@ -665,64 +669,64 @@ class AppLocalizationsEs extends AppLocalizations {
   String get email3 => 'Correo-e';
 
   @override
-  String get enterEmailAddress => 'Enter email address';
+  String get enterEmailAddress => 'Introduzca su dirección de correo-e';
 
   @override
-  String get enterGroupName => 'Enter group name';
+  String get enterGroupName => 'Introduzca el nombre del grupo';
 
   @override
-  String get enterGroupName1 => 'Enter group name';
+  String get enterGroupName1 => 'Introduzca el nombre del grupo';
 
   @override
-  String get enterGroupName2 => 'Enter group name';
+  String get enterGroupName2 => 'Introduzca el nombre del grupo';
 
   @override
-  String get enterItemName1 => 'Enter item name...';
+  String get enterItemName1 => 'Introduzca el nombre del artículo…';
 
   @override
-  String get enterListName => 'Enter list name';
+  String get enterListName => 'Introduzca el nombre de la lista';
 
   @override
-  String get enterYourName => 'Enter your name';
+  String get enterYourName => 'Introduzca su nombre';
 
   @override
   String errorCreatingCategoryE(String e) {
-    return 'Error creating category: $e';
+    return 'Error al crear categoría: $e';
   }
 
   @override
   String errorCreatingCategoryE1(String e) {
-    return 'Error creating category: $e';
+    return 'Error al crear categoría: $e';
   }
 
   @override
   String errorCreatingCategoryE2(String e) {
-    return 'Error creating category: $e';
+    return 'Error al crear categoría: $e';
   }
 
   @override
   String errorCreatingCategoryE3(String e) {
-    return 'Error creating category: $e';
+    return 'Error al crear categoría: $e';
   }
 
   @override
   String errorDeletingCategoryE(String e) {
-    return 'Error deleting category: $e';
+    return 'Error al eliminar categoría: $e';
   }
 
   @override
   String errorDeletingCategoryE1(String e) {
-    return 'Error deleting category: $e';
+    return 'Error al eliminar categoría: $e';
   }
 
   @override
   String errorDeletingCategoryE2(String e) {
-    return 'Error deleting category: $e';
+    return 'Error al eliminar categoría: $e';
   }
 
   @override
   String errorDeletingCategoryE3(String e) {
-    return 'Error deleting category: $e';
+    return 'Error al eliminar categoría: $e';
   }
 
   @override
@@ -757,243 +761,249 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String errorFetchingMaintenanceStatusE(String e) {
-    return 'Error fetching maintenance status: $e';
+    return 'Error al obtener estado de mantenimiento: $e';
   }
 
   @override
   String errorFetchingMaintenanceStatusE1(String e) {
-    return 'Error fetching maintenance status: $e';
+    return 'Error al obtener estado de mantenimiento: $e';
   }
 
   @override
   String errorFetchingMaintenanceStatusE2(String e) {
-    return 'Error fetching maintenance status: $e';
+    return 'Error al obtener estado de mantenimiento: $e';
   }
 
   @override
   String errorFetchingMaintenanceStatusE3(String e) {
-    return 'Error fetching maintenance status: $e';
+    return 'Error al obtener estado de mantenimiento: $e';
   }
 
   @override
   String errorLoadingInsightsE(String e) {
-    return 'Error loading insights: $e';
+    return 'Error al cargar perspectivas: $e';
   }
 
   @override
   String errorLoadingInsightsE1(String e) {
-    return 'Error loading insights: $e';
+    return 'Error al cargar información: $e';
   }
 
   @override
   String errorLoadingInsightsE2(String e) {
-    return 'Error loading insights: $e';
+    return 'Error al cargar información: $e';
   }
 
   @override
   String errorLoadingInsightsE3(String e) {
-    return 'Error loading insights: $e';
+    return 'Error al cargar información: $e';
   }
 
   @override
   String errorLoadingListsSnapshoterror(String error) {
-    return 'Error loading lists: $error';
+    return 'Error al cargar listados: $error';
   }
 
   @override
   String errorLoadingListsSnapshoterror1(String error) {
-    return 'Error loading lists: $error';
+    return 'Error al cargar listados: $error';
   }
 
   @override
   String errorSigningOutEtostring(String e) {
-    return 'Error signing out: $e';
+    return 'Error al salir: $e';
   }
 
   @override
   String errorSigningOutEtostring1(String e) {
-    return 'Error signing out: $e';
+    return 'Error al salir: $e';
   }
 
   @override
   String errorSigningOutEtostring2(String e) {
-    return 'Error signing out: $e';
+    return 'Error al salir: $e';
   }
 
   @override
   String errorSigningOutEtostring3(String e) {
-    return 'Error signing out: $e';
+    return 'Error al salir: $e';
   }
 
   @override
   String errorSigningOutEtostring4(String e) {
-    return 'Error signing out: $e';
+    return 'Error al salir: $e';
   }
 
   @override
   String errorSigningOutEtostring5(String e) {
-    return 'Error signing out: $e';
+    return 'Error al salir: $e';
   }
 
   @override
   String errorSigningOutEtostring6(String e) {
-    return 'Error signing out: $e';
+    return 'Error al salir: $e';
   }
 
   @override
   String errorSigningOutEtostring7(String e) {
-    return 'Error signing out: $e';
+    return 'Error al salir: $e';
   }
 
   @override
-  String get exportBackup => 'Export & Backup';
+  String get exportBackup => 'Exportar y Respaldar';
 
   @override
-  String get exportList => 'Export List';
+  String get exportList => 'Exportar Listado';
 
   @override
-  String get exportListAsACsv => 'Export list as a CSV';
+  String get exportListAsACsv => 'Exportar listado como un CSV';
 
   @override
-  String get failedToChangePermission => 'Failed to change permission';
+  String get failedToChangePermission => 'Ha fallado al cambiar permiso';
 
   @override
-  String get failedToChangePermission1 => 'Failed to change permission';
+  String get failedToChangePermission1 => 'Ha fallado al cambiar permiso';
 
   @override
   String get failedToCreateGroupPleaseTryAgain =>
-      'Failed to create group. Please try again.';
+      'Ha fallado al crear grupo. Inténtelo de nuevo.';
 
   @override
   String get failedToCreateGroupPleaseTryAgain1 =>
-      'Failed to create group. Please try again.';
+      'Ha fallado al crear grupo. Inténtelo de nuevo.';
 
   @override
-  String get failedToCreateItem => 'Failed to create item';
+  String get failedToCreateItem => 'Ha fallado al crear elemento';
 
   @override
-  String get failedToCreateItem1 => 'Failed to create item';
+  String get failedToCreateItem1 => 'Ha fallado al crear elemento';
 
   @override
   String get failedToCreateListPleaseTryAgain =>
-      'Failed to create list. Please try again.';
+      'Ha fallado al crear listado. Inténtelo de nuevo.';
 
   @override
   String get failedToCreateListPleaseTryAgain1 =>
-      'Failed to create list. Please try again.';
+      'Ha fallado al crear listado. Inténtelo de nuevo.';
 
   @override
   String get failedToDeleteGroupPleaseTryAgain =>
-      'Failed to delete group. Please try again.';
+      'Ha fallado al eliminar grupo. Inténtelo de nuevo.';
 
   @override
   String get failedToDeleteGroupPleaseTryAgain1 =>
-      'Failed to delete group. Please try again.';
+      'Ha fallado al eliminar grupo. Inténtelo de nuevo.';
 
   @override
-  String get failedToDeleteItem => 'Failed to delete item';
+  String get failedToDeleteItem => 'Ha fallado al eliminar elemento';
 
   @override
-  String get failedToDeleteItem1 => 'Failed to delete item';
+  String get failedToDeleteItem1 => 'Ha fallado al eliminar elemento';
 
   @override
-  String get failedToDeleteItem2 => 'Failed to delete item';
+  String get failedToDeleteItem2 => 'Ha fallado al eliminar elemento';
 
   @override
-  String get failedToDeleteItem3 => 'Failed to delete item';
+  String get failedToDeleteItem3 => 'Ha fallado al eliminar elemento';
 
   @override
-  String get failedToDeleteList => 'Failed to delete list';
+  String get failedToDeleteList => 'Ha fallado al eliminar listado';
 
   @override
-  String get failedToDeleteList1 => 'Failed to delete list';
+  String get failedToDeleteList1 => 'Ha fallado al eliminar listado';
 
   @override
   String get failedToMigrateListsPleaseTryAgain =>
-      'Failed to migrate lists. Please try again.';
+      'Ha fallado al migrar listados. Inténtelo de nuevo.';
 
   @override
   String get failedToMigrateListsPleaseTryAgain1 =>
-      'Failed to migrate lists. Please try again.';
+      'Ha fallado al migrar listados. Inténtelo de nuevo.';
 
   @override
-  String get failedToRemoveUser => 'Failed to remove user';
+  String get failedToRemoveUser => 'Ha fallado al quitar usuario';
 
   @override
-  String get failedToRemoveUser1 => 'Failed to remove user';
+  String get failedToRemoveUser1 => 'Ha fallado al quitar usuario';
 
   @override
-  String get failedToRestoreItem => 'Failed to restore item';
+  String get failedToRestoreItem => 'Ha fallado al restaurar elemento';
 
   @override
-  String get failedToRestoreItem1 => 'Failed to restore item';
+  String get failedToRestoreItem1 => 'Ha fallado al restaurar elemento';
 
   @override
-  String get failedToSaveItemTemplate => 'Failed to save item template';
+  String get failedToSaveItemTemplate =>
+      'Ha fallado al guardar plantilla de elemento';
 
   @override
-  String get failedToSaveItemTemplate1 => 'Failed to save item template';
+  String get failedToSaveItemTemplate1 =>
+      'Ha fallado al guardar plantilla de elemento';
 
   @override
-  String get failedToSaveLocation => 'Failed to save location';
+  String get failedToSaveLocation => 'Ha fallado al guardar lugar';
 
   @override
-  String get failedToSaveLocation1 => 'Failed to save location';
+  String get failedToSaveLocation1 => 'Ha fallado al guardar lugar';
 
   @override
-  String get failedToShareList => 'Failed to share list';
+  String get failedToShareList => 'Ha fallado al compartir listado';
 
   @override
-  String get failedToShareList1 => 'Failed to share list';
+  String get failedToShareList1 => 'Ha fallado al compartir listado';
 
   @override
-  String get failedToSignInWithGoogle => 'Failed to sign in with Google';
+  String get failedToSignInWithGoogle => 'Ha fallado al acceder con Google';
 
   @override
-  String get failedToSignInWithGoogle1 => 'Failed to sign in with Google';
+  String get failedToSignInWithGoogle1 => 'Ha fallado al acceder con Google';
 
   @override
   String get failedToUpdateGroupNamePleaseTryAgain =>
-      'Failed to update group name. Please try again.';
+      'Ha fallado al actualizar el nombre del grupo. Inténtelo de nuevo.';
 
   @override
   String get failedToUpdateGroupNamePleaseTryAgain1 =>
-      'Failed to update group name. Please try again.';
+      'Ha fallado al actualizar el nombre del grupo. Inténtelo de nuevo.';
 
   @override
-  String get failedToUpdateItemStatus => 'Failed to update item status';
+  String get failedToUpdateItemStatus =>
+      'Ha fallado al actualizar el estado del elemento';
 
   @override
-  String get failedToUpdateItemStatus1 => 'Failed to update item status';
+  String get failedToUpdateItemStatus1 =>
+      'Ha fallado al actualizar el estado del elemento';
 
   @override
-  String get failedToUpdateListName => 'Failed to update list name';
+  String get failedToUpdateListName =>
+      'Ha fallado al actualizar el nombre del listado';
 
   @override
-  String get failedToUpdateListName1 => 'Failed to update list name';
+  String get failedToUpdateListName1 =>
+      'Ha fallado al actualizar el nombre del listado';
 
   @override
   String failedToUpdateWidgetE(String e) {
-    return 'Failed to update widget: $e';
+    return 'Ha fallado al actualizar el widget: $e';
   }
 
   @override
   String failedToUpdateWidgetE1(String e) {
-    return 'Failed to update widget: $e';
+    return 'Ha fallado al actualizar el widget: $e';
   }
 
   @override
   String failedToUpdateWidgetE2(String e) {
-    return 'Failed to update widget: $e';
+    return 'Ha fallado al actualizar el widget: $e';
   }
 
   @override
   String failedToUpdateWidgetE3(String e) {
-    return 'Failed to update widget: $e';
+    return 'Ha fallado al actualizar el widget: $e';
   }
 
   @override
-  String get feedback => 'Feedback';
+  String get feedback => 'Retroalimentación';
 
   @override
   String get finished => 'Finalizado';
@@ -1011,80 +1021,80 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get googleAccountUnlinkedSuccessfully =>
-      'Cuenta Google correctamente enlazada.';
+      'Cuenta Google correctamente desenlazada';
 
   @override
   String get googleAccountUnlinkedSuccessfully1 =>
-      'Cuenta Google correctamente desenlazada.';
+      'Cuenta Google correctamente desenlazada';
 
   @override
   String groupNamecontrollertexttrimCreatedSuccessfully(Object nameController) {
-    return 'Group \"$nameController\" created successfully';
+    return 'Grupo «$nameController» creado correctamente';
   }
 
   @override
   String groupNamecontrollertexttrimCreatedSuccessfully1(
       Object nameController) {
-    return 'Group \"$nameController\" created successfully';
+    return 'Grupo «$nameController» creado correctamente';
   }
 
   @override
   String groupNamecontrollertexttrimCreatedSuccessfully2(
       Object nameController) {
-    return 'Group \"$nameController\" created successfully';
+    return 'Grupo «$nameController» creado correctamente';
   }
 
   @override
   String groupNamecontrollertexttrimCreatedSuccessfully3(
       Object nameController) {
-    return 'Group \"$nameController\" created successfully';
+    return 'Grupo «$nameController» creado correctamente';
   }
 
   @override
   String groupRenamedToNamecontrollertexttrim(Object nameController) {
-    return 'Group renamed to \"$nameController\"';
+    return 'Grupo renombrado a «$nameController»';
   }
 
   @override
   String groupRenamedToNamecontrollertexttrim1(Object nameController) {
-    return 'Group renamed to \"$nameController\"';
+    return 'Grupo renombrado a «$nameController»';
   }
 
   @override
   String groupRenamedToNamecontrollertexttrim2(Object nameController) {
-    return 'Group renamed to \"$nameController\"';
+    return 'Grupo renombrado a «$nameController»';
   }
 
   @override
   String groupRenamedToNamecontrollertexttrim3(Object nameController) {
-    return 'Group renamed to \"$nameController\"';
+    return 'Grupo renombrado a «$nameController»';
   }
 
   @override
   String groupWidgetgroupnameDeleted(String groupName) {
-    return 'Group \"$groupName\" deleted';
+    return 'Grupo «$groupName» eliminado';
   }
 
   @override
   String groupWidgetgroupnameDeleted1(String groupName) {
-    return 'Group \"$groupName\" deleted';
+    return 'Grupo «$groupName» eliminado';
   }
 
   @override
   String groupWidgetgroupnameDeleted2(String groupName) {
-    return 'Group \"$groupName\" deleted';
+    return 'Grupo «$groupName» eliminado';
   }
 
   @override
   String groupWidgetgroupnameDeleted3(String groupName) {
-    return 'Group \"$groupName\" deleted';
+    return 'Grupo «$groupName» eliminado';
   }
 
   @override
-  String get helpTranslate => 'Help Translate';
+  String get helpTranslate => 'Ayuda a Traducción';
 
   @override
-  String get high => 'high';
+  String get high => 'alta';
 
   @override
   String get icon => 'Icono';
@@ -1093,407 +1103,411 @@ class AppLocalizationsEs extends AppLocalizations {
   String get icon1 => 'Icono';
 
   @override
-  String get inTimeframe => 'in timeframe';
+  String get inTimeframe => 'en fotograma';
 
   @override
-  String get inTimeframe1 => 'in timeframe';
+  String get inTimeframe1 => 'en fotograma';
 
   @override
-  String get insights => 'Insights';
+  String get insights => 'Insignias';
 
   @override
-  String get itemCreatedFromTemplate => 'Item created from template';
+  String get itemCreatedFromTemplate => 'Ítem creado desde plantilla';
 
   @override
-  String get itemCreatedFromTemplate1 => 'Item created from template';
+  String get itemCreatedFromTemplate1 => 'Ítem creado desde plantilla';
 
   @override
-  String get itemName => 'Item Name';
+  String get itemName => 'Nombre de Ítem';
 
   @override
-  String get itemName1 => 'Item Name';
+  String get itemName1 => 'Nombre de Ítem';
 
   @override
   String get itemTemplateSavedSuccessfully =>
-      'Item template saved successfully';
+      'Plantilla de ítem guardada correctamente';
 
   @override
   String get itemTemplateSavedSuccessfully1 =>
-      'Item template saved successfully';
+      'Plantilla de ítem guardada correctamente';
 
   @override
-  String get items => 'Items';
+  String get items => 'Ítemes';
 
   @override
-  String get itemsAdded => 'Items Added';
+  String get itemsAdded => 'Ítemes Añadidos';
 
   @override
-  String get itemsCheckedOff => 'items checked off';
+  String get itemsCheckedOff => 'elementos marcados';
 
   @override
-  String get itemsCheckedOff1 => 'items checked off';
+  String get itemsCheckedOff1 => 'elementos marcados';
 
   @override
-  String get itemsCompleted => 'Items Completed';
+  String get itemsCompleted => 'Elementos Completados';
 
   @override
-  String get itemsInList => 'items in list';
+  String get itemsInList => 'elementos dentro del listado';
 
   @override
-  String get itemsPerDay => 'items per day';
+  String get itemsPerDay => 'elementos por día';
 
   @override
-  String get itemsPerDay1 => 'items per day';
+  String get itemsPerDay1 => 'elementos por día';
 
   @override
   String get keepTrackOfWhatYouNeedToBuy =>
-      'Keep track of what you need to buy';
+      'Conservar seguimiento de qué necesita comprar';
 
   @override
-  String get language => 'Language';
+  String get language => 'Idioma';
 
   @override
-  String get leaveUngrouped => 'Leave Ungrouped';
+  String get leaveUngrouped => 'Dejar Desagrupado';
 
   @override
-  String get licenses => 'Licenses';
+  String get licenses => 'Licencias';
 
   @override
-  String get linkGoogleAccount => 'Link Google Account';
+  String get linkGoogleAccount => 'Enlace de Cuenta Google';
 
   @override
-  String get listDeletedSuccessfully => 'List deleted successfully';
+  String get listDeletedSuccessfully => 'Listado eliminado correctamente';
 
   @override
-  String get listDeletedSuccessfully1 => 'List deleted successfully';
+  String get listDeletedSuccessfully1 => 'Listado eliminado correctamente';
 
   @override
-  String get listManagement => 'List Management';
+  String get listManagement => 'Gestor de Listado';
 
   @override
-  String get listName => 'List name';
+  String get listName => 'Nombre de listado';
 
   @override
-  String get listNameUpdated => 'List name updated';
+  String get listNameUpdated => 'Nombre de listado actualizado';
 
   @override
-  String get listNameUpdated1 => 'List name updated';
+  String get listNameUpdated1 => 'Nombre de listado actualizado';
 
   @override
   String listSharedWithEmailAsSelectedrole(String email, String selectedRole) {
-    return 'List shared with $email as $selectedRole';
+    return 'Listado compartido con $email como $selectedRole';
   }
 
   @override
   String listSharedWithEmailAsSelectedrole1(String email, String selectedRole) {
-    return 'List shared with $email as $selectedRole';
+    return 'Listado compartido con $email como $selectedRole';
   }
 
   @override
   String listSharedWithEmailAsSelectedrole2(String email, String selectedRole) {
-    return 'List shared with $email as $selectedRole';
+    return 'Listado compartido con $email como $selectedRole';
   }
 
   @override
   String listSharedWithEmailAsSelectedrole3(String email, String selectedRole) {
-    return 'List shared with $email as $selectedRole';
+    return 'Listado compartido con $email como $selectedRole';
   }
 
   @override
   String listnameAddedToGroup(String listName) {
-    return '$listName added to group';
+    return '$listName añadido al grupo';
   }
 
   @override
   String listnameAddedToGroup1(String listName) {
-    return '$listName added to group';
+    return '$listName añadido al grupo';
   }
 
   @override
   String listnameAddedToGroup2(String listName) {
-    return '$listName added to group';
+    return '$listName añadido al grupo';
   }
 
   @override
   String listnameAddedToGroup3(String listName) {
-    return '$listName added to group';
+    return '$listName añadido al grupo';
   }
 
   @override
   String listnameRemovedFromGroup(String listName) {
-    return '$listName removed from group';
+    return '$listName retirado del grupo';
   }
 
   @override
   String listnameRemovedFromGroup1(String listName) {
-    return '$listName removed from group';
+    return '$listName retirado del grupo';
   }
 
   @override
   String listnameRemovedFromGroup2(String listName) {
-    return '$listName removed from group';
+    return '$listName retirado del grupo';
   }
 
   @override
   String listnameRemovedFromGroup3(String listName) {
-    return '$listName removed from group';
+    return '$listName retirado del grupo';
   }
 
   @override
-  String get listsCreated => 'Lists Created';
+  String get listsCreated => 'Listados Creados';
 
   @override
-  String get loading => 'Loading...';
+  String get loading => 'Cargando…';
 
   @override
-  String get location => 'Location';
+  String get location => 'Lugar';
 
   @override
-  String get location1 => 'Location';
+  String get location1 => 'Lugar';
 
   @override
-  String get locationDeleted => 'Location deleted';
+  String get locationDeleted => 'Lugar eliminado';
 
   @override
-  String get locationDeleted1 => 'Location deleted';
+  String get locationDeleted1 => 'Lugar eliminado';
 
   @override
-  String get locationSavedSuccessfully => 'Location saved successfully';
+  String get locationSavedSuccessfully => 'Lugar guardado correctamente';
 
   @override
-  String get locationSavedSuccessfully1 => 'Location saved successfully';
+  String get locationSavedSuccessfully1 => 'Lugar guardado correctamente';
 
   @override
-  String get low => 'low';
+  String get low => 'bajo';
 
   @override
-  String get low1 => 'low';
+  String get low1 => 'bajo';
 
   @override
-  String get manageCategories => 'Manage Categories';
+  String get manageCategories => 'Categorías de Gestión';
 
   @override
   String get manageYourFrequentlyUsedLocations =>
-      'Manage your frequently used locations';
+      'Gestiona su lugar frecuentemente utilizado';
 
   @override
-  String get medium => 'medium';
+  String get medium => 'medio';
 
   @override
   String moveToGroupname(String name) {
-    return 'Move to $name';
+    return 'Mover a $name';
   }
 
   @override
   String moveToGroupname1(String name) {
-    return 'Move to $name';
+    return 'Mover a $name';
   }
 
   @override
-  String get myProfile => 'My Profile';
+  String get myProfile => 'Mi Perfil';
 
   @override
-  String get name => 'Name';
+  String get name => 'Nombre';
 
   @override
   String get nameMustBeAtLeast2Characters =>
-      'Name must be at least 2 characters';
+      'El nombre debe ser de al menos 2 caracteres';
 
   @override
   String get networkErrorCheckYourConnectionAndTryAgain =>
-      'Network error. Check your connection and try again';
+      'Error de red. Compruebe su conexión e inténtelo de nuevo';
 
   @override
   String get networkErrorPleaseCheckYourInternetConnectionAndTryAgain =>
-      'Network error. Please check your internet connection and try again';
+      'Error de red. Compruebe su conexión de internet e intente de nuevo';
 
   @override
   String get networkErrorPleaseCheckYourInternetConnectionAndTryAgain1 =>
-      'Network error. Please check your internet connection and try again';
+      'Error de red. Compruebe su conexión de internet e intente de nuevo';
 
   @override
-  String get noAccountFoundWithThisEmail => 'No account found with this email';
+  String get noAccountFoundWithThisEmail =>
+      'Ninguna cuenta encontrada con este correo-e';
 
   @override
-  String get noCategoriesAvailable => 'No categories available';
+  String get noCategoriesAvailable => 'Ninguna categoría disponible';
 
   @override
-  String get noCategory => 'No Category';
+  String get noCategory => 'Ninguna Categoría';
 
   @override
   String get noUserFoundForThatEmailPleaseCheckYourEmailAndTryAgain =>
-      'No user found for that email. Please check your email and try again';
+      'Ningún usuario encontrado para ese correo-e. Compruebe su correo-e e intente de nuevo';
 
   @override
-  String get notLoggedIn => 'Not logged in';
+  String get notLoggedIn => 'No accedido';
 
   @override
   String get ok => 'Aceptar';
 
   @override
-  String get openSourceLicenses => 'Open source licenses';
+  String get openSourceLicenses => 'Licencias de fuente abierta';
 
   @override
-  String get openTheDrawerFromTheLeft => 'Open the drawer from the left';
+  String get openTheDrawerFromTheLeft => 'Abre el cajón desde el izquierdo';
 
   @override
   String get options => 'Opciones';
 
   @override
   String get organizeYourListsWithTheButton =>
-      'Organize your lists with the + button';
+      'Organice sus listados con el botón +';
 
   @override
-  String get owner => 'owner';
+  String get owner => 'propietario';
 
   @override
-  String get password => 'Password';
+  String get password => 'Contraseña';
 
   @override
-  String get password1 => 'Password';
+  String get password1 => 'Contraseña';
 
   @override
-  String get password2 => 'Password';
+  String get password2 => 'Contraseña';
 
   @override
   String get passwordMustBeAtLeast6Characters =>
-      'Password must be at least 6 characters';
+      'La contraseña debe ser de al menos 6 caracteres';
 
   @override
-  String get peopleCollaborating => 'people collaborating';
+  String get peopleCollaborating => 'gente colaborando';
 
   @override
-  String get permanentlyDeleteThisList => 'Permanently delete this list';
+  String get permanentlyDeleteThisList =>
+      'Elimina permanentemente este listado';
 
   @override
   String permissionChangedToNewrole(String newRole) {
-    return 'Permission changed to $newRole';
+    return 'Permiso cambiado a $newRole';
   }
 
   @override
   String permissionChangedToNewrole1(String newRole) {
-    return 'Permission changed to $newRole';
+    return 'Permiso cambiado a $newRole';
   }
 
   @override
   String permissionChangedToNewrole2(String newRole) {
-    return 'Permission changed to $newRole';
+    return 'Permiso cambiado a $newRole';
   }
 
   @override
   String permissionChangedToNewrole3(String newRole) {
-    return 'Permission changed to $newRole';
+    return 'Permiso cambiado a $newRole';
   }
 
   @override
-  String get pleaseEnterACategoryName => 'Please enter a category name';
+  String get pleaseEnterACategoryName => 'Introduzca un nombre de categoría';
 
   @override
-  String get pleaseEnterACategoryName1 => 'Please enter a category name';
+  String get pleaseEnterACategoryName1 => 'Introduzca un nombre de categoría';
 
   @override
-  String get pleaseEnterACategoryName2 => 'Please enter a category name';
+  String get pleaseEnterACategoryName2 => 'Introduzca un nombre de categoría';
 
   @override
-  String get pleaseEnterACategoryName3 => 'Please enter a category name';
+  String get pleaseEnterACategoryName3 => 'Introduzca un nombre de categoría';
 
   @override
-  String get pleaseEnterADisplayName => 'Please enter a display name';
+  String get pleaseEnterADisplayName => 'Introduzca un nombre de pantalla';
 
   @override
-  String get pleaseEnterAGroupName => 'Please enter a group name';
+  String get pleaseEnterAGroupName => 'Introduzca un nombre de grupo';
 
   @override
-  String get pleaseEnterAGroupName1 => 'Please enter a group name';
+  String get pleaseEnterAGroupName1 => 'Introduzca un nombre de grupo';
 
   @override
-  String get pleaseEnterAGroupName2 => 'Please enter a group name';
+  String get pleaseEnterAGroupName2 => 'Introduzca un nombre de grupo';
 
   @override
-  String get pleaseEnterAGroupName3 => 'Please enter a group name';
+  String get pleaseEnterAGroupName3 => 'Introduzca un nombre de grupo';
 
   @override
-  String get pleaseEnterAPassword => 'Please enter a password';
+  String get pleaseEnterAPassword => 'Introduzca una contraseña';
 
   @override
-  String get pleaseEnterATemplateName => 'Please enter a template name';
+  String get pleaseEnterATemplateName => 'Introduzca un nombre de plantilla';
 
   @override
-  String get pleaseEnterATemplateName1 => 'Please enter a template name';
+  String get pleaseEnterATemplateName1 => 'Introduzca un nombre de plantilla';
 
   @override
   String get pleaseEnterAValidEmailAddress =>
-      'Please enter a valid email address';
+      'Introduzca una dirección de correo-e válida';
 
   @override
   String get pleaseEnterAValidEmailAddress1 =>
-      'Please enter a valid email address';
+      'Introduzca una dirección de correo-e válida';
 
   @override
   String get pleaseEnterAValidEmailAddress2 =>
-      'Please enter a valid email address';
+      'Introduzca una dirección de correo-e válida';
 
   @override
   String get pleaseEnterAValidEmailAddress3 =>
-      'Please enter a valid email address';
+      'Introduzca una dirección de correo-e válida';
 
   @override
   String get pleaseEnterAValidEmailAddress4 =>
-      'Please enter a valid email address';
+      'Introduzca una dirección de correo-e válida';
 
   @override
-  String get pleaseEnterAnEmailAddress => 'Please enter an email address';
+  String get pleaseEnterAnEmailAddress =>
+      'Introduzca una dirección de correo-e';
 
   @override
-  String get pleaseEnterAnEmailAddress1 => 'Please enter an email address';
+  String get pleaseEnterAnEmailAddress1 =>
+      'Introduzca una dirección de correo-e';
 
   @override
-  String get pleaseEnterAnItemTitle => 'Please enter an item title';
+  String get pleaseEnterAnItemTitle => 'Introduzca un elemento de título';
 
   @override
-  String get pleaseEnterAnItemTitle1 => 'Please enter an item title';
+  String get pleaseEnterAnItemTitle1 => 'Introduzca un elemento de título';
 
   @override
-  String get pleaseEnterYourEmail => 'Please enter your email';
+  String get pleaseEnterYourEmail => 'Introduzca su correo-e';
 
   @override
-  String get pleaseEnterYourEmail1 => 'Please enter your email';
+  String get pleaseEnterYourEmail1 => 'Introduzca su correo-e';
 
   @override
-  String get pleaseEnterYourEmail2 => 'Please enter your email';
+  String get pleaseEnterYourEmail2 => 'Introduzca su correo-e';
 
   @override
-  String get pleaseEnterYourName => 'Please enter your name';
+  String get pleaseEnterYourName => 'Introduzca su nombre';
 
   @override
-  String get pleaseEnterYourPassword => 'Please enter your password';
+  String get pleaseEnterYourPassword => 'Introduzca su contraseña';
 
   @override
-  String get productivity => 'Productivity';
+  String get productivity => 'Productividad';
 
   @override
-  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+  String get profileUpdatedSuccessfully => 'Perfil actualizado correctamente';
 
   @override
-  String get profileUpdatedSuccessfully1 => 'Profile updated successfully';
+  String get profileUpdatedSuccessfully1 => 'Perfil actualizado correctamente';
 
   @override
-  String get progress => 'Progress';
+  String get progress => 'Progreso';
 
   @override
-  String get recycleBin => 'Recycle Bin';
+  String get recycleBin => 'Papelera';
 
   @override
-  String get recycleBin1 => 'Recycle Bin';
+  String get recycleBin1 => 'Papelera';
 
   @override
-  String get releaseNotes => 'Release Notes';
+  String get releaseNotes => 'Notas de Versión';
 
   @override
-  String get removeAllCompletedItems => 'Remove all completed items';
+  String get removeAllCompletedItems => 'Quita todos los elementos completados';
 
   @override
-  String get removeMember => 'Remove Member';
+  String get removeMember => 'Retirar Miembro';
 
   @override
   String get retry => 'Reintentar';
@@ -1520,46 +1534,46 @@ class AppLocalizationsEs extends AppLocalizations {
   String get save2 => 'Guardar';
 
   @override
-  String get saveChanges => 'Save Changes';
+  String get saveChanges => 'Guardar Cambios';
 
   @override
-  String get saveChanges1 => 'Save Changes';
+  String get saveChanges1 => 'Guardar Cambios';
 
   @override
-  String get savedItems => 'Saved Items';
+  String get savedItems => 'Guardar Elementos';
 
   @override
-  String get savedLocations => 'Saved Locations';
+  String get savedLocations => 'Lugar Guardado';
 
   @override
-  String get searchIcons => 'Search icons...';
+  String get searchIcons => 'Buscar iconos…';
 
   @override
-  String get searchPackages => 'Search packages';
+  String get searchPackages => 'Buscar paquetes';
 
   @override
-  String get searchPackages1 => 'Search packages...';
+  String get searchPackages1 => 'Buscar paquetes…';
 
   @override
-  String get setPassword => 'Set Password';
+  String get setPassword => 'Establecer Contraseña';
 
   @override
-  String get settings => 'Settings';
+  String get settings => 'Ajustes';
 
   @override
-  String get settings1 => 'Settings';
+  String get settings1 => 'Ajustes';
 
   @override
-  String get shareCollaborate => 'Share & Collaborate';
+  String get shareCollaborate => 'Compartir y Colaborar';
 
   @override
-  String get shareList => 'Share List';
+  String get shareList => 'Listado Compartido';
 
   @override
-  String get shareThisListWithOthers => 'Share this list with others';
+  String get shareThisListWithOthers => 'Comparte este listado con otros';
 
   @override
-  String get shoppingLists => 'shopping lists';
+  String get shoppingLists => 'listado de compras';
 
   @override
   String get shopsync => 'ShopSync';
@@ -1568,362 +1582,367 @@ class AppLocalizationsEs extends AppLocalizations {
   String get shopsync1 => 'ShopSync';
 
   @override
-  String get shopsyncForms => 'ShopSync Forms';
+  String get shopsyncForms => 'Formularios ShopSync';
 
   @override
-  String get shopsyncLogo => 'ShopSync logo';
+  String get shopsyncLogo => 'Logotipo ShopSync';
 
   @override
-  String get signInWithEmail => 'Sign in with email';
+  String get signInWithEmail => 'Acceder con correo-e';
 
   @override
-  String get signOut => 'Sign Out';
+  String get signOut => 'Salir';
 
   @override
-  String get signOut1 => 'Sign Out';
+  String get signOut1 => 'Salir';
 
   @override
-  String get signOut2 => 'Sign Out';
+  String get signOut2 => 'Salir';
 
   @override
-  String get signOut3 => 'Sign Out';
+  String get signOut3 => 'Salir';
 
   @override
-  String get signOut4 => 'Sign Out';
+  String get signOut4 => 'Salir';
 
   @override
-  String get signOut5 => 'Sign Out';
+  String get signOut5 => 'Salir';
 
   @override
-  String get skipForNow => 'Skip for Now';
+  String get skipForNow => 'Omitir por Ahora';
 
   @override
-  String get skipOrganization => 'Skip Organization';
+  String get skipOrganization => 'Omitir Organización';
 
   @override
-  String get smartLists => 'Smart Lists';
+  String get smartLists => 'Listados Inteligentes';
 
   @override
-  String get storeAddress => 'Store address';
+  String get storeAddress => 'Dirección de tienda';
 
   @override
-  String get storeName => 'Store name';
+  String get storeName => 'Nombre de tienda';
 
   @override
   String successfullyOrganizedSelectedgroupslengthGroups(String length) {
-    return 'Successfully organized $length groups';
+    return 'Se organizaron $length grupos correctamente';
   }
 
   @override
   String successfullyOrganizedSelectedgroupslengthGroups1(String length) {
-    return 'Successfully organized $length groups';
+    return 'Se organizaron $length grupos correctamente';
   }
 
   @override
   String successfullyOrganizedSelectedgroupslengthGroups2(String length) {
-    return 'Successfully organized $length groups';
+    return 'Se organizaron $length grupos correctamente';
   }
 
   @override
   String successfullyOrganizedSelectedgroupslengthGroups3(String length) {
-    return 'Successfully organized $length groups';
+    return 'Se organizaron $length grupos correctamente';
   }
 
   @override
-  String get templateDeleted => 'Template deleted';
+  String get templateDeleted => 'Plantilla eliminada';
 
   @override
-  String get templateDeleted1 => 'Template deleted';
+  String get templateDeleted1 => 'Plantilla eliminada';
 
   @override
-  String get templatesShortcuts => 'Templates & Shortcuts';
+  String get templatesShortcuts => 'Plantilla y Accesos directos';
 
   @override
   String get theEmailAddressIsAlreadyInUseByAnotherAccount =>
-      'The email address is already in use by another account';
+      'La dirección del correo-e ya está en uso por otra cuenta';
 
   @override
   String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev =>
-      'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
+      'La operación no está concedida. Intente de nuevo más tarde. Si no funciona, contacte con support@aadish.dev';
 
   @override
   String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1 =>
-      'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
+      'La operación no está concedida. Intente de nuevo más tarde. Si no funciona, contacte con support@aadish.dev';
 
   @override
   String get thePasswordIsInvalidOrTheUserDoesNotHaveAPassword =>
-      'The password is invalid or the user does not have a password';
+      'La contraseña es inválida o el usuario no tiene una contraseña';
 
   @override
   String get theProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword =>
-      'The provided credentials are incorrect. Please check your email and password';
+      'Las credenciales proporcionadas son incorrectas. Verifique su correo-e y contraseña';
 
   @override
   String get thisEmailIsAlreadyRegisteredPleaseSignInInstead =>
-      'This email is already registered. Please sign in instead';
+      'Este correo-e ya está registrado. Acceda en su lugar';
 
   @override
   String get thisPasswordIsTooWeakPleaseChooseAStrongerOne =>
-      'This password is too weak. Please choose a stronger one';
+      'Esta contraseña es muy débil. Elija una más fuerte';
 
   @override
   String get thisUserHasBeenDisabledPleaseContactSupportaadishdev =>
-      'This user has been disabled. Please contact support@aadish.dev';
+      'Este usuario ha sido inhabilitado. Contacte con support@aadish.dev';
 
   @override
   String get tooManyRequestsPleaseTryAgainLater =>
-      'Too many requests. Please try again later';
+      'Demasiadas peticiones. Inténtelo más tarde';
 
   @override
   String get tooManyRequestsPleaseTryAgainLater1 =>
-      'Too many requests. Please try again later';
+      'Demasiadas peticiones. Inténtelo más tarde';
 
   @override
   String get tooManyRequestsPleaseTryAgainLater2 =>
-      'Too many requests. Please try again later';
+      'Demasiadas peticiones. Inténtelo más tarde';
 
   @override
-  String get totalItems => 'total items';
+  String get totalItems => 'elementos totales';
 
   @override
-  String get totalItems1 => 'Total Items';
+  String get totalItems1 => 'Elementos Totales';
 
   @override
-  String get unlink => 'Unlink';
+  String get unlink => 'Desenlazar';
 
   @override
-  String get unlinkGoogleAccount => 'Unlink Google Account';
+  String get unlinkGoogleAccount => 'Desenlazar Cuenta de Google';
 
   @override
-  String get unlinkGoogleAccount1 => 'Unlink Google Account';
+  String get unlinkGoogleAccount1 => 'Desenlazar Cuenta de Google';
 
   @override
   String get useYourPhoneToRegisterIfYouDoNotHaveAnAccount =>
-      'Use your phone to register if you do not have an account';
+      'Utilice su teléfono para registrar si no tiene una cuenta';
 
   @override
   String get userAlreadyHasAccessToThisList =>
-      'User already has access to this list';
+      'Usuario ya tiene acceso a este listado';
 
   @override
   String get userAlreadyHasAccessToThisList1 =>
-      'User already has access to this list';
+      'Usuario ya tiene acceso a este listado';
 
   @override
   String get userNotFoundTheyNeedToSignUpForShopsyncFirst =>
-      'User not found. They need to sign up for ShopSync first.';
+      'Usuario no encontrado. Necesitan acceder para el primer ShopSync.';
 
   @override
   String get userNotFoundTheyNeedToSignUpForShopsyncFirst1 =>
-      'User not found. They need to sign up for ShopSync first.';
+      'Usuario no encontrado. Necesitan acceder para el primer ShopSync.';
 
   @override
-  String get userRemoved => 'User removed';
+  String get userRemoved => 'Usuario retirado';
 
   @override
-  String get userRemoved1 => 'User removed';
+  String get userRemoved1 => 'Usuario retirado';
 
   @override
   String versionPackageinfoversionPackageinfobuildnumber(
       String version, String buildNumber) {
-    return 'Version $version ($buildNumber)';
+    return 'Versión $version ($buildNumber)';
   }
 
   @override
   String versionPackageinfoversionPackageinfobuildnumber1(
       String version, String buildNumber) {
-    return 'Version $version ($buildNumber)';
+    return 'Versión $version ($buildNumber)';
   }
 
   @override
-  String get viewDeletedItems => 'View deleted items';
+  String get viewDeletedItems => 'Vista de elementos borrados';
 
   @override
-  String get viewSourceCode => 'View source code';
+  String get viewSourceCode => 'Vista de código fuente';
 
   @override
-  String get viewer => 'viewer';
+  String get viewer => 'visor';
 
   @override
-  String get viewer1 => 'viewer';
+  String get viewer1 => 'visor';
 
   @override
-  String get viewer2 => 'viewer';
+  String get viewer2 => 'visor';
 
   @override
-  String get viewer3 => 'Viewer';
+  String get viewer3 => 'Visor';
 
   @override
-  String get welcomeToShopsync => 'Welcome to ShopSync';
+  String get welcomeToShopsync => 'Bienvenido a ShopSync';
 
   @override
-  String get widgetSettings => 'Widget Settings';
+  String get widgetSettings => 'Ajustes de Widget';
 
   @override
-  String get widgetSettings1 => 'Widget Settings';
+  String get widgetSettings1 => 'Ajustes de Widget';
 
   @override
-  String get widgetUpdatedSuccessfully => 'Widget updated successfully!';
+  String get widgetUpdatedSuccessfully => 'Widget actualizado correctamente.';
 
   @override
-  String get widgetUpdatedSuccessfully1 => 'Widget updated successfully!';
+  String get widgetUpdatedSuccessfully1 => 'Widget actualizado correctamente.';
 
   @override
-  String get yourInsights => 'Your Insights';
+  String get yourInsights => 'Sus Insignias';
 
   @override
-  String get aiFeatures => 'AI Features';
+  String get aiFeatures => 'Características de IA';
 
   @override
   String get aiSetupDescription =>
-      'ShopSync uses on-device AI to provide smart suggestions based on your shopping patterns. Choose whether you\'d like to enable these features.';
+      'ShopSync utiliza IA en dispositivo para proporcionar sugerencias breves basadas en sus patrones de compras. Elija si lo gustaría habilitar estas características.';
 
   @override
-  String get enableAiFeatures => 'Enable AI Features';
+  String get enableAiFeatures => 'Habilitar Características de IA';
 
   @override
   String get enableAiDescription =>
-      'Get personalized item suggestions based on your shopping history and patterns';
+      'Reciba sugerencias personalizadas de artículos basadas en su historial y patrones de compra';
 
   @override
-  String get disableAiFeatures => 'Disable AI Features';
+  String get disableAiFeatures => 'Inhabilitar Características de IA';
 
   @override
   String get disableAiDescription =>
-      'Use ShopSync without AI-powered suggestions';
+      'Utiliza ShopSync sin sugerencias basadas en IA';
 
   @override
-  String get smartItemSuggestions => 'Smart item suggestions';
+  String get smartItemSuggestions => 'Sugerencias inteligentes de artículos';
 
   @override
-  String get patternRecognition => 'Pattern recognition';
+  String get patternRecognition => 'Reconocimiento de patrones';
 
   @override
-  String get timeBasedRecommendations => 'Time-based recommendations';
+  String get timeBasedRecommendations => 'Recomendaciones basadas en el tiempo';
 
   @override
-  String get personalizedExperience => 'Personalized experience';
+  String get personalizedExperience => 'Experiencia personalizada';
 
   @override
-  String get noDataAnalysis => 'No data analysis';
+  String get noDataAnalysis => 'Sin análisis de datos';
 
   @override
-  String get noAiSuggestions => 'No AI suggestions';
+  String get noAiSuggestions => 'Sin sugerencias de IA';
 
   @override
-  String get gravatarSettings => 'Profile Picture';
+  String get gravatarSettings => 'Imagen de Perfil';
 
   @override
   String get gravatarDescription =>
-      'Gravatar is a globally recognized avatar service. If you have a Gravatar associated with your email, enable it to show your profile picture throughout ShopSync.';
+      'Gravatar es un servicio de avatares reconocido a nivel mundial. Si tienes un Gravatar asociado a tu correo electrónico, actívalo para que tu foto de perfil aparezca en todo ShopSync.';
 
   @override
-  String get enableGravatar => 'Show My Gravatar';
+  String get enableGravatar => 'Mostrar My Gravatar';
 
   @override
-  String get disableGravatar => 'Hide My Gravatar';
+  String get disableGravatar => 'Ocultar My Gravatar';
 
   @override
-  String get gravatarEnabled => 'Gravatar Enabled';
+  String get gravatarEnabled => 'Gravatar habilitado';
 
   @override
-  String get gravatarDisabled => 'Gravatar Disabled';
+  String get gravatarDisabled => 'Gravatar inhabilitado';
 
   @override
   String get gravatarEnabledMessage =>
-      'Your Gravatar profile picture is now visible to other users';
+      'Tu foto de perfil de Gravatar ahora es visible para otros usuarios';
 
   @override
   String get gravatarDisabledMessage =>
-      'Your Gravatar profile picture is now hidden from other users';
+      'Tu foto de perfil de Gravatar ahora está oculta para otros usuarios';
 
   @override
-  String get refreshGravatar => 'Refresh Gravatar';
+  String get refreshGravatar => 'Recargar Gravatar';
 
   @override
-  String get gravatarRefreshed => 'Gravatar refreshed successfully';
+  String get gravatarRefreshed => 'Gravatar recargado correctamente';
 
   @override
-  String get gravatarNotFound => 'No Gravatar found for your email';
+  String get gravatarNotFound =>
+      'No se ha encontrado ningún Gravatar para tu correo-e';
 
   @override
-  String get gravatarFound => 'Gravatar found and updated';
+  String get gravatarFound => 'Gravatar encontrado y actualizado';
 
   @override
-  String get whatIsGravatar => 'What is Gravatar?';
+  String get whatIsGravatar => '¿Qué es Gravatar?';
 
   @override
   String get gravatarExplanation =>
-      'Gravatar (Globally Recognized Avatar) is a service that provides a profile picture across different websites and apps using your email address. Visit gravatar.com to create or update your Gravatar.';
+      'Gravatar (Globally Recognized Avatar) es un servicio que proporciona una imagen de perfil en diferentes sitios web y aplicaciones utilizando tu dirección de correo electrónico. Visita gravatar.com para crear o actualizar tu Gravatar.';
 
   @override
-  String get visitGravatar => 'Visit Gravatar.com';
+  String get visitGravatar => 'Visitar Gravatar.com';
 
   @override
-  String get privacyControl => 'Privacy Control';
+  String get privacyControl => 'Control de Privacidad';
 
   @override
   String get gravatarPrivacyDescription =>
-      'You can enable or disable your Gravatar at any time. When disabled, only your initials will be shown to other users.';
+      'Puedes activar o desactivar tu Gravatar en cualquier momento. Cuando esté desactivado, solo se mostrarán tus iniciales a los demás usuarios.';
 
   @override
-  String get learnMore => 'Learn More';
+  String get learnMore => 'Aprender Más';
 
   @override
-  String get close => 'Close';
+  String get close => 'Cerrar';
 
   @override
-  String get anErrorOccurred => 'An error occurred';
+  String get anErrorOccurred => 'Ha ocurrido un error';
 
   @override
-  String get gravatarProfilePictures => 'Profile Pictures';
+  String get gravatarProfilePictures => 'Fotos de perfil';
 
   @override
   String get gravatarSetupDescription =>
-      'ShopSync can display your Gravatar profile picture throughout the app. Would you like to enable this feature?';
+      'ShopSync puede exhibir tu foto de perfil de Gravatar en toda la aplicación. ¿Deseas habilitar esta función?';
 
   @override
-  String get enableGravatarSetup => 'Enable Gravatar';
+  String get enableGravatarSetup => 'Habilitar Gravatar';
 
   @override
   String get enableGravatarSetupDescription =>
-      'Show my profile picture to other users';
+      'Mostrar mi foto de perfil a otros usuarios';
 
   @override
-  String get disableGravatarSetup => 'Disable Gravatar';
+  String get disableGravatarSetup => 'Inhabilitar Gravatar';
 
   @override
   String get disableGravatarSetupDescription =>
-      'Keep my profile picture private';
+      'Mantener mi foto de perfil privada';
 
   @override
-  String get gravatarFeature1 => 'Display your profile picture from Gravatar';
+  String get gravatarFeature1 => 'Exhibe tu foto de perfil de Gravatar';
 
   @override
-  String get gravatarFeature2 => 'Automatically synced with your email';
+  String get gravatarFeature2 => 'Sincronización automática con tu correo-e';
 
   @override
-  String get gravatarFeature3 => 'Visible in shared lists and collaborations';
+  String get gravatarFeature3 =>
+      'Visible en listas compartidas y colaboraciones';
 
   @override
-  String get gravatarFeature4 => 'Can be changed anytime in settings';
+  String get gravatarFeature4 =>
+      'Se puede cambiar en cualquier momento en los ajustes';
 
   @override
-  String get gravatarDisabledFeature1 => 'Only initials shown to other users';
+  String get gravatarDisabledFeature1 =>
+      'Solo se muestran las iniciales a otros usuarios';
 
   @override
   String get gravatarDisabledFeature2 =>
-      'Keeps your Gravatar hidden from other users';
+      'Mantiene tu Gravatar oculto para otros usuarios';
 
   @override
-  String get gravatarDisabledFeature3 => 'Can be enabled later in settings';
+  String get gravatarDisabledFeature3 =>
+      'Se puede habilitar más adelante en los ajustes';
 
   @override
   String get gravatarPreferenceChangeNote =>
-      'You can change this setting later in your profile settings.';
+      'Puedes cambiar este ajuste más adelante en los ajustes de tu perfil.';
 
   @override
-  String get basicListManagement => 'Basic list management';
+  String get basicListManagement => 'Gestión básica de listados';
 
   @override
   String get privacyFocused => 'Privacy-focused';
@@ -2360,7 +2379,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'An error occurred while unlinking your Google account.';
 
   @override
-  String get goBack => 'Go Back';
+  String get goBack => 'Atrás';
 
   @override
   String get editProfileTooltip => 'Edit Profile';
@@ -2399,7 +2418,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get notLinked => 'Not linked';
 
   @override
-  String get showGravatar => 'Show Gravatar';
+  String get showGravatar => 'Mostrar Gravatar';
 
   @override
   String get displayProfilePictureToOtherUsers =>
