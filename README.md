@@ -24,7 +24,11 @@ _Share shopping lists with family and friends_
 </div>
 
 > [!WARNING]
-> I have started using a new authentication system within GitHub. As a result, previous commits from 13 March 2026 and before may have an "Unverified" badge. This is because those commits were made using the old authentication method. Moving forward, all new commits will be verified with the new system, ensuring that they display a "Verified" badge.
+> I have started using a new authentication system within GitHub.
+> As a result, previous commits from 13 March 2026 and before may have an "Unverified" badge. This is because those commits were made using the old authentication method.
+> Moving forward, all new commits will be verified with the new system, ensuring that they display a "Verified" badge.
+> I have implemented this system due to a rise in infostealer attacks across GitHub, Discord, as well as fake CAPTCHAs on compromised sites. This new authentication method provides an additional layer of security to protect against such attacks.
+> Read more on [www.infostealers.com](https://www.infostealers.com) by Hudson Rock: [What is an info-stealer?](https://www.infostealers.com/article/what-are-info-stealers/)
 
 ## 📱 Overview
 
