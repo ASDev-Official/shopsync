@@ -23,6 +23,9 @@ _Share shopping lists with family and friends_
 
 </div>
 
+> [!IMPORTANT]
+> I have started using a new authentication system within GitHub. As a result, previous commits from 13 March 2026 and before may have an "Unverified" badge. This is because those commits were made using the old authentication method. Moving forward, all new commits will be verified with the new system, ensuring that they display a "Verified" badge.
+
 ## 📱 Overview
 
 ShopSync is an intuitive Flutter application that simplifies shared shopping experiences. Create and
