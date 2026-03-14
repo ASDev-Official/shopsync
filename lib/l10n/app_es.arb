@@ -1132,5 +1132,251 @@
     "gravatarDisabledFeature2": "Mantiene tu Gravatar oculto para otros usuarios",
     "gravatarDisabledFeature3": "Se puede habilitar más adelante en los ajustes",
     "gravatarPreferenceChangeNote": "Puedes cambiar este ajuste más adelante en los ajustes de tu perfil.",
-    "basicListManagement": "Gestión básica de listados"
+    "basicListManagement": "Gestión básica de listados",
+    "privacyFocused": "Privacidad-enfocada",
+    "continueButton": "Continuo",
+    "aiPreferenceChangeNote": "Puedes cambiar este ajuste más tarde en tu perfil.",
+    "controlAiFeatures": "Control de características de IA sobre dispositivo como pequeñas sugerencias",
+    "enableSmartSuggestions": "Habilitar Sugerencias Inteligentes",
+    "aiAnalyzesPatterns": "Analiza la IA en sus patrones de ventas",
+    "aiFeaturesDisabled": "Las características de IA están inhabilitadas",
+    "aiFeaturesEnabled": "Características de IA habilitadas",
+    "aiFeaturesDisabledMessage": "Características de IA inhabilitadas",
+    "failedToUpdateAiPreference": "Ha fallado al actualizar preferencia de IA",
+    "errorSavingPreference": "Error al guardar preferencia. Inténtelo de nuevo.",
+    "chooseIconTitle": "Elegir Icono",
+    "doneButton": "Hecho",
+    "selectedIconLabel": "Icono Seleccionado",
+    "loadingIcons": "Cargando iconos…",
+    "noIconsFound": "Ningún icono encontrado",
+    "noIconsFoundHint": "Intente ajustar su filtro de búsqueda o categoría",
+    "allCategory": "Todo",
+    "itemInRecycleBin": "{count, plural, =0{Ningún ítem en la basura} =1{{count} ítem en la basura} other{{count} ítem en la basura}}",
+    "@itemInRecycleBin": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "restoreItemTooltip": "Restaurar ítem",
+    "deletePermanentlyTooltip": "Eliminar permanentemente",
+    "deletedOnDate": "Eliminado {date}",
+    "@deletedOnDate": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "noDeletedItems": "Ningún Ítem Eliminado",
+    "noDeletedItemsSubtitle": "Los ítem que eliminó aparecerán aquí durante 30 días",
+    "areYouSureDeleteCategory": "¿Seguro que desea eliminar «{categoryName}»? Esto retirará la categoría desde todos los ítem.",
+    "@areYouSureDeleteCategory": {
+        "placeholders": {
+            "categoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "noCategoriesYet": "Ninguna categoría aún",
+    "createYourFirstCategoryAbove": "Crea tu primara categoría arriba",
+    "editTooltip": "Editar",
+    "deleteTooltip": "Eliminar",
+    "createNewCategory": "Crear Categoría Nueva",
+    "timeframeDay": "Día",
+    "timeframeWeek": "Semana",
+    "timeframeMonth": "Mes",
+    "timeframeAll": "Todo",
+    "noInsightsAvailableYet": "Aún no hay disponible ninguna insignia",
+    "noActivityDataForTimeframe": "Ningún dato de actividad para este marco de tiempo",
+    "activityTimeline": "Cronograma de Actividad",
+    "addedLabel": "Añadido",
+    "completedLabel": "Completado",
+    "categoryBreakdown": "Desglosar por Categoría",
+    "noCollaboratorActivityInTimeframe": "Ninguna actividad de colaboración dentro de este periodo",
+    "collaboratorActivity": "Actividad de Colaborador",
+    "addedCompletedSummary": "{added} añadido • {completed} completado",
+    "@addedCompletedSummary": {
+        "placeholders": {
+            "added": {
+                "type": "String"
+            },
+            "completed": {
+                "type": "String"
+            }
+        }
+    },
+    "continueWithoutOrganizing": "Puedes organizar tus listados en grupos más tarde desde la pantalla de inicio. ¿Continúo sin organizar?",
+    "createdAtDate": "{date} creada",
+    "@createdAtDate": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "suggestedBadge": "Sugerida",
+    "ungroupedListsSection": "Listados Desagrupados",
+    "ungroupedListsCount": "{count, plural, =0{Ninguna lista asignada a cualquier grupo} =1{{count} lista no asignada a cualquier grupo} other{{count} lastas no asignadas a cualquier grupo}}",
+    "@ungroupedListsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dragListsToGroupOrCreate": "Suelta estos listados a un grupo encima o crea un grupo nuevo para ellos:",
+    "shopSyncMigration": "Migración de ShopSync",
+    "organizeWithListGroups": "Organizar con Grupos de Listado",
+    "organizeLists": "Listados Organizados",
+    "listsCount": "{count, plural, =0{Sin listas} =1{{count} lista} other{{count} listas}}",
+    "@listsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "failedToUpgradeLists": "Incorrecto al mejorar listados. Inténtelo de nuevo.",
+    "anErrorOccurredError": "Ha ocurrido un error: {error}",
+    "@anErrorOccurredError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "upgradeFailed": "Mejora Incorrecta",
+    "upgradingYourLists": "Mejorando sus listados",
+    "pleaseWaitUpdatingListGroups": "Espere mientras actualizamos tus grupos de la lista al formato nuevo…",
+    "licensesTitle": "Licencias",
+    "noPackagesFound": "No encontró ningún paquete",
+    "noPackagesMatchSearch": "No coinciden paquetes en su búsqueda",
+    "versionDisplay": "Versión {version}",
+    "@versionDisplay": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "trendsAndPerformance": "Tendencias y Rendimiento",
+    "topCategories": "Categorías Máximas",
+    "topCompletedLists": "Listados Completados Máximos",
+    "timeframeQuarter": "Trimestre",
+    "timeframeYear": "Año",
+    "timeframeAllTime": "Todo el tiempo",
+    "completionRateTitle": "Tipo de Completado",
+    "failedToLoadCompletionRate": "Incorrecto al cargar tipo de completado",
+    "ofItemsCompleted": "de elementos completados",
+    "dailyProductivity": "Productividad Diaria",
+    "failedToLoadProductivityData": "Incorrecto al cargar datos de productividad",
+    "itemsAddedPerDay": "elementos añadidos por día",
+    "activityOverTime": "Actividad Por Tiempo",
+    "failedToLoadActivityData": "Incorrecto al cargar datos de actividad",
+    "noDataAvailable": "Ningún dato disponible",
+    "noData": "Sin datos",
+    "itemsCountTooltip": "{count, plural, =0{Ningún elemento} =1{{count} elemento} other{{count} elementos}}",
+    "@itemsCountTooltip": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "itemsAddedEachDay": "Elementos añadidos cada día",
+    "failedToLoadCategoryData": "Incorrecto al cargar datos de categoría",
+    "itemCountLabel": "{count, plural, =0{Sin elementos} =1{{count} elementos} other{{count} elementos}}",
+    "@itemCountLabel": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "failedToLoadListData": "Incorrecto al cargar datos de listado",
+    "selectLanguage": "Seleccionar Idioma",
+    "systemDefault": "Predeterminado del sistema",
+    "langEnglish": "English",
+    "langArabic": "العربية",
+    "langBengali": "বাংলা",
+    "langDeutsch": "Deutsch",
+    "useSystemDefaultTitle": "Utilizar el del Sistema Por Defecto",
+    "useSystemDefaultBody": "¿Desea utilizar su idioma en los ajustes del dispositivo?",
+    "confirm": "Confirmar",
+    "errorUpdatingProfile": "Error al actualizar perfil: {error}",
+    "@errorUpdatingProfile": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "googleAccountLinkedMessage": "¡Cuenta de Google enlazada correctamente! Ahora puedes acceder con Google.",
+    "areYouSureUnlinkGoogle": "¿Seguro que desea desenlazar su cuenta de Google? No podrá acceder sin Google a no ser que lo enlaza de nuevo.",
+    "anErrorOccurredLinkingGoogle": "Sucedió un error mientras enlaza su cuenta de Google.",
+    "anErrorOccurredUnlinkingGoogle": "Ha ocurrido un error mientras desenlaza su cuenta de Google.",
+    "editProfileTooltip": "Editar Perfil",
+    "accountInformation": "Información de Cuenta",
+    "displayName": "Exhibir Nombre",
+    "emailAddress": "Dirección de Correo-e",
+    "emailCannotBeChanged": "Correo-e (no puede ser cambiado)",
+    "linkedAccounts": "Cuentas Enlazadas",
+    "manageHowYouSignIn": "Gestiona como acceder a ShopSync",
+    "emailAndPassword": "Correo-e y Contraseña",
+    "signInWithEmailAndPassword": "Acceda con correo-e y contraseña",
+    "notConfigured": "No configurado",
+    "signInWithGoogleAccount": "Acceder son cuenta de Google",
+    "notLinked": "No enlazado",
+    "displayProfilePictureToOtherUsers": "Exhibe la foto del perfil a otros usuarios",
+    "accountActivity": "Actividad de Cuenta",
+    "shoppingListsCount": "{count, plural, =0{Sin listados de compra} =1{{count} listado de compra} other{{count} listados de compras}}",
+    "@shoppingListsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "listsYouHaveAccessTo": "Listados que tienen acceso a",
+    "rememberYourPassword": "¿Recuerda su contraseña?",
+    "shopSyncUpdate": "Actualización de ShopSync",
+    "shopSyncHasAnUpdate": "ShopSync tiene una actualización",
+    "pleaseUpdateAppBody": "Actualice la app para continuar utilizando las últimas características y mejoras.",
+    "restartingShopSync": "Reiniciando ShopSync",
+    "downloadingUpdateLabel": "Descargando actualización…",
+    "restartRequiredTitle": "Se Requiere Reinicio",
+    "restartRequiredBody": "Reinicio automático incorrecto. Fuerce el cierre de ShopSync y ábralo de nuevo para aplicar su cambio de idioma.",
+    "install": "Instalar",
+    "downloading": "Descargando…",
+    "updateButton": "Actualizar",
+    "startAddingItemsToSeeInsights": "Iniciar añadiendo elementos para ver insignias",
+    "pleaseTryAgainLater": "Inténtelo más tarde",
+    "organizeListsBodyCount": "{count, plural, =0{Hemos sugerido algunos grupos para su listados. Puedes editar, eliminar o añadir grupos nuevos.} =1{Hemos sugerido algunos grupos para tu {count} lista. Puedes editar, quitar, o añadir grupos nuevos.} other{Hemos sugerido algunos grupos para tus {count} listados. You can edit, remove, or add new groups.}}",
+    "@organizeListsBodyCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "langDutch": "Dutch",
+    "langEspanol": "Español",
+    "langFrancais": "Français",
+    "langHindi": "हिन्दी",
+    "langIndonesian": "Indonés",
+    "langItaliano": "Italiano",
+    "langJapanese": "日本語",
+    "langKannada": "ಕನ್ನಡ",
+    "langKorean": "한국어",
+    "langMarathi": "मराठी",
+    "langPortuguese": "Português",
+    "langRussian": "Русский",
+    "langSimplifiedChinese": "简体中文",
+    "langTamil": "தமிழ்",
+    "langTelugu": "తెలుగు",
+    "langTraditionalChinese": "繁體中文",
+    "langTurkish": "Türkçe",
+    "langVietnamese": "Tiếng Việt"
 }
