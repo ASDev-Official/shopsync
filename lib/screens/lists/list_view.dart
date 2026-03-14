@@ -32,7 +32,7 @@ class ListViewScreen extends StatefulWidget {
 
 class _ListViewScreenState extends State<ListViewScreen>
     with TickerProviderStateMixin {
-  static const String _itemsRoute = '/items';
+  static const String _itemsRoute = '/';
   static const String _insightsRoute = '/insights';
   static const String _optionsRoute = '/options';
 
@@ -143,10 +143,66 @@ class _ListViewScreenState extends State<ListViewScreen>
         return 1;
       case _optionsRoute:
         return 2;
+      case '/items':
       case _itemsRoute:
       default:
         return 0;
     }
+  }
+
+  Widget _tabScreenForIndex(int index) {
+    switch (index) {
+      case 1:
+        return ListInsightsScreen(
+          listId: widget.listId,
+          listName: widget.listName,
+        );
+      case 2:
+        return ListOptionsScreen(
+          listId: widget.listId,
+          listName: widget.listName,
+        );
+      case 0:
+      default:
+        return ItemsTab(
+          listId: widget.listId,
+          listName: widget.listName,
+        );
+    }
+  }
+
+  PageRoute<void> _buildTabRoute({
+    required int index,
+    int? fromIndex,
+    bool isInitial = false,
+  }) {
+    final routeName = _routeForTabIndex(index);
+    final screen = _tabScreenForIndex(index);
+
+    if (isInitial || fromIndex == null || fromIndex == index) {
+      return MaterialPageRoute<void>(
+        settings: RouteSettings(name: routeName),
+        builder: (context) => screen,
+      );
+    }
+
+    return PageRouteBuilder<void>(
+      settings: RouteSettings(name: routeName),
+      transitionDuration: const Duration(milliseconds: 360),
+      reverseTransitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation, secondaryAnimation) => screen,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final opacity = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeInOut,
+        );
+
+        return FadeTransition(
+          opacity: opacity,
+          child: child,
+        );
+      },
+    );
   }
 
   void _syncSelectedIndexFromRoute(Route<dynamic>? route) {
@@ -171,11 +227,14 @@ class _ListViewScreenState extends State<ListViewScreen>
       // Pop nested route stack to items so this is a real route pop.
       nestedNavigator.popUntil((route) => route.isFirst);
     } else {
-      final targetRoute = _routeForTabIndex(index);
       if (_selectedIndex == 0) {
-        nestedNavigator.pushNamed(targetRoute);
+        nestedNavigator.push(
+          _buildTabRoute(index: index, fromIndex: _selectedIndex),
+        );
       } else {
-        nestedNavigator.pushReplacementNamed(targetRoute);
+        nestedNavigator.pushReplacement(
+          _buildTabRoute(index: index, fromIndex: _selectedIndex),
+        );
       }
     }
 
@@ -229,33 +288,8 @@ class _ListViewScreenState extends State<ListViewScreen>
         observers: [_tabNavigatorObserver],
         initialRoute: _itemsRoute,
         onGenerateRoute: (settings) {
-          switch (settings.name) {
-            case _insightsRoute:
-              return MaterialPageRoute<void>(
-                settings: const RouteSettings(name: _insightsRoute),
-                builder: (context) => ListInsightsScreen(
-                  listId: widget.listId,
-                  listName: widget.listName,
-                ),
-              );
-            case _optionsRoute:
-              return MaterialPageRoute<void>(
-                settings: const RouteSettings(name: _optionsRoute),
-                builder: (context) => ListOptionsScreen(
-                  listId: widget.listId,
-                  listName: widget.listName,
-                ),
-              );
-            case _itemsRoute:
-            default:
-              return MaterialPageRoute<void>(
-                settings: const RouteSettings(name: _itemsRoute),
-                builder: (context) => ItemsTab(
-                  listId: widget.listId,
-                  listName: widget.listName,
-                ),
-              );
-          }
+          final index = _tabIndexForRouteName(settings.name);
+          return _buildTabRoute(index: index, isInitial: true);
         },
       ),
     );
