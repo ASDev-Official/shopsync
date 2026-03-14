@@ -32,7 +32,14 @@ class ListViewScreen extends StatefulWidget {
 
 class _ListViewScreenState extends State<ListViewScreen>
     with TickerProviderStateMixin {
+  static const String _itemsRoute = '/items';
+  static const String _insightsRoute = '/insights';
+  static const String _optionsRoute = '/options';
+
   int _selectedIndex = 0;
+  final GlobalKey<NavigatorState> _tabsNavigatorKey =
+      GlobalKey<NavigatorState>();
+  late final _ListTabNavigatorObserver _tabNavigatorObserver;
   final _firestore = FirebaseFirestore.instance;
   late AnimationController _itemsAnimationController;
   late AnimationController _optionsAnimationController;
@@ -49,6 +56,10 @@ class _ListViewScreenState extends State<ListViewScreen>
 
     // Cache permission check to avoid repeated Firestore queries
     _isViewerFuture = PermissionsHelper.isViewer(widget.listId);
+
+    _tabNavigatorObserver = _ListTabNavigatorObserver(
+      onRouteChanged: _syncSelectedIndexFromRoute,
+    );
 
     // Items animation controller for bouncy effect
     _itemsAnimationController = AnimationController(
@@ -114,13 +125,63 @@ class _ListViewScreenState extends State<ListViewScreen>
     super.dispose();
   }
 
+  String _routeForTabIndex(int index) {
+    switch (index) {
+      case 1:
+        return _insightsRoute;
+      case 2:
+        return _optionsRoute;
+      case 0:
+      default:
+        return _itemsRoute;
+    }
+  }
+
+  int _tabIndexForRouteName(String? routeName) {
+    switch (routeName) {
+      case _insightsRoute:
+        return 1;
+      case _optionsRoute:
+        return 2;
+      case _itemsRoute:
+      default:
+        return 0;
+    }
+  }
+
+  void _syncSelectedIndexFromRoute(Route<dynamic>? route) {
+    final nextIndex = _tabIndexForRouteName(route?.settings.name);
+    if (mounted && nextIndex != _selectedIndex) {
+      setState(() {
+        _selectedIndex = nextIndex;
+      });
+    }
+  }
+
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == _selectedIndex) return;
 
     // Add haptic feedback
     HapticFeedback.selectionClick();
+
+    final nestedNavigator = _tabsNavigatorKey.currentState;
+    if (nestedNavigator == null) return;
+
+    if (index == 0) {
+      // Pop nested route stack to items so this is a real route pop.
+      nestedNavigator.popUntil((route) => route.isFirst);
+    } else {
+      final targetRoute = _routeForTabIndex(index);
+      if (_selectedIndex == 0) {
+        nestedNavigator.pushNamed(targetRoute);
+      } else {
+        nestedNavigator.pushReplacementNamed(targetRoute);
+      }
+    }
+
+    setState(() {
+      _selectedIndex = index;
+    });
 
     // Play different animations based on selected tab
     if (index == 0) {
@@ -141,6 +202,65 @@ class _ListViewScreenState extends State<ListViewScreen>
     }
   }
 
+  void _handleBackAction() {
+    final nestedNavigator = _tabsNavigatorKey.currentState;
+
+    // Pop nested tab route first to preserve native predictive route behavior.
+    if (nestedNavigator != null && nestedNavigator.canPop()) {
+      nestedNavigator.maybePop();
+      return;
+    }
+
+    if (Navigator.of(context).canPop()) {
+      Navigator.of(context).maybePop();
+    }
+  }
+
+  Widget _buildNestedTabNavigator() {
+    return NavigatorPopHandler(
+      onPopWithResult: (_) {
+        final nestedNavigator = _tabsNavigatorKey.currentState;
+        if (nestedNavigator != null && nestedNavigator.canPop()) {
+          nestedNavigator.pop();
+        }
+      },
+      child: Navigator(
+        key: _tabsNavigatorKey,
+        observers: [_tabNavigatorObserver],
+        initialRoute: _itemsRoute,
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case _insightsRoute:
+              return MaterialPageRoute<void>(
+                settings: const RouteSettings(name: _insightsRoute),
+                builder: (context) => ListInsightsScreen(
+                  listId: widget.listId,
+                  listName: widget.listName,
+                ),
+              );
+            case _optionsRoute:
+              return MaterialPageRoute<void>(
+                settings: const RouteSettings(name: _optionsRoute),
+                builder: (context) => ListOptionsScreen(
+                  listId: widget.listId,
+                  listName: widget.listName,
+                ),
+              );
+            case _itemsRoute:
+            default:
+              return MaterialPageRoute<void>(
+                settings: const RouteSettings(name: _itemsRoute),
+                builder: (context) => ItemsTab(
+                  listId: widget.listId,
+                  listName: widget.listName,
+                ),
+              );
+          }
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -148,14 +268,7 @@ class _ListViewScreenState extends State<ListViewScreen>
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktopOrTablet = screenWidth >= 600; // Tablets and desktop
 
-    Widget body = IndexedStack(
-      index: _selectedIndex,
-      children: [
-        ItemsTab(listId: widget.listId, listName: widget.listName),
-        ListInsightsScreen(listId: widget.listId, listName: widget.listName),
-        ListOptionsScreen(listId: widget.listId, listName: widget.listName),
-      ],
-    );
+    final body = _buildNestedTabNavigator();
 
     Widget? fab = _selectedIndex == 0
         ? FutureBuilder<bool>(
@@ -209,7 +322,7 @@ class _ListViewScreenState extends State<ListViewScreen>
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: _handleBackAction,
         ),
       ),
       body: isDesktopOrTablet
@@ -486,6 +599,40 @@ class _ListViewScreenState extends State<ListViewScreen>
             ),
       floatingActionButton: fab,
     );
+  }
+}
+
+class _ListTabNavigatorObserver extends NavigatorObserver {
+  _ListTabNavigatorObserver({required this.onRouteChanged});
+
+  final ValueChanged<Route<dynamic>?> onRouteChanged;
+
+  void _notify(Route<dynamic>? route) {
+    onRouteChanged(route);
+  }
+
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    _notify(route);
+    super.didPush(route, previousRoute);
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    _notify(previousRoute);
+    super.didPop(route, previousRoute);
+  }
+
+  @override
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
+    _notify(newRoute);
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+  }
+
+  @override
+  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    _notify(previousRoute);
+    super.didRemove(route, previousRoute);
   }
 }
 
