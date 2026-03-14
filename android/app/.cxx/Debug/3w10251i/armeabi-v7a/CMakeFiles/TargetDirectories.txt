@@ -1,0 +1,2 @@
+/Users/aadishsamir/Developer/Projects/FlutterDev/Apps/shopsync/android/app/.cxx/Debug/3w10251i/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/aadishsamir/Developer/Projects/FlutterDev/Apps/shopsync/android/app/.cxx/Debug/3w10251i/armeabi-v7a/CMakeFiles/rebuild_cache.dir

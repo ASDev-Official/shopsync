@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="41c19b88-fbef-4da5-9341-776365eff3cb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="e4d22c3f3a1a0ac068f948870bb4294364bafb67" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;aadishsamir123&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ASDev-Official/shopsync.git",
+    "accountId": "2de57938-e02c-4a81-802e-acba4b602837"
+  }
+}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;548659f0&quot;,
+  &quot;associatedIndex&quot;: -1
+}</component>
+  <component name="ProjectId" id="2vifb3SGKkbbdlg89Fzk9XeOUYs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Flutter.main.dart.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "ScreenshotViewer.SavePath": "/Users/aadishsamir/Desktop",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "v4.0.0-wearos-support",
+    "io.flutter.project.isFirstOpen": "true",
+    "io.flutter.reload.alreadyRun": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/aadishsamir/Developer/Projects/FlutterDev/Apps/shopsync",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-WS-251.23774.424" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="41c19b88-fbef-4da5-9341-776365eff3cb" name="Changes" comment="" />
+      <created>1744632883849</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744632883849</updated>
+      <workItem from="1745026381226" duration="882000" />
+    </task>
+    <task id="LOCAL-00001" summary="Add issue templates for bug reports and feature requests.">
+      <option name="closed" value="true" />
+      <created>1744802048874</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744802048874</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Use Font Awesome icons and improve UI&#10;&#10;This commit introduces Font Awesome icons throughout the application, replacing the default Material icons. This change enhances the visual appeal and consistency of the app's user interface. Additionally, the location selector bottom sheet has been updated to a more modern and user-friendly design, and various other UI improvements have been made.">
+      <option name="closed" value="true" />
+      <created>1744897262294</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744897262294</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Bump version to 1.0.0-beta.19.">
+      <option name="closed" value="true" />
+      <created>1744900361179</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744900361179</updated>
+    </task>
+    <task id="LOCAL-00004" summary="remove widget test">
+      <option name="closed" value="true" />
+      <created>1744939514561</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744939514561</updated>
+    </task>
+    <task id="LOCAL-00005" summary="chore: Replaced material icons with FontAwesome icons in the profile screen">
+      <option name="closed" value="true" />
+      <created>1744940115868</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744940115868</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Bump version to 1.0.0-beta.20">
+      <option name="closed" value="true" />
+      <created>1744941356944</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744941356944</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Upgraded page transitions to use the new M3 transition builder.">
+      <option name="closed" value="true" />
+      <created>1744944079999</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744944079999</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Moved the list view from home screen to a different file for a more optimized user interface, reformatted all the files.">
+      <option name="closed" value="true" />
+      <created>1744950949432</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744950949432</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Bump version">
+      <option name="closed" value="true" />
+      <created>1744951738183</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744951738183</updated>
+    </task>
+    <task id="LOCAL-00010" summary="incremement version">
+      <option name="closed" value="true" />
+      <created>1745121199216</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745121199216</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update button labels for registration and login screens">
+      <option name="closed" value="true" />
+      <created>1745629256746</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745629256746</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Add logo to app bar and update asset path in pubspec.yaml">
+      <option name="closed" value="true" />
+      <created>1745629980843</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745629980843</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Refactor RecycleBinScreen to use StatefulWidget, enhance RecycleBinScreen UI with custom app bar and animations">
+      <option name="closed" value="true" />
+      <created>1746064829386</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1746064829386</updated>
+    </task>
+    <task id="LOCAL-00014" summary="half-implementation of crowdin(willfix later)">
+      <option name="closed" value="true" />
+      <created>1746095625927</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1746095625927</updated>
+    </task>
+    <task id="LOCAL-00015" summary="updated gitignore">
+      <option name="closed" value="true" />
+      <created>1746095965969</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1746095965969</updated>
+    </task>
+    <task id="LOCAL-00016" summary="updated readme to include crowdin badge">
+      <option name="closed" value="true" />
+      <created>1746096202404</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1746096202404</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added localization stuff">
+      <option name="closed" value="true" />
+      <created>1746096230182</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1746096230182</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added Crowdin button in app drawer.">
+      <option name="closed" value="true" />
+      <created>1746097805824</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1746097805824</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Update dark theme transitions in main.dart to include ZoomPageTransitions for macOS and Linux">
+      <option name="closed" value="true" />
+      <created>1746193693665</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1746193693665</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Updated page transition builders">
+      <option name="closed" value="true" />
+      <created>1746193759975</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1746193759975</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Fix formatting in dark theme page transitions in main.dart">
+      <option name="closed" value="true" />
+      <created>1746234298826</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1746234298826</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Add Google Sign-In functionality">
+      <option name="closed" value="true" />
+      <created>1746240964109</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1746240964109</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Add Google Sign-In integration and new SVG assets">
+      <option name="closed" value="true" />
+      <created>1746241594006</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1746241594006</updated>
+    </task>
+    <task id="LOCAL-00024" summary="incremented version number">
+      <option name="closed" value="true" />
+      <created>1746242753563</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1746242753563</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Removed Google Sign-In button as it was not working">
+      <option name="closed" value="true" />
+      <created>1746262616462</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1746262616462</updated>
+    </task>
+    <task id="LOCAL-00026" summary="updated localizations">
+      <option name="closed" value="true" />
+      <created>1746264771601</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1746264771601</updated>
+    </task>
+    <task id="LOCAL-00027" summary="added minimal sentry stuff">
+      <option name="closed" value="true" />
+      <created>1746329772859</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1746329772859</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Added Sentry error reporting to the entire app.">
+      <option name="closed" value="true" />
+      <created>1746802598291</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1746802598291</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Bump version">
+      <option name="closed" value="true" />
+      <created>1746804403585</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1746804403585</updated>
+    </task>
+    <task id="LOCAL-00030" summary="fixed sentry config in pubspec.yaml">
+      <option name="closed" value="true" />
+      <created>1746855557920</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1746855557920</updated>
+    </task>
+    <task id="LOCAL-00031" summary="bump build number">
+      <option name="closed" value="true" />
+      <created>1746855798237</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1746855798237</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add in-app update functionality with update screen">
+      <option name="closed" value="true" />
+      <created>1746873310553</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1746873310553</updated>
+    </task>
+    <task id="LOCAL-00033" summary="bump version">
+      <option name="closed" value="true" />
+      <created>1746873894527</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1746873894527</updated>
+    </task>
+    <task id="LOCAL-00034" summary="prepped amplitude(will add in a future release)">
+      <option name="closed" value="true" />
+      <created>1746926098481</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1746926098481</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Added error handling to auth flows">
+      <option name="closed" value="true" />
+      <created>1746927934267</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1746927934267</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Changed the logic of update screen.">
+      <option name="closed" value="true" />
+      <created>1746932604510</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1746932604511</updated>
+    </task>
+    <task id="LOCAL-00037" summary="bump version">
+      <option name="closed" value="true" />
+      <created>1746932628518</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1746932628518</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Removed review banner">
+      <option name="closed" value="true" />
+      <created>1746938474673</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1746938474673</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Updated translations">
+      <option name="closed" value="true" />
+      <created>1746975728111</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1746975728111</updated>
+    </task>
+    <task id="LOCAL-00040" summary="fixed translations">
+      <option name="closed" value="true" />
+      <created>1747009574589</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1747009574589</updated>
+    </task>
+    <task id="LOCAL-00041" summary="fixed localizations(again)">
+      <option name="closed" value="true" />
+      <created>1747009803580</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1747009803580</updated>
+    </task>
+    <task id="LOCAL-00042" summary="bump version">
+      <option name="closed" value="true" />
+      <created>1747014138344</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1747014138344</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Added new settings screen, reformatted files.">
+      <option name="closed" value="true" />
+      <created>1747830230256</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1747830230256</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Optimized the sign-out flow">
+      <option name="closed" value="true" />
+      <created>1747830322887</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1747830322887</updated>
+    </task>
+    <task id="LOCAL-00045" summary="bump version">
+      <option name="closed" value="true" />
+      <created>1747830710108</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1747830710108</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Added swipe down prompt and icons to enhance user experience in home screen">
+      <option name="closed" value="true" />
+      <created>1748222096589</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1748222096589</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Increment version code due to issues with Google Play">
+      <option name="closed" value="true" />
+      <created>1748653118090</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1748653118090</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Fixed the settings screen not loading on Web">
+      <option name="closed" value="true" />
+      <created>1748959520635</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1748959520635</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="pushed the icons for badges" />
+    <MESSAGE value="Add Google Sign-In functionality and SVG assets for various platforms" />
+    <MESSAGE value="Add Google Sign-In integration and new SVG assets" />
+    <MESSAGE value="incremented version number" />
+    <MESSAGE value="Removed Google Sign-In button as it was not working" />
+    <MESSAGE value="updated localizations" />
+    <MESSAGE value="added minimal sentry stuff" />
+    <MESSAGE value="Added Sentry error reporting to the entire app." />
+    <MESSAGE value="Bump version" />
+    <MESSAGE value="fixed sentry config in pubspec.yaml" />
+    <MESSAGE value="bump build number" />
+    <MESSAGE value="Add in-app update functionality with update screen" />
+    <MESSAGE value="prepped amplitude(will add in a future release)" />
+    <MESSAGE value="Added error handling to auth flows" />
+    <MESSAGE value="Changed the logic of update screen." />
+    <MESSAGE value="Removed review banner" />
+    <MESSAGE value="Updated translations" />
+    <MESSAGE value="fixed translations" />
+    <MESSAGE value="fixed localizations(again)" />
+    <MESSAGE value="Added new settings screen, reformatted files." />
+    <MESSAGE value="Optimized the sign-out flow" />
+    <MESSAGE value="bump version" />
+    <MESSAGE value="Added swipe down prompt and icons to enhance user experience in home screen" />
+    <MESSAGE value="Increment version code due to issues with Google Play" />
+    <MESSAGE value="Fixed the settings screen not loading on Web" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the settings screen not loading on Web" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

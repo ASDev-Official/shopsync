@@ -1,0 +1,15 @@
+Index: crowdin.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>project_id: \"your-project-id\"\napi_token: \"453c349bb98e2cfc2f847049db4d76517f4f4a6a0bb17c6d3acdfbe0b995950ffcd0051a4e33f8f9\"\n\nfiles:\n  - source: /lib/l10n/app_en.arb\n    translation: /lib/l10n/app_%two_letters_code%.arb\n\npull_request_title: \"chore: update translations\"\ncommit_message: \"chore: update %language% translations\"\n\npreserve_hierarchy: true
+===================================================================
+diff --git a/crowdin.yml b/crowdin.yml
+--- a/crowdin.yml	(revision 853ad1347c21d69099f47a3b04b0adc8ee7f7f3d)
++++ b/crowdin.yml	(date 1746095847897)
+@@ -1,5 +1,5 @@
+ project_id: "your-project-id"
+-api_token: "453c349bb98e2cfc2f847049db4d76517f4f4a6a0bb17c6d3acdfbe0b995950ffcd0051a4e33f8f9"
++api_token: "f9903907e3222361f51ee8248d97bc028dc404848bd383b2d1a41f14785fc53ebba7a9abf3061561"
+ 
+ files:
+   - source: /lib/l10n/app_en.arb

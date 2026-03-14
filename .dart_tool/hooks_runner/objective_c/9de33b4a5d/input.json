@@ -1,0 +1,29 @@
+{
+  "assets": {},
+  "config": {
+    "build_asset_types": [
+      "code_assets/code"
+    ],
+    "extensions": {
+      "code_assets": {
+        "android": {
+          "target_ndk_api": 29
+        },
+        "c_compiler": {
+          "ar": "/Users/aadishsamir/Library/Android/sdk/ndk/29.0.14206865/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-ar",
+          "cc": "/Users/aadishsamir/Library/Android/sdk/ndk/29.0.14206865/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+          "ld": "/Users/aadishsamir/Library/Android/sdk/ndk/29.0.14206865/toolchains/llvm/prebuilt/darwin-x86_64/bin/ld.lld"
+        },
+        "link_mode_preference": "dynamic",
+        "target_architecture": "arm",
+        "target_os": "android"
+      }
+    },
+    "linking_enabled": false
+  },
+  "out_dir_shared": "/Users/aadishsamir/Developer/Projects/FlutterDev/Apps/shopsync/.dart_tool/hooks_runner/shared/objective_c/build/",
+  "out_file": "/Users/aadishsamir/Developer/Projects/FlutterDev/Apps/shopsync/.dart_tool/hooks_runner/objective_c/9de33b4a5d/output.json",
+  "package_name": "objective_c",
+  "package_root": "/Users/aadishsamir/.pub-cache/hosted/pub.dev/objective_c-9.3.0/",
+  "user_defines": {}
+}
