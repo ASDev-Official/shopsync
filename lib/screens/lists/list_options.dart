@@ -24,6 +24,8 @@ import '/widgets/ui/loading_spinner.dart';
 import '/widgets/lists/place_selector.dart';
 import '/widgets/lists/smart_suggestions_widget.dart';
 import '/widgets/user/user_avatar.dart';
+import '/widgets/lists/clear_completed_dialog.dart';
+import '/services/data/completed_items_service.dart';
 import 'recycle_bin.dart';
 
 class ListOptionsScreen extends StatefulWidget {
@@ -289,52 +291,54 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
 
   Future<void> _clearCompletedItems() async {
     final l10n = AppLocalizations.of(context)!;
-    final shouldClear = await showDialog<bool>(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(l10n.clearCompletedItems),
-            content: Text(l10n.areYouSureYouWantToRemoveAllCompletedItems),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: Text(l10n.cancel,
-                    style: TextStyle(color: Colors.grey[700])),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                style: TextButton.styleFrom(foregroundColor: Colors.red[700]),
-                child: Text(l10n.clearItems),
-              ),
-            ],
+
+    try {
+      final selection = await showClearCompletedDialog(
+        context: context,
+        listId: widget.listId,
+      );
+
+      if (selection == null || !mounted) {
+        return;
+      }
+
+      final clearedCount = await CompletedItemsService.clearCompletedItems(
+        listId: widget.listId,
+        categoryIds: selection.mode == ClearCompletedMode.selectedCategories
+            ? selection.selectedCategoryIds
+            : null,
+        clearOnlyUncategorized:
+            selection.mode == ClearCompletedMode.uncategorizedOnly,
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.clearedCompleteditemsdocslengthCompletedItems(clearedCount),
           ),
-        ) ??
-        false;
+          backgroundColor: Colors.green[800],
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } catch (e, stackTrace) {
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({
+          'message': 'Failed to clear completed items',
+          'listId': widget.listId,
+        }),
+      );
 
-    if (!shouldClear || !mounted) return;
-
-    final QuerySnapshot completedItems = await _firestore
-        .collection('lists')
-        .doc(widget.listId)
-        .collection('items')
-        .where('completed', isEqualTo: true)
-        .get();
-
-    final batch = _firestore.batch();
-    for (var doc in completedItems.docs) {
-      batch.delete(doc.reference);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.failedToDeleteItem),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
-
-    await batch.commit();
-
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.clearedCompleteditemsdocslengthCompletedItems(
-            completedItems.docs.length)),
-        backgroundColor: Colors.green[800],
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
   }
 
   @override
