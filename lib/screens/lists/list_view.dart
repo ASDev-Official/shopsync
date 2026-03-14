@@ -13,6 +13,8 @@ import 'list_insights.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/utils/icons/food_icons_map.dart';
 import '/utils/permissions.dart';
+import '/widgets/lists/clear_completed_dialog.dart';
+import '/services/data/completed_items_service.dart';
 
 class ListViewScreen extends StatefulWidget {
   final String listId;
@@ -652,6 +654,13 @@ class _ItemsTabState extends State<ItemsTab> {
   final _firestore = FirebaseFirestore.instance;
   QuerySnapshot? _lastItemsSnapshot;
   QuerySnapshot? _lastCategoriesSnapshot;
+  late Future<bool> _isViewerFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _isViewerFuture = PermissionsHelper.isViewer(widget.listId);
+  }
 
   @override
   void didUpdateWidget(covariant ItemsTab oldWidget) {
@@ -659,6 +668,59 @@ class _ItemsTabState extends State<ItemsTab> {
     if (oldWidget.listId != widget.listId) {
       _lastItemsSnapshot = null;
       _lastCategoriesSnapshot = null;
+      _isViewerFuture = PermissionsHelper.isViewer(widget.listId);
+    }
+  }
+
+  Future<void> _clearCompletedItems() async {
+    final l10n = AppLocalizations.of(context)!;
+
+    try {
+      final selection = await showClearCompletedDialog(
+        context: context,
+        listId: widget.listId,
+      );
+
+      if (selection == null || !mounted) {
+        return;
+      }
+
+      final clearedCount = await CompletedItemsService.clearCompletedItems(
+        listId: widget.listId,
+        categoryIds: selection.mode == ClearCompletedMode.selectedCategories
+            ? selection.selectedCategoryIds
+            : null,
+        clearOnlyUncategorized:
+            selection.mode == ClearCompletedMode.uncategorizedOnly,
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.clearedCompleteditemsdocslengthCompletedItems(clearedCount),
+          ),
+          backgroundColor: Colors.green[800],
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } catch (e, stackTrace) {
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap({
+          'message': 'Failed to clear completed items from list view',
+          'listId': widget.listId,
+        }),
+      );
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.failedToDeleteItem),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
   }
 
@@ -930,6 +992,45 @@ class _ItemsTabState extends State<ItemsTab> {
                   return ListView(
                     children: [
                       _buildStatsCard(effectiveItemsSnapshot),
+
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 16,
+                          bottom: 8,
+                        ),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: FutureBuilder<bool>(
+                            future: _isViewerFuture,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState !=
+                                  ConnectionState.done) {
+                                return const SizedBox.shrink();
+                              }
+
+                              final isViewer = snapshot.data == true;
+                              if (isViewer) {
+                                return const SizedBox.shrink();
+                              }
+
+                              return OutlinedButton.icon(
+                                onPressed: _clearCompletedItems,
+                                icon: const Icon(Icons.delete_sweep_outlined),
+                                label: Text(
+                                  AppLocalizations.of(context)!.clearCompleted,
+                                ),
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.red[700],
+                                  side: BorderSide(
+                                    color: Colors.red[300]!,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
 
                       // Build category sections
                       ...groupedItems.entries.map((entry) {

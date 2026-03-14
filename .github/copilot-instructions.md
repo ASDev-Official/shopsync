@@ -176,6 +176,14 @@ Text(AppLocalizations.of(context)!.aiFeatures)
 - The FAB no longer includes a direct template action.
 - Navigation uses `SavedItemsScreen(listId)` from `lib/screens/lists/list_options.dart`.
 
+8. **Clear Completed Behavior**:
+
+- In both list items view and list options, "Clear Completed" must present category-aware choices:
+  - Clear all completed items
+  - Clear completed items from selected categories only
+- Clearing completed items must move items from `lists/{listId}/items` to `lists/{listId}/recycled_items` with deletion metadata (`deletedAt`, `deletedBy`, `deletedByName`) rather than hard deleting.
+- Keep behavior consistent by reusing the shared dialog (`lib/widgets/lists/clear_completed_dialog.dart`) and data logic (`lib/services/data/completed_items_service.dart`).
+
 ### Authentication
 
 - Google Sign-In uses **Credential Manager** on Android (v2.0.0 API) for passkey support
