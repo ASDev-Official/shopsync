@@ -32,14 +32,7 @@ class ListViewScreen extends StatefulWidget {
 
 class _ListViewScreenState extends State<ListViewScreen>
     with TickerProviderStateMixin {
-  static const String _itemsRoute = '/';
-  static const String _insightsRoute = '/insights';
-  static const String _optionsRoute = '/options';
-
   int _selectedIndex = 0;
-  final GlobalKey<NavigatorState> _tabsNavigatorKey =
-      GlobalKey<NavigatorState>();
-  late final _ListTabNavigatorObserver _tabNavigatorObserver;
   final _firestore = FirebaseFirestore.instance;
   late AnimationController _itemsAnimationController;
   late AnimationController _optionsAnimationController;
@@ -56,10 +49,6 @@ class _ListViewScreenState extends State<ListViewScreen>
 
     // Cache permission check to avoid repeated Firestore queries
     _isViewerFuture = PermissionsHelper.isViewer(widget.listId);
-
-    _tabNavigatorObserver = _ListTabNavigatorObserver(
-      onRouteChanged: _syncSelectedIndexFromRoute,
-    );
 
     // Items animation controller for bouncy effect
     _itemsAnimationController = AnimationController(
@@ -125,32 +114,7 @@ class _ListViewScreenState extends State<ListViewScreen>
     super.dispose();
   }
 
-  String _routeForTabIndex(int index) {
-    switch (index) {
-      case 1:
-        return _insightsRoute;
-      case 2:
-        return _optionsRoute;
-      case 0:
-      default:
-        return _itemsRoute;
-    }
-  }
-
-  int _tabIndexForRouteName(String? routeName) {
-    switch (routeName) {
-      case _insightsRoute:
-        return 1;
-      case _optionsRoute:
-        return 2;
-      case '/items':
-      case _itemsRoute:
-      default:
-        return 0;
-    }
-  }
-
-  Widget _tabScreenForIndex(int index) {
+  Widget _buildTabContent(int index) {
     switch (index) {
       case 1:
         return ListInsightsScreen(
@@ -171,72 +135,11 @@ class _ListViewScreenState extends State<ListViewScreen>
     }
   }
 
-  PageRoute<void> _buildTabRoute({
-    required int index,
-    int? fromIndex,
-    bool isInitial = false,
-  }) {
-    final routeName = _routeForTabIndex(index);
-    final screen = _tabScreenForIndex(index);
-
-    if (isInitial || fromIndex == null || fromIndex == index) {
-      return MaterialPageRoute<void>(
-        settings: RouteSettings(name: routeName),
-        builder: (context) => screen,
-      );
-    }
-
-    return PageRouteBuilder<void>(
-      settings: RouteSettings(name: routeName),
-      transitionDuration: const Duration(milliseconds: 360),
-      reverseTransitionDuration: const Duration(milliseconds: 300),
-      pageBuilder: (context, animation, secondaryAnimation) => screen,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        final opacity = CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeInOut,
-        );
-
-        return FadeTransition(
-          opacity: opacity,
-          child: child,
-        );
-      },
-    );
-  }
-
-  void _syncSelectedIndexFromRoute(Route<dynamic>? route) {
-    final nextIndex = _tabIndexForRouteName(route?.settings.name);
-    if (mounted && nextIndex != _selectedIndex) {
-      setState(() {
-        _selectedIndex = nextIndex;
-      });
-    }
-  }
-
   void _onItemTapped(int index) {
     if (index == _selectedIndex) return;
 
     // Add haptic feedback
     HapticFeedback.selectionClick();
-
-    final nestedNavigator = _tabsNavigatorKey.currentState;
-    if (nestedNavigator == null) return;
-
-    if (index == 0) {
-      // Pop nested route stack to items so this is a real route pop.
-      nestedNavigator.popUntil((route) => route.isFirst);
-    } else {
-      if (_selectedIndex == 0) {
-        nestedNavigator.push(
-          _buildTabRoute(index: index, fromIndex: _selectedIndex),
-        );
-      } else {
-        nestedNavigator.pushReplacement(
-          _buildTabRoute(index: index, fromIndex: _selectedIndex),
-        );
-      }
-    }
 
     setState(() {
       _selectedIndex = index;
@@ -261,40 +164,6 @@ class _ListViewScreenState extends State<ListViewScreen>
     }
   }
 
-  void _handleBackAction() {
-    final nestedNavigator = _tabsNavigatorKey.currentState;
-
-    // Pop nested tab route first to preserve native predictive route behavior.
-    if (nestedNavigator != null && nestedNavigator.canPop()) {
-      nestedNavigator.maybePop();
-      return;
-    }
-
-    if (Navigator.of(context).canPop()) {
-      Navigator.of(context).maybePop();
-    }
-  }
-
-  Widget _buildNestedTabNavigator() {
-    return NavigatorPopHandler(
-      onPopWithResult: (_) {
-        final nestedNavigator = _tabsNavigatorKey.currentState;
-        if (nestedNavigator != null && nestedNavigator.canPop()) {
-          nestedNavigator.pop();
-        }
-      },
-      child: Navigator(
-        key: _tabsNavigatorKey,
-        observers: [_tabNavigatorObserver],
-        initialRoute: _itemsRoute,
-        onGenerateRoute: (settings) {
-          final index = _tabIndexForRouteName(settings.name);
-          return _buildTabRoute(index: index, isInitial: true);
-        },
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -302,7 +171,17 @@ class _ListViewScreenState extends State<ListViewScreen>
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktopOrTablet = screenWidth >= 600; // Tablets and desktop
 
-    final body = _buildNestedTabNavigator();
+    final body = AnimatedSwitcher(
+      duration: const Duration(milliseconds: 220),
+      switchInCurve: Curves.easeInOut,
+      switchOutCurve: Curves.easeInOut,
+      transitionBuilder: (child, animation) =>
+          FadeTransition(opacity: animation, child: child),
+      child: KeyedSubtree(
+        key: ValueKey(_selectedIndex),
+        child: _buildTabContent(_selectedIndex),
+      ),
+    );
 
     Widget? fab = _selectedIndex == 0
         ? FutureBuilder<bool>(
@@ -356,7 +235,7 @@ class _ListViewScreenState extends State<ListViewScreen>
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: _handleBackAction,
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: isDesktopOrTablet
@@ -633,40 +512,6 @@ class _ListViewScreenState extends State<ListViewScreen>
             ),
       floatingActionButton: fab,
     );
-  }
-}
-
-class _ListTabNavigatorObserver extends NavigatorObserver {
-  _ListTabNavigatorObserver({required this.onRouteChanged});
-
-  final ValueChanged<Route<dynamic>?> onRouteChanged;
-
-  void _notify(Route<dynamic>? route) {
-    onRouteChanged(route);
-  }
-
-  @override
-  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    _notify(route);
-    super.didPush(route, previousRoute);
-  }
-
-  @override
-  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    _notify(previousRoute);
-    super.didPop(route, previousRoute);
-  }
-
-  @override
-  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
-    _notify(newRoute);
-    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
-  }
-
-  @override
-  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    _notify(previousRoute);
-    super.didRemove(route, previousRoute);
   }
 }
 
