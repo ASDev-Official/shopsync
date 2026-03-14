@@ -713,7 +713,7 @@ When creating or modifying list navigation:
 - Index 1: Insights (donut spin animation with `Icons.donut_small` → `Icons.donut_large`)
 - Index 2: Options (settings spin animation)
 - List tab content is hosted in a nested `Navigator` (inside `list_view.dart`) so tab changes use Material route transitions instead of `PageView`.
-- For non-items tabs, switch via nested route push/replace (`/insights`, `/options`); switch to items via nested route pop-to-first.
+- For non-items tabs, switch via nested route push/replace (`/insights`, `/options`); switch to items via nested route pop-to-first (root `/`).
 - Back handling uses `NavigatorPopHandler` + nested `Navigator.pop()` so Android predictive back uses native route-pop progress.
 
 ### Testing Responsibilities
