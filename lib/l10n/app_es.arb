@@ -1353,7 +1353,7 @@
     "updateButton": "Actualizar",
     "startAddingItemsToSeeInsights": "Iniciar añadiendo elementos para ver insignias",
     "pleaseTryAgainLater": "Inténtelo más tarde",
-    "organizeListsBodyCount": "{count, plural, =0{Hemos sugerido algunos grupos para su listados. Puedes editar, eliminar o añadir grupos nuevos.} =1{Hemos sugerido algunos grupos para tu {count} lista. Puedes editar, quitar, o añadir grupos nuevos.} other{Hemos sugerido algunos grupos para tus {count} listados. You can edit, remove, or add new groups.}}",
+    "organizeListsBodyCount": "{count, plural, =0{Hemos sugerido algunos grupos para tus listas. Puedes editarlos, eliminarlos o añadir nuevos grupos.} =1{Hemos sugerido algunos grupos para tu lista. Puedes editarlos, eliminarlos o añadir nuevos grupos.} other{Hemos sugerido algunos grupos para tus {count} listas. Puedes editarlos, eliminarlos o añadir nuevos grupos.}}",
     "@organizeListsBodyCount": {
         "placeholders": {
             "count": {
