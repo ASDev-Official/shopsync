@@ -1,5 +1,5 @@
 {
-    "organizeListsBodyCount": "{count, plapland, = {귀하는 귀하의 목록에 대한 일부 그룹을 후원했습니다. 뉴스 그룹을 편집하고 제거하고, {1 {1 {1 {count} 목록에 대한 일부 그룹을 제안했습니다. 새 그룹을 편집하고 제거하고, {{count} 목록을 사용하여 새 그룹을 수정, 제거, 삭제할 수 있습니다.}}",
+    "organizeListsBodyCount": "{count, plural, =0{목록에 사용할 그룹을 몇 가지 제안했어요. 수정, 삭제하거나 새로 추가할 수 있어요.} =1{{count}개 목록에 사용할 그룹을 몇 가지 제안했어요. 수정, 삭제하거나 새로 추가할 수 있어요.} other{{count}개 목록에 사용할 그룹을 몇 가지 제안했어요. 수정, 삭제하거나 새로 추가할 수 있어요.}}",
     "@organizeListsBodyCount": {
         "placeholders": {
             "count": {
