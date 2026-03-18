@@ -51,12 +51,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get appVersion => 'App Version';
 
   @override
-  String get areYouSureYouWantToRemoveAllCompletedItems =>
-      'Are you sure you want to remove all completed items?';
+  String get areYouSureYouWantToRemoveAllCompletedItems => '모든 완성품을 제거하고 싶습니까?';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems1 =>
-      'Are you sure you want to remove all completed items?';
+      '모든 완성품을 제거하고 싶습니까?';
 
   @override
   String get areYouSureYouWantToSignOut => 'Are you sure you want to sign out?';
@@ -345,7 +344,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get googleSignInAccountExists =>
-      'An account with this email already exists. Please sign in with email/password first, then link your Google account from the Profile screen.';
+      '이 이메일 Anliady가있는 계정이 있습니다. 먼저 이메일 / 암호로 로그인하여 옵션으로 링크 링크 링크 링크를 프로필 화면에서 표시하십시오.';
 
   @override
   String get googleSignInGeneric =>
@@ -385,36 +384,32 @@ class AppLocalizationsKo extends AppLocalizations {
   String get loginSignUp => 'Sign Up';
 
   @override
-  String get loginAccountExists =>
-      'The email address is already in use by another account';
+  String get loginAccountExists => '이메일 주소는 다른 계정에 의해 이미 사용됩니다';
 
   @override
   String get loginInvalidCredentials =>
-      'The provided credentials are incorrect. Please check your email and password';
+      '입증 된 자격 증명이 잘못되었습니다. 이메일과 비밀번호를 확인하십시오';
 
   @override
   String get loginOperationNotAllowed =>
-      'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
+      '운영은 허용되지 않습니다. 나중에 다시 시도하십시오. 작동하지 않는 경우 support@aadish.dev';
 
   @override
   String get loginUserDisabled =>
       'This user has been disabled. Please contact support@aadish.dev';
 
   @override
-  String get loginUserNotFound =>
-      'No user found for that email. Please check your email and try again';
+  String get loginUserNotFound => '해당 이메일을위한 다운로드 없음. 이메일을 확인하고 다시 시도하십시오';
 
   @override
-  String get loginWrongPassword =>
-      'The password is invalid or the user does not have a password';
+  String get loginWrongPassword => '암호가 유효하지 않거나 미국이 파노를 해킹하지 않습니다';
 
   @override
   String get loginTooManyRequests =>
       'Too many requests. Please try again later';
 
   @override
-  String get loginNetworkError =>
-      'Network error. Please check your internet connection and try again';
+  String get loginNetworkError => '네트워크 오류. 인터넷 연결을 확인하고 다시 시도하십시오';
 
   @override
   String get loginGenericError => 'An error occurred during login';
@@ -445,16 +440,14 @@ class AppLocalizationsKo extends AppLocalizations {
   String get registerInvalidEmail => 'Please enter a valid email address';
 
   @override
-  String get registerWeakPassword =>
-      'This password is too weak. Please choose a stronger one';
+  String get registerWeakPassword => '이 암호는 너무 약합니다. 더 강한 것을 선택하십시오';
 
   @override
   String get registerTooManyRequests =>
       'Too many requests. Please try again later';
 
   @override
-  String get registerNetworkError =>
-      'Network error. Please check your internet connection and try again';
+  String get registerNetworkError => '네트워크 오류. 인터넷 연결을 확인하고 다시 시도하십시오';
 
   @override
   String get registerGenericError => 'An error occurred during registration';
@@ -1294,11 +1287,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get networkErrorPleaseCheckYourInternetConnectionAndTryAgain =>
-      'Network error. Please check your internet connection and try again';
+      '네트워크 오류. 인터넷 연결을 확인하고 다시 시도하십시오';
 
   @override
   String get networkErrorPleaseCheckYourInternetConnectionAndTryAgain1 =>
-      'Network error. Please check your internet connection and try again';
+      '네트워크 오류. 인터넷 연결을 확인하고 다시 시도하십시오';
 
   @override
   String get noAccountFoundWithThisEmail => 'No account found with this email';
@@ -1311,7 +1304,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get noUserFoundForThatEmailPleaseCheckYourEmailAndTryAgain =>
-      'No user found for that email. Please check your email and try again';
+      '이메일에 대한 사용자 검색은 없습니다. 를 선택하고 다시 시도하십시오';
 
   @override
   String get notLoggedIn => 'Not logged in';
@@ -1629,23 +1622,26 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get theEmailAddressIsAlreadyInUseByAnotherAccount =>
-      'The email address is already in use by another account';
+      '이메일 주소는 우리를 기준으로합니다';
 
   @override
-  String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev =>
-      'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
+  String
+      get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev =>
+          '운영은 허용되지 않습니다. 나중에 다시 시도하십시오. 작동하지 않는 경우 support@aadish.dev';
 
   @override
-  String get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1 =>
-      'The operation is not allowed. Please try again later. If it doesn\'t work, contact support@aadish.dev';
+  String
+      get theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1 =>
+          '운영은 허용되지 않습니다. 나중에 다시 시도하십시오. 작동하지 않는 경우 support@aadish.dev';
 
   @override
   String get thePasswordIsInvalidOrTheUserDoesNotHaveAPassword =>
-      'The password is invalid or the user does not have a password';
+      '암호가 유효하지 않거나 미국이 파노를 해킹하지 않습니다';
 
   @override
-  String get theProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword =>
-      'The provided credentials are incorrect. Please check your email and password';
+  String
+      get theProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword =>
+          '제공된 자격 증명이 잘못되었습니다. 이메일과 비밀번호를 확인하십시오';
 
   @override
   String get thisEmailIsAlreadyRegisteredPleaseSignInInstead =>
@@ -1653,7 +1649,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get thisPasswordIsTooWeakPleaseChooseAStrongerOne =>
-      'This password is too weak. Please choose a stronger one';
+      '이 암호는 너무 약합니다. 더 강한 선택';
 
   @override
   String get thisUserHasBeenDisabledPleaseContactSupportaadishdev =>
@@ -1688,7 +1684,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get useYourPhoneToRegisterIfYouDoNotHaveAnAccount =>
-      'Use your phone to register if you do not have an account';
+      '귀하의 전화를 사용하여 계정을 녹음하지 않으면 등록하십시오';
 
   @override
   String get userAlreadyHasAccessToThisList =>
@@ -1700,11 +1696,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get userNotFoundTheyNeedToSignUpForShopsyncFirst =>
-      'User not found. They need to sign up for ShopSync first.';
+      '사용자를 찾을 수 없습니다. 먼저 ShopSync에 가입해야합니다.';
 
   @override
   String get userNotFoundTheyNeedToSignUpForShopsyncFirst1 =>
-      'User not found. They need to sign up for ShopSync first.';
+      '사용자를 찾을 수 없습니다. 먼저 ShopSync에 가입해야합니다.';
 
   @override
   String get userRemoved => 'User removed';
@@ -1765,14 +1761,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get aiSetupDescription =>
-      'ShopSync uses on-device AI to provide smart suggestions based on your shopping patterns. Choose whether you\'d like to enable these features.';
+      'ShopSync 온 디바이스 AI를 사용하여 쇼핑 패턴에 슈퍼 테스트를 사용합니다. 웨스턴 청소년을 맛보십시오.';
 
   @override
   String get enableAiFeatures => 'Enable AI Features';
 
   @override
-  String get enableAiDescription =>
-      'Get personalized item suggestions based on your shopping history and patterns';
+  String get enableAiDescription => '쇼핑 스타터 및 패턴을 기반으로 구성된 항목 제안';
 
   @override
   String get disableAiFeatures => 'Disable AI Features';
@@ -1804,7 +1799,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get gravatarDescription =>
-      'Gravatar is a globally recognized avatar service. If you have a Gravatar associated with your email, enable it to show your profile picture throughout ShopSync.';
+      'Gravatar는 전 세계적으로 인정 된 아바타 서비스입니다. 이메일과 관련된 Gravatar가있는 경우 ShopSync 전체에 프로필 사진을 표시 할 수 있습니다.';
 
   @override
   String get enableGravatar => 'Show My Gravatar';
@@ -1819,8 +1814,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get gravatarDisabled => 'Gravatar Disabled';
 
   @override
-  String get gravatarEnabledMessage =>
-      'Your Gravatar profile picture is now visible to other users';
+  String get gravatarEnabledMessage => 'Gravatar 프로필 사진은 이제 다른 사용자에게 표시됩니다';
 
   @override
   String get gravatarDisabledMessage =>
@@ -1843,7 +1837,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get gravatarExplanation =>
-      'Gravatar (Globally Recognized Avatar) is a service that provides a profile picture across different websites and apps using your email address. Visit gravatar.com to create or update your Gravatar.';
+      'Gravatar (글로브 리브 아바타) 인증 서비스 프로파일은 프로필 사진이므로 다른 웹 사이트 및 앱 이메일 이메일로 액세스됩니다.';
 
   @override
   String get visitGravatar => 'Visit Gravatar.com';
@@ -1853,7 +1847,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get gravatarPrivacyDescription =>
-      'You can enable or disable your Gravatar at any time. When disabled, only your initials will be shown to other users.';
+      '언제든지 Gravatar를 사용할 수 있습니다. 당신이 끼울 때, 다른 사용자를 보는 베벨을 봅니다.';
 
   @override
   String get learnMore => 'Learn More';
@@ -1869,7 +1863,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get gravatarSetupDescription =>
-      'ShopSync can display your Gravatar profile picture throughout the app. Would you like to enable this feature?';
+      'ShopSync는 앱에서 전체 Gravatar 프로필 사진을 표시 할 수 있습니다. 야생 당신은이 기능을 좋아합니까?';
 
   @override
   String get enableGravatarSetup => 'Enable Gravatar';
@@ -1976,9 +1970,9 @@ class AppLocalizationsKo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count items in recycle bin',
-      one: '$count item in recycle bin',
-      zero: 'No items in recycle bin',
+      other: '휴지통에 항목 $count개',
+      one: '휴지통에 항목 $count개',
+      zero: '휴지통에 항목이 없어요',
     );
     return '$_temp0';
   }
@@ -2003,7 +1997,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String areYouSureDeleteCategory(String categoryName) {
-    return 'Are you sure you want to delete \"$categoryName\"? This will remove the category from all items.';
+    return '\"$categoryName\"을 삭제 하시겠습니까?이 항목은 모든 항목의 범주를 제거합니다.';
   }
 
   @override
@@ -2066,7 +2060,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get continueWithoutOrganizing =>
-      'You can organize your lists into groups later from the home screen. Continue without organizing?';
+      '나중에 홈 화면에서 나열 목록을 입력 할 수 있습니다. 계속 조직하지 않고 계속합니까?';
 
   @override
   String createdAtDate(String date) {
@@ -2084,16 +2078,15 @@ class AppLocalizationsKo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count lists not assigned to any group',
-      one: '$count list not assigned to any group',
-      zero: 'No lists assigned to any group',
+      other: '어떤 그룹에도 속하지 않은 목록 $count개',
+      one: '어떤 그룹에도 속하지 않은 목록 $count개',
+      zero: '어떤 그룹에도 속한 목록이 없어요',
     );
     return '$_temp0';
   }
 
   @override
-  String get dragListsToGroupOrCreate =>
-      'Drag these lists to a group above or create a new group for them:';
+  String get dragListsToGroupOrCreate => '이 목록을 위 그룹에 드래그하거나 새로운 그룹을 만들려면:';
 
   @override
   String get shopSyncMigration => 'ShopSync Migration';
@@ -2106,12 +2099,9 @@ class AppLocalizationsKo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other:
-          'We\'ve suggested some groups for your $count lists. You can edit, remove, or add new groups.',
-      one:
-          'We\'ve suggested some groups for your $count list. You can edit, remove, or add new groups.',
-      zero:
-          'We\'ve suggested some groups for your lists. You can edit, remove, or add new groups.',
+      other: '$count개 목록에 사용할 그룹을 몇 가지 제안했어요. 수정, 삭제하거나 새로 추가할 수 있어요.',
+      one: '$count개 목록에 사용할 그룹을 몇 가지 제안했어요. 수정, 삭제하거나 새로 추가할 수 있어요.',
+      zero: '목록에 사용할 그룹을 몇 가지 제안했어요. 수정, 삭제하거나 새로 추가할 수 있어요.',
     );
     return '$_temp0';
   }
@@ -2148,7 +2138,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get pleaseWaitUpdatingListGroups =>
-      'Please wait while we update your list groups to the new format...';
+      '목록 그룹을 새 형식으로 업데이트하는 동안 대기하십시오 ...';
 
   @override
   String get licensesTitle => 'Licenses';
@@ -2334,11 +2324,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get googleAccountLinkedMessage =>
-      'Google account linked successfully! You can now sign in with Google.';
+      'Google 계정이 성공적으로 연결되었습니다! 로그인 할 수 없습니다.';
 
   @override
   String get areYouSureUnlinkGoogle =>
-      'Are you sure you want to unlink your Google account? You will no longer be able to sign in with Google unless you link it again.';
+      '당신은 당신의 의견을 취소 할 수 있습니다 Google 계정? 더 이상 Google에 로그인 할 수 없습니다.';
 
   @override
   String get anErrorOccurredLinkingGoogle =>
@@ -2402,9 +2392,9 @@ class AppLocalizationsKo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count shopping lists',
-      one: '$count shopping list',
-      zero: 'No shopping lists',
+      other: '쇼핑 목록 $count개',
+      one: '쇼핑 목록 $count개',
+      zero: '쇼핑 목록이 없어요',
     );
     return '$_temp0';
   }
@@ -2422,8 +2412,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shopSyncHasAnUpdate => 'ShopSync has an update';
 
   @override
-  String get pleaseUpdateAppBody =>
-      'Please update the app to continue using the latest features and improvements.';
+  String get pleaseUpdateAppBody => '앱을 인상으로 업데이트하십시오.';
 
   @override
   String get restartingShopSync => 'Restarting ShopSync';
@@ -2436,7 +2425,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get restartRequiredBody =>
-      'Automatic restart failed. Please force close ShopSync and open it again to apply your language change.';
+      '자동 재시작 실패. 닫기 Shoundsnc를 강제하고 해당 언어를 적용하려면 다시 열어주십시오.';
 
   @override
   String get install => 'Install';

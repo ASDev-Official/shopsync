@@ -71,7 +71,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get areYouSureYouWantToSignOut3 => '¿Seguro que desea salir?';
 
   @override
-  String get avgCompletion => 'Promedio de finalización';
+  String get avgCompletion => 'Completado Avz';
 
   @override
   String get canAddEditAndDeleteItems =>
@@ -1945,191 +1945,194 @@ class AppLocalizationsEs extends AppLocalizations {
   String get basicListManagement => 'Gestión básica de listados';
 
   @override
-  String get privacyFocused => 'Privacy-focused';
+  String get privacyFocused => 'Privacidad-enfocada';
 
   @override
-  String get continueButton => 'Continue';
+  String get continueButton => 'Continuo';
 
   @override
   String get aiPreferenceChangeNote =>
-      'You can change this setting later in your profile.';
+      'Puedes cambiar este ajuste más tarde en tu perfil.';
 
   @override
   String get controlAiFeatures =>
-      'Control on-device AI features like smart suggestions';
+      'Control de características de IA sobre dispositivo como pequeñas sugerencias';
 
   @override
-  String get enableSmartSuggestions => 'Enable Smart Suggestions';
+  String get enableSmartSuggestions => 'Habilitar Sugerencias Inteligentes';
 
   @override
-  String get aiAnalyzesPatterns => 'AI analyzes your shopping patterns';
+  String get aiAnalyzesPatterns => 'Analiza la IA en sus patrones de ventas';
 
   @override
-  String get aiFeaturesDisabled => 'AI features are disabled';
+  String get aiFeaturesDisabled =>
+      'Las características de IA están inhabilitadas';
 
   @override
-  String get aiFeaturesEnabled => 'AI features enabled';
+  String get aiFeaturesEnabled => 'Características de IA habilitadas';
 
   @override
-  String get aiFeaturesDisabledMessage => 'AI features disabled';
+  String get aiFeaturesDisabledMessage => 'Características de IA inhabilitadas';
 
   @override
-  String get failedToUpdateAiPreference => 'Failed to update AI preference';
+  String get failedToUpdateAiPreference =>
+      'Ha fallado al actualizar preferencia de IA';
 
   @override
   String get errorSavingPreference =>
-      'Error saving preference. Please try again.';
+      'Error al guardar preferencia. Inténtelo de nuevo.';
 
   @override
-  String get chooseIconTitle => 'Choose Icon';
+  String get chooseIconTitle => 'Elegir Icono';
 
   @override
-  String get doneButton => 'Done';
+  String get doneButton => 'Hecho';
 
   @override
-  String get selectedIconLabel => 'Selected Icon';
+  String get selectedIconLabel => 'Icono Seleccionado';
 
   @override
-  String get loadingIcons => 'Loading icons...';
+  String get loadingIcons => 'Cargando iconos…';
 
   @override
-  String get noIconsFound => 'No icons found';
+  String get noIconsFound => 'Ningún icono encontrado';
 
   @override
-  String get noIconsFoundHint => 'Try adjusting your search or category filter';
+  String get noIconsFoundHint =>
+      'Intente ajustar su filtro de búsqueda o categoría';
 
   @override
-  String get allCategory => 'All';
+  String get allCategory => 'Todo';
 
   @override
   String itemInRecycleBin(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count items in recycle bin',
-      one: '$count item in recycle bin',
-      zero: 'No items in recycle bin',
+      other: '$count ítem en la basura',
+      one: '$count ítem en la basura',
+      zero: 'Ningún ítem en la basura',
     );
     return '$_temp0';
   }
 
   @override
-  String get restoreItemTooltip => 'Restore item';
+  String get restoreItemTooltip => 'Restaurar ítem';
 
   @override
-  String get deletePermanentlyTooltip => 'Delete permanently';
+  String get deletePermanentlyTooltip => 'Eliminar permanentemente';
 
   @override
   String deletedOnDate(String date) {
-    return 'Deleted $date';
+    return 'Eliminado $date';
   }
 
   @override
-  String get noDeletedItems => 'No Deleted Items';
+  String get noDeletedItems => 'Ningún Ítem Eliminado';
 
   @override
   String get noDeletedItemsSubtitle =>
-      'Items you delete will appear here for 30 days';
+      'Los ítem que eliminó aparecerán aquí durante 30 días';
 
   @override
   String areYouSureDeleteCategory(String categoryName) {
-    return 'Are you sure you want to delete \"$categoryName\"? This will remove the category from all items.';
+    return '¿Seguro que desea eliminar «$categoryName»? Esto retirará la categoría desde todos los ítem.';
   }
 
   @override
-  String get noCategoriesYet => 'No categories yet';
+  String get noCategoriesYet => 'Ninguna categoría aún';
 
   @override
-  String get createYourFirstCategoryAbove => 'Create your first category above';
+  String get createYourFirstCategoryAbove => 'Crea tu primara categoría arriba';
 
   @override
-  String get editTooltip => 'Edit';
+  String get editTooltip => 'Editar';
 
   @override
-  String get deleteTooltip => 'Delete';
+  String get deleteTooltip => 'Eliminar';
 
   @override
-  String get createNewCategory => 'Create New Category';
+  String get createNewCategory => 'Crear Categoría Nueva';
 
   @override
-  String get timeframeDay => 'Day';
+  String get timeframeDay => 'Día';
 
   @override
-  String get timeframeWeek => 'Week';
+  String get timeframeWeek => 'Semana';
 
   @override
-  String get timeframeMonth => 'Month';
+  String get timeframeMonth => 'Mes';
 
   @override
-  String get timeframeAll => 'All';
+  String get timeframeAll => 'Todo';
 
   @override
-  String get noInsightsAvailableYet => 'No insights available yet';
+  String get noInsightsAvailableYet => 'Aún no hay disponible ninguna insignia';
 
   @override
   String get noActivityDataForTimeframe =>
-      'No activity data for this timeframe';
+      'Ningún dato de actividad para este marco de tiempo';
 
   @override
-  String get activityTimeline => 'Activity Timeline';
+  String get activityTimeline => 'Cronograma de Actividad';
 
   @override
-  String get addedLabel => 'Added';
+  String get addedLabel => 'Añadido';
 
   @override
-  String get completedLabel => 'Completed';
+  String get completedLabel => 'Completado';
 
   @override
-  String get categoryBreakdown => 'Category Breakdown';
+  String get categoryBreakdown => 'Desglosar por Categoría';
 
   @override
   String get noCollaboratorActivityInTimeframe =>
-      'No collaborator activity in this timeframe';
+      'Ninguna actividad de colaboración dentro de este periodo';
 
   @override
-  String get collaboratorActivity => 'Collaborator Activity';
+  String get collaboratorActivity => 'Actividad de Colaborador';
 
   @override
   String addedCompletedSummary(String added, String completed) {
-    return '$added added • $completed completed';
+    return '$added añadido • $completed completado';
   }
 
   @override
   String get continueWithoutOrganizing =>
-      'You can organize your lists into groups later from the home screen. Continue without organizing?';
+      'Puedes organizar tus listados en grupos más tarde desde la pantalla de inicio. ¿Continúo sin organizar?';
 
   @override
   String createdAtDate(String date) {
-    return 'Created $date';
+    return '$date creada';
   }
 
   @override
-  String get suggestedBadge => 'Suggested';
+  String get suggestedBadge => 'Sugerida';
 
   @override
-  String get ungroupedListsSection => 'Ungrouped Lists';
+  String get ungroupedListsSection => 'Listados Desagrupados';
 
   @override
   String ungroupedListsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count lists not assigned to any group',
-      one: '$count list not assigned to any group',
-      zero: 'No lists assigned to any group',
+      other: '$count lastas no asignadas a cualquier grupo',
+      one: '$count lista no asignada a cualquier grupo',
+      zero: 'Ninguna lista asignada a cualquier grupo',
     );
     return '$_temp0';
   }
 
   @override
   String get dragListsToGroupOrCreate =>
-      'Drag these lists to a group above or create a new group for them:';
+      'Suelta estos listados a un grupo encima o crea un grupo nuevo para ellos:';
 
   @override
-  String get shopSyncMigration => 'ShopSync Migration';
+  String get shopSyncMigration => 'Migración de ShopSync';
 
   @override
-  String get organizeWithListGroups => 'Organize with List Groups';
+  String get organizeWithListGroups => 'Organizar con Grupos de Listado';
 
   @override
   String organizeListsBodyCount(int count) {
@@ -2137,149 +2140,153 @@ class AppLocalizationsEs extends AppLocalizations {
       count,
       locale: localeName,
       other:
-          'We\'ve suggested some groups for your $count lists. You can edit, remove, or add new groups.',
+          'Hemos sugerido algunos grupos para tus $count listas. Puedes editarlos, eliminarlos o añadir nuevos grupos.',
       one:
-          'We\'ve suggested some groups for your $count list. You can edit, remove, or add new groups.',
+          'Hemos sugerido algunos grupos para tu lista. Puedes editarlos, eliminarlos o añadir nuevos grupos.',
       zero:
-          'We\'ve suggested some groups for your lists. You can edit, remove, or add new groups.',
+          'Hemos sugerido algunos grupos para tus listas. Puedes editarlos, eliminarlos o añadir nuevos grupos.',
     );
     return '$_temp0';
   }
 
   @override
-  String get organizeLists => 'Organize Lists';
+  String get organizeLists => 'Listados Organizados';
 
   @override
   String listsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count lists',
-      one: '$count list',
-      zero: 'No lists',
+      other: '$count listas',
+      one: '$count lista',
+      zero: 'Sin listas',
     );
     return '$_temp0';
   }
 
   @override
   String get failedToUpgradeLists =>
-      'Failed to upgrade lists. Please try again.';
+      'Incorrecto al mejorar listados. Inténtelo de nuevo.';
 
   @override
   String anErrorOccurredError(String error) {
-    return 'An error occurred: $error';
+    return 'Ha ocurrido un error: $error';
   }
 
   @override
-  String get upgradeFailed => 'Upgrade Failed';
+  String get upgradeFailed => 'Mejora Incorrecta';
 
   @override
-  String get upgradingYourLists => 'Upgrading your lists';
+  String get upgradingYourLists => 'Mejorando sus listados';
 
   @override
   String get pleaseWaitUpdatingListGroups =>
-      'Please wait while we update your list groups to the new format...';
+      'Espere mientras actualizamos tus grupos de la lista al formato nuevo…';
 
   @override
-  String get licensesTitle => 'Licenses';
+  String get licensesTitle => 'Licencias';
 
   @override
-  String get noPackagesFound => 'No packages found';
+  String get noPackagesFound => 'No encontró ningún paquete';
 
   @override
-  String get noPackagesMatchSearch => 'No packages match your search';
+  String get noPackagesMatchSearch => 'No coinciden paquetes en su búsqueda';
 
   @override
   String versionDisplay(String version) {
-    return 'Version $version';
+    return 'Versión $version';
   }
 
   @override
-  String get trendsAndPerformance => 'Trends & Performance';
+  String get trendsAndPerformance => 'Tendencias y Rendimiento';
 
   @override
-  String get topCategories => 'Top Categories';
+  String get topCategories => 'Categorías Máximas';
 
   @override
-  String get topCompletedLists => 'Top Completed Lists';
+  String get topCompletedLists => 'Listados Completados Máximos';
 
   @override
-  String get timeframeQuarter => 'Quarter';
+  String get timeframeQuarter => 'Trimestre';
 
   @override
-  String get timeframeYear => 'Year';
+  String get timeframeYear => 'Año';
 
   @override
-  String get timeframeAllTime => 'All Time';
+  String get timeframeAllTime => 'Todo el tiempo';
 
   @override
-  String get completionRateTitle => 'Completion Rate';
+  String get completionRateTitle => 'Tipo de Completado';
 
   @override
-  String get failedToLoadCompletionRate => 'Failed to load completion rate';
+  String get failedToLoadCompletionRate =>
+      'Incorrecto al cargar tipo de completado';
 
   @override
-  String get ofItemsCompleted => 'of items completed';
+  String get ofItemsCompleted => 'de elementos completados';
 
   @override
-  String get dailyProductivity => 'Daily Productivity';
+  String get dailyProductivity => 'Productividad Diaria';
 
   @override
-  String get failedToLoadProductivityData => 'Failed to load productivity data';
+  String get failedToLoadProductivityData =>
+      'Incorrecto al cargar datos de productividad';
 
   @override
-  String get itemsAddedPerDay => 'items added per day';
+  String get itemsAddedPerDay => 'elementos añadidos por día';
 
   @override
-  String get activityOverTime => 'Activity Over Time';
+  String get activityOverTime => 'Actividad Por Tiempo';
 
   @override
-  String get failedToLoadActivityData => 'Failed to load activity data';
+  String get failedToLoadActivityData =>
+      'Incorrecto al cargar datos de actividad';
 
   @override
-  String get noDataAvailable => 'No data available';
+  String get noDataAvailable => 'Ningún dato disponible';
 
   @override
-  String get noData => 'No data';
+  String get noData => 'Sin datos';
 
   @override
   String itemsCountTooltip(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count items',
-      one: '$count item',
-      zero: 'No items',
+      other: '$count elementos',
+      one: '$count elemento',
+      zero: 'Ningún elemento',
     );
     return '$_temp0';
   }
 
   @override
-  String get itemsAddedEachDay => 'Items added each day';
+  String get itemsAddedEachDay => 'Elementos añadidos cada día';
 
   @override
-  String get failedToLoadCategoryData => 'Failed to load category data';
+  String get failedToLoadCategoryData =>
+      'Incorrecto al cargar datos de categoría';
 
   @override
   String itemCountLabel(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count items',
-      one: '$count item',
-      zero: 'No items',
+      other: '$count elementos',
+      one: '$count elementos',
+      zero: 'Sin elementos',
     );
     return '$_temp0';
   }
 
   @override
-  String get failedToLoadListData => 'Failed to load list data';
+  String get failedToLoadListData => 'Incorrecto al cargar datos de listado';
 
   @override
-  String get selectLanguage => 'Select Language';
+  String get selectLanguage => 'Seleccionar Idioma';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => 'Predeterminado del sistema';
 
   @override
   String get langEnglish => 'English';
@@ -2306,7 +2313,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get langHindi => 'हिन्दी';
 
   @override
-  String get langIndonesian => 'Bahasa Indonesia';
+  String get langIndonesian => 'Indonés';
 
   @override
   String get langItaliano => 'Italiano';
@@ -2348,142 +2355,142 @@ class AppLocalizationsEs extends AppLocalizations {
   String get langVietnamese => 'Tiếng Việt';
 
   @override
-  String get useSystemDefaultTitle => 'Use System Default';
+  String get useSystemDefaultTitle => 'Utilizar el del Sistema Por Defecto';
 
   @override
   String get useSystemDefaultBody =>
-      'Do you want to use your device\'s language setting?';
+      '¿Desea utilizar su idioma en los ajustes del dispositivo?';
 
   @override
-  String get confirm => 'Confirm';
+  String get confirm => 'Confirmar';
 
   @override
   String errorUpdatingProfile(String error) {
-    return 'Error updating profile: $error';
+    return 'Error al actualizar perfil: $error';
   }
 
   @override
   String get googleAccountLinkedMessage =>
-      'Google account linked successfully! You can now sign in with Google.';
+      '¡Cuenta de Google enlazada correctamente! Ahora puedes acceder con Google.';
 
   @override
   String get areYouSureUnlinkGoogle =>
-      'Are you sure you want to unlink your Google account? You will no longer be able to sign in with Google unless you link it again.';
+      '¿Seguro que desea desenlazar su cuenta de Google? No podrá acceder sin Google a no ser que lo enlaza de nuevo.';
 
   @override
   String get anErrorOccurredLinkingGoogle =>
-      'An error occurred while linking your Google account.';
+      'Sucedió un error mientras enlaza su cuenta de Google.';
 
   @override
   String get anErrorOccurredUnlinkingGoogle =>
-      'An error occurred while unlinking your Google account.';
+      'Ha ocurrido un error mientras desenlaza su cuenta de Google.';
 
   @override
   String get goBack => 'Atrás';
 
   @override
-  String get editProfileTooltip => 'Edit Profile';
+  String get editProfileTooltip => 'Editar Perfil';
 
   @override
-  String get accountInformation => 'Account Information';
+  String get accountInformation => 'Información de Cuenta';
 
   @override
-  String get displayName => 'Display Name';
+  String get displayName => 'Exhibir Nombre';
 
   @override
-  String get emailAddress => 'Email Address';
+  String get emailAddress => 'Dirección de Correo-e';
 
   @override
-  String get emailCannotBeChanged => 'Email (cannot be changed)';
+  String get emailCannotBeChanged => 'Correo-e (no puede ser cambiado)';
 
   @override
-  String get linkedAccounts => 'Linked Accounts';
+  String get linkedAccounts => 'Cuentas Enlazadas';
 
   @override
-  String get manageHowYouSignIn => 'Manage how you sign in to ShopSync';
+  String get manageHowYouSignIn => 'Gestiona como acceder a ShopSync';
 
   @override
-  String get emailAndPassword => 'Email & Password';
+  String get emailAndPassword => 'Correo-e y Contraseña';
 
   @override
-  String get signInWithEmailAndPassword => 'Sign in with email and password';
+  String get signInWithEmailAndPassword => 'Acceda con correo-e y contraseña';
 
   @override
-  String get notConfigured => 'Not configured';
+  String get notConfigured => 'No configurado';
 
   @override
-  String get signInWithGoogleAccount => 'Sign in with Google account';
+  String get signInWithGoogleAccount => 'Acceder son cuenta de Google';
 
   @override
-  String get notLinked => 'Not linked';
+  String get notLinked => 'No enlazado';
 
   @override
   String get showGravatar => 'Mostrar Gravatar';
 
   @override
   String get displayProfilePictureToOtherUsers =>
-      'Display profile picture to other users';
+      'Exhibe la foto del perfil a otros usuarios';
 
   @override
-  String get accountActivity => 'Account Activity';
+  String get accountActivity => 'Actividad de Cuenta';
 
   @override
   String shoppingListsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count shopping lists',
-      one: '$count shopping list',
-      zero: 'No shopping lists',
+      other: '$count listados de compras',
+      one: '$count listado de compra',
+      zero: 'Sin listados de compra',
     );
     return '$_temp0';
   }
 
   @override
-  String get listsYouHaveAccessTo => 'Lists you have access to';
+  String get listsYouHaveAccessTo => 'Listados que tienen acceso a';
 
   @override
-  String get rememberYourPassword => 'Remember your password?';
+  String get rememberYourPassword => '¿Recuerda su contraseña?';
 
   @override
-  String get shopSyncUpdate => 'ShopSync Update';
+  String get shopSyncUpdate => 'Actualización de ShopSync';
 
   @override
-  String get shopSyncHasAnUpdate => 'ShopSync has an update';
+  String get shopSyncHasAnUpdate => 'ShopSync tiene una actualización';
 
   @override
   String get pleaseUpdateAppBody =>
-      'Please update the app to continue using the latest features and improvements.';
+      'Actualice la app para continuar utilizando las últimas características y mejoras.';
 
   @override
-  String get restartingShopSync => 'Restarting ShopSync';
+  String get restartingShopSync => 'Reiniciando ShopSync';
 
   @override
-  String get downloadingUpdateLabel => 'Downloading update...';
+  String get downloadingUpdateLabel => 'Descargando actualización…';
 
   @override
-  String get restartRequiredTitle => 'Restart Required';
+  String get restartRequiredTitle => 'Se Requiere Reinicio';
 
   @override
   String get restartRequiredBody =>
-      'Automatic restart failed. Please force close ShopSync and open it again to apply your language change.';
+      'Reinicio automático incorrecto. Fuerce el cierre de ShopSync y ábralo de nuevo para aplicar su cambio de idioma.';
 
   @override
-  String get install => 'Install';
+  String get install => 'Instalar';
 
   @override
-  String get downloading => 'Downloading...';
+  String get downloading => 'Descargando…';
 
   @override
-  String get updateButton => 'Update';
+  String get updateButton => 'Actualizar';
 
   @override
   String get google => 'Google';
 
   @override
   String get startAddingItemsToSeeInsights =>
-      'Start adding items to see insights';
+      'Iniciar añadiendo elementos para ver insignias';
 
   @override
-  String get pleaseTryAgainLater => 'Please try again later';
+  String get pleaseTryAgainLater => 'Inténtelo más tarde';
 }
