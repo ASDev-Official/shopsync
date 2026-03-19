@@ -1106,5 +1106,277 @@
     "smartItemSuggestions": "Умные подсказки товаров",
     "aiPreferenceChangeNote": "Вы сможете изменить эту настройку позже в профиле.",
     "enableSmartSuggestions": "Включить умные подсказки",
-    "aiFeaturesDisabledMessage": "Функции ИИ отключены"
+    "aiFeaturesDisabledMessage": "Функции ИИ отключены",
+    "completedLabel": "",
+    "timeframeDay": "",
+    "whatIsGravatar": "",
+    "failedToLoadCompletionRate": "",
+    "timeframeAllTime": "",
+    "startAddingItemsToSeeInsights": "",
+    "showGravatar": "",
+    "areYouSureUnlinkGoogle": "",
+    "close": "",
+    "itemInRecycleBin": "",
+    "@itemInRecycleBin": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "ofItemsCompleted": "",
+    "manageHowYouSignIn": "",
+    "areYouSureDeleteCategory": "",
+    "@areYouSureDeleteCategory": {
+        "placeholders": {
+            "categoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "langFrancais": "",
+    "createNewCategory": "",
+    "upgradeFailed": "",
+    "refreshGravatar": "",
+    "langTelugu": "",
+    "deleteTooltip": "",
+    "noDeletedItemsSubtitle": "",
+    "noIconsFoundHint": "",
+    "displayProfilePictureToOtherUsers": "",
+    "failedToLoadProductivityData": "",
+    "failedToUpgradeLists": "",
+    "failedToLoadCategoryData": "",
+    "noIconsFound": "",
+    "langRussian": "",
+    "langVietnamese": "",
+    "langBengali": "",
+    "pleaseUpdateAppBody": "",
+    "disableGravatarSetup": "",
+    "gravatarFeature2": "",
+    "anErrorOccurredError": "",
+    "@anErrorOccurredError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "failedToLoadListData": "",
+    "downloading": "",
+    "gravatarFeature1": "",
+    "langTamil": "",
+    "pleaseWaitUpdatingListGroups": "",
+    "shopSyncUpdate": "",
+    "langTurkish": "",
+    "organizeWithListGroups": "",
+    "noDataAvailable": "",
+    "gravatarDisabledFeature2": "",
+    "restartRequiredBody": "",
+    "useSystemDefaultTitle": "",
+    "licensesTitle": "",
+    "google": "",
+    "notConfigured": "",
+    "langItaliano": "",
+    "noInsightsAvailableYet": "",
+    "allCategory": "",
+    "restartingShopSync": "",
+    "noCollaboratorActivityInTimeframe": "",
+    "errorUpdatingProfile": "",
+    "@errorUpdatingProfile": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "timeframeYear": "",
+    "noCategoriesYet": "",
+    "gravatarRefreshed": "",
+    "chooseIconTitle": "",
+    "anErrorOccurred": "",
+    "dragListsToGroupOrCreate": "",
+    "upgradingYourLists": "",
+    "editProfileTooltip": "",
+    "gravatarDisabledMessage": "",
+    "notLinked": "",
+    "organizeListsBodyCount": "",
+    "@organizeListsBodyCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "googleAccountLinkedMessage": "",
+    "shopSyncMigration": "",
+    "completionRateTitle": "",
+    "continueWithoutOrganizing": "",
+    "shoppingListsCount": "",
+    "@shoppingListsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "gravatarDisabledFeature3": "",
+    "anErrorOccurredLinkingGoogle": "",
+    "gravatarExplanation": "",
+    "shopSyncHasAnUpdate": "",
+    "ungroupedListsSection": "",
+    "gravatarNotFound": "",
+    "signInWithGoogleAccount": "",
+    "activityOverTime": "",
+    "visitGravatar": "",
+    "timeframeAll": "",
+    "categoryBreakdown": "",
+    "loadingIcons": "",
+    "langJapanese": "",
+    "goBack": "",
+    "accountActivity": "",
+    "anErrorOccurredUnlinkingGoogle": "",
+    "addedLabel": "",
+    "suggestedBadge": "",
+    "gravatarEnabled": "",
+    "langEnglish": "",
+    "gravatarPreferenceChangeNote": "",
+    "topCompletedLists": "",
+    "emailCannotBeChanged": "",
+    "deletePermanentlyTooltip": "",
+    "emailAndPassword": "",
+    "systemDefault": "",
+    "langSimplifiedChinese": "",
+    "ungroupedListsCount": "",
+    "@ungroupedListsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "timeframeQuarter": "",
+    "itemsAddedEachDay": "",
+    "activityTimeline": "",
+    "displayName": "",
+    "timeframeMonth": "",
+    "langKorean": "",
+    "rememberYourPassword": "",
+    "timeframeWeek": "",
+    "noActivityDataForTimeframe": "",
+    "privacyControl": "",
+    "createdAtDate": "",
+    "@createdAtDate": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "selectLanguage": "",
+    "enableGravatar": "",
+    "deletedOnDate": "",
+    "@deletedOnDate": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "gravatarProfilePictures": "",
+    "updateButton": "",
+    "disableGravatar": "",
+    "langIndonesian": "",
+    "itemCountLabel": "",
+    "@itemCountLabel": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "enableGravatarSetup": "",
+    "gravatarFeature4": "",
+    "langHindi": "",
+    "noPackagesFound": "",
+    "langArabic": "",
+    "noDeletedItems": "",
+    "gravatarDisabled": "",
+    "confirm": "",
+    "gravatarSettings": "",
+    "enableGravatarSetupDescription": "",
+    "learnMore": "",
+    "pleaseTryAgainLater": "",
+    "langKannada": "",
+    "organizeLists": "",
+    "failedToLoadActivityData": "",
+    "gravatarFound": "",
+    "signInWithEmailAndPassword": "",
+    "langEspanol": "",
+    "selectedIconLabel": "",
+    "itemsCountTooltip": "",
+    "@itemsCountTooltip": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "useSystemDefaultBody": "",
+    "gravatarDisabledFeature1": "",
+    "doneButton": "",
+    "createYourFirstCategoryAbove": "",
+    "emailAddress": "",
+    "collaboratorActivity": "",
+    "langDeutsch": "",
+    "langPortuguese": "",
+    "noData": "",
+    "gravatarFeature3": "",
+    "editTooltip": "",
+    "gravatarPrivacyDescription": "",
+    "versionDisplay": "",
+    "@versionDisplay": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "dailyProductivity": "",
+    "topCategories": "",
+    "restartRequiredTitle": "",
+    "gravatarEnabledMessage": "",
+    "addedCompletedSummary": "",
+    "@addedCompletedSummary": {
+        "placeholders": {
+            "added": {
+                "type": "String"
+            },
+            "completed": {
+                "type": "String"
+            }
+        }
+    },
+    "restoreItemTooltip": "",
+    "linkedAccounts": "",
+    "install": "",
+    "itemsAddedPerDay": "",
+    "noPackagesMatchSearch": "",
+    "gravatarSetupDescription": "",
+    "langMarathi": "",
+    "langDutch": "",
+    "downloadingUpdateLabel": "",
+    "langTraditionalChinese": "",
+    "disableGravatarSetupDescription": "",
+    "gravatarDescription": "",
+    "trendsAndPerformance": "",
+    "listsCount": "",
+    "@listsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "listsYouHaveAccessTo": "",
+    "accountInformation": ""
 }
