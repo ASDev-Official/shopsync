@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
@@ -13,20 +12,42 @@ class FeedbackScreen extends StatefulWidget {
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
-  InAppWebViewController? webViewController;
-  bool isLoading = true;
+  static const String _formsHost = 'forms.shopsync.aadish.dev';
+  static const String _closeRoutePath = '/close-shopsync';
 
-  Future<bool> _onWillPop() async {
-    if (!kIsWeb && webViewController != null) {
-      // Check if webview can go back (not supported on web platform)
-      if (await webViewController!.canGoBack()) {
-        // Go back in webview
-        await webViewController!.goBack();
-        return false; // Don't pop the screen
-      }
+  bool isLoading = true;
+  bool _isClosing = false;
+
+  bool _isCloseRoute(WebUri? uri) {
+    if (uri == null) {
+      return false;
     }
-    // If no webview history, allow normal back navigation
-    return true;
+
+    final host = uri.host;
+    final isFormsRoute = host.isEmpty || host == _formsHost;
+    if (!isFormsRoute) {
+      return false;
+    }
+
+    final normalizedPath =
+        uri.path.toLowerCase().replaceAll(RegExp(r'/+$'), '');
+    final normalizedClose = _closeRoutePath.toLowerCase();
+
+    if (normalizedPath == normalizedClose) {
+      return true;
+    }
+
+    final fragment = uri.fragment.toLowerCase().replaceAll(RegExp(r'/+$'), '');
+    return fragment == normalizedClose || fragment.endsWith(normalizedClose);
+  }
+
+  void _returnToHome() {
+    if (!mounted || _isClosing) {
+      return;
+    }
+
+    _isClosing = true;
+    Navigator.of(context).popUntil((route) => route.isFirst);
   }
 
   @override
@@ -34,12 +55,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (bool didPop, Object? result) async {
-        if (!didPop) {
-          final shouldPop = await _onWillPop();
-          if (shouldPop && context.mounted) {
-            Navigator.of(context).pop();
-          }
-        }
+        // Intentionally ignore back actions on this screen.
       },
       child: Scaffold(
         body: SafeArea(
@@ -47,7 +63,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             children: [
               InAppWebView(
                 initialUrlRequest: URLRequest(
-                  url: WebUri('https://as-shopsync-forms.pages.dev'),
+                  url: WebUri('https://forms.shopsync.aadish.dev'),
                 ),
                 initialSettings: InAppWebViewSettings(
                   useShouldOverrideUrlLoading: false,
@@ -59,30 +75,19 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   supportZoom: false,
                   javaScriptCanOpenWindowsAutomatically: true,
                 ),
-                onWebViewCreated: (controller) {
-                  webViewController = controller;
-
-                  // Add handler for close button (not supported on web platform)
-                  if (!kIsWeb) {
-                    controller.addJavaScriptHandler(
-                      handlerName: 'closeShopSync',
-                      callback: (args) async {
-                        final shouldPop = await _onWillPop();
-                        if (shouldPop && context.mounted) {
-                          Navigator.of(context).pop();
-                        }
-                      },
-                    );
-                  }
-                },
                 shouldOverrideUrlLoading: (controller, navigationAction) async {
                   final uri = navigationAction.request.url;
 
                   if (uri != null) {
+                    if (_isCloseRoute(uri)) {
+                      _returnToHome();
+                      return NavigationActionPolicy.CANCEL;
+                    }
+
                     final host = uri.host;
 
                     // Allow navigation within the forms domain
-                    if (host == 'as-shopsync-forms.pages.dev') {
+                    if (host == _formsHost) {
                       return NavigationActionPolicy.ALLOW;
                     }
 
@@ -98,101 +103,25 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   return NavigationActionPolicy.ALLOW;
                 },
                 onLoadStart: (controller, url) {
+                  if (_isCloseRoute(url)) {
+                    _returnToHome();
+                    return;
+                  }
+
                   setState(() {
                     isLoading = true;
                   });
                 },
+                onUpdateVisitedHistory: (controller, url, isReload) {
+                  if (_isCloseRoute(url)) {
+                    _returnToHome();
+                  }
+                },
                 onLoadStop: (controller, url) async {
-                  // Get current theme mode
-                  final isDarkMode =
-                      Theme.of(context).brightness == Brightness.dark;
-
-                  // Inject theme information and back button
-                  await controller.evaluateJavascript(source: '''
-                    (function() {
-                      // Set theme information
-                      window.shopSyncTheme = {
-                        isDark: ${isDarkMode ? 'true' : 'false'},
-                        brightness: '${isDarkMode ? 'dark' : 'light'}'
-                      };
-                      
-                      // Dispatch custom event to notify webpage of theme
-                      window.dispatchEvent(new CustomEvent('shopSyncThemeChanged', {
-                        detail: window.shopSyncTheme
-                      }));
-                      
-                      function addCloseButton() {
-                        const titleElement = document.querySelector('.MuiTypography-root.MuiTypography-h6.css-m9fo68');
-                        const toolbar = document.querySelector('.MuiToolbar-root');
-                        
-                        if (titleElement && toolbar && !document.getElementById('shopsync-close-btn')) {
-                          const closeButton = document.createElement('button');
-                          closeButton.id = 'shopsync-close-btn';
-                          closeButton.innerHTML = `
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
-                            </svg>
-                          `;
-                          closeButton.style.cssText = `
-                            position: absolute;
-                            left: 16px;
-                            top: 50%;
-                            transform: translateY(-50%);
-                            width: 40px;
-                            height: 40px;
-                            background: transparent;
-                            border: none;
-                            color: white;
-                            cursor: pointer;
-                            border-radius: 4px;
-                            transition: all 0.2s;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            z-index: 9999;
-                            padding: 8px;
-                          `;
-                          
-                          closeButton.onmouseover = function() {
-                            this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                          };
-                          
-                          closeButton.onmouseout = function() {
-                            this.style.backgroundColor = 'transparent';
-                          };
-                          
-                          closeButton.onclick = function() {
-                            window.flutter_inappwebview.callHandler('closeShopSync');
-                          };
-                          
-                          // Add to toolbar instead of title element
-                          toolbar.style.position = 'relative';
-                          toolbar.appendChild(closeButton);
-                          
-                          // Adjust title element margin to make room for close button
-                          titleElement.style.marginLeft = '40px';
-                        }
-                      }
-                      
-                      // Try to add button immediately
-                      addCloseButton();
-                      
-                      // Also try after a short delay in case the element loads later
-                      setTimeout(addCloseButton, 500);
-                      setTimeout(addCloseButton, 1000);
-                      setTimeout(addCloseButton, 2000);
-                      
-                      // Watch for DOM changes to catch dynamically loaded content
-                      const observer = new MutationObserver(function(mutations) {
-                        addCloseButton();
-                      });
-                      
-                      observer.observe(document.body, {
-                        childList: true,
-                        subtree: true
-                      });
-                    })();
-                  ''');
+                  if (_isCloseRoute(url)) {
+                    _returnToHome();
+                    return;
+                  }
                   // Add 500ms delay before hiding loading screen
                   await Future.delayed(const Duration(milliseconds: 500));
 
