@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
@@ -108,6 +109,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     return;
                   }
 
+                  if (kIsWeb) {
+                    return;
+                  }
+
                   setState(() {
                     isLoading = true;
                   });
@@ -122,6 +127,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     _returnToHome();
                     return;
                   }
+
+                  if (kIsWeb) {
+                    return;
+                  }
+
                   // Add 500ms delay before hiding loading screen
                   await Future.delayed(const Duration(milliseconds: 500));
 
@@ -130,12 +140,16 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   });
                 },
                 onReceivedError: (controller, request, error) {
+                  if (kIsWeb) {
+                    return;
+                  }
+
                   setState(() {
                     isLoading = false;
                   });
                 },
               ),
-              if (isLoading)
+              if (isLoading && !kIsWeb)
                 Container(
                   color: Theme.of(context).brightness == Brightness.dark
                       ? const Color(0xFF121212) // Dark background
@@ -145,7 +159,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     appBar: AppBar(
                       elevation: 0,
                       automaticallyImplyLeading: false,
-                      title: Text(AppLocalizations.of(context)!.shopsyncForms),
+                      title: Text(AppLocalizations.of(context)!.feedback),
                       titleTextStyle: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
