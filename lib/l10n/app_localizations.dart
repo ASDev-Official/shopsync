@@ -2807,12 +2807,6 @@ abstract class AppLocalizations {
   /// **'ShopSync'**
   String get shopsync1;
 
-  /// No description provided for @shopsyncForms.
-  ///
-  /// In en, this message translates to:
-  /// **'ShopSync Forms'**
-  String get shopsyncForms;
-
   /// No description provided for @shopsyncLogo.
   ///
   /// In en, this message translates to:

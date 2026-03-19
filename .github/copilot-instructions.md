@@ -238,6 +238,14 @@ Text(AppLocalizations.of(context)!.aiFeatures)
 - Selecting "System Default" should clear the saved locale and follow the same restart flow.
 - The current-language subtitle should use autonyms from `LocaleService.getLocaleName()` so users see language names in their own script.
 
+#### Feedback Form Close Flow (Phone/Web)
+
+- Screen: `lib/screens/settings/feedback.dart`
+- Back navigation inside this screen is intentionally disabled (system/app back should do nothing).
+- The embedded feedback page closes the screen by navigating to route path `/close-shopsync` on the forms domain.
+- App behavior for `/close-shopsync`: detect this URL from WebView navigation/history callbacks and return user to ShopSync home using `Navigator.pushNamedAndRemoveUntil('/home', ...)`.
+- Keep this close contract platform-consistent for both mobile and web builds.
+
 ## Critical Gotchas
 
 - **Don't use Provider**: Theme state management code is commented out; rebuild MaterialApp manually

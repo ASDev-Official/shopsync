@@ -1582,9 +1582,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get shopsync1 => 'ShopSync';
 
   @override
-  String get shopsyncForms => 'Formularios ShopSync';
-
-  @override
   String get shopsyncLogo => 'Logotipo ShopSync';
 
   @override

@@ -1561,9 +1561,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get shopsync1 => 'ShopSync';
 
   @override
-  String get shopsyncForms => 'Формы ShopSync';
-
-  @override
   String get shopsyncLogo => 'Логотип ShopSync';
 
   @override

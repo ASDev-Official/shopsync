@@ -1554,9 +1554,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get shopsync1 => 'ShopSync';
 
   @override
-  String get shopsyncForms => 'ShopSync Forms';
-
-  @override
   String get shopsyncLogo => 'ShopSync logo';
 
   @override
