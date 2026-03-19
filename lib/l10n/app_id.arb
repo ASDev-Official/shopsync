@@ -1,1 +1,1381 @@
-{}
+{
+    "inTimeframe": "",
+    "resetPasswordSuccess": "",
+    "registerInvalidEmail": "",
+    "completedLabel": "",
+    "loginOperationNotAllowed": "",
+    "pleaseEnterYourPassword": "",
+    "pleaseEnterYourName": "",
+    "googleAccountLinkedSuccessfully1": "",
+    "timeframeDay": "",
+    "whatIsGravatar": "",
+    "viewer": "",
+    "upcomingMaintenance": "",
+    "userRemoved1": "",
+    "registerNetworkError": "",
+    "createListGroups": "",
+    "pleaseEnterAnEmailAddress": "",
+    "itemName": "",
+    "failedToLoadCompletionRate": "",
+    "areYouSureYouWantToRemoveAllCompletedItems1": "",
+    "timeframeAllTime": "",
+    "registerTooManyRequests": "",
+    "signInWithEmail": "",
+    "successfullyOrganizedSelectedgroupslengthGroups3": "",
+    "@successfullyOrganizedSelectedgroupslengthGroups3": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "startAddingItemsToSeeInsights": "",
+    "showGravatar": "",
+    "areYouSureUnlinkGoogle": "",
+    "close": "",
+    "progress": "",
+    "itemTemplateSavedSuccessfully1": "",
+    "untitledItem": "",
+    "errorDeletingCategoryE3": "",
+    "@errorDeletingCategoryE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "shopsync1": "",
+    "cancel11": "",
+    "resetPasswordButton": "",
+    "save": "",
+    "itemInRecycleBin": "",
+    "@itemInRecycleBin": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "addItemManually": "",
+    "completionRate": "",
+    "ofItemsCompleted": "",
+    "locationSavedSuccessfully1": "",
+    "manageHowYouSignIn": "",
+    "permissionChangedToNewrole": "",
+    "@permissionChangedToNewrole": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "areYouSureDeleteCategory": "",
+    "@areYouSureDeleteCategory": {
+        "placeholders": {
+            "categoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "errorSigningOutEtostring3": "",
+    "@errorSigningOutEtostring3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "errorDeletingCategoryE": "",
+    "@errorDeletingCategoryE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "email3": "",
+    "groupWidgetgroupnameDeleted1": "",
+    "@groupWidgetgroupnameDeleted1": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "signIn": "",
+    "savedItems": "",
+    "itemsInList": "",
+    "enableAiDescription": "",
+    "helpTranslate": "",
+    "pleaseEnterAGroupName1": "",
+    "langFrancais": "",
+    "delete1": "",
+    "registerEnterPassword": "",
+    "createNewCategory": "",
+    "shareList": "",
+    "upgradeFailed": "",
+    "errorLoadingInsightsE1": "",
+    "@errorLoadingInsightsE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "userRemoved": "",
+    "noCategoriesAvailable": "",
+    "failedToUpdateListName1": "",
+    "appLanguage": "",
+    "counterLabel": "",
+    "signOut1": "",
+    "addedAt": "",
+    "groupNamecontrollertexttrimCreatedSuccessfully": "",
+    "enterGroupName1": "",
+    "loginTooManyRequests": "",
+    "outageStarted": "",
+    "groupWidgetgroupnameDeleted2": "",
+    "@groupWidgetgroupnameDeleted2": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "basicListManagement": "",
+    "expectedDuration": "",
+    "refreshGravatar": "",
+    "storeName": "",
+    "medium": "",
+    "openSourceLicenses": "",
+    "password": "",
+    "errorFetchingMaintenanceStatusE3": "",
+    "@errorFetchingMaintenanceStatusE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "langTelugu": "",
+    "deleteTooltip": "",
+    "noDeletedItemsSubtitle": "",
+    "groupNamecontrollertexttrimCreatedSuccessfully3": "",
+    "chooseIcon": "",
+    "noIconsFoundHint": "",
+    "enterGroupName2": "",
+    "displayProfilePictureToOtherUsers": "",
+    "failedToLoadProductivityData": "",
+    "failedToUpdateItemStatus": "",
+    "failedToUpgradeLists": "",
+    "configureHomeScreenWidgetDebugOnly": "",
+    "failedToLoadCategoryData": "",
+    "signOut4": "",
+    "listDeletedSuccessfully1": "",
+    "couldNotLaunchUrl1": "",
+    "@couldNotLaunchUrl1": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "userAlreadyHasAccessToThisList1": "",
+    "licenses": "",
+    "registerSignUp": "",
+    "templateDeleted1": "",
+    "noIconsFound": "",
+    "setDeadline": "",
+    "categoryLabel": "",
+    "createItemTitle": "",
+    "googleAccountUnlinkedSuccessfully": "",
+    "pleaseEnterAnEmailAddress1": "",
+    "failedToDeleteItem": "",
+    "saveChanges1": "",
+    "langRussian": "",
+    "selectCategory": "",
+    "langVietnamese": "",
+    "failedToDeleteItem2": "",
+    "noAccountFoundWithThisEmail": "",
+    "low": "",
+    "clearCompletedItems": "",
+    "viewDeletedItems": "",
+    "registerName": "",
+    "itemCreatedFromTemplate": "",
+    "categoryName": "",
+    "disableAiFeatures": "",
+    "loginAccountExists": "",
+    "groupRenamedToNamecontrollertexttrim3": "",
+    "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev1": "",
+    "langBengali": "",
+    "clearItems": "",
+    "pleaseUpdateAppBody": "",
+    "pleaseEnterAnItemTitle1": "",
+    "disableGravatarSetup": "",
+    "failedToSaveItemTemplate1": "",
+    "gravatarFeature2": "",
+    "listSharedWithEmailAsSelectedrole2": "",
+    "@listSharedWithEmailAsSelectedrole2": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "onboardingWelcomeDescription": "",
+    "failedToSaveLocation": "",
+    "listnameRemovedFromGroup1": "",
+    "@listnameRemovedFromGroup1": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "failedToSaveLocation1": "",
+    "anErrorOccurredError": "",
+    "@anErrorOccurredError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "addItemsToYourLists": "",
+    "failedToLoadListData": "",
+    "downloading": "",
+    "gravatarFeature1": "",
+    "langTamil": "",
+    "shopSyncAuthentication": "",
+    "errorSavingPreference": "",
+    "unlinkGoogleAccount": "",
+    "low1": "",
+    "errorSigningOutEtostring5": "",
+    "@errorSigningOutEtostring5": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "pleaseWaitUpdatingListGroups": "",
+    "resetPasswordEmail": "",
+    "createListGroup": "",
+    "errorFetchingMaintenanceStatusE2": "",
+    "@errorFetchingMaintenanceStatusE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "outageResolved": "",
+    "shopSyncUpdate": "",
+    "failedToRestoreItem1": "",
+    "langTurkish": "",
+    "organizeWithListGroups": "",
+    "create": "",
+    "pleaseEnterAValidEmailAddress1": "",
+    "listsCreated": "",
+    "userNotFoundTheyNeedToSignUpForShopsyncFirst1": "",
+    "listName": "",
+    "clearedCompleteditemsdocslengthCompletedItems2": "",
+    "listnameRemovedFromGroup": "",
+    "@listnameRemovedFromGroup": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "pleaseEnterAValidEmailAddress2": "",
+    "failedToShareList": "",
+    "storeAddress": "",
+    "shopsync": "",
+    "failedToShareList1": "",
+    "registerGenericError": "",
+    "clearedCompleteditemsdocslengthCompletedItems1": "",
+    "setDeadlineText": "",
+    "pleaseEnterYourEmail1": "",
+    "peopleCollaborating": "",
+    "noDataAvailable": "",
+    "failedToRemoveUser": "",
+    "areYouSureYouWantToRemoveAllCompletedItems": "",
+    "noDataAnalysis": "",
+    "changeTheNameOfThisList": "",
+    "gravatarDisabledFeature2": "",
+    "icon": "",
+    "loginUserNotFound": "",
+    "failedToCreateGroupPleaseTryAgain": "",
+    "areYouSureYouWantToSignOut1": "",
+    "networkErrorCheckYourConnectionAndTryAgain": "",
+    "restartRequiredBody": "",
+    "outageAffected": "",
+    "@outageAffected": {
+        "placeholders": {
+            "components": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/status/outage_dialog.dart"
+    },
+    "onboardingSkip": "",
+    "useSystemDefaultTitle": "",
+    "signOut": "",
+    "cancel4": "",
+    "loginSignInButton": "",
+    "failedToCreateItem1": "",
+    "userNotFoundTheyNeedToSignUpForShopsyncFirst": "",
+    "errorErrormessage1": "",
+    "@errorErrormessage1": {
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_welcome_screen.dart"
+    },
+    "exportBackup": "",
+    "delete2": "",
+    "couldNotOpenPlayStore1": "",
+    "deadline": "",
+    "licensesTitle": "",
+    "removeAllCompletedItems": "",
+    "failedToUpdateAiPreference": "",
+    "google": "",
+    "notConfigured": "",
+    "langItaliano": "",
+    "noInsightsAvailableYet": "",
+    "addGroup": "",
+    "allCategory": "",
+    "timeBasedRecommendations": "",
+    "restartingShopSync": "",
+    "successfullyOrganizedSelectedgroupslengthGroups2": "",
+    "@successfullyOrganizedSelectedgroupslengthGroups2": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "resetPasswordUserNotFound": "",
+    "googleSignInAccountExists": "",
+    "totalItems1": "",
+    "email2": "",
+    "couldNotOpenReleaseNotes": "",
+    "categoryUpdatedSuccessfully": "",
+    "viewSourceCode": "",
+    "resetPasswordTitle": "",
+    "noCollaboratorActivityInTimeframe": "",
+    "email": "",
+    "savedLocations": "",
+    "shareThisListWithOthers": "",
+    "egGroceryListsWorkProjects": "",
+    "errorUpdatingProfile": "",
+    "@errorUpdatingProfile": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "permissionChangedToNewrole3": "",
+    "@permissionChangedToNewrole3": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "timeframeYear": "",
+    "registerNameError": "",
+    "successfullyOrganizedSelectedgroupslengthGroups": "",
+    "@successfullyOrganizedSelectedgroupslengthGroups": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "aiFeaturesEnabled": "",
+    "noCategoriesYet": "",
+    "editListName": "",
+    "deleteList1": "",
+    "gravatarRefreshed": "",
+    "items": "",
+    "errorSigningOutEtostring4": "",
+    "@errorSigningOutEtostring4": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "resetPasswordGenericError": "",
+    "chooseIconTitle": "",
+    "useYourPhoneToRegisterIfYouDoNotHaveAnAccount": "",
+    "anErrorOccurred": "",
+    "pleaseEnterAValidEmailAddress3": "",
+    "cancel2": "",
+    "resetPasswordInvalidEmail": "",
+    "contributeOnWeblate": "",
+    "thePasswordIsInvalidOrTheUserDoesNotHaveAPassword": "",
+    "dragListsToGroupOrCreate": "",
+    "upgradingYourLists": "",
+    "resetPasswordError": "",
+    "signOut5": "",
+    "couldNotLaunchUrl3": "",
+    "@couldNotLaunchUrl3": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "email1": "",
+    "canAddEditAndDeleteItems": "",
+    "failedToChangePermission1": "",
+    "tooManyRequestsPleaseTryAgainLater1": "",
+    "itemDetailsTitle": "",
+    "added": "",
+    "editProfileTooltip": "",
+    "addDescription1": "",
+    "loginWrongPassword": "",
+    "gravatarDisabledMessage": "",
+    "itemsCheckedOff": "",
+    "loginSignUp": "",
+    "notLinked": "",
+    "addDescription": "",
+    "itemsCompleted": "",
+    "organizeListsBodyCount": "",
+    "@organizeListsBodyCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "description": "",
+    "resetPasswordTooManyRequests": "",
+    "itemsAdded": "",
+    "googleAccountLinkedMessage": "",
+    "skipForNow": "",
+    "groupWidgetgroupnameDeleted3": "",
+    "@groupWidgetgroupnameDeleted3": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "name": "",
+    "shopSyncMigration": "",
+    "completionRateTitle": "",
+    "registerPassword": "",
+    "listnameRemovedFromGroup2": "",
+    "@listnameRemovedFromGroup2": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "continueWithoutOrganizing": "",
+    "outageServiceOutage": "",
+    "manageCategories": "",
+    "enterItemName": "",
+    "loginInvalidEmail": "",
+    "shoppingListsCount": "",
+    "@shoppingListsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "failedToUpdateGroupNamePleaseTryAgain": "",
+    "feedback": "",
+    "gravatarDisabledFeature3": "",
+    "cancel9": "",
+    "loginNoAccount": "",
+    "areYouSureYouWantToSignOut2": "",
+    "onboardingShareDescription": "",
+    "pleaseEnterAGroupName2": "",
+    "networkErrorPleaseCheckYourInternetConnectionAndTryAgain1": "",
+    "groupWidgetgroupnameDeleted": "",
+    "@groupWidgetgroupnameDeleted": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "errorSigningOutEtostring7": "",
+    "@errorSigningOutEtostring7": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "locationLabel": "",
+    "yourInsights": "",
+    "failedToMigrateListsPleaseTryAgain": "",
+    "failedToRestoreItem": "",
+    "registerWeakPassword": "",
+    "anErrorOccurredLinkingGoogle": "",
+    "pleaseEnterATemplateName1": "",
+    "gravatarExplanation": "",
+    "errorEtostring1": "",
+    "@errorEtostring1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "outageLatestUpdates": "",
+    "password2": "",
+    "collaborators": "",
+    "shopSyncHasAnUpdate": "",
+    "onboardingNext": "",
+    "couldNotOpenPlayStore": "",
+    "accessYourListsAndSettings": "",
+    "failedToUpdateWidgetE3": "",
+    "@failedToUpdateWidgetE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "pleaseEnterACategoryName": "",
+    "failedToUpdateListName": "",
+    "ungroupedListsSection": "",
+    "delete": "",
+    "setPassword": "",
+    "productivity": "",
+    "recycleBin": "",
+    "cancel12": "",
+    "pleaseEnterYourEmail": "",
+    "gravatarNotFound": "",
+    "onboardingDone": "",
+    "failedToChangePermission": "",
+    "googleSignInGeneric": "",
+    "viewer3": "",
+    "theEmailAddressIsAlreadyInUseByAnotherAccount": "",
+    "signOut3": "",
+    "onboardingSmartListsDescription": "",
+    "editGroupName": "",
+    "deadlineLabel": "",
+    "signingOut": "",
+    "exportListAsACsv": "",
+    "signInWithGoogleAccount": "",
+    "activityOverTime": "",
+    "failedToDeleteGroupPleaseTryAgain": "",
+    "notLoggedIn": "",
+    "ok": "",
+    "appVersion": "",
+    "createCategory": "",
+    "aiPreferenceChangeNote": "",
+    "visitGravatar": "",
+    "pleaseEnterADisplayName": "",
+    "timeframeAll": "",
+    "retry": "",
+    "cancel6": "",
+    "locationDeleted1": "",
+    "listnameAddedToGroup2": "",
+    "@listnameAddedToGroup2": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "loginGenericError": "",
+    "categoryBreakdown": "",
+    "loadingIcons": "",
+    "nameMustBeAtLeast2Characters": "",
+    "groupRenamedToNamecontrollertexttrim": "",
+    "listnameAddedToGroup1": "",
+    "@listnameAddedToGroup1": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "smartItemSuggestions": "",
+    "loadingVersionInfo": "",
+    "utcTimeZone": "",
+    "userAlreadyHasAccessToThisList": "",
+    "googleAccountLinkedSuccessfully": "",
+    "outageDefaultDescription": "",
+    "errorEtostring3": "",
+    "@errorEtostring3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "langJapanese": "",
+    "goBack": "",
+    "errorEtostring": "",
+    "@errorEtostring": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "insights": "",
+    "accountActivity": "",
+    "noCategory": "",
+    "failedToCreateGroupPleaseTryAgain1": "",
+    "anErrorOccurredUnlinkingGoogle": "",
+    "addedLabel": "",
+    "locationDeleted": "",
+    "errorSigningOutEtostring2": "",
+    "@errorSigningOutEtostring2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "resetPasswordBack": "",
+    "createItemTemplate": "",
+    "suggestedBadge": "",
+    "location": "",
+    "canOnlyViewItems": "",
+    "listNameUpdated1": "",
+    "failedToDeleteList": "",
+    "scheduledPeriod": "",
+    "gravatarEnabled": "",
+    "registerEmailExists": "",
+    "registerButton": "",
+    "underMaintenance": "",
+    "langEnglish": "",
+    "gravatarPreferenceChangeNote": "",
+    "topCompletedLists": "",
+    "enterYourName": "",
+    "emailCannotBeChanged": "",
+    "pleaseEnterAGroupName3": "",
+    "deletePermanentlyTooltip": "",
+    "listDeletedSuccessfully": "",
+    "setLocationText": "",
+    "groupNamecontrollertexttrimCreatedSuccessfully2": "",
+    "listSharedWithEmailAsSelectedrole": "",
+    "@listSharedWithEmailAsSelectedrole": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "emailAndPassword": "",
+    "welcomeTagline": "",
+    "pleaseEnterYourEmail2": "",
+    "templateDeleted": "",
+    "listSharedWithEmailAsSelectedrole1": "",
+    "@listSharedWithEmailAsSelectedrole1": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "loginUserDisabled": "",
+    "thisUserHasBeenDisabledPleaseContactSupportaadishdev": "",
+    "versionInfo": "",
+    "@versionInfo": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/auth/welcome.dart"
+    },
+    "systemDefault": "",
+    "createItemsFromSavedTemplates": "",
+    "options": "",
+    "langSimplifiedChinese": "",
+    "myProfile": "",
+    "ungroupedListsCount": "",
+    "@ungroupedListsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "errorCreatingCategoryE1": "",
+    "@errorCreatingCategoryE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "failedToUpdateGroupNamePleaseTryAgain1": "",
+    "failedToCreateListPleaseTryAgain": "",
+    "errorFetchingMaintenanceStatusE": "",
+    "@errorFetchingMaintenanceStatusE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "owner": "",
+    "timeframeQuarter": "",
+    "createList": "",
+    "status": "",
+    "areYouSureYouWantToSignOut3": "",
+    "itemsAddedEachDay": "",
+    "activityTimeline": "",
+    "addCustomGroup": "",
+    "displayName": "",
+    "failedToUpdateWidgetE1": "",
+    "@failedToUpdateWidgetE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "aiFeaturesDisabledMessage": "",
+    "errorCreatingCategoryE2": "",
+    "@errorCreatingCategoryE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "timeframeMonth": "",
+    "errorDeletingCategoryE1": "",
+    "@errorDeletingCategoryE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "langKorean": "",
+    "itemNameLabel": "",
+    "rememberYourPassword": "",
+    "loginEmail": "",
+    "cancel5": "",
+    "groupRenamedToNamecontrollertexttrim2": "",
+    "timeframeWeek": "",
+    "noActivityDataForTimeframe": "",
+    "dailyAvg": "",
+    "descriptionLabel": "",
+    "viewer1": "",
+    "itemName1": "",
+    "privacyControl": "",
+    "createdAtDate": "",
+    "@createdAtDate": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "selectLanguage": "",
+    "categoryCreatedSuccessfully1": "",
+    "failedToDeleteItem3": "",
+    "aiSetupDescription": "",
+    "avgCompletion": "",
+    "enableGravatar": "",
+    "category1": "",
+    "errorSigningOutEtostring": "",
+    "@errorSigningOutEtostring": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "widgetSettings1": "",
+    "errorCreatingCategoryE3": "",
+    "@errorCreatingCategoryE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "cancel7": "",
+    "deletedOnDate": "",
+    "@deletedOnDate": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "loginPasswordEmpty": "",
+    "signOut2": "",
+    "deleteCategory": "",
+    "gravatarProfilePictures": "",
+    "failedToSaveItemTemplate": "",
+    "errorLoadingListsSnapshoterror": "",
+    "@errorLoadingListsSnapshoterror": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/home.dart"
+    },
+    "deleteGroup": "",
+    "addFromTemplate": "",
+    "cancel": "",
+    "widgetUpdatedSuccessfully1": "",
+    "errorDeletingCategoryE2": "",
+    "@errorDeletingCategoryE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "updateButton": "",
+    "aboutApp": "",
+    "cancel8": "",
+    "failedToUpdateItemStatus1": "",
+    "disableGravatar": "",
+    "langIndonesian": "",
+    "itemCountLabel": "",
+    "@itemCountLabel": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "delete4": "",
+    "save2": "",
+    "failedToRemoveUser1": "",
+    "recycleBin1": "",
+    "manageYourFrequentlyUsedLocations": "",
+    "description1": "",
+    "enableGravatarSetup": "",
+    "pleaseEnterAnItemTitle": "",
+    "errorLoadingInsightsE2": "",
+    "@errorLoadingInsightsE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "gravatarFeature4": "",
+    "failedToDeleteGroupPleaseTryAgain1": "",
+    "createItemButton": "",
+    "langHindi": "",
+    "openTheDrawerFromTheLeft": "",
+    "versionPackageinfoversionPackageinfobuildnumber1": "",
+    "@versionPackageinfoversionPackageinfobuildnumber1": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/auth/welcome.dart"
+    },
+    "noPackagesFound": "",
+    "itemsPerDay1": "",
+    "itemsCheckedOff1": "",
+    "langArabic": "",
+    "couldNotOpenReleaseNotes1": "",
+    "addDescription2": "",
+    "unnamedCategory": "",
+    "skipOrganization": "",
+    "noDeletedItems": "",
+    "errorSigningOutEtostring6": "",
+    "@errorSigningOutEtostring6": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "failedToMigrateListsPleaseTryAgain1": "",
+    "pleaseEnterAValidEmailAddress4": "",
+    "completed": "",
+    "gravatarDisabled": "",
+    "pleaseEnterACategoryName3": "",
+    "failedToUpdateWidgetE2": "",
+    "@failedToUpdateWidgetE2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "loginInvalidCredentials": "",
+    "clearedCompleteditemsdocslengthCompletedItems3": "",
+    "icon1": "",
+    "searchIcons": "",
+    "theOperationIsNotAllowedPleaseTryAgainLaterIfItDoesntWorkContactSupportaadishdev": "",
+    "editCategory": "",
+    "confirm": "",
+    "gravatarSettings": "",
+    "listnameAddedToGroup": "",
+    "@listnameAddedToGroup": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "enableGravatarSetupDescription": "",
+    "searchPackages1": "",
+    "theProvidedCredentialsAreIncorrectPleaseCheckYourEmailAndPassword": "",
+    "learnMore": "",
+    "registerEnterName": "",
+    "failedToSignInWithGoogle": "",
+    "enterGroupName": "",
+    "errorLoadingInsightsE3": "",
+    "@errorLoadingInsightsE3": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "pleaseTryAgainLater": "",
+    "disableAiDescription": "",
+    "language": "",
+    "langKannada": "",
+    "settings1": "",
+    "linkGoogleAccount": "",
+    "moveToGroupname": "",
+    "@moveToGroupname": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "finished": "",
+    "organizeLists": "",
+    "failedToLoadActivityData": "",
+    "error": "",
+    "retry1": "",
+    "listManagement": "",
+    "enterEmailAddress": "",
+    "gravatarFound": "",
+    "welcomeBack": "",
+    "itemCreatedFromTemplate1": "",
+    "unlinkGoogleAccount1": "",
+    "failedToCreateListPleaseTryAgain1": "",
+    "errorSigningOutEtostring1": "",
+    "@errorSigningOutEtostring1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/profile.dart"
+    },
+    "viewer2": "",
+    "signInWithEmailAndPassword": "",
+    "googleAccountUnlinkedSuccessfully1": "",
+    "locationSavedSuccessfully": "",
+    "high": "",
+    "failedToDeleteItem1": "",
+    "pleaseEnterAPassword": "",
+    "cancel10": "",
+    "langEspanol": "",
+    "pleaseEnterAGroupName": "",
+    "tooManyRequestsPleaseTryAgainLater": "",
+    "enableSmartSuggestions": "",
+    "selectedIconLabel": "",
+    "location1": "",
+    "itemsCountTooltip": "",
+    "@itemsCountTooltip": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "aiFeatures": "",
+    "loginPassword": "",
+    "privacyFocused": "",
+    "failedToDeleteList1": "",
+    "saveChanges": "",
+    "smartLists": "",
+    "errorCreatingCategoryE": "",
+    "@errorCreatingCategoryE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/manage_categories.dart"
+    },
+    "failedToSignInWithGoogle1": "",
+    "delete3": "",
+    "useSystemDefaultBody": "",
+    "addedBy": "",
+    "shopsyncLogo": "",
+    "retry3": "",
+    "counter1": "",
+    "retry4": "",
+    "groupRenamedToNamecontrollertexttrim1": "",
+    "removeMember": "",
+    "gravatarDisabledFeature1": "",
+    "doneButton": "",
+    "setLocation": "",
+    "patternRecognition": "",
+    "failedToUpdateWidgetE": "",
+    "@failedToUpdateWidgetE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/widget_settings.dart"
+    },
+    "createYourFirstCategoryAbove": "",
+    "permissionChangedToNewrole1": "",
+    "@permissionChangedToNewrole1": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "successfullyOrganizedSelectedgroupslengthGroups1": "",
+    "@successfullyOrganizedSelectedgroupslengthGroups1": {
+        "placeholders": {
+            "length": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "failedToCreateItem": "",
+    "errorEtostring2": "",
+    "@errorEtostring2": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_item_details_screen.dart"
+    },
+    "registerNameTooShort": "",
+    "emailAddress": "",
+    "collaboratorActivity": "",
+    "langDeutsch": "",
+    "passwordMustBeAtLeast6Characters": "",
+    "controlAiFeatures": "",
+    "exportList": "",
+    "langPortuguese": "",
+    "settings": "",
+    "listSharedWithEmailAsSelectedrole3": "",
+    "@listSharedWithEmailAsSelectedrole3": {
+        "placeholders": {
+            "email": {
+                "type": "String"
+            },
+            "selectedRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "errorFetchingMaintenanceStatusE1": "",
+    "@errorFetchingMaintenanceStatusE1": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/services/platform/maintenance_service.dart"
+    },
+    "moveToGroupname1": "",
+    "@moveToGroupname1": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/migration/migration_screen.dart"
+    },
+    "releaseNotes": "",
+    "noData": "",
+    "shoppingLists": "",
+    "couldNotLaunchUrl2": "",
+    "@couldNotLaunchUrl2": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "gravatarFeature3": "",
+    "loading": "",
+    "aiAnalyzesPatterns": "",
+    "editTooltip": "",
+    "pleaseEnterATemplateName": "",
+    "profileUpdatedSuccessfully": "",
+    "gravatarPrivacyDescription": "",
+    "versionDisplay": "",
+    "@versionDisplay": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "areYouSureYouWantToSignOut": "",
+    "dailyProductivity": "",
+    "searchPackages": "",
+    "unknownUser": "",
+    "groupNamecontrollertexttrimCreatedSuccessfully1": "",
+    "topCategories": "",
+    "categoryCreatedSuccessfully": "",
+    "googleSignInError": "",
+    "restartRequiredTitle": "",
+    "keepTrackOfWhatYouNeedToBuy": "",
+    "categoryDeletedSuccessfully1": "",
+    "gravatarEnabledMessage": "",
+    "templatesShortcuts": "",
+    "cancel1": "",
+    "errorErrormessage": "",
+    "@errorErrormessage": {
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/wear/screens/wear_welcome_screen.dart"
+    },
+    "noUserFoundForThatEmailPleaseCheckYourEmailAndTryAgain": "",
+    "loginNetworkError": "",
+    "enterItemName1": "",
+    "shareCollaborate": "",
+    "networkErrorPleaseCheckYourInternetConnectionAndTryAgain": "",
+    "profileUpdatedSuccessfully1": "",
+    "errorLoadingInsightsE": "",
+    "@errorLoadingInsightsE": {
+        "placeholders": {
+            "e": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_insights.dart"
+    },
+    "thisPasswordIsTooWeakPleaseChooseAStrongerOne": "",
+    "couldNotLaunchUrl": "",
+    "@couldNotLaunchUrl": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/settings/settings.dart"
+    },
+    "continueButton": "",
+    "addedCompletedSummary": "",
+    "@addedCompletedSummary": {
+        "placeholders": {
+            "added": {
+                "type": "String"
+            },
+            "completed": {
+                "type": "String"
+            }
+        }
+    },
+    "restoreItemTooltip": "",
+    "password1": "",
+    "linkedAccounts": "",
+    "aiFeaturesDisabled": "",
+    "install": "",
+    "pleaseEnterACategoryName2": "",
+    "categoryDeletedSuccessfully": "",
+    "category": "",
+    "itemsAddedPerDay": "",
+    "resetPasswordNetworkError": "",
+    "deleteList": "",
+    "versionPackageinfoversionPackageinfobuildnumber": "",
+    "@versionPackageinfoversionPackageinfobuildnumber": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/auth/welcome.dart"
+    },
+    "organizeYourListsWithTheButton": "",
+    "signUp": "",
+    "inTimeframe1": "",
+    "itemsPerDay": "",
+    "leaveUngrouped": "",
+    "widgetSettings": "",
+    "itemIconLabel": "",
+    "noPackagesMatchSearch": "",
+    "signInContinue": "",
+    "gravatarSetupDescription": "",
+    "permanentlyDeleteThisList": "",
+    "langMarathi": "",
+    "enterListName": "",
+    "listnameRemovedFromGroup3": "",
+    "@listnameRemovedFromGroup3": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "githubRepository": "",
+    "langDutch": "",
+    "permissionChangedToNewrole2": "",
+    "@permissionChangedToNewrole2": {
+        "placeholders": {
+            "newRole": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/lists/list_options.dart"
+    },
+    "categoryUpdatedSuccessfully1": "",
+    "pleaseEnterACategoryName1": "",
+    "editor": "",
+    "thisEmailIsAlreadyRegisteredPleaseSignInInstead": "",
+    "listnameAddedToGroup3": "",
+    "@listnameAddedToGroup3": {
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/widgets/lists/manage_list_group_bottom_sheet.dart"
+    },
+    "registerEmail": "",
+    "listNameUpdated": "",
+    "tooManyRequestsPleaseTryAgainLater2": "",
+    "clearCompleted": "",
+    "downloadingUpdateLabel": "",
+    "totalItems": "",
+    "widgetUpdatedSuccessfully": "",
+    "addNewLocation": "",
+    "unlink": "",
+    "registerCreateAccount": "",
+    "personalizedExperience": "",
+    "clearedCompleteditemsdocslengthCompletedItems": "",
+    "welcomeToShopsync": "",
+    "errorLoadingListsSnapshoterror1": "",
+    "@errorLoadingListsSnapshoterror1": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        },
+        "description": "From: lib/screens/home.dart"
+    },
+    "retry2": "",
+    "langTraditionalChinese": "",
+    "enableAiFeatures": "",
+    "disableGravatarSetupDescription": "",
+    "gravatarDescription": "",
+    "noAiSuggestions": "",
+    "itemTemplateSavedSuccessfully": "",
+    "categoryName1": "",
+    "trendsAndPerformance": "",
+    "resetPasswordSubtitle": "",
+    "listsCount": "",
+    "@listsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "cancel3": "",
+    "outageClose": "",
+    "pleaseEnterAValidEmailAddress": "",
+    "counter": "",
+    "listsYouHaveAccessTo": "",
+    "completionRate1": "",
+    "loginForgotPassword": "",
+    "save1": "",
+    "accountInformation": "",
+    "understood": ""
+}
