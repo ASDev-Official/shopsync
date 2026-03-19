@@ -2201,7 +2201,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get topCategories => 'Categorías Máximas';
 
   @override
-  String get topCompletedLists => 'Listados Completados Máximos';
+  String get topCompletedLists => 'Máximos Listados Completados';
 
   @override
   String get timeframeQuarter => 'Trimestre';
@@ -2277,13 +2277,13 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get failedToLoadListData => 'Incorrecto al cargar datos de listado';
+  String get failedToLoadListData => 'Incorrecto al cargar datos del listado';
 
   @override
   String get selectLanguage => 'Seleccionar Idioma';
 
   @override
-  String get systemDefault => 'Predeterminado del sistema';
+  String get systemDefault => 'Predeterminado del Sistema';
 
   @override
   String get langEnglish => 'English';
@@ -2352,11 +2352,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get langVietnamese => 'Tiếng Việt';
 
   @override
-  String get useSystemDefaultTitle => 'Utilizar el del Sistema Por Defecto';
+  String get useSystemDefaultTitle => 'Utilizar Sistema Por Defecto';
 
   @override
   String get useSystemDefaultBody =>
-      '¿Desea utilizar su idioma en los ajustes del dispositivo?';
+      '¿Deseas utilizar su idioma en los ajustes del dispositivo?';
 
   @override
   String get confirm => 'Confirmar';
@@ -2376,11 +2376,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get anErrorOccurredLinkingGoogle =>
-      'Sucedió un error mientras enlaza su cuenta de Google.';
+      'Sucedió un error mientras enlazaba su cuenta de Google.';
 
   @override
   String get anErrorOccurredUnlinkingGoogle =>
-      'Ha ocurrido un error mientras desenlaza su cuenta de Google.';
+      'Ha ocurrido un error mientras desenlazaba su cuenta de Google.';
 
   @override
   String get goBack => 'Atrás';
@@ -2466,7 +2466,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get downloadingUpdateLabel => 'Descargando actualización…';
 
   @override
-  String get restartRequiredTitle => 'Se Requiere Reinicio';
+  String get restartRequiredTitle => 'Reinicio Requerido';
 
   @override
   String get restartRequiredBody =>
