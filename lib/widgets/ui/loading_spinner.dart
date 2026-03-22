@@ -17,7 +17,6 @@ class CustomLoadingSpinner extends StatelessWidget {
       width: size,
       height: size,
       child: LoadingIndicatorM3E(
-        variant: LoadingIndicatorM3EVariant.contained,
         color: Theme.of(context).brightness == Brightness.dark
             ? (color ?? Colors.green[900])
             : (color ?? Colors.green[400]),
