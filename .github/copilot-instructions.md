@@ -387,7 +387,7 @@ Added to `pubspec.yaml` dev_dependencies:
 
 - `.github/workflows/CD-Prod-Play-Phone.yml` — Phone release to Play.
   - Trigger: manual `workflow_dispatch`.
-  - Steps: checkout, Java 17 (cached Gradle), Flutter 3.41.4 (cached), pub cache, Android build cache, decode keystore + key.properties, sentry.properties, `flutter build appbundle --release --flavor phone --target=lib/main.dart`, upload via `r0adkll/upload-google-play` to production.
+  - Steps: checkout, Java 17 (cached Gradle), Flutter 3.41.5 (cached), pub cache, Android build cache, decode keystore + key.properties, sentry.properties, `flutter build appbundle --release --flavor phone --target=lib/main.dart`, upload via `r0adkll/upload-google-play` to production.
 
 - `.github/workflows/CD-Prod-Play-WearOS.yml` — WearOS release to Play.
   - Trigger: manual `workflow_dispatch`.
@@ -457,7 +457,7 @@ flutter test --watch
 
 If tests pass locally but fail in CI:
 
-1. Check Flutter version matches: `flutter --version` (should be 3.41.4)
+1. Check Flutter version matches: `flutter --version` (should be 3.41.5)
 2. Clear cache: `flutter clean && flutter pub get`
 3. Check for timing issues in async tests
 4. Verify test dependencies installed correctly
@@ -748,6 +748,6 @@ When implementing features or fixes:
 
 1. Check locally first: `flutter test`
 2. Look at CI logs in GitHub Actions
-3. Verify Flutter version matches CI (3.41.4)
+3. Verify Flutter version matches CI (3.41.5)
 4. Check for timing/race conditions in async tests
 5. Ensure mocks are set up correctly in test setup

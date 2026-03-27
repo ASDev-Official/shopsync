@@ -11,7 +11,7 @@ _Share shopping lists with family and friends_
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync?ref=badge_shield&issueType=license)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync.svg?type=shield&issueType=security)](https://app.fossa.com/projects/git%2Bgithub.com%2FASDev-Official%2Fshopsync?ref=badge_shield&issueType=security)
 
-[![Flutter Version](https://img.shields.io/badge/Flutter-^3.41.4-blue?logo=flutter)](https://flutter.dev)
+[![Flutter Version](https://img.shields.io/badge/Flutter-^3.41.5-blue?logo=flutter)](https://flutter.dev)
 
 [![License](https://img.shields.io/badge/license-MIT_License-blue?logo=data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNOC43NS43NVYyaC45ODVjLjMwNCAwIC42MDMuMDguODY3LjIzMWwxLjI5LjczNmMuMDM4LjAyMi4wOC4wMzMuMTI0LjAzM2gyLjIzNGEuNzUuNzUgMCAwIDEgMCAxLjVoLS40MjdMMTUuODUyIDkuNzE5YS43NS43NSAwIDAgMS0uMTU0LjgzOGwtLjUzLS41My41MjkuNTMxLS4wMDMuMDA0LS4wMTIuMDExLS4wNDUuNDBjLS4yMS4xNzYtLjQ0MS4zMjctLjY4Ni40NUMxNC41NTYgMTAuNzggMTMuODggMTEgMTMgMTFhNC40OTggNC40OTggMCAwIDEtMi4wMjMtLjQ1NCAzLjU0NCAzLjU0NCAwIDAgMS0uNjg2LS40NWwtLjA0NS0uNDAtLjAyMi0uMDIxYS43NS43NSAwIDAgMS0uMTU0LS44MzhMMTIuMTc4IDQuNWgtLjE2MmExLjc1IDEuNzUgMCAwIDEtLjg2OC0uMjMxbC0xLjI5LS43MzZhLjI0NS4yNDUgMCAwIDAtLjEyNC0uMDMzaC0xLjI1VjEzaDIuNWEuNzUuNzUgMCAwIDEgMCAxLjVoLTYuNWEuNzUuNzUgMCAwIDEgMC0xLjVoMi41VjMuNWgtLjk4NGEuMjQ1LjI0NSAwIDAgMC0uMTI0LjAzM2wtMS4yODkuNzM3YTEuNzUgMS43NSAwIDAgMS0uODY5LjIzaC0uMTYybDIuMTEyIDQuNjkyYS43NS43NSAwIDAgMS0uMTU0LjgzOGwtLjUzLS41My41MjkuNTMxLS4wMDMuMDA0LS4wMTIuMDExLS4wNDUuNDBjLS4yMS4xNzYtLjQ0MS4zMjctLjY4Ni40NUM0LjU1NiAxMC43OCAzLjg4IDExIDMgMTFhNC40OTggNC40OTggMCAwIDEtMi4wMjMtLjQ1NCAzLjU0NCAzLjU0NCAwIDAgMS0uNjg2LS40NWwtLjA0NS0uNDAtLjAyMi0uMDIxYS43NS43NSAwIDAgMS0uMTU0LS44MzhMMi4xNzggNC41SDEuNzVhLjc1Ljc1IDAgMCAxIDAtMS41aDIuMjM0YS4yNDkuMjQ5IDAgMCAwIC4xMjUtLjAzM2wxLjI4OC0uNzM3YTEuNzUgMS43NSAwIDAgMSAuODY5LS4yM2guOTg0Vi43NWEuNzUuNzUgMCAwIDEgMS41IDBaTTExLjY5NSA5LjIyN2MuMjg1LjEzNS43MTguMjczIDEuMzA1LjI3M3MxLjAyLS4xMzggMS4zMDUtLjI3M0wxMyA2LjMyN1ptLTEwIDBjLjI4NS4xMzUuNzE4LjI3MyAxLjMwNS4yNzNzMS4wMi0uMTM4IDEuMzA1LS4yNzNMMyA2LjMyN1oiLz48L3N2Zz4=)](https://github.com/ASDev-Official/ShopSync/blob/main/LICENSE)
 
@@ -24,11 +24,8 @@ _Share shopping lists with family and friends_
 </div>
 
 > [!WARNING]
-> I have started using a new authentication system within GitHub.
-> As a result, previous commits from 13 March 2026 and before may have an "Unverified" badge. This is because those commits were made using the old authentication method.
-> Moving forward, all new commits will be verified with the new system, ensuring that they display a "Verified" badge.
-> I have implemented this system due to a rise in infostealer attacks across GitHub, Discord, as well as fake CAPTCHAs on compromised sites. This new authentication method provides an additional layer of security to protect against such attacks.
-> Read more on [www.infostealers.com](https://www.infostealers.com) by Hudson Rock: [What is an info-stealer?](https://www.infostealers.com/article/what-are-info-stealers/)
+> Infostealer attacks are becoming more common.
+> Read more on [www.infostealers.com](https://www.infostealers.com) by Hudson Rock: [What is an info-stealer?](https://www.infostealers.com/article/what-are-info-stealers/).
 
 ## 📱 Overview
 
@@ -59,7 +56,7 @@ Coming Soon
 [//]: # "  </table>"
 [//]: # "</div>"
 
-## 🌐 Translation
+## 🌐 Translations/Localisation
 
 ✨ We use [Weblate](https://weblate.org)!
 
@@ -80,7 +77,7 @@ To make ShopSync available in multiple languages, contribute to our [Weblate](ht
 
 ### Prerequisites
 
-- Flutter SDK (^3.29.2)
+- Flutter SDK (^3.41.5)
 - Dart SDK
 - Firebase account
 - Android Studio / VS Code
@@ -116,11 +113,7 @@ To make ShopSync available in multiple languages, contribute to our [Weblate](ht
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. An amazing file exists called [CONTRIBUTING.md](CONTRIBUTING.md) that you should read before contributing.
 
 ## 📄 License
 
