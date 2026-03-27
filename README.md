@@ -117,16 +117,8 @@ To make ShopSync available in multiple languages, contribute to our [Weblate](ht
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file
 for details.
-
-## Code Coverage (Codecov)
-
-[![codecov](https://codecov.io/gh/ASDev-Official/shopsync/graph/badge.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
-
-[![](https://codecov.io/gh/ASDev-Official/shopsync/graphs/sunburst.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
-[![](https://codecov.io/gh/ASDev-Official/shopsync/graphs/tree.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
-[![](https://codecov.io/gh/ASDev-Official/shopsync/graphs/icicle.svg?token=R2HCGDT03G)](https://codecov.io/gh/ASDev-Official/shopsync)
 
 ## FOSSA
 
