@@ -300,12 +300,14 @@ class _AuthWrapperState extends State<AuthWrapper> {
         return;
       }
       UpdateService.checkForUpdate(context);
-      await _checkMaintenance();
-      await _checkOutage();
+      final hasActiveMaintenance = await _checkMaintenance();
+      if (!hasActiveMaintenance) {
+        await _checkOutage();
+      }
     });
   }
 
-  Future<void> _checkMaintenance() async {
+  Future<bool> _checkMaintenance() async {
     final maintenance = await MaintenanceService.checkMaintenance();
     // Uncomment the following lines for testing purposes
     // final updateInfo = await InAppUpdate.checkForUpdate();
@@ -317,6 +319,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
     if (maintenance != null && mounted) {
       if (maintenance['isUnderMaintenance']) {
+        StatuspageService.currentOutage.value = null;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -328,6 +331,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
             ),
           ),
         );
+        return true;
       } else if (maintenance['isPredictive']) {
         showDialog(
           context: context,
@@ -339,15 +343,23 @@ class _AuthWrapperState extends State<AuthWrapper> {
             isPredictive: true,
           ),
         );
+        return false;
       }
     }
+    return false;
   }
 
   Future<void> _checkOutage() async {
+    if (MaintenanceService.isMaintenanceActive.value) {
+      return;
+    }
+
     try {
       final outage = await StatuspageService.fetchCurrentOutage();
       // Show fullscreen closable dialog once per app run when outage is active
-      if (outage.active && mounted) {
+      if (outage.active &&
+          mounted &&
+          !MaintenanceService.isMaintenanceActive.value) {
         if (!StatuspageService.dialogDismissedThisSession) {
           await showDialog(
             context: context,

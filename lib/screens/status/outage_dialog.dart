@@ -13,20 +13,31 @@ class OutageDialog extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final backgroundColor = isDark ? Colors.grey[900] : Colors.grey[50];
-    final cardColor = isDark
-        ? Colors.black.withValues(alpha: 0.6)
-        : Colors.white.withValues(alpha: 0.8);
 
     return Dialog.fullscreen(
-      backgroundColor: backgroundColor,
       child: Scaffold(
         backgroundColor: backgroundColor,
         appBar: AppBar(
           backgroundColor: isDark ? Colors.grey[800] : Colors.green[800],
           elevation: 0,
-          title: const Text(
-            'ShopSync',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          title: Row(
+            children: [
+              Image(
+                image: AssetImage('assets/logos/shopsync.png'),
+                height: 32,
+                width: 32,
+              ),
+              SizedBox(width: 8),
+              Text(
+                l10n.shopsync,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
           actions: [
             IconButton(
@@ -37,45 +48,29 @@ class OutageDialog extends StatelessWidget {
             ),
           ],
         ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: cardColor,
-                    borderRadius: BorderRadius.circular(24),
-                    boxShadow: [
-                      BoxShadow(
-                        color: isDark
-                            ? Colors.black.withValues(alpha: 0.5)
-                            : Colors.red.withValues(alpha: 0.2),
-                        blurRadius: 20,
-                        offset: const Offset(0, 10),
-                      ),
-                    ],
-                    border: Border.all(
-                      color: isDark ? Colors.red.shade700 : Colors.red.shade200,
-                    ),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            final minHeight = constraints.maxHeight > 48
+                ? constraints.maxHeight - 48
+                : constraints.maxHeight;
+
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: 560,
+                    minHeight: minHeight,
                   ),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.red.shade700,
-                              Colors.red.shade400,
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
+                          color: Colors.red.shade700,
                         ),
                         child: const Icon(
                           Icons.error_outline,
@@ -148,9 +143,9 @@ class OutageDialog extends StatelessWidget {
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -170,9 +165,6 @@ class OutageDialog extends StatelessWidget {
             ? Colors.black.withValues(alpha: 0.5)
             : Colors.white.withValues(alpha: 0.7),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark ? Colors.red.shade700 : Colors.red.shade200,
-        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -223,9 +215,6 @@ class OutageDialog extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark ? Colors.black.withValues(alpha: 0.4) : Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark ? Colors.red.shade700 : Colors.red.shade200,
-        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
