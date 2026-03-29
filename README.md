@@ -39,19 +39,16 @@ manage shopping lists in real-time with family and friends.
 
 ## 📱 Screenshots
 
-Coming Soon
-
-[//]: # "## 📱 Screenshots"
-[//]: #
-[//]: # '<div align="center">'
-[//]: # "  <table>"
-[//]: # "    <tr>"
-[//]: # '      <td><img src="assets/screenshots/home.png" width="200"/></td>'
-[//]: # '      <td><img src="assets/screenshots/list.png" width="200"/></td>'
-[//]: # '      <td><img src="assets/screenshots/settings.png" width="200"/></td>'
-[//]: # "    </tr>"
-[//]: # "  </table>"
-[//]: # "</div>"
+<p align="center">
+   <img src="https://aadish.dev/assets/screenshots/shopsync/screen1.png" alt="ShopSync Screenshot 1" width="23%" />
+   <img src="https://aadish.dev/assets/screenshots/shopsync/screen2.png" alt="ShopSync Screenshot 2" width="23%" />
+   <img src="https://aadish.dev/assets/screenshots/shopsync/screen3.png" alt="ShopSync Screenshot 3" width="23%" />
+   <img src="https://aadish.dev/assets/screenshots/shopsync/screen4.png" alt="ShopSync Screenshot 4" width="23%" />
+   <img src="https://aadish.dev/assets/screenshots/shopsync/screen5.png" alt="ShopSync Screenshot 5" width="23%" />
+   <img src="https://aadish.dev/assets/screenshots/shopsync/screen6.png" alt="ShopSync Screenshot 6" width="23%" />
+   <img src="https://aadish.dev/assets/screenshots/shopsync/screen7.png" alt="ShopSync Screenshot 7" width="23%" />
+   <img src="https://aadish.dev/assets/screenshots/shopsync/screen8.png" alt="ShopSync Screenshot 8" width="23%" />
+</p>
 
 ## 🌐 Translations/Localisation
 
