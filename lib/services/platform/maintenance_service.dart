@@ -16,16 +16,18 @@ class MaintenanceService {
       if (doc.exists) {
         final data = doc.data()!;
         final isUnderMaintenance = data['isUnderMaintenance'] ?? false;
-        isMaintenanceActive.value = isUnderMaintenance;
         final startTime = data['startTime']?.toDate();
-        final endTime = data['endTime']?.toDate();
+        final isPredictive = !isUnderMaintenance && (startTime != null);
+
+        // Set to true for both active and predictive maintenance
+        isMaintenanceActive.value = isUnderMaintenance || isPredictive;
 
         return {
           'isUnderMaintenance': isUnderMaintenance,
           'message': data['message'] ?? '',
           'startTime': startTime,
-          'endTime': endTime,
-          'isPredictive': !isUnderMaintenance && (startTime != null),
+          'endTime': data['endTime']?.toDate(),
+          'isPredictive': isPredictive,
         };
       }
       isMaintenanceActive.value = false;
