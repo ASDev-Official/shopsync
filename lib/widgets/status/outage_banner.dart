@@ -40,8 +40,9 @@ class _OutageBannerState extends State<OutageBanner>
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    _resetAnimation =
-        _animationController.drive(Tween<double>(begin: 0, end: 0));
+    _resetAnimation = _animationController.drive(
+      Tween<double>(begin: 0, end: 0),
+    );
     _resetAnimation.addListener(_onAnimationTick);
   }
 
@@ -72,7 +73,9 @@ class _OutageBannerState extends State<OutageBanner>
       return incidentId;
     }
 
-    return '${outage.name}|${outage.startedAt.millisecondsSinceEpoch}|${outage.impact}';
+    return '${outage.name}|'
+        '${outage.startedAt.millisecondsSinceEpoch}|'
+        '${outage.impact}';
   }
 
   void _handleOutageChange() {
@@ -138,8 +141,10 @@ class _OutageBannerState extends State<OutageBanner>
       _resetAnimation.removeListener(_onAnimationTick);
 
       // Animate back to original position
-      _resetAnimation = Tween<double>(begin: _dragOffset, end: 0)
-          .animate(_animationController);
+      _resetAnimation = Tween<double>(
+        begin: _dragOffset,
+        end: 0,
+      ).animate(_animationController);
 
       // Attach listener to new animation
       _resetAnimation.addListener(_onAnimationTick);
@@ -192,8 +197,10 @@ class _OutageBannerState extends State<OutageBanner>
               child: Material(
                 color: Colors.transparent,
                 child: GestureDetector(
-                  onVerticalDragStart: isLarge ? null : _onVerticalDragStart,
-                  onVerticalDragUpdate: isLarge ? null : _onVerticalDragUpdate,
+                  onVerticalDragStart:
+                      isLarge ? null : _onVerticalDragStart,
+                  onVerticalDragUpdate:
+                      isLarge ? null : _onVerticalDragUpdate,
                   onVerticalDragEnd: isLarge ? null : _onVerticalDragEnd,
                   child: Transform.translate(
                     offset: Offset(0, _dragOffset),
@@ -208,21 +215,25 @@ class _OutageBannerState extends State<OutageBanner>
                                   return;
                                 }
 
-                                final ctx =
-                                    AppNavigation.navigatorKey.currentContext;
+                                final ctx = AppNavigation
+                                    .navigatorKey
+                                    .currentContext;
                                 if (ctx != null) {
                                   showDialog(
                                     context: ctx,
                                     barrierDismissible: true,
-                                    builder: (context) =>
-                                        OutageDialog(outage: outage),
+                                    builder: (context) => OutageDialog(
+                                      outage: outage,
+                                    ),
                                   );
                                 }
                               },
                         child: Container(
                           margin: const EdgeInsets.all(12),
                           padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 12),
+                            vertical: 10,
+                            horizontal: 12,
+                          ),
                           decoration: BoxDecoration(
                             color: isDark
                                 ? Colors.red.shade900
@@ -252,8 +263,11 @@ class _OutageBannerState extends State<OutageBanner>
                                   color: Colors.red.shade600,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(Icons.error,
-                                    color: Colors.white, size: 18),
+                                child: const Icon(
+                                  Icons.error,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
                               ),
                               const SizedBox(width: 10),
                               Expanded(
@@ -292,8 +306,12 @@ class _OutageBannerState extends State<OutageBanner>
                                         .affectedComponents.isNotEmpty) ...[
                                       const SizedBox(height: 4),
                                       Text(
-                                        l10n.outageAffected(_formatComponents(
-                                            outage.affectedComponents, l10n)),
+                                        l10n.outageAffected(
+                                          _formatComponents(
+                                            outage.affectedComponents,
+                                            l10n,
+                                          ),
+                                        ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
