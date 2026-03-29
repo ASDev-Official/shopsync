@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import '../../services/platform/statuspage_service.dart';
 import '../../services/platform/maintenance_service.dart';
 import '../../core/navigation_service.dart';
@@ -157,9 +158,20 @@ class _OutageBannerState extends State<OutageBanner>
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: MaintenanceService.isMaintenanceActive,
-      builder: (context, isMaintenanceActive, _) {
+    return StreamBuilder<bool>(
+      stream: MaintenanceService.getMaintenanceActiveStream(),
+      initialData: false,
+      builder: (context, snapshot) {
+        // Handle stream states
+        final isMaintenanceActive = snapshot.data ?? false;
+
+        if (snapshot.hasError) {
+          // On error, default to not showing maintenance banner
+          if (kDebugMode) {
+            print('Error in maintenance stream: ${snapshot.error}');
+          }
+        }
+
         if (isMaintenanceActive) {
           return const SizedBox.shrink();
         }
@@ -281,7 +293,7 @@ class _OutageBannerState extends State<OutageBanner>
                                       const SizedBox(height: 4),
                                       Text(
                                         l10n.outageAffected(_formatComponents(
-                                            outage.affectedComponents)),
+                                            outage.affectedComponents, l10n)),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
@@ -297,7 +309,7 @@ class _OutageBannerState extends State<OutageBanner>
                               ),
                               if (!isLarge) ...[
                                 Text(
-                                  _labelForImpact(outage.impact),
+                                  _labelForImpact(outage.impact, l10n),
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
@@ -309,7 +321,7 @@ class _OutageBannerState extends State<OutageBanner>
                               ] else ...[
                                 const SizedBox(width: 8),
                                 Text(
-                                  _labelForImpact(outage.impact),
+                                  _labelForImpact(outage.impact, l10n),
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
@@ -351,23 +363,23 @@ class _OutageBannerState extends State<OutageBanner>
     );
   }
 
-  String _labelForImpact(String impact) {
+  String _labelForImpact(String impact, AppLocalizations l10n) {
     switch (impact) {
       case 'critical':
-        return 'Critical';
+        return l10n.outageImpactCritical;
       case 'major':
-        return 'Major';
+        return l10n.outageImpactMajor;
       case 'minor':
-        return 'Minor';
+        return l10n.outageImpactMinor;
       default:
-        return 'Outage';
+        return l10n.outageImpactDefault;
     }
   }
 
-  String _formatComponents(List<String> comps) {
+  String _formatComponents(List<String> comps, AppLocalizations l10n) {
     if (comps.length <= 3) return comps.join(', ');
     final head = comps.take(3).join(', ');
     final more = comps.length - 3;
-    return '$head +$more more';
+    return '$head +$more ${l10n.outageMoreComponents}';
   }
 }

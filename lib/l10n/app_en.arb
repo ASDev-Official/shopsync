@@ -198,6 +198,11 @@
   "outageResolved": "Resolved",
   "outageLatestUpdates": "Latest Updates",
   "outageClose": "Close",
+  "outageMoreComponents": "more",
+  "outageImpactCritical": "Critical",
+  "outageImpactMajor": "Major",
+  "outageImpactMinor": "Minor",
+  "outageImpactDefault": "Outage",
   "couldNotLaunchUrl2": "Could not launch {url}",
   "@couldNotLaunchUrl2": {
     "placeholders": {
