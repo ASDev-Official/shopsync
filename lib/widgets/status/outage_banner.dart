@@ -88,9 +88,16 @@ class _OutageBannerState extends State<OutageBanner>
       // Dismiss if dragged far enough
       _dismissBanner();
     } else {
+      // Remove listener from old animation before reassigning
+      _resetAnimation.removeListener(_onAnimationTick);
+
       // Animate back to original position
       _resetAnimation = Tween<double>(begin: _dragOffset, end: 0)
           .animate(_animationController);
+
+      // Attach listener to new animation
+      _resetAnimation.addListener(_onAnimationTick);
+
       _animationController.reset();
       _animationController.forward();
     }
