@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart' show kDebugMode;
 
 class MaintenanceService {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  static final ValueNotifier<bool> isMaintenanceActive =
+      ValueNotifier<bool>(false);
 
   static Future<Map<String, dynamic>?> checkMaintenance() async {
     try {
@@ -13,19 +15,23 @@ class MaintenanceService {
 
       if (doc.exists) {
         final data = doc.data()!;
+        final isUnderMaintenance = data['isUnderMaintenance'] ?? false;
+        isMaintenanceActive.value = isUnderMaintenance;
         final startTime = data['startTime']?.toDate();
         final endTime = data['endTime']?.toDate();
 
         return {
-          'isUnderMaintenance': data['isUnderMaintenance'] ?? false,
+          'isUnderMaintenance': isUnderMaintenance,
           'message': data['message'] ?? '',
           'startTime': startTime,
           'endTime': endTime,
-          'isPredictive': !data['isUnderMaintenance'] && (startTime != null),
+          'isPredictive': !isUnderMaintenance && (startTime != null),
         };
       }
+      isMaintenanceActive.value = false;
       return null;
     } catch (e, stackTrace) {
+      isMaintenanceActive.value = false;
       if (kDebugMode) {
         print('Error fetching maintenance status: $e');
         print('Stack trace: $stackTrace');
