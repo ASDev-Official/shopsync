@@ -198,7 +198,14 @@
   "outageResolved": "Resolved",
   "outageLatestUpdates": "Latest Updates",
   "outageClose": "Close",
-  "outageMoreComponents": "more",
+  "outageMoreComponents": "{count, plural, =1{+1 more} other{+{count} more}}",
+  "@outageMoreComponents": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "outageImpactCritical": "Critical",
   "outageImpactMajor": "Major",
   "outageImpactMinor": "Minor",

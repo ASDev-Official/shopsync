@@ -31,6 +31,7 @@ class _OutageBannerState extends State<OutageBanner>
   void initState() {
     super.initState();
     _notifier = StatuspageService.currentOutage;
+    _lastOutageKey = _outageKey(_notifier.value);
     _notifier.addListener(_handleOutageChange);
     _timer = Timer.periodic(const Duration(minutes: 1), (_) {
       if (mounted) setState(() {});
@@ -160,7 +161,7 @@ class _OutageBannerState extends State<OutageBanner>
   Widget build(BuildContext context) {
     return StreamBuilder<bool>(
       stream: MaintenanceService.getMaintenanceActiveStream(),
-      initialData: false,
+      initialData: MaintenanceService.isMaintenanceActive.value,
       builder: (context, snapshot) {
         // Handle stream states
         final isMaintenanceActive = snapshot.data ?? false;
@@ -203,8 +204,7 @@ class _OutageBannerState extends State<OutageBanner>
                         onTap: _isDragging
                             ? null
                             : () {
-                                if (MaintenanceService
-                                    .isMaintenanceActive.value) {
+                                if (isMaintenanceActive) {
                                   return;
                                 }
 
@@ -331,21 +331,19 @@ class _OutageBannerState extends State<OutageBanner>
                                   ),
                                 ),
                                 const SizedBox(width: 8),
-                                GestureDetector(
-                                  onTap: _dismissBanner,
-                                  child: MouseRegion(
-                                    cursor: SystemMouseCursors.click,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4),
-                                      child: Icon(
-                                        Icons.close,
-                                        size: 18,
-                                        color: isDark
-                                            ? Colors.white70
-                                            : Colors.red.shade700,
-                                      ),
-                                    ),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.close,
+                                    size: 18,
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.red.shade700,
                                   ),
+                                  onPressed: _dismissBanner,
+                                  tooltip: l10n.close,
+                                  padding: const EdgeInsets.all(4),
+                                  splashRadius: 18,
+                                  constraints: const BoxConstraints(),
                                 ),
                               ],
                             ],
@@ -380,6 +378,6 @@ class _OutageBannerState extends State<OutageBanner>
     if (comps.length <= 3) return comps.join(', ');
     final head = comps.take(3).join(', ');
     final more = comps.length - 3;
-    return '$head +$more ${l10n.outageMoreComponents}';
+    return '$head ${l10n.outageMoreComponents(more)}';
   }
 }
