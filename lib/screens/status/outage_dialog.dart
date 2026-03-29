@@ -14,136 +14,139 @@ class OutageDialog extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final backgroundColor = isDark ? Colors.grey[900] : Colors.grey[50];
 
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        backgroundColor: isDark ? Colors.grey[800] : Colors.green[800],
-        elevation: 0,
-        title: Row(
-          children: [
-            Image(
-              image: AssetImage('assets/logos/shopsync.png'),
-              height: 32,
-              width: 32,
-            ),
-            SizedBox(width: 8),
-            Text(
-              l10n.shopsync,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.5,
-                color: Colors.white,
+    return Dialog.fullscreen(
+      child: Scaffold(
+        backgroundColor: backgroundColor,
+        appBar: AppBar(
+          backgroundColor: isDark ? Colors.grey[800] : Colors.green[800],
+          elevation: 0,
+          title: Row(
+            children: [
+              Image(
+                image: AssetImage('assets/logos/shopsync.png'),
+                height: 32,
+                width: 32,
               ),
+              SizedBox(width: 8),
+              Text(
+                l10n.shopsync,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.close, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.close, color: Colors.white),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final minHeight = constraints.maxHeight > 48
-              ? constraints.maxHeight - 48
-              : constraints.maxHeight;
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            final minHeight = constraints.maxHeight > 48
+                ? constraints.maxHeight - 48
+                : constraints.maxHeight;
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-            child: Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: 560,
-                  minHeight: minHeight,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.red.shade700,
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: 560,
+                    minHeight: minHeight,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red.shade700,
+                        ),
+                        child: const Icon(
+                          Icons.error_outline,
+                          size: 48,
+                          color: Colors.white,
+                        ),
                       ),
-                      child: const Icon(
-                        Icons.error_outline,
-                        size: 48,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      outage.name.isNotEmpty
-                          ? outage.name
-                          : l10n.outageServiceOutage,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.white : Colors.black87,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      outage.description.isNotEmpty
-                          ? outage.description
-                          : l10n.outageDefaultDescription,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: isDark ? Colors.white70 : Colors.black54,
-                        height: 1.5,
-                      ),
-                    ),
-                    if (outage.affectedComponents.isNotEmpty) ...[
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 24),
                       Text(
-                        l10n.outageAffected(
-                            _formatComponents(outage.affectedComponents)),
+                        outage.name.isNotEmpty
+                            ? outage.name
+                            : l10n.outageServiceOutage,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.white : Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        outage.description.isNotEmpty
+                            ? outage.description
+                            : l10n.outageDefaultDescription,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
                           color: isDark ? Colors.white70 : Colors.black54,
+                          height: 1.5,
                         ),
                       ),
-                    ],
-                    const SizedBox(height: 20),
-                    _buildTimes(isDark, l10n),
-                    if (outage.updates.isNotEmpty) ...[
+                      if (outage.affectedComponents.isNotEmpty) ...[
+                        const SizedBox(height: 12),
+                        Text(
+                          l10n.outageAffected(
+                              _formatComponents(outage.affectedComponents)),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: isDark ? Colors.white70 : Colors.black54,
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: 20),
-                      _buildUpdates(isDark, l10n),
-                    ],
-                    const SizedBox(height: 24),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            isDark ? Colors.red.shade700 : Colors.red.shade600,
-                        minimumSize: const Size(200, 48),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                      _buildTimes(isDark, l10n),
+                      if (outage.updates.isNotEmpty) ...[
+                        const SizedBox(height: 20),
+                        _buildUpdates(isDark, l10n),
+                      ],
+                      const SizedBox(height: 24),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isDark
+                              ? Colors.red.shade700
+                              : Colors.red.shade600,
+                          minimumSize: const Size(200, 48),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
+                        icon: const Icon(Icons.check_circle,
+                            size: 18, color: Colors.white),
+                        label: Text(l10n.outageClose,
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white)),
                       ),
-                      icon: const Icon(Icons.check_circle,
-                          size: 18, color: Colors.white),
-                      label: Text(l10n.outageClose,
-                          style: const TextStyle(
-                              fontSize: 16, color: Colors.white)),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

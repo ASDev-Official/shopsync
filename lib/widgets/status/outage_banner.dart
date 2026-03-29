@@ -6,6 +6,7 @@ import '../../services/platform/maintenance_service.dart';
 import '../../core/navigation_service.dart';
 import '../../models/status_outage.dart';
 import '../../l10n/app_localizations.dart';
+import '../../screens/status/outage_dialog.dart';
 
 class OutageBanner extends StatefulWidget {
   const OutageBanner({super.key});
@@ -151,7 +152,7 @@ class _OutageBannerState extends State<OutageBanner>
                                     context: ctx,
                                     barrierDismissible: true,
                                     builder: (context) =>
-                                        _buildOutageDialog(context, outage),
+                                        OutageDialog(outage: outage),
                                   );
                                 }
                               },
@@ -317,138 +318,5 @@ class _OutageBannerState extends State<OutageBanner>
     final head = comps.take(3).join(', ');
     final more = comps.length - 3;
     return '$head +$more more';
-  }
-
-  Widget _buildOutageDialog(BuildContext context, StatusOutage outage) {
-    final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: SingleChildScrollView(
-          child: Container(
-            color: isDark ? Colors.grey[900] : Colors.grey[50],
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  color: isDark ? Colors.grey[800] : Colors.green[800],
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  child: Row(
-                    children: [
-                      Image(
-                        image: AssetImage('assets/logos/shopsync.png'),
-                        height: 32,
-                        width: 32,
-                      ),
-                      SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          l10n.shopsync,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.5,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.close, color: Colors.white),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.red.shade700,
-                        ),
-                        child: const Icon(
-                          Icons.error_outline,
-                          size: 48,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        outage.name.isNotEmpty
-                            ? outage.name
-                            : l10n.outageServiceOutage,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: isDark ? Colors.white : Colors.black87,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        outage.description.isNotEmpty
-                            ? outage.description
-                            : l10n.outageDefaultDescription,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: isDark ? Colors.white70 : Colors.black54,
-                          height: 1.5,
-                        ),
-                      ),
-                      if (outage.affectedComponents.isNotEmpty) ...[
-                        const SizedBox(height: 12),
-                        Text(
-                          l10n.outageAffected(
-                              _formatComponents(outage.affectedComponents)),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: isDark ? Colors.white70 : Colors.black54,
-                          ),
-                        ),
-                      ],
-                      const SizedBox(height: 24),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: isDark
-                              ? Colors.red.shade700
-                              : Colors.red.shade600,
-                          minimumSize: const Size(200, 48),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        icon: const Icon(Icons.check_circle,
-                            size: 18, color: Colors.white),
-                        label: Text(l10n.outageClose,
-                            style: const TextStyle(
-                                fontSize: 16, color: Colors.white)),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
