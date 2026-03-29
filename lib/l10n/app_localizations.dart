@@ -1115,6 +1115,36 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get outageClose;
 
+  /// No description provided for @outageMoreComponents.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{+1 more} other{+{count} more}}'**
+  String outageMoreComponents(int count);
+
+  /// No description provided for @outageImpactCritical.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical'**
+  String get outageImpactCritical;
+
+  /// No description provided for @outageImpactMajor.
+  ///
+  /// In en, this message translates to:
+  /// **'Major'**
+  String get outageImpactMajor;
+
+  /// No description provided for @outageImpactMinor.
+  ///
+  /// In en, this message translates to:
+  /// **'Minor'**
+  String get outageImpactMinor;
+
+  /// No description provided for @outageImpactDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Outage'**
+  String get outageImpactDefault;
+
   /// From: lib/screens/settings/settings.dart
   ///
   /// In en, this message translates to:

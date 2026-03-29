@@ -541,6 +541,29 @@ class AppLocalizationsTr extends AppLocalizations {
   String get outageClose => 'Close';
 
   @override
+  String outageMoreComponents(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '+$count more',
+      one: '+1 more',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get outageImpactCritical => 'Critical';
+
+  @override
+  String get outageImpactMajor => 'Major';
+
+  @override
+  String get outageImpactMinor => 'Minor';
+
+  @override
+  String get outageImpactDefault => 'Outage';
+
+  @override
   String couldNotLaunchUrl2(String url) {
     return 'Could not launch $url';
   }
