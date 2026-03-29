@@ -197,10 +197,8 @@ class _OutageBannerState extends State<OutageBanner>
               child: Material(
                 color: Colors.transparent,
                 child: GestureDetector(
-                  onVerticalDragStart:
-                      isLarge ? null : _onVerticalDragStart,
-                  onVerticalDragUpdate:
-                      isLarge ? null : _onVerticalDragUpdate,
+                  onVerticalDragStart: isLarge ? null : _onVerticalDragStart,
+                  onVerticalDragUpdate: isLarge ? null : _onVerticalDragUpdate,
                   onVerticalDragEnd: isLarge ? null : _onVerticalDragEnd,
                   child: Transform.translate(
                     offset: Offset(0, _dragOffset),
@@ -215,9 +213,8 @@ class _OutageBannerState extends State<OutageBanner>
                                   return;
                                 }
 
-                                final ctx = AppNavigation
-                                    .navigatorKey
-                                    .currentContext;
+                                final ctx =
+                                    AppNavigation.navigatorKey.currentContext;
                                 if (ctx != null) {
                                   showDialog(
                                     context: ctx,
