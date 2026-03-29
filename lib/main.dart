@@ -343,6 +343,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
             isPredictive: true,
           ),
         );
+        return true;
       }
     }
     return false;

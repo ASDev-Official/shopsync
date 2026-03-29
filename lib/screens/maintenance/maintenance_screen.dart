@@ -28,7 +28,7 @@ class MaintenanceScreen extends StatelessWidget {
         backgroundColor: isDark ? Colors.grey[800] : Colors.green[800],
         elevation: 0,
         title: Row(
-          children: const [
+          children: [
             Image(
               image: AssetImage('assets/logos/shopsync.png'),
               height: 32,
@@ -36,7 +36,7 @@ class MaintenanceScreen extends StatelessWidget {
             ),
             SizedBox(width: 8),
             Text(
-              'ShopSync',
+              l10n.shopsync,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
