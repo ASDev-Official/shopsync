@@ -20,6 +20,7 @@ class _OutageBannerState extends State<OutageBanner>
   late final ValueNotifier<StatusOutage?> _notifier;
   Timer? _timer;
   bool _isDismissed = false;
+  String? _lastOutageKey;
   double _dragOffset = 0;
   bool _isDragging = false;
   late AnimationController _animationController;
@@ -29,6 +30,7 @@ class _OutageBannerState extends State<OutageBanner>
   void initState() {
     super.initState();
     _notifier = StatuspageService.currentOutage;
+    _notifier.addListener(_handleOutageChange);
     _timer = Timer.periodic(const Duration(minutes: 1), (_) {
       if (mounted) setState(() {});
     });
@@ -52,9 +54,51 @@ class _OutageBannerState extends State<OutageBanner>
   @override
   void dispose() {
     _timer?.cancel();
+    _notifier.removeListener(_handleOutageChange);
     _resetAnimation.removeListener(_onAnimationTick);
     _animationController.dispose();
     super.dispose();
+  }
+
+  String? _outageKey(StatusOutage? outage) {
+    if (outage == null || !outage.active) {
+      return null;
+    }
+
+    final incidentId = outage.incidentId;
+    if (incidentId != null && incidentId.isNotEmpty) {
+      return incidentId;
+    }
+
+    return '${outage.name}|${outage.startedAt.millisecondsSinceEpoch}|${outage.impact}';
+  }
+
+  void _handleOutageChange() {
+    final key = _outageKey(_notifier.value);
+
+    if (key == null) {
+      if (_isDismissed ||
+          _lastOutageKey != null ||
+          _dragOffset != 0 ||
+          _isDragging) {
+        setState(() {
+          _isDismissed = false;
+          _lastOutageKey = null;
+          _dragOffset = 0;
+          _isDragging = false;
+        });
+      }
+      return;
+    }
+
+    if (_lastOutageKey != key) {
+      setState(() {
+        _lastOutageKey = key;
+        _isDismissed = false;
+        _dragOffset = 0;
+        _isDragging = false;
+      });
+    }
   }
 
   void _dismissBanner() {
