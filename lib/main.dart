@@ -333,7 +333,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
         );
         return true;
       } else if (maintenance['isPredictive']) {
-        StatuspageService.currentOutage.value = null;
         showDialog(
           context: context,
           barrierDismissible: false,
@@ -344,7 +343,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
             isPredictive: true,
           ),
         );
-        return true;
+        return false;
       }
     }
     return false;
