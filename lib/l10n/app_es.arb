@@ -1378,5 +1378,17 @@
     "langTelugu": "తెలుగు",
     "langTraditionalChinese": "繁體中文",
     "langTurkish": "Türkçe",
-    "langVietnamese": "Tiếng Việt"
+    "langVietnamese": "Tiếng Việt",
+    "outageMoreComponents": "{count, plural, =1{+1 más} other{+{count} más}}",
+    "@outageMoreComponents": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "outageImpactCritical": "Crítico",
+    "outageImpactMajor": "Mayor",
+    "outageImpactMinor": "Menor",
+    "outageImpactDefault": "Corte"
 }
