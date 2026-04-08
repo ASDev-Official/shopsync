@@ -9,126 +9,126 @@ class AppLocalizationsVi extends AppLocalizations {
   AppLocalizationsVi([String locale = 'vi']) : super(locale);
 
   @override
-  String get aboutApp => 'About App';
+  String get aboutApp => 'Về ứng dụng này';
 
   @override
-  String get accessYourListsAndSettings => 'Access your lists and settings';
+  String get accessYourListsAndSettings =>
+      'Truy cập vào các danh sách và cài đặt';
 
   @override
-  String get addCustomGroup => 'Add Custom Group';
+  String get addCustomGroup => 'Thêm nhóm tùy chỉnh';
 
   @override
-  String get addDescription => 'Add description...';
+  String get addDescription => 'Thêm mô tả...';
 
   @override
-  String get addDescription1 => 'Add description...';
+  String get addDescription1 => 'Thêm mô ta...';
 
   @override
-  String get addDescription2 => 'Add description...';
+  String get addDescription2 => 'Thêm mô tả...';
 
   @override
-  String get addFromTemplate => 'Add From Template';
+  String get addFromTemplate => 'Thêm từ bản mẫu';
 
   @override
-  String get addGroup => 'Add Group';
+  String get addGroup => 'Thêm nhóm';
 
   @override
-  String get addItemManually => 'Add Item Manually';
+  String get addItemManually => 'Thêm mục thủ công';
 
   @override
-  String get addItemsToYourLists => 'Add items to your lists';
+  String get addItemsToYourLists =>
+      'Thêm các mặt hàng của bạn vào các danh sách của bạn';
 
   @override
-  String get addNewLocation => 'Add new location';
+  String get addNewLocation => 'Thêm địa điểm mới';
 
   @override
-  String get added => 'Added';
+  String get added => 'Đã thêm';
 
   @override
-  String get appLanguage => 'App Language';
+  String get appLanguage => 'Ngôn ngữ ứng dụng';
 
   @override
-  String get appVersion => 'App Version';
+  String get appVersion => 'Phiên bản ứng dụng';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems =>
-      'Are you sure you want to remove all completed items?';
+      'Bạn có chắc muốn xóa toàn bộ những mặt hàng đã hoàn thành?';
 
   @override
   String get areYouSureYouWantToRemoveAllCompletedItems1 =>
-      'Are you sure you want to remove all completed items?';
+      'Bạn có chắc muốn xóa toàn bộ mặt hàng đã hoàn thành của bạn không?';
 
   @override
-  String get areYouSureYouWantToSignOut => 'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut => 'Bạn có chắc muốn đăng xuất không?';
 
   @override
-  String get areYouSureYouWantToSignOut1 =>
-      'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut1 => 'Bạn có chắc muốn đăng xuất không?';
 
   @override
-  String get areYouSureYouWantToSignOut2 =>
-      'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut2 => 'Bạn có chắc muốn đăng xuất không?';
 
   @override
-  String get areYouSureYouWantToSignOut3 =>
-      'Are you sure you want to sign out?';
+  String get areYouSureYouWantToSignOut3 => 'Bạn có chắc muốn đăng xuất không?';
 
   @override
-  String get avgCompletion => 'Avg Completion';
+  String get avgCompletion => 'Tỷ lệ hoàn thành trung bình';
 
   @override
-  String get canAddEditAndDeleteItems => 'Can add, edit, and delete items';
+  String get canAddEditAndDeleteItems =>
+      'Có thể thêm, chỉnh sửa và xóa những mặt hàng';
 
   @override
-  String get canOnlyViewItems => 'Can only view items';
+  String get canOnlyViewItems => 'Chỉ có thể xem mặt hàng';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Hủy';
 
   @override
-  String get cancel1 => 'Cancel';
+  String get cancel1 => 'Hủy';
 
   @override
-  String get cancel10 => 'Cancel';
+  String get cancel10 => 'Hủy';
 
   @override
-  String get cancel11 => 'Cancel';
+  String get cancel11 => 'Hủy';
 
   @override
-  String get cancel12 => 'Cancel';
+  String get cancel12 => 'Hủy';
 
   @override
-  String get cancel2 => 'Cancel';
+  String get cancel2 => 'Hủy';
 
   @override
-  String get cancel3 => 'Cancel';
+  String get cancel3 => 'Hủy';
 
   @override
-  String get cancel4 => 'Cancel';
+  String get cancel4 => 'Hủy';
 
   @override
-  String get cancel5 => 'Cancel';
+  String get cancel5 => 'Hủy';
 
   @override
-  String get cancel6 => 'Cancel';
+  String get cancel6 => 'Hủy';
 
   @override
-  String get cancel7 => 'Cancel';
+  String get cancel7 => 'Hủy';
 
   @override
-  String get cancel8 => 'Cancel';
+  String get cancel8 => 'Hủy';
 
   @override
-  String get cancel9 => 'Cancel';
+  String get cancel9 => 'Hủy';
 
   @override
-  String get category => 'Category';
+  String get category => 'Danh mục';
 
   @override
-  String get category1 => 'Category';
+  String get category1 => 'Danh mục';
 
   @override
-  String get categoryCreatedSuccessfully => 'Category created successfully';
+  String get categoryCreatedSuccessfully => 'Danh mục đã được tạo thành công';
 
   @override
   String get categoryCreatedSuccessfully1 => 'Category created successfully';

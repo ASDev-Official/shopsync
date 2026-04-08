@@ -557,23 +557,23 @@ class AppLocalizationsEs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '+$count more',
-      one: '+1 more',
+      other: '+$count más',
+      one: '+1 más',
     );
     return '$_temp0';
   }
 
   @override
-  String get outageImpactCritical => 'Critical';
+  String get outageImpactCritical => 'Crítico';
 
   @override
-  String get outageImpactMajor => 'Major';
+  String get outageImpactMajor => 'Mayor';
 
   @override
-  String get outageImpactMinor => 'Minor';
+  String get outageImpactMinor => 'Menor';
 
   @override
-  String get outageImpactDefault => 'Outage';
+  String get outageImpactDefault => 'Corte';
 
   @override
   String couldNotLaunchUrl2(String url) {
