@@ -8,6 +8,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
+import '/screens/settings/android_account_manager_screen.dart';
 import '/screens/auth/sign_out.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/widgets/common/advert.dart';
@@ -174,6 +175,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _signOut() async {
+    if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AndroidAccountManagerScreen(),
+        ),
+      );
+      return;
+    }
+
     final shouldSignOut = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
@@ -1573,8 +1584,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: double.infinity,
                       child: ButtonM3E(
                         onPressed: () => {_signOut()},
-                        icon: const Icon(Icons.logout),
-                        label: Text(AppLocalizations.of(context)!.signOut),
+                        icon: Icon(
+                          !kIsWeb &&
+                                  defaultTargetPlatform ==
+                                      TargetPlatform.android
+                              ? Icons.manage_accounts
+                              : Icons.logout,
+                        ),
+                        label: Text(
+                          !kIsWeb &&
+                                  defaultTargetPlatform ==
+                                      TargetPlatform.android
+                              ? AppLocalizations.of(context)!.manageAccounts
+                              : AppLocalizations.of(context)!.signOut,
+                        ),
                         style: ButtonM3EStyle.outlined,
                         size: ButtonM3ESize.lg,
                       ),

@@ -6,6 +6,8 @@ import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
 import '/utils/sentry_auth_utils.dart';
 import '/services/data/gravatar_service.dart';
+import '/services/auth/google_auth.dart';
+import '/services/auth/android_system_accounts_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -99,6 +101,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
 
       await userCredential.user?.updateDisplayName(_nameController.text.trim());
+
+      await GoogleAuthService.savePasswordCredentialForAndroid(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+
+      await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+        password: _passwordController.text,
+        provider: 'password',
+      );
 
       // Initialize Gravatar (async, non-blocking)
       GravatarService.initializeGravatar(

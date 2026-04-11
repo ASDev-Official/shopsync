@@ -60,6 +60,11 @@ class _WearLoginScreenState extends State<WearLoginScreen> {
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
+
+      await GoogleAuthService.savePasswordCredentialForAndroid(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
     } on FirebaseAuthException catch (e) {
       String message;
       switch (e.code) {

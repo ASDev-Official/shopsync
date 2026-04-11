@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
 import 'package:intl/intl.dart';
-import 'package:shopsync/l10n/app_localizations.dart';
+import '/wear/widgets/wear_status_feedback_overlay.dart';
 
 class WearItemDetailsScreen extends StatefulWidget {
   final String listId;
@@ -21,6 +21,24 @@ class WearItemDetailsScreen extends StatefulWidget {
 
 class _WearItemDetailsScreenState extends State<WearItemDetailsScreen> {
   final ScrollController _scrollController = ScrollController();
+  bool _showFeedback = false;
+  bool _feedbackSuccess = true;
+
+  void _showStatusFeedback(bool isSuccess) {
+    if (!mounted) return;
+
+    setState(() {
+      _feedbackSuccess = isSuccess;
+      _showFeedback = true;
+    });
+
+    Future<void>.delayed(const Duration(milliseconds: 900), () {
+      if (!mounted) return;
+      setState(() {
+        _showFeedback = false;
+      });
+    });
+  }
 
   @override
   void dispose() {
@@ -39,17 +57,9 @@ class _WearItemDetailsScreenState extends State<WearItemDetailsScreen> {
         'completed': !currentValue,
         'lastModified': FieldValue.serverTimestamp(),
       });
+      _showStatusFeedback(true);
     } catch (e) {
-      if (mounted) {
-        final l10n = AppLocalizations.of(context)!;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('${l10n.error}: ${e.toString()}'),
-            backgroundColor: Colors.red,
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      }
+      _showStatusFeedback(false);
     }
   }
 
@@ -62,7 +72,15 @@ class _WearItemDetailsScreenState extends State<WearItemDetailsScreen> {
             return Scaffold(
               backgroundColor:
                   mode == WearMode.active ? Colors.black : Colors.black,
-              body: _buildItemDetails(mode, shape),
+              body: Stack(
+                children: [
+                  _buildItemDetails(mode, shape),
+                  WearStatusFeedbackOverlay(
+                    visible: _showFeedback,
+                    isSuccess: _feedbackSuccess,
+                  ),
+                ],
+              ),
             );
           },
         );

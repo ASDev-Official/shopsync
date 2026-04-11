@@ -5,9 +5,18 @@ import 'package:shopsync/l10n/app_localizations.dart';
 import 'forgot_password.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/utils/sentry_auth_utils.dart';
+import '/services/auth/google_auth.dart';
+import '/services/auth/android_system_accounts_service.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({
+    super.key,
+    this.initialEmail,
+    this.returnSuccessResult = false,
+  });
+
+  final String? initialEmail;
+  final bool returnSuccessResult;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -27,8 +36,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    if (widget.initialEmail != null && widget.initialEmail!.trim().isNotEmpty) {
+      _emailController.text = widget.initialEmail!.trim();
+    }
     _emailController.addListener(_validateEmail);
     _passwordController.addListener(_validatePassword);
+    _validateEmail();
+    _validatePassword();
   }
 
   void _validateEmail() {
@@ -81,8 +95,19 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
+
+      await GoogleAuthService.savePasswordCredentialForAndroid(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+
+      await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+        password: _passwordController.text,
+        provider: 'password',
+      );
+
       if (!mounted) return;
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(widget.returnSuccessResult ? true : null);
     } on FirebaseAuthException catch (e, stackTrace) {
       final l10n = AppLocalizations.of(context)!;
       setState(() {

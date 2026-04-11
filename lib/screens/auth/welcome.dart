@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import '/utils/sentry_auth_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:credential_manager/credential_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
@@ -26,7 +25,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   String _errorMessage = '';
   bool _isGoogleLoading = false;
-  bool _hasTriedCredentialManager = true;
+  bool _hasTriedCredentialManager = false;
+  bool _showManualAuthOptions = true;
 
   // Widget _getGoogleButtonImage(bool isDarkMode) {
   //   if (Theme.of(context).platform == TargetPlatform.android) {
@@ -113,17 +113,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Future<void> _tryCredentialManagerSignIn() async {
     if (_hasTriedCredentialManager) return;
 
+    bool signedIn = false;
+
     setState(() {
       _hasTriedCredentialManager = true;
       _isGoogleLoading = true;
+      _showManualAuthOptions = false;
     });
 
     try {
       final userCredential =
-          await GoogleAuthService.signInWithGoogleCredentialManager();
+          await GoogleAuthService.signInWithAndroidCredentialManager();
 
       if (userCredential != null) {
         // Successfully signed in with Credential Manager
+        signedIn = true;
         if (!mounted) return;
         return;
       }
@@ -135,6 +139,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       if (mounted) {
         setState(() {
           _isGoogleLoading = false;
+          if (!signedIn) {
+            _showManualAuthOptions = true;
+          }
         });
       }
     }
@@ -143,10 +150,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    // On Android, try Credential Manager automatically
+
     if (!kIsWeb && Platform.isAndroid) {
-      _tryCredentialManagerSignIn();
+      _showManualAuthOptions = false;
     }
+
+    _handleStartupAuthFlows();
+  }
+
+  Future<void> _handleStartupAuthFlows() async {
+    if (kIsWeb || !Platform.isAndroid) {
+      return;
+    }
+
+    _tryCredentialManagerSignIn();
   }
 
   @override
@@ -260,12 +277,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                 const Spacer(flex: 2),
 
-                // Continue with Google Button with morphing animation
-                AnimatedGoogleButton(
-                  onPressed: _signInWithGoogle,
-                  isLoading: _isGoogleLoading,
-                  isDarkMode: isDarkMode,
-                ),
+                if (!kIsWeb &&
+                    Platform.isAndroid &&
+                    _isGoogleLoading &&
+                    !_showManualAuthOptions)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ),
+
+                if ((kIsWeb || !Platform.isAndroid) && _showManualAuthOptions)
+                  AnimatedGoogleButton(
+                    onPressed: _signInWithGoogle,
+                    isLoading: _isGoogleLoading,
+                    isDarkMode: isDarkMode,
+                  ),
 
                 // Error Message Display
                 if (_errorMessage.isNotEmpty)
@@ -295,64 +323,66 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
 
-                const SizedBox(height: 20),
+                if (_showManualAuthOptions) const SizedBox(height: 20),
 
-                // Login Button
-                ButtonM3E(
-                  onPressed: () async {
-                    if (await connectivityService
-                        .checkConnectivityAndShowDialog(context,
-                            feature: l10n.shopSyncAuthentication)) {
-                      Navigator.pushNamed(context, '/login');
-                    }
-                  },
-                  label: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.login, size: 24),
-                      const SizedBox(width: 12),
-                      Text(
-                        l10n.signIn,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                if (_showManualAuthOptions) ...[
+                  // Login Button
+                  ButtonM3E(
+                    onPressed: () async {
+                      if (await connectivityService
+                          .checkConnectivityAndShowDialog(context,
+                              feature: l10n.shopSyncAuthentication)) {
+                        Navigator.pushNamed(context, '/login');
+                      }
+                    },
+                    label: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.login, size: 24),
+                        const SizedBox(width: 12),
+                        Text(
+                          l10n.signIn,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    style: ButtonM3EStyle.filled,
+                    size: ButtonM3ESize.lg,
                   ),
-                  style: ButtonM3EStyle.filled,
-                  size: ButtonM3ESize.lg,
-                ),
 
-                const SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
-                // Sign Up Button
-                ButtonM3E(
-                  onPressed: () async {
-                    if (await connectivityService
-                        .checkConnectivityAndShowDialog(context,
-                            feature: l10n.shopSyncAuthentication)) {
-                      // Navigate to registration screen
-                      Navigator.pushNamed(context, '/register');
-                    }
-                  },
-                  label: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.person_add, size: 24),
-                      const SizedBox(width: 12),
-                      Text(
-                        l10n.signUp,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                  // Sign Up Button
+                  ButtonM3E(
+                    onPressed: () async {
+                      if (await connectivityService
+                          .checkConnectivityAndShowDialog(context,
+                              feature: l10n.shopSyncAuthentication)) {
+                        // Navigate to registration screen
+                        Navigator.pushNamed(context, '/register');
+                      }
+                    },
+                    label: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.person_add, size: 24),
+                        const SizedBox(width: 12),
+                        Text(
+                          l10n.signUp,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    style: ButtonM3EStyle.outlined,
+                    size: ButtonM3ESize.lg,
                   ),
-                  style: ButtonM3EStyle.outlined,
-                  size: ButtonM3ESize.lg,
-                ),
+                ],
 
                 // const SizedBox(height: 20),
 

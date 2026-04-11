@@ -1604,6 +1604,47 @@ class AppLocalizationsTa extends AppLocalizations {
   String get signOut5 => 'Sign Out';
 
   @override
+  String get manageAccounts => 'ShopSync Accounts';
+
+  @override
+  String get accountManager => 'ShopSync Accounts';
+
+  @override
+  String get accountManagerSubtitle => 'Accounts on this device';
+
+  @override
+  String get manageAccountsDescription =>
+      'Choose an account to continue, or add another account.';
+
+  @override
+  String get switchAccount => 'Switch account';
+
+  @override
+  String get addGoogleAccount => 'Add Google account';
+
+  @override
+  String get addEmailPasswordAccount => 'Add account';
+
+  @override
+  String get removeCurrentAccount => 'Remove this account';
+
+  @override
+  String get noSavedAccounts => 'No accounts on this device yet.';
+
+  @override
+  String get accountSwitched => 'Switched account.';
+
+  @override
+  String get googleAccountAdded => 'Google account added.';
+
+  @override
+  String get removeAccountConfirm => 'Remove this account from this device?';
+
+  @override
+  String get removeAccountDetails =>
+      'This will sign you out and remove this ShopSync account from the Android account picker.';
+
+  @override
   String get skipForNow => 'Skip for Now';
 
   @override
@@ -2391,6 +2432,10 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get manageHowYouSignIn => 'Manage how you sign in to ShopSync';
+
+  @override
+  String get useCredentialManagerToSwitchAccounts =>
+      'Open Android account picker';
 
   @override
   String get emailAndPassword => 'Email & Password';

@@ -6,7 +6,7 @@ import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../../services/locale_service.dart';
 import '../../wear/wear_main.dart';
-import 'wear_sign_out_screen.dart';
+import 'wear_account_manager_screen.dart';
 import 'wear_custom_licenses.dart';
 import 'wear_language_selector_screen.dart';
 
@@ -463,7 +463,7 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
             ),
           ),
 
-          // Sign out button
+          // Account manager button
           SliverPadding(
             padding: EdgeInsets.only(
               left: shape == WearShape.round ? 32.0 : 12.0,
@@ -487,7 +487,8 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const WearSignOutScreen(),
+                          builder: (context) =>
+                              const WearAccountManagerScreen(),
                         ),
                       );
                     },
@@ -496,14 +497,14 @@ class _WearSettingsScreenState extends State<WearSettingsScreen> {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.exit_to_app,
+                            Icons.manage_accounts,
                             size: 18,
-                            color: Colors.red[400],
+                            color: Colors.green[400],
                           ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'Sign Out',
+                              l10n.manageAccounts,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: mode == WearMode.active

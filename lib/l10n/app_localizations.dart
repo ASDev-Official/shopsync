@@ -2885,6 +2885,84 @@ abstract class AppLocalizations {
   /// **'Sign Out'**
   String get signOut5;
 
+  /// No description provided for @manageAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'ShopSync Accounts'**
+  String get manageAccounts;
+
+  /// No description provided for @accountManager.
+  ///
+  /// In en, this message translates to:
+  /// **'ShopSync Accounts'**
+  String get accountManager;
+
+  /// No description provided for @accountManagerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts on this device'**
+  String get accountManagerSubtitle;
+
+  /// No description provided for @manageAccountsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an account to continue, or add another account.'**
+  String get manageAccountsDescription;
+
+  /// No description provided for @switchAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch account'**
+  String get switchAccount;
+
+  /// No description provided for @addGoogleAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Google account'**
+  String get addGoogleAccount;
+
+  /// No description provided for @addEmailPasswordAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Add account'**
+  String get addEmailPasswordAccount;
+
+  /// No description provided for @removeCurrentAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove this account'**
+  String get removeCurrentAccount;
+
+  /// No description provided for @noSavedAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'No accounts on this device yet.'**
+  String get noSavedAccounts;
+
+  /// No description provided for @accountSwitched.
+  ///
+  /// In en, this message translates to:
+  /// **'Switched account.'**
+  String get accountSwitched;
+
+  /// No description provided for @googleAccountAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Google account added.'**
+  String get googleAccountAdded;
+
+  /// No description provided for @removeAccountConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove this account from this device?'**
+  String get removeAccountConfirm;
+
+  /// No description provided for @removeAccountDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'This will sign you out and remove this ShopSync account from the Android account picker.'**
+  String get removeAccountDetails;
+
   /// No description provided for @skipForNow.
   ///
   /// In en, this message translates to:
@@ -4208,6 +4286,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Manage how you sign in to ShopSync'**
   String get manageHowYouSignIn;
+
+  /// No description provided for @useCredentialManagerToSwitchAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Android account picker'**
+  String get useCredentialManagerToSwitchAccounts;
 
   /// No description provided for @emailAndPassword.
   ///

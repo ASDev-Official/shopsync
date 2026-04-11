@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:credential_manager/credential_manager.dart';
 import '/services/data/gravatar_service.dart';
+import '/services/auth/android_system_accounts_service.dart';
 
 /// Service for handling Google Sign-In with Firebase Authentication
 /// Supports web, Android (phone and WearOS) platforms
@@ -76,6 +77,150 @@ class GoogleAuthService {
     }
   }
 
+  /// Sign in with any ShopSync credential stored in Android Credential Manager.
+  /// Supports both Google ID tokens and saved email/password credentials.
+  static Future<UserCredential?> signInWithAndroidCredentialManager() async {
+    if (kIsWeb) {
+      throw UnsupportedError('Use signInWithGoogle for web platform');
+    }
+
+    await initialize();
+    await _initCredentialManager();
+
+    if (!_credentialManager.isGmsAvailable) {
+      throw Exception('Google Play Services is not available on this device');
+    }
+
+    try {
+      final credentials = await _credentialManager.getCredentials(
+        fetchOptions: FetchOptionsAndroid(
+          googleCredential: true,
+          passwordCredential: true,
+        ),
+      );
+
+      final googleIdTokenCredential = credentials.googleIdTokenCredential;
+      if (googleIdTokenCredential != null) {
+        final googleCredential = GoogleAuthProvider.credential(
+          idToken: googleIdTokenCredential.idToken,
+        );
+
+        final userCredential =
+            await _auth.signInWithCredential(googleCredential);
+
+        if (userCredential.additionalUserInfo?.isNewUser ?? false) {
+          await _createUserProfile(userCredential.user!);
+        }
+
+        await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+          provider: 'google',
+        );
+
+        return userCredential;
+      }
+
+      final passwordCredential = credentials.passwordCredential;
+      if (passwordCredential != null) {
+        final email = passwordCredential.username;
+        final password = passwordCredential.password;
+
+        if (email == null ||
+            email.isEmpty ||
+            password == null ||
+            password.isEmpty) {
+          return null;
+        }
+
+        final userCredential = await _auth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        if (userCredential.additionalUserInfo?.isNewUser ?? false) {
+          await _createUserProfile(userCredential.user!);
+        }
+
+        await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+          password: password,
+          provider: 'password',
+        );
+
+        return userCredential;
+      }
+
+      return null;
+    } on CredentialException catch (e, stackTrace) {
+      if (kDebugMode) {
+        print('Credential Manager Error: ${e.message}');
+      }
+      await _logError(e, stackTrace, 'signInWithAndroidCredentialManager');
+      return null;
+    } on FirebaseAuthException catch (e, stackTrace) {
+      if (kDebugMode) {
+        print('Firebase Auth Error: ${e.code} - ${e.message}');
+      }
+      if (e.code != 'user-disabled') {
+        await _logError(e, stackTrace, 'signInWithAndroidCredentialManager');
+      }
+      rethrow;
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        print('Error signing in with Android Credential Manager: $e');
+      }
+      await _logError(e, stackTrace, 'signInWithAndroidCredentialManager');
+      rethrow;
+    }
+  }
+
+  /// Save a password credential to Android Credential Manager.
+  static Future<void> savePasswordCredentialForAndroid({
+    required String email,
+    required String password,
+  }) async {
+    if (kIsWeb || !Platform.isAndroid) return;
+
+    await _initCredentialManager();
+
+    if (!_credentialManager.isSupportedPlatform ||
+        !_credentialManager.isGmsAvailable) {
+      return;
+    }
+
+    try {
+      await _credentialManager.savePasswordCredentials(
+        PasswordCredential(
+          username: email,
+          password: password,
+        ),
+      );
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        print('Error saving password credential: $e');
+      }
+      await _logError(e, stackTrace, 'savePasswordCredentialForAndroid');
+    }
+  }
+
+  /// Clear the current Android Credential Manager state.
+  static Future<void> clearAndroidCredentialManager() async {
+    if (kIsWeb || !Platform.isAndroid) return;
+
+    await _initCredentialManager();
+
+    if (!_credentialManager.isSupportedPlatform) {
+      return;
+    }
+
+    try {
+      await _credentialManager.logout();
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        print('Error clearing Credential Manager state: $e');
+      }
+      await _logError(e, stackTrace, 'clearAndroidCredentialManager');
+    }
+  }
+
   /// Sign in with Google using Credential Manager for Android/WearOS
   /// Shows Android Credential Manager picker with saved Google accounts
   /// Returns UserCredential on success, null if user cancels or no credentials
@@ -117,6 +262,10 @@ class GoogleAuthService {
       if (userCredential.additionalUserInfo?.isNewUser ?? false) {
         await _createUserProfile(userCredential.user!);
       }
+
+      await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+        provider: 'google',
+      );
 
       return userCredential;
     } on CredentialException catch (e, stackTrace) {
@@ -175,6 +324,10 @@ class GoogleAuthService {
             await _createUserProfile(userCredential.user!);
           }
 
+          await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+            provider: 'google',
+          );
+
           if (kDebugMode) {
             print(
                 'Successfully signed in with Google: ${userCredential.user?.email}');
@@ -210,6 +363,10 @@ class GoogleAuthService {
         if (userCredential.additionalUserInfo?.isNewUser ?? false) {
           await _createUserProfile(userCredential.user!);
         }
+
+        await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+          provider: 'google',
+        );
 
         if (kDebugMode) {
           print(
