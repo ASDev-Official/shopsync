@@ -27,6 +27,7 @@ import 'screens/auth/forgot_password.dart';
 import 'screens/maintenance/maintenance_screen.dart';
 import 'screens/onboarding/onboarding.dart';
 import 'screens/status/outage_dialog.dart';
+import 'screens/settings/restarting_screen.dart';
 import 'widgets/status/outage_banner.dart';
 import 'screens/settings/settings.dart';
 import 'screens/migration/migration_screen.dart';
@@ -367,12 +368,10 @@ class _AuthWrapperState extends State<AuthWrapper> {
           )
           .toList(growable: false);
 
-      await GoogleAuthService.signOut();
-
       if (!mounted) return;
       setState(() {
         _isCheckingDeviceAccountAvailability = false;
-        _shouldShowRecoverySelector = alternatives.isNotEmpty;
+        _shouldShowRecoverySelector = true;
         _recoveryAccountOptions = alternatives;
       });
     } catch (_) {
@@ -554,6 +553,13 @@ class _AuthWrapperState extends State<AuthWrapper> {
                     );
                   }
 
+                  if (_shouldShowRecoverySelector) {
+                    return _RecoveryAccountSelectorDialog(
+                      accounts: _recoveryAccountOptions,
+                      onAccountSwitched: _clearRecoverySelector,
+                    );
+                  }
+
                   _updateUserFutures(snapshot.data!.uid);
 
                   return FutureBuilder<bool>(
@@ -619,14 +625,8 @@ class _AuthWrapperState extends State<AuthWrapper> {
                 _gravatarPreferenceFuture = null;
                 _isInitialLoad = true;
                 _lastCheckedDeviceAccountUid = null;
-
-                if (_shouldShowRecoverySelector &&
-                    _recoveryAccountOptions.isNotEmpty) {
-                  return _RecoveryAccountSelectorDialog(
-                    accounts: _recoveryAccountOptions,
-                    onAccountSwitched: _clearRecoverySelector,
-                  );
-                }
+                _shouldShowRecoverySelector = false;
+                _recoveryAccountOptions = const [];
 
                 return WelcomeScreen();
               },
@@ -656,6 +656,7 @@ class _RecoveryAccountSelectorDialogState
     extends State<_RecoveryAccountSelectorDialog> {
   bool _isSwitching = false;
   String? _errorMessage;
+  bool _isClosing = false;
 
   String _providerOf(Map<String, String> account) {
     final hasPassword =
@@ -727,6 +728,38 @@ class _RecoveryAccountSelectorDialogState
     }
   }
 
+  Future<void> _closeAndRestart() async {
+    if (_isClosing) return;
+
+    setState(() {
+      _isClosing = true;
+      _errorMessage = null;
+    });
+
+    try {
+      await GoogleAuthService.clearAndroidCredentialManager();
+      await GoogleAuthService.signOut();
+
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => const RestartingScreen(),
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _errorMessage = e.toString();
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isClosing = false;
+        });
+      }
+    }
+  }
+
   Widget _providerPill(String provider, AppLocalizations l10n) {
     final isGoogle = provider == 'google';
     return Container(
@@ -755,7 +788,9 @@ class _RecoveryAccountSelectorDialogState
     return PopScope(
       canPop: false,
       child: Scaffold(
-        backgroundColor: Colors.black.withValues(alpha: 0.35),
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? Colors.green.shade900
+            : Colors.green.shade100,
         body: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 520),
@@ -783,36 +818,55 @@ class _RecoveryAccountSelectorDialogState
                     ),
                     const SizedBox(height: 10),
                   ],
-                  SizedBox(
-                    width: double.maxFinite,
-                    child: Column(
-                      children: widget.accounts.map((account) {
-                        final email = account['name'] ?? '';
-                        final displayName = account['displayName'] ?? '';
-                        final provider = _providerOf(account);
+                  if (widget.accounts.isEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Text(l10n.noSavedAccounts),
+                    )
+                  else
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: Column(
+                        children: widget.accounts.map((account) {
+                          final email = account['name'] ?? '';
+                          final displayName = account['displayName'] ?? '';
+                          final provider = _providerOf(account);
 
-                        return ListTile(
-                          enabled: !_isSwitching,
-                          leading: UserAvatar.fromUserId(
-                            userId: account['uid'] ?? '',
-                            radius: 20,
-                          ),
-                          title: Text(
-                            displayName.isNotEmpty ? displayName : email,
-                          ),
-                          subtitle: Text(email),
-                          trailing: _providerPill(provider, l10n),
-                          onTap: () => _switchToAccount(account),
-                        );
-                      }).toList(growable: false),
+                          return ListTile(
+                            enabled: !_isSwitching,
+                            leading: UserAvatar.fromUserId(
+                              userId: account['uid'] ?? '',
+                              radius: 20,
+                            ),
+                            title: Text(
+                              displayName.isNotEmpty ? displayName : email,
+                            ),
+                            subtitle: Text(email),
+                            trailing: _providerPill(provider, l10n),
+                            onTap: () => _switchToAccount(account),
+                          );
+                        }).toList(growable: false),
+                      ),
                     ),
-                  ),
                   if (_isSwitching) ...[
                     const SizedBox(height: 8),
                     const CircularProgressIndicator(),
                   ],
                 ],
               ),
+              actions: [
+                if (widget.accounts.isEmpty)
+                  TextButton(
+                    onPressed: _isClosing ? null : _closeAndRestart,
+                    child: _isClosing
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2.2),
+                          )
+                        : Text(l10n.close),
+                  ),
+              ],
             ),
           ),
         ),

@@ -2927,6 +2927,36 @@ abstract class AppLocalizations {
   /// **'Add account'**
   String get addEmailPasswordAccount;
 
+  /// No description provided for @removeAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Accounts'**
+  String get removeAccounts;
+
+  /// No description provided for @removeAccountsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the minus icon next to an account to remove it from this device.'**
+  String get removeAccountsDescription;
+
+  /// No description provided for @restartText.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart'**
+  String get restartText;
+
+  /// No description provided for @removeOwnAccountRestartWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Removing your currently signed-in account will restart ShopSync. You can then log in to any other account saved on this device.'**
+  String get removeOwnAccountRestartWarning;
+
+  /// No description provided for @removeAccountSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Account removed from this device.'**
+  String get removeAccountSuccess;
+
   /// No description provided for @removeCurrentAccount.
   ///
   /// In en, this message translates to:

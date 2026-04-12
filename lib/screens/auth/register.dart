@@ -11,7 +11,9 @@ import '/services/auth/google_auth.dart';
 import '/services/auth/android_system_accounts_service.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  const RegisterScreen({super.key, this.returnSuccessResult = false});
+
+  final bool returnSuccessResult;
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -142,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
 
       if (!mounted) return;
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(widget.returnSuccessResult ? true : null);
     } on FirebaseAuthException catch (e, stackTrace) {
       final l10n = AppLocalizations.of(context)!;
       setState(() {

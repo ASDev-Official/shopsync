@@ -1626,6 +1626,23 @@ class AppLocalizationsId extends AppLocalizations {
   String get addEmailPasswordAccount => 'Add account';
 
   @override
+  String get removeAccounts => 'Remove Accounts';
+
+  @override
+  String get removeAccountsDescription =>
+      'Tap the minus icon next to an account to remove it from this device.';
+
+  @override
+  String get restartText => 'Restart';
+
+  @override
+  String get removeOwnAccountRestartWarning =>
+      'Removing your currently signed-in account will restart ShopSync. You can then log in to any other account saved on this device.';
+
+  @override
+  String get removeAccountSuccess => 'Account removed from this device.';
+
+  @override
   String get removeCurrentAccount => 'Remove this account';
 
   @override

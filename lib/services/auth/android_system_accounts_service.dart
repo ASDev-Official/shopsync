@@ -107,6 +107,33 @@ class AndroidSystemAccountsService {
     }
   }
 
+  static Future<void> removeSystemAccountByEmail(String email) async {
+    if (kIsWeb || !Platform.isAndroid) return;
+
+    final normalizedEmail = email.trim();
+    if (normalizedEmail.isEmpty) return;
+
+    try {
+      await _channel.invokeMethod('removeAccount', {
+        'email': normalizedEmail,
+      });
+    } on PlatformException catch (e, stackTrace) {
+      await _captureChannelException(
+        e,
+        stackTrace,
+        'removeSystemAccountByEmail',
+        email: normalizedEmail,
+      );
+    } catch (e, stackTrace) {
+      await _captureChannelException(
+        e,
+        stackTrace,
+        'removeSystemAccountByEmail',
+        email: normalizedEmail,
+      );
+    }
+  }
+
   static Future<List<String>> listSystemAccounts() async {
     if (kIsWeb || !Platform.isAndroid) return const [];
 

@@ -4,6 +4,7 @@ import 'package:m3e_collection/m3e_collection.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+import '/screens/auth/register.dart';
 import '/screens/auth/login.dart';
 import '/services/auth/android_system_accounts_service.dart';
 import '/services/auth/google_auth.dart';
@@ -91,7 +92,7 @@ class _SystemAddAccountScreenState extends State<SystemAddAccountScreen> {
       final success = await Navigator.push<bool>(
         context,
         MaterialPageRoute(
-          builder: (context) => const LoginScreen(returnSuccessResult: true),
+          builder: (context) => const RegisterScreen(returnSuccessResult: true),
         ),
       );
 

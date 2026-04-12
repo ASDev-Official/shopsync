@@ -6,6 +6,7 @@ import 'package:m3e_collection/m3e_collection.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import '/widgets/user/user_avatar.dart';
 import '/screens/auth/login.dart';
+import '/screens/settings/restarting_screen.dart';
 import '/services/auth/google_auth.dart';
 import '/services/auth/android_system_accounts_service.dart';
 
@@ -84,29 +85,41 @@ class _AndroidAccountManagerScreenState
   Future<void> _showSwitchingDialog() async {
     if (_switchingDialogVisible || !mounted) return;
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     _switchingDialogVisible = true;
     await showDialog<void>(
       context: context,
       barrierDismissible: false,
+      barrierColor: Colors.transparent,
       builder: (context) {
         return PopScope(
           canPop: false,
-          child: AlertDialog(
-            title: Text(AppLocalizations.of(context)!.switchAccount),
-            content: Row(
-              children: [
-                const SizedBox(
-                  height: 22,
-                  width: 22,
-                  child: CircularProgressIndicator(strokeWidth: 2.5),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    AppLocalizations.of(context)!.switchAccount,
+          child: Scaffold(
+            backgroundColor:
+                isDark ? Colors.green.shade900 : Colors.green.shade100,
+            body: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 520),
+                child: AlertDialog(
+                  title: Text(AppLocalizations.of(context)!.switchAccount),
+                  content: Row(
+                    children: [
+                      const SizedBox(
+                        height: 22,
+                        width: 22,
+                        child: CircularProgressIndicator(strokeWidth: 2.5),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context)!.switchAccount,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         );
@@ -191,7 +204,11 @@ class _AndroidAccountManagerScreenState
         return;
       }
 
-      unawaited(_showSwitchingDialog());
+      final shouldShowSwitchingDialog = provider != 'google';
+
+      if (shouldShowSwitchingDialog) {
+        unawaited(_showSwitchingDialog());
+      }
 
       if (provider == 'google') {
         final userCredential =
@@ -219,7 +236,9 @@ class _AndroidAccountManagerScreenState
         );
       }
 
-      _closeSwitchingDialog();
+      if (shouldShowSwitchingDialog) {
+        _closeSwitchingDialog();
+      }
       await _loadSystemAccounts();
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -277,24 +296,23 @@ class _AndroidAccountManagerScreenState
     }
   }
 
-  Future<void> _removeCurrentAccount() async {
-    final shouldRemove = await showDialog<bool>(
+  Future<bool> _confirmOwnAccountRemoval() async {
+    final l10n = AppLocalizations.of(context)!;
+    final shouldRestart = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(AppLocalizations.of(context)!.removeCurrentAccount),
-            content: Text(
-              AppLocalizations.of(context)!.removeAccountDetails,
-            ),
+            title: Text(l10n.restartRequiredTitle),
+            content: Text(l10n.removeOwnAccountRestartWarning),
             actions: [
               ButtonM3E(
                 onPressed: () => Navigator.pop(context, false),
-                label: Text(AppLocalizations.of(context)!.cancel),
+                label: Text(l10n.cancel),
                 style: ButtonM3EStyle.text,
                 size: ButtonM3ESize.md,
               ),
               ButtonM3E(
                 onPressed: () => Navigator.pop(context, true),
-                label: Text(AppLocalizations.of(context)!.removeCurrentAccount),
+                label: Text(l10n.restartText),
                 style: ButtonM3EStyle.text,
                 size: ButtonM3ESize.md,
               ),
@@ -303,31 +321,172 @@ class _AndroidAccountManagerScreenState
         ) ??
         false;
 
-    if (!shouldRemove) {
+    return shouldRestart;
+  }
+
+  Future<void> _openRemoveAccountsModal() async {
+    if (_systemAccounts.isEmpty) {
+      setState(() {
+        _errorMessage = AppLocalizations.of(context)!.noSavedAccounts;
+      });
       return;
     }
 
-    setState(() {
-      _isRemoving = true;
-      _errorMessage = null;
-    });
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (sheetContext) {
+        final l10n = AppLocalizations.of(sheetContext)!;
+        final removingEmails = <String>{};
 
-    try {
-      await AndroidSystemAccountsService.removeCurrentUserFromSystemAccounts();
-      await GoogleAuthService.signOut();
-      if (!mounted) return;
-      Navigator.of(context).popUntil((route) => route.isFirst);
-    } catch (e) {
-      setState(() {
-        _errorMessage = e.toString();
-      });
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isRemoving = false;
-        });
-      }
-    }
+        return StatefulBuilder(
+          builder: (modalContext, setModalState) {
+            Future<void> removeAccount(Map<String, String> account) async {
+              final email = account['name'] ?? '';
+              if (email.isEmpty) {
+                return;
+              }
+
+              final currentEmail = _user?.email ?? '';
+              final isCurrent = currentEmail.isNotEmpty &&
+                  currentEmail.toLowerCase() == email.toLowerCase();
+
+              if (isCurrent) {
+                final shouldContinue = await _confirmOwnAccountRemoval();
+                if (!shouldContinue) {
+                  return;
+                }
+              }
+
+              setModalState(() {
+                removingEmails.add(email.toLowerCase());
+              });
+
+              setState(() {
+                _isRemoving = true;
+                _errorMessage = null;
+              });
+
+              try {
+                await AndroidSystemAccountsService.removeSystemAccountByEmail(
+                  email,
+                );
+
+                if (!mounted) return;
+                await _loadSystemAccounts();
+                if (!mounted) return;
+
+                if (isCurrent) {
+                  if (Navigator.of(modalContext).canPop()) {
+                    Navigator.of(modalContext).pop();
+                  }
+                  await Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) => const RestartingScreen(),
+                    ),
+                  );
+                  return;
+                }
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(l10n.removeAccountSuccess)),
+                );
+              } catch (e) {
+                if (!mounted) return;
+                setState(() {
+                  _errorMessage = e.toString();
+                });
+              } finally {
+                if (mounted) {
+                  setState(() {
+                    _isRemoving = false;
+                  });
+                }
+                setModalState(() {
+                  removingEmails.remove(email.toLowerCase());
+                });
+              }
+            }
+
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.removeAccounts,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      l10n.removeAccountsDescription,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 16),
+                    Flexible(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _systemAccounts.length,
+                        itemBuilder: (context, index) {
+                          final account = _systemAccounts[index];
+                          final email = account['name'] ?? '';
+                          final displayName = account['displayName'] ?? '';
+                          final provider = _accountProvider(account);
+                          final isCurrent = _user?.email != null &&
+                              _user!.email!.toLowerCase() ==
+                                  email.toLowerCase();
+                          final isRemovingThis =
+                              removingEmails.contains(email.toLowerCase());
+
+                          return ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: UserAvatar.fromUserId(
+                              userId: account['uid'] ?? '',
+                              radius: 20,
+                              isOwner: isCurrent,
+                            ),
+                            title: Text(
+                              displayName.isNotEmpty ? displayName : email,
+                            ),
+                            subtitle: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                _buildProviderBadge(provider, l10n),
+                              ],
+                            ),
+                            trailing: isRemovingThis
+                                ? const SizedBox(
+                                    width: 22,
+                                    height: 22,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.4,
+                                    ),
+                                  )
+                                : IconButton(
+                                    tooltip: l10n.removeAccounts,
+                                    onPressed: _isRemoving
+                                        ? null
+                                        : () => removeAccount(account),
+                                    icon: const Icon(
+                                      Icons.remove_circle_outline,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   Future<void> _addGoogleAccount() async {
@@ -524,8 +683,8 @@ class _AndroidAccountManagerScreenState
           ),
           const SizedBox(height: 20),
           ButtonM3E(
-            onPressed: _isRemoving ? null : _removeCurrentAccount,
-            label: Text(l10n.removeCurrentAccount),
+            onPressed: _isRemoving ? null : _openRemoveAccountsModal,
+            label: Text(l10n.removeAccounts),
             style: ButtonM3EStyle.text,
             size: ButtonM3ESize.md,
           ),
