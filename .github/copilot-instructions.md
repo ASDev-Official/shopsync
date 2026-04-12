@@ -187,6 +187,8 @@ Text(AppLocalizations.of(context)!.aiFeatures)
 ### Authentication
 
 - Google Sign-In uses **Credential Manager** on Android (v2.0.0 API) for passkey support
+- Android Account Manager screen supports two explicit add flows: `Add account` (email/password via system add-account intent) and `Add Google account` (interactive Google sign-in). Both must register/update ShopSync system accounts after successful auth.
+- When launched from Android device Settings -> Accounts -> Add account -> ShopSync, app startup must route to a dedicated add-account chooser screen (Google vs email/password) instead of home/welcome. After successful add, the flow must close the activity and return to device Settings.
 - Web uses `GoogleSignIn` with client ID from `GoogleAuthService._webClientId`
 - Check `currentUser.providerData` to detect linked providers (Google, email/password)
 

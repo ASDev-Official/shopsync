@@ -41,7 +41,7 @@ class _RestartingScreenState extends State<RestartingScreen> {
   @override
   void initState() {
     super.initState();
-    _restartTimer = Timer(const Duration(seconds: 2), () async {
+    _restartTimer = Timer(const Duration(milliseconds: 600), () async {
       await _restartOrFallback();
     });
   }

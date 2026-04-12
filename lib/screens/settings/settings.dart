@@ -4,6 +4,7 @@ import 'package:m3e_collection/m3e_collection.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shopsync/screens/auth/sign_out.dart';
+import 'package:shopsync/screens/settings/android_account_manager_screen.dart';
 import 'package:shopsync/screens/settings/custom_licenses.dart';
 import 'package:shopsync/screens/settings/restarting_screen.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
@@ -165,6 +166,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _signOut() async {
     final l10n = AppLocalizations.of(context)!;
+
+    if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AndroidAccountManagerScreen(),
+        ),
+      );
+      return;
+    }
+
     final shouldSignOut = await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
@@ -371,11 +383,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
           // Settings Section
           SectionHeader(title: l10n.settings, color: iconColor),
           buildSettingsTile(
-            icon: Icons.logout,
-            title: l10n.signOut,
-            iconColorOverride: Colors.red,
-            textColorOverride: Colors.red,
-            isDestructive: true,
+            icon: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                ? Icons.manage_accounts
+                : Icons.logout,
+            title: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                ? l10n.manageAccounts
+                : l10n.signOut,
+            subtitle: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                ? l10n.manageAccountsDescription
+                : l10n.areYouSureYouWantToSignOut,
+            iconColorOverride:
+                !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                    ? Colors.green[700]
+                    : Colors.red,
+            textColorOverride:
+                !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                    ? Colors.green[700]
+                    : Colors.red,
+            isDestructive:
+                kIsWeb || defaultTargetPlatform != TargetPlatform.android,
             onTap: _signOut,
           ),
           Padding(

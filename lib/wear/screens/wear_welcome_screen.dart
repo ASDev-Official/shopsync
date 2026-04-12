@@ -43,7 +43,7 @@ class _WearWelcomeScreenState extends State<WearWelcomeScreen> {
 
     try {
       final userCredential =
-          await GoogleAuthService.signInWithGoogleCredentialManager();
+          await GoogleAuthService.signInWithAndroidCredentialManager();
 
       if (userCredential != null) {
         // Successfully signed in - auth state change will handle navigation

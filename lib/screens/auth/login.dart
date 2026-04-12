@@ -3,49 +3,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import 'forgot_password.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/utils/sentry_auth_utils.dart';
+import '/services/auth/google_auth.dart';
+import '/services/auth/android_system_accounts_service.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({
+    super.key,
+    this.initialEmail,
+    this.returnSuccessResult = false,
+  });
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
+  final String? initialEmail;
+  final bool returnSuccessResult;
 
-class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  String _errorMessage = '';
-  bool _isLoading = false;
-  bool _obscureText = true;
-  bool _isEmailValid = false;
-  bool _isPasswordValid = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _emailController.addListener(_validateEmail);
-    _passwordController.addListener(_validatePassword);
-  }
-
-  void _validateEmail() {
-    setState(() {
-      final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
-      _isEmailValid = _emailController.text.trim().isNotEmpty &&
-          emailRegex.hasMatch(_emailController.text.trim());
-    });
-  }
-
-  void _validatePassword() {
-    setState(() {
-      _isPasswordValid = _passwordController.text.isNotEmpty;
-    });
-  }
-
-  String? _getErrorMessage(FirebaseAuthException e, AppLocalizations l10n) {
+  static String getLocalizedAuthErrorMessage(
+    BuildContext context,
+    FirebaseAuthException e,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
     switch (e.code) {
       case 'account-exists-with-different-credential':
         return l10n.loginAccountExists;
@@ -68,6 +46,47 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  String _errorMessage = '';
+  bool _isLoading = false;
+  bool _obscureText = true;
+  bool _isEmailValid = false;
+  bool _isPasswordValid = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialEmail != null && widget.initialEmail!.trim().isNotEmpty) {
+      _emailController.text = widget.initialEmail!.trim();
+    }
+    _emailController.addListener(_validateEmail);
+    _passwordController.addListener(_validatePassword);
+    _validateEmail();
+    _validatePassword();
+  }
+
+  void _validateEmail() {
+    setState(() {
+      final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
+      _isEmailValid = _emailController.text.trim().isNotEmpty &&
+          emailRegex.hasMatch(_emailController.text.trim());
+    });
+  }
+
+  void _validatePassword() {
+    setState(() {
+      _isPasswordValid = _passwordController.text.isNotEmpty;
+    });
+  }
+
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -81,18 +100,36 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
+
+      await GoogleAuthService.savePasswordCredentialForAndroid(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+
+      await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+        password: _passwordController.text,
+        provider: 'password',
+      ).catchError((error, stackTrace) async {
+        await Sentry.captureException(
+          error,
+          stackTrace: stackTrace,
+          hint: Hint.withMap({
+            'action': 'add_android_system_account_after_login',
+            'email': _emailController.text.trim(),
+          }),
+        );
+      });
+
       if (!mounted) return;
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(widget.returnSuccessResult ? true : null);
     } on FirebaseAuthException catch (e, stackTrace) {
-      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _errorMessage = _getErrorMessage(e, l10n) ?? l10n.loginGenericError;
+        _errorMessage = LoginScreen.getLocalizedAuthErrorMessage(context, e);
       });
       await SentryUtils.reportError(e, stackTrace);
     } catch (e, stackTrace) {
-      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _errorMessage = l10n.loginGenericError;
+        _errorMessage = AppLocalizations.of(context)!.loginGenericError;
       });
       await SentryUtils.reportError(e, stackTrace);
     } finally {

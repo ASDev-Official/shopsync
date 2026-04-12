@@ -1,6 +1,7 @@
 // ignore_for_file: experimental_member_use
 
 import 'dart:async';
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,7 @@ import 'package:shopsync/widgets/ui/loading_spinner.dart';
 import 'config/firebase_options.dart';
 import 'screens/auth/welcome.dart';
 import 'screens/auth/login.dart';
+import 'screens/auth/system_add_account_screen.dart';
 import 'screens/auth/register.dart';
 import 'screens/home.dart';
 import 'screens/settings/ai_preference_setup.dart';
@@ -25,6 +27,8 @@ import 'screens/auth/forgot_password.dart';
 import 'screens/maintenance/maintenance_screen.dart';
 import 'screens/onboarding/onboarding.dart';
 import 'screens/status/outage_dialog.dart';
+import 'screens/settings/restarting_screen.dart';
+import 'widgets/status/outage_banner.dart';
 import 'screens/settings/settings.dart';
 import 'screens/migration/migration_screen.dart';
 import 'screens/settings/feedback.dart';
@@ -34,8 +38,10 @@ import 'services/platform/maintenance_service.dart';
 import 'services/platform/statuspage_service.dart';
 import 'services/storage/shared_prefs.dart';
 import 'services/platform/home_widget_service.dart';
+import 'services/auth/android_system_accounts_service.dart';
+import 'services/auth/google_auth.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'widgets/status/outage_banner.dart';
+import 'widgets/user/user_avatar.dart';
 import 'core/navigation_service.dart';
 
 void main() async {
@@ -275,8 +281,14 @@ class _AuthWrapperState extends State<AuthWrapper> {
   String? _cachedUserId;
   Future<bool>? _aiPreferenceFuture;
   Future<bool?>? _gravatarPreferenceFuture;
+  late final Future<bool> _isFirstLaunchFuture;
+  late final Future<bool> _isSystemAddAccountFlowFuture;
 
   bool _isInitialLoad = true;
+  bool _isCheckingDeviceAccountAvailability = false;
+  String? _lastCheckedDeviceAccountUid;
+  List<Map<String, String>> _recoveryAccountOptions = const [];
+  bool _shouldShowRecoverySelector = false;
 
   void _updateUserFutures(String uid) {
     if (_cachedUserId != uid) {
@@ -287,18 +299,108 @@ class _AuthWrapperState extends State<AuthWrapper> {
     }
   }
 
+  void _startDeviceAccountAvailabilityCheck(User user) {
+    if (kIsWeb || !Platform.isAndroid) {
+      return;
+    }
+
+    if (_isCheckingDeviceAccountAvailability ||
+        _lastCheckedDeviceAccountUid == user.uid) {
+      return;
+    }
+
+    _lastCheckedDeviceAccountUid = user.uid;
+    _isCheckingDeviceAccountAvailability = true;
+    unawaited(_validateCurrentSignedInAccount(user));
+  }
+
+  Future<void> _validateCurrentSignedInAccount(User user) async {
+    try {
+      final currentEmail = user.email?.trim().toLowerCase();
+
+      if (currentEmail == null || currentEmail.isEmpty) {
+        if (!mounted) return;
+        setState(() {
+          _isCheckingDeviceAccountAvailability = false;
+          _shouldShowRecoverySelector = false;
+          _recoveryAccountOptions = const [];
+        });
+        return;
+      }
+
+      const maxAttempts = 3;
+      List<Map<String, String>> accounts = const [];
+      var currentExists = false;
+
+      for (var attempt = 0; attempt < maxAttempts; attempt++) {
+        accounts =
+            await AndroidSystemAccountsService.listSystemAccountsDetailed();
+        currentExists = accounts.any(
+          (account) =>
+              (account['name'] ?? '').trim().toLowerCase() == currentEmail,
+        );
+
+        if (currentExists) {
+          break;
+        }
+
+        if (attempt < maxAttempts - 1) {
+          await Future<void>.delayed(
+            Duration(milliseconds: 150 * (1 << attempt)),
+          );
+        }
+      }
+
+      if (currentExists) {
+        if (!mounted) return;
+        setState(() {
+          _isCheckingDeviceAccountAvailability = false;
+          _shouldShowRecoverySelector = false;
+          _recoveryAccountOptions = const [];
+        });
+        return;
+      }
+
+      final alternatives = accounts
+          .where(
+            (account) =>
+                (account['name'] ?? '').trim().toLowerCase() != currentEmail,
+          )
+          .toList(growable: false);
+
+      if (!mounted) return;
+      setState(() {
+        _isCheckingDeviceAccountAvailability = false;
+        _shouldShowRecoverySelector = true;
+        _recoveryAccountOptions = alternatives;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _isCheckingDeviceAccountAvailability = false;
+        _shouldShowRecoverySelector = false;
+        _recoveryAccountOptions = const [];
+      });
+    }
+  }
+
+  void _clearRecoverySelector() {
+    if (!mounted) return;
+    setState(() {
+      _shouldShowRecoverySelector = false;
+      _recoveryAccountOptions = const [];
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    // Check for updates after widget is built
+    _isFirstLaunchFuture = SharedPrefs.isFirstLaunch();
+    _isSystemAddAccountFlowFuture = !kIsWeb && Platform.isAndroid
+        ? AndroidSystemAccountsService.consumePendingAddAccountRequest()
+        : Future.value(false);
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (await SharedPrefs.isFirstLaunch() && mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const OnboardingScreen()),
-        );
-        return;
-      }
       UpdateService.checkForUpdate(context);
       final hasActiveMaintenance = await _checkMaintenance();
       if (!hasActiveMaintenance) {
@@ -309,13 +411,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
   Future<bool> _checkMaintenance() async {
     final maintenance = await MaintenanceService.checkMaintenance();
-    // Uncomment the following lines for testing purposes
-    // final updateInfo = await InAppUpdate.checkForUpdate();
-    //
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => UpdateAppScreen(onUpdateComplete: (bool completed) {}, updateInfo: updateInfo))
-    // );
 
     if (maintenance != null && mounted) {
       if (maintenance['isUnderMaintenance']) {
@@ -356,7 +451,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
     try {
       final outage = await StatuspageService.fetchCurrentOutage();
-      // Show fullscreen closable dialog once per app run when outage is active
       if (outage.active &&
           mounted &&
           !MaintenanceService.isMaintenanceActive.value) {
@@ -366,27 +460,27 @@ class _AuthWrapperState extends State<AuthWrapper> {
             barrierDismissible: true,
             builder: (context) => OutageDialog(outage: outage),
           ).then((_) {
-            // Track dismissal regardless of how dialog was closed (button or barrier tap)
             StatuspageService.markDialogDismissed();
           });
         }
       }
     } catch (e, stackTrace) {
-      await Sentry.captureException(e,
-          stackTrace: stackTrace,
-          hint: Hint.withMap(
-              {'action': 'check_outage', 'context': 'showing_outage_dialog'}));
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap(
+          {'action': 'check_outage', 'context': 'showing_outage_dialog'},
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        // Only show loading on initial connection, not on active/done states
-        if (snapshot.connectionState == ConnectionState.waiting &&
-            _isInitialLoad) {
+    return FutureBuilder<bool>(
+      future: _isSystemAddAccountFlowFuture,
+      builder: (context, addAccountSnapshot) {
+        if (addAccountSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             backgroundColor: Theme.of(context).brightness == Brightness.dark
                 ? const Color(0xFF212121)
@@ -400,41 +494,54 @@ class _AuthWrapperState extends State<AuthWrapper> {
           );
         }
 
-        // Check if user is logged in
-        if (snapshot.hasData && snapshot.data != null) {
-          // Cache futures keyed to the current user to prevent re-creation on rebuild
-          _updateUserFutures(snapshot.data!.uid);
+        if (addAccountSnapshot.data == true) {
+          return const SystemAddAccountScreen();
+        }
 
-          // User is signed in, check if AI preference is set
-          return FutureBuilder<bool>(
-            future: _aiPreferenceFuture,
-            builder: (context, aiSnapshot) {
-              if (aiSnapshot.connectionState == ConnectionState.waiting &&
-                  _isInitialLoad) {
-                return Scaffold(
-                  backgroundColor:
-                      Theme.of(context).brightness == Brightness.dark
-                          ? const Color(0xFF212121)
-                          : Colors.white,
-                  body: Center(
-                    child: CustomLoadingSpinner(),
+        return FutureBuilder<bool>(
+          future: _isFirstLaunchFuture,
+          builder: (context, onboardingSnapshot) {
+            if (onboardingSnapshot.connectionState == ConnectionState.waiting) {
+              return Scaffold(
+                backgroundColor: Theme.of(context).brightness == Brightness.dark
+                    ? const Color(0xFF212121)
+                    : Colors.white,
+                body: Center(
+                  child: Image.asset(
+                    'assets/logos/shopsync.png',
+                    fit: BoxFit.cover,
                   ),
-                );
-              }
+                ),
+              );
+            }
 
-              // If AI preference not set, show mandatory setup screen
-              if (!aiSnapshot.hasData || !aiSnapshot.data!) {
-                _isInitialLoad = false;
-                return const AIPreferenceSetupScreen();
-              }
+            if (onboardingSnapshot.data == true) {
+              return const OnboardingScreen();
+            }
 
-              // AI preference is set, now check Gravatar preference
-              return FutureBuilder<bool?>(
-                future: _gravatarPreferenceFuture,
-                builder: (context, gravatarSnapshot) {
-                  if (gravatarSnapshot.connectionState ==
-                          ConnectionState.waiting &&
-                      _isInitialLoad) {
+            return StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting &&
+                    _isInitialLoad) {
+                  return Scaffold(
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                            ? const Color(0xFF212121)
+                            : Colors.white,
+                    body: Center(
+                      child: Image.asset(
+                        'assets/logos/shopsync.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                }
+
+                if (snapshot.hasData && snapshot.data != null) {
+                  _startDeviceAccountAvailabilityCheck(snapshot.data!);
+
+                  if (_isCheckingDeviceAccountAvailability) {
                     return Scaffold(
                       backgroundColor:
                           Theme.of(context).brightness == Brightness.dark
@@ -446,37 +553,343 @@ class _AuthWrapperState extends State<AuthWrapper> {
                     );
                   }
 
-                  // Handle Firestore errors - allow normal startup instead of forcing setup
-                  if (gravatarSnapshot.hasError ||
-                      gravatarSnapshot.data == null) {
-                    _isInitialLoad = false;
-                    return const HomeScreen();
+                  if (_shouldShowRecoverySelector) {
+                    return _RecoveryAccountSelectorDialog(
+                      accounts: _recoveryAccountOptions,
+                      onAccountSwitched: _clearRecoverySelector,
+                    );
                   }
 
-                  // If Gravatar preference not set (false), show mandatory setup screen
-                  if (gravatarSnapshot.data == false) {
-                    _isInitialLoad = false;
-                    return const GravatarPreferenceSetupScreen();
-                  }
+                  _updateUserFutures(snapshot.data!.uid);
 
-                  // Both preferences are set, direct to home screen
-                  _isInitialLoad = false;
-                  return const HomeScreen();
-                },
-              );
-            },
-          );
+                  return FutureBuilder<bool>(
+                    future: _aiPreferenceFuture,
+                    builder: (context, aiSnapshot) {
+                      if (aiSnapshot.connectionState ==
+                              ConnectionState.waiting &&
+                          _isInitialLoad) {
+                        return Scaffold(
+                          backgroundColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? const Color(0xFF212121)
+                                  : Colors.white,
+                          body: Center(
+                            child: CustomLoadingSpinner(),
+                          ),
+                        );
+                      }
+
+                      if (!aiSnapshot.hasData || !aiSnapshot.data!) {
+                        _isInitialLoad = false;
+                        return const AIPreferenceSetupScreen();
+                      }
+
+                      return FutureBuilder<bool?>(
+                        future: _gravatarPreferenceFuture,
+                        builder: (context, gravatarSnapshot) {
+                          if (gravatarSnapshot.connectionState ==
+                                  ConnectionState.waiting &&
+                              _isInitialLoad) {
+                            return Scaffold(
+                              backgroundColor: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? const Color(0xFF212121)
+                                  : Colors.white,
+                              body: Center(
+                                child: CustomLoadingSpinner(),
+                              ),
+                            );
+                          }
+
+                          if (gravatarSnapshot.hasError ||
+                              gravatarSnapshot.data == null) {
+                            _isInitialLoad = false;
+                            return const HomeScreen();
+                          }
+
+                          if (gravatarSnapshot.data == false) {
+                            _isInitialLoad = false;
+                            return const GravatarPreferenceSetupScreen();
+                          }
+
+                          _isInitialLoad = false;
+                          return const HomeScreen();
+                        },
+                      );
+                    },
+                  );
+                }
+
+                _cachedUserId = null;
+                _aiPreferenceFuture = null;
+                _gravatarPreferenceFuture = null;
+                _isInitialLoad = true;
+                _lastCheckedDeviceAccountUid = null;
+                _shouldShowRecoverySelector = false;
+                _recoveryAccountOptions = const [];
+
+                return WelcomeScreen();
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class _RecoveryAccountSelectorDialog extends StatefulWidget {
+  const _RecoveryAccountSelectorDialog({
+    required this.accounts,
+    required this.onAccountSwitched,
+  });
+
+  final List<Map<String, String>> accounts;
+  final VoidCallback onAccountSwitched;
+
+  @override
+  State<_RecoveryAccountSelectorDialog> createState() =>
+      _RecoveryAccountSelectorDialogState();
+}
+
+class _RecoveryAccountSelectorDialogState
+    extends State<_RecoveryAccountSelectorDialog> {
+  bool _isSwitching = false;
+  String? _errorMessage;
+  bool _isClosing = false;
+
+  String _providerOf(Map<String, String> account) {
+    final hasPassword =
+        (account['hasPassword'] ?? 'false').toLowerCase() == 'true';
+    if (hasPassword) {
+      return 'password';
+    }
+
+    final provider =
+        AndroidSystemAccountsService.normalizeProvider(account['provider']);
+    if (provider == 'google') {
+      return 'google';
+    }
+
+    return 'password';
+  }
+
+  Future<void> _switchToAccount(Map<String, String> account) async {
+    if (_isSwitching) return;
+
+    setState(() {
+      _isSwitching = true;
+      _errorMessage = null;
+    });
+
+    try {
+      final email = account['name'] ?? '';
+      final provider = _providerOf(account);
+
+      if (provider == 'google') {
+        final userCredential =
+            await GoogleAuthService.signInWithGoogleCredentialManager();
+        if (userCredential == null) {
+          throw StateError('Google sign-in was cancelled');
         }
 
-        // User is not signed in - reset state
-        _cachedUserId = null;
-        _aiPreferenceFuture = null;
-        _gravatarPreferenceFuture = null;
-        _isInitialLoad = true;
+        await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+          provider: 'google',
+        );
+      } else {
+        final password =
+            await AndroidSystemAccountsService.getStoredPasswordForAccount(
+          email,
+        );
 
-        // User is not signed in, direct to welcome screen
-        return WelcomeScreen();
-      },
+        if (password == null || password.isEmpty) {
+          throw StateError('Saved password not found for this account');
+        }
+
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+          password: password,
+          provider: 'password',
+        );
+      }
+
+      widget.onAccountSwitched();
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _errorMessage = e.toString();
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSwitching = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _closeAndRestart() async {
+    if (_isClosing) return;
+
+    setState(() {
+      _isClosing = true;
+      _errorMessage = null;
+    });
+
+    try {
+      await GoogleAuthService.clearAndroidCredentialManager();
+      await GoogleAuthService.signOut();
+
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => const RestartingScreen(),
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _errorMessage = e.toString();
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isClosing = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _cancelRecoveryAndRestart() async {
+    await _closeAndRestart();
+  }
+
+  Widget _providerPill(String provider, AppLocalizations l10n) {
+    final isGoogle = provider == 'google';
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: isGoogle
+            ? Colors.green.withValues(alpha: 0.12)
+            : Colors.blueGrey.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        isGoogle ? l10n.google : l10n.email,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+          color: isGoogle ? Colors.green[800] : Colors.blueGrey[800],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? Colors.green.shade900
+            : Colors.green.shade100,
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 520),
+            child: AlertDialog(
+              title: Text(l10n.switchAccount),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(l10n.manageAccountsDescription),
+                  const SizedBox(height: 14),
+                  if (_errorMessage != null) ...[
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: Colors.red.withValues(alpha: 0.2)),
+                      ),
+                      child: Text(
+                        _errorMessage!,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                  if (widget.accounts.isEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Text(l10n.noSavedAccounts),
+                    )
+                  else
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: Column(
+                        children: widget.accounts.map((account) {
+                          final email = account['name'] ?? '';
+                          final displayName = account['displayName'] ?? '';
+                          final provider = _providerOf(account);
+
+                          return ListTile(
+                            enabled: !_isSwitching,
+                            leading: UserAvatar.fromUserId(
+                              userId: account['uid'] ?? '',
+                              radius: 20,
+                            ),
+                            title: Text(
+                              displayName.isNotEmpty ? displayName : email,
+                            ),
+                            subtitle: Text(email),
+                            trailing: _providerPill(provider, l10n),
+                            onTap: () => _switchToAccount(account),
+                          );
+                        }).toList(growable: false),
+                      ),
+                    ),
+                  if (_isSwitching) ...[
+                    const SizedBox(height: 8),
+                    const CircularProgressIndicator(),
+                  ],
+                ],
+              ),
+              actions: [
+                if (widget.accounts.isEmpty)
+                  TextButton(
+                    onPressed: _isClosing ? null : _closeAndRestart,
+                    child: _isClosing
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2.2),
+                          )
+                        : Text(l10n.close),
+                  ),
+                if (widget.accounts.isNotEmpty)
+                  TextButton(
+                    onPressed: _isClosing ? null : _cancelRecoveryAndRestart,
+                    child: _isClosing
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2.2),
+                          )
+                        : Text(l10n.cancel),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

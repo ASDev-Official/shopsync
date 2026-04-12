@@ -1608,6 +1608,64 @@ class AppLocalizationsRu extends AppLocalizations {
   String get signOut5 => 'Выйти';
 
   @override
+  String get manageAccounts => 'ShopSync Accounts';
+
+  @override
+  String get accountManager => 'ShopSync Accounts';
+
+  @override
+  String get accountManagerSubtitle => 'Accounts on this device';
+
+  @override
+  String get manageAccountsDescription =>
+      'Choose an account to continue, or add another account.';
+
+  @override
+  String get switchAccount => 'Switch account';
+
+  @override
+  String get addGoogleAccount => 'Add Google account';
+
+  @override
+  String get addEmailPasswordAccount => 'Add account';
+
+  @override
+  String get removeAccounts => 'Remove Accounts';
+
+  @override
+  String get removeAccountsDescription =>
+      'Tap the minus icon next to an account to remove it from this device.';
+
+  @override
+  String get restartText => 'Restart';
+
+  @override
+  String get removeOwnAccountRestartWarning =>
+      'Removing your currently signed-in account will restart ShopSync. You can then log in to any other account saved on this device.';
+
+  @override
+  String get removeAccountSuccess => 'Account removed from this device.';
+
+  @override
+  String get removeCurrentAccount => 'Remove this account';
+
+  @override
+  String get noSavedAccounts => 'No accounts on this device yet.';
+
+  @override
+  String get accountSwitched => 'Switched account.';
+
+  @override
+  String get googleAccountAdded => 'Google account added.';
+
+  @override
+  String get removeAccountConfirm => 'Remove this account from this device?';
+
+  @override
+  String get removeAccountDetails =>
+      'This will sign you out and remove this ShopSync account from the Android account picker.';
+
+  @override
   String get skipForNow => 'Пропустить';
 
   @override
@@ -2396,6 +2454,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get manageHowYouSignIn => 'Manage how you sign in to ShopSync';
+
+  @override
+  String get useCredentialManagerToSwitchAccounts =>
+      'Open Android account picker';
 
   @override
   String get emailAndPassword => 'Email & Password';

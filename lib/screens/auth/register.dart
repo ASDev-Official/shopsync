@@ -4,11 +4,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:shopsync/widgets/ui/loading_spinner.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import '/utils/sentry_auth_utils.dart';
 import '/services/data/gravatar_service.dart';
+import '/services/auth/google_auth.dart';
+import '/services/auth/android_system_accounts_service.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  const RegisterScreen({super.key, this.returnSuccessResult = false});
+
+  final bool returnSuccessResult;
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -100,6 +105,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       await userCredential.user?.updateDisplayName(_nameController.text.trim());
 
+      try {
+        await GoogleAuthService.savePasswordCredentialForAndroid(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        );
+      } catch (error, stackTrace) {
+        await Sentry.captureException(
+          error,
+          stackTrace: stackTrace,
+          hint: Hint.withMap({
+            'action': 'save_password_credential_after_register',
+            'email': _emailController.text.trim(),
+          }),
+        );
+      }
+
+      try {
+        await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+          password: _passwordController.text,
+          provider: 'password',
+        );
+      } catch (error, stackTrace) {
+        await Sentry.captureException(
+          error,
+          stackTrace: stackTrace,
+          hint: Hint.withMap({
+            'action': 'add_android_system_account_after_register',
+            'email': _emailController.text.trim(),
+          }),
+        );
+      }
+
       // Initialize Gravatar (async, non-blocking)
       GravatarService.initializeGravatar(
         userCredential.user!.uid,
@@ -107,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
 
       if (!mounted) return;
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(widget.returnSuccessResult ? true : null);
     } on FirebaseAuthException catch (e, stackTrace) {
       final l10n = AppLocalizations.of(context)!;
       setState(() {
