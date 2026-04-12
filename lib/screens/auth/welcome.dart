@@ -288,7 +288,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
 
-                if ((kIsWeb || !Platform.isAndroid) && _showManualAuthOptions)
+                if (_showManualAuthOptions)
                   AnimatedGoogleButton(
                     onPressed: _signInWithGoogle,
                     isLoading: _isGoogleLoading,
