@@ -12,7 +12,7 @@ class WearStatusFeedbackOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final icon = isSuccess ? Icons.check_rounded : Icons.close_rounded;
+    final icon = isSuccess ? Icons.check_rounded : Icons.close;
     final bgColor = isSuccess
         ? Colors.green.withValues(alpha: 0.9)
         : Colors.red.withValues(alpha: 0.9);

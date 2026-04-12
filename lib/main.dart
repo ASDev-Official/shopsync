@@ -760,6 +760,10 @@ class _RecoveryAccountSelectorDialogState
     }
   }
 
+  Future<void> _cancelRecoveryAndRestart() async {
+    await _closeAndRestart();
+  }
+
   Widget _providerPill(String provider, AppLocalizations l10n) {
     final isGoogle = provider == 'google';
     return Container(
@@ -865,6 +869,17 @@ class _RecoveryAccountSelectorDialogState
                             child: CircularProgressIndicator(strokeWidth: 2.2),
                           )
                         : Text(l10n.close),
+                  ),
+                if (widget.accounts.isNotEmpty)
+                  TextButton(
+                    onPressed: _isClosing ? null : _cancelRecoveryAndRestart,
+                    child: _isClosing
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2.2),
+                          )
+                        : Text(l10n.cancel),
                   ),
               ],
             ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'package:rotary_scrollbar/widgets/rotary_scrollbar.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
+import 'package:shopsync/services/auth/android_system_accounts_service.dart';
 import 'package:shopsync/services/auth/google_auth.dart';
 import '/wear/widgets/wear_status_feedback_overlay.dart';
 import 'wear_login_screen.dart';
@@ -26,6 +28,50 @@ class _WearAccountManagerScreenState extends State<WearAccountManagerScreen> {
   bool _feedbackSuccess = true;
 
   User? get _user => FirebaseAuth.instance.currentUser;
+
+  String _mapExceptionToLocalizedMessage(Object error, BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    if (error is FirebaseAuthException) {
+      switch (error.code) {
+        case 'account-exists-with-different-credential':
+        case 'email-already-in-use':
+          return l10n.loginAccountExists;
+        case 'invalid-credential':
+          return l10n.loginInvalidCredentials;
+        case 'operation-not-allowed':
+          return l10n.loginOperationNotAllowed;
+        case 'user-disabled':
+          return l10n.loginUserDisabled;
+        case 'user-not-found':
+          return l10n.loginUserNotFound;
+        case 'wrong-password':
+          return l10n.loginWrongPassword;
+        case 'too-many-requests':
+          return l10n.loginTooManyRequests;
+        case 'network-request-failed':
+          return l10n.loginNetworkError;
+        default:
+          return error.message ?? l10n.loginGenericError;
+      }
+    }
+
+    if (error is PlatformException) {
+      switch (error.code) {
+        case 'network_error':
+        case 'network-request-failed':
+          return l10n.loginNetworkError;
+        case 'sign_in_cancelled':
+        case 'canceled':
+        case 'cancelled':
+          return l10n.googleSignInGeneric;
+        default:
+          return l10n.loginGenericError;
+      }
+    }
+
+    return l10n.loginGenericError;
+  }
 
   void _showStatusFeedback(bool isSuccess) {
     if (!mounted) return;
@@ -56,11 +102,15 @@ class _WearAccountManagerScreenState extends State<WearAccountManagerScreen> {
       if (userCredential != null && mounted) {
         _showStatusFeedback(true);
       }
-    } catch (e) {
+    } catch (error, stackTrace) {
       _showStatusFeedback(false);
+      debugPrint('Wear account switch failed: $error');
       setState(() {
-        _errorMessage = e.toString();
+        _errorMessage = _mapExceptionToLocalizedMessage(error, context);
       });
+      if (error is! FirebaseAuthException && error is! PlatformException) {
+        debugPrintStack(stackTrace: stackTrace);
+      }
     } finally {
       if (mounted) {
         setState(() {
@@ -83,11 +133,15 @@ class _WearAccountManagerScreenState extends State<WearAccountManagerScreen> {
       if (userCredential != null && mounted) {
         _showStatusFeedback(true);
       }
-    } catch (e) {
+    } catch (error, stackTrace) {
       _showStatusFeedback(false);
+      debugPrint('Wear Google add-account failed: $error');
       setState(() {
-        _errorMessage = e.toString();
+        _errorMessage = _mapExceptionToLocalizedMessage(error, context);
       });
+      if (error is! FirebaseAuthException && error is! PlatformException) {
+        debugPrintStack(stackTrace: stackTrace);
+      }
     } finally {
       if (mounted) {
         setState(() {
@@ -147,12 +201,16 @@ class _WearAccountManagerScreenState extends State<WearAccountManagerScreen> {
     });
 
     try {
+      await AndroidSystemAccountsService.removeCurrentUserFromSystemAccounts();
       await GoogleAuthService.signOut();
       if (!mounted) return;
       Navigator.of(context).popUntil((route) => route.isFirst);
-    } catch (e) {
+    } catch (error, stackTrace) {
+      debugPrint('Wear account removal/sign-out failed: $error');
+      debugPrintStack(stackTrace: stackTrace);
+      if (!mounted) return;
       setState(() {
-        _errorMessage = e.toString();
+        _errorMessage = _mapExceptionToLocalizedMessage(error, context);
       });
     } finally {
       if (mounted) {
