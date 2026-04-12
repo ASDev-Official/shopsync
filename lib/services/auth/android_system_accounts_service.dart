@@ -80,16 +80,17 @@ class AndroidSystemAccountsService {
     }
   }
 
-  static Future<void> removeCurrentUserFromSystemAccounts() async {
-    if (kIsWeb || !Platform.isAndroid) return;
+  static Future<bool> removeCurrentUserFromSystemAccounts() async {
+    if (kIsWeb || !Platform.isAndroid) return true;
 
     final email = FirebaseAuth.instance.currentUser?.email;
-    if (email == null || email.isEmpty) return;
+    if (email == null || email.isEmpty) return true;
 
     try {
       await _channel.invokeMethod('removeAccount', {
         'email': email,
       });
+      return true;
     } on PlatformException catch (e, stackTrace) {
       await _captureChannelException(
         e,
@@ -97,6 +98,7 @@ class AndroidSystemAccountsService {
         'removeCurrentUserFromSystemAccounts',
         email: email,
       );
+      return false;
     } catch (e, stackTrace) {
       await _captureChannelException(
         e,
@@ -104,6 +106,7 @@ class AndroidSystemAccountsService {
         'removeCurrentUserFromSystemAccounts',
         email: email,
       );
+      return false;
     }
   }
 

@@ -241,9 +241,12 @@ class _AndroidAccountManagerScreenState
       }
       await _loadSystemAccounts();
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.accountSwitched)),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(AppLocalizations.of(context)!.accountSwitched)),
+        );
+      }
     } catch (e) {
       _closeSwitchingDialog();
       setState(() {
@@ -377,6 +380,20 @@ class _AndroidAccountManagerScreenState
                 await _loadSystemAccounts();
                 if (!mounted) return;
 
+                final removed = !_systemAccounts.any(
+                  (account) =>
+                      (account['name'] ?? '').trim().toLowerCase() ==
+                      email.toLowerCase(),
+                );
+
+                if (!removed) {
+                  setState(() {
+                    _errorMessage =
+                        AppLocalizations.of(context)!.removeAccountDetails;
+                  });
+                  return;
+                }
+
                 if (isCurrent) {
                   if (Navigator.of(modalContext).canPop()) {
                     Navigator.of(modalContext).pop();
@@ -389,9 +406,11 @@ class _AndroidAccountManagerScreenState
                   return;
                 }
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(l10n.removeAccountSuccess)),
-                );
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.removeAccountSuccess)),
+                  );
+                }
               } catch (e) {
                 if (!mounted) return;
                 setState(() {

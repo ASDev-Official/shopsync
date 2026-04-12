@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -104,12 +105,15 @@ class _WearAccountManagerScreenState extends State<WearAccountManagerScreen> {
       }
     } catch (error, stackTrace) {
       _showStatusFeedback(false);
-      debugPrint('Wear account switch failed: $error');
+      if (!mounted) return;
       setState(() {
         _errorMessage = _mapExceptionToLocalizedMessage(error, context);
       });
-      if (error is! FirebaseAuthException && error is! PlatformException) {
-        debugPrintStack(stackTrace: stackTrace);
+      if (foundation.kDebugMode) {
+        foundation.debugPrint('Wear account switch failed: $error');
+        if (error is! FirebaseAuthException && error is! PlatformException) {
+          foundation.debugPrintStack(stackTrace: stackTrace);
+        }
       }
     } finally {
       if (mounted) {
@@ -135,12 +139,15 @@ class _WearAccountManagerScreenState extends State<WearAccountManagerScreen> {
       }
     } catch (error, stackTrace) {
       _showStatusFeedback(false);
-      debugPrint('Wear Google add-account failed: $error');
+      if (!mounted) return;
       setState(() {
         _errorMessage = _mapExceptionToLocalizedMessage(error, context);
       });
-      if (error is! FirebaseAuthException && error is! PlatformException) {
-        debugPrintStack(stackTrace: stackTrace);
+      if (foundation.kDebugMode) {
+        foundation.debugPrint('Wear Google add-account failed: $error');
+        if (error is! FirebaseAuthException && error is! PlatformException) {
+          foundation.debugPrintStack(stackTrace: stackTrace);
+        }
       }
     } finally {
       if (mounted) {
@@ -195,23 +202,30 @@ class _WearAccountManagerScreenState extends State<WearAccountManagerScreen> {
       return;
     }
 
+    if (!mounted) return;
     setState(() {
       _isRemoving = true;
       _errorMessage = null;
     });
 
     try {
-      await AndroidSystemAccountsService.removeCurrentUserFromSystemAccounts();
+      final removed = await AndroidSystemAccountsService
+          .removeCurrentUserFromSystemAccounts();
+      if (!removed) {
+        throw StateError('Unable to remove current account from device');
+      }
       await GoogleAuthService.signOut();
       if (!mounted) return;
       Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (error, stackTrace) {
-      debugPrint('Wear account removal/sign-out failed: $error');
-      debugPrintStack(stackTrace: stackTrace);
       if (!mounted) return;
       setState(() {
         _errorMessage = _mapExceptionToLocalizedMessage(error, context);
       });
+      if (foundation.kDebugMode) {
+        foundation.debugPrint('Wear account removal/sign-out failed: $error');
+        foundation.debugPrintStack(stackTrace: stackTrace);
+      }
     } finally {
       if (mounted) {
         setState(() {

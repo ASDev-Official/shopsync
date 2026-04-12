@@ -692,6 +692,10 @@ class _RecoveryAccountSelectorDialogState
         if (userCredential == null) {
           throw StateError('Google sign-in was cancelled');
         }
+
+        await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
+          provider: 'google',
+        );
       } else {
         final password =
             await AndroidSystemAccountsService.getStoredPasswordForAccount(
