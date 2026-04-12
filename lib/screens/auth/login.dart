@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import 'forgot_password.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/utils/sentry_auth_utils.dart';
 import '/services/auth/google_auth.dart';
@@ -17,6 +18,33 @@ class LoginScreen extends StatefulWidget {
 
   final String? initialEmail;
   final bool returnSuccessResult;
+
+  static String getLocalizedAuthErrorMessage(
+    BuildContext context,
+    FirebaseAuthException e,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (e.code) {
+      case 'account-exists-with-different-credential':
+        return l10n.loginAccountExists;
+      case 'invalid-credential':
+        return l10n.loginInvalidCredentials;
+      case 'operation-not-allowed':
+        return l10n.loginOperationNotAllowed;
+      case 'user-disabled':
+        return l10n.loginUserDisabled;
+      case 'user-not-found':
+        return l10n.loginUserNotFound;
+      case 'wrong-password':
+        return l10n.loginWrongPassword;
+      case 'too-many-requests':
+        return l10n.loginTooManyRequests;
+      case 'network-request-failed':
+        return l10n.loginNetworkError;
+      default:
+        return e.message ?? l10n.loginGenericError;
+    }
+  }
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -59,29 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  String? _getErrorMessage(FirebaseAuthException e, AppLocalizations l10n) {
-    switch (e.code) {
-      case 'account-exists-with-different-credential':
-        return l10n.loginAccountExists;
-      case 'invalid-credential':
-        return l10n.loginInvalidCredentials;
-      case 'operation-not-allowed':
-        return l10n.loginOperationNotAllowed;
-      case 'user-disabled':
-        return l10n.loginUserDisabled;
-      case 'user-not-found':
-        return l10n.loginUserNotFound;
-      case 'wrong-password':
-        return l10n.loginWrongPassword;
-      case 'too-many-requests':
-        return l10n.loginTooManyRequests;
-      case 'network-request-failed':
-        return l10n.loginNetworkError;
-      default:
-        return e.message ?? l10n.loginGenericError;
-    }
-  }
-
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -104,20 +109,27 @@ class _LoginScreenState extends State<LoginScreen> {
       await AndroidSystemAccountsService.addCurrentUserToSystemAccounts(
         password: _passwordController.text,
         provider: 'password',
-      );
+      ).catchError((error, stackTrace) async {
+        await Sentry.captureException(
+          error,
+          stackTrace: stackTrace,
+          hint: Hint.withMap({
+            'action': 'add_android_system_account_after_login',
+            'email': _emailController.text.trim(),
+          }),
+        );
+      });
 
       if (!mounted) return;
       Navigator.of(context).pop(widget.returnSuccessResult ? true : null);
     } on FirebaseAuthException catch (e, stackTrace) {
-      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _errorMessage = _getErrorMessage(e, l10n) ?? l10n.loginGenericError;
+        _errorMessage = LoginScreen.getLocalizedAuthErrorMessage(context, e);
       });
       await SentryUtils.reportError(e, stackTrace);
     } catch (e, stackTrace) {
-      final l10n = AppLocalizations.of(context)!;
       setState(() {
-        _errorMessage = l10n.loginGenericError;
+        _errorMessage = AppLocalizations.of(context)!.loginGenericError;
       });
       await SentryUtils.reportError(e, stackTrace);
     } finally {

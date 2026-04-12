@@ -27,6 +27,7 @@ import 'screens/auth/forgot_password.dart';
 import 'screens/maintenance/maintenance_screen.dart';
 import 'screens/onboarding/onboarding.dart';
 import 'screens/status/outage_dialog.dart';
+import 'widgets/status/outage_banner.dart';
 import 'screens/settings/settings.dart';
 import 'screens/migration/migration_screen.dart';
 import 'screens/settings/feedback.dart';
@@ -39,7 +40,6 @@ import 'services/platform/home_widget_service.dart';
 import 'services/auth/android_system_accounts_service.dart';
 import 'services/auth/google_auth.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'widgets/status/outage_banner.dart';
 import 'widgets/user/user_avatar.dart';
 import 'core/navigation_service.dart';
 
@@ -315,8 +315,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
   Future<void> _validateCurrentSignedInAccount(User user) async {
     try {
-      final accounts =
-          await AndroidSystemAccountsService.listSystemAccountsDetailed();
       final currentEmail = user.email?.trim().toLowerCase();
 
       if (currentEmail == null || currentEmail.isEmpty) {
@@ -329,10 +327,28 @@ class _AuthWrapperState extends State<AuthWrapper> {
         return;
       }
 
-      final currentExists = accounts.any(
-        (account) =>
-            (account['name'] ?? '').trim().toLowerCase() == currentEmail,
-      );
+      const maxAttempts = 3;
+      List<Map<String, String>> accounts = const [];
+      var currentExists = false;
+
+      for (var attempt = 0; attempt < maxAttempts; attempt++) {
+        accounts =
+            await AndroidSystemAccountsService.listSystemAccountsDetailed();
+        currentExists = accounts.any(
+          (account) =>
+              (account['name'] ?? '').trim().toLowerCase() == currentEmail,
+        );
+
+        if (currentExists) {
+          break;
+        }
+
+        if (attempt < maxAttempts - 1) {
+          await Future<void>.delayed(
+            Duration(milliseconds: 150 * (1 << attempt)),
+          );
+        }
+      }
 
       if (currentExists) {
         if (!mounted) return;
@@ -385,7 +401,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
         ? AndroidSystemAccountsService.consumePendingAddAccountRequest()
         : Future.value(false);
 
-    // Check for updates after widget is built
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       UpdateService.checkForUpdate(context);
       final hasActiveMaintenance = await _checkMaintenance();
@@ -397,13 +412,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
   Future<bool> _checkMaintenance() async {
     final maintenance = await MaintenanceService.checkMaintenance();
-    // Uncomment the following lines for testing purposes
-    // final updateInfo = await InAppUpdate.checkForUpdate();
-    //
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => UpdateAppScreen(onUpdateComplete: (bool completed) {}, updateInfo: updateInfo))
-    // );
 
     if (maintenance != null && mounted) {
       if (maintenance['isUnderMaintenance']) {
@@ -444,7 +452,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
     try {
       final outage = await StatuspageService.fetchCurrentOutage();
-      // Show fullscreen closable dialog once per app run when outage is active
       if (outage.active &&
           mounted &&
           !MaintenanceService.isMaintenanceActive.value) {
@@ -454,16 +461,18 @@ class _AuthWrapperState extends State<AuthWrapper> {
             barrierDismissible: true,
             builder: (context) => OutageDialog(outage: outage),
           ).then((_) {
-            // Track dismissal regardless of how dialog was closed (button or barrier tap)
             StatuspageService.markDialogDismissed();
           });
         }
       }
     } catch (e, stackTrace) {
-      await Sentry.captureException(e,
-          stackTrace: stackTrace,
-          hint: Hint.withMap(
-              {'action': 'check_outage', 'context': 'showing_outage_dialog'}));
+      await Sentry.captureException(
+        e,
+        stackTrace: stackTrace,
+        hint: Hint.withMap(
+          {'action': 'check_outage', 'context': 'showing_outage_dialog'},
+        ),
+      );
     }
   }
 
@@ -514,7 +523,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
             return StreamBuilder<User?>(
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, snapshot) {
-                // Only show loading on initial connection, not on active/done states
                 if (snapshot.connectionState == ConnectionState.waiting &&
                     _isInitialLoad) {
                   return Scaffold(
@@ -531,7 +539,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
                   );
                 }
 
-                // Check if user is logged in
                 if (snapshot.hasData && snapshot.data != null) {
                   _startDeviceAccountAvailabilityCheck(snapshot.data!);
 
@@ -547,10 +554,8 @@ class _AuthWrapperState extends State<AuthWrapper> {
                     );
                   }
 
-                  // Cache futures keyed to the current user to prevent re-creation on rebuild
                   _updateUserFutures(snapshot.data!.uid);
 
-                  // User is signed in, check if AI preference is set
                   return FutureBuilder<bool>(
                     future: _aiPreferenceFuture,
                     builder: (context, aiSnapshot) {
@@ -568,13 +573,11 @@ class _AuthWrapperState extends State<AuthWrapper> {
                         );
                       }
 
-                      // If AI preference not set, show mandatory setup screen
                       if (!aiSnapshot.hasData || !aiSnapshot.data!) {
                         _isInitialLoad = false;
                         return const AIPreferenceSetupScreen();
                       }
 
-                      // AI preference is set, now check Gravatar preference
                       return FutureBuilder<bool?>(
                         future: _gravatarPreferenceFuture,
                         builder: (context, gravatarSnapshot) {
@@ -592,20 +595,17 @@ class _AuthWrapperState extends State<AuthWrapper> {
                             );
                           }
 
-                          // Handle Firestore errors - allow normal startup instead of forcing setup
                           if (gravatarSnapshot.hasError ||
                               gravatarSnapshot.data == null) {
                             _isInitialLoad = false;
                             return const HomeScreen();
                           }
 
-                          // If Gravatar preference not set (false), show mandatory setup screen
                           if (gravatarSnapshot.data == false) {
                             _isInitialLoad = false;
                             return const GravatarPreferenceSetupScreen();
                           }
 
-                          // Both preferences are set, direct to home screen
                           _isInitialLoad = false;
                           return const HomeScreen();
                         },
@@ -614,7 +614,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
                   );
                 }
 
-                // User is not signed in - reset state
                 _cachedUserId = null;
                 _aiPreferenceFuture = null;
                 _gravatarPreferenceFuture = null;
@@ -629,7 +628,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
                   );
                 }
 
-                // User is not signed in, direct to welcome screen
                 return WelcomeScreen();
               },
             );

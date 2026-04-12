@@ -1,6 +1,7 @@
 package com.aadishsamir.shopsync
 
 import android.accounts.Account
+import android.accounts.AccountAuthenticatorResponse
 import android.accounts.AccountManager
 import android.content.Intent
 import android.os.Bundle
@@ -16,6 +17,7 @@ class MainActivity : FlutterActivity() {
 	}
 
 	private var pendingAddAccountRequest = false
+	private var accountAuthenticatorResponse: AccountAuthenticatorResponse? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -31,6 +33,36 @@ class MainActivity : FlutterActivity() {
 	private fun captureIntentAction(intent: Intent?) {
 		if (intent?.action == ACTION_ADD_ACCOUNT) {
 			pendingAddAccountRequest = true
+			@Suppress("DEPRECATION")
+			accountAuthenticatorResponse =
+				intent.getParcelableExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE)
+		} else {
+			accountAuthenticatorResponse = null
+		}
+	}
+
+	private fun completeAccountAuthenticatorFlow(
+		completed: Boolean,
+		accountName: String? = null,
+		accountType: String? = null,
+		message: String? = null,
+	) {
+		val response = accountAuthenticatorResponse
+		accountAuthenticatorResponse = null
+		pendingAddAccountRequest = false
+
+		if (response != null) {
+			if (completed) {
+				val resultBundle = Bundle().apply {
+					if (!accountName.isNullOrBlank()) {
+						putString(AccountManager.KEY_ACCOUNT_NAME, accountName)
+					}
+					putString(AccountManager.KEY_ACCOUNT_TYPE, accountType ?: SHOPSYNC_ACCOUNT_TYPE)
+				}
+				response.onResult(resultBundle)
+			} else {
+				response.onError(AccountManager.ERROR_CODE_CANCELED, message ?: "Account addition cancelled")
+			}
 		}
 	}
 
@@ -168,7 +200,17 @@ class MainActivity : FlutterActivity() {
 					}
 
 					"closeSystemAddAccountFlow" -> {
-						pendingAddAccountRequest = false
+						val args = call.arguments as? Map<*, *>
+						val completed = args?.get("completed") as? Boolean ?: false
+						val accountName = args?.get("accountName")?.toString()
+						val accountType = args?.get("accountType")?.toString()
+						val message = args?.get("message")?.toString()
+						completeAccountAuthenticatorFlow(
+							completed = completed,
+							accountName = accountName,
+							accountType = accountType,
+							message = message,
+						)
 						result.success(true)
 						finish()
 					}
