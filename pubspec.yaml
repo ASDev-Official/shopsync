@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
   firebase_core: ^4.6.0
   firebase_auth: ^6.3.0
-  cloud_firestore: ^6.2.0
+  cloud_firestore: ^6.3.0
   package_info_plus: ^9.0.1
   url_launcher: ^6.3.2
   in_app_update: ^4.2.5
