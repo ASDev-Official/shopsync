@@ -164,6 +164,38 @@ class _ListViewScreenState extends State<ListViewScreen>
     }
   }
 
+  Widget _buildViewerBadge({required bool isDark, required String label}) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: isDark ? Colors.blue[900] : Colors.blue[50],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: isDark ? Colors.blue[700]! : Colors.blue[200]!,
+        ),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.visibility,
+            color: isDark ? Colors.blue[300] : Colors.blue[700],
+            size: 16,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: TextStyle(
+              color: isDark ? Colors.blue[300] : Colors.blue[700],
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -171,7 +203,7 @@ class _ListViewScreenState extends State<ListViewScreen>
     final screenWidth = MediaQuery.of(context).size.width;
     final isDesktopOrTablet = screenWidth >= 600; // Tablets and desktop
 
-    final body = AnimatedSwitcher(
+    final content = AnimatedSwitcher(
       duration: const Duration(milliseconds: 220),
       switchInCurve: Curves.easeInOut,
       switchOutCurve: Curves.easeInOut,
@@ -181,6 +213,23 @@ class _ListViewScreenState extends State<ListViewScreen>
         key: ValueKey(_selectedIndex),
         child: _buildTabContent(_selectedIndex),
       ),
+    );
+
+    final bodyWithViewerBadge = FutureBuilder<bool>(
+      future: _isViewerFuture,
+      builder: (context, snapshot) {
+        final isViewer = snapshot.data == true;
+        return Column(
+          children: [
+            Expanded(child: content),
+            if (isViewer)
+              _buildViewerBadge(
+                isDark: isDark,
+                label: l10n.homeYouAreAViewer,
+              ),
+          ],
+        );
+      },
     );
 
     Widget? fab = _selectedIndex == 0
@@ -388,10 +437,10 @@ class _ListViewScreenState extends State<ListViewScreen>
                 ),
                 const VerticalDivider(thickness: 1, width: 1),
                 // Main content
-                Expanded(child: body),
+                Expanded(child: bodyWithViewerBadge),
               ],
             )
-          : body,
+          : bodyWithViewerBadge,
       bottomNavigationBar: isDesktopOrTablet
           ? null
           : Theme(

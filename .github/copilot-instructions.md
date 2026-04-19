@@ -184,6 +184,12 @@ Text(AppLocalizations.of(context)!.aiFeatures)
 - Clearing completed items must move items from `lists/{listId}/items` to `lists/{listId}/recycled_items` with deletion metadata (`deletedAt`, `deletedBy`, `deletedByName`) rather than hard deleting.
 - Keep behavior consistent by reusing the shared dialog (`lib/widgets/lists/clear_completed_dialog.dart`) and data logic (`lib/services/data/completed_items_service.dart`).
 
+9. **Viewer Badge Placement**:
+
+- Do not show a global viewer badge on the home screen based on `hasViewerLists()`.
+- Show the viewer badge only inside a specific list screen when `PermissionsHelper.isViewer(listId)` is true for that list.
+- Render the badge in normal layout flow between list content and navigation UI (not as an overlay) so list content is never hidden behind it.
+
 ### Authentication
 
 - Google Sign-In uses **Credential Manager** on Android (v2.0.0 API) for passkey support
