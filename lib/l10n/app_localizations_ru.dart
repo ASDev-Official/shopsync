@@ -811,16 +811,6 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String errorLoadingListsSnapshoterror(String error) {
-    return 'Ошибка загрузки списков: $error';
-  }
-
-  @override
-  String errorLoadingListsSnapshoterror1(String error) {
-    return 'Ошибка загрузки списков: $error';
-  }
-
-  @override
   String errorSigningOutEtostring(String e) {
     return 'Ошибка при выходе: $e';
   }

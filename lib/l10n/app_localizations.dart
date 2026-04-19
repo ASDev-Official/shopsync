@@ -1535,18 +1535,6 @@ abstract class AppLocalizations {
   /// **'Error loading insights: {e}'**
   String errorLoadingInsightsE3(String e);
 
-  /// From: lib/screens/home.dart
-  ///
-  /// In en, this message translates to:
-  /// **'Error loading lists: {error}'**
-  String errorLoadingListsSnapshoterror(String error);
-
-  /// From: lib/screens/home.dart
-  ///
-  /// In en, this message translates to:
-  /// **'Error loading lists: {error}'**
-  String errorLoadingListsSnapshoterror1(String error);
-
   /// From: lib/screens/settings/profile.dart
   ///
   /// In en, this message translates to:

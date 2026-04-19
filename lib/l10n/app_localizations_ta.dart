@@ -808,16 +808,6 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String errorLoadingListsSnapshoterror(String error) {
-    return 'Error loading lists: $error';
-  }
-
-  @override
-  String errorLoadingListsSnapshoterror1(String error) {
-    return 'Error loading lists: $error';
-  }
-
-  @override
   String errorSigningOutEtostring(String e) {
     return 'Error signing out: $e';
   }
