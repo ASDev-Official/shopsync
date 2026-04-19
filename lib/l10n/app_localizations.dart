@@ -3261,6 +3261,66 @@ abstract class AppLocalizations {
   /// **'Welcome to ShopSync'**
   String get welcomeToShopsync;
 
+  /// No description provided for @homeUserDisplayNameFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get homeUserDisplayNameFallback;
+
+  /// No description provided for @homeMyLists.
+  ///
+  /// In en, this message translates to:
+  /// **'My Lists'**
+  String get homeMyLists;
+
+  /// No description provided for @homeNoListsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No lists yet'**
+  String get homeNoListsYet;
+
+  /// No description provided for @homeSwipeUpToViewOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe up to view options'**
+  String get homeSwipeUpToViewOptions;
+
+  /// No description provided for @homeUnnamedList.
+  ///
+  /// In en, this message translates to:
+  /// **'Unnamed List'**
+  String get homeUnnamedList;
+
+  /// No description provided for @homeListGroupsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'List Groups'**
+  String get homeListGroupsTitle;
+
+  /// No description provided for @homeHoldToReorder.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold to reorder'**
+  String get homeHoldToReorder;
+
+  /// No description provided for @homeUnknownDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown date'**
+  String get homeUnknownDate;
+
+  /// No description provided for @homeQuickTutorial.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Tutorial'**
+  String get homeQuickTutorial;
+
+  /// No description provided for @homeYouAreAViewer.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re a viewer'**
+  String get homeYouAreAViewer;
+
   /// No description provided for @widgetSettings.
   ///
   /// In en, this message translates to:

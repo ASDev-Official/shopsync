@@ -460,13 +460,12 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     super.build(context); // Required for AutomaticKeepAliveClientMixin
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     final connectivityService = ConnectivityService();
 
     // Wrap the entire content in RepaintBoundary to prevent unnecessary repaints
     // during predictive back animations
-
-    // final l10n = AppLocalizations.of(context);
 
     PreferredSize buildCustomAppBar(BuildContext context) {
       final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -489,9 +488,9 @@ class _HomeScreenState extends State<HomeScreen>
                 width: 32,
               ),
               const SizedBox(width: 8),
-              const Text(
-                'ShopSync',
-                style: TextStyle(
+              Text(
+                l10n.shopsync,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 0.5,
@@ -554,7 +553,8 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          _auth.currentUser?.displayName ?? 'User',
+                          _auth.currentUser?.displayName ??
+                              l10n.homeUserDisplayNameFallback,
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -612,7 +612,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     Padding(
                                       padding: const EdgeInsets.all(16),
                                       child: Text(
-                                        'My Lists',
+                                        l10n.homeMyLists,
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -640,7 +640,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         ),
                                         const SizedBox(height: 16),
                                         Text(
-                                          'No lists yet',
+                                          l10n.homeNoListsYet,
                                           style: TextStyle(
                                             color: Colors.grey[600],
                                           ),
@@ -653,7 +653,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         ),
                                         const SizedBox(height: 16),
                                         Text(
-                                          'Swipe up to view options',
+                                          l10n.homeSwipeUpToViewOptions,
                                           style: TextStyle(
                                             color: Colors.grey[600],
                                           ),
@@ -669,7 +669,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     (context, index) {
                                       final doc = snapshot.data!.docs[index];
                                       final listName =
-                                          doc['name'] ?? 'Unnamed List';
+                                          doc['name'] ?? l10n.homeUnnamedList;
 
                                       return Container(
                                         margin: const EdgeInsets.symmetric(
@@ -735,7 +735,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     _buildDrawerItem(
                                       icon: Icons.analytics,
-                                      title: 'Your Insights',
+                                      title: l10n.yourInsights,
                                       onTap: () {
                                         Navigator.pop(context);
                                         Navigator.push(
@@ -750,7 +750,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     _buildDrawerItem(
                                       icon: Icons.settings,
-                                      title: 'Settings',
+                                      title: l10n.settings,
                                       onTap: () {
                                         Navigator.pop(context);
                                         Navigator.pushNamed(
@@ -759,7 +759,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     _buildDrawerItem(
                                       icon: Icons.person,
-                                      title: 'My Profile',
+                                      title: l10n.myProfile,
                                       onTap: () {
                                         Navigator.pop(context);
                                         Navigator.pushNamed(
@@ -768,12 +768,12 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     _buildDrawerItem(
                                       icon: Icons.comment,
-                                      title: 'Feedback',
+                                      title: l10n.feedback,
                                       onTap: () async {
                                         if (await connectivityService
                                             .checkConnectivityAndShowDialog(
                                                 context,
-                                                feature: 'feedback')) {
+                                                feature: l10n.feedback)) {
                                           Navigator.pop(context);
                                           Navigator.pushNamed(
                                               context, '/feedback');
@@ -782,21 +782,22 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     _buildDrawerItem(
                                       icon: Icons.article,
-                                      title: 'Release Notes',
+                                      title: l10n.releaseNotes,
                                       onTap: () async {
                                         if (await connectivityService
                                             .checkConnectivityAndShowDialog(
                                                 context,
-                                                feature: 'release notes')) {
+                                                feature: l10n.releaseNotes)) {
                                           final Uri url = Uri.parse(
                                               'https://rn.shopsync.aadish.dev');
                                           if (!await launchUrl(url)) {
                                             if (!mounted) return;
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
-                                              const SnackBar(
+                                              SnackBar(
                                                 content: Text(
-                                                    'Could not open release notes'),
+                                                  l10n.couldNotOpenReleaseNotes,
+                                                ),
                                               ),
                                             );
                                           }
@@ -849,7 +850,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   Row(
                                     children: [
                                       Text(
-                                        'List Groups',
+                                        l10n.homeListGroupsTitle,
                                         style: TextStyle(
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold,
@@ -881,7 +882,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             ),
                                             const SizedBox(width: 4),
                                             Text(
-                                              'Hold to reorder',
+                                              l10n.homeHoldToReorder,
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 color: isDark
@@ -951,7 +952,10 @@ class _HomeScreenState extends State<HomeScreen>
                             );
                             return Center(
                               child: Text(
-                                  'Error loading lists: ${snapshot.error}'),
+                                l10n.errorLoadingListsSnapshoterror(
+                                  snapshot.error.toString(),
+                                ),
+                              ),
                             );
                           }
 
@@ -976,7 +980,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Ungrouped Lists',
+                                    l10n.ungroupedListsSection,
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
@@ -988,13 +992,13 @@ class _HomeScreenState extends State<HomeScreen>
                                   const SizedBox(height: 16),
                                   ...snapshot.data!.map((doc) {
                                     final listName =
-                                        doc['name'] ?? 'Unnamed List';
+                                        doc['name'] ?? l10n.homeUnnamedList;
                                     final timestamp =
                                         doc['createdAt'] as Timestamp?;
                                     final createdAt = timestamp != null
                                         ? DateFormat('MMM dd, yyyy')
                                             .format(timestamp.toDate())
-                                        : 'Unknown date';
+                                        : l10n.homeUnknownDate;
 
                                     return Padding(
                                       padding:
@@ -1177,7 +1181,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         ),
                                         const SizedBox(height: 24),
                                         Text(
-                                          'Welcome to ShopSync',
+                                          l10n.welcomeToShopsync,
                                           style: TextStyle(
                                             fontSize: 24,
                                             fontWeight: FontWeight.bold,
@@ -1188,7 +1192,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         ),
                                         const SizedBox(height: 12),
                                         Text(
-                                          'Share shopping lists with family and friends',
+                                          l10n.onboardingWelcomeDescription,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 16,
@@ -1256,7 +1260,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   ),
                                                   const SizedBox(width: 12),
                                                   Text(
-                                                    'Quick Tutorial',
+                                                    l10n.homeQuickTutorial,
                                                     style: TextStyle(
                                                       fontSize: 18,
                                                       fontWeight:
@@ -1291,28 +1295,28 @@ class _HomeScreenState extends State<HomeScreen>
                                                   children: [
                                                     TutorialStep(
                                                       icon: Icons.menu,
-                                                      title:
-                                                          'Open the drawer from the left',
-                                                      subtitle:
-                                                          'Access your lists and settings',
+                                                      title: l10n
+                                                          .openTheDrawerFromTheLeft,
+                                                      subtitle: l10n
+                                                          .accessYourListsAndSettings,
                                                       color: Colors.green[800]!,
                                                     ),
                                                     const SizedBox(height: 16),
                                                     TutorialStep(
                                                       icon: Icons.layers,
                                                       title:
-                                                          'Create list groups',
-                                                      subtitle:
-                                                          'Organize your lists with the + button',
+                                                          l10n.createListGroups,
+                                                      subtitle: l10n
+                                                          .organizeYourListsWithTheButton,
                                                       color: Colors.green[800]!,
                                                     ),
                                                     const SizedBox(height: 16),
                                                     TutorialStep(
                                                       icon: Icons.add_circle,
-                                                      title:
-                                                          'Add items to your lists',
-                                                      subtitle:
-                                                          'Keep track of what you need to buy',
+                                                      title: l10n
+                                                          .addItemsToYourLists,
+                                                      subtitle: l10n
+                                                          .keepTrackOfWhatYouNeedToBuy,
                                                       color: Colors.green[800]!,
                                                     ),
                                                   ],
@@ -1370,7 +1374,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            "You're a viewer",
+                            l10n.homeYouAreAViewer,
                             style: TextStyle(
                               color:
                                   isDark ? Colors.blue[300] : Colors.blue[700],
@@ -1483,7 +1487,7 @@ class _HomeScreenState extends State<HomeScreen>
                       builder: (context) => AlertDialog(
                         backgroundColor: isDark ? Colors.black : Colors.white,
                         title: Text(
-                          'Create New List',
+                          l10n.createList,
                           style: TextStyle(
                             color: isDark ? Colors.white : Colors.black,
                             fontWeight: FontWeight.bold,
@@ -1496,7 +1500,7 @@ class _HomeScreenState extends State<HomeScreen>
                             color: isDark ? Colors.white : Colors.black,
                           ),
                           decoration: InputDecoration(
-                            hintText: 'List name',
+                            hintText: l10n.listName,
                             hintStyle: TextStyle(
                               color:
                                   isDark ? Colors.grey[400] : Colors.grey[700],
