@@ -952,9 +952,7 @@ class _HomeScreenState extends State<HomeScreen>
                             );
                             return Center(
                               child: Text(
-                                l10n.errorLoadingListsSnapshoterror(
-                                  snapshot.error.toString(),
-                                ),
+                                l10n.failedToLoadListData,
                               ),
                             );
                           }
