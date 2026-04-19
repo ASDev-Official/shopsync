@@ -1829,6 +1829,36 @@ class AppLocalizationsRu extends AppLocalizations {
   String get welcomeToShopsync => 'Добро пожаловать в ShopSync';
 
   @override
+  String get homeUserDisplayNameFallback => 'User';
+
+  @override
+  String get homeMyLists => 'My Lists';
+
+  @override
+  String get homeNoListsYet => 'No lists yet';
+
+  @override
+  String get homeSwipeUpToViewOptions => 'Swipe up to view options';
+
+  @override
+  String get homeUnnamedList => 'Unnamed List';
+
+  @override
+  String get homeListGroupsTitle => 'List Groups';
+
+  @override
+  String get homeHoldToReorder => 'Hold to reorder';
+
+  @override
+  String get homeUnknownDate => 'Unknown date';
+
+  @override
+  String get homeQuickTutorial => 'Quick Tutorial';
+
+  @override
+  String get homeYouAreAViewer => 'You\'re a viewer';
+
+  @override
   String get widgetSettings => 'Настройки виджета';
 
   @override

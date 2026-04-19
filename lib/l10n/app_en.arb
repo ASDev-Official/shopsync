@@ -467,24 +467,6 @@
     },
     "description": "From: lib/screens/lists/list_insights.dart"
   },
-  "errorLoadingListsSnapshoterror": "Error loading lists: {error}",
-  "@errorLoadingListsSnapshoterror": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/home.dart"
-  },
-  "errorLoadingListsSnapshoterror1": "Error loading lists: {error}",
-  "@errorLoadingListsSnapshoterror1": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    },
-    "description": "From: lib/screens/home.dart"
-  },
   "errorSigningOutEtostring": "Error signing out: {e}",
   "@errorSigningOutEtostring": {
     "placeholders": {
@@ -1108,6 +1090,16 @@
   "viewer2": "viewer",
   "viewer3": "Viewer",
   "welcomeToShopsync": "Welcome to ShopSync",
+  "homeUserDisplayNameFallback": "User",
+  "homeMyLists": "My Lists",
+  "homeNoListsYet": "No lists yet",
+  "homeSwipeUpToViewOptions": "Swipe up to view options",
+  "homeUnnamedList": "Unnamed List",
+  "homeListGroupsTitle": "List Groups",
+  "homeHoldToReorder": "Hold to reorder",
+  "homeUnknownDate": "Unknown date",
+  "homeQuickTutorial": "Quick Tutorial",
+  "homeYouAreAViewer": "You're a viewer",
   "widgetSettings": "Widget Settings",
   "widgetSettings1": "Widget Settings",
   "widgetUpdatedSuccessfully": "Widget updated successfully!",
