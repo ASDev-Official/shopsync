@@ -184,13 +184,17 @@ class _ListViewScreenState extends State<ListViewScreen>
             size: 16,
           ),
           const SizedBox(width: 8),
-          Text(
-            label,
-            style: TextStyle(
-              color: isDark ? Colors.blue[300] : Colors.blue[700],
-              fontWeight: FontWeight.w500,
+          Expanded(
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isDark ? Colors.blue[300] : Colors.blue[700],
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
+        ],
+      ),
         ],
       ),
     );
