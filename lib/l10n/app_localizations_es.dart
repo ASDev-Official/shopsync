@@ -1629,62 +1629,63 @@ class AppLocalizationsEs extends AppLocalizations {
   String get signOut5 => 'Salir';
 
   @override
-  String get manageAccounts => 'ShopSync Accounts';
+  String get manageAccounts => 'Cuentas de ShopSync';
 
   @override
-  String get accountManager => 'ShopSync Accounts';
+  String get accountManager => 'Cuentas de ShopSync';
 
   @override
-  String get accountManagerSubtitle => 'Accounts on this device';
+  String get accountManagerSubtitle => 'Cuentas en este dispositivo';
 
   @override
   String get manageAccountsDescription =>
-      'Choose an account to continue, or add another account.';
+      'Elige una cuenta para continuar, o añade otra cuenta.';
 
   @override
-  String get switchAccount => 'Switch account';
+  String get switchAccount => 'Cambiar de cuenta';
 
   @override
-  String get addGoogleAccount => 'Add Google account';
+  String get addGoogleAccount => 'Añadir una cuenta de Google';
 
   @override
-  String get addEmailPasswordAccount => 'Add account';
+  String get addEmailPasswordAccount => 'Añadir cuenta';
 
   @override
-  String get removeAccounts => 'Remove Accounts';
+  String get removeAccounts => 'Eliminar Cuentas';
 
   @override
   String get removeAccountsDescription =>
-      'Tap the minus icon next to an account to remove it from this device.';
+      'Pulsa el icono de menos junto a una cuenta para eliminarla de este dispositivo.';
 
   @override
-  String get restartText => 'Restart';
+  String get restartText => 'Reiniciar';
 
   @override
   String get removeOwnAccountRestartWarning =>
-      'Removing your currently signed-in account will restart ShopSync. You can then log in to any other account saved on this device.';
+      'Eliminar la cuenta que actualmente está registrada reiniciará ShopSync. Luego podrás iniciar sesión con cualquier otra cuenta guardada en este dispositivo.';
 
   @override
-  String get removeAccountSuccess => 'Account removed from this device.';
+  String get removeAccountSuccess => 'Cuenta eliminada de este dispositivo.';
 
   @override
-  String get removeCurrentAccount => 'Remove this account';
+  String get removeCurrentAccount => 'Eliminar esta cuenta';
 
   @override
-  String get noSavedAccounts => 'No accounts on this device yet.';
+  String get noSavedAccounts => 'Aún no hay cuentas en este dispositivo.';
 
   @override
-  String get accountSwitched => 'Switched account.';
+  String get accountSwitched => 'Cuenta cambiada.';
 
   @override
-  String get googleAccountAdded => 'Google account added.';
+  String get googleAccountAdded => 'Cuenta de Google añadida.';
 
   @override
-  String get removeAccountConfirm => 'Remove this account from this device?';
+  String get removeAccountConfirm =>
+      '¿Eliminar esta cuenta de este dispositivo?';
 
   @override
   String get removeAccountDetails =>
-      'This will sign you out and remove this ShopSync account from the Android account picker.';
+      'Esto cerrará tu sesión y eliminará esta cuenta de ShopSync del selector de cuentas de Android.';
 
   @override
   String get skipForNow => 'Omitir por Ahora';
@@ -2489,7 +2490,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get useCredentialManagerToSwitchAccounts =>
-      'Open Android account picker';
+      'Abrir selector de cuentas de Android';
 
   @override
   String get emailAndPassword => 'Correo-e y Contraseña';
