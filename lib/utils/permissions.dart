@@ -52,34 +52,4 @@ class PermissionsHelper {
       return 'viewer';
     }
   }
-
-  /// Check if current user has any viewer-only lists
-  static Future<bool> hasViewerLists() async {
-    final currentUserId = _auth.currentUser?.uid;
-    if (currentUserId == null) return false;
-
-    try {
-      final listsSnapshot = await _firestore
-          .collection('lists')
-          .where('members', arrayContains: currentUserId)
-          .get();
-
-      for (final doc in listsSnapshot.docs) {
-        final data = doc.data();
-
-        // Skip if user is the owner
-        if (data['createdBy'] == currentUserId) continue;
-
-        // Check member role
-        final memberRoles = Map<String, String>.from(data['memberRoles'] ?? {});
-        final userRole = memberRoles[currentUserId] ?? 'viewer';
-
-        if (userRole == 'viewer') return true;
-      }
-
-      return false;
-    } catch (e) {
-      return false;
-    }
-  }
 }
