@@ -41,7 +41,7 @@ dependencies:
   crypto: ^3.0.6
 
 dev_dependencies:
-  sentry_dart_plugin: ^3.2.1
+  sentry_dart_plugin: ^3.3.0
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
