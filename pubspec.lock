@@ -1169,10 +1169,10 @@ packages:
     dependency: "direct main"
     description:
       name: restart_app
-      sha256: "5bbeb34f7af32d1b87fbb8bc56a6501ca779596cfbb84af6ba4e3ebf57af4a23"
+      sha256: "400dd401b77b599e2defef55fd4c22af3ff80af48616a82f01c2a07070e3e368"
       url: "https://pub.dev"
     source: hosted
-    version: "1.7.3"
+    version: "1.8.3"
   rotary_scrollbar:
     dependency: "direct main"
     description:
