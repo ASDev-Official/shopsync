@@ -37,5 +37,13 @@
     "cancel9": "Hủy",
     "category": "Danh mục",
     "category1": "Danh mục",
-    "categoryCreatedSuccessfully": "Danh mục đã được tạo thành công"
+    "categoryCreatedSuccessfully": "Danh mục đã được tạo thành công",
+    "categoryCreatedSuccessfully1": "Danh mục đã được tạo thành công",
+    "categoryDeletedSuccessfully": "Danh mục đã được xóa thành công",
+    "categoryDeletedSuccessfully1": "Danh mục đã được xóa thành công",
+    "categoryName": "Tên danh mục",
+    "categoryName1": "Tên danh mục",
+    "categoryUpdatedSuccessfully": "Danh mục đã cập nhật thành công",
+    "categoryUpdatedSuccessfully1": "Danh mục đã cập nhập thành công",
+    "changeTheNameOfThisList": "Đổi tên cho danh sách này"
 }
