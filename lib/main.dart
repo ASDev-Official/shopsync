@@ -199,7 +199,6 @@ class _ShopSyncAppState extends State<ShopSyncApp> {
           builders: {
             TargetPlatform.android:
                 const PredictiveBackPageTransitionsBuilder(),
-            TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
             TargetPlatform.macOS: const ZoomPageTransitionsBuilder(),
             TargetPlatform.linux: const ZoomPageTransitionsBuilder(),
             TargetPlatform.windows: const ZoomPageTransitionsBuilder(),
@@ -218,7 +217,6 @@ class _ShopSyncAppState extends State<ShopSyncApp> {
           builders: {
             TargetPlatform.android:
                 const PredictiveBackPageTransitionsBuilder(),
-            TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
             TargetPlatform.macOS: const ZoomPageTransitionsBuilder(),
             TargetPlatform.linux: const ZoomPageTransitionsBuilder(),
             TargetPlatform.windows: const ZoomPageTransitionsBuilder(),

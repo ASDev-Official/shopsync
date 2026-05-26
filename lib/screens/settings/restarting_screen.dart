@@ -27,7 +27,7 @@ class _RestartingScreenState extends State<RestartingScreen> {
   Future<void> _restartOrFallback() async {
     try {
       final restarted = await Restart.restartApp();
-      if (restarted) {
+      if (restarted.success) {
         return;
       }
       _showManualRestartState();

@@ -900,11 +900,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     physics:
                                         const NeverScrollableScrollPhysics(),
                                     itemCount: groups.length,
-                                    onReorder: (oldIndex, newIndex) async {
-                                      if (oldIndex < newIndex) {
-                                        newIndex -= 1;
-                                      }
-
+                                    onReorderItem: (oldIndex, newIndex) async {
                                       final reorderedGroups =
                                           List<DocumentSnapshot>.from(groups);
                                       final item =

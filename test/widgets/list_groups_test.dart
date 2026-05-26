@@ -112,7 +112,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: ReorderableListView(
-              onReorder: (oldIndex, newIndex) {},
+              onReorderItem: (oldIndex, newIndex) {},
               children: [
                 ListTile(
                     key: const ValueKey(1), title: const Text('Groceries')),
