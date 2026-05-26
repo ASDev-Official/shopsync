@@ -21,6 +21,7 @@ firestore.rules
 
 # # VSCode related
 # .vscode/
+.antigravitycli
 
 # Flutter/Dart/Pub related
 **/doc/api/
