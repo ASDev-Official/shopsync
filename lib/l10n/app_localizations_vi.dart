@@ -131,28 +131,28 @@ class AppLocalizationsVi extends AppLocalizations {
   String get categoryCreatedSuccessfully => 'Danh mục đã được tạo thành công';
 
   @override
-  String get categoryCreatedSuccessfully1 => 'Category created successfully';
+  String get categoryCreatedSuccessfully1 => 'Danh mục đã được tạo thành công';
 
   @override
-  String get categoryDeletedSuccessfully => 'Category deleted successfully';
+  String get categoryDeletedSuccessfully => 'Danh mục đã được xóa thành công';
 
   @override
-  String get categoryDeletedSuccessfully1 => 'Category deleted successfully';
+  String get categoryDeletedSuccessfully1 => 'Danh mục đã được xóa thành công';
 
   @override
-  String get categoryName => 'Category Name';
+  String get categoryName => 'Tên danh mục';
 
   @override
-  String get categoryName1 => 'Category Name';
+  String get categoryName1 => 'Tên danh mục';
 
   @override
-  String get categoryUpdatedSuccessfully => 'Category updated successfully';
+  String get categoryUpdatedSuccessfully => 'Danh mục đã cập nhật thành công';
 
   @override
-  String get categoryUpdatedSuccessfully1 => 'Category updated successfully';
+  String get categoryUpdatedSuccessfully1 => 'Danh mục đã cập nhập thành công';
 
   @override
-  String get changeTheNameOfThisList => 'Change the name of this list';
+  String get changeTheNameOfThisList => 'Đổi tên cho danh sách này';
 
   @override
   String get clearCompleted => 'Clear Completed';
