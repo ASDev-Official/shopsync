@@ -1409,5 +1409,15 @@
     "removeAccountDetails": "Esto cerrará tu sesión y eliminará esta cuenta de ShopSync del selector de cuentas de Android.",
     "useCredentialManagerToSwitchAccounts": "Abrir selector de cuentas de Android",
     "manageAccounts": "Cuentas de ShopSync",
-    "accountManager": "Cuentas de ShopSync"
+    "accountManager": "Cuentas de ShopSync",
+    "homeUserDisplayNameFallback": "Usuario",
+    "homeMyLists": "Mis Listados",
+    "homeNoListsYet": "Aún sin listados",
+    "homeSwipeUpToViewOptions": "Desliza para ver las opciones",
+    "homeUnnamedList": "Listados sin nombre",
+    "homeListGroupsTitle": "Grupos de lista",
+    "homeHoldToReorder": "Mantener para reordenar",
+    "homeUnknownDate": "Fecha desconocida",
+    "homeQuickTutorial": "Tutorial rápido",
+    "homeYouAreAViewer": "Eres un visor"
 }
