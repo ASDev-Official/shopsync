@@ -25,7 +25,7 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 
 Before contributing, ensure you have:
 
-- **Flutter SDK**: Version 3.44.0 or higher
+- **Flutter SDK**: Version 3.44.4 or higher
 - **Android Studio** or **VS Code** with Flutter plugins
 - **Git** for version control
 - **Android device or emulator** for testing
