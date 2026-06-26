@@ -27,9 +27,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8
-    }
 
     signingConfigs {
         if (keystorePropertiesFile.exists()) {
@@ -77,6 +74,12 @@ android {
                 signingConfig = signingConfigs.getByName("release")
             }
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8
     }
 }
 
