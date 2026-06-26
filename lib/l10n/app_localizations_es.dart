@@ -1840,34 +1840,34 @@ class AppLocalizationsEs extends AppLocalizations {
   String get welcomeToShopsync => 'Bienvenido a ShopSync';
 
   @override
-  String get homeUserDisplayNameFallback => 'User';
+  String get homeUserDisplayNameFallback => 'Usuario';
 
   @override
-  String get homeMyLists => 'My Lists';
+  String get homeMyLists => 'Mis Listados';
 
   @override
-  String get homeNoListsYet => 'No lists yet';
+  String get homeNoListsYet => 'Aún sin listados';
 
   @override
-  String get homeSwipeUpToViewOptions => 'Swipe up to view options';
+  String get homeSwipeUpToViewOptions => 'Desliza para ver las opciones';
 
   @override
-  String get homeUnnamedList => 'Unnamed List';
+  String get homeUnnamedList => 'Listados sin nombre';
 
   @override
-  String get homeListGroupsTitle => 'List Groups';
+  String get homeListGroupsTitle => 'Grupos de lista';
 
   @override
-  String get homeHoldToReorder => 'Hold to reorder';
+  String get homeHoldToReorder => 'Mantener para reordenar';
 
   @override
-  String get homeUnknownDate => 'Unknown date';
+  String get homeUnknownDate => 'Fecha desconocida';
 
   @override
-  String get homeQuickTutorial => 'Quick Tutorial';
+  String get homeQuickTutorial => 'Tutorial rápido';
 
   @override
-  String get homeYouAreAViewer => 'You\'re a viewer';
+  String get homeYouAreAViewer => 'Eres un visor';
 
   @override
   String get widgetSettings => 'Ajustes de Widget';
