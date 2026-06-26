@@ -34,7 +34,7 @@ dependencies:
   connectivity_plus: ^7.1.1
   home_widget: ^0.9.1
   collection: ^1.18.0
-  wear_plus: ^1.2.4
+  wear_plus: ^1.2.5
   rotary_scrollbar: ^1.1.0
   restart_app: ^1.8.3
   http: ^1.6.0

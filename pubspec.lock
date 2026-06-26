@@ -1550,10 +1550,10 @@ packages:
     dependency: "direct main"
     description:
       name: wear_plus
-      sha256: e8e565ed4ba79ec36a615bc33998111c94b7e3c56240aab98b60f6ac9128fa27
+      sha256: "492caaf15c13d3ea20e5b00f8fb884b412a6ae81ebac7995e47b57d436ad0a1b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.4"
+    version: "1.2.5"
   wearable_rotary:
     dependency: transitive
     description:
