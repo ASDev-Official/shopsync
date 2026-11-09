@@ -1117,5 +1117,307 @@
     "removeAccountSuccess": "Аккаунт удален с этого устройства.",
     "removeCurrentAccount": "Удалить этот аккаунт",
     "googleAccountAdded": "Google аккаунт добавлен.",
-    "removeAccountConfirm": "Удалить этот аккаунт с этого устройства?"
+    "removeAccountConfirm": "Удалить этот аккаунт с этого устройства?",
+    "outageMoreComponents": "{count, plural, =1{+1 ещё} other{+{count} ещё}}",
+    "@outageMoreComponents": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "outageImpactMajor": "Значительный",
+    "outageImpactMinor": "Незначительный",
+    "outageImpactDefault": "Сбой",
+    "accountManager": "Аккаунты ShopSync",
+    "manageAccountsDescription": "Выберите аккаунт для продолжения или добавьте другой аккаунт.",
+    "removeAccountsDescription": "Нажмите значок минуса рядом с аккаунтом, чтобы удалить его с этого устройства.",
+    "restartText": "Перезапустить",
+    "removeOwnAccountRestartWarning": "Удаление текущей учётной записи, в которую выполнен вход, перезапустит ShopSync. После этого можно войти в любой другой аккаунт, сохранённый на этом устройстве.",
+    "noSavedAccounts": "На этом устройстве пока нет аккаунтов.",
+    "accountSwitched": "Аккаунт переключён.",
+    "removeAccountDetails": "Вы выйдете из системы, и этот аккаунт ShopSync будет удалён из списка аккаунтов Android.",
+    "homeUserDisplayNameFallback": "Пользователь",
+    "homeMyLists": "Мои списки",
+    "homeNoListsYet": "Списков пока нет",
+    "homeSwipeUpToViewOptions": "Смахните вверх, чтобы увидеть параметры",
+    "homeUnnamedList": "Список без названия",
+    "homeListGroupsTitle": "Группы списков",
+    "homeHoldToReorder": "Удерживайте, чтобы изменить порядок",
+    "homeUnknownDate": "Неизвестная дата",
+    "homeQuickTutorial": "Краткое руководство",
+    "homeYouAreAViewer": "Вы просматриваете",
+    "gravatarSettings": "Фото профиля",
+    "gravatarDescription": "Gravatar — это глобально распознаваемый сервис аватаров. Если с вашей электронной почтой связан Gravatar, включите его, чтобы показывать фото профиля во всём ShopSync.",
+    "enableGravatar": "Показывать мой Gravatar",
+    "disableGravatar": "Скрыть мой Gravatar",
+    "gravatarEnabled": "Gravatar включён",
+    "gravatarDisabled": "Gravatar отключён",
+    "gravatarEnabledMessage": "Ваше фото профиля Gravatar теперь видно другим пользователям",
+    "gravatarDisabledMessage": "Ваше фото профиля Gravatar теперь скрыто от других пользователей",
+    "refreshGravatar": "Обновить Gravatar",
+    "gravatarRefreshed": "Gravatar успешно обновлён",
+    "gravatarNotFound": "Для вашей электронной почты Gravatar не найден",
+    "gravatarFound": "Gravatar найден и обновлён",
+    "whatIsGravatar": "Что такое Gravatar?",
+    "gravatarExplanation": "Gravatar (Globally Recognized Avatar) — это сервис, который предоставляет фото профиля на разных сайтах и в приложениях по вашему адресу электронной почты. Посетите gravatar.com, чтобы создать или обновить свой Gravatar.",
+    "visitGravatar": "Перейти на Gravatar.com",
+    "privacyControl": "Управление конфиденциальностью",
+    "gravatarPrivacyDescription": "Вы можете включить или отключить свой Gravatar в любое время. Когда он отключён, другим пользователям показываются только ваши инициалы.",
+    "learnMore": "Подробнее",
+    "close": "Закрыть",
+    "anErrorOccurred": "Произошла ошибка",
+    "gravatarProfilePictures": "Фотографии профиля",
+    "gravatarSetupDescription": "ShopSync может показывать ваше фото профиля Gravatar во всём приложении. Хотите включить эту функцию?",
+    "enableGravatarSetup": "Включить Gravatar",
+    "enableGravatarSetupDescription": "Показывать моё фото профиля другим пользователям",
+    "disableGravatarSetup": "Отключить Gravatar",
+    "disableGravatarSetupDescription": "Не показывать моё фото профиля",
+    "gravatarFeature1": "Показывать ваше фото профиля из Gravatar",
+    "gravatarFeature2": "Автоматически синхронизируется с вашей электронной почтой",
+    "gravatarFeature3": "Видно в общих списках и при совместной работе",
+    "gravatarFeature4": "Можно изменить в любое время в настройках",
+    "gravatarDisabledFeature1": "Другим пользователям показываются только инициалы",
+    "gravatarDisabledFeature2": "Скрывает ваш Gravatar от других пользователей",
+    "gravatarDisabledFeature3": "Можно включить позже в настройках",
+    "gravatarPreferenceChangeNote": "Вы можете изменить эту настройку позже в настройках профиля.",
+    "chooseIconTitle": "Выберите значок",
+    "doneButton": "Готово",
+    "selectedIconLabel": "Выбранный значок",
+    "loadingIcons": "Загрузка значков…",
+    "noIconsFound": "Значки не найдены",
+    "noIconsFoundHint": "Попробуйте изменить запрос или фильтр категории",
+    "allCategory": "Все",
+    "itemInRecycleBin": "{count, plural, =0{В корзине нет элементов} =1{{count} элемент в корзине} other{{count} элементов в корзине}}",
+    "@itemInRecycleBin": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "restoreItemTooltip": "Восстановить элемент",
+    "deletePermanentlyTooltip": "Удалить навсегда",
+    "deletedOnDate": "Удалено {date}",
+    "@deletedOnDate": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "noDeletedItems": "Нет удалённых элементов",
+    "noDeletedItemsSubtitle": "Удалённые вами элементы будут отображаться здесь 30 дней",
+    "areYouSureDeleteCategory": "Вы уверены, что хотите удалить «{categoryName}»? Категория будет удалена из всех элементов.",
+    "@areYouSureDeleteCategory": {
+        "placeholders": {
+            "categoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "noCategoriesYet": "Категорий пока нет",
+    "createYourFirstCategoryAbove": "Создайте свою первую категорию выше",
+    "editTooltip": "Изменить",
+    "deleteTooltip": "Удалить",
+    "createNewCategory": "Создать новую категорию",
+    "timeframeDay": "День",
+    "timeframeWeek": "Неделя",
+    "timeframeMonth": "Месяц",
+    "timeframeAll": "Все",
+    "noInsightsAvailableYet": "Аналитика пока недоступна",
+    "noActivityDataForTimeframe": "Нет данных об активности за этот период",
+    "activityTimeline": "Хронология активности",
+    "addedLabel": "Добавлено",
+    "completedLabel": "Завершено",
+    "categoryBreakdown": "Распределение по категориям",
+    "noCollaboratorActivityInTimeframe": "За этот период нет активности участников",
+    "collaboratorActivity": "Активность участников",
+    "addedCompletedSummary": "{added} добавлено • {completed} завершено",
+    "@addedCompletedSummary": {
+        "placeholders": {
+            "added": {
+                "type": "String"
+            },
+            "completed": {
+                "type": "String"
+            }
+        }
+    },
+    "continueWithoutOrganizing": "Вы можете позже распределить списки по группам на главном экране. Продолжить без распределения?",
+    "createdAtDate": "Создано {date}",
+    "@createdAtDate": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "suggestedBadge": "Рекомендуется",
+    "ungroupedListsSection": "Списки без группы",
+    "ungroupedListsCount": "{count, plural, =0{Нет списков, назначенных группе} =1{{count} список не назначен ни одной группе} other{{count} списков не назначены ни одной группе}}",
+    "@ungroupedListsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "dragListsToGroupOrCreate": "Перетащите эти списки в группу выше или создайте для них новую группу:",
+    "shopSyncMigration": "Миграция ShopSync",
+    "organizeWithListGroups": "Упорядочить с помощью групп списков",
+    "organizeListsBodyCount": "{count, plural, =0{Мы предложили несколько групп для ваших списков. Вы можете изменить, удалить или добавить новые группы.} =1{Мы предложили несколько групп для вашего списка ({count}). Вы можете изменить, удалить или добавить новые группы.} other{Мы предложили несколько групп для ваших списков ({count}). Вы можете изменить, удалить или добавить новые группы.}}",
+    "@organizeListsBodyCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "organizeLists": "Упорядочить списки",
+    "listsCount": "{count, plural, =0{Нет списков} =1{{count} список} other{{count} списков}}",
+    "@listsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "failedToUpgradeLists": "Не удалось обновить списки. Пожалуйста, попробуйте снова.",
+    "anErrorOccurredError": "Произошла ошибка: {error}",
+    "@anErrorOccurredError": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "upgradeFailed": "Обновление не удалось",
+    "upgradingYourLists": "Обновление ваших списков",
+    "pleaseWaitUpdatingListGroups": "Подождите, пока мы обновляем группы ваших списков до нового формата…",
+    "licensesTitle": "Лицензии",
+    "noPackagesFound": "Пакеты не найдены",
+    "noPackagesMatchSearch": "Нет пакетов, соответствующих вашему запросу",
+    "versionDisplay": "Версия {version}",
+    "@versionDisplay": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "trendsAndPerformance": "Тенденции и производительность",
+    "topCategories": "Лучшие категории",
+    "topCompletedLists": "Списки с наибольшим числом завершённых",
+    "timeframeQuarter": "Квартал",
+    "timeframeYear": "Год",
+    "timeframeAllTime": "За всё время",
+    "completionRateTitle": "Доля завершённых",
+    "failedToLoadCompletionRate": "Не удалось загрузить долю завершённых",
+    "ofItemsCompleted": "элементов завершено",
+    "dailyProductivity": "Ежедневная продуктивность",
+    "failedToLoadProductivityData": "Не удалось загрузить данные о продуктивности",
+    "itemsAddedPerDay": "элементов добавлено в день",
+    "activityOverTime": "Активность с течением времени",
+    "failedToLoadActivityData": "Не удалось загрузить данные об активности",
+    "noDataAvailable": "Нет доступных данных",
+    "noData": "Нет данных",
+    "itemsCountTooltip": "{count, plural, =0{Нет элементов} =1{{count} элемент} other{{count} элементов}}",
+    "@itemsCountTooltip": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "itemsAddedEachDay": "Элементы, добавленные за день",
+    "failedToLoadCategoryData": "Не удалось загрузить данные категорий",
+    "itemCountLabel": "{count, plural, =0{Нет элементов} =1{{count} элемент} other{{count} элементов}}",
+    "@itemCountLabel": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "failedToLoadListData": "Не удалось загрузить данные списков",
+    "selectLanguage": "Выберите язык",
+    "systemDefault": "Как в системе",
+    "langEnglish": "English",
+    "langArabic": "العربية",
+    "langBengali": "বাংলা",
+    "langDeutsch": "Deutsch",
+    "langDutch": "Нидерландский",
+    "langEspanol": "Español",
+    "langFrancais": "Français",
+    "langHindi": "हिन्दी",
+    "langIndonesian": "Bahasa Indonesia",
+    "langItaliano": "Italiano",
+    "langJapanese": "日本語",
+    "langKannada": "ಕನ್ನಡ",
+    "langKorean": "한국어",
+    "langMarathi": "मराठी",
+    "langPortuguese": "Português",
+    "langRussian": "Русский",
+    "langSimplifiedChinese": "简体中文",
+    "langTamil": "தமிழ்",
+    "langTelugu": "తెలుగు",
+    "langTraditionalChinese": "繁體中文",
+    "langTurkish": "Türkçe",
+    "langVietnamese": "Tiếng Việt",
+    "useSystemDefaultTitle": "Использовать настройки системы",
+    "useSystemDefaultBody": "Использовать языковую настройку вашего устройства?",
+    "confirm": "Подтвердить",
+    "errorUpdatingProfile": "Ошибка обновления профиля: {error}",
+    "@errorUpdatingProfile": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "googleAccountLinkedMessage": "Аккаунт Google успешно привязан! Теперь вы можете войти через Google.",
+    "areYouSureUnlinkGoogle": "Вы уверены, что хотите отвязать аккаунт Google? Вы больше не сможете входить через Google, пока не привяжете его снова.",
+    "anErrorOccurredLinkingGoogle": "Произошла ошибка при привязке аккаунта Google.",
+    "anErrorOccurredUnlinkingGoogle": "Произошла ошибка при отвязке аккаунта Google.",
+    "goBack": "Назад",
+    "editProfileTooltip": "Изменить профиль",
+    "accountInformation": "Информация об аккаунте",
+    "displayName": "Отображаемое имя",
+    "emailAddress": "Адрес электронной почты",
+    "emailCannotBeChanged": "Электронная почта (нельзя изменить)",
+    "linkedAccounts": "Связанные аккаунты",
+    "manageHowYouSignIn": "Управление способами входа в ShopSync",
+    "useCredentialManagerToSwitchAccounts": "Открыть выбор аккаунта Android",
+    "emailAndPassword": "Электронная почта и пароль",
+    "signInWithEmailAndPassword": "Вход по электронной почте и паролю",
+    "notConfigured": "Не настроено",
+    "signInWithGoogleAccount": "Вход через аккаунт Google",
+    "notLinked": "Не привязано",
+    "showGravatar": "Показывать Gravatar",
+    "displayProfilePictureToOtherUsers": "Показывать фото профиля другим пользователям",
+    "accountActivity": "Активность аккаунта",
+    "shoppingListsCount": "{count, plural, =0{Нет списков покупок} =1{{count} список покупок} other{{count} списков покупок}}",
+    "@shoppingListsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "listsYouHaveAccessTo": "Списки, к которым у вас есть доступ",
+    "rememberYourPassword": "Запомнить пароль?",
+    "shopSyncUpdate": "Обновление ShopSync",
+    "shopSyncHasAnUpdate": "Доступно обновление ShopSync",
+    "pleaseUpdateAppBody": "Пожалуйста, обновите приложение, чтобы продолжать пользоваться новейшими функциями и улучшениями.",
+    "restartingShopSync": "Перезапуск ShopSync",
+    "downloadingUpdateLabel": "Загрузка обновления…",
+    "restartRequiredTitle": "Требуется перезапуск",
+    "restartRequiredBody": "Автоматический перезапуск не удался. Принудительно закройте ShopSync и откройте его снова, чтобы применить смену языка.",
+    "install": "Установить",
+    "downloading": "Загрузка…",
+    "updateButton": "Обновить",
+    "google": "Google",
+    "startAddingItemsToSeeInsights": "Начните добавлять элементы, чтобы увидеть аналитику",
+    "pleaseTryAgainLater": "Пожалуйста, повторите попытку позже"
 }
