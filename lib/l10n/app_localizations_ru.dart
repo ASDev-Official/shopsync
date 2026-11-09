@@ -556,7 +556,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get outageImpactCritical => 'Critical';
+  String get outageImpactCritical => 'Критический';
 
   @override
   String get outageImpactMajor => 'Major';
@@ -1598,29 +1598,29 @@ class AppLocalizationsRu extends AppLocalizations {
   String get signOut5 => 'Выйти';
 
   @override
-  String get manageAccounts => 'ShopSync Accounts';
+  String get manageAccounts => 'Аккаунты ShopSync';
 
   @override
   String get accountManager => 'ShopSync Accounts';
 
   @override
-  String get accountManagerSubtitle => 'Accounts on this device';
+  String get accountManagerSubtitle => 'Аккаунты на этом устройстве';
 
   @override
   String get manageAccountsDescription =>
       'Choose an account to continue, or add another account.';
 
   @override
-  String get switchAccount => 'Switch account';
+  String get switchAccount => 'Изменить аккаунт';
 
   @override
-  String get addGoogleAccount => 'Add Google account';
+  String get addGoogleAccount => 'Добавить Google аккаунт';
 
   @override
-  String get addEmailPasswordAccount => 'Add account';
+  String get addEmailPasswordAccount => 'Добавить аккаунт';
 
   @override
-  String get removeAccounts => 'Remove Accounts';
+  String get removeAccounts => 'Удалить аккаунты';
 
   @override
   String get removeAccountsDescription =>
@@ -1634,10 +1634,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'Removing your currently signed-in account will restart ShopSync. You can then log in to any other account saved on this device.';
 
   @override
-  String get removeAccountSuccess => 'Account removed from this device.';
+  String get removeAccountSuccess => 'Аккаунт удален с этого устройства.';
 
   @override
-  String get removeCurrentAccount => 'Remove this account';
+  String get removeCurrentAccount => 'Удалить этот аккаунт';
 
   @override
   String get noSavedAccounts => 'No accounts on this device yet.';
@@ -1646,10 +1646,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get accountSwitched => 'Switched account.';
 
   @override
-  String get googleAccountAdded => 'Google account added.';
+  String get googleAccountAdded => 'Google аккаунт добавлен.';
 
   @override
-  String get removeAccountConfirm => 'Remove this account from this device?';
+  String get removeAccountConfirm => 'Удалить этот аккаунт с этого устройства?';
 
   @override
   String get removeAccountDetails =>

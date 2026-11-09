@@ -204,7 +204,6 @@ Text(AppLocalizations.of(context)!.aiFeatures)
 
 - **Firebase**: Auth, Firestore, deployed via `firebase.json` (hosting config)
 - **Sentry**: Error tracking with 100% trace/profile sample rate (see `main.dart`)
-- **Google Mobile Ads**: Initialized with `unawaited(MobileAds.instance.initialize())`
 - **TFLite**: Local ML model for smart suggestions (`SmartSuggestionsService`)
 - **Weblate**: Translation management (not in code, contributor workflow)
 - **Atlassian Statuspage**: Outage status via public API (`StatuspageService`)

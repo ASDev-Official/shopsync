@@ -116,55 +116,57 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cancel6 => 'Abbrechen';
 
   @override
-  String get cancel7 => 'Cancel';
+  String get cancel7 => 'Abbrechen';
 
   @override
-  String get cancel8 => 'Cancel';
+  String get cancel8 => 'Abbrechen';
 
   @override
-  String get cancel9 => 'Cancel';
+  String get cancel9 => 'Abbrechen';
 
   @override
-  String get category => 'Category';
+  String get category => 'Kategorie';
 
   @override
-  String get category1 => 'Category';
+  String get category1 => 'Kategorie';
 
   @override
-  String get categoryCreatedSuccessfully => 'Category created successfully';
+  String get categoryCreatedSuccessfully => 'Kategorie erfolgreich erstellt';
 
   @override
-  String get categoryCreatedSuccessfully1 => 'Category created successfully';
+  String get categoryCreatedSuccessfully1 => 'Kategorie erfolgreich erstellt';
 
   @override
-  String get categoryDeletedSuccessfully => 'Category deleted successfully';
+  String get categoryDeletedSuccessfully => 'Kategorie erfolgreich gelöscht';
 
   @override
-  String get categoryDeletedSuccessfully1 => 'Category deleted successfully';
+  String get categoryDeletedSuccessfully1 => 'Kategorie erfolgreich gelöscht';
 
   @override
-  String get categoryName => 'Category Name';
+  String get categoryName => 'Kategoriename';
 
   @override
-  String get categoryName1 => 'Category Name';
+  String get categoryName1 => 'Kategoriename';
 
   @override
-  String get categoryUpdatedSuccessfully => 'Category updated successfully';
+  String get categoryUpdatedSuccessfully =>
+      'Kategorie erfolgreich aktualisiert';
 
   @override
-  String get categoryUpdatedSuccessfully1 => 'Category updated successfully';
+  String get categoryUpdatedSuccessfully1 =>
+      'Kategorie erfolgreich aktualisiert';
 
   @override
-  String get changeTheNameOfThisList => 'Change the name of this list';
+  String get changeTheNameOfThisList => 'Den Namen dieser Liste ändern';
 
   @override
-  String get clearCompleted => 'Clear Completed';
+  String get clearCompleted => 'Löschen Abgeschlossen';
 
   @override
-  String get clearCompletedItems => 'Clear Completed Items';
+  String get clearCompletedItems => 'Abgeschlossene Elemente löschen';
 
   @override
-  String get clearItems => 'Clear Items';
+  String get clearItems => 'Artikel löschen';
 
   @override
   String clearedCompleteditemsdocslengthCompletedItems(Object completedItems) {
@@ -187,23 +189,23 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get collaborators => 'Collaborators';
+  String get collaborators => 'Mitarbeiter';
 
   @override
-  String get completed => 'Completed';
+  String get completed => 'Abgeschlossen';
 
   @override
-  String get completionRate => 'completion rate';
+  String get completionRate => 'Abschlussquote';
 
   @override
-  String get completionRate1 => 'completion rate';
+  String get completionRate1 => 'Abschlussquote';
 
   @override
   String get configureHomeScreenWidgetDebugOnly =>
-      'Configure home screen widget (Debug Only)';
+      'Startbildschirm-Widget konfigurieren (nur für Debugging)';
 
   @override
-  String get contributeOnWeblate => 'Contribute on Weblate';
+  String get contributeOnWeblate => 'Bei Weblate mitwirken';
 
   @override
   String couldNotLaunchUrl(String url) {
@@ -216,35 +218,35 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get itemDetailsTitle => 'Item Details';
+  String get itemDetailsTitle => 'Artikel-Details';
 
   @override
-  String get untitledItem => 'Untitled Item';
+  String get untitledItem => 'Element ohne Titel';
 
   @override
-  String get unknownUser => 'Unknown';
+  String get unknownUser => 'Unbekannt';
 
   @override
   String get status => 'Status';
 
   @override
-  String get setDeadline => 'Set deadline';
+  String get setDeadline => 'Frist festlegen';
 
   @override
-  String get setLocation => 'Set location';
+  String get setLocation => 'Standort festlegen';
 
   @override
-  String get addedBy => 'Added by';
+  String get addedBy => 'Hinzugefügt von';
 
   @override
-  String get addedAt => 'Added at';
+  String get addedAt => 'Hinzugefügt am';
 
   @override
-  String get unnamedCategory => 'Unnamed Category';
+  String get unnamedCategory => 'Unbenannte Kategorie';
 
   @override
   String get onboardingWelcomeDescription =>
-      'Share shopping lists with family and friends';
+      'Teile Einkaufslisten mit Familie und Freunden';
 
   @override
   String get onboardingSmartListsDescription =>
@@ -252,34 +254,34 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingShareDescription =>
-      'Share lists with family and friends';
+      'Listen mit Familie und Freunden teilen';
 
   @override
-  String get onboardingSkip => 'Skip';
+  String get onboardingSkip => 'Überspringen';
 
   @override
-  String get onboardingNext => 'Next';
+  String get onboardingNext => 'Weiter';
 
   @override
-  String get onboardingDone => 'Done';
+  String get onboardingDone => 'Fertig';
 
   @override
-  String get upcomingMaintenance => 'Upcoming Maintenance';
+  String get upcomingMaintenance => 'Bevorstehende Wartungsarbeiten';
 
   @override
-  String get underMaintenance => 'Under Maintenance';
+  String get underMaintenance => 'Wartungsarbeiten';
 
   @override
-  String get understood => 'Understood';
+  String get understood => 'Verstanden';
 
   @override
   String get scheduledPeriod => 'Scheduled Period';
 
   @override
-  String get expectedDuration => 'Expected Duration';
+  String get expectedDuration => 'Voraussichtliche Dauer';
 
   @override
-  String get utcTimeZone => 'UTC Time Zone';
+  String get utcTimeZone => '­UTC-Zeitzone';
 
   @override
   String get createItemTitle => 'Create Item';
@@ -291,19 +293,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get enterItemName => 'Enter item name...';
 
   @override
-  String get categoryLabel => 'Category';
+  String get categoryLabel => 'Kategorie';
 
   @override
-  String get selectCategory => 'Select a category';
+  String get selectCategory => 'Wählen Sie eine Kategorie aus';
 
   @override
   String get itemIconLabel => 'Item Icon';
 
   @override
-  String get chooseIcon => 'Choose an icon';
+  String get chooseIcon => 'Wählen Sie ein Symbol aus';
 
   @override
-  String get deadlineLabel => 'Deadline';
+  String get deadlineLabel => 'Frist';
 
   @override
   String get setDeadlineText => 'Set deadline';

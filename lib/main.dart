@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
 import 'package:shopsync/services/locale_service.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
@@ -74,8 +73,6 @@ void main() async {
       print('Failed to initialize HomeWidgetService: $e');
     }
   }
-
-  unawaited(MobileAds.instance.initialize());
 
   // Start Statuspage polling early
   try {

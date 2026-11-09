@@ -3,21 +3,18 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:m3e_collection/m3e_collection.dart';
 
 import '/screens/lists/list_view.dart';
 import '/screens/migration/list_group_migration_screen.dart';
 import '/screens/settings/user_insights.dart';
 import '/widgets/ui/loading_spinner.dart';
-import '/widgets/common/advert.dart';
 import '/widgets/lists/add_list_group_bottom_sheet.dart';
 import '/widgets/lists/expandable_list_group_widget.dart';
 import '/widgets/user/user_avatar.dart';
@@ -130,10 +127,6 @@ class _HomeScreenState extends State<HomeScreen>
   final _fabMenuController = FabMenuController();
 
   double _dragStartX = 0;
-
-  // Ad management
-  BannerAd? _bannerAd;
-  bool _isBannerAdLoaded = false;
 
   // Cached streams to prevent rebuild issues with PredictiveBackPageTransitionsBuilder
   late final Stream<QuerySnapshot> _listGroupsStream;
@@ -373,7 +366,6 @@ class _HomeScreenState extends State<HomeScreen>
         .limit(1)
         .snapshots();
 
-    _loadBannerAd();
     _checkListGroupMigration();
     _checkMigration();
     _cleanupOrphanedLists();
@@ -418,40 +410,9 @@ class _HomeScreenState extends State<HomeScreen>
     await ListGroupsService.cleanupOrphanedLists();
   }
 
-  void _loadBannerAd() {
-    // Don't load ads on web platform
-    if (kIsWeb) {
-      return;
-    }
-
-    _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-6149170768233698/9243836096',
-      size: AdSize.banner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          setState(() {
-            _isBannerAdLoaded = true;
-          });
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          setState(() {
-            _bannerAd = null;
-            _isBannerAdLoaded = false;
-          });
-        },
-      ),
-    );
-    _bannerAd?.load();
-  }
-
   @override
   void dispose() {
     _newListController.dispose();
-    if (!kIsWeb) {
-      _bannerAd?.dispose();
-    }
     super.dispose();
   }
 
@@ -1332,39 +1293,19 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
 
-                    // Bottom padding for FAB and ad
-                    SliverToBoxAdapter(
+                    // Bottom padding for FAB
+                    const SliverToBoxAdapter(
                       child: SizedBox(
-                        height:
-                            _isBannerAdLoaded && _bannerAd != null ? 180 : 100,
+                        height: 100,
                       ),
                     ),
                   ],
                 ),
               ),
-              // Advertisement at the bottom
-              if (_isBannerAdLoaded && _bannerAd != null)
-                SafeArea(
-                  top: false,
-                  child: Container(
-                    margin: const EdgeInsets.all(8.0),
-                    child: BannerAdvertWidget(
-                      bannerAd: _bannerAd,
-                      backgroundColor:
-                          Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey[800]!
-                              : Colors.white,
-                    ),
-                  ),
-                ),
             ],
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-          floatingActionButton: Padding(
-            padding: EdgeInsets.only(
-              bottom: _isBannerAdLoaded && _bannerAd != null ? 90.0 : 0.0,
-            ),
-            child: FabMenuM3E(
+          floatingActionButton: FabMenuM3E(
               controller: _fabMenuController,
               alignment: Alignment.bottomRight,
               direction: FabMenuDirection.up,
@@ -1502,7 +1443,6 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

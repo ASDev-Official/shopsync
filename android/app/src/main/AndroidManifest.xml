@@ -37,10 +37,6 @@
             android:name="flutterEmbedding"
             android:value="2"
         />
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6149170768233698~5038211828"
-        />
 
         <service
             android:name=".ShopSyncAccountAuthenticatorService"

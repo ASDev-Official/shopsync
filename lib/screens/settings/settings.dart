@@ -12,8 +12,6 @@ import 'package:shopsync/services/locale_service.dart';
 import 'package:shopsync/main.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '/widgets/common/advert.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -34,44 +32,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   // Offline mode
   final connectivityService = ConnectivityService();
 
-  // Ad management
-  BannerAd? _bannerAd;
-  bool _isBannerAdLoaded = false;
-
   @override
   void initState() {
     super.initState();
     _loadSettings();
     _loadAppVersion();
-    _loadBannerAd();
-  }
-
-  void _loadBannerAd() {
-    // Don't load ads on web platform
-    if (kIsWeb) {
-      return;
-    }
-
-    _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-6149170768233698/6011136275',
-      size: AdSize.banner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          setState(() {
-            _isBannerAdLoaded = true;
-          });
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          setState(() {
-            _bannerAd = null;
-            _isBannerAdLoaded = false;
-          });
-        },
-      ),
-    );
-    _bannerAd?.load();
   }
 
   Future<void> _loadSettings() async {
@@ -227,14 +192,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         );
       }
     }
-  }
-
-  @override
-  void dispose() {
-    if (!kIsWeb) {
-      _bannerAd?.dispose();
-    }
-    super.dispose();
   }
 
   @override
@@ -698,24 +655,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               }
             },
           ),
-
-          // Advertisement at the bottom
-          const SizedBox(height: 16),
-          if (_isBannerAdLoaded && _bannerAd != null)
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).padding.bottom,
-              ),
-              child: Center(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 18.0),
-                  child: BannerAdvertWidget(
-                    bannerAd: _bannerAd,
-                    backgroundColor: isDark ? Colors.grey[800]! : Colors.white,
-                  ),
-                ),
-              ),
-            ),
         ],
       ),
     );

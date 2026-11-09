@@ -5,13 +5,11 @@ import 'package:m3e_collection/m3e_collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
 import '/screens/settings/android_account_manager_screen.dart';
 import '/screens/auth/sign_out.dart';
 import '/widgets/ui/loading_spinner.dart';
-import '/widgets/common/advert.dart';
 import '/widgets/user/user_avatar.dart';
 import '/services/auth/google_auth.dart';
 import '/services/data/ai_preference_service.dart';
@@ -71,10 +69,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? _errorMessage;
   String? _successMessage;
 
-  // Ad management
-  BannerAd? _bannerAd;
-  bool _isBannerAdLoaded = false;
-
   @override
   void initState() {
     super.initState();
@@ -86,35 +80,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
     _nameController.text = _auth.currentUser?.displayName ?? '';
-    _loadBannerAd();
-  }
-
-  void _loadBannerAd() {
-    // Don't load ads on web platform
-    if (kIsWeb) {
-      return;
-    }
-
-    _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-6149170768233698/8182035869',
-      size: AdSize.banner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          setState(() {
-            _isBannerAdLoaded = true;
-          });
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          setState(() {
-            _bannerAd = null;
-            _isBannerAdLoaded = false;
-          });
-        },
-      ),
-    );
-    _bannerAd?.load();
   }
 
   @override
@@ -127,9 +92,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
     _nameController.dispose();
-    if (!kIsWeb) {
-      _bannerAd?.dispose();
-    }
     super.dispose();
   }
 
@@ -1603,22 +1565,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     const SizedBox(height: 32),
-
-                    // Advertisement at the bottom
-                    if (_isBannerAdLoaded && _bannerAd != null)
-                      Padding(
-                        padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).padding.bottom,
-                        ),
-                        child: Center(
-                          child: BannerAdvertWidget(
-                            bannerAd: _bannerAd,
-                            backgroundColor:
-                                isDark ? Colors.grey[800]! : Colors.white,
-                          ),
-                        ),
-                      ),
-                    const SizedBox(height: 16),
                   ],
                 ),
               ),

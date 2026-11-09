@@ -3,10 +3,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shopsync/services/platform/connectivity_service.dart';
 import 'package:shopsync/l10n/app_localizations.dart';
@@ -18,7 +16,6 @@ import '/services/data/smart_suggestions_service.dart';
 import '/services/data/ai_preference_service.dart';
 import '/utils/food_icon_detector.dart';
 import '/utils/permissions.dart';
-import '/widgets/common/advert.dart';
 import '/widgets/lists/category_picker.dart';
 import '/widgets/ui/loading_spinner.dart';
 import '/widgets/lists/place_selector.dart';
@@ -48,49 +45,7 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
 
   final connectivityService = ConnectivityService();
 
-  // Ad management
-  BannerAd? _bannerAd;
-  bool _isBannerAdLoaded = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadBannerAd();
-  }
-
-  void _loadBannerAd() {
-    // Don't load ads on web platform
-    if (kIsWeb) {
-      return;
-    }
-
-    _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-6149170768233698/4749207257',
-      size: AdSize.banner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          setState(() {
-            _isBannerAdLoaded = true;
-          });
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-          setState(() {
-            _bannerAd = null;
-            _isBannerAdLoaded = false;
-          });
-        },
-      ),
-    );
-    _bannerAd?.load();
-  }
-
-  @override
-  void dispose() {
-    _bannerAd?.dispose();
-    super.dispose();
-  }
 
   void _editListName(String currentName) {
     final TextEditingController nameController =
@@ -471,26 +426,6 @@ class _ListOptionsScreenState extends State<ListOptionsScreen> {
                         ],
                       ),
                     ],
-
-                    const SizedBox(height: 16),
-
-                    // Advertisement at the bottom
-                    if (_isBannerAdLoaded && _bannerAd != null)
-                      Padding(
-                        padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).padding.bottom,
-                        ),
-                        child: Center(
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 8.0),
-                            child: BannerAdvertWidget(
-                              bannerAd: _bannerAd,
-                              backgroundColor:
-                                  isDark ? Colors.grey[800]! : Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
                   ],
                 ),
               );
