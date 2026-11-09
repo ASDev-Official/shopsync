@@ -549,8 +549,8 @@ class AppLocalizationsRu extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '+$count more',
-      one: '+1 more',
+      other: '+$count ещё',
+      one: '+1 ещё',
     );
     return '$_temp0';
   }
@@ -559,13 +559,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get outageImpactCritical => 'Критический';
 
   @override
-  String get outageImpactMajor => 'Major';
+  String get outageImpactMajor => 'Значительный';
 
   @override
-  String get outageImpactMinor => 'Minor';
+  String get outageImpactMinor => 'Незначительный';
 
   @override
-  String get outageImpactDefault => 'Outage';
+  String get outageImpactDefault => 'Сбой';
 
   @override
   String couldNotLaunchUrl2(String url) {
@@ -1601,14 +1601,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get manageAccounts => 'Аккаунты ShopSync';
 
   @override
-  String get accountManager => 'ShopSync Accounts';
+  String get accountManager => 'Аккаунты ShopSync';
 
   @override
   String get accountManagerSubtitle => 'Аккаунты на этом устройстве';
 
   @override
   String get manageAccountsDescription =>
-      'Choose an account to continue, or add another account.';
+      'Выберите аккаунт для продолжения или добавьте другой аккаунт.';
 
   @override
   String get switchAccount => 'Изменить аккаунт';
@@ -1624,14 +1624,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get removeAccountsDescription =>
-      'Tap the minus icon next to an account to remove it from this device.';
+      'Нажмите значок минуса рядом с аккаунтом, чтобы удалить его с этого устройства.';
 
   @override
-  String get restartText => 'Restart';
+  String get restartText => 'Перезапустить';
 
   @override
   String get removeOwnAccountRestartWarning =>
-      'Removing your currently signed-in account will restart ShopSync. You can then log in to any other account saved on this device.';
+      'Удаление текущей учётной записи, в которую выполнен вход, перезапустит ShopSync. После этого можно войти в любой другой аккаунт, сохранённый на этом устройстве.';
 
   @override
   String get removeAccountSuccess => 'Аккаунт удален с этого устройства.';
@@ -1640,10 +1640,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get removeCurrentAccount => 'Удалить этот аккаунт';
 
   @override
-  String get noSavedAccounts => 'No accounts on this device yet.';
+  String get noSavedAccounts => 'На этом устройстве пока нет аккаунтов.';
 
   @override
-  String get accountSwitched => 'Switched account.';
+  String get accountSwitched => 'Аккаунт переключён.';
 
   @override
   String get googleAccountAdded => 'Google аккаунт добавлен.';
@@ -1653,7 +1653,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get removeAccountDetails =>
-      'This will sign you out and remove this ShopSync account from the Android account picker.';
+      'Вы выйдете из системы, и этот аккаунт ShopSync будет удалён из списка аккаунтов Android.';
 
   @override
   String get skipForNow => 'Пропустить';
@@ -1819,34 +1819,35 @@ class AppLocalizationsRu extends AppLocalizations {
   String get welcomeToShopsync => 'Добро пожаловать в ShopSync';
 
   @override
-  String get homeUserDisplayNameFallback => 'User';
+  String get homeUserDisplayNameFallback => 'Пользователь';
 
   @override
-  String get homeMyLists => 'My Lists';
+  String get homeMyLists => 'Мои списки';
 
   @override
-  String get homeNoListsYet => 'No lists yet';
+  String get homeNoListsYet => 'Списков пока нет';
 
   @override
-  String get homeSwipeUpToViewOptions => 'Swipe up to view options';
+  String get homeSwipeUpToViewOptions =>
+      'Смахните вверх, чтобы увидеть параметры';
 
   @override
-  String get homeUnnamedList => 'Unnamed List';
+  String get homeUnnamedList => 'Список без названия';
 
   @override
-  String get homeListGroupsTitle => 'List Groups';
+  String get homeListGroupsTitle => 'Группы списков';
 
   @override
-  String get homeHoldToReorder => 'Hold to reorder';
+  String get homeHoldToReorder => 'Удерживайте, чтобы изменить порядок';
 
   @override
-  String get homeUnknownDate => 'Unknown date';
+  String get homeUnknownDate => 'Неизвестная дата';
 
   @override
-  String get homeQuickTutorial => 'Quick Tutorial';
+  String get homeQuickTutorial => 'Краткое руководство';
 
   @override
-  String get homeYouAreAViewer => 'You\'re a viewer';
+  String get homeYouAreAViewer => 'Вы просматриваете';
 
   @override
   String get widgetSettings => 'Настройки виджета';
@@ -1903,116 +1904,120 @@ class AppLocalizationsRu extends AppLocalizations {
   String get noAiSuggestions => 'Без подсказок ИИ';
 
   @override
-  String get gravatarSettings => 'Profile Picture';
+  String get gravatarSettings => 'Фото профиля';
 
   @override
   String get gravatarDescription =>
-      'Gravatar is a globally recognized avatar service. If you have a Gravatar associated with your email, enable it to show your profile picture throughout ShopSync.';
+      'Gravatar — это глобально распознаваемый сервис аватаров. Если с вашей электронной почтой связан Gravatar, включите его, чтобы показывать фото профиля во всём ShopSync.';
 
   @override
-  String get enableGravatar => 'Show My Gravatar';
+  String get enableGravatar => 'Показывать мой Gravatar';
 
   @override
-  String get disableGravatar => 'Hide My Gravatar';
+  String get disableGravatar => 'Скрыть мой Gravatar';
 
   @override
-  String get gravatarEnabled => 'Gravatar Enabled';
+  String get gravatarEnabled => 'Gravatar включён';
 
   @override
-  String get gravatarDisabled => 'Gravatar Disabled';
+  String get gravatarDisabled => 'Gravatar отключён';
 
   @override
   String get gravatarEnabledMessage =>
-      'Your Gravatar profile picture is now visible to other users';
+      'Ваше фото профиля Gravatar теперь видно другим пользователям';
 
   @override
   String get gravatarDisabledMessage =>
-      'Your Gravatar profile picture is now hidden from other users';
+      'Ваше фото профиля Gravatar теперь скрыто от других пользователей';
 
   @override
-  String get refreshGravatar => 'Refresh Gravatar';
+  String get refreshGravatar => 'Обновить Gravatar';
 
   @override
-  String get gravatarRefreshed => 'Gravatar refreshed successfully';
+  String get gravatarRefreshed => 'Gravatar успешно обновлён';
 
   @override
-  String get gravatarNotFound => 'No Gravatar found for your email';
+  String get gravatarNotFound =>
+      'Для вашей электронной почты Gravatar не найден';
 
   @override
-  String get gravatarFound => 'Gravatar found and updated';
+  String get gravatarFound => 'Gravatar найден и обновлён';
 
   @override
-  String get whatIsGravatar => 'What is Gravatar?';
+  String get whatIsGravatar => 'Что такое Gravatar?';
 
   @override
   String get gravatarExplanation =>
-      'Gravatar (Globally Recognized Avatar) is a service that provides a profile picture across different websites and apps using your email address. Visit gravatar.com to create or update your Gravatar.';
+      'Gravatar (Globally Recognized Avatar) — это сервис, который предоставляет фото профиля на разных сайтах и в приложениях по вашему адресу электронной почты. Посетите gravatar.com, чтобы создать или обновить свой Gravatar.';
 
   @override
-  String get visitGravatar => 'Visit Gravatar.com';
+  String get visitGravatar => 'Перейти на Gravatar.com';
 
   @override
-  String get privacyControl => 'Privacy Control';
+  String get privacyControl => 'Управление конфиденциальностью';
 
   @override
   String get gravatarPrivacyDescription =>
-      'You can enable or disable your Gravatar at any time. When disabled, only your initials will be shown to other users.';
+      'Вы можете включить или отключить свой Gravatar в любое время. Когда он отключён, другим пользователям показываются только ваши инициалы.';
 
   @override
-  String get learnMore => 'Learn More';
+  String get learnMore => 'Подробнее';
 
   @override
-  String get close => 'Close';
+  String get close => 'Закрыть';
 
   @override
-  String get anErrorOccurred => 'An error occurred';
+  String get anErrorOccurred => 'Произошла ошибка';
 
   @override
-  String get gravatarProfilePictures => 'Profile Pictures';
+  String get gravatarProfilePictures => 'Фотографии профиля';
 
   @override
   String get gravatarSetupDescription =>
-      'ShopSync can display your Gravatar profile picture throughout the app. Would you like to enable this feature?';
+      'ShopSync может показывать ваше фото профиля Gravatar во всём приложении. Хотите включить эту функцию?';
 
   @override
-  String get enableGravatarSetup => 'Enable Gravatar';
+  String get enableGravatarSetup => 'Включить Gravatar';
 
   @override
   String get enableGravatarSetupDescription =>
-      'Show my profile picture to other users';
+      'Показывать моё фото профиля другим пользователям';
 
   @override
-  String get disableGravatarSetup => 'Disable Gravatar';
+  String get disableGravatarSetup => 'Отключить Gravatar';
 
   @override
   String get disableGravatarSetupDescription =>
-      'Keep my profile picture private';
+      'Не показывать моё фото профиля';
 
   @override
-  String get gravatarFeature1 => 'Display your profile picture from Gravatar';
+  String get gravatarFeature1 => 'Показывать ваше фото профиля из Gravatar';
 
   @override
-  String get gravatarFeature2 => 'Automatically synced with your email';
+  String get gravatarFeature2 =>
+      'Автоматически синхронизируется с вашей электронной почтой';
 
   @override
-  String get gravatarFeature3 => 'Visible in shared lists and collaborations';
+  String get gravatarFeature3 =>
+      'Видно в общих списках и при совместной работе';
 
   @override
-  String get gravatarFeature4 => 'Can be changed anytime in settings';
+  String get gravatarFeature4 => 'Можно изменить в любое время в настройках';
 
   @override
-  String get gravatarDisabledFeature1 => 'Only initials shown to other users';
+  String get gravatarDisabledFeature1 =>
+      'Другим пользователям показываются только инициалы';
 
   @override
   String get gravatarDisabledFeature2 =>
-      'Keeps your Gravatar hidden from other users';
+      'Скрывает ваш Gravatar от других пользователей';
 
   @override
-  String get gravatarDisabledFeature3 => 'Can be enabled later in settings';
+  String get gravatarDisabledFeature3 => 'Можно включить позже в настройках';
 
   @override
   String get gravatarPreferenceChangeNote =>
-      'You can change this setting later in your profile settings.';
+      'Вы можете изменить эту настройку позже в настройках профиля.';
 
   @override
   String get basicListManagement => 'Базовое управление списками';
@@ -2054,155 +2059,157 @@ class AppLocalizationsRu extends AppLocalizations {
       'Ошибка сохранения настройки. Попробуйте снова.';
 
   @override
-  String get chooseIconTitle => 'Choose Icon';
+  String get chooseIconTitle => 'Выберите значок';
 
   @override
-  String get doneButton => 'Done';
+  String get doneButton => 'Готово';
 
   @override
-  String get selectedIconLabel => 'Selected Icon';
+  String get selectedIconLabel => 'Выбранный значок';
 
   @override
-  String get loadingIcons => 'Loading icons...';
+  String get loadingIcons => 'Загрузка значков…';
 
   @override
-  String get noIconsFound => 'No icons found';
+  String get noIconsFound => 'Значки не найдены';
 
   @override
-  String get noIconsFoundHint => 'Try adjusting your search or category filter';
+  String get noIconsFoundHint =>
+      'Попробуйте изменить запрос или фильтр категории';
 
   @override
-  String get allCategory => 'All';
+  String get allCategory => 'Все';
 
   @override
   String itemInRecycleBin(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count items in recycle bin',
-      one: '$count item in recycle bin',
-      zero: 'No items in recycle bin',
+      other: '$count элементов в корзине',
+      one: '$count элемент в корзине',
+      zero: 'В корзине нет элементов',
     );
     return '$_temp0';
   }
 
   @override
-  String get restoreItemTooltip => 'Restore item';
+  String get restoreItemTooltip => 'Восстановить элемент';
 
   @override
-  String get deletePermanentlyTooltip => 'Delete permanently';
+  String get deletePermanentlyTooltip => 'Удалить навсегда';
 
   @override
   String deletedOnDate(String date) {
-    return 'Deleted $date';
+    return 'Удалено $date';
   }
 
   @override
-  String get noDeletedItems => 'No Deleted Items';
+  String get noDeletedItems => 'Нет удалённых элементов';
 
   @override
   String get noDeletedItemsSubtitle =>
-      'Items you delete will appear here for 30 days';
+      'Удалённые вами элементы будут отображаться здесь 30 дней';
 
   @override
   String areYouSureDeleteCategory(String categoryName) {
-    return 'Are you sure you want to delete \"$categoryName\"? This will remove the category from all items.';
+    return 'Вы уверены, что хотите удалить «$categoryName»? Категория будет удалена из всех элементов.';
   }
 
   @override
-  String get noCategoriesYet => 'No categories yet';
+  String get noCategoriesYet => 'Категорий пока нет';
 
   @override
-  String get createYourFirstCategoryAbove => 'Create your first category above';
+  String get createYourFirstCategoryAbove =>
+      'Создайте свою первую категорию выше';
 
   @override
-  String get editTooltip => 'Edit';
+  String get editTooltip => 'Изменить';
 
   @override
-  String get deleteTooltip => 'Delete';
+  String get deleteTooltip => 'Удалить';
 
   @override
-  String get createNewCategory => 'Create New Category';
+  String get createNewCategory => 'Создать новую категорию';
 
   @override
-  String get timeframeDay => 'Day';
+  String get timeframeDay => 'День';
 
   @override
-  String get timeframeWeek => 'Week';
+  String get timeframeWeek => 'Неделя';
 
   @override
-  String get timeframeMonth => 'Month';
+  String get timeframeMonth => 'Месяц';
 
   @override
-  String get timeframeAll => 'All';
+  String get timeframeAll => 'Все';
 
   @override
-  String get noInsightsAvailableYet => 'No insights available yet';
+  String get noInsightsAvailableYet => 'Аналитика пока недоступна';
 
   @override
   String get noActivityDataForTimeframe =>
-      'No activity data for this timeframe';
+      'Нет данных об активности за этот период';
 
   @override
-  String get activityTimeline => 'Activity Timeline';
+  String get activityTimeline => 'Хронология активности';
 
   @override
-  String get addedLabel => 'Added';
+  String get addedLabel => 'Добавлено';
 
   @override
-  String get completedLabel => 'Completed';
+  String get completedLabel => 'Завершено';
 
   @override
-  String get categoryBreakdown => 'Category Breakdown';
+  String get categoryBreakdown => 'Распределение по категориям';
 
   @override
   String get noCollaboratorActivityInTimeframe =>
-      'No collaborator activity in this timeframe';
+      'За этот период нет активности участников';
 
   @override
-  String get collaboratorActivity => 'Collaborator Activity';
+  String get collaboratorActivity => 'Активность участников';
 
   @override
   String addedCompletedSummary(String added, String completed) {
-    return '$added added • $completed completed';
+    return '$added добавлено • $completed завершено';
   }
 
   @override
   String get continueWithoutOrganizing =>
-      'You can organize your lists into groups later from the home screen. Continue without organizing?';
+      'Вы можете позже распределить списки по группам на главном экране. Продолжить без распределения?';
 
   @override
   String createdAtDate(String date) {
-    return 'Created $date';
+    return 'Создано $date';
   }
 
   @override
-  String get suggestedBadge => 'Suggested';
+  String get suggestedBadge => 'Рекомендуется';
 
   @override
-  String get ungroupedListsSection => 'Ungrouped Lists';
+  String get ungroupedListsSection => 'Списки без группы';
 
   @override
   String ungroupedListsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count lists not assigned to any group',
-      one: '$count list not assigned to any group',
-      zero: 'No lists assigned to any group',
+      other: '$count списков не назначены ни одной группе',
+      one: '$count список не назначен ни одной группе',
+      zero: 'Нет списков, назначенных группе',
     );
     return '$_temp0';
   }
 
   @override
   String get dragListsToGroupOrCreate =>
-      'Drag these lists to a group above or create a new group for them:';
+      'Перетащите эти списки в группу выше или создайте для них новую группу:';
 
   @override
-  String get shopSyncMigration => 'ShopSync Migration';
+  String get shopSyncMigration => 'Миграция ShopSync';
 
   @override
-  String get organizeWithListGroups => 'Organize with List Groups';
+  String get organizeWithListGroups => 'Упорядочить с помощью групп списков';
 
   @override
   String organizeListsBodyCount(int count) {
@@ -2210,149 +2217,154 @@ class AppLocalizationsRu extends AppLocalizations {
       count,
       locale: localeName,
       other:
-          'We\'ve suggested some groups for your $count lists. You can edit, remove, or add new groups.',
+          'Мы предложили несколько групп для ваших списков ($count). Вы можете изменить, удалить или добавить новые группы.',
       one:
-          'We\'ve suggested some groups for your $count list. You can edit, remove, or add new groups.',
+          'Мы предложили несколько групп для вашего списка ($count). Вы можете изменить, удалить или добавить новые группы.',
       zero:
-          'We\'ve suggested some groups for your lists. You can edit, remove, or add new groups.',
+          'Мы предложили несколько групп для ваших списков. Вы можете изменить, удалить или добавить новые группы.',
     );
     return '$_temp0';
   }
 
   @override
-  String get organizeLists => 'Organize Lists';
+  String get organizeLists => 'Упорядочить списки';
 
   @override
   String listsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count lists',
-      one: '$count list',
-      zero: 'No lists',
+      other: '$count списков',
+      one: '$count список',
+      zero: 'Нет списков',
     );
     return '$_temp0';
   }
 
   @override
   String get failedToUpgradeLists =>
-      'Failed to upgrade lists. Please try again.';
+      'Не удалось обновить списки. Пожалуйста, попробуйте снова.';
 
   @override
   String anErrorOccurredError(String error) {
-    return 'An error occurred: $error';
+    return 'Произошла ошибка: $error';
   }
 
   @override
-  String get upgradeFailed => 'Upgrade Failed';
+  String get upgradeFailed => 'Обновление не удалось';
 
   @override
-  String get upgradingYourLists => 'Upgrading your lists';
+  String get upgradingYourLists => 'Обновление ваших списков';
 
   @override
   String get pleaseWaitUpdatingListGroups =>
-      'Please wait while we update your list groups to the new format...';
+      'Подождите, пока мы обновляем группы ваших списков до нового формата…';
 
   @override
-  String get licensesTitle => 'Licenses';
+  String get licensesTitle => 'Лицензии';
 
   @override
-  String get noPackagesFound => 'No packages found';
+  String get noPackagesFound => 'Пакеты не найдены';
 
   @override
-  String get noPackagesMatchSearch => 'No packages match your search';
+  String get noPackagesMatchSearch =>
+      'Нет пакетов, соответствующих вашему запросу';
 
   @override
   String versionDisplay(String version) {
-    return 'Version $version';
+    return 'Версия $version';
   }
 
   @override
-  String get trendsAndPerformance => 'Trends & Performance';
+  String get trendsAndPerformance => 'Тенденции и производительность';
 
   @override
-  String get topCategories => 'Top Categories';
+  String get topCategories => 'Лучшие категории';
 
   @override
-  String get topCompletedLists => 'Top Completed Lists';
+  String get topCompletedLists => 'Списки с наибольшим числом завершённых';
 
   @override
-  String get timeframeQuarter => 'Quarter';
+  String get timeframeQuarter => 'Квартал';
 
   @override
-  String get timeframeYear => 'Year';
+  String get timeframeYear => 'Год';
 
   @override
-  String get timeframeAllTime => 'All Time';
+  String get timeframeAllTime => 'За всё время';
 
   @override
-  String get completionRateTitle => 'Completion Rate';
+  String get completionRateTitle => 'Доля завершённых';
 
   @override
-  String get failedToLoadCompletionRate => 'Failed to load completion rate';
+  String get failedToLoadCompletionRate =>
+      'Не удалось загрузить долю завершённых';
 
   @override
-  String get ofItemsCompleted => 'of items completed';
+  String get ofItemsCompleted => 'элементов завершено';
 
   @override
-  String get dailyProductivity => 'Daily Productivity';
+  String get dailyProductivity => 'Ежедневная продуктивность';
 
   @override
-  String get failedToLoadProductivityData => 'Failed to load productivity data';
+  String get failedToLoadProductivityData =>
+      'Не удалось загрузить данные о продуктивности';
 
   @override
-  String get itemsAddedPerDay => 'items added per day';
+  String get itemsAddedPerDay => 'элементов добавлено в день';
 
   @override
-  String get activityOverTime => 'Activity Over Time';
+  String get activityOverTime => 'Активность с течением времени';
 
   @override
-  String get failedToLoadActivityData => 'Failed to load activity data';
+  String get failedToLoadActivityData =>
+      'Не удалось загрузить данные об активности';
 
   @override
-  String get noDataAvailable => 'No data available';
+  String get noDataAvailable => 'Нет доступных данных';
 
   @override
-  String get noData => 'No data';
+  String get noData => 'Нет данных';
 
   @override
   String itemsCountTooltip(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count items',
-      one: '$count item',
-      zero: 'No items',
+      other: '$count элементов',
+      one: '$count элемент',
+      zero: 'Нет элементов',
     );
     return '$_temp0';
   }
 
   @override
-  String get itemsAddedEachDay => 'Items added each day';
+  String get itemsAddedEachDay => 'Элементы, добавленные за день';
 
   @override
-  String get failedToLoadCategoryData => 'Failed to load category data';
+  String get failedToLoadCategoryData =>
+      'Не удалось загрузить данные категорий';
 
   @override
   String itemCountLabel(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count items',
-      one: '$count item',
-      zero: 'No items',
+      other: '$count элементов',
+      one: '$count элемент',
+      zero: 'Нет элементов',
     );
     return '$_temp0';
   }
 
   @override
-  String get failedToLoadListData => 'Failed to load list data';
+  String get failedToLoadListData => 'Не удалось загрузить данные списков';
 
   @override
-  String get selectLanguage => 'Select Language';
+  String get selectLanguage => 'Выберите язык';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => 'Как в системе';
 
   @override
   String get langEnglish => 'English';
@@ -2367,7 +2379,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get langDeutsch => 'Deutsch';
 
   @override
-  String get langDutch => 'Dutch';
+  String get langDutch => 'Нидерландский';
 
   @override
   String get langEspanol => 'Español';
@@ -2421,146 +2433,146 @@ class AppLocalizationsRu extends AppLocalizations {
   String get langVietnamese => 'Tiếng Việt';
 
   @override
-  String get useSystemDefaultTitle => 'Use System Default';
+  String get useSystemDefaultTitle => 'Использовать настройки системы';
 
   @override
   String get useSystemDefaultBody =>
-      'Do you want to use your device\'s language setting?';
+      'Использовать языковую настройку вашего устройства?';
 
   @override
-  String get confirm => 'Confirm';
+  String get confirm => 'Подтвердить';
 
   @override
   String errorUpdatingProfile(String error) {
-    return 'Error updating profile: $error';
+    return 'Ошибка обновления профиля: $error';
   }
 
   @override
   String get googleAccountLinkedMessage =>
-      'Google account linked successfully! You can now sign in with Google.';
+      'Аккаунт Google успешно привязан! Теперь вы можете войти через Google.';
 
   @override
   String get areYouSureUnlinkGoogle =>
-      'Are you sure you want to unlink your Google account? You will no longer be able to sign in with Google unless you link it again.';
+      'Вы уверены, что хотите отвязать аккаунт Google? Вы больше не сможете входить через Google, пока не привяжете его снова.';
 
   @override
   String get anErrorOccurredLinkingGoogle =>
-      'An error occurred while linking your Google account.';
+      'Произошла ошибка при привязке аккаунта Google.';
 
   @override
   String get anErrorOccurredUnlinkingGoogle =>
-      'An error occurred while unlinking your Google account.';
+      'Произошла ошибка при отвязке аккаунта Google.';
 
   @override
-  String get goBack => 'Go Back';
+  String get goBack => 'Назад';
 
   @override
-  String get editProfileTooltip => 'Edit Profile';
+  String get editProfileTooltip => 'Изменить профиль';
 
   @override
-  String get accountInformation => 'Account Information';
+  String get accountInformation => 'Информация об аккаунте';
 
   @override
-  String get displayName => 'Display Name';
+  String get displayName => 'Отображаемое имя';
 
   @override
-  String get emailAddress => 'Email Address';
+  String get emailAddress => 'Адрес электронной почты';
 
   @override
-  String get emailCannotBeChanged => 'Email (cannot be changed)';
+  String get emailCannotBeChanged => 'Электронная почта (нельзя изменить)';
 
   @override
-  String get linkedAccounts => 'Linked Accounts';
+  String get linkedAccounts => 'Связанные аккаунты';
 
   @override
-  String get manageHowYouSignIn => 'Manage how you sign in to ShopSync';
+  String get manageHowYouSignIn => 'Управление способами входа в ShopSync';
 
   @override
   String get useCredentialManagerToSwitchAccounts =>
-      'Open Android account picker';
+      'Открыть выбор аккаунта Android';
 
   @override
-  String get emailAndPassword => 'Email & Password';
+  String get emailAndPassword => 'Электронная почта и пароль';
 
   @override
-  String get signInWithEmailAndPassword => 'Sign in with email and password';
+  String get signInWithEmailAndPassword => 'Вход по электронной почте и паролю';
 
   @override
-  String get notConfigured => 'Not configured';
+  String get notConfigured => 'Не настроено';
 
   @override
-  String get signInWithGoogleAccount => 'Sign in with Google account';
+  String get signInWithGoogleAccount => 'Вход через аккаунт Google';
 
   @override
-  String get notLinked => 'Not linked';
+  String get notLinked => 'Не привязано';
 
   @override
-  String get showGravatar => 'Show Gravatar';
+  String get showGravatar => 'Показывать Gravatar';
 
   @override
   String get displayProfilePictureToOtherUsers =>
-      'Display profile picture to other users';
+      'Показывать фото профиля другим пользователям';
 
   @override
-  String get accountActivity => 'Account Activity';
+  String get accountActivity => 'Активность аккаунта';
 
   @override
   String shoppingListsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count shopping lists',
-      one: '$count shopping list',
-      zero: 'No shopping lists',
+      other: '$count списков покупок',
+      one: '$count список покупок',
+      zero: 'Нет списков покупок',
     );
     return '$_temp0';
   }
 
   @override
-  String get listsYouHaveAccessTo => 'Lists you have access to';
+  String get listsYouHaveAccessTo => 'Списки, к которым у вас есть доступ';
 
   @override
-  String get rememberYourPassword => 'Remember your password?';
+  String get rememberYourPassword => 'Запомнить пароль?';
 
   @override
-  String get shopSyncUpdate => 'ShopSync Update';
+  String get shopSyncUpdate => 'Обновление ShopSync';
 
   @override
-  String get shopSyncHasAnUpdate => 'ShopSync has an update';
+  String get shopSyncHasAnUpdate => 'Доступно обновление ShopSync';
 
   @override
   String get pleaseUpdateAppBody =>
-      'Please update the app to continue using the latest features and improvements.';
+      'Пожалуйста, обновите приложение, чтобы продолжать пользоваться новейшими функциями и улучшениями.';
 
   @override
-  String get restartingShopSync => 'Restarting ShopSync';
+  String get restartingShopSync => 'Перезапуск ShopSync';
 
   @override
-  String get downloadingUpdateLabel => 'Downloading update...';
+  String get downloadingUpdateLabel => 'Загрузка обновления…';
 
   @override
-  String get restartRequiredTitle => 'Restart Required';
+  String get restartRequiredTitle => 'Требуется перезапуск';
 
   @override
   String get restartRequiredBody =>
-      'Automatic restart failed. Please force close ShopSync and open it again to apply your language change.';
+      'Автоматический перезапуск не удался. Принудительно закройте ShopSync и откройте его снова, чтобы применить смену языка.';
 
   @override
-  String get install => 'Install';
+  String get install => 'Установить';
 
   @override
-  String get downloading => 'Downloading...';
+  String get downloading => 'Загрузка…';
 
   @override
-  String get updateButton => 'Update';
+  String get updateButton => 'Обновить';
 
   @override
   String get google => 'Google';
 
   @override
   String get startAddingItemsToSeeInsights =>
-      'Start adding items to see insights';
+      'Начните добавлять элементы, чтобы увидеть аналитику';
 
   @override
-  String get pleaseTryAgainLater => 'Please try again later';
+  String get pleaseTryAgainLater => 'Пожалуйста, повторите попытку позже';
 }
