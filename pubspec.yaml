@@ -17,7 +17,7 @@ dependencies:
   firebase_auth: ^6.5.7
   cloud_firestore: ^6.7.1
   package_info_plus: ^10.1.0
-  url_launcher: ^6.3.2
+  url_launcher: ^6.3.3
   in_app_update: ^4.2.5
   intl: ^0.20.3
   shared_preferences: ^2.5.5
