@@ -37,7 +37,7 @@ dependencies:
   rotary_scrollbar: ^1.1.0
   restart_app: ^1.9.0
   http: ^1.6.0
-  crypto: ^3.0.6
+  crypto: ^3.0.8
 
 dev_dependencies:
   sentry_dart_plugin: ^3.4.0
