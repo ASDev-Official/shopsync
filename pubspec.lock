@@ -157,10 +157,10 @@ packages:
     dependency: transitive
     description:
       name: cel
-      sha256: "51d77e16424d41b5fdb0a239be4c8a0550d4dd3f952801d35375ddd90cfb49da"
+      sha256: "36048193ae78b83970a54916a86aa82a58c0ad64e92fa4d79b427542d3cb2c3a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.4+1"
+    version: "0.6.1"
   characters:
     dependency: transitive
     description:
@@ -405,18 +405,18 @@ packages:
     dependency: "direct dev"
     description:
       name: fake_cloud_firestore
-      sha256: c2ce1f828e5840c2f212584d496dbae0cfc94848daa84112e51a0722358aa24a
+      sha256: f0916603e17b53b6fd0c8f1b124594c473ab06007f4a79c13efa00fb08b61098
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.0"
+    version: "4.4.0"
   fake_firebase_security_rules:
     dependency: transitive
     description:
       name: fake_firebase_security_rules
-      sha256: "6af54bedfd6985451a9735f2cfac91ffe0128bfc92bf15e8544cd56c6941d6cc"
+      sha256: "983a1b3aec751af3122c1cfa79ebac0336a1589226a9683548b30457a5268720"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.4"
+    version: "0.6.0"
   ffi:
     dependency: transitive
     description:
